@@ -67,5 +67,7 @@ export interface Project {
     bankAccount?: string
     bankBeneficiary?: string
   } | null
+  color_theme: string
+  invitation_text: string | null
   extra_config: Record<string, unknown>
 }

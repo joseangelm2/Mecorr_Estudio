@@ -33,6 +33,8 @@ export interface ProjectFormData {
   liverpool_link: string
   bank_account: string
   bank_beneficiary: string
+  color_theme: string
+  invitation_text: string
 }
 
 function formDataToProject(data: ProjectFormData) {
@@ -82,6 +84,8 @@ function formDataToProject(data: ProjectFormData) {
       bankAccount: data.bank_account || undefined,
       bankBeneficiary: data.bank_beneficiary || undefined,
     } : null,
+    color_theme: data.color_theme || 'rosagold',
+    invitation_text: data.invitation_text || null,
     extra_config: {},
   }
 }

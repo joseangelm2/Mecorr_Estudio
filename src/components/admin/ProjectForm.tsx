@@ -32,6 +32,8 @@ function toFormData(project?: Project): ProjectFormData {
       dress_code_colors: '', dress_code_notes: '',
       photos: [''],
       liverpool_link: '', bank_account: '', bank_beneficiary: '',
+      color_theme: 'rosagold',
+      invitation_text: '',
     }
   }
   return {
@@ -68,6 +70,8 @@ function toFormData(project?: Project): ProjectFormData {
     liverpool_link: project.gift_registry?.liverpoolLink ?? '',
     bank_account: project.gift_registry?.bankAccount ?? '',
     bank_beneficiary: project.gift_registry?.bankBeneficiary ?? '',
+    color_theme: project.color_theme ?? 'rosagold',
+    invitation_text: project.invitation_text ?? '',
   }
 }
 
