@@ -5,10 +5,12 @@ import ColorSwitcher from "@/components/ColorSwitcher";
 
 interface Props {
   musicUrl?: string;
+  showSwitcher?: boolean;
 }
 
 export default function IntroEnvelope({
   musicUrl = "https://invitadigitalmanitas.com/musica/nocrezcasmas.mp3",
+  showSwitcher = true,
 }: Props) {
   const introRef = useRef<HTMLElement>(null);
   const sDerechoRef = useRef<HTMLImageElement>(null);
@@ -25,7 +27,7 @@ export default function IntroEnvelope({
     if (sIzquierdoRef.current) {
       sIzquierdoRef.current.classList.add("efecto-izquierda");
     }
-    document.getElementById("html")?.classList.add("con-scroll");
+    document.documentElement.classList.add("con-scroll");
     audioRef.current?.play().catch(() => {});
   }
 
@@ -81,7 +83,7 @@ export default function IntroEnvelope({
             }}
           />
         </button>
-        <ColorSwitcher variant="inline" defaultTheme="rosagold" />
+        {showSwitcher && <ColorSwitcher variant="inline" defaultTheme="rosagold" />}
       </section>
     </>
   );
