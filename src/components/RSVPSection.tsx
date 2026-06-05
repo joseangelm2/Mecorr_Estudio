@@ -2,9 +2,11 @@
 
 import { FormEvent, useState } from "react";
 
-const WHATSAPP_PHONE = "5214438569931";
+interface Props {
+  rsvpPhone?: string;
+}
 
-export default function RSVPSection() {
+export default function RSVPSection({ rsvpPhone = "5214438569931" }: Props) {
   const [attending, setAttending] = useState(true);
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -29,7 +31,7 @@ export default function RSVPSection() {
       mensajeCA = `Hola, soy ${nombre} y lamentablemente, no podré asistir.`;
     }
 
-    const url = `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(mensajeCA)}`;
+    const url = `https://api.whatsapp.com/send?phone=${rsvpPhone}&text=${encodeURIComponent(mensajeCA)}`;
     window.open(url, "_blank");
   }
 

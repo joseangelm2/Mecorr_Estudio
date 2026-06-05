@@ -5,15 +5,22 @@ import { useEffect, useRef } from "react";
 interface TimelineItem {
   title: string;
   time: string;
-  icon: string;
+  icon?: string;
+  iconSrc?: string;
+  description?: string;
 }
 
-const items: TimelineItem[] = [
+interface Props {
+  itinerary?: TimelineItem[];
+}
+
+const DEFAULT_ITEMS: TimelineItem[] = [
   { title: "Ceremonia Religiosa", time: "15:00", icon: "/images/iglesia.png" },
   { title: "Recepción", time: "18:00", icon: "/images/recep.png" },
 ];
 
-export default function ItinerarioSection() {
+export default function ItinerarioSection({ itinerary = DEFAULT_ITEMS }: Props) {
+  const items = itinerary;
   const timelineRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
@@ -84,7 +91,7 @@ export default function ItinerarioSection() {
                     </p>
                     <div className="icon-holder">
                       <div className="text-center">
-                        <img src={item.icon} width="60" alt={item.title} />
+                        <img src={item.iconSrc ?? item.icon ?? ""} width="60" alt={item.title} />
                       </div>
                     </div>
                   </li>

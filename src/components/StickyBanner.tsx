@@ -3,10 +3,10 @@
 import { useEffect } from "react";
 
 interface StickyBannerProps {
-  guestName: string;
+  guestName?: string;
 }
 
-export default function StickyBanner({ guestName }: StickyBannerProps) {
+export default function StickyBanner({ guestName = "Aime Ferreira" }: StickyBannerProps) {
   useEffect(() => {
     function handleScroll() {
       const cintillo = document.getElementById("cintillo");

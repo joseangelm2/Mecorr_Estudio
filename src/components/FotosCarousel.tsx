@@ -2,14 +2,18 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const photos = [
+const DEFAULT_PHOTOS = [
   "/images/IMG_8201.JPG",
   "/images/IMG_8202.JPG",
   "/images/IMG_8203.JPG",
   "/images/IMG_8204.JPG",
 ];
 
-export default function FotosCarousel() {
+interface Props {
+  photos?: string[];
+}
+
+export default function FotosCarousel({ photos = DEFAULT_PHOTOS }: Props) {
   const [current, setCurrent] = useState(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 

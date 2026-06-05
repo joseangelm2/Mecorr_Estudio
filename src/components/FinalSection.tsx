@@ -1,10 +1,18 @@
-export default function FinalSection() {
+interface Props {
+  quinceaneraName?: string;
+  finalPhotoUrl?: string;
+}
+
+export default function FinalSection({
+  quinceaneraName = "Aime Ferreira",
+  finalPhotoUrl = "/images/IMG_8206.JPG",
+}: Props) {
   return (
     <section
       id="nombre"
       className="padding-final bg-overlay-contador bg-img"
       style={{
-        backgroundImage: "url(/images/IMG_8206.JPG)",
+        backgroundImage: `url(${finalPhotoUrl})`,
       }}
     >
       <div
@@ -15,7 +23,7 @@ export default function FinalSection() {
           <div className="col-md-10">
             <p className="mb-0 text-white sombra text-center">¡Te Espero!</p>
             <h1 className="titulo mb-0 text-white sombra text-center">
-              Aime Ferreira
+              {quinceaneraName}
             </h1>
           </div>
         </div>

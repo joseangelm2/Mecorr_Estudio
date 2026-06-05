@@ -1,4 +1,14 @@
-export default function CelebracionSection() {
+interface Props {
+  quinceaneraName?: string;
+  parentNames?: string[];
+  padrinos?: string[];
+}
+
+export default function CelebracionSection({
+  quinceaneraName = "Aime Ferreira",
+  parentNames = ["Felipe Ferreira", "Paola Mendoza"],
+  padrinos = ["Sergio García", "Graciela Santos"],
+}: Props) {
   return (
     <section
       id="celebracion"
@@ -21,7 +31,7 @@ export default function CelebracionSection() {
               className="titulo mb-20 color-titulos text-center wow fadeInUp"
               style={{ fontSize: "60px" }}
             >
-              Aime Ferreira
+              {quinceaneraName}
             </h1>
             <p className="mb-30 color-textos text-center wow fadeInUp">
               Te invito a mis quince primaveras, porque formas parte esencial de
@@ -36,9 +46,12 @@ export default function CelebracionSection() {
               Mis Padres
             </h1>
             <p className="mb-30 color-textos text-center wow fadeInUp">
-              Felipe Ferreira
-              <br />
-              Paola Mendoza
+              {parentNames.map((name, i) => (
+                <span key={i}>
+                  {name}
+                  {i < parentNames.length - 1 && <br />}
+                </span>
+              ))}
             </p>
             <div className="mb-10 text-center wow fadeInUp">
               <img src="/images/flores-01.png" width="160" alt="" />
@@ -47,9 +60,12 @@ export default function CelebracionSection() {
               Mis Padrinos
             </h1>
             <p className="mb-30 color-textos text-center wow fadeInUp">
-              Sergio García
-              <br />
-              Graciela Santos
+              {padrinos.map((name, i) => (
+                <span key={i}>
+                  {name}
+                  {i < padrinos.length - 1 && <br />}
+                </span>
+              ))}
             </p>
           </div>
         </div>
