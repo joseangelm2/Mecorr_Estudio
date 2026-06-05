@@ -37,7 +37,7 @@ export default function ContadorSection() {
     <section
       id="contador"
       className="padding-section"
-      style={{ backgroundColor: "#a8686a" }}
+      style={{ backgroundColor: "var(--inv-primary)", transition: "background-color 0.4s" }}
     >
       <div style={{ padding: "0 15px" }}>
         <div className="row justify-content-center">

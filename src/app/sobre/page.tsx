@@ -12,8 +12,9 @@ import HashtagSection from "@/components/HashtagSection";
 import FotosCarousel from "@/components/FotosCarousel";
 import RSVPSection from "@/components/RSVPSection";
 import FinalSection from "@/components/FinalSection";
-import ColorSwitcher from "@/components/ColorSwitcher";
-
+import VideoSection from "@/components/VideoSection";
+import MesaRegalosSection from "@/components/MesaRegalosSection";
+import LluviaSobresSection from "@/components/LluviaDesobresSection";
 export default function SobrePage() {
   return (
     <>
@@ -28,10 +29,12 @@ export default function SobrePage() {
       <ItinerarioSection />
       <VestimentaSection />
       <HashtagSection />
+      <MesaRegalosSection />
+      <LluviaSobresSection />
       <FotosCarousel />
+      <VideoSection />
       <RSVPSection />
       <FinalSection />
-      <ColorSwitcher defaultTheme="rosagold" />
     </>
   );
 }

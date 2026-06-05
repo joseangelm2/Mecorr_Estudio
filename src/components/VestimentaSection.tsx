@@ -20,8 +20,11 @@ export default function VestimentaSection() {
             <div className="mb-10 text-center wow fadeInUp">
               <img src="/images/formal.png" width="120" alt="Formal" />
             </div>
-            <p className="mb-0 color-textos text-center wow fadeInUp">
+            <p className="mb-10 color-textos text-center wow fadeInUp">
               Formal
+            </p>
+            <p className="mb-0 color-textos text-center wow fadeInUp" style={{ fontSize: "15px", fontStyle: "italic" }}>
+              Los colores amarillo y dorado están destinados solo para la Quinceañera
             </p>
           </div>
         </div>

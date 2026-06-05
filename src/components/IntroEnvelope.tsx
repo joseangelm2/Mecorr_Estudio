@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import ColorSwitcher from "@/components/ColorSwitcher";
 
 export default function IntroEnvelope() {
   const introRef = useRef<HTMLElement>(null);
@@ -65,6 +66,7 @@ export default function IntroEnvelope() {
           aria-label="Abrir invitación"
         >
           <img
+            className="sello-img"
             src="/images/sello.png"
             alt="Abrir"
             style={{
@@ -73,6 +75,7 @@ export default function IntroEnvelope() {
             }}
           />
         </button>
+        <ColorSwitcher variant="inline" defaultTheme="rosagold" />
       </section>
     </>
   );
