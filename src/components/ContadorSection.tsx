@@ -2,9 +2,43 @@
 
 import { useEffect, useState } from "react";
 
-const TARGET_DATE = new Date("November 22, 2026 15:00:00").getTime();
+const DEFAULT_EVENT_DATE = "2026-11-22T15:00:00";
+const DEFAULT_DISPLAY_DATE = "22 Noviembre 2026";
+const DEFAULT_CALENDAR_LINK =
+  "https://calendar.google.com/calendar/r/eventedit?text=XV+Años+Aime+Ferreira&dates=20261122T150000/20261123T020000&details=Ceremonia+y+Recepción";
 
-export default function ContadorSection() {
+interface Props {
+  eventDate?: string;
+  quinceaneraName?: string;
+}
+
+export default function ContadorSection({
+  eventDate = DEFAULT_EVENT_DATE,
+  quinceaneraName = "Aime Ferreira",
+}: Props) {
+  const targetDate = new Date(eventDate).getTime();
+
+  const displayDate = (() => {
+    const d = new Date(eventDate);
+    if (isNaN(d.getTime())) return DEFAULT_DISPLAY_DATE;
+    const months = [
+      "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+      "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre",
+    ];
+    return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+  })();
+
+  const calendarLink = (() => {
+    const d = new Date(eventDate);
+    if (isNaN(d.getTime())) return DEFAULT_CALENDAR_LINK;
+    const pad = (n: number) => String(n).padStart(2, "0");
+    const start = `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`;
+    const endDate = new Date(d.getTime() + 11 * 60 * 60 * 1000);
+    const end = `${endDate.getFullYear()}${pad(endDate.getMonth() + 1)}${pad(endDate.getDate())}T${pad(endDate.getHours())}${pad(endDate.getMinutes())}00`;
+    const title = encodeURIComponent(`XV Años ${quinceaneraName}`);
+    return `https://calendar.google.com/calendar/r/eventedit?text=${title}&dates=${start}/${end}&details=Ceremonia+y+Recepción`;
+  })();
+
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -15,7 +49,7 @@ export default function ContadorSection() {
   useEffect(() => {
     function tick() {
       const now = Date.now();
-      const distance = TARGET_DATE - now;
+      const distance = targetDate - now;
       if (distance < 0) return;
       const day = 86400000;
       const hour = 3600000;
@@ -31,7 +65,7 @@ export default function ContadorSection() {
     tick();
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
-  }, []);
+  }, [targetDate]);
 
   return (
     <section
@@ -45,7 +79,7 @@ export default function ContadorSection() {
             <h1
               className="titulo mb-10 text-white text-center"
             >
-              22 Noviembre 2026
+              {displayDate}
             </h1>
             <h1
               className="titulo mb-30 text-white text-center"
@@ -73,7 +107,7 @@ export default function ContadorSection() {
             </ul>
             <div className="mb-0 text-center">
               <a
-                href="https://calendar.google.com/calendar/r/eventedit?text=XV+Años+Aime+Ferreira&dates=20261122T150000/20261123T020000&details=Ceremonia+y+Recepción"
+                href={calendarLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="link-abrir"

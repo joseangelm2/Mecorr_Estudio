@@ -1,4 +1,24 @@
-export default function RecepcionSection() {
+interface ReceptionInfo {
+  time: string;
+  venue: string;
+  address: string;
+  mapsUrl?: string;
+  mapLink?: string;
+}
+
+interface Props {
+  reception?: ReceptionInfo;
+}
+
+const DEFAULT_RECEPTION: ReceptionInfo = {
+  time: "18:00",
+  venue: "Mansión Solis",
+  address: "Acueducto de Morelia",
+  mapsUrl: "https://maps.app.goo.gl/XJbvxRgHouJVdX966",
+};
+
+export default function RecepcionSection({ reception = DEFAULT_RECEPTION }: Props) {
+  const mapsHref = reception.mapLink ?? reception.mapsUrl ?? DEFAULT_RECEPTION.mapsUrl ?? "";
   return (
     <section
       id="recepcion"
@@ -21,15 +41,15 @@ export default function RecepcionSection() {
         <div className="row">
           <div className="col-md-12 wow fadeInUp">
             <p className="color-textos mb-30 text-center">
-              <strong style={{ fontSize: "22px" }}>18:00</strong>
+              <strong style={{ fontSize: "22px" }}>{reception.time}</strong>
               <br />
-              Mansión Solis
+              {reception.venue}
               <br />
-              Acueducto de Morelia
+              {reception.address}
             </p>
             <div className="mb-20 text-center">
               <a
-                href="https://maps.app.goo.gl/XJbvxRgHouJVdX966"
+                href={mapsHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="link-abrir color-principal"

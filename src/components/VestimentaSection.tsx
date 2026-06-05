@@ -1,4 +1,18 @@
-export default function VestimentaSection() {
+interface DressCode {
+  colors: string;
+  notes?: string;
+}
+
+interface Props {
+  dressCode?: DressCode;
+}
+
+export default function VestimentaSection({
+  dressCode = {
+    colors: "Formal",
+    notes: "Los colores amarillo y dorado están destinados solo para la Quinceañera",
+  },
+}: Props) {
   return (
     <section
       id="vestimenta"
@@ -21,11 +35,16 @@ export default function VestimentaSection() {
               <img src="/images/formal.png" width="120" alt="Formal" />
             </div>
             <p className="mb-10 color-textos text-center wow fadeInUp">
-              Formal
+              {dressCode.colors}
             </p>
-            <p className="mb-0 color-textos text-center wow fadeInUp" style={{ fontSize: "15px", fontStyle: "italic" }}>
-              Los colores amarillo y dorado están destinados solo para la Quinceañera
-            </p>
+            {dressCode.notes ? (
+              <p
+                className="mb-0 color-textos text-center wow fadeInUp"
+                style={{ fontSize: "15px", fontStyle: "italic" }}
+              >
+                {dressCode.notes}
+              </p>
+            ) : null}
           </div>
         </div>
       </div>

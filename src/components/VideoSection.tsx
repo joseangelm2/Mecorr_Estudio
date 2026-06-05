@@ -1,8 +1,12 @@
-export default function VideoSection() {
-  // Cambia este valor por la URL del video de YouTube o la ruta del archivo local
-  const youtubeId = ""; // ej: "dQw4w9WgXcQ"
-  const localVideo = "/videos/Video XV Años.mp4"; // ej: "/videos/mi-video.mp4"
+interface Props {
+  youtubeId?: string;
+  localVideo?: string;
+}
 
+export default function VideoSection({
+  youtubeId = "",
+  localVideo = "/videos/Video XV Años.mp4",
+}: Props) {
   return (
     <section
       id="video"

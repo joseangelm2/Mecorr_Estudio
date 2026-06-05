@@ -1,4 +1,10 @@
-export default function MesaRegalosSection() {
+interface Props {
+  liverpoolLink?: string;
+}
+
+export default function MesaRegalosSection({
+  liverpoolLink = "https://mesaderegalos.liverpool.com.mx/milistaderegalos/51309081",
+}: Props) {
   return (
     <section
       id="mesa-regalos"
@@ -20,7 +26,7 @@ export default function MesaRegalosSection() {
             </p>
             <div className="mb-10 text-center wow fadeInUp">
               <a
-                href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51309081"
+                href={liverpoolLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="link-abrir color-principal"

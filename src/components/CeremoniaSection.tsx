@@ -1,4 +1,24 @@
-export default function CeremoniaSection() {
+interface CeremonyInfo {
+  time: string;
+  venue: string;
+  address: string;
+  mapsUrl?: string;
+  mapLink?: string;
+}
+
+interface Props {
+  ceremony?: CeremonyInfo;
+}
+
+const DEFAULT_CEREMONY: CeremonyInfo = {
+  time: "15:00",
+  venue: "Catedral de Morelia",
+  address: "Centro de Morelia",
+  mapsUrl: "https://maps.app.goo.gl/3Yw9GdtUXRA9KNz4A",
+};
+
+export default function CeremoniaSection({ ceremony = DEFAULT_CEREMONY }: Props) {
+  const mapsHref = ceremony.mapLink ?? ceremony.mapsUrl ?? DEFAULT_CEREMONY.mapsUrl ?? "";
   return (
     <section
       id="ceremonia"
@@ -21,15 +41,15 @@ export default function CeremoniaSection() {
         <div className="row">
           <div className="col-md-12 wow fadeInUp">
             <p className="color-textos mb-30 text-center">
-              <strong style={{ fontSize: "22px" }}>15:00</strong>
+              <strong style={{ fontSize: "22px" }}>{ceremony.time}</strong>
               <br />
-              Catedral de Morelia
+              {ceremony.venue}
               <br />
-              Centro de Morelia
+              {ceremony.address}
             </p>
             <div className="mb-20 text-center">
               <a
-                href="https://maps.app.goo.gl/3Yw9GdtUXRA9KNz4A"
+                href={mapsHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="link-abrir color-principal"

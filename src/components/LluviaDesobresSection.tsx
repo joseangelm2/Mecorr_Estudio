@@ -1,4 +1,12 @@
-export default function LluviaSobresSection() {
+interface Props {
+  bankAccount?: string;
+  bankBeneficiary?: string;
+}
+
+export default function LluviaSobresSection({
+  bankAccount = "000 000 000 000 000 000",
+  bankBeneficiary,
+}: Props) {
   return (
     <section
       id="lluvia-sobres"
@@ -20,9 +28,17 @@ export default function LluviaSobresSection() {
             </p>
             <div className="mb-10 text-center wow fadeInUp">
               <p className="color-textos" style={{ fontSize: "16px" }}>
+                {bankBeneficiary ? (
+                  <>
+                    <strong>Beneficiario:</strong>
+                    <br />
+                    {bankBeneficiary}
+                    <br />
+                  </>
+                ) : null}
                 <strong>Número de cuenta:</strong>
                 <br />
-                CLABE: 000 000 000 000 000 000
+                CLABE: {bankAccount}
               </p>
             </div>
           </div>

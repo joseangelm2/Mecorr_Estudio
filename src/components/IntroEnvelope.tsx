@@ -3,7 +3,13 @@
 import { useRef } from "react";
 import ColorSwitcher from "@/components/ColorSwitcher";
 
-export default function IntroEnvelope() {
+interface Props {
+  musicUrl?: string;
+}
+
+export default function IntroEnvelope({
+  musicUrl = "https://invitadigitalmanitas.com/musica/nocrezcasmas.mp3",
+}: Props) {
   const introRef = useRef<HTMLElement>(null);
   const sDerechoRef = useRef<HTMLImageElement>(null);
   const sIzquierdoRef = useRef<HTMLImageElement>(null);
@@ -30,7 +36,7 @@ export default function IntroEnvelope() {
         id="sonido2"
         loop
         preload="auto"
-        src="https://invitadigitalmanitas.com/musica/nocrezcasmas.mp3"
+        src={musicUrl}
       />
       <section
         ref={introRef}
