@@ -412,3 +412,11 @@ ul.tiempo { margin: 0; padding: 0; text-align: center; display: flex; justify-co
 ::-webkit-scrollbar { width: 10px; background-color: #fff; }
 ::-webkit-scrollbar-track { background-color: #000; }
 ::-webkit-scrollbar-thumb { background-color: var(--inv-border); transition: background 0.4s; }
+
+/* ======================================
+   INVITATION TEXT
+   ====================================== */
+
+.invitation-text-content {
+  white-space: pre-line;
+}

@@ -2,12 +2,14 @@ interface Props {
   quinceaneraName?: string;
   parentNames?: string[];
   padrinos?: string[];
+  invitationText?: string;
 }
 
 export default function CelebracionSection({
   quinceaneraName = "Aime Ferreira",
   parentNames = ["Felipe Ferreira", "Paola Mendoza"],
   padrinos = ["Sergio García", "Graciela Santos"],
+  invitationText,
 }: Props) {
   return (
     <section
@@ -33,11 +35,8 @@ export default function CelebracionSection({
             >
               {quinceaneraName}
             </h1>
-            <p className="mb-30 color-textos text-center wow fadeInUp">
-              Te invito a mis quince primaveras, porque formas parte esencial de
-              mi vida y nada me haría más feliz que compartir contigo este día.
-              Llegó el gran día soñado, donde comenzaré a crecer y comprender lo
-              bello de la vida. Con amor, te invito a celebrar mis quince años
+            <p className="mb-30 color-textos text-center wow fadeInUp invitation-text-content">
+              {invitationText || "Te invito a mis quince primaveras, porque formas parte esencial de mi vida y nada me haría más feliz que compartir contigo este día. Llegó el gran día soñado, donde comenzaré a crecer y comprender lo bello de la vida. Con amor, te invito a celebrar mis quince años"}
             </p>
             <div className="mb-10 text-center wow fadeInUp">
               <img src="/images/flores-01.png" width="160" alt="" />
