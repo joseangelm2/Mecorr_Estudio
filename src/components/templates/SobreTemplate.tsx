@@ -1,4 +1,8 @@
+'use client'
+
+import { useEffect } from "react";
 import "@/app/sobre/sobre.css";
+import { THEMES } from "@/lib/themes";
 import type { Project } from "@/types/invitation";
 import WowInit from "@/components/WowInit";
 import IntroEnvelope from "@/components/IntroEnvelope";
@@ -14,7 +18,6 @@ import HashtagSection from "@/components/HashtagSection";
 import FotosCarousel from "@/components/FotosCarousel";
 import RSVPSection from "@/components/RSVPSection";
 import FinalSection from "@/components/FinalSection";
-import ColorSwitcher from "@/components/ColorSwitcher";
 import LluviaSobresSection from "@/components/LluviaDesobresSection";
 import MesaRegalosSection from "@/components/MesaRegalosSection";
 import VideoSection from "@/components/VideoSection";
@@ -40,12 +43,23 @@ export default function SobreTemplate({ project }: Props) {
     dress_code,
     photos,
     gift_registry,
+    color_theme,
+    invitation_text,
   } = project;
+
+  useEffect(() => {
+    const theme = THEMES.find(t => t.id === color_theme) ?? THEMES[0];
+    const root = document.documentElement;
+    root.style.setProperty("--inv-primary", theme.primary);
+    root.style.setProperty("--inv-primary-dark", theme.dark);
+    root.style.setProperty("--inv-border", theme.primary);
+    root.style.setProperty("--inv-filter", theme.filterValue);
+  }, [color_theme]);
 
   return (
     <>
       <WowInit />
-      <IntroEnvelope musicUrl={music_url ?? undefined} />
+      <IntroEnvelope musicUrl={music_url ?? undefined} showSwitcher={false} />
       <StickyBanner guestName={guest_name ?? undefined} />
       <HeroSection
         heroPhotoUrl={hero_photo_url ?? undefined}
@@ -55,6 +69,7 @@ export default function SobreTemplate({ project }: Props) {
         quinceaneraName={quinceanera_name}
         parentNames={parent_names.length > 0 ? parent_names : undefined}
         padrinos={padrinos.length > 0 ? padrinos : undefined}
+        invitationText={invitation_text ?? undefined}
       />
       <ContadorSection
         eventDate={event_date}
@@ -80,7 +95,6 @@ export default function SobreTemplate({ project }: Props) {
         quinceaneraName={quinceanera_name}
         finalPhotoUrl={hero_photo_url ?? undefined}
       />
-      <ColorSwitcher defaultTheme="rosagold" />
       <VideoSection />
     </>
   );
