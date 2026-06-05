@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "/home/jamermx/.npm-global/bin/playwright-mcp",
+      "args": ["--headless", "--browser", "chromium", "--executable-path", "/home/jamermx/.cache/ms-playwright/chromium-1224/chrome-linux64/chrome"]
+    }
+  }
+}

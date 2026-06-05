@@ -1,0 +1,843 @@
+@import "tailwindcss";
+
+/* ======================================
+   ROSAGOLD INVITATION — Gold/Rose Theme
+   ====================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  background-color: #fff8f5;
+}
+
+/* ======================================
+   ANIMATION KEYFRAMES
+   ====================================== */
+
+@keyframes anim-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes anim-up {
+  from { opacity: 0; transform: translateY(100px); }
+  to { opacity: 1; transform: translateY(0px); }
+}
+
+@keyframes anim-down {
+  from { opacity: 0; transform: translateY(-100px); }
+  to { opacity: 1; transform: translateY(0px); }
+}
+
+@keyframes anim-left {
+  from { opacity: 0; transform: translateX(100px); }
+  to { opacity: 1; transform: translateX(0px); }
+}
+
+@keyframes anim-right {
+  from { opacity: 0; transform: translateX(-100px); }
+  to { opacity: 1; transform: translateX(0px); }
+}
+
+.anim-up, .anim-down, .anim-left, .anim-right, .anim-fade-in {
+  animation-duration: 1s;
+  animation-delay: 0.5s;
+  animation-fill-mode: both;
+}
+
+.anim-up { animation-name: anim-up; }
+.anim-down { animation-name: anim-down; }
+.anim-left { animation-name: anim-left; }
+.anim-right { animation-name: anim-right; }
+.anim-fade-in { animation-name: anim-fade-in; }
+
+.anim-pause-1 { animation-delay: 1s; }
+.anim-pause-15 { animation-delay: 1.5s; }
+.anim-pause-2 { animation-delay: 2s; }
+.anim-pause-25 { animation-delay: 2.5s; }
+.anim-pause-3 { animation-delay: 3s; }
+
+/* ======================================
+   WELCOME MODAL
+   ====================================== */
+
+.rg-welcome-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #f5ebe0, #ddbea9, #ce9e5f);
+  z-index: 100000;
+  transition: opacity 0.5s ease;
+}
+
+.rg-welcome-modal.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.rg-modal-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.rg-modal-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 30px 30px 60px 30px;
+  text-align: right;
+  background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
+}
+
+.rg-names-modal {
+  color: #FFF;
+  font-size: clamp(3rem, 10vw, 7rem);
+  font-family: var(--font-meaculpa, 'Mea Culpa', cursive);
+  font-weight: 400;
+  line-height: 1;
+  text-shadow: 1px 1px 1px rgba(62, 62, 62, 1), 2px 2px 15px rgba(255, 255, 255, 1);
+}
+
+.rg-modal-sub {
+  font-family: var(--font-raleway, 'Raleway', sans-serif);
+  color: #e7b7d4;
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.rg-enter-btn {
+  font-family: var(--font-raleway, 'Raleway', sans-serif);
+  margin-top: 1.5rem;
+  padding: 12px 32px;
+  background: #ce9e5f;
+  font-size: 16px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+  letter-spacing: 1px;
+}
+
+.rg-enter-btn:hover {
+  background: #eca196;
+}
+
+/* ======================================
+   MAIN CONTAINER
+   ====================================== */
+
+#rg-main {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* ======================================
+   HERO SECTION
+   ====================================== */
+
+.rg-hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: url('/images/IMG_8198.JPG') no-repeat center center;
+  background-size: cover;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.rg-hero-content {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 2;
+  width: 90%;
+}
+
+.rg-name-container {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+
+.rg-names {
+  color: #ce9e5f;
+  font-size: clamp(3.5rem, 10vw, 6rem);
+  font-family: var(--font-meaculpa, 'Mea Culpa', cursive);
+  font-weight: 400;
+  line-height: 1;
+  margin: 0;
+}
+
+.rg-xv {
+  font-family: var(--font-raleway, 'Raleway', sans-serif);
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #eca196;
+  position: absolute;
+  top: 80px;
+  right: 0;
+}
+
+/* ======================================
+   WRAPPER / CONTENT
+   ====================================== */
+
+.rg-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+/* ======================================
+   ANNOUNCEMENT / HEADINGS
+   ====================================== */
+
+.rg-announcement {
+  color: #ce9e5f;
+  font-size: clamp(2rem, 6vw, 43px);
+  font-family: var(--font-meaculpa, 'Mea Culpa', cursive);
+  font-weight: 500;
+  text-align: center;
+}
+
+.rg-announcement-color {
+  color: #eca196;
+  font-size: clamp(1.8rem, 5vw, 36px);
+  font-family: var(--font-meaculpa, 'Mea Culpa', cursive);
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.rg-announcement-white {
+  color: #fff;
+  font-size: clamp(2rem, 6vw, 41px);
+  font-family: var(--font-meaculpa, 'Mea Culpa', cursive);
+  font-weight: 500;
+  text-align: center;
+}
+
+.rg-division {
+  width: 230px;
+  margin: 8px auto;
+  display: block;
+}
+
+.rg-greeting {
+  font-family: var(--font-raleway, 'Raleway', sans-serif);
+  color: #6c6c6c;
+  font-size: 13px;
+  letter-spacing: 4px;
+  font-weight: 500;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.rg-text {
+  font-family: var(--font-raleway, 'Raleway', sans-serif);
+  color: #606060;
+  line-height: 30px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.rg-text-details {
+  font-family: var(--font-raleway, 'Raleway', sans-serif);
+  color: #606060;
+  line-height: 28px;
+  font-size: 15px;
+  text-align: center;
+}
+
+.rg-hora {
+  font-family: var(--font-raleway, 'Raleway', sans-serif);
+  font-size: 23px;
+  font-weight: 600;
+  color: #eca196;
+  text-align: center;
+}
+
+/* ======================================
+   SPACING HELPERS
+   ====================================== */
+
+.esp-peq { padding: 10px; }
+.esp-med { padding: 20px; }
+.esp-gra { padding: 30px; }
+
+/* ======================================
+   MENSAJE SECTION
+   ====================================== */
+
+.rg-mensaje {
+  position: relative;
+  width: 100%;
+  padding: 40px 0;
+  text-align: center;
+  background-color: #fff8f5;
+  overflow: hidden;
+}
+
+.rg-mensaje-recuadro {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0);
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 700px;
+  border-radius: 0;
+  z-index: 1;
+}
+
+.rg-text-container {
+  position: relative;
+  text-align: center;
+  width: 100%;
+  line-height: 1;
+  margin: 20px 0;
+}
+
+.rg-line {
+  font-family: var(--font-raleway, 'Raleway', sans-serif);
+  color: #606060;
+  font-size: 18px;
+  position: relative;
+  z-index: 1;
+}
+
+.rg-overlay {
+  font-size: 46px;
+  font-family: var(--font-meaculpa, 'Mea Culpa', cursive);
+  color: #ce9e5f;
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  padding: 10px;
+}
+
+/* ======================================
+   DATE / APARTA LA FECHA
+   ====================================== */
+
+.rg-aparta-fecha {
+  position: relative;
+  width: 100%;
+  min-height: 350px;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url('/images/IMG_8201.JPG') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 1024px) {
+  .rg-aparta-fecha { background-attachment: scroll; }
+}
+
+.rg-contenido-aparta {
+  position: relative;
+  text-align: center;
+  width: 80%;
+  z-index: 1;
+  padding: 20px;
+}
+
+.rg-datenew {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
+  font-family: var(--font-raleway, 'Raleway', sans-serif);
+  color: #eca196;
+}
+
+.rg-datenew .number {
+  font-size: clamp(50px, 12vw, 80px);
+  margin-right: 12px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.rg-datenew .month {
+  font-size: clamp(20px, 4vw, 30px);
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.rg-datenew .year {
+  font-size: clamp(16px, 3vw, 25px);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.rg-date-column {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ======================================
+   COUNTDOWN
+   ====================================== */
+
+.rg-countdown-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.rg-countdown-item {
+  text-align: center;
+  font-family: var(--font-raleway, 'Raleway', sans-serif);
+  color: #fff;
+  margin: 0 12px;
+}
+
+.rg-countdown-label {
+  font-size: 13px;
+  color: #eca196;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.rg-countdown-value {
+  font-size: clamp(28px, 7vw, 40px);
+  color: #eca196;
+  font-weight: bold;
+}
+
+/* ======================================
+   VENUES
+   ====================================== */
+
+.rg-cuando-donde {
+  width: 90%;
+  padding: 1rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.rg-evento {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+  gap: 1rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+@media (min-width: 1025px) {
+  .rg-evento {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .rg-evento.misa .rg-foto { order: 1; }
+  .rg-evento.misa .rg-detalles { order: 2; }
+  .rg-evento.fiesta .rg-detalles { order: 1; }
+  .rg-evento.fiesta .rg-foto { order: 2; }
+}
+
+.rg-columna {
+  flex: 1;
+  padding: 16px;
+  text-align: center;
+}
+
+.rg-columna img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.rg-location-btn {
+  background: #ce9e5f;
+  color: white;
+  font-family: var(--font-raleway, 'Raleway', sans-serif);
+  font-weight: 500;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 13px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 12px;
+  transition: background 0.2s;
+}
+
+.rg-location-btn:hover {
+  background: #b0ae97;
+}
+
+/* ======================================
+   FRASE PARALLAX
+   ====================================== */
+
+.rg-frase1 {
+  width: 100%;
+  min-height: 400px;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('/images/IMG_8202.JPG') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+}
+
+.rg-frase-content {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  padding: 30px;
+  background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));
+}
+
+.rg-frase-sub {
+  font-family: var(--font-raleway, 'Raleway', sans-serif);
+  color: #fff;
+  font-size: 13px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.rg-frase-main {
+  font-family: var(--font-meaculpa, 'Mea Culpa', cursive);
+  color: #eca196;
+  font-size: clamp(28px, 6vw, 41px);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+@media (max-width: 1024px) {
+  .rg-frase1 {
+    background-attachment: scroll;
+    min-height: 300px;
+  }
+}
+
+/* ======================================
+   ITINERARIO
+   ====================================== */
+
+.rg-itinerario-container {
+  position: relative;
+  width: 100%;
+  background-color: #f4c1c0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 0;
+}
+
+.rg-itinerario-header {
+  padding: 20px;
+  text-align: center;
+}
+
+.rg-tabla-itinerario {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+.rg-tabla-itinerario td {
+  padding: 10px;
+  vertical-align: middle;
+}
+
+.rg-imagen-col {
+  width: 60px;
+  text-align: center;
+}
+
+.rg-icono-itinerario {
+  width: 50px;
+  height: auto;
+  filter: invert(100%);
+}
+
+.rg-actividad {
+  color: #fff;
+  font-size: clamp(22px, 5vw, 29px);
+  font-family: var(--font-meaculpa, 'Mea Culpa', cursive);
+}
+
+.rg-horario {
+  font-family: var(--font-raleway, 'Raleway', sans-serif);
+  color: #fff;
+  font-size: 16px;
+}
+
+/* ======================================
+   GALERÍA / CAROUSEL
+   ====================================== */
+
+.rg-galeria {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+    url('/images/IMG_8203.JPG') no-repeat center center;
+  background-size: cover;
+}
+
+.rg-slider-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+}
+
+.rg-slider {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  min-height: 300px;
+}
+
+.rg-slide {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.rg-slide.active {
+  display: flex;
+}
+
+.rg-slide img {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+}
+
+.rg-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 22px;
+  z-index: 10;
+  transition: background 0.2s;
+}
+
+.rg-arrow:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.rg-arrow-left { left: 10px; }
+.rg-arrow-right { right: 10px; }
+
+/* ======================================
+   REGALOS
+   ====================================== */
+
+.rg-centrar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 20px 60px;
+}
+
+/* ======================================
+   FRASE 2
+   ====================================== */
+
+.rg-frase2 {
+  width: 100%;
+  min-height: 400px;
+  background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)),
+    url('/images/IMG_8206.JPG') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+}
+
+.rg-frase2-content {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  padding: 30px;
+  background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));
+}
+
+.rg-frase2-white {
+  font-family: var(--font-meaculpa, 'Mea Culpa', cursive);
+  color: #fff;
+  font-size: clamp(28px, 6vw, 44px);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.rg-frase2-sub {
+  font-family: var(--font-raleway, 'Raleway', sans-serif);
+  color: #fff;
+  font-size: 13px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1024px) {
+  .rg-frase2 { background-attachment: scroll; min-height: 300px; }
+}
+
+/* ======================================
+   RSVP FORM
+   ====================================== */
+
+.rg-confirmacion {
+  position: relative;
+  width: 100%;
+  padding: 40px 0;
+  background-color: #fff8f5;
+  overflow: hidden;
+  text-align: center;
+}
+
+.rg-form-campo {
+  background: rgba(0, 0, 0, 0.08);
+  width: 100%;
+  border: 1px solid #eca196;
+  padding: 10px 12px;
+  color: #333;
+  border-radius: 15px;
+  font-family: var(--font-raleway, 'Raleway', sans-serif);
+  font-size: 14px;
+  margin-bottom: 12px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.rg-form-campo:focus {
+  border-color: #ce9e5f;
+}
+
+.rg-btn-form {
+  color: #fff;
+  font-size: 14px;
+  font-family: var(--font-raleway, 'Raleway', sans-serif);
+  padding: 10px 40px;
+  border: 1px solid #eca196;
+  text-decoration: none;
+  letter-spacing: 1px;
+  border-radius: 30px;
+  background: linear-gradient(to right, #b4882d 0%, #dbce8f 100%);
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.rg-btn-form:hover {
+  opacity: 0.9;
+}
+
+.rg-mb-30 { margin-bottom: 24px; }
+.rg-mb-40 { margin-bottom: 32px; }
+
+/* ======================================
+   VESTIMENTA
+   ====================================== */
+
+.rg-vestimenta-img {
+  max-width: 140px;
+  margin: 12px auto;
+  display: block;
+}
+
+/* ======================================
+   MUSIC BUTTON
+   ====================================== */
+
+.rg-music-btn {
+  position: fixed;
+  bottom: 80px;
+  right: 0;
+  background-color: #ce9e5f;
+  color: white;
+  border: none;
+  padding: 15px 8px 15px 16px;
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 100;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.rg-music-btn:hover {
+  background-color: #eca196;
+  transform: scale(1.1);
+}
+
+/* ======================================
+   FOOTER
+   ====================================== */
+
+.rg-footer {
+  text-align: center;
+  padding: 20px;
+  font-family: var(--font-raleway, 'Raleway', sans-serif);
+  color: #b0ae97;
+  font-size: 13px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}

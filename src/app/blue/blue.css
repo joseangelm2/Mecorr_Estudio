@@ -1,0 +1,292 @@
+/* Custom font: Marchila (Titles) */
+@font-face {
+  font-family: "Titles";
+  src: url(/fonts/marchila.otf) format("opentype");
+}
+
+/* ======================================
+   GLOBAL LAYOUT
+   ====================================== */
+
+html {
+  overflow: hidden;
+  position: relative;
+  overflow-x: hidden !important;
+}
+
+html.con-scroll {
+  overflow-y: scroll;
+}
+
+body {
+  margin: 0;
+  position: relative;
+  background-color: #222;
+  overflow-x: hidden !important;
+  font-family: var(--font-raleway), "Raleway", sans-serif;
+}
+
+.bg-invitacion::after {
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-image: url(/images/background-mob.jpg);
+  background-size: cover;
+  background-position: center;
+  content: "";
+}
+
+@media (min-width: 769px) {
+  #body {
+    width: 30%;
+    position: relative;
+    margin: 0 auto;
+    background-color: #222;
+  }
+  .bg-invitacion::after {
+    right: 35%;
+    width: 30%;
+    left: auto;
+  }
+  .invitado {
+    width: 30% !important;
+  }
+}
+
+/* ======================================
+   TYPOGRAPHY
+   ====================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Titles", serif !important;
+}
+
+p, a, li {
+  font-family: var(--font-raleway), "Raleway", sans-serif;
+  font-size: 18px;
+}
+
+.titulo {
+  font-size: 30px;
+  font-family: "Titles", serif !important;
+}
+
+/* ======================================
+   COLORS
+   ====================================== */
+
+.color-principal { background: #12397A; }
+
+.color-titulos {
+  background: linear-gradient(to right, #12397A 0%, #12397A 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding: 5px 0 !important;
+}
+
+.color-textos { color: #292929; }
+.sombra { text-shadow: #000 0.05em 0.05em 0.05em; }
+
+/* ======================================
+   SPACING
+   ====================================== */
+
+.mb-0  { margin-bottom: 0 !important; }
+.mb-10 { margin-bottom: 10px !important; }
+.mb-20 { margin-bottom: 20px !important; }
+.mb-30 { margin-bottom: 30px !important; }
+.mb-40 { margin-bottom: 40px !important; }
+.mb-50 { margin-bottom: 50px !important; }
+.mb-60 { margin-bottom: 60px !important; }
+
+.text-center { text-align: center; }
+.text-white  { color: #fff !important; }
+
+/* ======================================
+   SECTIONS
+   ====================================== */
+
+.padding-section { padding: 50px 0; position: relative; }
+.padding-final   { padding: 450px 0 40px 0; }
+
+.bg-img { background-position: center; background-size: cover; }
+
+.bg-overlay-contador { position: relative; z-index: 1; }
+.bg-overlay-contador::after {
+  position: absolute; z-index: -1; top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 31%, rgba(0,0,0,0.65) 100%);
+  content: "";
+}
+
+/* ======================================
+   INTRO ENVELOPE
+   ====================================== */
+
+.bg-overlay-intro { position: relative; z-index: 1; }
+.bg-overlay-intro::after {
+  position: absolute; z-index: -1; top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: #fff; opacity: 0.6; content: "";
+}
+
+.bg-intro {
+  background-image: url(/images/background-mob.jpg);
+  background-size: cover; background-position: center; background-color: #222;
+}
+
+#intro {
+  width: 100%; height: 100vh; z-index: 99999999;
+  position: fixed; top: 0; left: 0;
+  display: flex; justify-content: center; align-content: center; flex-direction: column;
+  backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+}
+
+.sobre-izquierdo { position: absolute; left: 0; top: 0; bottom: 0; margin: auto; height: 100%; }
+.sobre-derecho   { position: absolute; right: 0; top: 0; height: 100%; }
+.sello           { position: absolute; width: 120px; top: 45%; left: 40%; }
+
+.desaparecer   { visibility: hidden; opacity: 0; transition: all 3s; }
+.efecto-derecha { right: -800px !important; transition: all 3s; position: absolute; }
+.efecto-izquierda { left: -800px !important; transition: all 3s; position: absolute; }
+
+/* ======================================
+   STICKY BANNER
+   ====================================== */
+
+.invitado { padding: 5px 0; width: 100%; position: fixed; top: 0; z-index: 10; }
+#cintillo { opacity: 0; transition-duration: 0.5s; }
+#cintillo.cintillo-scrolled { opacity: 1 !important; transition-duration: 0.5s; }
+
+/* ======================================
+   SCROLL ARROW
+   ====================================== */
+
+.scroll       { display: block; width: 18px; }
+.scroll_arrow { display: block; height: 10px; animation: downarrow 2.5s infinite; }
+
+@keyframes downarrow {
+  0%   { transform: translate(0, 0); opacity: 0; }
+  50%  { transform: translate(0, 10px); opacity: 1; }
+  100% { transform: translate(0, 0); opacity: 0; }
+}
+
+/* ======================================
+   COUNTDOWN
+   ====================================== */
+
+ul.tiempo { margin: 0; padding: 0; text-align: center; }
+.tiempo li { display: inline-block; list-style-type: none; margin: 0; color: #fff; padding: 0 15px; font-size: 18px; }
+.tiempo li span { display: block; }
+.circulo-tiempo {
+  list-style-type: none; margin: 0; color: #000; font-size: 18px;
+  border-radius: 50%; background: #12397A; border: solid 1px #fff;
+  width: 50px; height: 50px;
+  display: flex; justify-content: center; align-items: center;
+  font-family: "Titles", serif !important;
+}
+
+/* ======================================
+   BUTTONS & LINKS
+   ====================================== */
+
+.link-abrir { color: #fff; font-size: 14px; padding: 10px 40px; text-decoration: none; letter-spacing: 1px; border-radius: 30px; }
+.link-abrir:hover { color: #fff; }
+
+.btn-form {
+  color: #fff; font-size: 14px;
+  font-family: var(--font-raleway), "Raleway", sans-serif;
+  padding: 10px 40px; border: 1px solid #12397A;
+  letter-spacing: 1px; border-radius: 30px;
+  background: #12397A; cursor: pointer;
+}
+.btn-form:hover { background: #0e2d61; border-color: #0e2d61; transition-duration: 0.2s; }
+
+/* ======================================
+   FORM
+   ====================================== */
+
+.form-campo {
+  background: rgba(255, 255, 255, 0.3); width: 100%;
+  border: 1px solid #12397a; padding: 10px 10px;
+  color: #000; border-radius: 15px;
+  font-family: var(--font-raleway), "Raleway", sans-serif;
+}
+.form-campo::placeholder { color: #000; }
+.form-campo:focus { color: #000; outline: none; }
+
+/* ======================================
+   TIMELINE
+   ====================================== */
+
+.timeline-container { display: flex; justify-content: center; }
+.timeline-container .vertical-scrollable-timeline { width: 100%; list-style-type: none; position: relative; padding: 0; }
+.timeline-container .vertical-scrollable-timeline .list-progress {
+  width: 8px; height: 100%; background-color: #12397A;
+  position: absolute; left: 53px; top: 0; overflow: hidden;
+}
+.timeline-container .vertical-scrollable-timeline .list-progress .inner {
+  position: absolute; right: 0; bottom: 0; height: 100%;
+  background-color: #c5c3cb; width: 100%;
+}
+.timeline-container .vertical-scrollable-timeline li { position: relative; padding: 0px 0px 80px 100px; }
+.timeline-container .vertical-scrollable-timeline li .icon-holder {
+  position: absolute; left: 0; top: 0; width: 50px; height: 50px;
+  display: flex; justify-content: center; align-items: center;
+  background-color: #c5c3cb; border-radius: 50%; z-index: 1; transition: 0.4s all;
+}
+.timeline-container .vertical-scrollable-timeline li .icon-holder::before {
+  content: ""; width: 100px; height: 100px; border: 4px solid #fff;
+  position: absolute; background-color: #c5c3cb; border-radius: 50%; z-index: -1; transition: 0.4s all;
+}
+.timeline-container .vertical-scrollable-timeline li::before {
+  content: ""; position: absolute; height: 100%; width: 8px;
+  background-color: transparent; left: 48px; z-index: 0;
+}
+.timeline-container .vertical-scrollable-timeline li.active .icon-holder { background-color: #12397A; }
+.timeline-container .vertical-scrollable-timeline li.active .icon-holder img { filter: invert(100%); }
+.timeline-container .vertical-scrollable-timeline li.active .icon-holder::before { background-color: #12397A; }
+
+/* ======================================
+   CAROUSEL DOTS
+   ====================================== */
+
+.owl-fotos .owl-dots { text-align: center; margin-top: 40px; }
+.owl-fotos .owl-dots .owl-dot { display: inline-block; }
+.owl-fotos .owl-dots .owl-dot span {
+  width: 8px; height: 8px; margin: 5px; background: #999;
+  display: block; border-radius: 50%; transition: opacity 200ms ease;
+}
+.owl-fotos .owl-dots .owl-dot.active span,
+.owl-fotos .owl-dots .owl-dot:hover span { background: #12397A; }
+
+/* ======================================
+   WOW ANIMATIONS
+   ====================================== */
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translate3d(0, 40px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+.wow { visibility: hidden; }
+.wow.animated { visibility: visible; }
+.wow.animated.fadeInUp { visibility: visible; animation-name: fadeInUp; animation-fill-mode: both; }
+
+@keyframes pulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* ======================================
+   SCROLLBAR
+   ====================================== */
+
+::-webkit-scrollbar { width: 10px; background-color: #fff; }
+::-webkit-scrollbar-track { background-color: #000; }
+::-webkit-scrollbar-thumb { background-color: #12397a; }

@@ -1,0 +1,1001 @@
+@import "tailwindcss";
+
+/* ======================================
+   CSS CUSTOM PROPERTIES — Esmeralda
+   ====================================== */
+
+:root {
+  --color-principal: #098074;
+  --color-elementos: rgb(26, 161, 134);
+  --color-sobre: var(--color-principal);
+  --nombre-color: #b78946;
+  --subtitulos-color: #b78946;
+  --texto-color: rgb(255, 255, 255);
+  --itinerario-card-color: rgba(32, 102, 64, 0.12);
+  --invertir-img-itinerario: invert(100%);
+  --text-sello-shadow1: rgba(121, 172, 155, 0.7);
+  --text-sello-shadow2: rgba(192, 202, 196, 0.5);
+  --line-sobre: #b88585;
+  --button-background-color: rgb(26, 161, 134);
+}
+
+/* ======================================
+   FONTS
+   ====================================== */
+
+/* h1 — event title */
+h1 {
+  font-family: var(--font-cormorant), "Cormorant Garamond", serif;
+  font-size: 6vw;
+  color: #585858;
+  margin-bottom: 0;
+  z-index: 2;
+}
+
+/* h2 — section headings */
+h2 {
+  font-family: var(--font-carattere), "Carattere", cursive;
+  font-size: 8vw;
+  color: var(--subtitulos-color);
+}
+
+/* h3 — date */
+h3 {
+  font-family: var(--font-old-standard), "Old Standard TT", serif;
+  font-size: 7vw;
+  font-weight: 500;
+  line-height: 1.2;
+  color: #585858;
+}
+
+/* h4 — venue names, addresses */
+h4 {
+  font-family: var(--font-bellefair), "Bellefair", serif;
+  font-size: 3vw;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0;
+  color: #585858;
+}
+
+/* h5 — times */
+h5 {
+  font-family: var(--font-bellefair), "Bellefair", serif;
+  font-size: 4vw;
+  font-weight: 900;
+  margin-top: 1vw;
+  color: #000000;
+}
+
+/* ======================================
+   BODY & LAYOUT
+   ====================================== */
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  background: url(/images/esmeralda/verde_oro.jpg);
+  animation: moveBackground 50s infinite;
+  background-size: cover;
+}
+
+@keyframes moveBackground {
+  0% { background-position: -200px 0px; }
+  50% { background-position: -800px 0px; }
+  100% { background-position: -200px 0px; }
+}
+
+.background {
+  margin: auto;
+  background: rgba(9, 128, 116, 0.6);
+  -webkit-box-shadow: 0px 3px 23px 0px rgb(4, 43, 25);
+  box-shadow: 0px 3px 23px 0px rgb(4, 43, 25);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-top: 7vw;
+  border-radius: 2vw;
+  margin-bottom: 19vw;
+}
+
+.texto {
+  color: var(--texto-color);
+}
+
+h2 {
+  color: var(--subtitulos-color);
+}
+
+.person-name {
+  color: var(--nombre-color) !important;
+  font-size: 8vw;
+}
+
+/* ======================================
+   BUTTON
+   ====================================== */
+
+.button {
+  font-family: var(--font-old-standard), "Old Standard TT", serif;
+  font-size: 2vw;
+  font-weight: 900;
+  color: #585858;
+  background: radial-gradient(
+      ellipse farthest-corner at right bottom,
+      #bfa44d 0%,
+      #ebca8e 8%,
+      #f0c872 30%,
+      #edc78a 40%,
+      transparent 80%
+    ),
+    radial-gradient(
+      ellipse farthest-corner at left top,
+      #9f7335 0%,
+      #ffffe2 8%,
+      #f3e1c2 25%,
+      #edda90 62.5%,
+      #957a23 100%
+    );
+  box-shadow: 1vw 1vw 2vw -1vw rgba(0, 0, 0, 0.3);
+  padding: 1vw 4vw;
+  border-radius: 2vw;
+  text-decoration: none;
+  margin-top: -3vw;
+  transition: 0.7s ease-in-out;
+  cursor: pointer;
+  display: inline-block;
+  border: none;
+}
+
+.button:hover {
+  transform: scale(1.2);
+}
+
+/* ======================================
+   PHOTO SECTION
+   ====================================== */
+
+.foto {
+  width: 80%;
+  position: relative;
+  margin-bottom: -4%;
+  margin-top: -3%;
+}
+
+.foto .principal,
+.foto .aro-foto {
+  position: absolute;
+  border-radius: 50%;
+  width: 75%;
+  height: 75%;
+  object-fit: cover;
+  left: 12%;
+  top: 12%;
+}
+
+.foto .aro {
+  width: 100%;
+}
+
+.photo {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.photo .age {
+  width: 20%;
+  margin-top: -8vw;
+}
+
+/* ======================================
+   QUOTE
+   ====================================== */
+
+.mensaje {
+  width: 90%;
+  font-size: 4vw;
+  font-family: var(--font-old-standard), "Old Standard TT", serif;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* ======================================
+   NAME BANNER
+   ====================================== */
+
+.name {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 5vw;
+}
+
+.name img {
+  height: 14vw;
+  width: 100%;
+  object-fit: cover;
+}
+
+.name h2 {
+  margin: auto;
+  margin-top: -13%;
+}
+
+/* ======================================
+   COUNTDOWN
+   ====================================== */
+
+.time {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 11vw;
+}
+
+.time img {
+  height: 39vw;
+  margin: auto;
+}
+
+#countdown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-old-standard), "Old Standard TT", serif;
+  font-weight: 600;
+  margin-top: -24vw;
+}
+
+.countdown-container {
+  display: flex;
+  line-height: 1.2;
+  margin-top: -3%;
+}
+
+.countdown-container .number {
+  font-size: 4vw;
+}
+
+.countdown-container .unit {
+  font-size: 2vw;
+}
+
+.countdown-container .segment {
+  margin: 3vw;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+}
+
+/* ======================================
+   PARENTS SECTION
+   ====================================== */
+
+.parents-container {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4vw;
+}
+
+.parents-container h2 {
+  font-size: 7vw;
+  margin-top: 0;
+}
+
+.parents p {
+  font-size: 4vw;
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-old-standard), "Old Standard TT", serif;
+  margin-top: 1vw;
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.vector-long {
+  margin-top: -7vw;
+  width: 50vw;
+}
+
+/* ======================================
+   LOCATION CARDS
+   ====================================== */
+
+.lugar {
+  margin: auto;
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  z-index: 4;
+}
+
+.lugar img.con-foto {
+  width: 100%;
+  border-radius: 2vw;
+  margin-bottom: 1vw;
+}
+
+.lugar .nombre {
+  font-size: 3vw;
+  color: white;
+}
+
+.lugar .direccion {
+  font-size: 2.5vw;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0.5vw 0;
+  padding: 0 5%;
+}
+
+.lugar .hora {
+  font-size: 4vw;
+  font-weight: 900;
+  margin-top: 1vw;
+  color: white;
+}
+
+/* ======================================
+   PHOTO GRID
+   ====================================== */
+
+#grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 90%;
+  margin-top: 5%;
+}
+
+#grid .container-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 2%;
+  width: 100%;
+}
+
+#grid .column {
+  flex: 0 0 calc(33.33% - 2%);
+}
+
+#grid .column.full-width {
+  flex-basis: 100%;
+}
+
+#grid img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 10%;
+  box-shadow: 1vw 1vw 1vw 0px rgba(0, 0, 0, 0.3);
+  border-radius: 5%;
+  cursor: pointer;
+}
+
+/* ======================================
+   ITINERARIO
+   ====================================== */
+
+.itinerario {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin-top: 5%;
+}
+
+.itinerario .evento {
+  display: grid;
+  grid-template-columns: 45% 45%;
+  column-gap: 10%;
+  margin-top: 3vw;
+  background: var(--itinerario-card-color);
+  border-radius: 5vw;
+  padding: 2vw;
+  backdrop-filter: blur(1vw);
+}
+
+.itinerario .evento .icono {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.itinerario .evento .icono .circulo {
+  margin: auto;
+  width: 16vw;
+  height: 16vw;
+  border-radius: 50%;
+  background: var(--color-elementos);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.itinerario .evento .icono .circulo img {
+  margin: auto;
+  width: 60%;
+  filter: var(--invertir-img-itinerario);
+}
+
+.itinerario .evento .item {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.itinerario .evento .item .nombre {
+  font-size: 5vw;
+  color: var(--texto-color);
+  font-family: var(--font-bellefair), "Bellefair", serif;
+  margin: auto;
+}
+
+.itinerario .evento .item .hora {
+  font-size: 4vw;
+  color: var(--texto-color);
+  font-weight: 900;
+  font-family: var(--font-old-standard), "Old Standard TT", serif;
+  margin: auto;
+}
+
+/* ======================================
+   DRESS CODE
+   ====================================== */
+
+.dress-code {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  margin: auto;
+  margin-top: 2vw;
+}
+
+.dress-code h2 {
+  font-size: 6vw;
+  margin-bottom: -1vw;
+  margin-top: 0;
+}
+
+.dress-code-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.dress-code-container img {
+  width: 13vw;
+  margin-bottom: -2vw;
+  margin-top: 2vw;
+}
+
+.dress-code p {
+  font-family: var(--font-old-standard), "Old Standard TT", serif;
+  font-size: 3vw;
+  text-align: center;
+}
+
+/* ======================================
+   GIFT / SOBRES / BUZON
+   ====================================== */
+
+.gift-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  margin: auto;
+  margin-top: -2vw;
+}
+
+.gift-container h2 {
+  font-size: 6vw;
+  margin-bottom: -1vw;
+  margin-top: 0;
+}
+
+.gift-object-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.gift-object-container img {
+  width: 14vw;
+  margin-bottom: -2vw;
+}
+
+.gift-container p {
+  font-family: var(--font-old-standard), "Old Standard TT", serif;
+  font-size: 3vw;
+  width: 80%;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.gift-liverpool-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  margin: auto;
+  margin-top: 2vw;
+}
+
+.gift-liverpool-container h2 {
+  font-size: 7vw;
+  margin-bottom: 1vw;
+  margin-top: 0;
+}
+
+.gift-liverpool-object-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.gift-liverpool-object-container img {
+  width: 17%;
+}
+
+.gift-liverpool-container p {
+  font-family: var(--font-old-standard), "Old Standard TT", serif;
+  font-size: 3vw;
+  width: 80%;
+  text-align: center;
+}
+
+.liverpool-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.liverpool-container img {
+  margin: auto;
+  margin-bottom: 5vw;
+  width: 25vw;
+}
+
+.liverpool-container a {
+  text-decoration: none;
+  font-weight: 800;
+  color: black;
+  z-index: 3;
+}
+
+.cut-line {
+  width: 80%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.3);
+  margin: 1vw auto;
+}
+
+.mensaje-buzon {
+  margin-top: -5%;
+  margin-bottom: 6%;
+  border-radius: 2vw;
+  padding: 2vw;
+  width: 70%;
+  height: 2em;
+  border: 0.4vw solid var(--button-background-color);
+  resize: none;
+  font-size: 3vw;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.mensaje-buzon::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ======================================
+   INFORMACION IMPORTANTE
+   ====================================== */
+
+.informacion-importante {
+  display: flex;
+  width: 80%;
+  margin: auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.informacion-importante h2 {
+  margin-bottom: 0;
+  line-height: 0.9;
+  margin-bottom: 4%;
+}
+
+.informacion-importante p {
+  font-size: 3vw;
+  font-family: var(--font-old-standard), "Old Standard TT", serif;
+  line-height: 1;
+  margin-top: 0;
+  margin-bottom: 2%;
+}
+
+/* ======================================
+   CONFIRMACION DE ASISTENCIA
+   ====================================== */
+
+.confirmacion-asistencia {
+  text-align: center;
+  width: 90%;
+  margin: auto;
+  margin-bottom: 2%;
+}
+
+.confirmacion-asistencia form {
+  margin: auto;
+  margin-top: -4%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.confirmacion-asistencia .familia-input {
+  border-radius: 2vw;
+  width: 70%;
+  border: 0.4vw solid var(--color-elementos);
+  margin-top: 1%;
+  padding: 0.7vw;
+  background: white;
+  color: black;
+  font-size: 3vw;
+}
+
+.confirmacion-asistencia .button {
+  font-size: 3vw;
+  border: none;
+  margin-top: 2%;
+  cursor: pointer;
+}
+
+/* ======================================
+   FOOTER
+   ====================================== */
+
+.footer {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% - 10px);
+  padding: 5px;
+  color: rgb(68, 68, 68);
+  border-bottom-left-radius: 2vw;
+  border-bottom-right-radius: 2vw;
+  background: var(--color-elementos);
+}
+
+.footer span span {
+  color: var(--texto-color);
+}
+
+/* ======================================
+   SOBRE (ENVELOPE)
+   ====================================== */
+
+.sobre {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.sobre .first {
+  background-color: var(--color-sobre);
+  width: 100%;
+  height: 50%;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  border-bottom: var(--line-sobre) solid 1px;
+}
+
+.sobre .second {
+  background-color: var(--color-sobre);
+  width: 100%;
+  height: 50%;
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  border-top: var(--line-sobre) solid 1px;
+}
+
+.sello {
+  background: var(--color-sobre);
+  border: none;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.2rem;
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  box-shadow: -6px -6px 14px var(--text-sello-shadow1),
+    -6px -6px 10px var(--text-sello-shadow2),
+    6px 6px 8px rgba(255, 255, 255, 0.075), 6px 6px 10px rgba(0, 0, 0, 0.15);
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: booms 2s infinite;
+  z-index: 2;
+}
+
+@keyframes booms {
+  0% { transform: scale(1) translate(-50%, -50%); }
+  50% { transform: scale(1.1) translate(-50%, -50%); }
+  100% { transform: scale(1) translate(-50%, -50%); }
+}
+
+.up_1 {
+  -webkit-animation-duration: 3s;
+  -webkit-animation-name: up;
+  -webkit-animation-fill-mode: forwards;
+  animation: up 3s forwards;
+}
+
+.down_1 {
+  -webkit-animation-duration: 3s;
+  -webkit-animation-name: down;
+  -webkit-animation-fill-mode: forwards;
+  animation: down 3s forwards;
+}
+
+.button_hiden {
+  -webkit-animation-duration: 3s;
+  -webkit-animation-name: hiden;
+  -webkit-animation-fill-mode: forwards;
+  animation: hiden 3s forwards;
+}
+
+.sobre_hiden {
+  -webkit-animation-duration: 3s;
+  -webkit-animation-name: hiden;
+  -webkit-animation-fill-mode: forwards;
+  animation: hiden 3s forwards;
+}
+
+@keyframes hiden {
+  0% { opacity: 1; }
+  99% { opacity: 0; }
+  100% { display: none; pointer-events: none; }
+}
+
+@keyframes up {
+  0% { transform: translateY(0%); }
+  100% { transform: translateY(-100%); }
+}
+
+@keyframes down {
+  0% { transform: translateY(0%); }
+  100% { transform: translateY(100%); }
+}
+
+/* ======================================
+   MODAL
+   ====================================== */
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  text-align: center;
+  z-index: 9999;
+}
+
+.modal.open {
+  display: block;
+}
+
+.modal-img {
+  max-width: 80%;
+  max-height: 80%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 30px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.prev-btn,
+.next-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 36px;
+  color: #fff;
+  cursor: pointer;
+  padding: 1rem;
+}
+
+.prev-btn { left: 100px; }
+.next-btn { right: 100px; }
+
+/* ======================================
+   DYNAMIC DISPLAY ANIMATIONS
+   ====================================== */
+
+.show-p-y {
+  opacity: 0;
+  transform: translateY(150px);
+  transition: all 2s ease;
+}
+
+.active-p-y {
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+.show-n-x {
+  opacity: 0;
+  transform: translateX(150px);
+  transition: all 2s ease;
+}
+
+.active-n-x {
+  transform: translateX(0px);
+  opacity: 1;
+}
+
+.show-p-x {
+  opacity: 0;
+  transform: translateX(-150px);
+  transition: all 2s ease;
+}
+
+.active-p-x {
+  transform: translateX(0px);
+  opacity: 1;
+}
+
+/* ======================================
+   DECORATIONS
+   ====================================== */
+
+.decorations {
+  position: absolute;
+  width: 100%;
+  height: 0;
+  pointer-events: none;
+}
+
+.decorations .item1 { position: absolute; width: 17vw; right: 4vw; top: 2vw; animation: rotar 2.5s linear infinite; }
+.decorations .item2 { position: absolute; width: 14vw; left: 3vw; top: 96vw; animation: rotar 2.5s linear infinite; }
+.decorations .item3 { position: absolute; width: 14vw; right: 3vw; top: 143vw; animation: rotar 2.5s linear infinite; }
+.decorations .item4 { position: absolute; width: 14vw; left: 3vw; top: 350vw; animation: rotar 2.5s linear infinite; }
+.decorations .item5 { position: absolute; width: 13vw; right: 4vw; top: 1110vw; animation: rotar 2.5s linear infinite; }
+
+.decorations .item11 { position: absolute; width: 14vw; left: 4vw; top: 4vw; animation: aumentar 2.5s linear infinite; }
+.decorations .item12 { position: absolute; width: 12vw; right: 5vw; top: 97vw; animation: aumentar 2.5s linear infinite; }
+.decorations .item13 { position: absolute; width: 14vw; left: 4vw; top: 144vw; animation: aumentar 2.5s linear infinite; }
+.decorations .item14 { position: absolute; width: 12vw; right: 4vw; top: 525vw; animation: aumentar 2.5s linear infinite; }
+.decorations .item15 { position: absolute; width: 12vw; left: 5vw; top: 900vw; animation: aumentar 2.5s linear infinite; }
+
+.decorations .item21 { position: absolute; width: 10vw; left: 46vw; top: 2vw; }
+.decorations .item22 { position: absolute; width: 12vw; left: 5vw; top: 40vw; }
+.decorations .item23 { position: absolute; width: 12vw; right: 4vw; top: 65vw; }
+.decorations .item24 { position: absolute; width: 10vw; right: 6vw; top: 240vw; }
+.decorations .item25 { position: absolute; width: 11vw; left: 5vw; top: 578vw; }
+.decorations .item26 { position: absolute; width: 12vw; right: 5vw; top: 760vw; }
+
+@keyframes rotar {
+  0% { transform: rotate(2deg); }
+  50% { transform: rotate(-2deg); }
+  100% { transform: rotate(2deg); }
+}
+
+@keyframes aumentar {
+  0% { transform: scale(1) rotate(3deg); }
+  50% { transform: scale(0.9) rotate(-3deg); }
+  100% { transform: scale(1) rotate(3deg); }
+}
+
+/* ======================================
+   RESPONSIVE (min-width: 1100px)
+   ====================================== */
+
+@media (min-width: 1100px) {
+  .background { width: 600px; margin-top: 30px; margin-bottom: 30px; }
+  h1 { font-size: 40px; }
+  h2 { font-size: 60px; }
+  h3 { font-size: 40px; margin-top: 30px; }
+  h4 { font-size: 26px; }
+  h5 { font-size: 26px; margin-top: 8px; }
+  .button { font-size: 20px; padding: 2px 30px; margin-top: -27px; }
+  .decorations { display: none; }
+  .person-name { font-size: 60px; }
+  .photo .age { margin-top: -70px; }
+  .name { margin-top: 20px; }
+  .name img { height: 105px; }
+  .time { padding-bottom: 85px; }
+  .time img { height: 294px; }
+  #countdown { margin-top: -180px; }
+  .countdown-container .number { font-size: 30px; }
+  .countdown-container .unit { font-size: 20px; }
+  .countdown-container .segment { margin: 20px; }
+  .parents-container { margin-top: 30px; }
+  .parents-container h2 { font-size: 35px; }
+  .parents p { font-size: 26px; margin-top: -15px; }
+  .vector-long { margin-top: -30px; width: 250px; }
+  .lugar .nombre { font-size: 26px; }
+  .lugar .direccion { font-size: 20px; }
+  .lugar .hora { font-size: 26px; }
+  .itinerario { width: 70%; }
+  .itinerario .evento { column-gap: 50px; margin-top: 8px; border-radius: 15px; padding: 8px; }
+  .itinerario .evento .icono .circulo { width: 160px; height: 160px; }
+  .itinerario .evento .item .nombre { font-size: 35px; }
+  .itinerario .evento .item .hora { font-size: 32px; }
+  .dress-code { width: 80%; margin-top: 10px; }
+  .dress-code h2 { font-size: 35px; margin-bottom: -4px; }
+  .dress-code-container img { width: 80px; margin-bottom: -15px; margin-top: 10px; }
+  .dress-code p { font-size: 22px; }
+  .gift-container { width: 80%; margin-top: -10px; }
+  .gift-container h2 { font-size: 35px; margin-bottom: -4px; }
+  .gift-object-container img { width: 80px; margin-bottom: -15px; }
+  .gift-container p { font-size: 22px; width: 80%; }
+  .gift-liverpool-container { margin-top: 10px; }
+  .gift-liverpool-container h2 { font-size: 35px; margin-bottom: 8px; }
+  .gift-liverpool-container p { font-size: 25px; width: 80%; }
+  .liverpool-container img { margin-bottom: 40px; width: 190px; }
+  .mensaje-buzon { font-size: 20px; border-radius: 8px; padding: 8px; border: 2px solid var(--button-background-color); }
+  .informacion-importante p { font-size: 20px; }
+  .informacion-importante h2 { font-size: 45px; }
+  .confirmacion-asistencia .familia-input { font-size: 20px; border-radius: 8px; padding: 5px; border: 2px solid var(--color-elementos); }
+  .confirmacion-asistencia .button { font-size: 20px; }
+  .sello { font-size: 16px; }
+  .prev-btn { left: 100px; }
+  .next-btn { right: 100px; }
+}

@@ -1,0 +1,59 @@
+export default function CelebracionSection() {
+  return (
+    <section
+      id="celebracion"
+      className="padding-section"
+      style={{ backgroundColor: "rgba(255,255,255,.5)" }}
+    >
+      <div
+        className="container"
+        style={{ maxWidth: "100%", padding: "0 15px" }}
+      >
+        <div className="row justify-content-center">
+          <div className="col-md-10">
+            <p
+              className="mb-10 color-textos text-center wow fadeInUp"
+              style={{ fontSize: "20px" }}
+            >
+              Mis XV Años
+            </p>
+            <h1
+              className="titulo mb-20 color-titulos text-center wow fadeInUp"
+              style={{ fontSize: "60px" }}
+            >
+              Aime Ferreira
+            </h1>
+            <p className="mb-30 color-textos text-center wow fadeInUp">
+              Te invito a mis quince primaveras, porque formas parte esencial de
+              mi vida y nada me haría más feliz que compartir contigo este día.
+              Llegó el gran día soñado, donde comenzaré a crecer y comprender lo
+              bello de la vida. Con amor, te invito a celebrar mis quince años
+            </p>
+            <div className="mb-10 text-center wow fadeInUp">
+              <img src="/images/flores-01.png" width="160" alt="" />
+            </div>
+            <h1 className="titulo mb-20 color-titulos text-center wow fadeInUp">
+              Mis Padres
+            </h1>
+            <p className="mb-30 color-textos text-center wow fadeInUp">
+              Felipe Ferreira
+              <br />
+              Paola Mendoza
+            </p>
+            <div className="mb-10 text-center wow fadeInUp">
+              <img src="/images/flores-01.png" width="160" alt="" />
+            </div>
+            <h1 className="titulo mb-20 color-titulos text-center wow fadeInUp">
+              Mis Padrinos
+            </h1>
+            <p className="mb-30 color-textos text-center wow fadeInUp">
+              Sergio García
+              <br />
+              Graciela Santos
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

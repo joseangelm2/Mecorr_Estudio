@@ -1,0 +1,411 @@
+@import "tailwindcss";
+
+/* ==============================
+   CENICIENTA — Gold/Cinderella #c48602 on #e3f2fd
+   ============================== */
+
+:root {
+  --color-principal: #c48602;
+  --bg-color: #e3f2fd;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  overflow-x: hidden;
+}
+
+.contenido {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  max-width: 600px;
+  margin: auto;
+  padding-top: 5vw;
+  position: relative;
+  z-index: 1;
+}
+
+.top, .bottom {
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.top { top: 0; right: 0; }
+.bottom { bottom: 0; left: 0; }
+.top-img, .bottom-img { width: 30vw; opacity: 0.6; }
+
+.nombre-principal {
+  font-family: var(--font-beau), "Beau Rivage", cursive;
+  font-size: 13vw;
+  color: #c48602;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.evento {
+  font-family: var(--font-albert), "Albert Sans", sans-serif;
+  font-size: 6vw;
+  color: #333;
+  text-align: center;
+  margin: 0;
+}
+
+.encabezado { text-align: center; width: 100%; }
+
+.frase {
+  font-family: var(--font-albert), "Albert Sans", sans-serif;
+  font-size: 4vw;
+  text-align: center;
+  color: #555;
+  width: 85%;
+  margin: 4vw auto;
+  line-height: 1.6;
+}
+
+.foto-con-degradado { width: 90%; position: relative; margin: 3vw auto; }
+
+.foto-full { width: 100%; border-radius: 2vw; display: block; }
+
+.familia { text-align: center; margin: 4vw 0; width: 100%; }
+
+.familia h3 {
+  font-family: var(--font-beau), "Beau Rivage", cursive;
+  font-size: 9vw;
+  color: #c48602;
+  margin: 0 0 1vw;
+  font-style: italic;
+}
+
+.familia p.nombre {
+  font-family: var(--font-albert), "Albert Sans", sans-serif;
+  font-size: 4vw;
+  color: #444;
+  margin: 1vw 0;
+}
+
+.fecha { display: flex; justify-content: center; align-items: center; gap: 3vw; margin: 5vw 0; }
+
+.fecha .dia, .fecha .mes, .fecha .anio {
+  font-family: var(--font-albert), "Albert Sans", sans-serif;
+  font-size: 7vw;
+  font-weight: 600;
+  color: #c48602;
+}
+
+.fecha .barra { width: 0.4vw; height: 8vw; background: #c48602; }
+
+.cuenta { display: flex; gap: 5vw; justify-content: center; margin: 3vw 0 5vw; width: 100%; }
+
+.segmento { display: flex; flex-direction: column; align-items: center; }
+
+.numero {
+  font-family: var(--font-albert), "Albert Sans", sans-serif;
+  font-size: 8vw;
+  font-weight: 700;
+  color: #c48602;
+}
+
+.unidad {
+  font-family: var(--font-albert), "Albert Sans", sans-serif;
+  font-size: 3vw;
+  color: #666;
+}
+
+.ubicacion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 90%;
+  margin: 3vw auto;
+  background: rgba(196, 134, 2, 0.08);
+  border-radius: 3vw;
+  padding: 4vw;
+  text-decoration: none;
+  color: inherit;
+}
+
+.ubicacion .lugar {
+  font-family: var(--font-albert), "Albert Sans", sans-serif;
+  font-size: 4.5vw;
+  font-weight: 600;
+  color: #333;
+  margin: 1vw 0;
+}
+
+.ubicacion .lugar-titulo {
+  font-family: var(--font-beau), "Beau Rivage", cursive;
+  font-size: 10vw;
+  color: #c48602;
+  margin: 0 0 1vw;
+}
+
+.ubicacion .direccion {
+  font-family: var(--font-albert), "Albert Sans", sans-serif;
+  font-size: 3.5vw;
+  color: #666;
+  margin: 0.5vw 0;
+}
+
+.ubicacion .hora {
+  font-family: var(--font-albert), "Albert Sans", sans-serif;
+  font-size: 4vw;
+  font-weight: 700;
+  color: #c48602;
+  margin: 1vw 0;
+}
+
+.boton {
+  background: #c48602;
+  color: white;
+  padding: 2vw 6vw;
+  border-radius: 2vw;
+  font-family: var(--font-albert), "Albert Sans", sans-serif;
+  font-size: 3.5vw;
+  cursor: pointer;
+  margin: 2vw auto;
+  display: inline-block;
+  text-decoration: none;
+  border: none;
+  transition: opacity 0.2s;
+}
+
+.boton:hover { opacity: 0.85; }
+
+.extra {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 90%;
+  margin: 5vw auto;
+  text-decoration: none;
+  color: inherit;
+}
+
+.extra h3 {
+  font-family: var(--font-beau), "Beau Rivage", cursive;
+  font-size: 9vw;
+  color: #c48602;
+  margin: 0 0 2vw;
+}
+
+.extra .texto {
+  font-family: var(--font-albert), "Albert Sans", sans-serif;
+  font-size: 3.5vw;
+  color: #555;
+  width: 85%;
+  line-height: 1.6;
+}
+
+#grid { width: 90%; margin: 3vw auto; }
+
+.container-grid { display: flex; flex-wrap: wrap; gap: 2vw; justify-content: space-between; }
+
+.dos-fotos { display: flex; gap: 2vw; width: 100%; }
+.dos-fotos img { flex: 1; border-radius: 2vw; }
+.column { flex: 0 0 calc(33.33% - 2vw); }
+.column.full-width { flex-basis: 100%; }
+.object-grid { width: 100%; border-radius: 2vw; display: block; margin-bottom: 2vw; }
+
+.itinerario {
+  width: 90%;
+  margin: 5vw auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.itinerario h3 {
+  font-family: var(--font-beau), "Beau Rivage", cursive;
+  font-size: 9vw;
+  color: #c48602;
+  margin: 0 0 4vw;
+}
+
+.itinerario .evento {
+  display: grid;
+  grid-template-columns: 45% 45%;
+  column-gap: 10%;
+  margin-top: 3vw;
+  background: rgba(196, 134, 2, 0.08);
+  border-radius: 5vw;
+  padding: 2vw;
+  width: 100%;
+}
+
+.itinerario .evento .icono {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.itinerario .evento .icono .circulo {
+  margin: auto;
+  width: 16vw;
+  height: 16vw;
+  border-radius: 50%;
+  background: #c48602;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.itinerario .evento .icono .circulo img { margin: auto; width: 60%; filter: invert(100%); }
+
+.itinerario .evento .item { display: flex; flex-direction: column; justify-content: center; text-align: center; }
+
+.itinerario .evento .item .nombre {
+  font-family: var(--font-albert), "Albert Sans", sans-serif;
+  font-size: 5vw;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.itinerario .evento .item .hora {
+  font-family: var(--font-albert), "Albert Sans", sans-serif;
+  font-size: 4vw;
+  font-weight: 700;
+  color: #c48602;
+  margin: 0;
+}
+
+.mensaje {
+  width: 70%;
+  font-family: var(--font-albert), "Albert Sans", sans-serif;
+  font-size: 3.5vw;
+  border-radius: 2vw;
+  padding: 1.5vw;
+  border: 0.4vw solid #c48602;
+  margin: 2vw 0;
+  resize: none;
+  background: white;
+}
+
+.confirmacion-asistencia { width: 90%; margin: 5vw auto; text-align: center; }
+
+.confirmacion-asistencia h3 {
+  font-family: var(--font-beau), "Beau Rivage", cursive;
+  font-size: 9vw;
+  color: #c48602;
+}
+
+.confirmacion-asistencia form { display: flex; flex-direction: column; align-items: center; gap: 1.5vw; }
+
+.familia-input {
+  border-radius: 2vw;
+  width: 70%;
+  border: 0.4vw solid #c48602;
+  padding: 1.5vw;
+  font-family: var(--font-albert), "Albert Sans", sans-serif;
+  font-size: 3.5vw;
+  background: white;
+}
+
+.texto {
+  font-family: var(--font-albert), "Albert Sans", sans-serif;
+  font-size: 3.5vw;
+  color: #555;
+}
+
+.despedida {
+  font-family: var(--font-beau), "Beau Rivage", cursive;
+  font-size: 10vw;
+  color: #c48602;
+  text-align: center;
+  margin: 5vw 0;
+}
+
+.importante {
+  font-family: var(--font-albert), "Albert Sans", sans-serif;
+  font-size: 3.5vw;
+  color: #555;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* SOBRE */
+.sobre { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: 100; overflow: hidden; }
+
+.petalo { position: absolute; width: 50%; height: 100%; top: 0; border: 0.2vw solid rgba(255, 255, 255, 0.3); }
+.petalo.left { left: 0; transition: transform 1.5s ease; }
+.petalo.right { right: 0; transition: transform 1.5s ease; }
+.petalo.left.open { transform: translateX(-100%); }
+.petalo.right.open { transform: translateX(100%); }
+
+.sello {
+  background: #c48602;
+  border: none;
+  color: white;
+  font-size: 4vw;
+  font-family: var(--font-albert), "Albert Sans", sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  position: absolute;
+  width: 35vw;
+  height: 35vw;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  transition: opacity 1.5s;
+  animation: booms 2s infinite;
+  line-height: 1.3;
+}
+
+.sello.hidden { opacity: 0; pointer-events: none; }
+
+.banda-sobre {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 0.4vw;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+@keyframes booms {
+  0% { transform: scale(1) translate(-50%, -50%); }
+  50% { transform: scale(1.05) translate(-50%, -50%); }
+  100% { transform: scale(1) translate(-50%, -50%); }
+}
+
+/* SCROLL */
+.show-p-y { opacity: 0; transform: translateY(80px); transition: all 1.5s ease; }
+.active-p-y { transform: translateY(0px); opacity: 1; }
+.show-n-x { opacity: 0; transform: translateX(80px); transition: all 1.5s ease; }
+.active-n-x { transform: translateX(0px); opacity: 1; }
+.show-p-x { opacity: 0; transform: translateX(-80px); transition: all 1.5s ease; }
+.active-p-x { transform: translateX(0px); opacity: 1; }
+.show { opacity: 0; transition: all 1.5s ease; }
+.active { opacity: 1; }
+
+@media (min-width: 600px) {
+  .nombre-principal { font-size: 78px; }
+  .evento { font-size: 36px; }
+  .frase { font-size: 18px; }
+  .familia h3 { font-size: 54px; }
+  .familia p.nombre { font-size: 18px; }
+  .fecha .dia, .fecha .mes, .fecha .anio { font-size: 42px; }
+  .numero { font-size: 48px; }
+  .unidad { font-size: 16px; }
+  .ubicacion .lugar { font-size: 22px; }
+  .ubicacion .hora { font-size: 20px; }
+  .boton { font-size: 16px; padding: 8px 24px; }
+  .extra h3 { font-size: 54px; }
+  .extra .texto { font-size: 16px; }
+  .sello { font-size: 18px; width: 150px; height: 150px; }
+  .despedida { font-size: 60px; }
+}

@@ -1,0 +1,671 @@
+@import "tailwindcss";
+
+/* ======================================
+   LOVE INVITATION — Red Theme
+   ====================================== */
+
+html {
+  overflow: hidden;
+  position: relative;
+}
+
+html.con-scroll {
+  overflow-y: scroll;
+}
+
+body {
+  margin: 0;
+  background: #1a0a0a;
+  color: white;
+  font-family: Georgia, "Times New Roman", serif;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* ======================================
+   PARALLAX SECTIONS
+   ====================================== */
+
+.parallax-container {
+  min-height: 60vw;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.parallax-1 {
+  background: linear-gradient(135deg, #d50f12 0%, #8b0000 50%, #1a0a0a 100%);
+  min-height: 100vh;
+}
+
+.parallax-2,
+.parallax-4 {
+  background: linear-gradient(135deg, #8b0000 0%, #c20b0e 100%);
+  min-height: 30vw;
+}
+
+.parallax-3,
+.parallax-5 {
+  background: linear-gradient(135deg, #1a0a0a 0%, #8b0000 100%);
+  min-height: 30vw;
+}
+
+/* ======================================
+   HERO
+   ====================================== */
+
+.hero-container {
+  text-align: center;
+  padding: 20vw 5vw 8vw;
+  width: 100%;
+}
+
+.nombre-titulo {
+  font-size: 18vw;
+  color: white;
+  font-family: Georgia, serif;
+  font-weight: 400;
+  margin: 0;
+  line-height: 1;
+  text-shadow: 0 0 40px rgba(213, 15, 18, 0.8);
+}
+
+.fecha-text h3 {
+  font-size: 6vw;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.4em;
+  font-family: Georgia, serif;
+  font-weight: 400;
+  margin: 2vw 0;
+}
+
+/* ======================================
+   COUNTDOWN
+   ====================================== */
+
+#countdown .container {
+  padding: 2vw;
+}
+
+.countdown-container {
+  display: flex;
+  justify-content: center;
+  gap: 4vw;
+  flex-wrap: wrap;
+}
+
+.segment {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+}
+
+.number {
+  font-size: 8vw;
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+  display: block;
+}
+
+.unit {
+  font-size: 2.5vw;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  display: block;
+}
+
+/* ======================================
+   CONTAIN (white card sections)
+   ====================================== */
+
+.contain {
+  background: #faf5f5;
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 3vw;
+  padding: 6vw 5vw;
+  color: #333;
+}
+
+.subtitulo {
+  font-family: Georgia, serif;
+  font-size: 7vw;
+  color: #d50f12;
+  text-align: center;
+  margin: 3vw 0 1vw;
+  font-weight: 400;
+}
+
+.separador {
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #d50f12, transparent);
+  margin: 2vw auto;
+  border: none;
+  display: block;
+}
+
+/* ======================================
+   QUOTE / FRASE
+   ====================================== */
+
+.frase-container {
+  text-align: center;
+  padding: 2vw 0;
+}
+
+.frase-container .texto {
+  color: #555;
+  font-size: 4vw;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* ======================================
+   LOCATIONS
+   ====================================== */
+
+.ubicaciones {
+  margin-top: 4vw;
+}
+
+.lugar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 4vw auto;
+  background: rgba(213, 15, 18, 0.06);
+  border-radius: 2vw;
+  padding: 4vw 3vw;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.2s;
+}
+
+.lugar:hover {
+  background: rgba(213, 15, 18, 0.12);
+}
+
+.lugar .con-foto {
+  width: 100%;
+  max-width: 280px;
+  border-radius: 2vw;
+  margin-bottom: 2vw;
+  object-fit: cover;
+}
+
+.lugar .nombre {
+  font-size: 4.5vw;
+  font-weight: 600;
+  color: #d50f12;
+  margin: 1vw 0 0.5vw;
+}
+
+.lugar .direccion {
+  font-size: 3.5vw;
+  color: #666;
+  margin: 0.5vw 0;
+  font-weight: 400;
+}
+
+.lugar .hora {
+  font-size: 5vw;
+  font-weight: 700;
+  color: #8b0000;
+  margin: 1vw 0;
+}
+
+.button {
+  background: #d50f12;
+  color: white;
+  padding: 2.5vw 7vw;
+  border-radius: 5vw;
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
+  margin: 2vw auto;
+  font-size: 3.5vw;
+  letter-spacing: 0.1em;
+  transition: background 0.2s;
+  border: none;
+  font-family: Georgia, serif;
+}
+
+.button:hover {
+  background: #8b0000;
+  color: white;
+}
+
+/* ======================================
+   PARENTS / PADRINOS
+   ====================================== */
+
+.familiares {
+  text-align: center;
+}
+
+.parents-container {
+  margin: 4vw 0;
+}
+
+.parents {
+  text-align: center;
+}
+
+.parents p {
+  font-size: 4.5vw;
+  line-height: 2;
+  color: #444;
+}
+
+.vector-long {
+  width: 60%;
+  margin: 2vw auto;
+  display: block;
+}
+
+/* ======================================
+   PHOTO ALBUM GRID
+   ====================================== */
+
+.album {
+  text-align: center;
+}
+
+.container-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2vw;
+  margin-top: 4vw;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 2vw;
+}
+
+.column.full-width {
+  width: 100%;
+}
+
+.object-grid {
+  width: 100%;
+  border-radius: 2vw;
+  object-fit: cover;
+}
+
+.dos-fotos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2vw;
+}
+
+/* ======================================
+   ITINERARIO
+   ====================================== */
+
+.itinerario {
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 4vw 0;
+  text-align: center;
+}
+
+.itinerario .subtitulo {
+  color: white;
+}
+
+.evento {
+  display: flex;
+  align-items: center;
+  margin: 4vw 0;
+  padding: 3vw;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3vw;
+}
+
+.evento.izquierda {
+  flex-direction: row;
+}
+
+.evento.derecha {
+  flex-direction: row-reverse;
+}
+
+.icono {
+  flex-shrink: 0;
+}
+
+.circulo {
+  width: 14vw;
+  height: 14vw;
+  border-radius: 50%;
+  background: rgba(213, 15, 18, 0.3);
+  border: 1px solid rgba(213, 15, 18, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 3vw;
+}
+
+.circulo img {
+  width: 8vw;
+  filter: invert(100%);
+}
+
+.item {
+  flex: 1;
+  padding: 0 2vw;
+}
+
+.evento.izquierda .item {
+  text-align: left;
+}
+
+.evento.derecha .item {
+  text-align: right;
+}
+
+.item .nombre {
+  font-size: 5vw;
+  color: white;
+  font-weight: 600;
+  margin: 0;
+}
+
+.item .hora {
+  font-size: 4vw;
+  color: rgba(255, 180, 180, 0.9);
+  margin: 0.5vw 0 0;
+}
+
+/* ======================================
+   EXTRA (Vestimenta, Sobres, etc.)
+   ====================================== */
+
+.extra {
+  width: 100%;
+}
+
+.dress-code {
+  margin: 4vw 0;
+  text-align: center;
+}
+
+.dress-code-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2vw;
+}
+
+.icon-extra {
+  width: 20vw;
+  max-width: 80px;
+}
+
+.texto {
+  font-size: 4vw;
+  color: #555;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.gift-container,
+.gift-liverpool-container {
+  margin: 4vw 0;
+  text-align: center;
+}
+
+.gift-object-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2vw;
+}
+
+.gift-liverpool-object-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5vw;
+}
+
+.liverpool-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2vw;
+  margin-top: 2vw;
+}
+
+.liverpool-container img {
+  width: 30vw;
+  max-width: 120px;
+}
+
+.mensaje {
+  width: 100%;
+  padding: 2vw;
+  border-radius: 2vw;
+  border: 1px solid #d50f12;
+  font-size: 3.5vw;
+  resize: vertical;
+  font-family: Georgia, serif;
+  color: #333;
+  min-height: 80px;
+}
+
+.informacion-importante-container p {
+  font-size: 4vw;
+  color: #555;
+  margin: 2vw 0;
+}
+
+/* ======================================
+   RSVP FORM
+   ====================================== */
+
+.confirmacion-asistencia {
+  margin: 6vw 0 2vw;
+  text-align: center;
+}
+
+.confirmacion-asistencia h2 {
+  font-size: 5vw;
+  color: #d50f12;
+  margin-bottom: 4vw;
+  font-family: Georgia, serif;
+}
+
+.familia-input {
+  width: 100%;
+  padding: 2.5vw;
+  border-radius: 2vw;
+  border: 1px solid #d50f12;
+  font-size: 4vw;
+  font-family: Georgia, serif;
+  color: #333;
+  margin: 1vw 0 2vw;
+  background: white;
+}
+
+.confirmacion-asistencia label {
+  display: block;
+  font-size: 4vw;
+  color: #555;
+  margin: 1vw 0;
+}
+
+.radio-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2vw;
+  margin: 1.5vw 0;
+}
+
+.radio-group input[type="radio"] {
+  width: 5vw;
+  height: 5vw;
+  accent-color: #d50f12;
+}
+
+/* ======================================
+   ENVELOPE (sobre) — Red version
+   ====================================== */
+
+.sobre-love {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1a0a0a;
+  overflow: hidden;
+  transition: opacity 0.5s ease;
+}
+
+.sobre-love.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sobre-love-inner {
+  position: relative;
+  width: 80vw;
+  max-width: 360px;
+}
+
+.sobre-love-label {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 4vw;
+  text-align: center;
+  margin-bottom: 4vw;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.sobre-love-box {
+  background: linear-gradient(135deg, #8b0000, #d50f12);
+  border-radius: 2vw;
+  padding: 8vw;
+  text-align: center;
+  border: 1px solid rgba(255, 100, 100, 0.3);
+}
+
+.sobre-love-name {
+  font-size: 10vw;
+  color: white;
+  font-family: Georgia, serif;
+  margin-bottom: 4vw;
+  text-shadow: 0 0 20px rgba(255, 100, 100, 0.5);
+}
+
+.sobre-love-btn {
+  background: white;
+  color: #d50f12;
+  border: none;
+  padding: 3vw 8vw;
+  border-radius: 5vw;
+  font-size: 4vw;
+  font-family: Georgia, serif;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: pulse-red 3s infinite;
+}
+
+.sobre-love-btn:hover {
+  transform: scale(1.05);
+}
+
+@keyframes pulse-red {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+  50% { box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.1); }
+}
+
+/* ======================================
+   FOOTER
+   ====================================== */
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2vw;
+  padding: 5vw;
+  color: #809eff;
+  text-decoration: none;
+  font-size: 3.5vw;
+}
+
+/* ======================================
+   SCROLL ANIMATIONS
+   ====================================== */
+
+.show-p-y {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.show-p-y.active-p-y {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.show-n-x {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.show-n-x.active-n-x {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.show-p-x {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.show-p-x.active-p-x {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ======================================
+   RESPONSIVE
+   ====================================== */
+
+@media (min-width: 600px) {
+  .nombre-titulo { font-size: 12vw; }
+  .fecha-text h3 { font-size: 4vw; }
+  .number { font-size: 6vw; }
+  .unit { font-size: 1.5vw; }
+  .subtitulo { font-size: 5vw; }
+  .texto { font-size: 2.5vw; }
+  .button { font-size: 2vw; padding: 1.5vw 5vw; }
+}
