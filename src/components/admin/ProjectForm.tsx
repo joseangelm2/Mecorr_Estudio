@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { generateSlug } from '@/lib/slug'
 import { createProject, updateProject, type ProjectFormData } from '@/app/admin/actions'
 import type { Project, TemplateId } from '@/types/invitation'
+import { THEMES } from '@/lib/themes'
 
 const TEMPLATES: { value: TemplateId; label: string }[] = [
   { value: 'sobre', label: 'Sobre Animado' },
@@ -182,6 +183,32 @@ export default function ProjectForm({ project }: Props) {
               {TEMPLATES.map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
             </select>
           </div>
+          {form.template === 'sobre' && (
+            <div>
+              <label className={labelClass}>Paleta de color</label>
+              <div className="flex flex-wrap gap-3 mt-1">
+                {THEMES.map(theme => (
+                  <button
+                    key={theme.id}
+                    type="button"
+                    onClick={() => set('color_theme', theme.id)}
+                    className="flex flex-col items-center gap-1"
+                    title={theme.label}
+                  >
+                    <span
+                      className="w-8 h-8 rounded-full border-2 transition-all"
+                      style={{
+                        background: theme.swatch,
+                        borderColor: form.color_theme === theme.id ? '#1f2937' : 'transparent',
+                        boxShadow: form.color_theme === theme.id ? '0 0 0 2px #f43f5e' : 'none',
+                      }}
+                    />
+                    <span className="text-xs text-gray-500">{theme.label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
           <div>
             <label className={labelClass}>Fecha del evento *</label>
             <input type="datetime-local" value={form.event_date} onChange={e => set('event_date', e.target.value)} required className={inputClass} />
@@ -195,6 +222,16 @@ export default function ProjectForm({ project }: Props) {
           <div>
             <label className={labelClass}>Nombre del invitado (para banner)</label>
             <input type="text" value={form.guest_name} onChange={e => set('guest_name', e.target.value)} className={inputClass} placeholder="Familia Martínez" />
+          </div>
+          <div>
+            <label className={labelClass}>Mensaje de invitación</label>
+            <textarea
+              value={form.invitation_text}
+              onChange={e => set('invitation_text', e.target.value)}
+              className={inputClass}
+              rows={4}
+              placeholder="Con cariño te invitamos a compartir nuestro día más especial..."
+            />
           </div>
           <div>
             <label className={labelClass}>Teléfono RSVP (WhatsApp, sin +)</label>
