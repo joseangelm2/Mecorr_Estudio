@@ -18,6 +18,7 @@ export default function ColorSwitcher({ defaultTheme = "rosagold", variant = "fi
     root.style.setProperty("--inv-primary-dark", theme.dark);
     root.style.setProperty("--inv-border", theme.primary);
     root.style.setProperty("--inv-filter", theme.filterValue);
+    root.style.setProperty("--inv-filter-light", theme.filterLight);
     setActive(theme.id);
   }
 

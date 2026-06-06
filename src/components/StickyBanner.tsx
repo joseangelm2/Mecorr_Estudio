@@ -6,7 +6,7 @@ interface StickyBannerProps {
   guestName?: string;
 }
 
-export default function StickyBanner({ guestName = "Aime Ferreira" }: StickyBannerProps) {
+export default function StickyBanner({ guestName = "" }: StickyBannerProps) {
   useEffect(() => {
     function handleScroll() {
       const cintillo = document.getElementById("cintillo");

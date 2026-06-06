@@ -36,6 +36,13 @@ function toFormData(project?: Project): ProjectFormData {
       liverpool_link: '', bank_account: '', bank_beneficiary: '',
       color_theme: 'rosagold',
       invitation_text: '',
+      show_video: false,
+      video_youtube_id: '',
+      video_url: '',
+      show_lluvia_sobres: false,
+      lluvia_sobres_text: '',
+      show_datos_bancarios: false,
+      datos_bancarios_text: '',
     }
   }
   return {
@@ -74,6 +81,13 @@ function toFormData(project?: Project): ProjectFormData {
     bank_beneficiary: project.gift_registry?.bankBeneficiary ?? '',
     color_theme: project.color_theme ?? 'rosagold',
     invitation_text: project.invitation_text ?? '',
+    show_video: project.show_video ?? false,
+    video_youtube_id: project.video_youtube_id ?? '',
+    video_url: project.video_url ?? '',
+    show_lluvia_sobres: project.show_lluvia_sobres ?? false,
+    lluvia_sobres_text: project.lluvia_sobres_text ?? '',
+    show_datos_bancarios: project.show_datos_bancarios ?? false,
+    datos_bancarios_text: project.datos_bancarios_text ?? '',
   }
 }
 
@@ -427,16 +441,98 @@ export default function ProjectForm({ project }: Props) {
             </div>
           </div>
           <div className="border-t pt-4">
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={form.show_video}
+                onChange={e => set('show_video', e.target.checked)}
+                className="w-4 h-4 accent-rose-500"
+              />
+              <span className="text-sm font-medium text-gray-700">Mostrar sección de video</span>
+            </label>
+            {form.show_video && (
+              <div className="mt-3 space-y-3 pl-6">
+                <div>
+                  <label className={labelClass}>ID de YouTube</label>
+                  <input type="text" value={form.video_youtube_id} onChange={e => set('video_youtube_id', e.target.value)} className={inputClass} placeholder="dQw4w9WgXcQ" />
+                  <p className="text-xs text-gray-400 mt-1">Solo el ID de la URL: youtube.com/watch?v=<strong>ESTE_TEXTO</strong></p>
+                </div>
+                <div>
+                  <label className={labelClass}>O subir video (MP4)</label>
+                  {project?.id && (
+                    <MediaUploader
+                      projectId={project.id}
+                      bucket="invitation-media"
+                      accept="video/*"
+                      onUploadComplete={url => set('video_url', url)}
+                      label="Subir video (MP4)"
+                    />
+                  )}
+                  <input type="text" value={form.video_url} onChange={e => set('video_url', e.target.value)} className={`${inputClass} mt-2`} placeholder="https://supabase.co/.../video.mp4" />
+                  {!project?.id && <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para poder subir archivos.</p>}
+                </div>
+              </div>
+            )}
+          </div>
+          <div className="border-t pt-4">
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={form.show_lluvia_sobres}
+                onChange={e => set('show_lluvia_sobres', e.target.checked)}
+                className="w-4 h-4 accent-rose-500"
+              />
+              <span className="text-sm font-medium text-gray-700">Mostrar sección Lluvia de Sobres</span>
+            </label>
+            {form.show_lluvia_sobres && (
+              <div className="mt-3 pl-6">
+                <label className={labelClass}>Texto personalizado</label>
+                <textarea
+                  value={form.lluvia_sobres_text}
+                  onChange={e => set('lluvia_sobres_text', e.target.value)}
+                  className={inputClass}
+                  rows={3}
+                  placeholder="Si prefieres obsequiarme un sobre, será recibido con el mismo amor y gratitud..."
+                />
+              </div>
+            )}
+          </div>
+          <div className="border-t pt-4">
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={form.show_datos_bancarios}
+                onChange={e => set('show_datos_bancarios', e.target.checked)}
+                className="w-4 h-4 accent-rose-500"
+              />
+              <span className="text-sm font-medium text-gray-700">Mostrar sección Datos Bancarios</span>
+            </label>
+            {form.show_datos_bancarios && (
+              <div className="mt-3 space-y-3 pl-6">
+                <div>
+                  <label className={labelClass}>Texto personalizado</label>
+                  <textarea
+                    value={form.datos_bancarios_text}
+                    onChange={e => set('datos_bancarios_text', e.target.value)}
+                    className={inputClass}
+                    rows={3}
+                    placeholder="Si deseas realizarme un regalo monetario, aquí encontrarás mis datos bancarios..."
+                  />
+                </div>
+                <div>
+                  <label className={labelClass}>Cuenta bancaria (CLABE)</label>
+                  <input type="text" value={form.bank_account} onChange={e => set('bank_account', e.target.value)} className={inputClass} placeholder="000 000 000 000 000 000" />
+                </div>
+                <div>
+                  <label className={labelClass}>Beneficiario</label>
+                  <input type="text" value={form.bank_beneficiary} onChange={e => set('bank_beneficiary', e.target.value)} className={inputClass} placeholder="María García López" />
+                </div>
+              </div>
+            )}
+          </div>
+          <div className="border-t pt-4">
             <label className={labelClass}>Regalo — Link de Liverpool</label>
             <input type="url" value={form.liverpool_link} onChange={e => set('liverpool_link', e.target.value)} className={inputClass} placeholder="https://liverpool.com.mx/..." />
-          </div>
-          <div>
-            <label className={labelClass}>Cuenta bancaria</label>
-            <input type="text" value={form.bank_account} onChange={e => set('bank_account', e.target.value)} className={inputClass} placeholder="1234 5678 9012 3456" />
-          </div>
-          <div>
-            <label className={labelClass}>Beneficiario</label>
-            <input type="text" value={form.bank_beneficiary} onChange={e => set('bank_beneficiary', e.target.value)} className={inputClass} placeholder="María García López" />
           </div>
         </div>
       )}

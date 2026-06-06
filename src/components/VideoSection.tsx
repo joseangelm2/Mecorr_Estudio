@@ -1,12 +1,22 @@
+'use client'
+
+import { useState } from 'react'
+
 interface Props {
   youtubeId?: string;
   localVideo?: string;
 }
 
+function pauseBackgroundMusic() {
+  const audio = document.getElementById('sonido2') as HTMLAudioElement | null
+  audio?.pause()
+}
+
 export default function VideoSection({
   youtubeId = "",
-  localVideo = "/videos/Video XV Años.mp4",
+  localVideo = "",
 }: Props) {
+  const [ytStarted, setYtStarted] = useState(false)
   return (
     <section
       id="video"
@@ -23,20 +33,29 @@ export default function VideoSection({
 
         <div className="wow fadeInUp" style={{ borderRadius: "12px", overflow: "hidden" }}>
           {youtubeId ? (
-            <iframe
-              width="100%"
-              style={{ aspectRatio: "16/9", border: "none", display: "block" }}
-              src={`https://www.youtube.com/embed/${youtubeId}`}
-              title="Video"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
+            <div style={{ position: 'relative' }}>
+              {!ytStarted && (
+                <div
+                  style={{ position: 'absolute', inset: 0, zIndex: 1, cursor: 'pointer' }}
+                  onClick={() => { pauseBackgroundMusic(); setYtStarted(true) }}
+                />
+              )}
+              <iframe
+                width="100%"
+                style={{ aspectRatio: "16/9", border: "none", display: "block" }}
+                src={`https://www.youtube.com/embed/${youtubeId}`}
+                title="Video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
           ) : localVideo ? (
             <video
               src={localVideo}
               controls
               playsInline
               style={{ width: "100%", display: "block" }}
+              onPlay={pauseBackgroundMusic}
             />
           ) : (
             <div

@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { logout } from './logout-action'
 
 export const metadata = {
-  title: 'Goldrose Admin',
+  title: 'MeCorr Estudio Admin',
 }
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -11,7 +11,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Sidebar */}
       <aside className="w-56 bg-white border-r border-gray-200 flex flex-col">
         <div className="p-4 border-b border-gray-200">
-          <h1 className="text-lg font-bold text-rose-600">Goldrose</h1>
+          <h1 className="text-lg font-bold text-rose-600">MeCorr Estudio</h1>
           <p className="text-xs text-gray-400">Panel de administración</p>
         </div>
 

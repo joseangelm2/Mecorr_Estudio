@@ -62,7 +62,7 @@ export default function FotosCarousel({ photos = DEFAULT_PHOTOS }: Props) {
           style={{
             display: "flex",
             transition: "transform 0.25s ease",
-            transform: `translateX(-${current * 100}%)`,
+            transform: `translateX(-${current * (100 / photos.length)}%)`,
             width: `${photos.length * 100}%`,
           }}
         >

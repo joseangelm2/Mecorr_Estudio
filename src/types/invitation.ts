@@ -69,5 +69,12 @@ export interface Project {
   } | null
   color_theme: string
   invitation_text: string | null
+  show_video: boolean
+  video_youtube_id: string | null
+  video_url: string | null
+  show_lluvia_sobres: boolean
+  lluvia_sobres_text: string | null
+  show_datos_bancarios: boolean
+  datos_bancarios_text: string | null
   extra_config: Record<string, unknown>
 }

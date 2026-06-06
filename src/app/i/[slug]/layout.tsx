@@ -1,4 +1,17 @@
 import type { Metadata } from 'next'
+import {
+  Raleway, Albert_Sans, Beau_Rivage, Mea_Culpa,
+  Carattere, Bellefair, Cormorant_Garamond, Old_Standard_TT,
+} from 'next/font/google'
+
+const raleway     = Raleway({ variable: '--font-raleway',      subsets: ['latin'], weight: ['400', '600', '700'] })
+const albert      = Albert_Sans({ variable: '--font-albert',   subsets: ['latin'], weight: ['200', '300', '400', '500'] })
+const beau        = Beau_Rivage({ variable: '--font-beau',      subsets: ['latin'], weight: '400' })
+const meaCulpa    = Mea_Culpa({ variable: '--font-meaculpa',   subsets: ['latin'], weight: '400' })
+const carattere   = Carattere({ variable: '--font-carattere',  subsets: ['latin'], weight: '400' })
+const bellefair   = Bellefair({ variable: '--font-bellefair',  subsets: ['latin'], weight: '400' })
+const cormorant   = Cormorant_Garamond({ variable: '--font-cormorant', subsets: ['latin'], weight: ['400', '500', '600', '700'] })
+const oldStandard = Old_Standard_TT({ variable: '--font-old-standard', subsets: ['latin'], weight: ['400', '700'] })
 
 export const metadata: Metadata = {
   title: 'Invitación',
@@ -6,9 +19,14 @@ export const metadata: Metadata = {
 }
 
 export default function InvitationLayout({ children }: { children: React.ReactNode }) {
+  const fonts = [
+    raleway.variable, albert.variable, beau.variable, meaCulpa.variable,
+    carattere.variable, bellefair.variable, cormorant.variable, oldStandard.variable,
+  ].join(' ')
+
   return (
-    <html lang="es">
-      <body>{children}</body>
-    </html>
+    <div id="body" className={`bg-invitacion ${fonts}`}>
+      {children}
+    </div>
   )
 }

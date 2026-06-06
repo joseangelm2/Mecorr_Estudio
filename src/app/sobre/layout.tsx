@@ -15,10 +15,8 @@ export const metadata: Metadata = {
 
 export default function SobreLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" id="html" className={raleway.variable}>
-      <body id="body" className="bg-invitacion">
-        {children}
-      </body>
-    </html>
+    <div id="body" className={`bg-invitacion ${raleway.variable}`}>
+      {children}
+    </div>
   );
 }

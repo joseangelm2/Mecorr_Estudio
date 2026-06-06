@@ -5,14 +5,15 @@ export interface Theme {
   dark: string
   swatch: string
   filterValue: string
+  filterLight: string
 }
 
 export const THEMES: Theme[] = [
-  { id: 'rosagold',  label: 'Rosa Gold',  primary: '#a8686a', dark: '#96585a', swatch: '#a8686a', filterValue: 'hue-rotate(0deg) saturate(1)' },
-  { id: 'azul',      label: 'Azul',        primary: '#12397A', dark: '#0e2d61', swatch: '#12397A', filterValue: 'hue-rotate(210deg) saturate(2) brightness(0.85)' },
-  { id: 'lila',      label: 'Lila',        primary: '#8d77ab', dark: '#7a6598', swatch: '#8d77ab', filterValue: 'hue-rotate(260deg) saturate(1.3)' },
-  { id: 'rojo',      label: 'Rojo',        primary: '#ff3131', dark: '#e02b2b', swatch: '#ff3131', filterValue: 'hue-rotate(350deg) saturate(1.8)' },
-  { id: 'negro',     label: 'Negro',       primary: '#424242', dark: '#333333', swatch: '#424242', filterValue: 'grayscale(1) brightness(0.45)' },
-  { id: 'mariposas', label: 'Mariposas',   primary: '#b4882d', dark: '#9e7726', swatch: '#b4882d', filterValue: 'hue-rotate(38deg) saturate(1.4)' },
-  { id: 'blancooro', label: 'Blanco Oro',  primary: '#F4C430', dark: '#d4a800', swatch: '#FFD700', filterValue: 'hue-rotate(46deg) saturate(1.5) brightness(1.15)' },
+  { id: 'rosagold',  label: 'Rosa Gold',  primary: '#a8686a', dark: '#96585a', swatch: '#a8686a', filterValue: 'hue-rotate(0deg) saturate(1)',                          filterLight: 'hue-rotate(0deg) saturate(0.65) brightness(1.45)' },
+  { id: 'azul',      label: 'Azul',        primary: '#12397A', dark: '#0e2d61', swatch: '#12397A', filterValue: 'hue-rotate(210deg) saturate(2) brightness(0.85)',        filterLight: 'hue-rotate(210deg) saturate(1.3) brightness(1.35)' },
+  { id: 'lila',      label: 'Lila',        primary: '#8d77ab', dark: '#7a6598', swatch: '#8d77ab', filterValue: 'hue-rotate(260deg) saturate(1.3)',                       filterLight: 'hue-rotate(260deg) saturate(0.85) brightness(1.45)' },
+  { id: 'rojo',      label: 'Rojo',        primary: '#ff3131', dark: '#e02b2b', swatch: '#ff3131', filterValue: 'hue-rotate(350deg) saturate(1.8)',                       filterLight: 'hue-rotate(350deg) saturate(1.1) brightness(1.5)' },
+  { id: 'negro',     label: 'Negro',       primary: '#424242', dark: '#333333', swatch: '#424242', filterValue: 'grayscale(1) brightness(0.45)',                          filterLight: 'grayscale(1) brightness(0.65)' },
+  { id: 'mariposas', label: 'Mariposas',   primary: '#b4882d', dark: '#9e7726', swatch: '#b4882d', filterValue: 'hue-rotate(38deg) saturate(1.4)',                        filterLight: 'hue-rotate(38deg) saturate(0.95) brightness(1.4)' },
+  { id: 'blancooro', label: 'Blanco Oro',  primary: '#F4C430', dark: '#d4a800', swatch: '#FFD700', filterValue: 'hue-rotate(46deg) saturate(1.5) brightness(1.15)',       filterLight: 'hue-rotate(46deg) saturate(1.0) brightness(1.6)' },
 ]

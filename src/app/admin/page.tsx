@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import { togglePublish, deleteProject } from './actions'
+import { DeleteButton } from './DeleteButton'
 import type { Project } from '@/types/invitation'
 
 export default async function AdminDashboard() {
@@ -128,17 +129,3 @@ function ProjectRow({ project }: { project: Pick<Project, 'id' | 'slug' | 'templ
   )
 }
 
-function DeleteButton() {
-  return (
-    <button
-      type="submit"
-      formAction={undefined}
-      className="text-xs px-2 py-1 border border-red-200 rounded hover:bg-red-50 text-red-500"
-      onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-        if (!confirm('¿Eliminar este proyecto?')) e.preventDefault()
-      }}
-    >
-      Eliminar
-    </button>
-  )
-}

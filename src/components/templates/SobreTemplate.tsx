@@ -18,7 +18,8 @@ import HashtagSection from "@/components/HashtagSection";
 import FotosCarousel from "@/components/FotosCarousel";
 import RSVPSection from "@/components/RSVPSection";
 import FinalSection from "@/components/FinalSection";
-import LluviaSobresSection from "@/components/LluviaDesobresSection";
+import LluviaSobresSection from "@/components/LluviaDesobresSection"
+import DatosBancariosSection from "@/components/DatosBancariosSection";
 import MesaRegalosSection from "@/components/MesaRegalosSection";
 import VideoSection from "@/components/VideoSection";
 
@@ -45,6 +46,13 @@ export default function SobreTemplate({ project }: Props) {
     gift_registry,
     color_theme,
     invitation_text,
+    show_video,
+    video_youtube_id,
+    video_url,
+    show_lluvia_sobres,
+    lluvia_sobres_text,
+    show_datos_bancarios,
+    datos_bancarios_text,
   } = project;
 
   useEffect(() => {
@@ -54,13 +62,14 @@ export default function SobreTemplate({ project }: Props) {
     root.style.setProperty("--inv-primary-dark", theme.dark);
     root.style.setProperty("--inv-border", theme.primary);
     root.style.setProperty("--inv-filter", theme.filterValue);
+    root.style.setProperty("--inv-filter-light", theme.filterLight);
   }, [color_theme]);
 
   return (
     <>
       <WowInit />
       <IntroEnvelope musicUrl={music_url ?? undefined} showSwitcher={false} />
-      <StickyBanner guestName={guest_name ?? undefined} />
+      <StickyBanner guestName={guest_name ?? quinceanera_name} />
       <HeroSection
         heroPhotoUrl={hero_photo_url ?? undefined}
         quinceaneraName={quinceanera_name}
@@ -84,10 +93,14 @@ export default function SobreTemplate({ project }: Props) {
       {gift_registry?.liverpoolLink && (
         <MesaRegalosSection liverpoolLink={gift_registry.liverpoolLink} />
       )}
-      {gift_registry?.bankAccount && (
-        <LluviaSobresSection
-          bankAccount={gift_registry.bankAccount}
-          bankBeneficiary={gift_registry.bankBeneficiary}
+      {show_lluvia_sobres && (
+        <LluviaSobresSection text={lluvia_sobres_text ?? undefined} />
+      )}
+      {show_datos_bancarios && (
+        <DatosBancariosSection
+          bankAccount={gift_registry?.bankAccount}
+          bankBeneficiary={gift_registry?.bankBeneficiary}
+          text={datos_bancarios_text ?? undefined}
         />
       )}
       <RSVPSection rsvpPhone={rsvp_phone ?? undefined} />
@@ -95,7 +108,12 @@ export default function SobreTemplate({ project }: Props) {
         quinceaneraName={quinceanera_name}
         finalPhotoUrl={hero_photo_url ?? undefined}
       />
-      <VideoSection />
+      {show_video && (
+        <VideoSection
+          youtubeId={video_youtube_id ?? undefined}
+          localVideo={video_url ?? undefined}
+        />
+      )}
     </>
   );
 }

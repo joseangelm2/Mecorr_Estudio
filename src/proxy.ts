@@ -1,7 +1,7 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request })
 
   const supabase = createServerClient(
@@ -25,9 +25,23 @@ export async function middleware(request: NextRequest) {
     }
   )
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  let user = null
+  try {
+    // Race against 2s timeout — in WSL getUser() can hang instead of throwing
+    const result = await Promise.race([
+      supabase.auth.getUser(),
+      new Promise<null>(resolve => setTimeout(() => resolve(null), 2000)),
+    ])
+    user = result?.data?.user ?? null
+    if (!user) {
+      // Timed out or empty — fall back to local session (no revocation check)
+      const { data } = await supabase.auth.getSession()
+      user = data.session?.user ?? null
+    }
+  } catch {
+    const { data } = await supabase.auth.getSession()
+    user = data.session?.user ?? null
+  }
 
   const { pathname } = request.nextUrl
 

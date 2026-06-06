@@ -35,6 +35,13 @@ export interface ProjectFormData {
   bank_beneficiary: string
   color_theme: string
   invitation_text: string
+  show_video: boolean
+  video_youtube_id: string
+  video_url: string
+  show_lluvia_sobres: boolean
+  lluvia_sobres_text: string
+  show_datos_bancarios: boolean
+  datos_bancarios_text: string
 }
 
 function formDataToProject(data: ProjectFormData) {
@@ -86,6 +93,13 @@ function formDataToProject(data: ProjectFormData) {
     } : null,
     color_theme: data.color_theme || 'rosagold',
     invitation_text: data.invitation_text || null,
+    show_video: data.show_video,
+    video_youtube_id: data.video_youtube_id || null,
+    video_url: data.video_url || null,
+    show_lluvia_sobres: data.show_lluvia_sobres,
+    lluvia_sobres_text: data.lluvia_sobres_text || null,
+    show_datos_bancarios: data.show_datos_bancarios,
+    datos_bancarios_text: data.datos_bancarios_text || null,
     extra_config: {},
   }
 }

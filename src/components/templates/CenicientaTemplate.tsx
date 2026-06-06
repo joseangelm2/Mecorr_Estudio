@@ -13,7 +13,7 @@ interface Props {
   project: Project
 }
 
-export default function CenicientaTemplate({ project: _project }: Props) {
+export default function CenicientaTemplate({ project }: Props) {
   const [envelopeOpen, setEnvelopeOpen] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
 
@@ -26,7 +26,7 @@ export default function CenicientaTemplate({ project: _project }: Props) {
     <div style={{ position: 'relative' }}>
       <EsmeraldaScrollInit />
       <audio ref={audioRef} loop>
-        <source src="/images/esmeralda/musica.mp3" type="audio/mpeg" />
+        <source src={project.music_url ?? '/images/esmeralda/musica.mp3'} type="audio/mpeg" />
       </audio>
 
       {!envelopeOpen && (
@@ -40,7 +40,7 @@ export default function CenicientaTemplate({ project: _project }: Props) {
         <img className="bottom-img" src="/images/cenicienta/453.png" alt="" />
       </div>
 
-      <CenicientaContent />
+      <CenicientaContent project={project} />
     </div>
   )
 }
