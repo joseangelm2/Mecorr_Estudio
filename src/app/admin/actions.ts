@@ -42,6 +42,8 @@ export interface ProjectFormData {
   lluvia_sobres_text: string
   show_datos_bancarios: boolean
   datos_bancarios_text: string
+  confirmation_phrase: string
+  confirmation_highlight_date: string
 }
 
 function formDataToProject(data: ProjectFormData) {
@@ -100,6 +102,8 @@ function formDataToProject(data: ProjectFormData) {
     lluvia_sobres_text: data.lluvia_sobres_text || null,
     show_datos_bancarios: data.show_datos_bancarios,
     datos_bancarios_text: data.datos_bancarios_text || null,
+    confirmation_phrase: data.confirmation_phrase || null,
+    confirmation_highlight_date: data.confirmation_highlight_date || null,
     extra_config: {},
   }
 }

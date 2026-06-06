@@ -53,6 +53,8 @@ export default function SobreTemplate({ project }: Props) {
     lluvia_sobres_text,
     show_datos_bancarios,
     datos_bancarios_text,
+    confirmation_phrase,
+    confirmation_highlight_date,
   } = project;
 
   useEffect(() => {
@@ -104,7 +106,11 @@ export default function SobreTemplate({ project }: Props) {
           text={datos_bancarios_text ?? undefined}
         />
       )}
-      <RSVPSection rsvpPhone={rsvp_phone ?? undefined} />
+      <RSVPSection
+        rsvpPhone={rsvp_phone ?? undefined}
+        confirmationPhrase={confirmation_phrase ?? undefined}
+        highlightDate={confirmation_highlight_date ?? undefined}
+      />
       <FinalSection
         quinceaneraName={quinceanera_name}
         finalPhotoUrl={hero_photo_url ?? undefined}

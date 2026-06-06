@@ -43,6 +43,8 @@ function toFormData(project?: Project): ProjectFormData {
       lluvia_sobres_text: '',
       show_datos_bancarios: false,
       datos_bancarios_text: '',
+      confirmation_phrase: '',
+      confirmation_highlight_date: '',
     }
   }
   return {
@@ -88,6 +90,8 @@ function toFormData(project?: Project): ProjectFormData {
     lluvia_sobres_text: project.lluvia_sobres_text ?? '',
     show_datos_bancarios: project.show_datos_bancarios ?? false,
     datos_bancarios_text: project.datos_bancarios_text ?? '',
+    confirmation_phrase: project.confirmation_phrase ?? '',
+    confirmation_highlight_date: project.confirmation_highlight_date ?? '',
   }
 }
 
@@ -251,6 +255,20 @@ export default function ProjectForm({ project }: Props) {
           <div>
             <label className={labelClass}>Teléfono RSVP (WhatsApp, sin +)</label>
             <input type="text" value={form.rsvp_phone} onChange={e => set('rsvp_phone', e.target.value)} className={inputClass} placeholder="5218001234567" />
+          </div>
+          <div>
+            <label className={labelClass}>Frase de confirmación</label>
+            <textarea
+              value={form.confirmation_phrase}
+              onChange={e => set('confirmation_phrase', e.target.value)}
+              className={inputClass}
+              rows={3}
+              placeholder="Llena el siguiente formulario y no olvides dar clic en el botón, nosotros revisaremos tu confirmación."
+            />
+          </div>
+          <div>
+            <label className={labelClass}>Fecha resaltada en confirmación</label>
+            <input type="date" value={form.confirmation_highlight_date} onChange={e => set('confirmation_highlight_date', e.target.value)} className={inputClass} />
           </div>
           <div>
             <label className={labelClass}>Hashtag</label>

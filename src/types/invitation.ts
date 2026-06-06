@@ -76,5 +76,7 @@ export interface Project {
   lluvia_sobres_text: string | null
   show_datos_bancarios: boolean
   datos_bancarios_text: string | null
+  confirmation_phrase: string | null
+  confirmation_highlight_date: string | null
   extra_config: Record<string, unknown>
 }

@@ -58,6 +58,8 @@ const DEMO_PROJECT: Project = {
   lluvia_sobres_text: null,
   show_datos_bancarios: false,
   datos_bancarios_text: null,
+  confirmation_phrase: null,
+  confirmation_highlight_date: null,
   extra_config: {},
 };
 
