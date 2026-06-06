@@ -14,7 +14,6 @@ export default function RSVPSection({ rsvpPhone = "5214438569931" }: Props) {
     const form = e.currentTarget;
     const nombre = (form.elements.namedItem("nombre") as HTMLInputElement)
       .value;
-    const conel = (form.elements.namedItem("conel") as HTMLSelectElement).value;
     const mensaje = (form.elements.namedItem("mensaje") as HTMLTextAreaElement)
       .value;
 
@@ -24,12 +23,9 @@ export default function RSVPSection({ rsvpPhone = "5214438569931" }: Props) {
 
     if (!confirm(confirmMsg)) return;
 
-    let mensajeCA: string;
-    if (attending) {
-      mensajeCA = `Hola, soy ${nombre} y confirmo mi asistencia, asistiremos ${conel}, Mi Mensaje: ${mensaje}`;
-    } else {
-      mensajeCA = `Hola, soy ${nombre} y lamentablemente, no podré asistir.`;
-    }
+    const mensajeCA = attending
+      ? `Hola, soy ${nombre} y confirmo mi asistencia. Mi Mensaje: ${mensaje}`
+      : `Hola, soy ${nombre} y lamentablemente, no podré asistir.`;
 
     const url = `https://api.whatsapp.com/send?phone=${rsvpPhone}&text=${encodeURIComponent(mensajeCA)}`;
     window.open(url, "_blank");
@@ -71,63 +67,33 @@ export default function RSVPSection({ rsvpPhone = "5214438569931" }: Props) {
               autoComplete="off"
             />
           </div>
-          <div style={{ textAlign: "center" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px" }}>
             <input
               type="radio"
               id="asistire"
               name="confirmacion"
               value="asistire"
-              className="form-campo"
               checked={attending}
               onChange={() => setAttending(true)}
-              style={{ width: "auto" }}
+              style={{ width: "auto", cursor: "pointer", flexShrink: 0 }}
             />
+            <label htmlFor="asistire" style={{ color: "black", cursor: "pointer", margin: 0, fontSize: "18px" }}>
+              Asistiré
+            </label>
           </div>
-          <label
-            htmlFor="asistire"
-            className="form-campo"
-            style={{ color: "black", width: "auto", border: "none", background: "none" }}
-          >
-            Asistiré
-          </label>
-          <br />
-          <div style={{ textAlign: "center" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "24px" }}>
             <input
               type="radio"
               id="noAsistire"
               name="confirmacion"
               value="noAsistire"
-              className="form-campo"
               checked={!attending}
               onChange={() => setAttending(false)}
-              style={{ width: "auto" }}
+              style={{ width: "auto", cursor: "pointer", flexShrink: 0 }}
             />
-          </div>
-          <label
-            htmlFor="noAsistire"
-            className="form-campo"
-            style={{ color: "black", width: "auto", border: "none", background: "none" }}
-          >
-            No Asistiré
-          </label>
-          <br />
-          <br />
-          <div className="mb-30">
-            <select
-              name="conel"
-              id="conel"
-              className="form-campo"
-              required
-              autoComplete="off"
-            >
-              <option value="">¿Cuantas Personas Asistirán?</option>
-              <option value="0 Personas">No Asistiré</option>
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
-                <option key={n} value={`${n} ${n === 1 ? "Persona" : "Personas"}`}>
-                  {n} {n === 1 ? "Persona" : "Personas"}
-                </option>
-              ))}
-            </select>
+            <label htmlFor="noAsistire" style={{ color: "black", cursor: "pointer", margin: 0, fontSize: "18px" }}>
+              No Asistiré
+            </label>
           </div>
           <div className="mb-40">
             <textarea

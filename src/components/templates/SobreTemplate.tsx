@@ -60,6 +60,7 @@ export default function SobreTemplate({ project }: Props) {
     const root = document.documentElement;
     root.style.setProperty("--inv-primary", theme.primary);
     root.style.setProperty("--inv-primary-dark", theme.dark);
+    root.style.setProperty("--inv-primary-light", theme.light ?? theme.primary);
     root.style.setProperty("--inv-border", theme.primary);
     root.style.setProperty("--inv-filter", theme.filterValue);
     root.style.setProperty("--inv-filter-light", theme.filterLight);

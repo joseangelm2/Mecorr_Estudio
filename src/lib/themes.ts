@@ -3,6 +3,7 @@ export interface Theme {
   label: string
   primary: string
   dark: string
+  light?: string
   swatch: string
   filterValue: string
   filterLight: string
@@ -13,7 +14,7 @@ export const THEMES: Theme[] = [
   { id: 'azul',      label: 'Azul',        primary: '#12397A', dark: '#0e2d61', swatch: '#12397A', filterValue: 'hue-rotate(210deg) saturate(2) brightness(0.85)',        filterLight: 'hue-rotate(210deg) saturate(1.3) brightness(1.35)' },
   { id: 'lila',      label: 'Lila',        primary: '#8d77ab', dark: '#7a6598', swatch: '#8d77ab', filterValue: 'hue-rotate(260deg) saturate(1.3)',                       filterLight: 'hue-rotate(260deg) saturate(0.85) brightness(1.45)' },
   { id: 'rojo',      label: 'Rojo',        primary: '#ff3131', dark: '#e02b2b', swatch: '#ff3131', filterValue: 'hue-rotate(350deg) saturate(1.8)',                       filterLight: 'hue-rotate(350deg) saturate(1.1) brightness(1.5)' },
-  { id: 'negro',     label: 'Negro',       primary: '#424242', dark: '#333333', swatch: '#424242', filterValue: 'grayscale(1) brightness(0.45)',                          filterLight: 'grayscale(1) brightness(0.65)' },
+  { id: 'negro',     label: 'Negro',       primary: '#424242', dark: '#333333', swatch: '#424242', filterValue: 'grayscale(1) brightness(0.75)',                          filterLight: 'grayscale(1) brightness(0.88)' },
   { id: 'mariposas', label: 'Mariposas',   primary: '#b4882d', dark: '#9e7726', swatch: '#b4882d', filterValue: 'hue-rotate(38deg) saturate(1.4)',                        filterLight: 'hue-rotate(38deg) saturate(0.95) brightness(1.4)' },
-  { id: 'blancooro', label: 'Blanco Oro',  primary: '#F4C430', dark: '#d4a800', swatch: '#FFD700', filterValue: 'hue-rotate(46deg) saturate(1.5) brightness(1.15)',       filterLight: 'hue-rotate(46deg) saturate(1.0) brightness(1.6)' },
+  { id: 'blancooro', label: 'Blanco Oro',  primary: '#d4b030', dark: '#b8952c', light: '#f0dc7a', swatch: '#d4b030', filterValue: 'hue-rotate(38deg) saturate(1.3) brightness(1.35)', filterLight: 'brightness(1.5) saturate(0.08) hue-rotate(8deg)' },
 ]

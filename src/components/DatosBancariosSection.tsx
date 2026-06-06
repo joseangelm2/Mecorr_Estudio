@@ -44,18 +44,17 @@ export default function DatosBancariosSection({
             </p>
 
             <div className="text-center wow fadeInUp" style={{ marginBottom: '30px' }}>
-              {bankBeneficiary && (
-                <p className="color-textos mb-20" style={{ fontSize: '16px' }}>
-                  <strong>Beneficiario:</strong><br />{bankBeneficiary}
-                </p>
-              )}
-
               {!visible ? (
                 <button onClick={() => setVisible(true)} className="btn-form">
                   Mostrar cuenta
                 </button>
               ) : (
                 <div>
+                  {bankBeneficiary && (
+                    <p className="color-textos mb-20" style={{ fontSize: '16px' }}>
+                      <strong>Beneficiario:</strong><br />{bankBeneficiary}
+                    </p>
+                  )}
                   <p
                     className="color-textos mb-20"
                     style={{ fontSize: '18px', letterSpacing: '2px', fontWeight: 600 }}

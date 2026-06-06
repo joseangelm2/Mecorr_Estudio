@@ -11,6 +11,7 @@
 :root {
   --inv-primary: #a8686a;
   --inv-primary-dark: #96585a;
+  --inv-primary-light: #a8686a;
   --inv-border: #a8686a;
   --inv-filter-light: hue-rotate(0deg) saturate(0.65) brightness(1.45);
 }
@@ -48,6 +49,8 @@ body {
   background-size: cover;
   background-position: center;
   content: "";
+  filter: var(--inv-filter-light, hue-rotate(0deg) brightness(1.4));
+  transition: filter 0.4s;
 }
 
 @media (min-width: 769px) {
@@ -89,10 +92,15 @@ p, a, li {
    COLORS — use CSS variables
    ====================================== */
 
-.color-principal { background: var(--inv-primary); }
+.color-principal { background: linear-gradient(to right, var(--inv-primary-dark), var(--inv-primary), var(--inv-primary-light)); }
 
 .color-titulos {
-  background: linear-gradient(to right, var(--inv-primary) 0%, var(--inv-primary) 100%);
+  background: linear-gradient(
+    to right,
+    var(--inv-primary-dark) 0%,
+    var(--inv-primary) 50%,
+    var(--inv-primary-light) 100%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -215,7 +223,7 @@ ul.tiempo { margin: 0; padding: 0; text-align: center; display: flex; justify-co
 .tiempo li span:not(.circulo-tiempo) { display: block; }
 .circulo-tiempo {
   list-style-type: none; margin: 0; color: #fff; font-size: 18px;
-  border-radius: 50%; background: var(--inv-primary); border: solid 1px #fff;
+  border-radius: 50%; background: linear-gradient(135deg, var(--inv-primary-dark), var(--inv-primary), var(--inv-primary-light)); border: solid 1px #fff;
   width: 50px; height: 50px;
   display: flex; justify-content: center; align-items: center;
   font-family: "Titles", serif !important;
@@ -234,7 +242,7 @@ ul.tiempo { margin: 0; padding: 0; text-align: center; display: flex; justify-co
   font-family: var(--font-raleway), "Raleway", sans-serif;
   padding: 10px 40px; border: 1px solid var(--inv-primary);
   letter-spacing: 1px; border-radius: 30px;
-  background: var(--inv-primary); cursor: pointer;
+  background: linear-gradient(to right, var(--inv-primary-dark), var(--inv-primary), var(--inv-primary-light)); cursor: pointer;
   transition: background 0.2s, border-color 0.2s;
 }
 .btn-form:hover { background: var(--inv-primary-dark); border-color: var(--inv-primary-dark); }
