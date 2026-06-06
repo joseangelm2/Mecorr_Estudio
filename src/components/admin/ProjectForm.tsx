@@ -5,6 +5,7 @@ import { generateSlug } from '@/lib/slug'
 import { createProject, updateProject, type ProjectFormData } from '@/app/admin/actions'
 import type { Project, TemplateId } from '@/types/invitation'
 import { THEMES } from '@/lib/themes'
+import MediaUploader from '@/components/admin/MediaUploader'
 
 const TEMPLATES: { value: TemplateId; label: string }[] = [
   { value: 'sobre', label: 'Sobre Animado' },
@@ -329,7 +330,23 @@ export default function ProjectForm({ project }: Props) {
               </div>
               <input type="text" value={item.time} onChange={e => setItineraryItem(i, 'time', e.target.value)} className={inputClass} placeholder="3:00 PM" />
               <input type="text" value={item.description} onChange={e => setItineraryItem(i, 'description', e.target.value)} className={inputClass} placeholder="Descripción del evento" />
-              <input type="text" value={item.icon} onChange={e => setItineraryItem(i, 'icon', e.target.value)} className={inputClass} placeholder="Ícono (URL o emoji)" />
+              <div>
+                {project?.id && (
+                  <MediaUploader
+                    projectId={project.id}
+                    bucket="invitation-media"
+                    onUploadComplete={url => setItineraryItem(i, 'icon', url)}
+                    label="Subir ícono"
+                  />
+                )}
+                <input type="text" value={item.icon} onChange={e => setItineraryItem(i, 'icon', e.target.value)} className={`${inputClass} mt-1`} placeholder="Ícono (URL, emoji o ruta)" />
+                {item.icon && !item.icon.startsWith('http') && item.icon.length <= 4 && (
+                  <span className="text-2xl mt-1 block">{item.icon}</span>
+                )}
+                {item.icon && item.icon.startsWith('http') && (
+                  <img src={item.icon} alt="ícono" className="mt-1 w-8 h-8 object-contain" />
+                )}
+              </div>
             </div>
           ))}
           <button type="button" onClick={() => setForm(prev => ({ ...prev, itinerary: [...prev.itinerary, { time: '', description: '', icon: '' }] }))} className="text-sm text-rose-500 hover:text-rose-600">+ Agregar paso</button>
@@ -340,8 +357,20 @@ export default function ProjectForm({ project }: Props) {
       {activeTab === 6 && (
         <div className="space-y-4">
           <div>
-            <label className={labelClass}>Foto de portada (URL)</label>
-            <input type="text" value={form.hero_photo_url} onChange={e => set('hero_photo_url', e.target.value)} className={inputClass} placeholder="/images/hero.jpg o URL de Supabase" />
+            <label className={labelClass}>Foto de portada</label>
+            {project?.id && (
+              <MediaUploader
+                projectId={project.id}
+                bucket="invitation-media"
+                onUploadComplete={url => set('hero_photo_url', url)}
+                label="Subir foto"
+              />
+            )}
+            <input type="text" value={form.hero_photo_url} onChange={e => set('hero_photo_url', e.target.value)} className={`${inputClass} mt-2`} placeholder="/images/hero.jpg o URL de Supabase" />
+            {form.hero_photo_url && (
+              <img src={form.hero_photo_url} alt="Portada" className="mt-2 w-32 h-20 object-cover rounded border border-gray-200" />
+            )}
+            {!project?.id && <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para poder subir imágenes.</p>}
           </div>
           <div>
             <label className={labelClass}>Colores de vestimenta</label>
@@ -362,15 +391,29 @@ export default function ProjectForm({ project }: Props) {
             <input type="text" value={form.music_url} onChange={e => set('music_url', e.target.value)} className={inputClass} placeholder="https://supabase.co/.../musica.mp3" />
           </div>
           <div>
-            <label className={labelClass}>Fotos de galería (URLs)</label>
+            <label className={labelClass}>Fotos de galería</label>
+            {project?.id && (
+              <div className="mb-2">
+                <MediaUploader
+                  projectId={project.id}
+                  bucket="invitation-media"
+                  onUploadComplete={url => setForm(prev => ({
+                    ...prev,
+                    photos: [...prev.photos.filter(Boolean), url],
+                  }))}
+                  label="Subir foto a galería"
+                />
+              </div>
+            )}
             <div className="space-y-2">
               {form.photos.map((url, i) => (
-                <div key={i} className="flex gap-2">
+                <div key={i} className="flex gap-2 items-center">
                   <input type="text" value={url} onChange={e => setArrayItem('photos', i, e.target.value)} className={inputClass} placeholder="URL de imagen" />
-                  <button type="button" onClick={() => removeArrayItem('photos', i)} className="text-red-400 hover:text-red-600 px-2">✕</button>
+                  {url && <img src={url} alt="" className="w-8 h-8 object-cover rounded border border-gray-200 shrink-0" />}
+                  <button type="button" onClick={() => removeArrayItem('photos', i)} className="text-red-400 hover:text-red-600 px-2 shrink-0">✕</button>
                 </div>
               ))}
-              <button type="button" onClick={() => addArrayItem('photos')} className="text-sm text-rose-500 hover:text-rose-600">+ Agregar foto</button>
+              <button type="button" onClick={() => addArrayItem('photos')} className="text-sm text-rose-500 hover:text-rose-600">+ Agregar URL manual</button>
             </div>
           </div>
           <div className="border-t pt-4">
