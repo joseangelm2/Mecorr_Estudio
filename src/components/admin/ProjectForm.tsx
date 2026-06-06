@@ -387,8 +387,18 @@ export default function ProjectForm({ project }: Props) {
       {activeTab === 7 && (
         <div className="space-y-6">
           <div>
-            <label className={labelClass}>URL de música de fondo</label>
-            <input type="text" value={form.music_url} onChange={e => set('music_url', e.target.value)} className={inputClass} placeholder="https://supabase.co/.../musica.mp3" />
+            <label className={labelClass}>Música de fondo</label>
+            {project?.id && (
+              <MediaUploader
+                projectId={project.id}
+                bucket="invitation-audio"
+                accept="audio/*"
+                onUploadComplete={url => set('music_url', url)}
+                label="Subir archivo de música (MP3, etc.)"
+              />
+            )}
+            <input type="text" value={form.music_url} onChange={e => set('music_url', e.target.value)} className={`${inputClass} mt-2`} placeholder="https://supabase.co/.../musica.mp3" />
+            {!project?.id && <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para poder subir archivos.</p>}
           </div>
           <div>
             <label className={labelClass}>Fotos de galería</label>
