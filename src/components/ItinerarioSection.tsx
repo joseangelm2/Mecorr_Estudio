@@ -19,6 +19,18 @@ const DEFAULT_ITEMS: TimelineItem[] = [
   { title: "Recepción", time: "18:00", icon: "/images/recep.png" },
 ];
 
+const DEFAULT_ICONS = [
+  "/images/iglesia.png",
+  "/images/recep.png",
+  "/images/calendario.png",
+  "/images/formal.png",
+];
+
+function resolveIcon(item: TimelineItem, index: number): string {
+  const src = item.iconSrc ?? item.icon ?? "";
+  return src || DEFAULT_ICONS[index % DEFAULT_ICONS.length];
+}
+
 export default function ItinerarioSection({ itinerary = DEFAULT_ITEMS }: Props) {
   const items = itinerary;
   const timelineRef = useRef<HTMLUListElement>(null);
@@ -91,7 +103,7 @@ export default function ItinerarioSection({ itinerary = DEFAULT_ITEMS }: Props) 
                     </p>
                     <div className="icon-holder">
                       <div className="text-center">
-                        <img src={item.iconSrc ?? item.icon ?? ""} width="60" alt={item.title} />
+                        <img src={resolveIcon(item, i)} width="60" alt={item.title} />
                       </div>
                     </div>
                   </li>
