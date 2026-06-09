@@ -132,6 +132,20 @@ const invitations: Invitation[] = [
     demoLabel: "Ver el demo",
     internalRoute: "/sellorosa",
   },
+  {
+    title: "Magical",
+    description: [
+      "Una invitación de XV años que transporta a tus invitados a un mundo de fantasía. Fondo de cosmos con estrellas animadas, paleta morado profundo y oro mágico, tipografía elegante y efectos de brillo que hacen de cada sección una experiencia visual única.",
+      "Incluye sobre de apertura con efecto mágico, cuenta regresiva, galería de fotos con lightbox y confirmación de asistencia por WhatsApp.",
+    ],
+    image: "/promo/magical.webp",
+    imageAlt: "Muestra de invitación Magical",
+    accent: "accent-magical",
+    reversed: true,
+    demoHref: "/magical",
+    demoLabel: "Ver el demo",
+    internalRoute: "/magical",
+  },
 ];
 
 function DemoLink({ href, label, internal }: { href: string; label: string; internal?: boolean }) {

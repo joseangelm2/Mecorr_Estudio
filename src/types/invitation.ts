@@ -40,6 +40,7 @@ export type TemplateId =
   | 'hogwarts'
   | 'sellorosa'
   | 'rosagold'
+  | 'magical'
 
 export interface Project {
   id: string

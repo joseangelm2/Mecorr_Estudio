@@ -15,6 +15,7 @@ const templateMap: Record<TemplateId, TemplateComponent> = {
   hogwarts: dynamic(() => import('./HogwartsTemplate')),
   sellorosa: dynamic(() => import('./SelloRosaTemplate')),
   rosagold: dynamic(() => import('./RosaGoldTemplate')),
+  magical: dynamic(() => import('./MagicalTemplate')),
 }
 
 interface Props {

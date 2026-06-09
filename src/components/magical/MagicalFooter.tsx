@@ -1,4 +1,4 @@
-export default function EsmeraldaFooter() {
+export default function MagicalFooter() {
   return (
     <a
       className="footer no-print"
@@ -12,7 +12,7 @@ export default function EsmeraldaFooter() {
         height="24"
         viewBox="0 0 24 24"
         strokeWidth="2"
-        stroke="rgb(154, 115, 87)"
+        stroke="#d4af37"
         fill="none"
         strokeLinecap="round"
         strokeLinejoin="round"

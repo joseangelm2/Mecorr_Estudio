@@ -17,6 +17,7 @@ const TEMPLATES: { value: TemplateId; label: string }[] = [
   { value: 'hogwarts', label: 'Hogwarts' },
   { value: 'sellorosa', label: 'Sello Rosa' },
   { value: 'rosagold', label: 'Rosa Gold' },
+  { value: 'magical', label: 'Magical' },
 ]
 
 const TABS = ['General', 'Contacto', 'Familia', 'Ceremonia', 'Recepción', 'Itinerario', 'Estilo', 'Media']

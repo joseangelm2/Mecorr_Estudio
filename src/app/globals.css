@@ -206,6 +206,14 @@ header .logo img {
     radial-gradient(at 12.9% 93.2%, #38b6ff 0px, transparent 50%);
 }
 
+.accent-magical::before {
+  background: radial-gradient(at 3.3% 11.1%, #0a0418 0px, transparent 50%),
+    radial-gradient(at 80.6% 26.3%, #d4af37 0px, transparent 50%),
+    radial-gradient(at 71.3% 68.6%, #7c3aed 0px, transparent 50%),
+    radial-gradient(at 89.8% 87.9%, #2d1b69 0px, transparent 50%),
+    radial-gradient(at 12.9% 93.2%, #1a0a3e 0px, transparent 50%);
+}
+
 /* ======================================
    SECTION CONTENT LAYOUT
    ====================================== */
