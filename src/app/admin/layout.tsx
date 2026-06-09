@@ -1,11 +1,17 @@
+'use client'
+
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { logout } from './logout-action'
 
-export const metadata = {
-  title: 'MeCorr Estudio Admin',
-}
-
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname()
+  const isLoginPage = pathname === '/admin/login'
+
+  if (isLoginPage) {
+    return <>{children}</>
+  }
+
   return (
     <div className="flex h-screen bg-gray-50">
       {/* Sidebar */}

@@ -27,25 +27,23 @@ export default function MagicalCountdown() {
     <div className="time no-print">
       <img src="/images/magical/reloj.png" alt="Reloj mágico" />
       <section id="countdown">
-        <div className="container">
-          <div className="countdown-container">
-            <p className="segment">
-              <span className="number" id="days">{t.days}</span>
-              <span className="unit"> Días</span>
-            </p>
-            <p className="segment">
-              <span className="number" id="hours">{t.hours}</span>
-              <span className="unit"> Horas</span>
-            </p>
-            <p className="segment">
-              <span className="number" id="minutes">{t.minutes}</span>
-              <span className="unit"> Minutos</span>
-            </p>
-            <p className="segment">
-              <span className="number" id="seconds">{t.seconds}</span>
-              <span className="unit"> Segundos</span>
-            </p>
-          </div>
+        <div className="countdown-container">
+          <p className="segment">
+            <span className="number" id="days">{t.days}</span>
+            <span className="unit">Días</span>
+          </p>
+          <p className="segment">
+            <span className="number" id="hours">{t.hours}</span>
+            <span className="unit">Horas</span>
+          </p>
+          <p className="segment">
+            <span className="number" id="minutes">{t.minutes}</span>
+            <span className="unit">Minutos</span>
+          </p>
+          <p className="segment">
+            <span className="number" id="seconds">{t.seconds}</span>
+            <span className="unit">Segundos</span>
+          </p>
         </div>
       </section>
     </div>

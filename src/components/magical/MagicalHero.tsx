@@ -27,13 +27,13 @@ export default function MagicalHero() {
       <div className="name">
         <img className="tarjet" src="/images/magical/banda.png" alt="" />
         <h2 className="person-name" style={{ textAlign: "center" }}>
-          Nombre
+          Valentina
         </h2>
       </div>
 
       {/* Date */}
       <h3 id="fecha" className="date texto" style={{ textAlign: "center", margin: "3vw 0" }}>
-        DD.MES.YYYY
+        21.04.2023
       </h3>
     </>
   );

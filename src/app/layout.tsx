@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Promociones XV — Invitaciones Digitales",
-  description: "Promociones del mes en invitaciones digitales para XV años",
+  title: "MeCorr Estudio | Soluciones Digitales",
+  description: "Invitaciones digitales para XV años, sitios web y soluciones digitales a medida.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -5,7 +5,7 @@ export default function MagicalParents() {
         <h2>Mis Padres</h2>
         <img className="vector-long" src="/images/magical/separador.png" alt="" />
         <div className="parents texto">
-          <p>Padre de la Quinceañera<br />&amp;<br />Madre de la Quinceañera</p>
+          <p>Juan Domingo de la Fuente<br />&amp;<br />Cristina Pérez</p>
         </div>
       </section>
 
@@ -13,7 +13,7 @@ export default function MagicalParents() {
         <h2>Padrinos</h2>
         <img className="vector-long" src="/images/magical/separador.png" alt="" />
         <div className="parents texto">
-          <p>Padrino Uno<br />y<br />Madrina Una</p>
+          <p>Carlos Rodríguez<br />y<br />María González</p>
         </div>
       </section>
     </>
