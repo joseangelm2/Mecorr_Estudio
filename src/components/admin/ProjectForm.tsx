@@ -5,6 +5,7 @@ import { generateSlug } from '@/lib/slug'
 import { createProject, updateProject, type ProjectFormData } from '@/app/admin/actions'
 import type { Project, TemplateId } from '@/types/invitation'
 import { THEMES } from '@/lib/themes'
+import { CENICIENTA_THEMES } from '@/lib/cenicienta-themes'
 import MediaUploader from '@/components/admin/MediaUploader'
 
 const TEMPLATES: { value: TemplateId; label: string }[] = [
@@ -29,8 +30,8 @@ function toFormData(project?: Project): ProjectFormData {
       quinceanera_name: '', guest_name: '', event_date: '',
       rsvp_phone: '', hashtag: '', music_url: '', hero_photo_url: '',
       parent_names: ['', ''], padrinos: ['', ''],
-      ceremony_venue: '', ceremony_address: '', ceremony_time: '', ceremony_map_link: '',
-      reception_venue: '', reception_address: '', reception_time: '', reception_map_link: '',
+      ceremony_venue: '', ceremony_address: '', ceremony_time: '', ceremony_map_link: '', ceremony_photo_url: '',
+      reception_venue: '', reception_address: '', reception_time: '', reception_map_link: '', reception_photo_url: '',
       itinerary: [{ time: '', description: '', icon: '' }],
       dress_code_colors: '', dress_code_notes: '',
       photos: [''],
@@ -44,6 +45,7 @@ function toFormData(project?: Project): ProjectFormData {
       lluvia_sobres_text: '',
       show_datos_bancarios: false,
       datos_bancarios_text: '',
+      show_itinerary: true,
       confirmation_phrase: '',
       confirmation_highlight_date: '',
     }
@@ -65,10 +67,12 @@ function toFormData(project?: Project): ProjectFormData {
     ceremony_address: project.ceremony?.address ?? '',
     ceremony_time: project.ceremony?.time ?? '',
     ceremony_map_link: project.ceremony?.mapsUrl ?? project.ceremony?.mapLink ?? '',
+    ceremony_photo_url: project.ceremony?.photoUrl ?? '',
     reception_venue: project.reception?.venue ?? '',
     reception_address: project.reception?.address ?? '',
     reception_time: project.reception?.time ?? '',
     reception_map_link: project.reception?.mapsUrl ?? project.reception?.mapLink ?? '',
+    reception_photo_url: project.reception?.photoUrl ?? '',
     itinerary: project.itinerary.length
       ? project.itinerary.map(i => ({
           time: i.time,
@@ -91,6 +95,7 @@ function toFormData(project?: Project): ProjectFormData {
     lluvia_sobres_text: project.lluvia_sobres_text ?? '',
     show_datos_bancarios: project.show_datos_bancarios ?? false,
     datos_bancarios_text: project.datos_bancarios_text ?? '',
+    show_itinerary: project.show_itinerary ?? true,
     confirmation_phrase: project.confirmation_phrase ?? '',
     confirmation_highlight_date: project.confirmation_highlight_date ?? '',
   }
@@ -229,6 +234,32 @@ export default function ProjectForm({ project }: Props) {
               </div>
             </div>
           )}
+          {form.template === 'cenicienta' && (
+            <div>
+              <label className={labelClass}>Paleta de color</label>
+              <div className="flex flex-wrap gap-3 mt-1">
+                {CENICIENTA_THEMES.map(theme => (
+                  <button
+                    key={theme.id}
+                    type="button"
+                    onClick={() => set('color_theme', theme.id)}
+                    className="flex flex-col items-center gap-1"
+                    title={theme.label}
+                  >
+                    <span
+                      className="w-8 h-8 rounded-full border-2 transition-all"
+                      style={{
+                        background: theme.swatch,
+                        borderColor: form.color_theme === theme.id ? '#1f2937' : 'transparent',
+                        boxShadow: form.color_theme === theme.id ? '0 0 0 2px #f59e0b' : 'none',
+                      }}
+                    />
+                    <span className="text-xs text-gray-500">{theme.label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
           <div>
             <label className={labelClass}>Fecha del evento *</label>
             <input type="datetime-local" value={form.event_date} onChange={e => set('event_date', e.target.value)} required className={inputClass} />
@@ -327,6 +358,23 @@ export default function ProjectForm({ project }: Props) {
             <label className={labelClass}>Link de Google Maps</label>
             <input type="url" value={form.ceremony_map_link} onChange={e => set('ceremony_map_link', e.target.value)} className={inputClass} placeholder="https://maps.google.com/..." />
           </div>
+          <div>
+            <label className={labelClass}>Foto de la Iglesia</label>
+            {project?.id && (
+              <MediaUploader
+                projectId={project.id}
+                bucket="invitation-media"
+                accept="image/*"
+                onUploadComplete={url => set('ceremony_photo_url', url)}
+                label="Subir foto de la iglesia"
+              />
+            )}
+            {form.ceremony_photo_url && (
+              <img src={form.ceremony_photo_url} alt="Iglesia" className="mt-2 w-full max-h-40 object-cover rounded-md border border-gray-200" />
+            )}
+            <input type="url" value={form.ceremony_photo_url} onChange={e => set('ceremony_photo_url', e.target.value)} className={`${inputClass} mt-2`} placeholder="https://... o sube una foto arriba" />
+            {!project?.id && <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para poder subir archivos.</p>}
+          </div>
         </div>
       )}
 
@@ -348,6 +396,23 @@ export default function ProjectForm({ project }: Props) {
           <div>
             <label className={labelClass}>Link de Google Maps</label>
             <input type="url" value={form.reception_map_link} onChange={e => set('reception_map_link', e.target.value)} className={inputClass} placeholder="https://maps.google.com/..." />
+          </div>
+          <div>
+            <label className={labelClass}>Foto del Salón</label>
+            {project?.id && (
+              <MediaUploader
+                projectId={project.id}
+                bucket="invitation-media"
+                accept="image/*"
+                onUploadComplete={url => set('reception_photo_url', url)}
+                label="Subir foto del salón"
+              />
+            )}
+            {form.reception_photo_url && (
+              <img src={form.reception_photo_url} alt="Salón" className="mt-2 w-full max-h-40 object-cover rounded-md border border-gray-200" />
+            )}
+            <input type="url" value={form.reception_photo_url} onChange={e => set('reception_photo_url', e.target.value)} className={`${inputClass} mt-2`} placeholder="https://... o sube una foto arriba" />
+            {!project?.id && <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para poder subir archivos.</p>}
           </div>
         </div>
       )}
@@ -515,6 +580,17 @@ export default function ProjectForm({ project }: Props) {
                 />
               </div>
             )}
+          </div>
+          <div className="border-t pt-4">
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={form.show_itinerary}
+                onChange={e => set('show_itinerary', e.target.checked)}
+                className="w-4 h-4 accent-rose-500"
+              />
+              <span className="text-sm font-medium text-gray-700">Mostrar Programa del Evento (Itinerario)</span>
+            </label>
           </div>
           <div className="border-t pt-4">
             <label className="flex items-center gap-2 cursor-pointer">

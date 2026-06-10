@@ -81,12 +81,12 @@ const invitations: Invitation[] = [
     internalRoute: '/pink',
   },
   {
-    title: 'Cenicienta',
+    title: 'Elegance',
     description: [
-      'Una invitación que transforma el sueño de Cenicienta en realidad digital. Paleta azul cristalino, detalles dorados y una atmósfera de cuento que conquistará a cada invitado.',
+      'Una invitación que transforma el sueño de una quinceañera en realidad digital. Paleta blanco marfil, detalles dorados y una atmósfera de cuento que conquistará a cada invitado.',
     ],
-    image: '/promo/celalic.png',
-    imageAlt: 'Invitación Cenicienta',
+    image: '/promo/elegance.png',
+    imageAlt: 'Invitación Elegance',
     accent: 'accent-blue1',
     reversed: true,
     demoHref: '/cenicienta',

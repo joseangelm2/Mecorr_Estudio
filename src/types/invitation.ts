@@ -12,6 +12,7 @@ export interface LocationInfo {
   address: string;
   mapsUrl: string;
   mapLink?: string;
+  photoUrl?: string;
 }
 
 export interface InvitationData {
@@ -77,6 +78,7 @@ export interface Project {
   lluvia_sobres_text: string | null
   show_datos_bancarios: boolean
   datos_bancarios_text: string | null
+  show_itinerary: boolean
   confirmation_phrase: string | null
   confirmation_highlight_date: string | null
   extra_config: Record<string, unknown>

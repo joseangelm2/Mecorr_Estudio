@@ -22,10 +22,12 @@ export interface ProjectFormData {
   ceremony_address: string
   ceremony_time: string
   ceremony_map_link: string
+  ceremony_photo_url: string
   reception_venue: string
   reception_address: string
   reception_time: string
   reception_map_link: string
+  reception_photo_url: string
   itinerary: Array<{ time: string; description: string; icon: string }>
   dress_code_colors: string
   dress_code_notes: string
@@ -42,6 +44,7 @@ export interface ProjectFormData {
   lluvia_sobres_text: string
   show_datos_bancarios: boolean
   datos_bancarios_text: string
+  show_itinerary: boolean
   confirmation_phrase: string
   confirmation_highlight_date: string
 }
@@ -66,6 +69,7 @@ function formDataToProject(data: ProjectFormData) {
       time: data.ceremony_time,
       mapsUrl: data.ceremony_map_link,
       mapLink: data.ceremony_map_link,
+      photoUrl: data.ceremony_photo_url || undefined,
     } : null,
     reception: (data.reception_venue || data.reception_address) ? {
       venue: data.reception_venue,
@@ -73,6 +77,7 @@ function formDataToProject(data: ProjectFormData) {
       time: data.reception_time,
       mapsUrl: data.reception_map_link,
       mapLink: data.reception_map_link,
+      photoUrl: data.reception_photo_url || undefined,
     } : null,
     itinerary: data.itinerary
       .filter(i => i.time || i.description)
@@ -102,6 +107,7 @@ function formDataToProject(data: ProjectFormData) {
     lluvia_sobres_text: data.lluvia_sobres_text || null,
     show_datos_bancarios: data.show_datos_bancarios,
     datos_bancarios_text: data.datos_bancarios_text || null,
+    show_itinerary: data.show_itinerary,
     confirmation_phrase: data.confirmation_phrase || null,
     confirmation_highlight_date: data.confirmation_highlight_date || null,
     extra_config: {},

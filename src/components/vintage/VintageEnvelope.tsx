@@ -34,7 +34,7 @@ export default function VintageEnvelope({ onOpen, primaryColor }: Props) {
         <br />
         Invitación
       </button>
-      <div className="banda-sobre" />
+      <div className={`banda-sobre${opening ? " opening" : ""}`} />
     </div>
   );
 }
