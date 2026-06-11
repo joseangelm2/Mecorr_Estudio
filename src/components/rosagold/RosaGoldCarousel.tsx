@@ -2,24 +2,27 @@
 
 import { useState } from "react";
 
-const IMAGES = [
-  "/images/IMG_8201.JPG",
-  "/images/IMG_8202.JPG",
-  "/images/IMG_8203.JPG",
-  "/images/IMG_8204.JPG",
+const FALLBACK = [
+  "/images/esmeralda/11.jpg",
+  "/images/esmeralda/21.jpg",
+  "/images/esmeralda/31.jpg",
+  "/images/esmeralda/41.jpg",
 ];
 
-export default function RosaGoldCarousel() {
+interface Props { photos?: string[] }
+
+export default function RosaGoldCarousel({ photos }: Props) {
+  const images = photos?.length ? photos : FALLBACK;
   const [current, setCurrent] = useState(0);
 
-  function prev() { setCurrent((c) => (c === 0 ? IMAGES.length - 1 : c - 1)); }
-  function next() { setCurrent((c) => (c === IMAGES.length - 1 ? 0 : c + 1)); }
+  function prev() { setCurrent((c) => (c === 0 ? images.length - 1 : c - 1)); }
+  function next() { setCurrent((c) => (c === images.length - 1 ? 0 : c + 1)); }
 
   return (
     <section className="rg-galeria">
       <div className="rg-slider-container">
         <div className="rg-slider">
-          {IMAGES.map((src, i) => (
+          {images.map((src, i) => (
             <div key={src} className={`rg-slide${i === current ? " active" : ""}`}>
               <img src={src} alt={`Foto ${i + 1}`} />
             </div>

@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import VintageEnvelope from "@/components/vintage/VintageEnvelope";
 import EsmeraldaScrollInit from "@/components/esmeralda/EsmeraldaScrollInit";
 import ZafiroContent from "@/components/zafiro/ZafiroContent";
+import { DEMO_PROJECT } from "@/lib/demo-project";
 
 export default function ZafiroPage() {
   const [open, setOpen] = useState(false);
@@ -23,7 +24,7 @@ export default function ZafiroPage() {
       {!open && <VintageEnvelope onOpen={handleOpen} primaryColor="#775197" />}
       <div className="top"><img className="top-img" src="/images/zafiro/452.png" alt="" /></div>
       <div className="bottom"><img className="bottom-img" src="/images/zafiro/453.png" alt="" /></div>
-      <ZafiroContent />
+      <ZafiroContent project={DEMO_PROJECT} />
     </div>
   );
 }

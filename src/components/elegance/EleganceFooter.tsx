@@ -1,9 +1,9 @@
-export default function CenicientaFooter() {
+export default function EleganceFooter() {
   return (
     <>
       <img
         className="foto-full"
-        src="/images/cenicienta/Carruaje2.png"
+        src="/images/elegance/Carruaje2.png"
         style={{ width: '50%', marginTop: '3%', marginBottom: '-3%', filter: 'var(--img-filter, none)' }}
         alt=""
       />

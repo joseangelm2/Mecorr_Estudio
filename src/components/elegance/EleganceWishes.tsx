@@ -15,14 +15,14 @@ interface Props {
   dressCodeNotes?: string
 }
 
-export default function CenicientaWishes({ phone, hashtag, dressCodeNotes }: Props) {
+export default function EleganceWishes({ phone, hashtag, dressCodeNotes }: Props) {
   const messageRef = useRef<HTMLTextAreaElement>(null)
 
   return (
     <>
       {phone && (
         <div id="whatsappLink" className="extra show-p-y">
-          <img src="/images/cenicienta/buzon.png" style={{ width: '25%', marginBottom: '3%' }} alt="Buzón" />
+          <img src="/images/elegance/buzon.png" style={{ width: '25%', marginBottom: '3%' }} alt="Buzón" />
           <h3>Buzón de Deseos</h3>
           <p className="texto" style={{ width: '90%' }}>Déjame un lindo mensaje por mis XV años, recibo tus palabras con cariño en este buzón:</p>
           <textarea className="mensaje" ref={messageRef} placeholder="Escribe tu mensaje aquí" />
@@ -38,7 +38,7 @@ export default function CenicientaWishes({ phone, hashtag, dressCodeNotes }: Pro
 
       {hashtag && (
         <a className="extra show-p-y" href={`https://www.instagram.com/explore/tags/${hashtag}/`} target="_self">
-          <img src="/images/cenicienta/instagram.png" style={{ width: '50%', marginBottom: '4%' }} alt="Instagram" />
+          <img src="/images/elegance/instagram.png" style={{ width: '50%', marginBottom: '4%' }} alt="Instagram" />
           <h3>Hashtag en Instagram</h3>
           <p className="texto">Comparte tus mejores momentos con el Hashtag de Instagram <br />#{hashtag}</p>
           <div className="boton" style={{ width: '30%' }}>Ver Fotos</div>

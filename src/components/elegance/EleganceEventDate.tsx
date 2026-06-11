@@ -29,7 +29,7 @@ interface Props {
   eventDate: string
 }
 
-export default function CenicientaEventDate({ eventDate }: Props) {
+export default function EleganceEventDate({ eventDate }: Props) {
   const countdown = useCountdown(eventDate)
   const date = new Date(eventDate)
   const day = date.getDate()
@@ -55,7 +55,7 @@ export default function CenicientaEventDate({ eventDate }: Props) {
       <div className="reloj-silueta">
         <img
           className="foto-full"
-          src="/images/cenicienta/Reloj.png"
+          src="/images/elegance/Reloj.png"
           style={{ width: '68%', marginTop: '3%', marginBottom: '5%' }}
           alt=""
         />

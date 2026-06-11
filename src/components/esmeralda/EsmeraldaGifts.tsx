@@ -1,5 +1,9 @@
 "use client";
 
+function CutLine() {
+  return <div className="cut-line" />;
+}
+
 export default function EsmeraldaGifts() {
   function enviarMensaje() {
     const msg = (document.getElementById("mensajeInput") as HTMLTextAreaElement)?.value ?? "";
@@ -10,7 +14,8 @@ export default function EsmeraldaGifts() {
   return (
     <>
       {/* Vestimenta */}
-      <section className="dress-code show-p-y no-print" style={{ marginTop: "10%" }}>
+      <CutLine />
+      <section className="dress-code show-p-y no-print" style={{ marginTop: "4vw" }}>
         <h2>Código de Vestimenta</h2>
         <div className="dress-code-container">
           <img src="/images/esmeralda/vestimenta.png" alt="Vestimenta" />
@@ -19,9 +24,9 @@ export default function EsmeraldaGifts() {
       </section>
 
       {/* Lluvia de Sobres */}
-      <section id="gift-table" className="gift-container show-p-y no-print" style={{ marginTop: "3%" }}>
+      <CutLine />
+      <section id="gift-table" className="gift-container show-p-y no-print" style={{ marginTop: "4vw" }}>
         <h2>Lluvia de Sobres</h2>
-        <div className="cut-line" />
         <div className="gift-object-container">
           <img src="/images/esmeralda/sobre.png" alt="Sobre" />
           <p className="texto">Es la tradición de regalar dinero en efectivo dentro de un sobre</p>
@@ -29,7 +34,8 @@ export default function EsmeraldaGifts() {
       </section>
 
       {/* Mesa de Regalos Liverpool */}
-      <section className="gift-liverpool-container show-p-y no-print" style={{ marginTop: "3%" }}>
+      <CutLine />
+      <section className="gift-liverpool-container show-p-y no-print" style={{ marginTop: "4vw" }}>
         <h2>Mesa de Regalos</h2>
         <div className="gift-liverpool-object-container">
           <img src="/images/esmeralda/mesa_regalos.png" className="icon-image" alt="Mesa de regalos" />
@@ -49,9 +55,9 @@ export default function EsmeraldaGifts() {
       </section>
 
       {/* Buzón de Deseos */}
-      <section className="gift-container show-p-y no-print" style={{ marginTop: "8%" }}>
+      <CutLine />
+      <section className="gift-container show-p-y no-print" style={{ marginTop: "4vw" }}>
         <h2>Buzón de Deseos</h2>
-        <div className="cut-line" />
         <div className="gift-object-container">
           <img src="/images/esmeralda/buzon.png" alt="Buzón" />
           <p className="texto">
@@ -70,7 +76,8 @@ export default function EsmeraldaGifts() {
       </section>
 
       {/* Hashtag Instagram */}
-      <section className="gift-liverpool-container show-p-y no-print" style={{ marginTop: "8%" }}>
+      <CutLine />
+      <section className="gift-liverpool-container show-p-y no-print" style={{ marginTop: "4vw" }}>
         <h2>Hashtag en Instagram</h2>
         <div className="gift-liverpool-object-container">
           <img src="/images/esmeralda/instagram.png" className="icon-image" alt="Instagram" />
@@ -90,6 +97,7 @@ export default function EsmeraldaGifts() {
           </a>
         </div>
       </section>
+      <CutLine />
     </>
   );
 }

@@ -10,7 +10,6 @@ import EsmeraldaPhotoGrid from "@/components/esmeralda/EsmeraldaPhotoGrid";
 import EsmeraldaItinerario from "@/components/esmeralda/EsmeraldaItinerario";
 import EsmeraldaGifts from "@/components/esmeralda/EsmeraldaGifts";
 import EsmeraldaRSVP from "@/components/esmeralda/EsmeraldaRSVP";
-import EsmeraldaFooter from "@/components/esmeralda/EsmeraldaFooter";
 import EsmeraldaDecorations from "@/components/esmeralda/EsmeraldaDecorations";
 import EsmeraldaScrollInit from "@/components/esmeralda/EsmeraldaScrollInit";
 
@@ -40,7 +39,6 @@ export default function EsmeraldaPage() {
         <EsmeraldaItinerario />
         <EsmeraldaGifts />
         <EsmeraldaRSVP />
-        <EsmeraldaFooter />
       </div>
     </div>
   );

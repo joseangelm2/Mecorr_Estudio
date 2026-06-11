@@ -11,7 +11,7 @@ interface Props {
   project: Project
 }
 
-export default function SelloRosaTemplate({ project: _project }: Props) {
+export default function SelloRosaTemplate({ project }: Props) {
   const [open, setOpen] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
 
@@ -24,10 +24,10 @@ export default function SelloRosaTemplate({ project: _project }: Props) {
     <div>
       <EsmeraldaScrollInit />
       <audio ref={audioRef} loop preload="auto">
-        <source src="/images/esmeralda/musica.mp3" type="audio/mpeg" />
+        <source src={project.music_url ?? '/images/esmeralda/musica.mp3'} type="audio/mpeg" />
       </audio>
       {!open && <SelloRosaEnvelope onOpen={handleOpen} />}
-      <SelloRosaContent />
+      <SelloRosaContent project={project} />
     </div>
   )
 }

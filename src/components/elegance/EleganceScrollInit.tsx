@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 
-export default function CenicientaScrollInit() {
+export default function EleganceScrollInit() {
   useEffect(() => {
     const classMap: Record<string, string> = {
       'show-p-y': 'active-p-y',

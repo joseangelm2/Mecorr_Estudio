@@ -14,7 +14,7 @@ interface Props {
   project: Project
 }
 
-export default function CenicientaRSVP({ project }: Props) {
+export default function EleganceRSVP({ project }: Props) {
   const nameRef = useRef<HTMLInputElement>(null)
   const [attending, setAttending] = useState(true)
 

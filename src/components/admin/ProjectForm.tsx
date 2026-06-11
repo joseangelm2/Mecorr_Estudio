@@ -1,27 +1,39 @@
 'use client'
 
 import { useState } from 'react'
+import dynamic from 'next/dynamic'
 import { generateSlug } from '@/lib/slug'
 import { createProject, updateProject, type ProjectFormData } from '@/app/admin/actions'
 import type { Project, TemplateId } from '@/types/invitation'
 import { THEMES } from '@/lib/themes'
-import { CENICIENTA_THEMES } from '@/lib/cenicienta-themes'
-import MediaUploader from '@/components/admin/MediaUploader'
+import { ELEGANCE_THEMES } from '@/lib/elegance-themes'
 
-const TEMPLATES: { value: TemplateId; label: string }[] = [
-  { value: 'sobre', label: 'Sobre Animado' },
-  { value: 'esmeralda', label: 'Esmeralda' },
-  { value: 'pink', label: 'Pink' },
-  { value: 'love', label: 'Love' },
-  { value: 'zafiro', label: 'Zafiro' },
-  { value: 'cenicienta', label: 'Cenicienta' },
-  { value: 'hogwarts', label: 'Hogwarts' },
-  { value: 'sellorosa', label: 'Sello Rosa' },
-  { value: 'rosagold', label: 'Rosa Gold' },
-  { value: 'magical', label: 'Magical' },
+// Lazy: arrastra el cliente de Supabase — no necesario en el bundle inicial
+const MediaUploader = dynamic(() => import('@/components/admin/MediaUploader'), { ssr: false })
+
+const TEMPLATES: { value: TemplateId; label: string; emoji: string }[] = [
+  { value: 'sobre', label: 'Sobre Animado', emoji: '💌' },
+  { value: 'esmeralda', label: 'Esmeralda', emoji: '💚' },
+  { value: 'pink', label: 'Pink', emoji: '🌸' },
+  { value: 'love', label: 'Love', emoji: '❤️' },
+  { value: 'zafiro', label: 'Zafiro', emoji: '💎' },
+  { value: 'elegance', label: 'Elegance', emoji: '👑' },
+  { value: 'hogwarts', label: 'Hogwarts', emoji: '🪄' },
+  { value: 'sellorosa', label: 'Sello Rosa', emoji: '🌹' },
+  { value: 'rosagold', label: 'Rosa Gold', emoji: '✨' },
+  { value: 'magical', label: 'Magical', emoji: '🦋' },
 ]
 
-const TABS = ['General', 'Contacto', 'Familia', 'Ceremonia', 'Recepción', 'Itinerario', 'Estilo', 'Media']
+const TABS = [
+  { label: 'General', icon: '◈' },
+  { label: 'Contacto', icon: '✉' },
+  { label: 'Familia', icon: '♡' },
+  { label: 'Ceremonia', icon: '⛪' },
+  { label: 'Recepción', icon: '🥂' },
+  { label: 'Itinerario', icon: '📋' },
+  { label: 'Estilo', icon: '🎨' },
+  { label: 'Media', icon: '🖼' },
+]
 
 function toFormData(project?: Project): ProjectFormData {
   if (!project) {
@@ -38,16 +50,11 @@ function toFormData(project?: Project): ProjectFormData {
       liverpool_link: '', bank_account: '', bank_beneficiary: '',
       color_theme: 'rosagold',
       invitation_text: '',
-      show_video: false,
-      video_youtube_id: '',
-      video_url: '',
-      show_lluvia_sobres: false,
-      lluvia_sobres_text: '',
-      show_datos_bancarios: false,
-      datos_bancarios_text: '',
+      show_video: false, video_youtube_id: '', video_url: '',
+      show_lluvia_sobres: false, lluvia_sobres_text: '',
+      show_datos_bancarios: false, datos_bancarios_text: '',
       show_itinerary: true,
-      confirmation_phrase: '',
-      confirmation_highlight_date: '',
+      confirmation_phrase: '', confirmation_highlight_date: '',
     }
   }
   return {
@@ -74,11 +81,7 @@ function toFormData(project?: Project): ProjectFormData {
     reception_map_link: project.reception?.mapsUrl ?? project.reception?.mapLink ?? '',
     reception_photo_url: project.reception?.photoUrl ?? '',
     itinerary: project.itinerary.length
-      ? project.itinerary.map(i => ({
-          time: i.time,
-          description: i.description ?? i.title,
-          icon: i.icon ?? i.iconSrc,
-        }))
+      ? project.itinerary.map(i => ({ time: i.time, description: i.description ?? i.title, icon: i.icon ?? i.iconSrc }))
       : [{ time: '', description: '', icon: '' }],
     dress_code_colors: project.dress_code?.colors ?? '',
     dress_code_notes: project.dress_code?.notes ?? '',
@@ -101,12 +104,47 @@ function toFormData(project?: Project): ProjectFormData {
   }
 }
 
-const inputClass = "w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-rose-400"
-const labelClass = "block text-sm font-medium text-gray-700 mb-1"
+// ── Shared styles ────────────────────────────────────────────────
+const input = "w-full border border-gray-200 rounded-xl px-4 py-3 text-base text-gray-900 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-rose-300 focus:border-rose-300 transition-all bg-white"
+const label = "block text-sm font-semibold text-gray-600 mb-2 uppercase tracking-wide"
 
-interface Props {
-  project?: Project
+function Field({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <label className={label}>{title}</label>
+      {children}
+    </div>
+  )
 }
+
+function SectionCard({ title, description, children }: { title: string; description?: string; children: React.ReactNode }) {
+  return (
+    <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-5 space-y-5">
+      <div>
+        <p className="text-base font-semibold text-gray-800">{title}</p>
+        {description && <p className="text-sm text-gray-400 mt-1">{description}</p>}
+      </div>
+      {children}
+    </div>
+  )
+}
+
+function Toggle({ checked, onChange, label: lbl }: { checked: boolean; onChange: (v: boolean) => void; label: string }) {
+  return (
+    <button
+      type="button"
+      onClick={() => onChange(!checked)}
+      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors shrink-0 ${checked ? 'bg-rose-500' : 'bg-gray-200'}`}
+      role="switch"
+      aria-checked={checked}
+    >
+      <span className={`inline-block h-4.5 w-4.5 transform rounded-full bg-white shadow transition-transform ${checked ? 'translate-x-5.5' : 'translate-x-0.5'}`} />
+      <span className="sr-only">{lbl}</span>
+    </button>
+  )
+}
+
+interface Props { project?: Project }
 
 export default function ProjectForm({ project }: Props) {
   const [activeTab, setActiveTab] = useState(0)
@@ -121,9 +159,7 @@ export default function ProjectForm({ project }: Props) {
   function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
     const name = e.target.value
     set('quinceanera_name', name)
-    if (!project) {
-      set('slug', generateSlug(name))
-    }
+    if (!project) set('slug', generateSlug(name))
   }
 
   function setArrayItem(field: 'parent_names' | 'padrinos' | 'photos', index: number, value: string) {
@@ -172,480 +208,449 @@ export default function ProjectForm({ project }: Props) {
   return (
     <div>
       {/* Tabs */}
-      <div className="flex border-b border-gray-200 mb-6 overflow-x-auto">
+      <div className="flex gap-1 mb-8 bg-gray-100 p-1.5 rounded-2xl overflow-x-auto">
         {TABS.map((tab, i) => (
           <button
-            key={tab}
+            key={tab.label}
             onClick={() => setActiveTab(i)}
-            className={`px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors ${
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium whitespace-nowrap transition-all ${
               activeTab === i
-                ? 'border-b-2 border-rose-500 text-rose-600'
+                ? 'bg-white text-gray-900 shadow-sm'
                 : 'text-gray-500 hover:text-gray-700'
             }`}
           >
-            {tab}
+            <span className="text-base leading-none">{tab.icon}</span>
+            {tab.label}
           </button>
         ))}
       </div>
 
       {/* Tab 0: General */}
       {activeTab === 0 && (
-        <div className="space-y-4">
-          <div>
-            <label className={labelClass}>Nombre de la quinceañera *</label>
-            <input type="text" value={form.quinceanera_name} onChange={handleNameChange} required className={inputClass} placeholder="Valeria García" />
+        <div className="space-y-7">
+          <Field title="Nombre de la quinceañera *">
+            <input type="text" value={form.quinceanera_name} onChange={handleNameChange} required className={input} placeholder="Ej. Valeria García" />
+          </Field>
+
+          <div className="grid grid-cols-2 gap-5">
+            <Field title="URL (slug) *">
+              <div className="flex items-center border border-gray-200 rounded-xl overflow-hidden focus-within:ring-2 focus-within:ring-rose-300 focus-within:border-rose-300 transition-all bg-white">
+                <span className="px-4 py-3 text-sm text-gray-400 bg-gray-50 border-r border-gray-200 shrink-0">/i/</span>
+                <input
+                  type="text"
+                  value={form.slug}
+                  onChange={e => set('slug', e.target.value)}
+                  required
+                  className="flex-1 px-4 py-3 text-base text-gray-900 placeholder-gray-300 focus:outline-none"
+                  placeholder="valeria-garcia"
+                />
+              </div>
+            </Field>
+            <Field title="Fecha del evento *">
+              <input type="datetime-local" value={form.event_date} onChange={e => set('event_date', e.target.value)} required className={input} />
+            </Field>
           </div>
-          <div>
-            <label className={labelClass}>Slug (URL) *</label>
-            <div className="flex gap-2 items-center">
-              <span className="text-sm text-gray-400">/i/</span>
-              <input type="text" value={form.slug} onChange={e => set('slug', e.target.value)} required className={inputClass} placeholder="valeria-garcia" />
+
+          <Field title="Template *">
+            <div className="grid grid-cols-5 gap-3">
+              {TEMPLATES.map(t => (
+                <button
+                  key={t.value}
+                  type="button"
+                  onClick={() => set('template', t.value)}
+                  className={`flex flex-col items-center gap-2 p-3.5 rounded-xl border-2 text-center transition-all ${
+                    form.template === t.value
+                      ? 'border-rose-400 bg-rose-50'
+                      : 'border-gray-100 hover:border-gray-200 bg-white'
+                  }`}
+                >
+                  <span className="text-2xl">{t.emoji}</span>
+                  <span className={`text-xs font-medium leading-tight ${form.template === t.value ? 'text-rose-600' : 'text-gray-500'}`}>{t.label}</span>
+                </button>
+              ))}
             </div>
-          </div>
-          <div>
-            <label className={labelClass}>Template *</label>
-            <select value={form.template} onChange={e => set('template', e.target.value as TemplateId)} className={inputClass}>
-              {TEMPLATES.map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
-            </select>
-          </div>
-          {form.template === 'sobre' && (
-            <div>
-              <label className={labelClass}>Paleta de color</label>
-              <div className="flex flex-wrap gap-3 mt-1">
-                {THEMES.map(theme => (
+          </Field>
+
+          {(form.template === 'sobre' || form.template === 'elegance') && (
+            <Field title="Paleta de color">
+              <div className="flex flex-wrap gap-4">
+                {(form.template === 'sobre' ? THEMES : ELEGANCE_THEMES).map(theme => (
                   <button
                     key={theme.id}
                     type="button"
                     onClick={() => set('color_theme', theme.id)}
-                    className="flex flex-col items-center gap-1"
+                    className="flex flex-col items-center gap-2"
                     title={theme.label}
                   >
                     <span
-                      className="w-8 h-8 rounded-full border-2 transition-all"
+                      className="w-10 h-10 rounded-full border-4 transition-all"
                       style={{
                         background: theme.swatch,
-                        borderColor: form.color_theme === theme.id ? '#1f2937' : 'transparent',
-                        boxShadow: form.color_theme === theme.id ? '0 0 0 2px #f43f5e' : 'none',
+                        borderColor: form.color_theme === theme.id ? '#f43f5e' : 'transparent',
+                        boxShadow: form.color_theme === theme.id ? '0 0 0 2px #fda4af' : '0 0 0 2px #e5e7eb',
                       }}
                     />
-                    <span className="text-xs text-gray-500">{theme.label}</span>
+                    <span className={`text-xs font-medium ${form.color_theme === theme.id ? 'text-rose-500' : 'text-gray-400'}`}>{theme.label}</span>
                   </button>
                 ))}
               </div>
-            </div>
+            </Field>
           )}
-          {form.template === 'cenicienta' && (
-            <div>
-              <label className={labelClass}>Paleta de color</label>
-              <div className="flex flex-wrap gap-3 mt-1">
-                {CENICIENTA_THEMES.map(theme => (
-                  <button
-                    key={theme.id}
-                    type="button"
-                    onClick={() => set('color_theme', theme.id)}
-                    className="flex flex-col items-center gap-1"
-                    title={theme.label}
-                  >
-                    <span
-                      className="w-8 h-8 rounded-full border-2 transition-all"
-                      style={{
-                        background: theme.swatch,
-                        borderColor: form.color_theme === theme.id ? '#1f2937' : 'transparent',
-                        boxShadow: form.color_theme === theme.id ? '0 0 0 2px #f59e0b' : 'none',
-                      }}
-                    />
-                    <span className="text-xs text-gray-500">{theme.label}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-          <div>
-            <label className={labelClass}>Fecha del evento *</label>
-            <input type="datetime-local" value={form.event_date} onChange={e => set('event_date', e.target.value)} required className={inputClass} />
-          </div>
         </div>
       )}
 
       {/* Tab 1: Contacto */}
       {activeTab === 1 && (
-        <div className="space-y-4">
-          <div>
-            <label className={labelClass}>Nombre del invitado (para banner)</label>
-            <input type="text" value={form.guest_name} onChange={e => set('guest_name', e.target.value)} className={inputClass} placeholder="Familia Martínez" />
+        <div className="space-y-6">
+          <Field title="Nombre del invitado (banner)">
+            <input type="text" value={form.guest_name} onChange={e => set('guest_name', e.target.value)} className={input} placeholder="Ej. Familia Martínez" />
+          </Field>
+          <Field title="Mensaje de invitación">
+            <textarea value={form.invitation_text} onChange={e => set('invitation_text', e.target.value)} className={input} rows={4} placeholder="Con cariño te invitamos a compartir nuestro día más especial..." />
+          </Field>
+          <div className="grid grid-cols-2 gap-5">
+            <Field title="WhatsApp RSVP (sin +)">
+              <input type="text" value={form.rsvp_phone} onChange={e => set('rsvp_phone', e.target.value)} className={input} placeholder="5218001234567" />
+            </Field>
+            <Field title="Hashtag">
+              <input type="text" value={form.hashtag} onChange={e => set('hashtag', e.target.value)} className={input} placeholder="#XVValeria" />
+            </Field>
           </div>
-          <div>
-            <label className={labelClass}>Mensaje de invitación</label>
-            <textarea
-              value={form.invitation_text}
-              onChange={e => set('invitation_text', e.target.value)}
-              className={inputClass}
-              rows={4}
-              placeholder="Con cariño te invitamos a compartir nuestro día más especial..."
-            />
-          </div>
-          <div>
-            <label className={labelClass}>Teléfono RSVP (WhatsApp, sin +)</label>
-            <input type="text" value={form.rsvp_phone} onChange={e => set('rsvp_phone', e.target.value)} className={inputClass} placeholder="5218001234567" />
-          </div>
-          <div>
-            <label className={labelClass}>Frase de confirmación</label>
-            <textarea
-              value={form.confirmation_phrase}
-              onChange={e => set('confirmation_phrase', e.target.value)}
-              className={inputClass}
-              rows={3}
-              placeholder="Llena el siguiente formulario y no olvides dar clic en el botón, nosotros revisaremos tu confirmación."
-            />
-          </div>
-          <div>
-            <label className={labelClass}>Fecha resaltada en confirmación</label>
-            <input type="date" value={form.confirmation_highlight_date} onChange={e => set('confirmation_highlight_date', e.target.value)} className={inputClass} />
-          </div>
-          <div>
-            <label className={labelClass}>Hashtag</label>
-            <input type="text" value={form.hashtag} onChange={e => set('hashtag', e.target.value)} className={inputClass} placeholder="#XVValeria" />
-          </div>
+          <Field title="Frase de confirmación">
+            <textarea value={form.confirmation_phrase} onChange={e => set('confirmation_phrase', e.target.value)} className={input} rows={2} placeholder="Llena el formulario y no olvides dar clic en el botón de confirmación." />
+          </Field>
+          <Field title="Fecha resaltada en confirmación">
+            <input type="date" value={form.confirmation_highlight_date} onChange={e => set('confirmation_highlight_date', e.target.value)} className={input} />
+          </Field>
         </div>
       )}
 
       {/* Tab 2: Familia */}
       {activeTab === 2 && (
         <div className="space-y-6">
-          <div>
-            <label className={labelClass}>Padres</label>
-            <div className="space-y-2">
+          <SectionCard title="Padres" description="Nombres que aparecerán en la invitación">
+            <div className="space-y-3">
               {form.parent_names.map((name, i) => (
-                <div key={i} className="flex gap-2">
-                  <input type="text" value={name} onChange={e => setArrayItem('parent_names', i, e.target.value)} className={inputClass} placeholder={`Padre ${i + 1}`} />
-                  <button type="button" onClick={() => removeArrayItem('parent_names', i)} className="text-red-400 hover:text-red-600 px-2">✕</button>
+                <div key={i} className="flex gap-3 items-center">
+                  <input type="text" value={name} onChange={e => setArrayItem('parent_names', i, e.target.value)} className={input} placeholder={i === 0 ? 'Nombre del padre' : 'Nombre de la madre'} />
+                  <button type="button" onClick={() => removeArrayItem('parent_names', i)} className="w-10 h-10 rounded-xl border border-red-200 text-red-400 hover:bg-red-50 flex items-center justify-center transition-colors shrink-0">✕</button>
                 </div>
               ))}
-              <button type="button" onClick={() => addArrayItem('parent_names')} className="text-sm text-rose-500 hover:text-rose-600">+ Agregar padre/madre</button>
+              <button type="button" onClick={() => addArrayItem('parent_names')} className="text-sm text-rose-500 hover:text-rose-600 font-medium flex items-center gap-2 mt-1">
+                <span className="w-5 h-5 rounded-full bg-rose-100 flex items-center justify-center text-xs">+</span>
+                Agregar padre/madre
+              </button>
             </div>
-          </div>
-          <div>
-            <label className={labelClass}>Padrinos</label>
-            <div className="space-y-2">
+          </SectionCard>
+
+          <SectionCard title="Padrinos" description="Lista de padrinos y madrinas">
+            <div className="space-y-3">
               {form.padrinos.map((name, i) => (
-                <div key={i} className="flex gap-2">
-                  <input type="text" value={name} onChange={e => setArrayItem('padrinos', i, e.target.value)} className={inputClass} placeholder={`Padrino ${i + 1}`} />
-                  <button type="button" onClick={() => removeArrayItem('padrinos', i)} className="text-red-400 hover:text-red-600 px-2">✕</button>
+                <div key={i} className="flex gap-3 items-center">
+                  <input type="text" value={name} onChange={e => setArrayItem('padrinos', i, e.target.value)} className={input} placeholder={`Padrino ${i + 1} — Ej. Padrino de Corona`} />
+                  <button type="button" onClick={() => removeArrayItem('padrinos', i)} className="w-10 h-10 rounded-xl border border-red-200 text-red-400 hover:bg-red-50 flex items-center justify-center transition-colors shrink-0">✕</button>
                 </div>
               ))}
-              <button type="button" onClick={() => addArrayItem('padrinos')} className="text-sm text-rose-500 hover:text-rose-600">+ Agregar padrino/madrina</button>
+              <button type="button" onClick={() => addArrayItem('padrinos')} className="text-sm text-rose-500 hover:text-rose-600 font-medium flex items-center gap-2 mt-1">
+                <span className="w-5 h-5 rounded-full bg-rose-100 flex items-center justify-center text-xs">+</span>
+                Agregar padrino/madrina
+              </button>
             </div>
-          </div>
+          </SectionCard>
         </div>
       )}
 
       {/* Tab 3: Ceremonia */}
       {activeTab === 3 && (
-        <div className="space-y-4">
-          <div>
-            <label className={labelClass}>Nombre del lugar</label>
-            <input type="text" value={form.ceremony_venue} onChange={e => set('ceremony_venue', e.target.value)} className={inputClass} placeholder="Parroquia de San Juan" />
+        <div className="space-y-6">
+          <div className="grid grid-cols-2 gap-5">
+            <Field title="Nombre del lugar">
+              <input type="text" value={form.ceremony_venue} onChange={e => set('ceremony_venue', e.target.value)} className={input} placeholder="Parroquia de San Juan" />
+            </Field>
+            <Field title="Hora">
+              <input type="text" value={form.ceremony_time} onChange={e => set('ceremony_time', e.target.value)} className={input} placeholder="3:00 PM" />
+            </Field>
           </div>
-          <div>
-            <label className={labelClass}>Dirección</label>
-            <input type="text" value={form.ceremony_address} onChange={e => set('ceremony_address', e.target.value)} className={inputClass} placeholder="Av. Reforma 123, Col. Centro" />
-          </div>
-          <div>
-            <label className={labelClass}>Hora</label>
-            <input type="text" value={form.ceremony_time} onChange={e => set('ceremony_time', e.target.value)} className={inputClass} placeholder="3:00 PM" />
-          </div>
-          <div>
-            <label className={labelClass}>Link de Google Maps</label>
-            <input type="url" value={form.ceremony_map_link} onChange={e => set('ceremony_map_link', e.target.value)} className={inputClass} placeholder="https://maps.google.com/..." />
-          </div>
-          <div>
-            <label className={labelClass}>Foto de la Iglesia</label>
-            {project?.id && (
-              <MediaUploader
-                projectId={project.id}
-                bucket="invitation-media"
-                accept="image/*"
-                onUploadComplete={url => set('ceremony_photo_url', url)}
-                label="Subir foto de la iglesia"
-              />
+          <Field title="Dirección completa">
+            <input type="text" value={form.ceremony_address} onChange={e => set('ceremony_address', e.target.value)} className={input} placeholder="Av. Reforma 123, Col. Centro, CDMX" />
+          </Field>
+          <Field title="Link de Google Maps">
+            <input type="url" value={form.ceremony_map_link} onChange={e => set('ceremony_map_link', e.target.value)} className={input} placeholder="https://maps.google.com/..." />
+          </Field>
+          <Field title="Foto de la iglesia">
+            {project?.id ? (
+              <MediaUploader projectId={project.id} bucket="invitation-media" accept="image/*" onUploadComplete={url => set('ceremony_photo_url', url)} label="Subir foto de la iglesia" />
+            ) : (
+              <p className="text-sm text-amber-600 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">Guarda el proyecto primero para poder subir imágenes.</p>
             )}
             {form.ceremony_photo_url && (
-              <img src={form.ceremony_photo_url} alt="Iglesia" className="mt-2 w-full max-h-40 object-cover rounded-md border border-gray-200" />
+              <div className="mt-3 relative rounded-xl overflow-hidden border border-gray-100">
+                <img src={form.ceremony_photo_url} alt="Iglesia" className="w-full max-h-48 object-cover" />
+                <button type="button" onClick={() => set('ceremony_photo_url', '')} className="absolute top-2 right-2 w-7 h-7 rounded-full bg-black/50 text-white text-sm flex items-center justify-center hover:bg-black/70">✕</button>
+              </div>
             )}
-            <input type="url" value={form.ceremony_photo_url} onChange={e => set('ceremony_photo_url', e.target.value)} className={`${inputClass} mt-2`} placeholder="https://... o sube una foto arriba" />
-            {!project?.id && <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para poder subir archivos.</p>}
-          </div>
+            <input type="url" value={form.ceremony_photo_url} onChange={e => set('ceremony_photo_url', e.target.value)} className={`${input} mt-3`} placeholder="O pega una URL directamente..." />
+          </Field>
         </div>
       )}
 
       {/* Tab 4: Recepción */}
       {activeTab === 4 && (
-        <div className="space-y-4">
-          <div>
-            <label className={labelClass}>Nombre del lugar</label>
-            <input type="text" value={form.reception_venue} onChange={e => set('reception_venue', e.target.value)} className={inputClass} placeholder="Salón Imperial" />
+        <div className="space-y-6">
+          <div className="grid grid-cols-2 gap-5">
+            <Field title="Nombre del salón">
+              <input type="text" value={form.reception_venue} onChange={e => set('reception_venue', e.target.value)} className={input} placeholder="Salón Imperial" />
+            </Field>
+            <Field title="Hora">
+              <input type="text" value={form.reception_time} onChange={e => set('reception_time', e.target.value)} className={input} placeholder="5:00 PM" />
+            </Field>
           </div>
-          <div>
-            <label className={labelClass}>Dirección</label>
-            <input type="text" value={form.reception_address} onChange={e => set('reception_address', e.target.value)} className={inputClass} placeholder="Calle Flores 456, Col. Jardines" />
-          </div>
-          <div>
-            <label className={labelClass}>Hora</label>
-            <input type="text" value={form.reception_time} onChange={e => set('reception_time', e.target.value)} className={inputClass} placeholder="5:00 PM" />
-          </div>
-          <div>
-            <label className={labelClass}>Link de Google Maps</label>
-            <input type="url" value={form.reception_map_link} onChange={e => set('reception_map_link', e.target.value)} className={inputClass} placeholder="https://maps.google.com/..." />
-          </div>
-          <div>
-            <label className={labelClass}>Foto del Salón</label>
-            {project?.id && (
-              <MediaUploader
-                projectId={project.id}
-                bucket="invitation-media"
-                accept="image/*"
-                onUploadComplete={url => set('reception_photo_url', url)}
-                label="Subir foto del salón"
-              />
+          <Field title="Dirección completa">
+            <input type="text" value={form.reception_address} onChange={e => set('reception_address', e.target.value)} className={input} placeholder="Calle Flores 456, Col. Jardines, CDMX" />
+          </Field>
+          <Field title="Link de Google Maps">
+            <input type="url" value={form.reception_map_link} onChange={e => set('reception_map_link', e.target.value)} className={input} placeholder="https://maps.google.com/..." />
+          </Field>
+          <Field title="Foto del salón">
+            {project?.id ? (
+              <MediaUploader projectId={project.id} bucket="invitation-media" accept="image/*" onUploadComplete={url => set('reception_photo_url', url)} label="Subir foto del salón" />
+            ) : (
+              <p className="text-sm text-amber-600 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">Guarda el proyecto primero para poder subir imágenes.</p>
             )}
             {form.reception_photo_url && (
-              <img src={form.reception_photo_url} alt="Salón" className="mt-2 w-full max-h-40 object-cover rounded-md border border-gray-200" />
+              <div className="mt-3 relative rounded-xl overflow-hidden border border-gray-100">
+                <img src={form.reception_photo_url} alt="Salón" className="w-full max-h-48 object-cover" />
+                <button type="button" onClick={() => set('reception_photo_url', '')} className="absolute top-2 right-2 w-7 h-7 rounded-full bg-black/50 text-white text-sm flex items-center justify-center hover:bg-black/70">✕</button>
+              </div>
             )}
-            <input type="url" value={form.reception_photo_url} onChange={e => set('reception_photo_url', e.target.value)} className={`${inputClass} mt-2`} placeholder="https://... o sube una foto arriba" />
-            {!project?.id && <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para poder subir archivos.</p>}
-          </div>
+            <input type="url" value={form.reception_photo_url} onChange={e => set('reception_photo_url', e.target.value)} className={`${input} mt-3`} placeholder="O pega una URL directamente..." />
+          </Field>
         </div>
       )}
 
       {/* Tab 5: Itinerario */}
       {activeTab === 5 && (
         <div className="space-y-4">
+          <p className="text-sm text-gray-400">Define el programa del evento. El ícono puede ser un emoji, URL de imagen, o ruta de archivo.</p>
           {form.itinerary.map((item, i) => (
-            <div key={i} className="border border-gray-200 rounded-md p-3 space-y-2">
-              <div className="flex justify-between items-center">
-                <span className="text-sm font-medium text-gray-600">Paso {i + 1}</span>
-                <button type="button" onClick={() => setForm(prev => ({ ...prev, itinerary: prev.itinerary.filter((_, idx) => idx !== i) }))} className="text-red-400 hover:text-red-600 text-sm">Eliminar</button>
+            <div key={i} className="rounded-xl border border-gray-100 bg-gray-50/60 p-5 space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Paso {i + 1}</span>
+                <button
+                  type="button"
+                  onClick={() => setForm(prev => ({ ...prev, itinerary: prev.itinerary.filter((_, idx) => idx !== i) }))}
+                  className="text-sm text-red-400 hover:text-red-600 transition-colors font-medium"
+                >
+                  Eliminar
+                </button>
               </div>
-              <input type="text" value={item.time} onChange={e => setItineraryItem(i, 'time', e.target.value)} className={inputClass} placeholder="3:00 PM" />
-              <input type="text" value={item.description} onChange={e => setItineraryItem(i, 'description', e.target.value)} className={inputClass} placeholder="Descripción del evento" />
-              <div>
-                {project?.id && (
-                  <MediaUploader
-                    projectId={project.id}
-                    bucket="invitation-media"
-                    onUploadComplete={url => setItineraryItem(i, 'icon', url)}
-                    label="Subir ícono"
-                  />
-                )}
-                <input type="text" value={item.icon} onChange={e => setItineraryItem(i, 'icon', e.target.value)} className={`${inputClass} mt-1`} placeholder="Ícono (URL, emoji o ruta)" />
-                {item.icon && !item.icon.startsWith('http') && item.icon.length <= 4 && (
-                  <span className="text-2xl mt-1 block">{item.icon}</span>
-                )}
-                {item.icon && item.icon.startsWith('http') && (
-                  <img src={item.icon} alt="ícono" className="mt-1 w-8 h-8 object-contain" />
-                )}
+              <div className="grid grid-cols-[120px_1fr] gap-3">
+                <input type="text" value={item.time} onChange={e => setItineraryItem(i, 'time', e.target.value)} className={input} placeholder="3:00 PM" />
+                <input type="text" value={item.description} onChange={e => setItineraryItem(i, 'description', e.target.value)} className={input} placeholder="Descripción del evento" />
               </div>
+              <div className="flex gap-3 items-center">
+                {item.icon && item.icon.length <= 4 ? (
+                  <span className="w-12 h-12 rounded-xl border border-gray-200 bg-white flex items-center justify-center text-2xl shrink-0">{item.icon}</span>
+                ) : item.icon?.startsWith('http') ? (
+                  <img src={item.icon} alt="" className="w-12 h-12 rounded-xl border border-gray-200 object-contain bg-white shrink-0" />
+                ) : null}
+                <input type="text" value={item.icon} onChange={e => setItineraryItem(i, 'icon', e.target.value)} className={input} placeholder="⛪ Emoji o URL del ícono" />
+              </div>
+              {project?.id && (
+                <MediaUploader projectId={project.id} bucket="invitation-media" onUploadComplete={url => setItineraryItem(i, 'icon', url)} label="Subir ícono personalizado" />
+              )}
             </div>
           ))}
-          <button type="button" onClick={() => setForm(prev => ({ ...prev, itinerary: [...prev.itinerary, { time: '', description: '', icon: '' }] }))} className="text-sm text-rose-500 hover:text-rose-600">+ Agregar paso</button>
+          <button
+            type="button"
+            onClick={() => setForm(prev => ({ ...prev, itinerary: [...prev.itinerary, { time: '', description: '', icon: '' }] }))}
+            className="w-full py-4 border-2 border-dashed border-gray-200 rounded-xl text-sm text-gray-400 hover:border-rose-300 hover:text-rose-400 transition-all font-medium"
+          >
+            + Agregar paso al itinerario
+          </button>
         </div>
       )}
 
       {/* Tab 6: Estilo */}
       {activeTab === 6 && (
-        <div className="space-y-4">
-          <div>
-            <label className={labelClass}>Foto de portada</label>
-            {project?.id && (
-              <MediaUploader
-                projectId={project.id}
-                bucket="invitation-media"
-                onUploadComplete={url => set('hero_photo_url', url)}
-                label="Subir foto"
-              />
+        <div className="space-y-6">
+          <SectionCard title="Foto de portada" description="Imagen principal que aparece al abrir la invitación">
+            {project?.id ? (
+              <MediaUploader projectId={project.id} bucket="invitation-media" accept="image/*" onUploadComplete={url => set('hero_photo_url', url)} label="Subir foto de portada" />
+            ) : (
+              <p className="text-sm text-amber-600 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">Guarda el proyecto primero para poder subir imágenes.</p>
             )}
-            <input type="text" value={form.hero_photo_url} onChange={e => set('hero_photo_url', e.target.value)} className={`${inputClass} mt-2`} placeholder="/images/hero.jpg o URL de Supabase" />
             {form.hero_photo_url && (
-              <img src={form.hero_photo_url} alt="Portada" className="mt-2 w-32 h-20 object-cover rounded border border-gray-200" />
+              <div className="relative rounded-xl overflow-hidden border border-gray-100">
+                <img src={form.hero_photo_url} alt="Portada" className="w-full max-h-56 object-cover" />
+                <button type="button" onClick={() => set('hero_photo_url', '')} className="absolute top-2 right-2 w-7 h-7 rounded-full bg-black/50 text-white text-sm flex items-center justify-center hover:bg-black/70">✕</button>
+              </div>
             )}
-            {!project?.id && <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para poder subir imágenes.</p>}
-          </div>
-          <div>
-            <label className={labelClass}>Colores de vestimenta</label>
-            <input type="text" value={form.dress_code_colors} onChange={e => set('dress_code_colors', e.target.value)} className={inputClass} placeholder="Rosa pastel, blanco y dorado" />
-          </div>
-          <div>
-            <label className={labelClass}>Notas adicionales de vestimenta</label>
-            <textarea value={form.dress_code_notes} onChange={e => set('dress_code_notes', e.target.value)} className={inputClass} rows={3} placeholder="Preferiblemente ropa formal..." />
-          </div>
+            <input type="url" value={form.hero_photo_url} onChange={e => set('hero_photo_url', e.target.value)} className={input} placeholder="O pega una URL directamente..." />
+          </SectionCard>
+
+          <SectionCard title="Código de vestimenta">
+            <Field title="Colores">
+              <input type="text" value={form.dress_code_colors} onChange={e => set('dress_code_colors', e.target.value)} className={input} placeholder="Rosa pastel, blanco y dorado" />
+            </Field>
+            <Field title="Notas adicionales">
+              <textarea value={form.dress_code_notes} onChange={e => set('dress_code_notes', e.target.value)} className={input} rows={3} placeholder="Preferiblemente ropa formal, evitar color negro..." />
+            </Field>
+          </SectionCard>
         </div>
       )}
 
       {/* Tab 7: Media */}
       {activeTab === 7 && (
         <div className="space-y-6">
-          <div>
-            <label className={labelClass}>Música de fondo</label>
+          {/* Music */}
+          <SectionCard title="Música de fondo">
+            {project?.id ? (
+              <MediaUploader projectId={project.id} bucket="invitation-audio" accept="audio/*" onUploadComplete={url => set('music_url', url)} label="Subir música (MP3)" />
+            ) : (
+              <p className="text-sm text-amber-600 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">Guarda el proyecto primero para poder subir archivos.</p>
+            )}
+            {form.music_url && <p className="text-sm text-green-600 flex items-center gap-1.5 font-medium">✓ Música cargada</p>}
+            <input type="url" value={form.music_url} onChange={e => set('music_url', e.target.value)} className={input} placeholder="O pega la URL del archivo de audio..." />
+          </SectionCard>
+
+          {/* Gallery */}
+          <SectionCard title="Galería de fotos" description="Mínimo 4 fotos para un buen carrusel">
             {project?.id && (
               <MediaUploader
                 projectId={project.id}
-                bucket="invitation-audio"
-                accept="audio/*"
-                onUploadComplete={url => set('music_url', url)}
-                label="Subir archivo de música (MP3, etc.)"
+                bucket="invitation-media"
+                accept="image/*"
+                onUploadComplete={url => setForm(prev => ({ ...prev, photos: [...prev.photos.filter(Boolean), url] }))}
+                label="Subir foto a la galería"
               />
             )}
-            <input type="text" value={form.music_url} onChange={e => set('music_url', e.target.value)} className={`${inputClass} mt-2`} placeholder="https://supabase.co/.../musica.mp3" />
-            {!project?.id && <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para poder subir archivos.</p>}
-          </div>
-          <div>
-            <label className={labelClass}>Fotos de galería</label>
-            {project?.id && (
-              <div className="mb-2">
-                <MediaUploader
-                  projectId={project.id}
-                  bucket="invitation-media"
-                  onUploadComplete={url => setForm(prev => ({
-                    ...prev,
-                    photos: [...prev.photos.filter(Boolean), url],
-                  }))}
-                  label="Subir foto a galería"
-                />
-              </div>
-            )}
-            <div className="space-y-2">
+            <div className="space-y-3">
               {form.photos.map((url, i) => (
-                <div key={i} className="flex gap-2 items-center">
-                  <input type="text" value={url} onChange={e => setArrayItem('photos', i, e.target.value)} className={inputClass} placeholder="URL de imagen" />
-                  {url && <img src={url} alt="" className="w-8 h-8 object-cover rounded border border-gray-200 shrink-0" />}
-                  <button type="button" onClick={() => removeArrayItem('photos', i)} className="text-red-400 hover:text-red-600 px-2 shrink-0">✕</button>
+                <div key={i} className="flex gap-3 items-center">
+                  {url ? (
+                    <img src={url} alt="" className="w-12 h-12 object-cover rounded-xl border border-gray-200 shrink-0" />
+                  ) : (
+                    <div className="w-12 h-12 rounded-xl border-2 border-dashed border-gray-200 shrink-0 flex items-center justify-center text-gray-300 text-sm">{i + 1}</div>
+                  )}
+                  <input type="url" value={url} onChange={e => setArrayItem('photos', i, e.target.value)} className={input} placeholder="URL de imagen" />
+                  <button type="button" onClick={() => removeArrayItem('photos', i)} className="w-10 h-10 rounded-xl border border-red-200 text-red-400 hover:bg-red-50 flex items-center justify-center transition-colors shrink-0">✕</button>
                 </div>
               ))}
-              <button type="button" onClick={() => addArrayItem('photos')} className="text-sm text-rose-500 hover:text-rose-600">+ Agregar URL manual</button>
+              <button type="button" onClick={() => addArrayItem('photos')} className="text-sm text-rose-500 hover:text-rose-600 font-medium flex items-center gap-2 mt-1">
+                <span className="w-5 h-5 rounded-full bg-rose-100 flex items-center justify-center text-xs">+</span>
+                Agregar URL manualmente
+              </button>
+            </div>
+          </SectionCard>
+
+          {/* Feature toggles */}
+          <div className="space-y-4">
+            {/* Video */}
+            <div className="rounded-xl border border-gray-100 bg-gray-50/50 overflow-hidden">
+              <div className="flex items-center justify-between px-5 py-4">
+                <div>
+                  <p className="text-base font-semibold text-gray-800">Sección de video</p>
+                  <p className="text-sm text-gray-400 mt-0.5">YouTube o video subido</p>
+                </div>
+                <Toggle checked={form.show_video} onChange={v => set('show_video', v)} label="Mostrar video" />
+              </div>
+              {form.show_video && (
+                <div className="px-5 pb-5 space-y-4 border-t border-gray-100 pt-4">
+                  <Field title="ID de YouTube">
+                    <input type="text" value={form.video_youtube_id} onChange={e => set('video_youtube_id', e.target.value)} className={input} placeholder="Ej. dQw4w9WgXcQ" />
+                    <p className="text-xs text-gray-400 mt-1.5">Copia solo el ID de: youtube.com/watch?v=<strong>ESTE_ID</strong></p>
+                  </Field>
+                  <Field title="O subir video MP4">
+                    {project?.id ? (
+                      <MediaUploader projectId={project.id} bucket="invitation-media" accept="video/*" onUploadComplete={url => set('video_url', url)} label="Subir video (MP4)" />
+                    ) : (
+                      <p className="text-sm text-amber-600 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">Guarda el proyecto primero.</p>
+                    )}
+                    {form.video_url && <p className="text-sm text-green-600 font-medium mt-1.5">✓ Video cargado</p>}
+                    <input type="url" value={form.video_url} onChange={e => set('video_url', e.target.value)} className={`${input} mt-3`} placeholder="O pega la URL del video..." />
+                  </Field>
+                </div>
+              )}
+            </div>
+
+            {/* Lluvia de sobres */}
+            <div className="rounded-xl border border-gray-100 bg-gray-50/50 overflow-hidden">
+              <div className="flex items-center justify-between px-5 py-4">
+                <div>
+                  <p className="text-base font-semibold text-gray-800">Lluvia de sobres</p>
+                  <p className="text-sm text-gray-400 mt-0.5">Sección para regalos en efectivo</p>
+                </div>
+                <Toggle checked={form.show_lluvia_sobres} onChange={v => set('show_lluvia_sobres', v)} label="Mostrar lluvia de sobres" />
+              </div>
+              {form.show_lluvia_sobres && (
+                <div className="px-5 pb-5 border-t border-gray-100 pt-4">
+                  <Field title="Texto personalizado">
+                    <textarea value={form.lluvia_sobres_text} onChange={e => set('lluvia_sobres_text', e.target.value)} className={input} rows={3} placeholder="Si prefieres obsequiarme un sobre, será recibido con el mismo amor..." />
+                  </Field>
+                </div>
+              )}
+            </div>
+
+            {/* Datos bancarios */}
+            <div className="rounded-xl border border-gray-100 bg-gray-50/50 overflow-hidden">
+              <div className="flex items-center justify-between px-5 py-4">
+                <div>
+                  <p className="text-base font-semibold text-gray-800">Datos bancarios</p>
+                  <p className="text-sm text-gray-400 mt-0.5">CLABE para transferencias</p>
+                </div>
+                <Toggle checked={form.show_datos_bancarios} onChange={v => set('show_datos_bancarios', v)} label="Mostrar datos bancarios" />
+              </div>
+              {form.show_datos_bancarios && (
+                <div className="px-5 pb-5 space-y-4 border-t border-gray-100 pt-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <Field title="Beneficiario">
+                      <input type="text" value={form.bank_beneficiary} onChange={e => set('bank_beneficiary', e.target.value)} className={input} placeholder="María García López" />
+                    </Field>
+                    <Field title="CLABE (18 dígitos)">
+                      <input type="text" value={form.bank_account} onChange={e => set('bank_account', e.target.value)} className={input} placeholder="000000000000000000" maxLength={18} />
+                    </Field>
+                  </div>
+                  <Field title="Texto personalizado">
+                    <textarea value={form.datos_bancarios_text} onChange={e => set('datos_bancarios_text', e.target.value)} className={input} rows={3} placeholder="Si deseas hacerme un regalo monetario..." />
+                  </Field>
+                </div>
+              )}
+            </div>
+
+            {/* Itinerario toggle */}
+            <div className="flex items-center justify-between px-5 py-4 rounded-xl border border-gray-100 bg-gray-50/50">
+              <div>
+                <p className="text-base font-semibold text-gray-800">Programa del evento</p>
+                <p className="text-sm text-gray-400 mt-0.5">Muestra el itinerario en la invitación</p>
+              </div>
+              <Toggle checked={form.show_itinerary} onChange={v => set('show_itinerary', v)} label="Mostrar itinerario" />
             </div>
           </div>
-          <div className="border-t pt-4">
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={form.show_video}
-                onChange={e => set('show_video', e.target.checked)}
-                className="w-4 h-4 accent-rose-500"
-              />
-              <span className="text-sm font-medium text-gray-700">Mostrar sección de video</span>
-            </label>
-            {form.show_video && (
-              <div className="mt-3 space-y-3 pl-6">
-                <div>
-                  <label className={labelClass}>ID de YouTube</label>
-                  <input type="text" value={form.video_youtube_id} onChange={e => set('video_youtube_id', e.target.value)} className={inputClass} placeholder="dQw4w9WgXcQ" />
-                  <p className="text-xs text-gray-400 mt-1">Solo el ID de la URL: youtube.com/watch?v=<strong>ESTE_TEXTO</strong></p>
-                </div>
-                <div>
-                  <label className={labelClass}>O subir video (MP4)</label>
-                  {project?.id && (
-                    <MediaUploader
-                      projectId={project.id}
-                      bucket="invitation-media"
-                      accept="video/*"
-                      onUploadComplete={url => set('video_url', url)}
-                      label="Subir video (MP4)"
-                    />
-                  )}
-                  <input type="text" value={form.video_url} onChange={e => set('video_url', e.target.value)} className={`${inputClass} mt-2`} placeholder="https://supabase.co/.../video.mp4" />
-                  {!project?.id && <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para poder subir archivos.</p>}
-                </div>
-              </div>
-            )}
-          </div>
-          <div className="border-t pt-4">
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={form.show_lluvia_sobres}
-                onChange={e => set('show_lluvia_sobres', e.target.checked)}
-                className="w-4 h-4 accent-rose-500"
-              />
-              <span className="text-sm font-medium text-gray-700">Mostrar sección Lluvia de Sobres</span>
-            </label>
-            {form.show_lluvia_sobres && (
-              <div className="mt-3 pl-6">
-                <label className={labelClass}>Texto personalizado</label>
-                <textarea
-                  value={form.lluvia_sobres_text}
-                  onChange={e => set('lluvia_sobres_text', e.target.value)}
-                  className={inputClass}
-                  rows={3}
-                  placeholder="Si prefieres obsequiarme un sobre, será recibido con el mismo amor y gratitud..."
-                />
-              </div>
-            )}
-          </div>
-          <div className="border-t pt-4">
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={form.show_itinerary}
-                onChange={e => set('show_itinerary', e.target.checked)}
-                className="w-4 h-4 accent-rose-500"
-              />
-              <span className="text-sm font-medium text-gray-700">Mostrar Programa del Evento (Itinerario)</span>
-            </label>
-          </div>
-          <div className="border-t pt-4">
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={form.show_datos_bancarios}
-                onChange={e => set('show_datos_bancarios', e.target.checked)}
-                className="w-4 h-4 accent-rose-500"
-              />
-              <span className="text-sm font-medium text-gray-700">Mostrar sección Datos Bancarios</span>
-            </label>
-            {form.show_datos_bancarios && (
-              <div className="mt-3 space-y-3 pl-6">
-                <div>
-                  <label className={labelClass}>Texto personalizado</label>
-                  <textarea
-                    value={form.datos_bancarios_text}
-                    onChange={e => set('datos_bancarios_text', e.target.value)}
-                    className={inputClass}
-                    rows={3}
-                    placeholder="Si deseas realizarme un regalo monetario, aquí encontrarás mis datos bancarios..."
-                  />
-                </div>
-                <div>
-                  <label className={labelClass}>Cuenta bancaria (CLABE)</label>
-                  <input type="text" value={form.bank_account} onChange={e => set('bank_account', e.target.value)} className={inputClass} placeholder="000 000 000 000 000 000" />
-                </div>
-                <div>
-                  <label className={labelClass}>Beneficiario</label>
-                  <input type="text" value={form.bank_beneficiary} onChange={e => set('bank_beneficiary', e.target.value)} className={inputClass} placeholder="María García López" />
-                </div>
-              </div>
-            )}
-          </div>
-          <div className="border-t pt-4">
-            <label className={labelClass}>Regalo — Link de Liverpool</label>
-            <input type="url" value={form.liverpool_link} onChange={e => set('liverpool_link', e.target.value)} className={inputClass} placeholder="https://liverpool.com.mx/..." />
-          </div>
+
+          {/* Liverpool */}
+          <SectionCard title="Mesa de regalos — Liverpool">
+            <Field title="Link de Liverpool">
+              <input type="url" value={form.liverpool_link} onChange={e => set('liverpool_link', e.target.value)} className={input} placeholder="https://mesaderegalos.liverpool.com.mx/..." />
+            </Field>
+          </SectionCard>
         </div>
       )}
 
       {/* Error */}
       {error && (
-        <div className="mt-4 bg-red-50 border border-red-200 text-red-700 text-sm rounded px-3 py-2">
-          {error}
+        <div className="mt-6 bg-red-50 border border-red-200 text-red-700 text-base rounded-xl px-4 py-3.5 flex items-center gap-2">
+          <span>⚠</span> {error}
         </div>
       )}
 
-      {/* Footer actions */}
-      <div className="mt-8 flex gap-3 pt-4 border-t border-gray-200">
+      {/* Footer */}
+      <div className="mt-8 flex items-center gap-3 pt-6 border-t border-gray-100">
         <button
           type="button"
           disabled={loading}
           onClick={() => handleSubmit('draft')}
-          className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md text-sm hover:bg-gray-50 disabled:opacity-50 transition-colors"
+          className="px-5 py-3 border border-gray-200 text-gray-600 rounded-xl text-base font-medium hover:bg-gray-50 disabled:opacity-50 transition-all"
         >
           Guardar borrador
         </button>
@@ -653,18 +658,23 @@ export default function ProjectForm({ project }: Props) {
           type="button"
           disabled={loading}
           onClick={() => handleSubmit('published')}
-          className="px-4 py-2 bg-rose-500 hover:bg-rose-600 text-white rounded-md text-sm font-medium disabled:opacity-50 transition-colors"
+          className="px-6 py-3 bg-rose-500 hover:bg-rose-600 text-white rounded-xl text-base font-medium disabled:opacity-50 transition-all shadow-sm shadow-rose-200"
         >
-          {loading ? 'Guardando...' : 'Guardar y Publicar'}
+          {loading ? (
+            <span className="flex items-center gap-2">
+              <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              Guardando...
+            </span>
+          ) : 'Guardar y publicar'}
         </button>
         {project && (
           <a
             href={`/i/${project.slug}`}
             target="_blank"
             rel="noreferrer"
-            className="px-4 py-2 text-rose-500 border border-rose-300 rounded-md text-sm hover:bg-rose-50 transition-colors"
+            className="ml-auto px-5 py-3 text-rose-500 border border-rose-200 rounded-xl text-base font-medium hover:bg-rose-50 transition-all"
           >
-            Vista previa ↗
+            Ver invitación ↗
           </a>
         )}
       </div>

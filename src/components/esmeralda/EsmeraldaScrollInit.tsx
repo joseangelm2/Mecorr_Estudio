@@ -9,6 +9,8 @@ export default function EsmeraldaScrollInit() {
       "show-n-x": "active-n-x",
       "show-p-x": "active-p-x",
       "show-n-y": "active-n-y",
+      "show-hero-up": "active-hero",
+      "show-hero-left": "active-hero",
       show: "active",
     };
 

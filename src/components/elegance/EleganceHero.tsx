@@ -4,8 +4,8 @@ interface Props {
   project: Project
 }
 
-export default function CenicientaHero({ project }: Props) {
-  const heroPhoto = project.hero_photo_url ?? '/images/cenicienta/foto.jpg'
+export default function EleganceHero({ project }: Props) {
+  const heroPhoto = project.hero_photo_url ?? '/images/elegance/foto.jpg'
   const invitationText = project.invitation_text ??
     'Porque este día es muy importante para mí, quiero compartirlo con las personas que llevo en mi corazón. Tú eres una de ellas. Quisiera que estés presente en uno de los días más inolvidables de mi vida.'
 
@@ -16,7 +16,7 @@ export default function CenicientaHero({ project }: Props) {
   return (
     <>
       <div style={{ display: 'grid', width: '70%', marginTop: '3%', marginBottom: '-3%' }}>
-        <img src="/images/cenicienta/Logo.png" style={{ gridArea: '1/1', width: '100%', display: 'block' }} alt="" />
+        <img src="/images/elegance/Logo.png" style={{ gridArea: '1/1', width: '100%', display: 'block' }} alt="" />
         <div style={{
           gridArea: '1/1',
           display: 'flex',
@@ -42,7 +42,7 @@ export default function CenicientaHero({ project }: Props) {
 
       <img
         className="foto-full"
-        src="/images/cenicienta/Papel.png"
+        src="/images/elegance/Papel.png"
         style={{ width: '100%', marginTop: '3%', marginBottom: '-110%' }}
         alt=""
       />

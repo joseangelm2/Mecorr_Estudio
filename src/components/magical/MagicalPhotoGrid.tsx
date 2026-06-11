@@ -2,7 +2,11 @@
 
 import { useState } from "react";
 
-const gridImages = [
+interface Props {
+  photos: string[]
+}
+
+const FALLBACK = [
   "/images/magical/11.jpg",
   "/images/magical/12.jpg",
   "/images/magical/21.jpg",
@@ -14,7 +18,9 @@ const gridImages = [
   "/images/magical/43.jpg",
 ];
 
-export default function MagicalPhotoGrid() {
+export default function MagicalPhotoGrid({ photos }: Props) {
+  const gridImages = photos.length >= 6 ? photos : FALLBACK;
+
   const [modalOpen, setModalOpen] = useState(false);
   const [currentIdx, setCurrentIdx] = useState(0);
 
@@ -40,26 +46,32 @@ export default function MagicalPhotoGrid() {
       <section id="grid" className="no-print">
         <div className="container-grid">
           <div className="column">
-            <img className="object-grid show-p-y" src="/images/magical/11.jpg" alt="" onClick={() => openModal(0)} />
-            <img className="object-grid show-p-y" src="/images/magical/12.jpg" alt="" onClick={() => openModal(1)} />
+            <img className="object-grid show-p-y" src={gridImages[0]} alt="" onClick={() => openModal(0)} />
+            <img className="object-grid show-p-y" src={gridImages[1] ?? gridImages[0]} alt="" onClick={() => openModal(1)} />
           </div>
           <div className="column">
-            <img className="object-grid show-p-y" src="/images/magical/21.jpg" alt="" onClick={() => openModal(2)} />
-            <img className="object-grid show-p-y" src="/images/magical/22.jpg" alt="" onClick={() => openModal(3)} />
+            <img className="object-grid show-p-y" src={gridImages[2] ?? gridImages[0]} alt="" onClick={() => openModal(2)} />
+            <img className="object-grid show-p-y" src={gridImages[3] ?? gridImages[0]} alt="" onClick={() => openModal(3)} />
           </div>
           <div className="column">
-            <img className="object-grid show-p-y" src="/images/magical/31.jpg" alt="" onClick={() => openModal(4)} />
-            <img className="object-grid show-p-y" src="/images/magical/32.jpg" alt="" onClick={() => openModal(5)} />
+            <img className="object-grid show-p-y" src={gridImages[4] ?? gridImages[0]} alt="" onClick={() => openModal(4)} />
+            <img className="object-grid show-p-y" src={gridImages[5] ?? gridImages[0]} alt="" onClick={() => openModal(5)} />
           </div>
-          <div className="column full-width show-p-y">
-            <img className="object-grid" src="/images/magical/41.jpg" alt="" onClick={() => openModal(6)} />
-          </div>
-          <div className="column full-width show-p-y">
-            <img className="object-grid" src="/images/magical/42.jpg" alt="" onClick={() => openModal(7)} />
-          </div>
-          <div className="column full-width show-p-y">
-            <img className="object-grid" src="/images/magical/43.jpg" alt="" onClick={() => openModal(8)} />
-          </div>
+          {gridImages[6] && (
+            <div className="column full-width show-p-y">
+              <img className="object-grid" src={gridImages[6]} alt="" onClick={() => openModal(6)} />
+            </div>
+          )}
+          {gridImages[7] && (
+            <div className="column full-width show-p-y">
+              <img className="object-grid" src={gridImages[7]} alt="" onClick={() => openModal(7)} />
+            </div>
+          )}
+          {gridImages[8] && (
+            <div className="column full-width show-p-y">
+              <img className="object-grid" src={gridImages[8]} alt="" onClick={() => openModal(8)} />
+            </div>
+          )}
         </div>
       </section>
 

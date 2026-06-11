@@ -1,9 +1,11 @@
 "use client";
 
+import "@/app/hogwarts/hogwarts.css";
 import { useState, useRef } from "react";
 import VintageEnvelope from "@/components/vintage/VintageEnvelope";
 import EsmeraldaScrollInit from "@/components/esmeralda/EsmeraldaScrollInit";
 import HogwartsContent from "@/components/hogwarts/HogwartsContent";
+import { DEMO_PROJECT } from "@/lib/demo-project";
 
 const PRIMARY = "#c49245";
 
@@ -34,7 +36,7 @@ export default function HogwartsPage() {
         <img className="bottom-img" src="/images/hogwarts/453.png" alt="" />
       </div>
 
-      <HogwartsContent />
+      <HogwartsContent project={DEMO_PROJECT} />
     </div>
   );
 }

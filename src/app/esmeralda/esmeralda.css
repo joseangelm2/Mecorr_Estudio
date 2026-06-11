@@ -9,7 +9,7 @@
   --color-elementos: rgb(26, 161, 134);
   --color-sobre: var(--color-principal);
   --nombre-color: #b78946;
-  --subtitulos-color: #b78946;
+  --subtitulos-color: #f2c96a;
   --texto-color: rgb(255, 255, 255);
   --itinerario-card-color: rgba(32, 102, 64, 0.12);
   --invertir-img-itinerario: invert(100%);
@@ -35,7 +35,7 @@ h1 {
 /* h2 — section headings */
 h2 {
   font-family: var(--font-carattere), "Carattere", cursive;
-  font-size: 8vw;
+  font-size: 7vw;
   color: var(--subtitulos-color);
 }
 
@@ -100,7 +100,9 @@ body {
   justify-content: center;
   align-items: center;
   position: relative;
+  z-index: 1;
   margin-top: 7vw;
+
   border-radius: 2vw;
   margin-bottom: 19vw;
 }
@@ -115,7 +117,7 @@ h2 {
 
 .person-name {
   color: var(--nombre-color) !important;
-  font-size: 8vw;
+  font-size: 10vw;
 }
 
 /* ======================================
@@ -228,7 +230,7 @@ h2 {
 
 .name h2 {
   margin: auto;
-  margin-top: -13%;
+  margin-top: -17%;
 }
 
 /* ======================================
@@ -239,6 +241,7 @@ h2 {
   width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding-bottom: 11vw;
 }
 
@@ -259,8 +262,11 @@ h2 {
 
 .countdown-container {
   display: flex;
+  justify-content: center;
+  align-items: center;
   line-height: 1.2;
   margin-top: -3%;
+  width: 100%;
 }
 
 .countdown-container .number {
@@ -335,14 +341,15 @@ h2 {
 }
 
 .lugar .nombre {
-  font-size: 3vw;
+  font-size: 4vw;
   color: white;
+  margin-top: 2vw;
 }
 
 .lugar .direccion {
-  font-size: 2.5vw;
+  font-size: 4vw;
   color: rgba(255, 255, 255, 0.85);
-  margin: 0.5vw 0;
+  margin: 1.5vw 0;
   padding: 0 5%;
 }
 
@@ -351,6 +358,19 @@ h2 {
   font-weight: 900;
   margin-top: 1vw;
   color: white;
+}
+
+/* Botones consistentes en secciones de lugar, regalos, vestimenta, info */
+.lugar .button,
+.liverpool-container .button,
+.gift-object-container .button,
+.gift-container .button,
+.confirmacion-asistencia .button {
+  font-size: 3vw;
+  font-family: var(--font-old-standard), "Old Standard TT", serif;
+  font-weight: 900;
+  margin: 2vw 0;
+  padding: 1.5vw 6vw;
 }
 
 /* ======================================
@@ -476,7 +496,7 @@ h2 {
 }
 
 .dress-code h2 {
-  font-size: 6vw;
+  font-size: 7vw;
   margin-bottom: -1vw;
   margin-top: 0;
 }
@@ -496,8 +516,9 @@ h2 {
 
 .dress-code p {
   font-family: var(--font-old-standard), "Old Standard TT", serif;
-  font-size: 3vw;
+  font-size: 4vw;
   text-align: center;
+  margin-top: 2vw;
 }
 
 /* ======================================
@@ -511,12 +532,12 @@ h2 {
   justify-content: center;
   width: 90%;
   margin: auto;
-  margin-top: -2vw;
+  margin-top: 4vw;
 }
 
 .gift-container h2 {
-  font-size: 6vw;
-  margin-bottom: -1vw;
+  font-size: 7vw;
+  margin-bottom: 0;
   margin-top: 0;
 }
 
@@ -529,15 +550,17 @@ h2 {
 
 .gift-object-container img {
   width: 14vw;
-  margin-bottom: -2vw;
+  margin-top: 2vw;
+  margin-bottom: 0;
 }
 
 .gift-container p {
   font-family: var(--font-old-standard), "Old Standard TT", serif;
-  font-size: 3vw;
+  font-size: 4vw;
   width: 80%;
   text-align: center;
-  line-height: 1.3;
+  line-height: 1.4;
+  margin-top: 2vw;
 }
 
 .gift-liverpool-container {
@@ -547,12 +570,12 @@ h2 {
   justify-content: center;
   width: 90%;
   margin: auto;
-  margin-top: 2vw;
+  margin-top: 4vw;
 }
 
 .gift-liverpool-container h2 {
   font-size: 7vw;
-  margin-bottom: 1vw;
+  margin-bottom: 0;
   margin-top: 0;
 }
 
@@ -565,23 +588,28 @@ h2 {
 
 .gift-liverpool-object-container img {
   width: 17%;
+  margin-top: 2vw;
 }
 
 .gift-liverpool-container p {
   font-family: var(--font-old-standard), "Old Standard TT", serif;
-  font-size: 3vw;
+  font-size: 4vw;
   width: 80%;
   text-align: center;
+  margin-top: 2vw;
+  line-height: 1.4;
 }
 
 .liverpool-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .liverpool-container img {
   margin: auto;
-  margin-bottom: 5vw;
+  margin-top: 2vw;
+  margin-bottom: 2vw;
   width: 25vw;
 }
 
@@ -593,10 +621,10 @@ h2 {
 }
 
 .cut-line {
-  width: 80%;
+  width: 70%;
   height: 1px;
-  background: rgba(255, 255, 255, 0.3);
-  margin: 1vw auto;
+  background: rgba(255, 255, 255, 0.4);
+  margin: 5vw auto 0;
 }
 
 .mensaje-buzon {
@@ -608,9 +636,10 @@ h2 {
   height: 2em;
   border: 0.4vw solid var(--button-background-color);
   resize: none;
-  font-size: 3vw;
+  font-size: 4vw;
   background: rgba(255, 255, 255, 0.2);
   color: white;
+  margin-top: 2vw;
 }
 
 .mensaje-buzon::placeholder {
@@ -638,11 +667,11 @@ h2 {
 }
 
 .informacion-importante p {
-  font-size: 3vw;
+  font-size: 4vw;
   font-family: var(--font-old-standard), "Old Standard TT", serif;
-  line-height: 1;
+  line-height: 1.4;
   margin-top: 0;
-  margin-bottom: 2%;
+  margin-bottom: 2vw;
 }
 
 /* ======================================
@@ -901,6 +930,24 @@ h2 {
   opacity: 1;
 }
 
+/* Hero — animaciones sincronizadas con el sobre (3s) */
+.show-hero-up {
+  opacity: 0;
+  transform: translateY(150px);
+  transition: opacity 3s ease, transform 3s ease;
+}
+
+.show-hero-left {
+  opacity: 0;
+  transform: translateX(-150px);
+  transition: opacity 3s ease, transform 3s ease;
+}
+
+.active-hero {
+  transform: translate(0px, 0px);
+  opacity: 1;
+}
+
 /* ======================================
    DECORATIONS
    ====================================== */
@@ -910,6 +957,7 @@ h2 {
   width: 100%;
   height: 0;
   pointer-events: none;
+  z-index: 2;
 }
 
 .decorations .item1 { position: absolute; width: 17vw; right: 4vw; top: 2vw; animation: rotar 2.5s linear infinite; }

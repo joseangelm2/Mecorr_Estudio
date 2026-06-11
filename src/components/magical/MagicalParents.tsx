@@ -1,21 +1,45 @@
-export default function MagicalParents() {
+import type { Project } from "@/types/invitation";
+
+interface Props {
+  project: Project
+}
+
+export default function MagicalParents({ project }: Props) {
   return (
     <>
-      <section className="parents-container no-print">
-        <h2>Mis Padres</h2>
-        <img className="vector-long" src="/images/magical/separador.png" alt="" />
-        <div className="parents texto">
-          <p>Juan Domingo de la Fuente<br />&amp;<br />Cristina Pérez</p>
-        </div>
-      </section>
+      {project.parent_names?.length > 0 && (
+        <section className="parents-container no-print">
+          <h2>Mis Padres</h2>
+          <img className="vector-long" src="/images/magical/separador.png" alt="" />
+          <div className="parents texto">
+            <p>
+              {project.parent_names.map((name, i) => (
+                <span key={i}>
+                  {name}
+                  {i < project.parent_names.length - 1 && <><br />&amp;<br /></>}
+                </span>
+              ))}
+            </p>
+          </div>
+        </section>
+      )}
 
-      <section className="parents-container no-print" style={{ marginTop: "5%" }}>
-        <h2>Padrinos</h2>
-        <img className="vector-long" src="/images/magical/separador.png" alt="" />
-        <div className="parents texto">
-          <p>Carlos Rodríguez<br />y<br />María González</p>
-        </div>
-      </section>
+      {project.padrinos?.length > 0 && (
+        <section className="parents-container no-print" style={{ marginTop: "5%" }}>
+          <h2>Padrinos</h2>
+          <img className="vector-long" src="/images/magical/separador.png" alt="" />
+          <div className="parents texto">
+            <p>
+              {project.padrinos.map((name, i) => (
+                <span key={i}>
+                  {name}
+                  {i < project.padrinos.length - 1 && <><br />&amp;<br /></>}
+                </span>
+              ))}
+            </p>
+          </div>
+        </section>
+      )}
     </>
   );
 }

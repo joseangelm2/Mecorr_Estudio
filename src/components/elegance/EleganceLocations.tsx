@@ -4,14 +4,14 @@ interface Props {
   project: Project
 }
 
-export default function CenicientaLocations({ project }: Props) {
+export default function EleganceLocations({ project }: Props) {
   return (
     <>
       {project.ceremony && (
         <>
           <img
             className="foto-full show-p-y"
-            src={project.ceremony.photoUrl || '/images/cenicienta/ceremonia.jpg'}
+            src={project.ceremony.photoUrl || '/images/elegance/ceremonia.jpg'}
             style={{ marginTop: '5%', marginBottom: '0%' }}
             alt=""
           />
@@ -31,7 +31,7 @@ export default function CenicientaLocations({ project }: Props) {
         <>
           <img
             className="foto-full show-p-y"
-            src={project.reception.photoUrl || '/images/cenicienta/evento.jpg'}
+            src={project.reception.photoUrl || '/images/elegance/evento.jpg'}
             style={{ marginTop: 'var(--separacion)', marginBottom: '0%' }}
             alt=""
           />

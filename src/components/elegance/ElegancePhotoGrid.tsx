@@ -2,7 +2,7 @@ interface Props {
   photos: string[]
 }
 
-export default function CenicientaPhotoGrid({ photos }: Props) {
+export default function ElegancePhotoGrid({ photos }: Props) {
   return (
     <>
       <div className="encabezado">

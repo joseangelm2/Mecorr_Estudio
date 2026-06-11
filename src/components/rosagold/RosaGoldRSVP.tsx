@@ -2,7 +2,9 @@
 
 import { useState, useRef } from "react";
 
-export default function RosaGoldRSVP() {
+interface Props { phone: string }
+
+export default function RosaGoldRSVP({ phone }: Props) {
   const nombreRef = useRef<HTMLInputElement>(null);
   const mensajeRef = useRef<HTMLTextAreaElement>(null);
   const conelRef = useRef<HTMLSelectElement>(null);
@@ -17,7 +19,7 @@ export default function RosaGoldRSVP() {
     const text = asistira
       ? `Hola, soy ${nombre} y confirmo mi asistencia, asistiremos ${conel}, Mi Mensaje: ${mensaje}`
       : `Hola, soy ${nombre} y lamentablemente, no podré asistir.`;
-    window.open(`https://api.whatsapp.com/send?phone=5215656408416&text=${encodeURIComponent(text)}`, "_blank");
+    window.open(`https://api.whatsapp.com/send?phone=52${phone}&text=${encodeURIComponent(text)}`, "_blank");
   }
 
   return (

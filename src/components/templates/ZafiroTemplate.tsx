@@ -11,7 +11,7 @@ interface Props {
   project: Project
 }
 
-export default function ZafiroTemplate({ project: _project }: Props) {
+export default function ZafiroTemplate({ project }: Props) {
   const [open, setOpen] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
 
@@ -24,7 +24,7 @@ export default function ZafiroTemplate({ project: _project }: Props) {
     <div style={{ position: 'relative' }}>
       <EsmeraldaScrollInit />
       <audio ref={audioRef} loop>
-        <source src="/images/esmeralda/musica.mp3" type="audio/mpeg" />
+        <source src={project.music_url ?? '/images/esmeralda/musica.mp3'} type="audio/mpeg" />
       </audio>
       {!open && <VintageEnvelope onOpen={handleOpen} primaryColor="#775197" />}
       <div className="top">
@@ -33,7 +33,7 @@ export default function ZafiroTemplate({ project: _project }: Props) {
       <div className="bottom">
         <img className="bottom-img" src="/images/zafiro/453.png" alt="" />
       </div>
-      <ZafiroContent />
+      <ZafiroContent project={project} />
     </div>
   )
 }

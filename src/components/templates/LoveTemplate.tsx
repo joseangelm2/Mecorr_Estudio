@@ -11,7 +11,7 @@ interface Props {
   project: Project
 }
 
-export default function LoveTemplate({ project: _project }: Props) {
+export default function LoveTemplate({ project }: Props) {
   const [open, setOpen] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
 
@@ -24,10 +24,10 @@ export default function LoveTemplate({ project: _project }: Props) {
     <div style={{ position: 'relative' }}>
       <EsmeraldaScrollInit />
       <audio ref={audioRef} id="music" loop>
-        <source src="/images/esmeralda/musica.mp3" type="audio/mpeg" />
+        <source src={project.music_url ?? '/images/esmeralda/musica.mp3'} type="audio/mpeg" />
       </audio>
       {!open && <LoveEnvelope onOpen={handleOpen} />}
-      <LoveContent />
+      <LoveContent project={project} />
     </div>
   )
 }

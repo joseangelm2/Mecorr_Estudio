@@ -1,4 +1,4 @@
-export interface CenicientaTheme {
+export interface EleganceTheme {
   id: string
   label: string
   swatch: string
@@ -18,7 +18,7 @@ export interface CenicientaTheme {
 
 const GOLD_IMG_FILTER = 'sepia(1) saturate(4) hue-rotate(8deg) brightness(0.9)'
 
-export const CENICIENTA_THEMES: CenicientaTheme[] = [
+export const ELEGANCE_THEMES: EleganceTheme[] = [
   {
     id: 'azul-dorado',
     label: 'Azul Dorado',
@@ -123,4 +123,4 @@ export const CENICIENTA_THEMES: CenicientaTheme[] = [
   },
 ]
 
-export const DEFAULT_CENICIENTA_THEME = CENICIENTA_THEMES.find(t => t.id === 'blanco-dorado')!
+export const DEFAULT_ELEGANCE_THEME = ELEGANCE_THEMES.find(t => t.id === 'blanco-dorado')!

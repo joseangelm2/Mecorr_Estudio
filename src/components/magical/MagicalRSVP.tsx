@@ -1,11 +1,15 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import type { Project } from "@/types/invitation";
 
-const PHONE = "5214438569931";
+interface Props {
+  project: Project
+}
 
-export default function MagicalRSVP() {
+export default function MagicalRSVP({ project }: Props) {
   const [attending, setAttending] = useState(true);
+  const phone = `52${project.rsvp_phone ?? ""}`;
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -24,25 +28,23 @@ export default function MagicalRSVP() {
       : `Hola, soy ${familia} y lamentablemente, no podré asistir.`;
 
     window.open(
-      `https://api.whatsapp.com/send?phone=${PHONE}&text=${encodeURIComponent(msg)}`,
+      `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(msg)}`,
       "_blank"
     );
   }
 
   return (
     <>
-      <section className="informacion-importante no-print" style={{ marginTop: "1%", marginBottom: "2%" }}>
-        <h2>Información Importante</h2>
-        <p className="texto">❖ No se permiten niños.</p>
-        <p className="texto">
-          ❖ El color dorado queda reservado exclusivamente para la Quinceañera.
-        </p>
-      </section>
+      {project.dress_code?.notes && (
+        <section className="informacion-importante no-print" style={{ marginTop: "1%", marginBottom: "2%" }}>
+          <h2>Información Importante</h2>
+          <p className="texto">❖ {project.dress_code.notes}</p>
+        </section>
+      )}
 
       <section className="confirmacion-asistencia" style={{ marginTop: "1%", marginBottom: "3%" }}>
         <h2>
-          Favor de confirmar asistencia <br />
-          antes del 14 de Julio
+          {project.confirmation_phrase ?? "Favor de confirmar asistencia"}
         </h2>
         <form method="POST" onSubmit={handleSubmit}>
           <label htmlFor="familia" className="texto">

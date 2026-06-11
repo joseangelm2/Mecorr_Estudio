@@ -4,12 +4,12 @@ interface Props {
   project: Project
 }
 
-export default function CenicientaParents({ project }: Props) {
+export default function EleganceParents({ project }: Props) {
   return (
     <>
       <img
         className="foto-full show-p-y"
-        src="/images/cenicienta/cenicienta3.png"
+        src="/images/elegance/cenicienta3.png"
         style={{ width: '35%', marginTop: '3%', marginBottom: '-3%', filter: 'var(--img-filter, none)' }}
         alt=""
       />

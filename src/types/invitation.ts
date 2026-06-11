@@ -37,7 +37,7 @@ export type TemplateId =
   | 'pink'
   | 'love'
   | 'zafiro'
-  | 'cenicienta'
+  | 'elegance'
   | 'hogwarts'
   | 'sellorosa'
   | 'rosagold'

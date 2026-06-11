@@ -1,11 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 
 export default function AdminLoginPage() {
-  const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
@@ -23,8 +21,8 @@ export default function AdminLoginPage() {
       setError('Credenciales incorrectas. Verifica tu correo y contraseña.')
       setLoading(false)
     } else {
-      router.push('/admin')
-      router.refresh()
+      // Full reload para que el browser envíe la cookie de sesión al proxy
+      window.location.href = '/admin'
     }
   }
 

@@ -1,20 +1,20 @@
 import type { Project } from '@/types/invitation'
 
 const DEFAULT_ITINERARY = [
-  { title: 'Misa',           time: '05:00 PM', iconSrc: '/images/cenicienta/iglesia.png'  },
-  { title: 'Recepción',      time: '07:00 PM', iconSrc: '/images/cenicienta/recepcion.png' },
-  { title: 'Coctelería',     time: '08:00 PM', iconSrc: '/images/cenicienta/coctel.png'    },
-  { title: 'Cena',           time: '09:00 PM', iconSrc: '/images/cenicienta/comida.png'    },
-  { title: 'Vals',           time: '10:20 PM', iconSrc: '/images/cenicienta/vals.png'      },
-  { title: 'Baile',          time: '11:30 PM', iconSrc: '/images/cenicienta/baile.png'     },
-  { title: 'Fin del Evento', time: '03:00 AM', iconSrc: '/images/cenicienta/fin.png'       },
+  { title: 'Misa',           time: '05:00 PM', iconSrc: '/images/elegance/iglesia.png'  },
+  { title: 'Recepción',      time: '07:00 PM', iconSrc: '/images/elegance/recepcion.png' },
+  { title: 'Coctelería',     time: '08:00 PM', iconSrc: '/images/elegance/coctel.png'    },
+  { title: 'Cena',           time: '09:00 PM', iconSrc: '/images/elegance/comida.png'    },
+  { title: 'Vals',           time: '10:20 PM', iconSrc: '/images/elegance/vals.png'      },
+  { title: 'Baile',          time: '11:30 PM', iconSrc: '/images/elegance/baile.png'     },
+  { title: 'Fin del Evento', time: '03:00 AM', iconSrc: '/images/elegance/fin.png'       },
 ]
 
 interface Props {
   project: Project
 }
 
-export default function CenicientaItinerary({ project }: Props) {
+export default function EleganceItinerary({ project }: Props) {
   const itinerary = project.itinerary?.length ? project.itinerary : DEFAULT_ITINERARY
 
   return (

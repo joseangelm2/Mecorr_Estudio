@@ -7,6 +7,6 @@ interface Props {
   primaryColor: string
 }
 
-export default function CenicientaEnvelope({ onOpen, primaryColor }: Props) {
+export default function EleganceEnvelope({ onOpen, primaryColor }: Props) {
   return <VintageEnvelope onOpen={onOpen} primaryColor={primaryColor} />
 }

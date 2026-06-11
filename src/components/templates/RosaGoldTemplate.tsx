@@ -10,7 +10,7 @@ interface Props {
   project: Project
 }
 
-export default function RosaGoldTemplate({ project: _project }: Props) {
+export default function RosaGoldTemplate({ project }: Props) {
   const audioRef = useRef<HTMLAudioElement>(null)
 
   function handleEnter() {
@@ -27,10 +27,10 @@ export default function RosaGoldTemplate({ project: _project }: Props) {
   return (
     <div>
       <audio ref={audioRef} id="background-music" loop preload="auto">
-        <source src="/images/esmeralda/musica.mp3" type="audio/mpeg" />
+        <source src={project.music_url ?? '/images/esmeralda/musica.mp3'} type="audio/mpeg" />
       </audio>
       <WelcomeModal onEnter={handleEnter} />
-      <RosaGoldContent />
+      <RosaGoldContent project={project} />
       <button className="rg-music-btn" onClick={toggleMusic} aria-label="Música">
         ♪
       </button>

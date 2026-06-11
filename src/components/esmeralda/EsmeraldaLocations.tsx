@@ -19,7 +19,7 @@ export default function EsmeraldaLocations() {
       </a>
 
       <a
-        style={{ marginTop: "-5%" }}
+        style={{ marginTop: "5%" }}
         className="lugar show-p-y"
         href="https://maps.app.goo.gl/W9nyTQnkuP9LxSf39"
         target="_blank"

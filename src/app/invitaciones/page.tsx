@@ -89,9 +89,9 @@ const invitations: Invitation[] = [
     imageAlt: 'Invitación Elegance',
     accent: 'accent-blue1',
     reversed: true,
-    demoHref: '/cenicienta',
+    demoHref: '/elegance',
     demoLabel: 'Ver demo',
-    internalRoute: '/cenicienta',
+    internalRoute: '/elegance',
   },
   {
     title: 'Rosa Gold',

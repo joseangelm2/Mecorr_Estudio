@@ -2,25 +2,25 @@
 
 import { useState, useRef, useEffect } from 'react'
 import type { Project } from '@/types/invitation'
-import { CENICIENTA_THEMES, DEFAULT_CENICIENTA_THEME, type CenicientaTheme } from '@/lib/cenicienta-themes'
-import CenicientaEnvelope from '@/components/cenicienta/CenicientaEnvelope'
-import CenicientaScrollInit from '@/components/cenicienta/CenicientaScrollInit'
-import CenicientaDecorations from '@/components/cenicienta/CenicientaDecorations'
-import CenicientaHero from '@/components/cenicienta/CenicientaHero'
-import CenicientaParents from '@/components/cenicienta/CenicientaParents'
-import CenicientaEventDate from '@/components/cenicienta/CenicientaEventDate'
-import CenicientaLocations from '@/components/cenicienta/CenicientaLocations'
-import CenicientaGifts from '@/components/cenicienta/CenicientaGifts'
-import CenicientaPhotoGrid from '@/components/cenicienta/CenicientaPhotoGrid'
-import CenicientaItinerary from '@/components/cenicienta/CenicientaItinerary'
-import CenicientaWishes from '@/components/cenicienta/CenicientaWishes'
-import CenicientaRSVP from '@/components/cenicienta/CenicientaRSVP'
-import CenicientaFooter from '@/components/cenicienta/CenicientaFooter'
+import { ELEGANCE_THEMES, DEFAULT_ELEGANCE_THEME, type EleganceTheme } from '@/lib/elegance-themes'
+import EleganceEnvelope from '@/components/elegance/EleganceEnvelope'
+import EleganceScrollInit from '@/components/elegance/EleganceScrollInit'
+import EleganceDecorations from '@/components/elegance/EleganceDecorations'
+import EleganceHero from '@/components/elegance/EleganceHero'
+import EleganceParents from '@/components/elegance/EleganceParents'
+import EleganceEventDate from '@/components/elegance/EleganceEventDate'
+import EleganceLocations from '@/components/elegance/EleganceLocations'
+import EleganceGifts from '@/components/elegance/EleganceGifts'
+import ElegancePhotoGrid from '@/components/elegance/ElegancePhotoGrid'
+import EleganceItinerary from '@/components/elegance/EleganceItinerary'
+import EleganceWishes from '@/components/elegance/EleganceWishes'
+import EleganceRSVP from '@/components/elegance/EleganceRSVP'
+import EleganceFooter from '@/components/elegance/EleganceFooter'
 
 const BASE_PROJECT: Omit<Project, 'color_theme'> = {
   id: 'demo',
-  slug: 'demo-cenicienta',
-  template: 'cenicienta',
+  slug: 'demo-elegance',
+  template: 'elegance',
   status: 'published',
   created_at: '',
   updated_at: '',
@@ -29,8 +29,8 @@ const BASE_PROJECT: Omit<Project, 'color_theme'> = {
   event_date: '2026-11-22T17:00:00',
   rsvp_phone: '524438569931',
   hashtag: 'XVAlison',
-  music_url: '/images/cenicienta/musica.mp3',
-  hero_photo_url: '/images/cenicienta/foto.jpg',
+  music_url: '/images/elegance/musica.mp3',
+  hero_photo_url: '/images/elegance/foto.jpg',
   parent_names: ['Elías Moises Galván Juárez', 'Esperanza Méndez Hernández'],
   padrinos: ['José Feliciano Hernández', 'María Carolina Escandón Cruz'],
   ceremony: {
@@ -48,10 +48,10 @@ const BASE_PROJECT: Omit<Project, 'color_theme'> = {
   itinerary: [],
   dress_code: { colors: 'Vestimenta Formal', notes: '' },
   photos: [
-    '/images/cenicienta/11.jpg',
-    '/images/cenicienta/21.jpg',
-    '/images/cenicienta/31.jpg',
-    '/images/cenicienta/41.jpg',
+    '/images/elegance/11.jpg',
+    '/images/elegance/21.jpg',
+    '/images/elegance/31.jpg',
+    '/images/elegance/41.jpg',
   ],
   gift_registry: {
     liverpoolLink: 'https://mesaderegalos.liverpool.com.mx/milistaderegalos/51309081',
@@ -76,7 +76,7 @@ const FALLBACKS = [11, 21, 31, 41, 12, 22, 32]
 
 function getPhotos(project: Project): string[] {
   const photos = project.photos ?? []
-  return FALLBACKS.map((fb, i) => photos[i] ?? `/images/cenicienta/${fb}.jpg`)
+  return FALLBACKS.map((fb, i) => photos[i] ?? `/images/elegance/${fb}.jpg`)
 }
 
 function GalleryPhoto({ src }: { src: string }) {
@@ -101,7 +101,7 @@ function ThemeSelector({ active, onChange }: { active: string; onChange: (id: st
       <span style={{ color: '#F2D67F', fontSize: 11, fontFamily: 'sans-serif', whiteSpace: 'nowrap' }}>
         Tema:
       </span>
-      {CENICIENTA_THEMES.map(t => (
+      {ELEGANCE_THEMES.map(t => (
         <button
           key={t.id}
           title={t.label}
@@ -122,12 +122,12 @@ function ThemeSelector({ active, onChange }: { active: string; onChange: (id: st
   )
 }
 
-export default function CenicientaPage() {
+export default function ElegancePage() {
   const [envelopeOpen, setEnvelopeOpen] = useState(false)
-  const [themeId, setThemeId] = useState(DEFAULT_CENICIENTA_THEME.id)
+  const [themeId, setThemeId] = useState(DEFAULT_ELEGANCE_THEME.id)
   const audioRef = useRef<HTMLAudioElement>(null)
 
-  const theme: CenicientaTheme = CENICIENTA_THEMES.find(t => t.id === themeId) ?? DEFAULT_CENICIENTA_THEME
+  const theme: EleganceTheme = ELEGANCE_THEMES.find(t => t.id === themeId) ?? DEFAULT_ELEGANCE_THEME
   const project: Project = { ...BASE_PROJECT, color_theme: themeId }
 
   useEffect(() => {
@@ -165,30 +165,30 @@ export default function CenicientaPage() {
 
   return (
     <div style={{ position: 'relative' }}>
-      <CenicientaScrollInit />
+      <EleganceScrollInit />
       <audio ref={audioRef} loop>
-        <source src={project.music_url ?? '/images/cenicienta/musica.mp3'} type="audio/mpeg" />
+        <source src={project.music_url ?? '/images/elegance/musica.mp3'} type="audio/mpeg" />
       </audio>
-      {!envelopeOpen && <CenicientaEnvelope onOpen={handleOpen} primaryColor={theme.colorPrincipal} />}
-      <CenicientaDecorations />
+      {!envelopeOpen && <EleganceEnvelope onOpen={handleOpen} primaryColor={theme.colorPrincipal} />}
+      <EleganceDecorations />
       <div className="contenido">
-        <CenicientaHero project={project} />
+        <EleganceHero project={project} />
         <GalleryPhoto src={photos[0]} />
-        <CenicientaParents project={project} />
+        <EleganceParents project={project} />
         <GalleryPhoto src={photos[1]} />
-        <CenicientaEventDate eventDate={project.event_date} />
-        <CenicientaLocations project={project} />
+        <EleganceEventDate eventDate={project.event_date} />
+        <EleganceLocations project={project} />
         <GalleryPhoto src={photos[2]} />
-        <CenicientaGifts project={project} />
+        <EleganceGifts project={project} />
         <GalleryPhoto src={photos[3]} />
-        <CenicientaPhotoGrid photos={photos} />
+        <ElegancePhotoGrid photos={photos} />
         {project.show_itinerary && <GalleryPhoto src={photos[4]} />}
-        {project.show_itinerary && <CenicientaItinerary project={project} />}
+        {project.show_itinerary && <EleganceItinerary project={project} />}
         <GalleryPhoto src={photos[5]} />
-        <CenicientaWishes phone={project.rsvp_phone ?? ''} hashtag={hashtag} dressCodeNotes={project.dress_code?.notes || undefined} />
-        <CenicientaRSVP project={project} />
+        <EleganceWishes phone={project.rsvp_phone ?? ''} hashtag={hashtag} dressCodeNotes={project.dress_code?.notes || undefined} />
+        <EleganceRSVP project={project} />
         <GalleryPhoto src={photos[6]} />
-        <CenicientaFooter />
+        <EleganceFooter />
       </div>
       {!envelopeOpen && <ThemeSelector active={themeId} onChange={id => { window.scrollTo({ top: 0, behavior: 'smooth' }); setThemeId(id) }} />}
     </div>
