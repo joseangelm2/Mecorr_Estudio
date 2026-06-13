@@ -28,12 +28,18 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 90%;
-  max-width: 600px;
+  width: 100%;
   margin: auto;
   padding-top: 5vw;
   position: relative;
   z-index: 1;
+  background: url(/images/zafiro/lila3.jpg);
+  background-size: contain;
+  background-position: center top;
+  text-shadow:
+    2px 2px 2px rgba(255,255,255,0.3),
+    -2px -2px 2px rgba(255,255,255,0.3),
+    0 2px 2px rgba(255,255,255,0.3);
 }
 
 /* ==============================
@@ -44,23 +50,33 @@ html, body {
 .bottom {
   position: fixed;
   pointer-events: none;
-  z-index: 0;
+  z-index: 3;
 }
 
 .top {
   top: 0;
-  right: 0;
+  left: 0;
+  width: 100%;
 }
 
 .bottom {
   bottom: 0;
   left: 0;
+  width: 100%;
 }
 
-.top-img,
+.top-img {
+  width: 100%;
+  transform: scale(1.5);
+  transform-origin: top center;
+  opacity: 0.9;
+}
+
 .bottom-img {
-  width: 30vw;
-  opacity: 0.6;
+  width: 100%;
+  transform: scale(1.5);
+  transform-origin: bottom center;
+  opacity: 0.9;
 }
 
 /* ==============================
@@ -172,29 +188,39 @@ html, body {
 
 .cuenta {
   display: flex;
-  gap: 5vw;
+  gap: 0;
   justify-content: center;
   margin: 3vw 0 5vw;
-  width: 100%;
+  width: 90%;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 5vw;
+  border: 0.4vw solid #775197;
+  padding: 1vw;
 }
 
 .segmento {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  text-align: center;
+  margin: 0;
 }
 
 .numero {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
-  font-size: 8vw;
-  font-weight: 700;
+  font-size: 4vw;
+  font-weight: 900;
   color: #775197;
+  margin-right: 2vw;
+  text-shadow: none;
 }
 
 .unidad {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 3vw;
   color: #666;
+  text-shadow: none;
 }
 
 /* ==============================
@@ -250,18 +276,19 @@ html, body {
    ============================== */
 
 .boton {
-  background: #775197;
-  color: white;
-  padding: 2vw 6vw;
+  background: #e5bdff;
+  color: #775197;
+  padding: 1vw 6vw;
   border-radius: 2vw;
   font-family: var(--font-albert), "Albert Sans", sans-serif;
-  font-size: 3.5vw;
+  font-size: 3vw;
   cursor: pointer;
   margin: 2vw auto;
   display: inline-block;
   text-decoration: none;
   border: none;
   transition: opacity 0.2s;
+  text-shadow: none;
 }
 
 .boton:hover {
@@ -369,10 +396,11 @@ html, body {
   grid-template-columns: 45% 45%;
   column-gap: 10%;
   margin-top: 3vw;
-  background: rgba(119, 81, 151, 0.08);
+  background: rgba(255, 255, 255, 0.066);
   border-radius: 5vw;
   padding: 2vw;
   width: 100%;
+  backdrop-filter: blur(1vw);
 }
 
 .itinerario .evento .icono {
@@ -502,91 +530,153 @@ html, body {
 }
 
 /* ==============================
-   VINTAGE ENVELOPE (SOBRE)
+   ZAFIRO ENVELOPE (SOBRE)
    ============================== */
 
-.sobre {
+.zafiro-envelope-screen {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
+  inset: 0;
   z-index: 100;
-  overflow: hidden;
+  background: radial-gradient(ellipse at center, #1a0a2e 0%, #0d0618 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s ease;
 }
 
-.petalo {
+.zafiro-envelope-screen.fading {
+  opacity: 0;
+}
+
+.zafiro-envelope-label {
+  color: rgba(200, 180, 255, 0.8);
+  font-family: var(--font-beau), "Beau Rivage", cursive;
+  font-size: 8vw;
+  margin-bottom: 6vw;
+  letter-spacing: 0.05em;
+}
+
+.zafiro-envelope-wrap {
+  position: relative;
+  width: 72vw;
+  max-width: 320px;
+}
+
+/* Flap (parte superior del sobre, triángulo) */
+.zafiro-flap {
+  width: 0;
+  height: 0;
+  border-left: 36vw solid transparent;
+  border-right: 36vw solid transparent;
+  border-bottom: 24vw solid #3a1f5e;
+  max-width: none;
+  position: relative;
+  z-index: 2;
+  transform-origin: top center;
+  transition: transform 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.zafiro-envelope-wrap.opening .zafiro-flap {
+  transform: rotateX(180deg);
+}
+
+/* Cuerpo del sobre */
+.zafiro-envelope-body {
+  background: linear-gradient(160deg, #2d1254 0%, #4a1f7a 100%);
+  border: 0.5vw solid rgba(150, 100, 220, 0.4);
+  border-top: none;
+  height: 36vw;
+  max-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 0 3vw 3vw;
+  box-shadow: 0 8px 40px rgba(80, 20, 160, 0.5);
+}
+
+.zafiro-envelope-lines {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2vw;
+  opacity: 0.4;
+}
+
+.zafiro-line {
+  width: 40vw;
+  max-width: 160px;
+  height: 0.4vw;
+  background: rgba(200, 160, 255, 0.6);
+  border-radius: 2px;
+}
+
+.zafiro-line.short {
+  width: 24vw;
+  max-width: 100px;
+}
+
+/* Sello de lacre */
+.zafiro-seal {
   position: absolute;
-  width: 50%;
-  height: 100%;
-  top: 0;
-  border: 0.2vw solid rgba(255, 255, 255, 0.3);
-}
-
-.petalo.left {
-  left: 0;
-  transition: transform 1.5s ease;
-}
-
-.petalo.right {
-  right: 0;
-  transition: transform 1.5s ease;
-}
-
-.petalo.left.open {
-  transform: translateX(-100%);
-}
-
-.petalo.right.open {
-  transform: translateX(100%);
-}
-
-.sello {
-  background: #775197;
-  border: none;
-  color: white;
-  font-size: 4vw;
-  font-family: var(--font-albert), "Albert Sans", sans-serif;
-  font-weight: 700;
-  cursor: pointer;
-  position: absolute;
-  width: 35vw;
-  height: 35vw;
-  border-radius: 50%;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  transition: opacity 1.5s;
-  animation: booms 2s infinite;
-  line-height: 1.3;
+  transform: translate(-50%, -20%);
+  width: 18vw;
+  height: 18vw;
+  max-width: 80px;
+  max-height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #9b59d0, #5c1e99);
+  border: 0.5vw solid rgba(220, 180, 255, 0.6);
+  box-shadow: 0 0 20px rgba(150, 80, 230, 0.8), inset 0 0 10px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  animation: zafiro-pulse 2s infinite;
+  transition: transform 0.3s ease, opacity 0.6s ease;
 }
 
-.sello.hidden {
+.zafiro-seal.breaking {
+  transform: translate(-50%, -20%) scale(0);
   opacity: 0;
+}
+
+.zafiro-seal:hover {
+  box-shadow: 0 0 30px rgba(150, 80, 230, 1), inset 0 0 10px rgba(0,0,0,0.3);
+}
+
+.zafiro-seal-letter {
+  color: white;
+  font-family: var(--font-beau), "Beau Rivage", cursive;
+  font-size: 5vw;
   pointer-events: none;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
 }
 
-.banda-sobre {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 0.4vw;
-  background: rgba(255, 255, 255, 0.3);
-  transform: translateY(-50%);
-  z-index: 1;
+.zafiro-envelope-hint {
+  color: rgba(200, 180, 255, 0.6);
+  font-family: var(--font-albert), "Albert Sans", sans-serif;
+  font-size: 3.5vw;
+  margin-top: 6vw;
+  letter-spacing: 0.1em;
 }
 
-@keyframes booms {
-  0% {
-    transform: scale(1) translate(-50%, -50%);
-  }
-  50% {
-    transform: scale(1.05) translate(-50%, -50%);
-  }
-  100% {
-    transform: scale(1) translate(-50%, -50%);
+@keyframes zafiro-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(150, 80, 230, 0.8), inset 0 0 10px rgba(0,0,0,0.3); }
+  50%       { box-shadow: 0 0 40px rgba(150, 80, 230, 1),   inset 0 0 10px rgba(0,0,0,0.3); }
+}
+
+@media (min-width: 600px) {
+  .zafiro-envelope-label { font-size: 48px; }
+  .zafiro-seal-letter    { font-size: 28px; }
+  .zafiro-envelope-hint  { font-size: 16px; }
+  .zafiro-flap {
+    border-left-width: 160px;
+    border-right-width: 160px;
+    border-bottom-width: 110px;
   }
 }
 
@@ -642,11 +732,11 @@ html, body {
 
 @media (min-width: 600px) {
   .nombre-principal {
-    font-size: 78px;
+    font-size: 108px;
   }
 
   .evento {
-    font-size: 36px;
+    font-size: 42px;
   }
 
   .frase {
@@ -668,11 +758,11 @@ html, body {
   }
 
   .numero {
-    font-size: 48px;
+    font-size: 24px;
   }
 
   .unidad {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .ubicacion .lugar {

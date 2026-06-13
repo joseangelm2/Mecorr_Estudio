@@ -1,46 +1,80 @@
-'use client'
+"use client";
 
-import '@/app/pink/pink.css'
-import { useState, useRef } from 'react'
-import type { Project } from '@/types/invitation'
-import VintageEnvelope from '@/components/vintage/VintageEnvelope'
-import EsmeraldaScrollInit from '@/components/esmeralda/EsmeraldaScrollInit'
-import PinkContent from '@/components/pink/PinkContent'
+import "@/app/pink/pink.css";
+import { useState, useRef, useEffect } from "react";
+import type { Project } from "@/types/invitation";
+import VintageEnvelope from "@/components/vintage/VintageEnvelope";
+import {
+  PinkScrollInit,
+  PinkHero,
+  PinkParents,
+  PinkDate,
+  PinkLocations,
+  PinkPhotoGrid,
+  PinkItinerary,
+  PinkGifts,
+  PinkRSVP,
+} from "@/components/pink";
 
-const PRIMARY = '#c48602'
+const PRIMARY = "#c48602";
 
-interface Props {
-  project: Project
-}
+const DEFAULT_PHOTOS = [
+  "/images/pink/foto1.jpg",
+  "/images/pink/foto2.jpg",
+  "/images/pink/foto3.jpg",
+  "/images/pink/foto4.jpg",
+  "/images/pink/foto5.jpg",
+  "/images/pink/foto6.jpg",
+];
+
+interface Props { project: Project }
 
 export default function PinkTemplate({ project }: Props) {
-  const [envelopeOpen, setEnvelopeOpen] = useState(false)
-  const audioRef = useRef<HTMLAudioElement>(null)
+  const [open, setOpen] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const photos = project.photos.length ? project.photos : DEFAULT_PHOTOS;
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, []);
 
   function handleOpen() {
-    setEnvelopeOpen(true)
-    audioRef.current?.play().catch(() => {})
+    setOpen(true);
+    audioRef.current?.play().catch(() => {});
   }
 
   return (
-    <div style={{ position: 'relative' }}>
-      <EsmeraldaScrollInit />
+    <div style={{ position: "relative" }}>
+      <PinkScrollInit />
       <audio ref={audioRef} loop>
-        <source src={project.music_url ?? '/images/esmeralda/musica.mp3'} type="audio/mpeg" />
+        <source src={project.music_url ?? "/images/pink/musica.mp3"} type="audio/mpeg" />
       </audio>
-
-      {!envelopeOpen && (
-        <VintageEnvelope onOpen={handleOpen} primaryColor={PRIMARY} />
-      )}
-
+      {!open && <VintageEnvelope onOpen={handleOpen} primaryColor={PRIMARY} />}
       <div className="top">
         <img className="top-img" src="/images/pink/452.png" alt="" />
       </div>
       <div className="bottom">
         <img className="bottom-img" src="/images/pink/453.png" alt="" />
       </div>
-
-      <PinkContent project={project} />
+      <div className="contenido">
+        <PinkHero project={project} />
+        {photos[0] && <div className="foto-con-degradado"><img className="foto-full show-p-y" src={photos[0]} alt="" /></div>}
+        <PinkParents project={project} />
+        {photos[1] && <div className="foto-con-degradado"><img className="foto-full show-p-y" src={photos[1]} alt="" /></div>}
+        <PinkDate project={project} />
+        <PinkLocations project={project} />
+        {photos[2] && <div className="foto-con-degradado"><img className="foto-full show-p-y" src={photos[2]} alt="" /></div>}
+        <PinkGifts project={project} />
+        {photos[3] && <div className="foto-con-degradado"><img className="foto-full show-p-y" src={photos[3]} alt="" /></div>}
+        <PinkPhotoGrid photos={photos.slice(4)} />
+        {photos[4] && <div className="foto-con-degradado"><img className="foto-full show-p-y" src={photos[4]} alt="" /></div>}
+        <PinkItinerary project={project} />
+        <PinkRSVP project={project} />
+        <div className="extra">
+          <img src="/images/pink/v2.png" style={{ width: "40%", marginBottom: "-8%" }} alt="" />
+        </div>
+        <div className="despedida">¡Te Esperamos!</div>
+      </div>
     </div>
-  )
+  );
 }

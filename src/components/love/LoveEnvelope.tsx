@@ -1,29 +1,40 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
-export default function LoveEnvelope({ onOpen }: { onOpen: () => void }) {
-  const [hidden, setHidden] = useState(false);
+interface Props {
+  onOpen: () => void;
+}
+
+export default function LoveEnvelope({ onOpen }: Props) {
+  const [opened, setOpened] = useState(false);
+  const firstRef = useRef<HTMLDivElement>(null);
+  const secondRef = useRef<HTMLDivElement>(null);
+  const centerRef = useRef<HTMLDivElement>(null);
+  const sobreRef = useRef<HTMLDivElement>(null);
 
   function handleOpen() {
-    setHidden(true);
-    document.getElementById("html")?.classList.add("con-scroll");
-    onOpen();
+    if (opened) return;
+    setOpened(true);
+    document.documentElement.classList.add("con-scroll");
+    firstRef.current?.classList.add("up_1");
+    secondRef.current?.classList.add("down_1");
+    centerRef.current?.classList.add("button_hiden");
+    setTimeout(() => {
+      sobreRef.current?.classList.add("sobre_hiden");
+      onOpen();
+    }, 3000);
   }
 
-  if (hidden) return null;
-
   return (
-    <div className="sobre-love">
-      <div className="sobre-love-inner">
-        <p className="sobre-love-label">Tienes una invitación</p>
-        <div className="sobre-love-box">
-          <div className="sobre-love-name">Lidia</div>
-          <button className="sobre-love-btn" onClick={handleOpen}>
-            Abrir Invitación
-          </button>
-        </div>
+    <div className="sobre" id="sobre" ref={sobreRef}>
+      <div className="first" ref={firstRef} />
+      <div className="sobre-center" ref={centerRef}>
+        <button className="sello" onClick={handleOpen} aria-label="Abrir Invitación">
+          Abrir<br />Invitación
+        </button>
       </div>
+      <div className="second" ref={secondRef} />
     </div>
   );
 }

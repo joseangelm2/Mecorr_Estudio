@@ -1,1 +1,10 @@
-export { default as PinkContent } from "./PinkContent";
+export { default as PinkScrollInit } from "./PinkScrollInit";
+export { default as PinkCountdown } from "./PinkCountdown";
+export { default as PinkHero } from "./PinkHero";
+export { default as PinkParents } from "./PinkParents";
+export { default as PinkDate } from "./PinkDate";
+export { default as PinkLocations } from "./PinkLocations";
+export { default as PinkPhotoGrid } from "./PinkPhotoGrid";
+export { default as PinkItinerary } from "./PinkItinerary";
+export { default as PinkGifts } from "./PinkGifts";
+export { default as PinkRSVP } from "./PinkRSVP";

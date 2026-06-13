@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import EnvelopeSobre from "@/components/esmeralda/EnvelopeSobre";
 import EsmeraldaHero from "@/components/esmeralda/EsmeraldaHero";
 import EsmeraldaCountdown from "@/components/esmeralda/EsmeraldaCountdown";
@@ -16,6 +16,10 @@ import EsmeraldaScrollInit from "@/components/esmeralda/EsmeraldaScrollInit";
 export default function EsmeraldaPage() {
   const [envelopeOpen, setEnvelopeOpen] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, []);
 
   function handleOpen() {
     setEnvelopeOpen(true);

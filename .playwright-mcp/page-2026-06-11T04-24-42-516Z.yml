@@ -1,0 +1,159 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - button "Abrir Invitación" [ref=e7] [cursor=pointer]:
+      - text: Abrir
+      - text: Invitación
+    - generic [ref=e9]:
+      - heading "Mis XV" [level=2] [ref=e11]
+      - generic [ref=e12]: Porque este día es muy importante para mí, quiero compartirlo con las personas que llevo en mi corazón.
+      - img "Alison Galván" [ref=e14]
+      - generic [ref=e15]:
+        - heading "Alison" [level=2] [ref=e16]
+        - heading "Galván" [level=1] [ref=e17]
+      - generic [ref=e18]: “Porque este día es muy importante para mí, quiero compartirlo con las personas que llevo en mi corazón. Tú eres una de ellas.”
+      - generic [ref=e20]: Con la bendición de Dios y de
+      - generic [ref=e21]:
+        - heading "Mis Padres" [level=3] [ref=e22]
+        - generic [ref=e23]:
+          - paragraph [ref=e24]: Elías Moises Galván Juárez
+          - paragraph [ref=e25]: "&"
+        - paragraph [ref=e27]: Esperanza Méndez Hernández
+      - generic [ref=e28]: Y la compañía de
+      - generic [ref=e29]:
+        - heading "Mis Padrinos" [level=3] [ref=e30]
+        - generic [ref=e31]:
+          - paragraph [ref=e32]: José Feliciano Hernández
+          - paragraph [ref=e33]: "&"
+        - paragraph [ref=e35]: María Carolina Escandón Cruz
+      - generic [ref=e37]: Celebremos juntos
+      - heading "El día" [level=3] [ref=e39]
+      - generic [ref=e40]:
+        - paragraph [ref=e41]: "22"
+        - paragraph [ref=e43]: noviembre
+        - paragraph [ref=e45]: "2026"
+      - generic [ref=e46]:
+        - paragraph [ref=e47]:
+          - generic [ref=e48]: "0"
+          - generic [ref=e49]: Días
+        - paragraph [ref=e50]:
+          - generic [ref=e51]: "0"
+          - generic [ref=e52]: Horas
+        - paragraph [ref=e53]:
+          - generic [ref=e54]: "0"
+          - generic [ref=e55]: Minutos
+        - paragraph [ref=e56]:
+          - generic [ref=e57]: "0"
+          - generic [ref=e58]: Segundos
+      - generic [ref=e59]: Los momentos que disfrutas con tus seres queridos se transforman en recuerdos imborrables...
+      - link "Ceremonia Religiosa Parroquia San Peregrino Blvd. Solidaridad, Fuentes del Mezquital, 83250 Hermosillo, Son.5:00 PM Ir al Mapa" [ref=e60] [cursor=pointer]:
+        - /url: https://maps.app.goo.gl/EKZpeKCqNpt8PqBo6
+        - generic [ref=e61]:
+          - paragraph [ref=e62]: Ceremonia Religiosa
+          - paragraph [ref=e63]: Parroquia San Peregrino
+          - text: Blvd. Solidaridad, Fuentes del Mezquital, 83250 Hermosillo, Son.5:00 PM
+          - generic [ref=e64]: Ir al Mapa
+      - link "Recepción Salón de Evento Villa Toscana C. Quintero Arce 280, Puerta Grande, 83246 Hermosillo, Son.7:00 PM Ir al Mapa" [ref=e65] [cursor=pointer]:
+        - /url: https://maps.app.goo.gl/NEusLqQqZhirLnCAA
+        - generic [ref=e66]:
+          - paragraph [ref=e67]: Recepción
+          - paragraph [ref=e68]: Salón de Evento Villa Toscana
+          - text: C. Quintero Arce 280, Puerta Grande, 83246 Hermosillo, Son.7:00 PM
+          - generic [ref=e69]: Ir al Mapa
+      - 'link "Liverpool Mesa de Regalos Tu presencia ilumina nuestro evento. Si deseas regalarme algo, te comparto las siguientes opciones: Ver Lista de Deseos" [ref=e71] [cursor=pointer]':
+        - /url: https://mesaderegalos.liverpool.com.mx/milistaderegalos/51309081
+        - img "Liverpool" [ref=e72]
+        - heading "Mesa de Regalos" [level=3] [ref=e73]
+        - paragraph [ref=e74]: "Tu presencia ilumina nuestro evento. Si deseas regalarme algo, te comparto las siguientes opciones:"
+        - generic [ref=e75]: Ver Lista de Deseos
+      - generic [ref=e76]:
+        - img "Sobre" [ref=e77]
+        - heading "Lluvia de Sobres" [level=3] [ref=e78]
+        - paragraph [ref=e79]: Es la tradición de regalar dinero en efectivo dentro de un sobre.
+      - generic [ref=e80]:
+        - img "Transferencia" [ref=e81]
+        - heading "Datos Bancarios" [level=3] [ref=e82]
+        - paragraph [ref=e83]: "Si lo prefieres puedes hacer una transferencia bancaria como regalo:"
+        - generic [ref=e84]:
+          - paragraph [ref=e85]: "Beneficiaria: Alison Galván Méndez"
+          - paragraph [ref=e86]: "CLABE: 012345678901234567"
+        - button "Copiar CLABE" [ref=e87] [cursor=pointer]
+      - generic [ref=e88]:
+        - img "Vestimenta" [ref=e89]
+        - heading "Código de Vestimenta" [level=3] [ref=e90]
+        - paragraph [ref=e91]: Vestimenta Formal
+        - paragraph [ref=e92]: El color dorado queda reservado para la quinceañera.
+      - heading "Álbum de fotos" [level=3] [ref=e95]
+      - generic [ref=e103]:
+        - heading "Programa del Evento" [level=3] [ref=e104]
+        - generic [ref=e105]:
+          - generic [ref=e106]:
+            - img "Misa" [ref=e109]
+            - generic [ref=e110]:
+              - heading "Misa" [level=4] [ref=e111]
+              - paragraph [ref=e112]: 05:00 PM
+          - generic [ref=e113]:
+            - generic [ref=e114]:
+              - heading "Recepción" [level=4] [ref=e115]
+              - paragraph [ref=e116]: 07:00 PM
+            - img "Recepción" [ref=e119]
+          - generic [ref=e120]:
+            - img "Coctelería" [ref=e123]
+            - generic [ref=e124]:
+              - heading "Coctelería" [level=4] [ref=e125]
+              - paragraph [ref=e126]: 08:00 PM
+          - generic [ref=e127]:
+            - generic [ref=e128]:
+              - heading "Cena" [level=4] [ref=e129]
+              - paragraph [ref=e130]: 09:00 PM
+            - img "Cena" [ref=e133]
+          - generic [ref=e134]:
+            - img "Vals" [ref=e137]
+            - generic [ref=e138]:
+              - heading "Vals" [level=4] [ref=e139]
+              - paragraph [ref=e140]: 10:20 PM
+          - generic [ref=e141]:
+            - generic [ref=e142]:
+              - heading "Baile" [level=4] [ref=e143]
+              - paragraph [ref=e144]: 11:30 PM
+            - img "Baile" [ref=e147]
+          - generic [ref=e148]:
+            - img "Fin del Evento" [ref=e151]
+            - generic [ref=e152]:
+              - heading "Fin del Evento" [level=4] [ref=e153]
+              - paragraph [ref=e154]: 03:00 AM
+      - generic [ref=e156]:
+        - img "Buzón" [ref=e157]
+        - heading "Buzón de Deseos" [level=3] [ref=e158]
+        - paragraph [ref=e159]: "Déjame un lindo mensaje por mis XV años:"
+        - textbox "Escribe tu mensaje aquí" [ref=e160]
+        - generic [ref=e161] [cursor=pointer]: Enviar Mensaje
+      - 'link "Instagram Hashtag en Instagram Comparte tus mejores momentos con el Hashtag #XVAlison Ver Fotos" [ref=e162] [cursor=pointer]':
+        - /url: https://www.instagram.com/explore/tags/XVAlison/
+        - img "Instagram" [ref=e163]
+        - heading "Hashtag en Instagram" [level=3] [ref=e164]
+        - paragraph [ref=e165]:
+          - text: Comparte tus mejores momentos con el Hashtag
+          - text: "#XVAlison"
+        - generic [ref=e166]: Ver Fotos
+      - generic [ref=e167]:
+        - heading "Información Importante" [level=3] [ref=e168]
+        - paragraph [ref=e169]: ❖ El color dorado queda reservado para la quinceañera.
+      - generic [ref=e170]:
+        - img "WhatsApp" [ref=e171]
+        - heading "Confirma tu asistencia" [level=3] [ref=e172]
+        - paragraph [ref=e173]: Favor de confirmar asistencia antes del 1 de Noviembre
+        - generic [ref=e174]:
+          - generic [ref=e175]: "Nombre y Apellido:"
+          - textbox "Nombre y Apellido:" [ref=e176]:
+            - /placeholder: Escribe Tu Nombre
+          - generic [ref=e177]: "Confirmo que:"
+          - generic [ref=e178]:
+            - radio "Asistiré" [checked] [ref=e179]
+            - text: Asistiré
+          - generic [ref=e180]:
+            - radio "No Asistiré" [ref=e181]
+            - text: No Asistiré
+          - button "Enviar" [ref=e182] [cursor=pointer]
+      - generic [ref=e184]: ¡Te Esperamos!
+  - button "Open Next.js Dev Tools" [ref=e190] [cursor=pointer]:
+    - img [ref=e191]

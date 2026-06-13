@@ -1,0 +1,157 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: Alison
+      - button "Abrir Invitación" [ref=e7] [cursor=pointer]
+    - main [ref=e8]:
+      - generic [ref=e10]:
+        - heading "Alison" [level=2] [ref=e12]
+        - heading "22.NOV.2026" [level=3] [ref=e14]
+        - generic [ref=e18]:
+          - paragraph [ref=e19]:
+            - generic [ref=e20]: "164"
+            - generic [ref=e21]: Días
+          - paragraph [ref=e22]:
+            - generic [ref=e23]: "18"
+            - generic [ref=e24]: Horas
+          - paragraph [ref=e25]:
+            - generic [ref=e26]: "33"
+            - generic [ref=e27]: Minutos
+          - paragraph [ref=e28]:
+            - generic [ref=e29]: "44"
+            - generic [ref=e30]: Segundos
+      - generic [ref=e31]:
+        - generic [ref=e32]:
+          - heading "Te Invito a mis XV" [level=2] [ref=e33]
+          - paragraph [ref=e34]: Porque este día es muy importante para mí, quiero compartirlo con las personas que llevo en mi corazón.
+        - generic [ref=e35]:
+          - heading "¿Dónde & cuándo?" [level=2] [ref=e36]
+          - link "Parroquia San Peregrino Parroquia San Peregrino Blvd. Solidaridad, Fuentes del Mezquital, 83250 Hermosillo, Son. 5:00 PM Ir al Mapa" [ref=e37] [cursor=pointer]:
+            - /url: https://maps.app.goo.gl/EKZpeKCqNpt8PqBo6
+            - img "Parroquia San Peregrino" [ref=e38]
+            - heading "Parroquia San Peregrino" [level=4] [ref=e39]
+            - heading "Blvd. Solidaridad, Fuentes del Mezquital, 83250 Hermosillo, Son." [level=4] [ref=e40]
+            - heading "5:00 PM" [level=5] [ref=e41]
+            - generic [ref=e42]: Ir al Mapa
+          - link "Salón de Evento Villa Toscana Salón de Evento Villa Toscana C. Quintero Arce 280, Puerta Grande, 83246 Hermosillo, Son. 7:00 PM Ir al Mapa" [ref=e43] [cursor=pointer]:
+            - /url: https://maps.app.goo.gl/NEusLqQqZhirLnCAA
+            - img "Salón de Evento Villa Toscana" [ref=e44]
+            - heading "Salón de Evento Villa Toscana" [level=4] [ref=e45]
+            - heading "C. Quintero Arce 280, Puerta Grande, 83246 Hermosillo, Son." [level=4] [ref=e46]
+            - heading "7:00 PM" [level=5] [ref=e47]
+            - generic [ref=e48]: Ir al Mapa
+      - generic [ref=e51]:
+        - generic [ref=e52]:
+          - heading "Mis Padres" [level=2] [ref=e53]
+          - paragraph [ref=e55]:
+            - generic [ref=e56]: Elías Moises Galván Juárez
+            - generic [ref=e57]: "&"
+            - generic [ref=e58]: Esperanza Méndez Hernández
+        - generic [ref=e59]:
+          - heading "Padrinos" [level=2] [ref=e60]
+          - paragraph [ref=e62]:
+            - generic [ref=e63]: José Feliciano Hernández
+            - generic [ref=e64]: "&"
+            - generic [ref=e65]: María Carolina Escandón Cruz
+      - heading "Álbum" [level=2] [ref=e68]
+      - generic [ref=e72]:
+        - heading "Programa del Evento" [level=2] [ref=e73]
+        - generic [ref=e74]:
+          - generic [ref=e75]:
+            - img "Misa" [ref=e78]
+            - generic [ref=e79]:
+              - heading "Misa" [level=4] [ref=e80]
+              - paragraph [ref=e81]: 05:00 PM
+          - generic [ref=e82]:
+            - img "Recepción" [ref=e85]
+            - generic [ref=e86]:
+              - heading "Recepción" [level=4] [ref=e87]
+              - paragraph [ref=e88]: 07:00 PM
+          - generic [ref=e89]:
+            - img "Coctelería" [ref=e92]
+            - generic [ref=e93]:
+              - heading "Coctelería" [level=4] [ref=e94]
+              - paragraph [ref=e95]: 08:00 PM
+          - generic [ref=e96]:
+            - img "Cena" [ref=e99]
+            - generic [ref=e100]:
+              - heading "Cena" [level=4] [ref=e101]
+              - paragraph [ref=e102]: 09:00 PM
+          - generic [ref=e103]:
+            - img "Vals" [ref=e106]
+            - generic [ref=e107]:
+              - heading "Vals" [level=4] [ref=e108]
+              - paragraph [ref=e109]: 10:20 PM
+          - generic [ref=e110]:
+            - img "Baile" [ref=e113]
+            - generic [ref=e114]:
+              - heading "Baile" [level=4] [ref=e115]
+              - paragraph [ref=e116]: 11:30 PM
+          - generic [ref=e117]:
+            - img "Fin del Evento" [ref=e120]
+            - generic [ref=e121]:
+              - heading "Fin del Evento" [level=4] [ref=e122]
+              - paragraph [ref=e123]: 03:00 AM
+      - generic [ref=e126]:
+        - generic [ref=e127]:
+          - heading "Código de Vestimenta" [level=2] [ref=e128]
+          - generic [ref=e129]:
+            - img "Vestimenta" [ref=e130]
+            - paragraph [ref=e131]: Vestimenta Formal
+        - generic [ref=e132]:
+          - heading "Lluvia de Sobres" [level=2] [ref=e133]
+          - generic [ref=e134]:
+            - img "Sobre" [ref=e135]
+            - paragraph [ref=e136]: Es la tradición de regalar dinero en efectivo dentro de un sobre
+        - generic [ref=e137]:
+          - heading "Mesa de Regalos" [level=2] [ref=e138]
+          - generic [ref=e139]:
+            - img "Mesa de regalos" [ref=e140]
+            - paragraph [ref=e141]: Valoro enormemente tu compañía por encima de cualquier obsequio
+          - generic [ref=e142]:
+            - img "Liverpool" [ref=e143]
+            - link "Ver Lista de Deseos" [ref=e144] [cursor=pointer]:
+              - /url: https://mesaderegalos.liverpool.com.mx/milistaderegalos/51309081
+        - generic [ref=e145]:
+          - heading "Datos Bancarios" [level=2] [ref=e146]
+          - generic [ref=e147]:
+            - paragraph [ref=e148]: "Si lo prefieres puedes hacer una transferencia bancaria como regalo:"
+            - strong [ref=e149]: "Beneficiaria:"
+            - paragraph [ref=e150]: Alison Galván Méndez
+            - strong [ref=e151]: "CLABE:"
+            - paragraph [ref=e152]: "012345678901234567"
+          - button "Copiar" [ref=e154] [cursor=pointer]
+        - generic [ref=e155]:
+          - heading "Buzón de Deseos" [level=2] [ref=e156]
+          - generic [ref=e157]:
+            - img "Buzón" [ref=e158]
+            - paragraph [ref=e159]: "Si quieres dejarme un lindo mensaje por mis XV, puedes hacerlo aquí:"
+            - textbox "Escribe tu mensaje aquí" [ref=e160]
+            - button "Enviar Mensaje" [ref=e161] [cursor=pointer]
+        - generic [ref=e162]:
+          - heading "Hashtag en Instagram" [level=2] [ref=e163]
+          - generic [ref=e164]:
+            - img "Instagram" [ref=e165]
+            - paragraph [ref=e166]: Comparte tus mejores momentos con el Hashtag en Instagram
+            - heading "#XVAlison" [level=2] [ref=e167]
+          - link "Ver Fotos" [ref=e169] [cursor=pointer]:
+            - /url: https://www.instagram.com/explore/tags/XVAlison/
+        - generic [ref=e170]:
+          - heading "Información Importante" [level=2] [ref=e171]
+          - paragraph [ref=e172]: ❖ El color dorado queda reservado para la quinceañera.
+      - generic [ref=e175]:
+        - heading "Favor de confirmar asistencia antes del 1 de Noviembre" [level=2] [ref=e176]
+        - generic [ref=e177]:
+          - generic [ref=e178]: "Nombre y Apellido:"
+          - textbox "Nombre y Apellido:" [ref=e179]
+          - generic [ref=e180]: "Confirmo que:"
+          - generic [ref=e181]:
+            - radio "Asistiré" [checked] [ref=e182]
+            - generic [ref=e183]: Asistiré
+          - generic [ref=e184]:
+            - radio "No Asistiré" [ref=e185]
+            - generic [ref=e186]: No Asistiré
+          - button "Confirmar Asistencia" [ref=e187] [cursor=pointer]
+  - button "Open Next.js Dev Tools" [ref=e193] [cursor=pointer]:
+    - img [ref=e194]
+  - alert [ref=e199]
