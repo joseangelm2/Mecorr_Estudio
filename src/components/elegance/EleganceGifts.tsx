@@ -4,12 +4,30 @@ interface Props {
   project: Project
 }
 
+const STORE_ICONS: Record<string, string> = {
+  liverpool: '/images/elegance/liverpool.png',
+  amazon:    '/images/elegance/amazon.svg',
+  palacio:   '/images/elegance/palacio.svg',
+  generic:   '/images/elegance/mesa_regalos.png',
+}
+
+const STORE_LABELS: Record<string, string> = {
+  liverpool: 'Liverpool',
+  amazon:    'Amazon',
+  palacio:   'El Palacio de Hierro',
+  generic:   'Mesa de Regalos',
+}
+
 export default function EleganceGifts({ project }: Props) {
+  const giftStore = project.gift_registry?.giftStore ?? 'liverpool'
+  const storeIcon = STORE_ICONS[giftStore] ?? STORE_ICONS.liverpool
+  const storeLabel = STORE_LABELS[giftStore] ?? 'Liverpool'
+
   return (
     <>
       {project.gift_registry?.liverpoolLink && (
         <a className="extra show-p-y" href={project.gift_registry.liverpoolLink} target="_self">
-          <img style={{ width: '50%', marginBottom: '3%' }} src="/images/elegance/liverpool.png" alt="Liverpool" />
+          <img style={{ width: '50%', marginBottom: '3%' }} src={storeIcon} alt={storeLabel} />
           <h3>Mesa de Regalos</h3>
           <p className="texto">Tu presencia ilumina nuestro evento. Si deseas regalarme algo, te comparto las siguientes opciones:</p>
           <div className="boton" style={{ marginTop: '1%' }}>Ver Lista de Deseos</div>

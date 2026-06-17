@@ -35,6 +35,7 @@ export interface ProjectFormData {
   liverpool_link: string
   bank_account: string
   bank_beneficiary: string
+  gift_store: string
   color_theme: string
   invitation_text: string
   show_video: boolean
@@ -97,6 +98,7 @@ function formDataToProject(data: ProjectFormData) {
       liverpoolLink: data.liverpool_link || undefined,
       bankAccount: data.bank_account || undefined,
       bankBeneficiary: data.bank_beneficiary || undefined,
+      giftStore: (data.gift_store || 'liverpool') as 'liverpool' | 'amazon' | 'palacio' | 'generic',
     } : null,
     color_theme: data.color_theme || 'rosagold',
     invitation_text: data.invitation_text || null,

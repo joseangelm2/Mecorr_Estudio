@@ -68,6 +68,7 @@ export interface Project {
     liverpoolLink?: string
     bankAccount?: string
     bankBeneficiary?: string
+    giftStore?: 'liverpool' | 'amazon' | 'palacio' | 'generic'
   } | null
   color_theme: string
   invitation_text: string | null

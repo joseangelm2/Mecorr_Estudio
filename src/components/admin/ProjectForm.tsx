@@ -47,7 +47,7 @@ function toFormData(project?: Project): ProjectFormData {
       itinerary: [{ time: '', description: '', icon: '' }],
       dress_code_colors: '', dress_code_notes: '',
       photos: [''],
-      liverpool_link: '', bank_account: '', bank_beneficiary: '',
+      liverpool_link: '', bank_account: '', bank_beneficiary: '', gift_store: 'liverpool',
       color_theme: 'rosagold',
       invitation_text: '',
       show_video: false, video_youtube_id: '', video_url: '',
@@ -89,6 +89,7 @@ function toFormData(project?: Project): ProjectFormData {
     liverpool_link: project.gift_registry?.liverpoolLink ?? '',
     bank_account: project.gift_registry?.bankAccount ?? '',
     bank_beneficiary: project.gift_registry?.bankBeneficiary ?? '',
+    gift_store: project.gift_registry?.giftStore ?? 'liverpool',
     color_theme: project.color_theme ?? 'rosagold',
     invitation_text: project.invitation_text ?? '',
     show_video: project.show_video ?? false,
@@ -628,10 +629,31 @@ export default function ProjectForm({ project }: Props) {
             </div>
           </div>
 
-          {/* Liverpool */}
-          <SectionCard title="Mesa de regalos — Liverpool">
-            <Field title="Link de Liverpool">
-              <input type="url" value={form.liverpool_link} onChange={e => set('liverpool_link', e.target.value)} className={input} placeholder="https://mesaderegalos.liverpool.com.mx/..." />
+          {/* Mesa de regalos */}
+          <SectionCard title="Mesa de regalos">
+            <Field title="Tienda">
+              <div className="flex flex-wrap gap-3">
+                {([
+                  { id: 'liverpool', label: 'Liverpool',        logo: '/images/elegance/liverpool.png' },
+                  { id: 'amazon',    label: 'Amazon',           logo: '/images/elegance/amazon.svg'    },
+                  { id: 'palacio',   label: 'Palacio de Hierro', logo: '/images/elegance/palacio.svg'  },
+                  { id: 'generic',   label: 'Genérico',         logo: '/images/elegance/mesa_regalos.png' },
+                ] as const).map(store => (
+                  <button
+                    key={store.id}
+                    type="button"
+                    onClick={() => set('gift_store', store.id)}
+                    className="flex flex-col items-center gap-1 p-2 rounded-xl border-2 transition-all"
+                    style={{ borderColor: form.gift_store === store.id ? '#f43f5e' : '#e5e7eb', background: form.gift_store === store.id ? '#fff1f3' : 'white', minWidth: 90 }}
+                  >
+                    <img src={store.logo} alt={store.label} style={{ height: 36, objectFit: 'contain' }} />
+                    <span className="text-xs text-gray-600 text-center leading-tight">{store.label}</span>
+                  </button>
+                ))}
+              </div>
+            </Field>
+            <Field title={`Link de ${form.gift_store === 'liverpool' ? 'Liverpool' : form.gift_store === 'amazon' ? 'Amazon' : form.gift_store === 'palacio' ? 'Palacio de Hierro' : 'Mesa de Regalos'}`}>
+              <input type="url" value={form.liverpool_link} onChange={e => set('liverpool_link', e.target.value)} className={input} placeholder="https://..." />
             </Field>
           </SectionCard>
         </div>
