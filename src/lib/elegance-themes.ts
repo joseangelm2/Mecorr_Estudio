@@ -121,6 +121,23 @@ export const ELEGANCE_THEMES: EleganceTheme[] = [
     imgFilter: 'none',
     iconFilter: 'brightness(0) invert(1) sepia(1) hue-rotate(278deg) saturate(6) brightness(0.55)',
   },
+  {
+    id: 'turquesa-dorado',
+    label: 'Turquesa Dorado',
+    swatch: '#00a9c3',
+    colorPrincipal: '#00a9c3',
+    bgColor: '#00a9c3',
+    cuentaFondo: '#00788C',
+    nombreColor: '#BA8100',
+    subtitulosColor: '#F7BB52',
+    textosColor: '#F2D67F',
+    cuentaTexto: '#F2D67F',
+    overlay: 'rgba(0, 169, 195, 0.55)',
+    botonColor: '#F2D67F',
+    botonTextoColor: '#BA8100',
+    imgFilter: 'none',
+    iconFilter: 'brightness(0) invert(1) sepia(1) hue-rotate(151deg) saturate(5) brightness(0.55)',
+  },
 ]
 
 export const DEFAULT_ELEGANCE_THEME = ELEGANCE_THEMES.find(t => t.id === 'blanco-dorado')!
