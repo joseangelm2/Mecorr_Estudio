@@ -1,3 +1,6 @@
+'use client'
+
+import { useState } from 'react'
 import type { Project } from '@/types/invitation'
 
 interface Props {
@@ -19,9 +22,20 @@ const STORE_LABELS: Record<string, string> = {
 }
 
 export default function EleganceGifts({ project }: Props) {
+  const [visible, setVisible] = useState(false)
+  const [copied, setCopied] = useState(false)
+
   const giftStore = project.gift_registry?.giftStore ?? 'liverpool'
   const storeIcon = STORE_ICONS[giftStore] ?? STORE_ICONS.liverpool
   const storeLabel = STORE_LABELS[giftStore] ?? 'Liverpool'
+
+  function handleCopy() {
+    const clean = (project.gift_registry?.bankAccount ?? '').replace(/\s/g, '')
+    navigator.clipboard.writeText(clean).then(() => {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2500)
+    })
+  }
 
   return (
     <>
@@ -51,12 +65,21 @@ export default function EleganceGifts({ project }: Props) {
           <p className="texto">
             {project.datos_bancarios_text || 'No es necesario estar cerca, para hacer sentir el amor y el cariño... Así que si lo prefieres puedes hacer una transferencia bancaria:'}
           </p>
-          <div className="texto" style={{ marginTop: '2%' }}>
-            <p><b>Cuenta:</b> {project.gift_registry.bankAccount}</p>
-            {project.gift_registry.bankBeneficiary && (
-              <p><b>Beneficiaria:</b> {project.gift_registry.bankBeneficiary}</p>
-            )}
-          </div>
+          {!visible ? (
+            <button className="boton" style={{ marginTop: '4%' }} onClick={() => setVisible(true)}>
+              Mostrar cuenta
+            </button>
+          ) : (
+            <div className="texto" style={{ marginTop: '2%' }}>
+              <p><b>Cuenta:</b> {project.gift_registry.bankAccount}</p>
+              {project.gift_registry.bankBeneficiary && (
+                <p><b>Beneficiaria:</b> {project.gift_registry.bankBeneficiary}</p>
+              )}
+              <button className="boton" style={{ marginTop: '4%' }} onClick={handleCopy}>
+                {copied ? '¡Copiado!' : 'Copiar número'}
+              </button>
+            </div>
+          )}
         </div>
       )}
 
