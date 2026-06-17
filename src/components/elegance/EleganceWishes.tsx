@@ -45,13 +45,12 @@ export default function EleganceWishes({ phone, hashtag, dressCodeNotes }: Props
         </a>
       )}
 
-      <div className="extra show-p-y">
-        <h3>Información Importante</h3>
-        {dressCodeNotes
-          ? <p className="importante">❖ {dressCodeNotes}</p>
-          : <p className="importante">❖ El color dorado queda reservado exclusivamente para la Quinceañera.</p>
-        }
-      </div>
+      {dressCodeNotes && (
+        <div className="extra show-p-y">
+          <h3>Información Importante</h3>
+          <p className="importante">❖ {dressCodeNotes}</p>
+        </div>
+      )}
     </>
   )
 }
