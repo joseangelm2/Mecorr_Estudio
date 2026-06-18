@@ -41,7 +41,7 @@ export default function EleganceEventDate({ eventDate }: Props) {
       <div className="frase show" style={{ fontSize: '5.5vw' }}>Celebremos juntos</div>
 
       <div className="encabezado show" style={{ marginBottom: '-5%', marginTop: '20px' }}>
-        <h3>El día</h3>
+        <h3 className="evento">El día</h3>
       </div>
 
       <div className="fecha">

@@ -48,6 +48,7 @@ function toFormData(project?: Project): ProjectFormData {
       dress_code_colors: '', dress_code_notes: '',
       photos: [''],
       liverpool_link: '', bank_account: '', bank_beneficiary: '', gift_store: 'liverpool',
+      parents_title: '', padrinos_title: '',
       color_theme: 'rosagold',
       invitation_text: '',
       show_video: false, video_youtube_id: '', video_url: '',
@@ -90,6 +91,8 @@ function toFormData(project?: Project): ProjectFormData {
     bank_account: project.gift_registry?.bankAccount ?? '',
     bank_beneficiary: project.gift_registry?.bankBeneficiary ?? '',
     gift_store: project.gift_registry?.giftStore ?? 'liverpool',
+    parents_title:  (project.extra_config?.parents_title  as string) ?? '',
+    padrinos_title: (project.extra_config?.padrinos_title as string) ?? '',
     color_theme: project.color_theme ?? 'rosagold',
     invitation_text: project.invitation_text ?? '',
     show_video: project.show_video ?? false,
@@ -329,6 +332,19 @@ export default function ProjectForm({ project }: Props) {
       {/* Tab 2: Familia */}
       {activeTab === 2 && (
         <div className="space-y-6">
+          {form.template === 'elegance' && (
+            <SectionCard title="Títulos de sección" description="Personaliza los encabezados (dejar vacío = valor por defecto)">
+              <div className="space-y-4">
+                <Field title="Título sección Padres">
+                  <input value={form.parents_title} onChange={e => set('parents_title', e.target.value)} className={input} placeholder="Mis Padres" />
+                </Field>
+                <Field title="Título sección Padrinos">
+                  <input value={form.padrinos_title} onChange={e => set('padrinos_title', e.target.value)} className={input} placeholder="Mis Padrinos" />
+                </Field>
+              </div>
+            </SectionCard>
+          )}
+
           <SectionCard title="Padres" description="Nombres que aparecerán en la invitación">
             <div className="space-y-3">
               {form.parent_names.map((name, i) => (

@@ -36,6 +36,8 @@ export interface ProjectFormData {
   bank_account: string
   bank_beneficiary: string
   gift_store: string
+  parents_title: string
+  padrinos_title: string
   color_theme: string
   invitation_text: string
   show_video: boolean
@@ -112,7 +114,10 @@ function formDataToProject(data: ProjectFormData) {
     show_itinerary: data.show_itinerary,
     confirmation_phrase: data.confirmation_phrase || null,
     confirmation_highlight_date: data.confirmation_highlight_date || null,
-    extra_config: {},
+    extra_config: {
+      ...(data.parents_title  ? { parents_title:  data.parents_title  } : {}),
+      ...(data.padrinos_title ? { padrinos_title: data.padrinos_title } : {}),
+    },
   }
 }
 

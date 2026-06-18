@@ -5,6 +5,9 @@ interface Props {
 }
 
 export default function EleganceParents({ project }: Props) {
+  const parentsTitle  = (project.extra_config?.parents_title  as string) || 'Mis Padres'
+  const padrinosTitle = (project.extra_config?.padrinos_title as string) || 'Mis Padrinos'
+
   return (
     <>
       <img
@@ -20,7 +23,7 @@ export default function EleganceParents({ project }: Props) {
             Con la bendición de Dios y de
           </div>
           <div className="familia show-p-y">
-            <h3 style={{ fontStyle: 'italic' }}>Mis Padres</h3>
+            <h3 style={{ fontStyle: 'italic' }}>{parentsTitle}</h3>
             {project.parent_names.flatMap((name, i) => [
               i > 0 ? <p key={`sp${i}`} className="nombre">&amp;</p> : null,
               <p key={i} className="nombre">{name}</p>,
@@ -35,7 +38,7 @@ export default function EleganceParents({ project }: Props) {
             Y la compañía de
           </div>
           <div className="familia show-p-y">
-            <h3 style={{ fontStyle: 'italic' }}>Mis Padrinos</h3>
+            <h3 style={{ fontStyle: 'italic' }}>{padrinosTitle}</h3>
             {project.padrinos.flatMap((name, i) => [
               i > 0 ? <p key={`sp${i}`} className="nombre">&amp;</p> : null,
               <p key={i} className="nombre">{name}</p>,
