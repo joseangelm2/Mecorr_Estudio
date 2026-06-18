@@ -18,7 +18,7 @@ import EleganceWishes from '@/components/elegance/EleganceWishes'
 import EleganceRSVP from '@/components/elegance/EleganceRSVP'
 import EleganceFooter from '@/components/elegance/EleganceFooter'
 
-const FALLBACKS = [11, 21, 31, 41, 12, 22, 32]
+const FALLBACKS = [11, 21, 31, 41, 12, 22, 32, 13, 23, 33]
 
 function getPhotos(project: Project): string[] {
   const photos = project.photos ?? []

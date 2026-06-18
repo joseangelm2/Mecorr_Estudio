@@ -17,11 +17,11 @@ export default function ElegancePhotoGrid({ photos }: Props) {
       <div id="grid">
         <div className="container-grid">
           <div className="dos-fotos">
-            <img className="object-grid show-p-y" src={photos[1]} alt="" />
-            <img className="object-grid show-p-y" src={photos[2]} alt="" />
+            <img className="object-grid show-p-y" src={photos[7]} alt="" />
+            <img className="object-grid show-p-y" src={photos[8]} alt="" />
           </div>
           <div className="column full-width show-p-y">
-            <img className="object-grid" src={photos[3]} alt="" />
+            <img className="object-grid" src={photos[9]} alt="" />
           </div>
         </div>
       </div>
