@@ -17,6 +17,7 @@ import EleganceItinerary from '@/components/elegance/EleganceItinerary'
 import EleganceWishes from '@/components/elegance/EleganceWishes'
 import EleganceRSVP from '@/components/elegance/EleganceRSVP'
 import EleganceFooter from '@/components/elegance/EleganceFooter'
+import EleganceVideo from '@/components/elegance/EleganceVideo'
 
 const FALLBACKS = [11, 21, 31, 41, 12, 22, 32, 13, 23, 33]
 
@@ -94,6 +95,13 @@ export default function EleganceTemplate({ project }: Props) {
         <EleganceGifts project={project} />
         <GalleryPhoto src={photos[3]} />
         <ElegancePhotoGrid photos={photos} />
+        {project.show_video && (
+          <EleganceVideo
+            youtubeId={project.video_youtube_id ?? undefined}
+            localVideo={project.video_url ?? undefined}
+            audioRef={audioRef}
+          />
+        )}
         {project.show_itinerary && <GalleryPhoto src={photos[4]} />}
         {project.show_itinerary && <EleganceItinerary project={project} />}
         <GalleryPhoto src={photos[5]} />
