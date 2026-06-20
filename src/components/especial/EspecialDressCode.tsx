@@ -1,0 +1,65 @@
+import type { Project } from '@/types/invitation'
+
+interface DressPaletteEntry {
+  name: string
+  colors: string[]
+}
+
+interface Props {
+  project: Project
+}
+
+export default function EspecialDressCode({ project }: Props) {
+  if (!project.dress_code) return null
+
+  const showPalette = project.extra_config?.show_dress_palette === true
+  const palette = (project.extra_config?.dress_palette as DressPaletteEntry[] | undefined) ?? []
+
+  return (
+    <section className="padding-section text-center">
+      <div className="row justify-content-center">
+        <div className="col-md-10">
+          <div className="mb-10 wow fadeInUp">
+            <img src="/images/flores-01.png" width="100" alt="" />
+          </div>
+          <h2 className="titulo color-titulos mb-20 wow fadeInUp">Código de Vestimenta</h2>
+          {project.dress_code.colors && (
+            <p className="color-textos mb-20 wow fadeInUp">{project.dress_code.colors}</p>
+          )}
+          {project.dress_code.notes && (
+            <p className="color-textos mb-30 wow fadeInUp">{project.dress_code.notes}</p>
+          )}
+          {showPalette && palette.length > 0 && (
+            <div
+              className="wow fadeInUp"
+              style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '16px', marginTop: '20px' }}
+            >
+              {palette.map((entry, i) => {
+                const bg = entry.colors.length === 1
+                  ? entry.colors[0]
+                  : `linear-gradient(to right, ${entry.colors.join(', ')})`
+                return (
+                  <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+                    <div
+                      style={{
+                        width: '60px',
+                        height: '60px',
+                        borderRadius: '50%',
+                        background: bg,
+                        border: '2px solid rgba(0,0,0,0.1)',
+                        flexShrink: 0,
+                      }}
+                    />
+                    <span className="color-textos" style={{ fontSize: '12px', maxWidth: '70px', textAlign: 'center' }}>
+                      {entry.name}
+                    </span>
+                  </div>
+                )
+              })}
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}
