@@ -4,9 +4,10 @@ import { useEffect, useRef, useState } from 'react'
 
 interface Props {
   photos: string[]
+  decorationSrc?: string
 }
 
-export default function EspecialPhotos({ photos }: Props) {
+export default function EspecialPhotos({ photos, decorationSrc = '/images/flores-01.png' }: Props) {
   const [current, setCurrent] = useState(0)
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
@@ -36,7 +37,7 @@ export default function EspecialPhotos({ photos }: Props) {
     <section id="fotos" className="padding-section" style={{ backgroundColor: 'rgba(255,255,255,.5)' }}>
       <div style={{ maxWidth: '100%', padding: '0 15px' }}>
         <div className="mb-10 text-center wow fadeInUp">
-          <img src="/images/flores-01.png" width="160" alt="" />
+          <img src={decorationSrc} width="160" alt="" />
         </div>
         <h2 className="titulo color-titulos mb-30 text-center wow fadeInUp">Momentos</h2>
       </div>

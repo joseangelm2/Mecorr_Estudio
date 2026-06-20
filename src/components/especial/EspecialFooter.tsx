@@ -10,7 +10,7 @@ export default function EspecialFooter({ project }: Props) {
   return (
     <section
       className="padding-final text-center bg-img bg-overlay-contador"
-      style={{ backgroundImage: 'url(/images/background-mob.jpg)' }}
+      style={{ backgroundImage: 'var(--inv-bg-url, url(/images/background-mob.jpg))' }}
     >
       <div className="row justify-content-center">
         <div className="col-md-10">
@@ -24,7 +24,7 @@ export default function EspecialFooter({ project }: Props) {
             />
           )}
           <h2 className="titulo text-white wow fadeInUp">{project.quinceanera_name}</h2>
-          <p className="text-white wow fadeInUp" style={{ fontSize: '20px', marginTop: '16px' }}>
+          <p className="text-white texto-frase wow fadeInUp" style={{ marginTop: '16px' }}>
             {footerText}
           </p>
         </div>

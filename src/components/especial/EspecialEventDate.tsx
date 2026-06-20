@@ -39,11 +39,11 @@ export default function EspecialEventDate({ eventDate }: Props) {
   return (
     <section
       className="padding-section text-center bg-overlay-contador bg-img"
-      style={{ backgroundImage: 'url(/images/background-mob.jpg)' }}
+      style={{ backgroundImage: 'var(--inv-bg-url, url(/images/background-mob.jpg))', paddingBottom: '20px' }}
     >
       <div className="row justify-content-center">
         <div className="col-md-10">
-          <h2 className="titulo text-white mb-30 wow fadeInUp">La Cuenta Regresiva</h2>
+          <h2 className="titulo color-titulos mb-30 wow fadeInUp">La Cuenta Regresiva</h2>
           <ul className="tiempo wow fadeInUp">
             <li>
               <span className="circulo-tiempo">{countdown.days}</span>

@@ -7,27 +7,28 @@ interface DressPaletteEntry {
 
 interface Props {
   project: Project
+  decorationSrc?: string
 }
 
-export default function EspecialDressCode({ project }: Props) {
-  if (!project.dress_code) return null
-
+export default function EspecialDressCode({ project, decorationSrc = '/images/flores-01.png' }: Props) {
   const showPalette = project.extra_config?.show_dress_palette === true
   const palette = (project.extra_config?.dress_palette as DressPaletteEntry[] | undefined) ?? []
 
+  if (!project.dress_code && !showPalette) return null
+
   return (
-    <section className="padding-section text-center">
+    <section className="padding-section text-center" style={{ paddingBottom: '20px' }}>
       <div className="row justify-content-center">
         <div className="col-md-10">
           <div className="mb-10 wow fadeInUp">
-            <img src="/images/flores-01.png" width="100" alt="" />
+            <img src={decorationSrc} width="100" alt="" />
           </div>
           <h2 className="titulo color-titulos mb-20 wow fadeInUp">Código de Vestimenta</h2>
-          {project.dress_code.colors && (
-            <p className="color-textos mb-20 wow fadeInUp">{project.dress_code.colors}</p>
+          {project.dress_code?.colors && (
+            <p className="color-textos mb-20 wow fadeInUp" style={{ fontWeight: 600 }}>{project.dress_code.colors}</p>
           )}
-          {project.dress_code.notes && (
-            <p className="color-textos mb-30 wow fadeInUp">{project.dress_code.notes}</p>
+          {project.dress_code?.notes && (
+            <p className="color-textos mb-30 wow fadeInUp" style={{ fontWeight: 600 }}>{project.dress_code.notes}</p>
           )}
           {showPalette && palette.length > 0 && (
             <div
@@ -42,8 +43,8 @@ export default function EspecialDressCode({ project }: Props) {
                   <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
                     <div
                       style={{
-                        width: '60px',
-                        height: '60px',
+                        width: '30px',
+                        height: '30px',
                         borderRadius: '50%',
                         background: bg,
                         border: '2px solid rgba(0,0,0,0.1)',

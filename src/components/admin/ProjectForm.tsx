@@ -65,11 +65,15 @@ function toFormData(project?: Project): ProjectFormData {
       show_itinerary: true,
       confirmation_phrase: '', confirmation_highlight_date: '',
       especial_background_url: '',
+      especial_decoration_url: '',
       especial_decoration_style: 'flores',
       especial_banner_text: '',
       especial_footer_text: '',
       especial_show_dress_palette: false,
       especial_dress_palette: [],
+      especial_gift_registries: [],
+      especial_rsvp_phones: [],
+      especial_rsvp_email: '',
     }
   }
   return {
@@ -108,11 +112,15 @@ function toFormData(project?: Project): ProjectFormData {
     parents_title:  (project.extra_config?.parents_title  as string) ?? '',
     padrinos_title: (project.extra_config?.padrinos_title as string) ?? '',
     especial_background_url: (project.extra_config?.background_url as string) ?? '',
+    especial_decoration_url: (project.extra_config?.decoration_url as string) ?? '',
     especial_decoration_style: (project.extra_config?.decoration_style as string) ?? 'flores',
     especial_banner_text: (project.extra_config?.banner_text as string) ?? '',
     especial_footer_text: (project.extra_config?.footer_text as string) ?? '',
     especial_show_dress_palette: (project.extra_config?.show_dress_palette as boolean) ?? false,
     especial_dress_palette: (project.extra_config?.dress_palette as DressPaletteEntry[]) ?? [],
+    especial_gift_registries: (project.extra_config?.gift_registries as Array<{ giftStore: string; liverpoolLink: string }>) ?? [],
+    especial_rsvp_phones: (project.extra_config?.rsvp_phones as Array<{ phone: string; label: string }>) ?? [],
+    especial_rsvp_email: (project.extra_config?.rsvp_email as string) ?? '',
     color_theme: project.color_theme ?? 'rosagold',
     invitation_text: project.invitation_text ?? '',
     show_video: project.show_video ?? false,
@@ -174,6 +182,7 @@ export default function ProjectForm({ project }: Props) {
   const [activeTab, setActiveTab] = useState(0)
   const [form, setForm] = useState<ProjectFormData>(() => toFormData(project))
   const [loading, setLoading] = useState(false)
+  const [saved, setSaved] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   function set(field: keyof ProjectFormData, value: unknown) {
@@ -215,16 +224,20 @@ export default function ProjectForm({ project }: Props) {
 
   async function handleSubmit(status: 'draft' | 'published') {
     setLoading(true)
+    setSaved(false)
     setError(null)
     try {
       const data = { ...form, status }
       if (project) {
         await updateProject(project.id, data)
+        setSaved(true)
+        setTimeout(() => setSaved(false), 3000)
       } else {
         await createProject(data)
       }
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Error desconocido')
+    } finally {
       setLoading(false)
     }
   }
@@ -359,7 +372,7 @@ export default function ProjectForm({ project }: Props) {
       {/* Tab 2: Familia */}
       {activeTab === 2 && (
         <div className="space-y-6">
-          {form.template === 'elegance' && (
+          {(form.template === 'elegance' || form.template === 'especial') && (
             <SectionCard title="Títulos de sección" description="Personaliza los encabezados (dejar vacío = valor por defecto)">
               <div className="space-y-4">
                 <Field title="Título sección Padres">
@@ -706,7 +719,7 @@ export default function ProjectForm({ project }: Props) {
       {activeTab === 8 && form.template === 'especial' && (
         <div className="space-y-6">
           <SectionCard title="Fondo y decoraciones">
-            <Field title="URL de imagen de fondo personalizada">
+            <Field title="Imagen de fondo personalizada">
               <input
                 type="url"
                 value={form.especial_background_url}
@@ -714,15 +727,26 @@ export default function ProjectForm({ project }: Props) {
                 className={input}
                 placeholder="https://..."
               />
+              {project?.id ? (
+                <MediaUploader
+                  projectId={project.id}
+                  bucket="invitation-media"
+                  accept="image/*"
+                  onUploadComplete={url => set('especial_background_url', url)}
+                  label="Subir imagen de fondo"
+                />
+              ) : (
+                <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para subir archivos.</p>
+              )}
             </Field>
             <Field title="Decoraciones">
-              <div className="flex gap-3">
-                {(['flores', 'mariposas', 'estrellas'] as const).map(style => (
+              <div className="flex gap-2 flex-wrap">
+                {(['flores', 'mariposas', 'estrellas', 'personalizado'] as const).map(style => (
                   <button
                     key={style}
                     type="button"
                     onClick={() => set('especial_decoration_style', style)}
-                    className={`flex-1 py-3 rounded-xl border-2 text-sm font-medium capitalize transition-all ${
+                    className={`flex-1 min-w-[100px] py-3 rounded-xl border-2 text-sm font-medium capitalize transition-all ${
                       form.especial_decoration_style === style
                         ? 'border-rose-400 bg-rose-50 text-rose-600'
                         : 'border-gray-100 bg-white text-gray-500 hover:border-gray-200'
@@ -732,6 +756,28 @@ export default function ProjectForm({ project }: Props) {
                   </button>
                 ))}
               </div>
+              {form.especial_decoration_style === 'personalizado' && (
+                <div className="mt-3 space-y-2">
+                  <input
+                    type="url"
+                    value={form.especial_decoration_url}
+                    onChange={e => set('especial_decoration_url', e.target.value)}
+                    className={input}
+                    placeholder="https://... (imagen de decoración)"
+                  />
+                  {project?.id ? (
+                    <MediaUploader
+                      projectId={project.id}
+                      bucket="invitation-media"
+                      accept="image/*"
+                      onUploadComplete={url => set('especial_decoration_url', url)}
+                      label="Subir imagen de decoración"
+                    />
+                  ) : (
+                    <p className="text-xs text-gray-400">Guarda el proyecto primero para subir archivos.</p>
+                  )}
+                </div>
+              )}
             </Field>
           </SectionCard>
 
@@ -754,6 +800,70 @@ export default function ProjectForm({ project }: Props) {
                 placeholder="¡Te Esperamos!"
               />
             </Field>
+          </SectionCard>
+
+          <SectionCard title="Mesas de Regalos">
+            <div className="space-y-4">
+              {form.especial_gift_registries.map((reg, i) => (
+                <div key={i} className="rounded-xl border border-gray-100 bg-gray-50/60 p-4 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-semibold text-gray-700">Mesa {i + 1}</span>
+                    <button
+                      type="button"
+                      onClick={() => set('especial_gift_registries', form.especial_gift_registries.filter((_, idx) => idx !== i))}
+                      className="w-8 h-8 rounded-lg border border-red-200 text-red-400 hover:bg-red-50 flex items-center justify-center text-sm transition-colors"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                  <div className="flex flex-wrap gap-3">
+                    {([
+                      { id: 'liverpool', label: 'Liverpool',         logo: '/images/elegance/liverpool.png' },
+                      { id: 'amazon',    label: 'Amazon',            logo: '/images/elegance/amazon.svg'    },
+                      { id: 'palacio',   label: 'Palacio de Hierro', logo: '/images/elegance/palacio.svg'   },
+                      { id: 'generic',   label: 'Genérico',          logo: '/images/elegance/mesa_regalos.png' },
+                    ] as const).map(store => (
+                      <button
+                        key={store.id}
+                        type="button"
+                        onClick={() => {
+                          const updated = [...form.especial_gift_registries]
+                          updated[i] = { ...updated[i], giftStore: store.id }
+                          set('especial_gift_registries', updated)
+                        }}
+                        className="flex flex-col items-center gap-1 p-2 rounded-xl border-2 transition-all"
+                        style={{
+                          borderColor: reg.giftStore === store.id ? '#f43f5e' : '#e5e7eb',
+                          background: reg.giftStore === store.id ? '#fff1f3' : 'white',
+                          minWidth: 80,
+                        }}
+                      >
+                        <img src={store.logo} alt={store.label} style={{ height: 32, objectFit: 'contain' }} />
+                        <span className="text-xs text-gray-600 text-center leading-tight">{store.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                  <input
+                    type="url"
+                    value={reg.liverpoolLink}
+                    onChange={e => {
+                      const updated = [...form.especial_gift_registries]
+                      updated[i] = { ...updated[i], liverpoolLink: e.target.value }
+                      set('especial_gift_registries', updated)
+                    }}
+                    className={input}
+                    placeholder="https://..."
+                  />
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={() => set('especial_gift_registries', [...form.especial_gift_registries, { giftStore: 'liverpool', liverpoolLink: '' }])}
+                className="w-full py-4 border-2 border-dashed border-gray-200 rounded-xl text-sm text-gray-400 hover:border-rose-300 hover:text-rose-400 transition-all font-medium"
+              >
+                + Agregar mesa de regalos
+              </button>
+            </div>
           </SectionCard>
 
           <SectionCard title="Paleta de colores (código de vestimenta)">
@@ -846,6 +956,63 @@ export default function ProjectForm({ project }: Props) {
               </div>
             )}
           </SectionCard>
+
+          <SectionCard title="Confirmación (WhatsApp y Correo)">
+            <div className="space-y-4">
+              <p className="text-xs text-gray-500">Números adicionales de WhatsApp para recibir confirmaciones. El invitado elige a quién enviar.</p>
+              {form.especial_rsvp_phones.map((entry, i) => (
+                <div key={i} className="rounded-xl border border-gray-100 bg-gray-50/60 p-4 space-y-3">
+                  <div className="flex items-center gap-3">
+                    <input
+                      type="text"
+                      value={entry.label}
+                      onChange={e => {
+                        const updated = [...form.especial_rsvp_phones]
+                        updated[i] = { ...updated[i], label: e.target.value }
+                        set('especial_rsvp_phones', updated)
+                      }}
+                      className={input}
+                      placeholder="Etiqueta (ej. Mamá, Organizador)"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => set('especial_rsvp_phones', form.especial_rsvp_phones.filter((_, idx) => idx !== i))}
+                      className="w-10 h-10 rounded-xl border border-red-200 text-red-400 hover:bg-red-50 flex items-center justify-center transition-colors shrink-0"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                  <input
+                    type="text"
+                    value={entry.phone}
+                    onChange={e => {
+                      const updated = [...form.especial_rsvp_phones]
+                      updated[i] = { ...updated[i], phone: e.target.value }
+                      set('especial_rsvp_phones', updated)
+                    }}
+                    className={input}
+                    placeholder="Número sin + (ej. 5218001234567)"
+                  />
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={() => set('especial_rsvp_phones', [...form.especial_rsvp_phones, { phone: '', label: '' }])}
+                className="w-full py-4 border-2 border-dashed border-gray-200 rounded-xl text-sm text-gray-400 hover:border-rose-300 hover:text-rose-400 transition-all font-medium"
+              >
+                + Agregar número de WhatsApp
+              </button>
+            </div>
+            <Field title="Correo para confirmaciones">
+              <input
+                type="email"
+                value={form.especial_rsvp_email}
+                onChange={e => set('especial_rsvp_email', e.target.value)}
+                className={input}
+                placeholder="confirmaciones@ejemplo.com"
+              />
+            </Field>
+          </SectionCard>
         </div>
       )}
 
@@ -870,14 +1037,18 @@ export default function ProjectForm({ project }: Props) {
           type="button"
           disabled={loading}
           onClick={() => handleSubmit('published')}
-          className="px-6 py-3 bg-rose-500 hover:bg-rose-600 text-white rounded-xl text-base font-medium disabled:opacity-50 transition-all shadow-sm shadow-rose-200"
+          className={`px-6 py-3 rounded-xl text-base font-medium disabled:opacity-50 transition-all shadow-sm ${
+            saved
+              ? 'bg-green-500 text-white shadow-green-200'
+              : 'bg-rose-500 hover:bg-rose-600 text-white shadow-rose-200'
+          }`}
         >
           {loading ? (
             <span className="flex items-center gap-2">
               <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
               Guardando...
             </span>
-          ) : 'Guardar y publicar'}
+          ) : saved ? '✓ Guardado' : 'Guardar y publicar'}
         </button>
         {project && (
           <a

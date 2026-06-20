@@ -2,9 +2,10 @@ import type { Project } from '@/types/invitation'
 
 interface Props {
   project: Project
+  decorationSrc?: string
 }
 
-export default function EspecialParents({ project }: Props) {
+export default function EspecialParents({ project, decorationSrc = '/images/flores-01.png' }: Props) {
   const parentsTitle  = (project.extra_config?.parents_title  as string) || 'Con la bendición de mis Padres'
   const padrinosTitle = (project.extra_config?.padrinos_title as string) || 'Y el apoyo de mis Padrinos'
 
@@ -18,7 +19,7 @@ export default function EspecialParents({ project }: Props) {
       <div className="row justify-content-center">
         <div className="col-md-10">
           <div className="mb-10 wow fadeInUp">
-            <img src="/images/flores-01.png" width="100" alt="" />
+            <img src={decorationSrc} width="100" alt="" />
           </div>
 
           {hasParents && (

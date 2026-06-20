@@ -17,23 +17,28 @@ const STORE_LABELS: Record<string, string> = {
   generic:   'Mesa de Regalos',
 }
 
-interface Props {
-  project: Project
+interface GiftRegistry {
+  giftStore: string
+  liverpoolLink: string
 }
 
-export default function EspecialGifts({ project }: Props) {
+interface Props {
+  project: Project
+  decorationSrc?: string
+}
+
+export default function EspecialGifts({ project, decorationSrc = '/images/flores-01.png' }: Props) {
   const [visible, setVisible] = useState(false)
   const [copied, setCopied] = useState(false)
 
-  const hasGiftLink  = Boolean(project.gift_registry?.liverpoolLink)
-  const hasLluvia    = project.show_lluvia_sobres
-  const hasBancarios = project.show_datos_bancarios && Boolean(project.gift_registry?.bankAccount)
+  const extraRegistries = (project.extra_config?.gift_registries as GiftRegistry[] | undefined) ?? []
+  const hasExtraLinks   = extraRegistries.length > 0
+  const hasFallbackLink = Boolean(project.gift_registry?.liverpoolLink)
+  const hasGiftLink     = hasExtraLinks || hasFallbackLink
+  const hasLluvia       = project.show_lluvia_sobres
+  const hasBancarios    = project.show_datos_bancarios && Boolean(project.gift_registry?.bankAccount)
 
   if (!hasGiftLink && !hasLluvia && !hasBancarios) return null
-
-  const giftStore  = project.gift_registry?.giftStore ?? 'liverpool'
-  const storeIcon  = STORE_ICONS[giftStore] ?? STORE_ICONS.liverpool
-  const storeLabel = STORE_LABELS[giftStore] ?? 'Liverpool'
 
   function handleCopy() {
     const clean = (project.gift_registry?.bankAccount ?? '').replace(/\s/g, '')
@@ -48,22 +53,12 @@ export default function EspecialGifts({ project }: Props) {
       <div className="row justify-content-center">
         <div className="col-md-10 text-center">
           <div className="mb-10 wow fadeInUp">
-            <img src="/images/flores-01.png" width="100" alt="" />
+            <img src={decorationSrc} width="100" alt="" />
           </div>
           <h2 className="titulo color-titulos mb-30 wow fadeInUp">Regalos</h2>
 
-          {hasGiftLink && (
-            <div className="mb-40 wow fadeInUp">
-              <img src={storeIcon} alt={storeLabel} style={{ width: '120px', marginBottom: '16px' }} />
-              <p className="color-textos mb-20">Tu presencia ilumina nuestro evento. Si deseas regalarme algo, aquí puedes ver mi lista:</p>
-              <a href={project.gift_registry!.liverpoolLink} target="_blank" rel="noreferrer" className="color-principal link-abrir">
-                Ver Mesa de Regalos
-              </a>
-            </div>
-          )}
-
           {hasLluvia && (
-            <div className="mb-40 wow fadeInUp">
+            <div className="mb-20 wow fadeInUp">
               <img src="/images/elegance/sobre.png" style={{ width: '80px', marginBottom: '16px' }} alt="Sobre" />
               <h3 className="titulo color-titulos mb-10">Lluvia de Sobres</h3>
               <p className="color-textos">
@@ -71,6 +66,41 @@ export default function EspecialGifts({ project }: Props) {
               </p>
             </div>
           )}
+
+          {hasLluvia && (hasExtraLinks || hasFallbackLink) && (
+            <div className="mb-20 wow fadeInUp">
+              <img src={decorationSrc} width="80" alt="" />
+            </div>
+          )}
+
+          {hasExtraLinks && extraRegistries.map((reg, i) => {
+            const storeIcon  = STORE_ICONS[reg.giftStore] ?? STORE_ICONS.liverpool
+            const storeLabel = STORE_LABELS[reg.giftStore] ?? 'Mesa de Regalos'
+            return (
+              <div key={i} className="mb-20 wow fadeInUp">
+                <img src={storeIcon} alt={storeLabel} style={{ width: '120px', marginBottom: '16px' }} />
+                <p className="color-textos mb-20">Tu presencia ilumina nuestro evento. Si deseas regalarme algo, aquí puedes ver mi lista:</p>
+                <a href={reg.liverpoolLink} target="_blank" rel="noreferrer" className="color-principal link-abrir">
+                  Ver Mesa de Regalos
+                </a>
+              </div>
+            )
+          })}
+
+          {!hasExtraLinks && hasFallbackLink && (() => {
+            const giftStore  = project.gift_registry?.giftStore ?? 'liverpool'
+            const storeIcon  = STORE_ICONS[giftStore] ?? STORE_ICONS.liverpool
+            const storeLabel = STORE_LABELS[giftStore] ?? 'Liverpool'
+            return (
+              <div className="mb-20 wow fadeInUp">
+                <img src={storeIcon} alt={storeLabel} style={{ width: '120px', marginBottom: '16px' }} />
+                <p className="color-textos mb-20">Tu presencia ilumina nuestro evento. Si deseas regalarme algo, aquí puedes ver mi lista:</p>
+                <a href={project.gift_registry!.liverpoolLink} target="_blank" rel="noreferrer" className="color-principal link-abrir">
+                  Ver Mesa de Regalos
+                </a>
+              </div>
+            )
+          })()}
 
           {hasBancarios && (
             <div className="wow fadeInUp">

@@ -6,9 +6,10 @@ interface Props {
   youtubeId?: string
   localVideo?: string
   audioRef: React.RefObject<HTMLAudioElement | null>
+  decorationSrc?: string
 }
 
-export default function EspecialVideo({ youtubeId, localVideo, audioRef }: Props) {
+export default function EspecialVideo({ youtubeId, localVideo, audioRef, decorationSrc = '/images/flores-01.png' }: Props) {
   const [ytStarted, setYtStarted] = useState(false)
 
   function pauseMusic() {
@@ -22,7 +23,7 @@ export default function EspecialVideo({ youtubeId, localVideo, audioRef }: Props
       <div className="row justify-content-center">
         <div className="col-md-10">
           <div className="mb-10 text-center wow fadeInUp">
-            <img src="/images/flores-01.png" width="100" alt="" />
+            <img src={decorationSrc} width="100" alt="" />
           </div>
           <h2 className="titulo color-titulos mb-20 text-center wow fadeInUp">Video</h2>
           <div className="wow fadeInUp" style={{ overflow: 'hidden', borderRadius: '8px' }}>

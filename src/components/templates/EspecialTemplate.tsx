@@ -28,6 +28,9 @@ export default function EspecialTemplate({ project }: Props) {
   const [envelopeOpen, setEnvelopeOpen] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
   const theme = ESPECIAL_THEMES.find(t => t.id === project.color_theme) ?? DEFAULT_ESPECIAL_THEME
+  const bgUrl = (project.extra_config?.background_url as string) || null
+  const decorationSrc = (project.extra_config?.decoration_url as string) || '/images/flores-01.png'
+  const showDressCode = Boolean(project.dress_code) || project.extra_config?.show_dress_palette === true
 
   useEffect(() => {
     const root = document.documentElement
@@ -37,13 +40,18 @@ export default function EspecialTemplate({ project }: Props) {
     root.style.setProperty('--inv-border',        theme.primary)
     root.style.setProperty('--inv-filter',        theme.filterValue)
     root.style.setProperty('--inv-filter-light',  theme.filterLight)
+    if (bgUrl) {
+      root.style.setProperty('--inv-bg-url', `url(${bgUrl})`)
+      root.style.setProperty('--inv-bg-filter', 'none')
+    }
     return () => {
-      const vars = ['--inv-primary', '--inv-primary-dark', '--inv-primary-light', '--inv-border', '--inv-filter', '--inv-filter-light']
+      const vars = ['--inv-primary', '--inv-primary-dark', '--inv-primary-light', '--inv-border', '--inv-filter', '--inv-filter-light', '--inv-bg-url', '--inv-bg-filter']
       vars.forEach(v => root.style.removeProperty(v))
     }
-  }, [theme])
+  }, [theme, bgUrl])
 
   function handleOpen() {
+    audioRef.current?.play().catch(() => {})
     setEnvelopeOpen(true)
   }
 
@@ -54,29 +62,27 @@ export default function EspecialTemplate({ project }: Props) {
         <source src={project.music_url ?? '/images/esmeralda/musica.mp3'} type="audio/mpeg" />
       </audio>
       {!envelopeOpen && (
-        <EspecialEnvelope
-          musicUrl={project.music_url ?? undefined}
-          onOpen={handleOpen}
-        />
+        <EspecialEnvelope onOpen={handleOpen} />
       )}
       <StickyBanner guestName={project.guest_name ?? project.quinceanera_name} />
-      <EspecialHero project={project} />
-      <EspecialParents project={project} />
+      <EspecialHero project={project} decorationSrc={decorationSrc} />
+      <EspecialParents project={project} decorationSrc={decorationSrc} />
       <EspecialEventDate eventDate={project.event_date} />
-      <EspecialLocations project={project} />
-      {project.show_itinerary && <EspecialItinerary project={project} />}
-      {project.dress_code && <EspecialDressCode project={project} />}
-      {project.hashtag && <EspecialHashtag hashtag={project.hashtag} />}
-      {project.photos.length > 0 && <EspecialPhotos photos={project.photos} />}
+      <EspecialLocations project={project} decorationSrc={decorationSrc} />
+      {project.show_itinerary && <EspecialItinerary project={project} decorationSrc={decorationSrc} />}
+      {showDressCode && <EspecialDressCode project={project} decorationSrc={decorationSrc} />}
+      {project.hashtag && <EspecialHashtag hashtag={project.hashtag} decorationSrc={decorationSrc} />}
+      {project.photos.length > 0 && <EspecialPhotos photos={project.photos} decorationSrc={decorationSrc} />}
       {project.show_video && (
         <EspecialVideo
           youtubeId={project.video_youtube_id ?? undefined}
           localVideo={project.video_url ?? undefined}
           audioRef={audioRef}
+          decorationSrc={decorationSrc}
         />
       )}
-      <EspecialGifts project={project} />
-      <EspecialRSVP project={project} />
+      <EspecialGifts project={project} decorationSrc={decorationSrc} />
+      <EspecialRSVP project={project} decorationSrc={decorationSrc} />
       <EspecialFooter project={project} />
     </div>
   )

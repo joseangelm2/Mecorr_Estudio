@@ -27,9 +27,9 @@ src/
     EspecialDressCode.tsx    ← vestimenta + paleta de colores
     EspecialHashtag.tsx      ← hashtag instagram
     EspecialPhotos.tsx       ← carrusel de fotos
+    EspecialVideo.tsx        ← video YouTube o local
     EspecialGifts.tsx        ← mesa regalos + lluvia sobres + datos bancarios
     EspecialRSVP.tsx         ← confirmación de asistencia
-    EspecialVideo.tsx        ← video YouTube o local
     EspecialFooter.tsx       ← sección final con foto y nombre
 
   components/templates/
@@ -157,9 +157,11 @@ Supabase projects.extra_config (JSONB)
             ├─ EspecialEventDate   ← event_date
             ├─ EspecialLocations   ← ceremony, reception
             ├─ EspecialDressCode   ← dress_code, show_dress_palette, dress_palette
+            ├─ EspecialPhotos      ← photos (arreglo de URLs de fotos)
+            ├─ EspecialVideo       ← show_video, video_youtube_id, video_url
             ├─ EspecialGifts       ← gift_registry, show_lluvia_sobres, show_datos_bancarios
             ├─ EspecialRSVP        ← rsvp_phone, confirmation_phrase
-            └─ EspecialVideo       ← show_video, video_youtube_id, video_url
+            └─ EspecialFooter      ← footer_text
 ```
 
 ---

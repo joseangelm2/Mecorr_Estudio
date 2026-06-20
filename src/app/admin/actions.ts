@@ -51,11 +51,15 @@ export interface ProjectFormData {
   confirmation_phrase: string
   confirmation_highlight_date: string
   especial_background_url: string
+  especial_decoration_url: string
   especial_decoration_style: string
   especial_banner_text: string
   especial_footer_text: string
   especial_show_dress_palette: boolean
   especial_dress_palette: Array<{ name: string; colors: string[] }>
+  especial_gift_registries: Array<{ giftStore: string; liverpoolLink: string }>
+  especial_rsvp_phones: Array<{ phone: string; label: string }>
+  especial_rsvp_email: string
 }
 
 function formDataToProject(data: ProjectFormData) {
@@ -125,24 +129,34 @@ function formDataToProject(data: ProjectFormData) {
       ...(data.padrinos_title ? { padrinos_title: data.padrinos_title } : {}),
       // especial fields
       ...(data.especial_background_url  ? { background_url:      data.especial_background_url  } : {}),
+      ...(data.especial_decoration_url  ? { decoration_url:      data.especial_decoration_url  } : {}),
       ...(data.especial_decoration_style !== 'flores' ? { decoration_style: data.especial_decoration_style } : {}),
       ...(data.especial_banner_text     ? { banner_text:         data.especial_banner_text     } : {}),
       ...(data.especial_footer_text     ? { footer_text:         data.especial_footer_text     } : {}),
       ...(data.especial_show_dress_palette ? { show_dress_palette: true } : {}),
       ...(data.especial_dress_palette.length > 0 ? { dress_palette: data.especial_dress_palette } : {}),
+      ...(data.especial_gift_registries.filter(r => r.liverpoolLink).length > 0
+        ? { gift_registries: data.especial_gift_registries.filter(r => r.liverpoolLink) }
+        : {}),
+      ...(data.especial_rsvp_phones.filter(p => p.phone).length > 0
+        ? { rsvp_phones: data.especial_rsvp_phones.filter(p => p.phone) }
+        : {}),
+      ...(data.especial_rsvp_email ? { rsvp_email: data.especial_rsvp_email } : {}),
     },
   }
 }
 
 export async function createProject(data: ProjectFormData): Promise<void> {
   const supabase = await createClient()
-  const { error } = await supabase
+  const { data: created, error } = await supabase
     .from('projects')
     .insert(formDataToProject(data))
+    .select('id')
+    .single()
 
   if (error) throw new Error(error.message)
   revalidatePath('/admin')
-  redirect('/admin')
+  redirect(`/admin/projects/${created.id}`)
 }
 
 export async function updateProject(id: string, data: ProjectFormData): Promise<void> {
@@ -153,8 +167,8 @@ export async function updateProject(id: string, data: ProjectFormData): Promise<
     .eq('id', id)
 
   if (error) throw new Error(error.message)
+  revalidatePath(`/admin/projects/${id}`)
   revalidatePath('/admin')
-  redirect('/admin')
 }
 
 export async function togglePublish(id: string, newStatus: 'draft' | 'published'): Promise<void> {

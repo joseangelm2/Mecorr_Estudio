@@ -4,6 +4,11 @@ import { useEffect } from 'react'
 
 export default function EspecialScrollInit() {
   useEffect(() => {
+    // Prevent browser from restoring scroll position on navigation
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
+    document.documentElement.classList.remove('con-scroll')
+    window.scrollTo(0, 0)
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -22,7 +27,11 @@ export default function EspecialScrollInit() {
     )
 
     document.querySelectorAll('.wow').forEach((el) => observer.observe(el))
-    return () => observer.disconnect()
+
+    return () => {
+      observer.disconnect()
+      document.documentElement.classList.remove('con-scroll')
+    }
   }, [])
 
   return null
