@@ -30,6 +30,7 @@ export default function EspecialTemplate({ project }: Props) {
   const theme = ESPECIAL_THEMES.find(t => t.id === project.color_theme) ?? DEFAULT_ESPECIAL_THEME
   const bgUrl = (project.extra_config?.background_url as string) || null
   const decorationSrc = (project.extra_config?.decoration_url as string) || '/images/flores-01.png'
+  const sealUrl = (project.extra_config?.seal_url as string) || '/images/sello.png'
   const showDressCode = Boolean(project.dress_code) || project.extra_config?.show_dress_palette === true
 
   useEffect(() => {
@@ -62,7 +63,7 @@ export default function EspecialTemplate({ project }: Props) {
         <source src={project.music_url ?? '/images/esmeralda/musica.mp3'} type="audio/mpeg" />
       </audio>
       {!envelopeOpen && (
-        <EspecialEnvelope onOpen={handleOpen} />
+        <EspecialEnvelope onOpen={handleOpen} sealUrl={sealUrl} />
       )}
       <StickyBanner guestName={project.guest_name ?? project.quinceanera_name} />
       <EspecialHero project={project} decorationSrc={decorationSrc} />

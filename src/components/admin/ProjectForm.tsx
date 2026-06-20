@@ -74,6 +74,7 @@ function toFormData(project?: Project): ProjectFormData {
       especial_gift_registries: [],
       especial_rsvp_phones: [],
       especial_rsvp_email: '',
+      especial_seal_url: '',
     }
   }
   return {
@@ -121,6 +122,7 @@ function toFormData(project?: Project): ProjectFormData {
     especial_gift_registries: (project.extra_config?.gift_registries as Array<{ giftStore: string; liverpoolLink: string }>) ?? [],
     especial_rsvp_phones: (project.extra_config?.rsvp_phones as Array<{ phone: string; label: string }>) ?? [],
     especial_rsvp_email: (project.extra_config?.rsvp_email as string) ?? '',
+    especial_seal_url: (project.extra_config?.seal_url as string) ?? '',
     color_theme: project.color_theme ?? 'rosagold',
     invitation_text: project.invitation_text ?? '',
     show_video: project.show_video ?? false,
@@ -777,6 +779,26 @@ export default function ProjectForm({ project }: Props) {
                     <p className="text-xs text-gray-400">Guarda el proyecto primero para subir archivos.</p>
                   )}
                 </div>
+              )}
+            </Field>
+            <Field title="Sello personalizado">
+              <input
+                type="url"
+                value={form.especial_seal_url}
+                onChange={e => set('especial_seal_url', e.target.value)}
+                className={input}
+                placeholder="https://..."
+              />
+              {project?.id ? (
+                <MediaUploader
+                  projectId={project.id}
+                  bucket="invitation-media"
+                  accept="image/*"
+                  onUploadComplete={url => set('especial_seal_url', url)}
+                  label="Subir sello"
+                />
+              ) : (
+                <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para subir archivos.</p>
               )}
             </Field>
           </SectionCard>

@@ -60,6 +60,7 @@ export interface ProjectFormData {
   especial_gift_registries: Array<{ giftStore: string; liverpoolLink: string }>
   especial_rsvp_phones: Array<{ phone: string; label: string }>
   especial_rsvp_email: string
+  especial_seal_url: string
 }
 
 function formDataToProject(data: ProjectFormData) {
@@ -142,6 +143,7 @@ function formDataToProject(data: ProjectFormData) {
         ? { rsvp_phones: data.especial_rsvp_phones.filter(p => p.phone) }
         : {}),
       ...(data.especial_rsvp_email ? { rsvp_email: data.especial_rsvp_email } : {}),
+      ...(data.especial_seal_url   ? { seal_url:   data.especial_seal_url   } : {}),
     },
   }
 }
