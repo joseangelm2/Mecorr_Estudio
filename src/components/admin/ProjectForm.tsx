@@ -7,6 +7,7 @@ import { createProject, updateProject, type ProjectFormData } from '@/app/admin/
 import type { Project, TemplateId } from '@/types/invitation'
 import { THEMES } from '@/lib/themes'
 import { ELEGANCE_THEMES } from '@/lib/elegance-themes'
+import { ESPECIAL_THEMES } from '@/lib/especial-themes'
 
 // Lazy: arrastra el cliente de Supabase — no necesario en el bundle inicial
 const MediaUploader = dynamic(() => import('@/components/admin/MediaUploader'), { ssr: false })
@@ -22,6 +23,7 @@ const TEMPLATES: { value: TemplateId; label: string; emoji: string }[] = [
   { value: 'sellorosa', label: 'Sello Rosa', emoji: '🌹' },
   { value: 'rosagold', label: 'Rosa Gold', emoji: '✨' },
   { value: 'magical', label: 'Magical', emoji: '🦋' },
+  { value: 'especial', label: 'Especial', emoji: '⭐' },
 ]
 
 const TABS = [
@@ -33,7 +35,13 @@ const TABS = [
   { label: 'Itinerario', icon: '📋' },
   { label: 'Estilo', icon: '🎨' },
   { label: 'Media', icon: '🖼' },
+  { label: 'Especial', icon: '⭐' },
 ]
+
+interface DressPaletteEntry {
+  name: string
+  colors: string[]
+}
 
 function toFormData(project?: Project): ProjectFormData {
   if (!project) {
@@ -56,6 +64,12 @@ function toFormData(project?: Project): ProjectFormData {
       show_datos_bancarios: false, datos_bancarios_text: '',
       show_itinerary: true,
       confirmation_phrase: '', confirmation_highlight_date: '',
+      especial_background_url: '',
+      especial_decoration_style: 'flores',
+      especial_banner_text: '',
+      especial_footer_text: '',
+      especial_show_dress_palette: false,
+      especial_dress_palette: [],
     }
   }
   return {
@@ -93,6 +107,12 @@ function toFormData(project?: Project): ProjectFormData {
     gift_store: project.gift_registry?.giftStore ?? 'liverpool',
     parents_title:  (project.extra_config?.parents_title  as string) ?? '',
     padrinos_title: (project.extra_config?.padrinos_title as string) ?? '',
+    especial_background_url: (project.extra_config?.background_url as string) ?? '',
+    especial_decoration_style: (project.extra_config?.decoration_style as string) ?? 'flores',
+    especial_banner_text: (project.extra_config?.banner_text as string) ?? '',
+    especial_footer_text: (project.extra_config?.footer_text as string) ?? '',
+    especial_show_dress_palette: (project.extra_config?.show_dress_palette as boolean) ?? false,
+    especial_dress_palette: (project.extra_config?.dress_palette as DressPaletteEntry[]) ?? [],
     color_theme: project.color_theme ?? 'rosagold',
     invitation_text: project.invitation_text ?? '',
     show_video: project.show_video ?? false,
@@ -213,7 +233,9 @@ export default function ProjectForm({ project }: Props) {
     <div>
       {/* Tabs */}
       <div className="flex gap-1 mb-8 bg-gray-100 p-1.5 rounded-2xl overflow-x-auto">
-        {TABS.map((tab, i) => (
+        {TABS.map((tab, i) => {
+          if (i === 8 && form.template !== 'especial') return null
+          return (
           <button
             key={tab.label}
             onClick={() => setActiveTab(i)}
@@ -226,7 +248,8 @@ export default function ProjectForm({ project }: Props) {
             <span className="text-base leading-none">{tab.icon}</span>
             {tab.label}
           </button>
-        ))}
+          )
+        })}
       </div>
 
       {/* Tab 0: General */}
@@ -275,10 +298,14 @@ export default function ProjectForm({ project }: Props) {
             </div>
           </Field>
 
-          {(form.template === 'sobre' || form.template === 'elegance') && (
+          {(form.template === 'sobre' || form.template === 'elegance' || form.template === 'especial') && (
             <Field title="Paleta de color">
               <div className="flex flex-wrap gap-4">
-                {(form.template === 'sobre' ? THEMES : ELEGANCE_THEMES).map(theme => (
+                {(
+                  form.template === 'sobre' ? THEMES :
+                  form.template === 'especial' ? ESPECIAL_THEMES :
+                  ELEGANCE_THEMES
+                ).map(theme => (
                   <button
                     key={theme.id}
                     type="button"
@@ -671,6 +698,153 @@ export default function ProjectForm({ project }: Props) {
             <Field title={`Link de ${form.gift_store === 'liverpool' ? 'Liverpool' : form.gift_store === 'amazon' ? 'Amazon' : form.gift_store === 'palacio' ? 'Palacio de Hierro' : 'Mesa de Regalos'}`}>
               <input type="url" value={form.liverpool_link} onChange={e => set('liverpool_link', e.target.value)} className={input} placeholder="https://..." />
             </Field>
+          </SectionCard>
+        </div>
+      )}
+
+      {/* Tab 8: Especial */}
+      {activeTab === 8 && form.template === 'especial' && (
+        <div className="space-y-6">
+          <SectionCard title="Fondo y decoraciones">
+            <Field title="URL de imagen de fondo personalizada">
+              <input
+                type="url"
+                value={form.especial_background_url}
+                onChange={e => set('especial_background_url', e.target.value)}
+                className={input}
+                placeholder="https://..."
+              />
+            </Field>
+            <Field title="Decoraciones">
+              <div className="flex gap-3">
+                {(['flores', 'mariposas', 'estrellas'] as const).map(style => (
+                  <button
+                    key={style}
+                    type="button"
+                    onClick={() => set('especial_decoration_style', style)}
+                    className={`flex-1 py-3 rounded-xl border-2 text-sm font-medium capitalize transition-all ${
+                      form.especial_decoration_style === style
+                        ? 'border-rose-400 bg-rose-50 text-rose-600'
+                        : 'border-gray-100 bg-white text-gray-500 hover:border-gray-200'
+                    }`}
+                  >
+                    {style}
+                  </button>
+                ))}
+              </div>
+            </Field>
+          </SectionCard>
+
+          <SectionCard title="Textos opcionales">
+            <Field title="Texto del banner (nombre del invitado)">
+              <input
+                type="text"
+                value={form.especial_banner_text}
+                onChange={e => set('especial_banner_text', e.target.value)}
+                className={input}
+                placeholder="Nombre de la quinceañera"
+              />
+            </Field>
+            <Field title="Texto de cierre">
+              <textarea
+                value={form.especial_footer_text}
+                onChange={e => set('especial_footer_text', e.target.value)}
+                className={input}
+                rows={2}
+                placeholder="¡Te Esperamos!"
+              />
+            </Field>
+          </SectionCard>
+
+          <SectionCard title="Paleta de colores (código de vestimenta)">
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-semibold text-gray-700">Mostrar paleta de colores</span>
+              <Toggle
+                checked={form.especial_show_dress_palette}
+                onChange={v => set('especial_show_dress_palette', v)}
+                label="Mostrar paleta"
+              />
+            </div>
+            {form.especial_show_dress_palette && (
+              <div className="space-y-3 mt-4">
+                {form.especial_dress_palette.map((entry, i) => (
+                  <div key={i} className="rounded-xl border border-gray-100 bg-gray-50/60 p-4 space-y-3">
+                    <div className="flex items-center gap-3">
+                      <input
+                        type="text"
+                        value={entry.name}
+                        onChange={e => {
+                          const updated = [...form.especial_dress_palette]
+                          updated[i] = { ...updated[i], name: e.target.value }
+                          set('especial_dress_palette', updated)
+                        }}
+                        className={input}
+                        placeholder="Nombre del color"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const updated = form.especial_dress_palette.filter((_, idx) => idx !== i)
+                          set('especial_dress_palette', updated)
+                        }}
+                        className="w-10 h-10 rounded-xl border border-red-200 text-red-400 hover:bg-red-50 flex items-center justify-center transition-colors shrink-0"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {entry.colors.map((color, j) => (
+                        <div key={j} className="flex items-center gap-1">
+                          <input
+                            type="color"
+                            value={color}
+                            onChange={e => {
+                              const updated = [...form.especial_dress_palette]
+                              const colors = [...updated[i].colors]
+                              colors[j] = e.target.value
+                              updated[i] = { ...updated[i], colors }
+                              set('especial_dress_palette', updated)
+                            }}
+                            className="w-9 h-9 rounded cursor-pointer border border-gray-200"
+                          />
+                          {entry.colors.length > 1 && (
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const updated = [...form.especial_dress_palette]
+                                updated[i] = { ...updated[i], colors: updated[i].colors.filter((_, ci) => ci !== j) }
+                                set('especial_dress_palette', updated)
+                              }}
+                              className="text-gray-400 hover:text-red-400 text-xs"
+                            >
+                              ✕
+                            </button>
+                          )}
+                        </div>
+                      ))}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const updated = [...form.especial_dress_palette]
+                          updated[i] = { ...updated[i], colors: [...updated[i].colors, '#ffffff'] }
+                          set('especial_dress_palette', updated)
+                        }}
+                        className="w-9 h-9 rounded border-2 border-dashed border-gray-300 text-gray-400 hover:border-rose-300 hover:text-rose-400 flex items-center justify-center text-sm font-bold transition-all"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  onClick={() => set('especial_dress_palette', [...form.especial_dress_palette, { name: '', colors: ['#ffffff'] }])}
+                  className="w-full py-4 border-2 border-dashed border-gray-200 rounded-xl text-sm text-gray-400 hover:border-rose-300 hover:text-rose-400 transition-all font-medium"
+                >
+                  + Agregar color
+                </button>
+              </div>
+            )}
           </SectionCard>
         </div>
       )}

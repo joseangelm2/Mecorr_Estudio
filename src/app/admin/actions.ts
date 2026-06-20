@@ -50,6 +50,12 @@ export interface ProjectFormData {
   show_itinerary: boolean
   confirmation_phrase: string
   confirmation_highlight_date: string
+  especial_background_url: string
+  especial_decoration_style: string
+  especial_banner_text: string
+  especial_footer_text: string
+  especial_show_dress_palette: boolean
+  especial_dress_palette: Array<{ name: string; colors: string[] }>
 }
 
 function formDataToProject(data: ProjectFormData) {
@@ -117,6 +123,13 @@ function formDataToProject(data: ProjectFormData) {
     extra_config: {
       ...(data.parents_title  ? { parents_title:  data.parents_title  } : {}),
       ...(data.padrinos_title ? { padrinos_title: data.padrinos_title } : {}),
+      // especial fields
+      ...(data.especial_background_url  ? { background_url:      data.especial_background_url  } : {}),
+      ...(data.especial_decoration_style !== 'flores' ? { decoration_style: data.especial_decoration_style } : {}),
+      ...(data.especial_banner_text     ? { banner_text:         data.especial_banner_text     } : {}),
+      ...(data.especial_footer_text     ? { footer_text:         data.especial_footer_text     } : {}),
+      ...(data.especial_show_dress_palette ? { show_dress_palette: true } : {}),
+      ...(data.especial_dress_palette.length > 0 ? { dress_palette: data.especial_dress_palette } : {}),
     },
   }
 }
