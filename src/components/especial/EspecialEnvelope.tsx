@@ -3,28 +3,32 @@
 import { useRef } from 'react'
 
 interface Props {
+  onSealClick?: () => void
   onOpen?: () => void
   sealUrl?: string
+  envelopeRightUrl?: string
+  envelopeLeftUrl?: string
 }
 
-export default function EspecialEnvelope({ onOpen, sealUrl = '/images/sello.png' }: Props) {
+export default function EspecialEnvelope({ onSealClick, onOpen, sealUrl = '/images/sello.png', envelopeRightUrl = '/images/sobre-derecho.png', envelopeLeftUrl = '/images/sobre-izquierdo.png' }: Props) {
   const introRef = useRef<HTMLElement>(null)
   const sDerechoRef = useRef<HTMLImageElement>(null)
   const sIzquierdoRef = useRef<HTMLImageElement>(null)
 
   function openEnvelope() {
+    onSealClick?.()
     introRef.current?.classList.add('desaparecer')
     sDerechoRef.current?.classList.add('efecto-derecha')
     sIzquierdoRef.current?.classList.add('efecto-izquierda')
     document.documentElement.classList.add('con-scroll')
     window.scrollTo(0, 0)
-    onOpen?.()
+    setTimeout(() => onOpen?.(), 3000)
   }
 
   return (
     <section ref={introRef} id="intro" className="bg-overlay-intro bg-intro">
-      <img ref={sDerechoRef} id="s-derecho" className="sobre-derecho" src="/images/sobre-derecho.png" alt="" />
-      <img ref={sIzquierdoRef} id="s-izquierdo" className="sobre-izquierdo" src="/images/sobre-izquierdo.png" alt="" />
+      <img ref={sDerechoRef} id="s-derecho" className="sobre-derecho" src={envelopeRightUrl} alt="" />
+      <img ref={sIzquierdoRef} id="s-izquierdo" className="sobre-izquierdo" src={envelopeLeftUrl} alt="" />
       <button
         onClick={openEnvelope}
         style={{ cursor: 'pointer', background: 'none', border: 'none', padding: 0, position: 'absolute', top: '45%', left: '40%', zIndex: 99999 }}

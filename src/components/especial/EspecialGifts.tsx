@@ -79,7 +79,6 @@ export default function EspecialGifts({ project, decorationSrc = '/images/flores
             return (
               <div key={i} className="mb-20 wow fadeInUp">
                 <img src={storeIcon} alt={storeLabel} style={{ width: '120px', marginBottom: '16px' }} />
-                <p className="color-textos mb-20">Tu presencia ilumina nuestro evento. Si deseas regalarme algo, aquí puedes ver mi lista:</p>
                 <a href={reg.liverpoolLink} target="_blank" rel="noreferrer" className="color-principal link-abrir">
                   Ver Mesa de Regalos
                 </a>
@@ -94,7 +93,6 @@ export default function EspecialGifts({ project, decorationSrc = '/images/flores
             return (
               <div className="mb-20 wow fadeInUp">
                 <img src={storeIcon} alt={storeLabel} style={{ width: '120px', marginBottom: '16px' }} />
-                <p className="color-textos mb-20">Tu presencia ilumina nuestro evento. Si deseas regalarme algo, aquí puedes ver mi lista:</p>
                 <a href={project.gift_registry!.liverpoolLink} target="_blank" rel="noreferrer" className="color-principal link-abrir">
                   Ver Mesa de Regalos
                 </a>

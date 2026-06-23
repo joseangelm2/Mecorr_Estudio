@@ -195,7 +195,7 @@ p, a, li {
 .sobre-izquierdo { position: absolute; left: 0; top: 0; bottom: 0; margin: auto; height: 100%; filter: var(--inv-filter-light, hue-rotate(0deg) brightness(1.4)); transition: filter 0.4s; }
 .sobre-derecho   { position: absolute; right: 0; top: 0; height: 100%; filter: var(--inv-filter-light, hue-rotate(0deg) brightness(1.4)); transition: filter 0.4s; }
 .sello           { position: absolute; width: 120px; top: 45%; left: 40%; }
-.sello-img       { filter: var(--inv-filter, hue-rotate(0deg)); transition: filter 0.4s; }
+.sello-img       { filter: var(--inv-seal-filter, hue-rotate(0deg)); transition: filter 0.4s; }
 
 .desaparecer   { visibility: hidden; opacity: 0; transition: all 3s; }
 .efecto-derecha { right: -800px !important; transition: all 3s; position: absolute; }
@@ -277,27 +277,28 @@ ul.tiempo { margin: 0; padding: 0; text-align: center; display: flex; justify-co
 .timeline-container .vertical-scrollable-timeline { width: 100%; list-style-type: none; position: relative; padding: 0; }
 .timeline-container .vertical-scrollable-timeline .list-progress {
   width: 8px; height: 100%; background-color: var(--inv-primary);
-  position: absolute; left: 53px; top: 0; overflow: hidden;
+  position: absolute; left: 51px; top: 0; overflow: hidden;
   transition: background 0.4s;
 }
 .timeline-container .vertical-scrollable-timeline .list-progress .inner {
   position: absolute; right: 0; bottom: 0; height: 100%;
   background-color: #c5c3cb; width: 100%;
 }
-.timeline-container .vertical-scrollable-timeline li { position: relative; padding: 0px 0px 80px 100px; }
+.timeline-container .vertical-scrollable-timeline li { position: relative; padding: 0px 0px 80px 115px; }
 .timeline-container .vertical-scrollable-timeline li:last-child { padding-bottom: 16px; }
 .timeline-container .vertical-scrollable-timeline li .icon-holder {
-  position: absolute; left: 0; top: 0; width: 50px; height: 50px;
+  position: absolute; left: 30px; top: 0; width: 50px; height: 50px;
   display: flex; justify-content: center; align-items: center;
   background-color: #c5c3cb; border-radius: 50%; z-index: 1; transition: 0.4s all;
 }
 .timeline-container .vertical-scrollable-timeline li .icon-holder::before {
   content: ""; width: 100px; height: 100px; border: 4px solid #fff;
-  position: absolute; background-color: #c5c3cb; border-radius: 50%; z-index: -1; transition: 0.4s all;
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  background-color: #c5c3cb; border-radius: 50%; z-index: -1; transition: 0.4s all;
 }
 .timeline-container .vertical-scrollable-timeline li::before {
   content: ""; position: absolute; height: 100%; width: 8px;
-  background-color: transparent; left: 48px; z-index: 0;
+  background-color: transparent; left: 51px; z-index: 0;
 }
 .timeline-container .vertical-scrollable-timeline li.active .icon-holder { background-color: var(--inv-primary); }
 .timeline-container .vertical-scrollable-timeline li.active .icon-holder img { filter: invert(100%); }

@@ -75,6 +75,10 @@ function toFormData(project?: Project): ProjectFormData {
       especial_rsvp_phones: [],
       especial_rsvp_email: '',
       especial_seal_url: '',
+      especial_seal_filter: '',
+      especial_dress_code_image_url: '',
+      especial_envelope_right_url: '',
+      especial_envelope_left_url: '',
     }
   }
   return {
@@ -123,6 +127,10 @@ function toFormData(project?: Project): ProjectFormData {
     especial_rsvp_phones: (project.extra_config?.rsvp_phones as Array<{ phone: string; label: string }>) ?? [],
     especial_rsvp_email: (project.extra_config?.rsvp_email as string) ?? '',
     especial_seal_url: (project.extra_config?.seal_url as string) ?? '',
+    especial_seal_filter: (project.extra_config?.seal_filter as string) ?? '',
+    especial_dress_code_image_url: (project.extra_config?.dress_code_image_url as string) ?? '',
+    especial_envelope_right_url: (project.extra_config?.envelope_right_url as string) ?? '',
+    especial_envelope_left_url: (project.extra_config?.envelope_left_url as string) ?? '',
     color_theme: project.color_theme ?? 'rosagold',
     invitation_text: project.invitation_text ?? '',
     show_video: project.show_video ?? false,
@@ -136,6 +144,24 @@ function toFormData(project?: Project): ProjectFormData {
     confirmation_phrase: project.confirmation_phrase ?? '',
     confirmation_highlight_date: project.confirmation_highlight_date ?? '',
   }
+}
+
+function hexToSealFilter(hex: string): string {
+  const r = parseInt(hex.slice(1, 3), 16) / 255
+  const g = parseInt(hex.slice(3, 5), 16) / 255
+  const b = parseInt(hex.slice(5, 7), 16) / 255
+  const max = Math.max(r, g, b), min = Math.min(r, g, b)
+  let h = 0
+  if (max !== min) {
+    const d = max - min
+    switch (max) {
+      case r: h = ((g - b) / d + (g < b ? 6 : 0)) * 60; break
+      case g: h = ((b - r) / d + 2) * 60; break
+      case b: h = ((r - g) / d + 4) * 60; break
+    }
+  }
+  const s = max === 0 ? 0 : (max - min) / max
+  return `hue-rotate(${Math.round(h)}deg) saturate(${(s * 2).toFixed(1)}) brightness(${(max * 1.5).toFixed(1)})`
 }
 
 // ── Shared styles ────────────────────────────────────────────────
@@ -801,6 +827,85 @@ export default function ProjectForm({ project }: Props) {
                 <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para subir archivos.</p>
               )}
             </Field>
+            <Field title="Sobre derecho (imagen)">
+              <input
+                type="url"
+                value={form.especial_envelope_right_url}
+                onChange={e => set('especial_envelope_right_url', e.target.value)}
+                className={input}
+                placeholder="https://..."
+              />
+              {project?.id ? (
+                <MediaUploader
+                  projectId={project.id}
+                  bucket="invitation-media"
+                  accept="image/*"
+                  onUploadComplete={url => set('especial_envelope_right_url', url)}
+                  label="Subir sobre derecho"
+                />
+              ) : (
+                <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para subir archivos.</p>
+              )}
+            </Field>
+            <Field title="Sobre izquierdo (imagen)">
+              <input
+                type="url"
+                value={form.especial_envelope_left_url}
+                onChange={e => set('especial_envelope_left_url', e.target.value)}
+                className={input}
+                placeholder="https://..."
+              />
+              {project?.id ? (
+                <MediaUploader
+                  projectId={project.id}
+                  bucket="invitation-media"
+                  accept="image/*"
+                  onUploadComplete={url => set('especial_envelope_left_url', url)}
+                  label="Subir sobre izquierdo"
+                />
+              ) : (
+                <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para subir archivos.</p>
+              )}
+            </Field>
+            <Field title="Color del sello">
+              <div className="flex flex-wrap gap-2 items-center">
+                <button
+                  type="button"
+                  onClick={() => set('especial_seal_filter', '')}
+                  className={`px-3 py-1.5 rounded-lg text-sm border-2 transition-all ${form.especial_seal_filter === '' ? 'border-rose-400 bg-rose-50 text-rose-600' : 'border-gray-100 bg-white text-gray-500 hover:border-gray-200'}`}
+                >
+                  Del tema
+                </button>
+                <button
+                  type="button"
+                  onClick={() => set('especial_seal_filter', 'none')}
+                  className={`px-3 py-1.5 rounded-lg text-sm border-2 transition-all ${form.especial_seal_filter === 'none' ? 'border-rose-400 bg-rose-50 text-rose-600' : 'border-gray-100 bg-white text-gray-500 hover:border-gray-200'}`}
+                >
+                  Sin filtro
+                </button>
+                {ESPECIAL_THEMES.map(t => (
+                  <button
+                    key={t.id}
+                    type="button"
+                    title={t.label}
+                    onClick={() => set('especial_seal_filter', t.filterValue)}
+                    style={{
+                      width: 26, height: 26, borderRadius: '50%',
+                      background: t.primary,
+                      border: form.especial_seal_filter === t.filterValue ? '3px solid #f43f5e' : '2px solid #e5e7eb',
+                      flexShrink: 0,
+                    }}
+                  />
+                ))}
+                <input
+                  type="color"
+                  title="Color personalizado"
+                  className="w-8 h-8 rounded cursor-pointer border-2 border-gray-200 p-0.5 bg-white"
+                  onChange={e => set('especial_seal_filter', hexToSealFilter(e.target.value))}
+                />
+              </div>
+              <p className="text-xs text-gray-400 mt-1">Elige el tinte de color del sello. "Del tema" hereda el color de la invitación.</p>
+            </Field>
           </SectionCard>
 
           <SectionCard title="Textos opcionales">
@@ -977,6 +1082,26 @@ export default function ProjectForm({ project }: Props) {
                 </button>
               </div>
             )}
+            <Field title="Imagen de referencia (vestimenta)">
+              <input
+                type="url"
+                value={form.especial_dress_code_image_url}
+                onChange={e => set('especial_dress_code_image_url', e.target.value)}
+                className={input}
+                placeholder="https://..."
+              />
+              {project?.id ? (
+                <MediaUploader
+                  projectId={project.id}
+                  bucket="invitation-media"
+                  accept="image/*"
+                  onUploadComplete={url => set('especial_dress_code_image_url', url)}
+                  label="Subir imagen de vestimenta"
+                />
+              ) : (
+                <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para subir archivos.</p>
+              )}
+            </Field>
           </SectionCard>
 
           <SectionCard title="Confirmación (WhatsApp y Correo)">

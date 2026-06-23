@@ -61,6 +61,10 @@ export interface ProjectFormData {
   especial_rsvp_phones: Array<{ phone: string; label: string }>
   especial_rsvp_email: string
   especial_seal_url: string
+  especial_seal_filter: string
+  especial_dress_code_image_url: string
+  especial_envelope_right_url: string
+  especial_envelope_left_url: string
 }
 
 function formDataToProject(data: ProjectFormData) {
@@ -143,7 +147,11 @@ function formDataToProject(data: ProjectFormData) {
         ? { rsvp_phones: data.especial_rsvp_phones.filter(p => p.phone) }
         : {}),
       ...(data.especial_rsvp_email ? { rsvp_email: data.especial_rsvp_email } : {}),
-      ...(data.especial_seal_url   ? { seal_url:   data.especial_seal_url   } : {}),
+      ...(data.especial_seal_url    ? { seal_url:    data.especial_seal_url    } : {}),
+      ...(data.especial_seal_filter !== '' ? { seal_filter: data.especial_seal_filter } : {}),
+      ...(data.especial_dress_code_image_url  ? { dress_code_image_url:  data.especial_dress_code_image_url  } : {}),
+      ...(data.especial_envelope_right_url    ? { envelope_right_url:    data.especial_envelope_right_url    } : {}),
+      ...(data.especial_envelope_left_url     ? { envelope_left_url:     data.especial_envelope_left_url     } : {}),
     },
   }
 }

@@ -31,6 +31,9 @@ export default function EspecialTemplate({ project }: Props) {
   const bgUrl = (project.extra_config?.background_url as string) || null
   const decorationSrc = (project.extra_config?.decoration_url as string) || '/images/flores-01.png'
   const sealUrl = (project.extra_config?.seal_url as string) || '/images/sello.png'
+  const sealFilter = (project.extra_config?.seal_filter as string) ?? ''
+  const envelopeRightUrl = (project.extra_config?.envelope_right_url as string) || '/images/sobre-derecho.png'
+  const envelopeLeftUrl  = (project.extra_config?.envelope_left_url  as string) || '/images/sobre-izquierdo.png'
   const showDressCode = Boolean(project.dress_code) || project.extra_config?.show_dress_palette === true
 
   useEffect(() => {
@@ -41,20 +44,16 @@ export default function EspecialTemplate({ project }: Props) {
     root.style.setProperty('--inv-border',        theme.primary)
     root.style.setProperty('--inv-filter',        theme.filterValue)
     root.style.setProperty('--inv-filter-light',  theme.filterLight)
+    root.style.setProperty('--inv-seal-filter',   sealFilter !== '' ? sealFilter : theme.filterValue)
     if (bgUrl) {
       root.style.setProperty('--inv-bg-url', `url(${bgUrl})`)
       root.style.setProperty('--inv-bg-filter', 'none')
     }
     return () => {
-      const vars = ['--inv-primary', '--inv-primary-dark', '--inv-primary-light', '--inv-border', '--inv-filter', '--inv-filter-light', '--inv-bg-url', '--inv-bg-filter']
+      const vars = ['--inv-primary', '--inv-primary-dark', '--inv-primary-light', '--inv-border', '--inv-filter', '--inv-filter-light', '--inv-seal-filter', '--inv-bg-url', '--inv-bg-filter']
       vars.forEach(v => root.style.removeProperty(v))
     }
-  }, [theme, bgUrl])
-
-  function handleOpen() {
-    audioRef.current?.play().catch(() => {})
-    setEnvelopeOpen(true)
-  }
+  }, [theme, bgUrl, sealFilter])
 
   return (
     <div>
@@ -63,7 +62,13 @@ export default function EspecialTemplate({ project }: Props) {
         <source src={project.music_url ?? '/images/esmeralda/musica.mp3'} type="audio/mpeg" />
       </audio>
       {!envelopeOpen && (
-        <EspecialEnvelope onOpen={handleOpen} sealUrl={sealUrl} />
+        <EspecialEnvelope
+          onSealClick={() => audioRef.current?.play().catch(() => {})}
+          onOpen={() => setEnvelopeOpen(true)}
+          sealUrl={sealUrl}
+          envelopeRightUrl={envelopeRightUrl}
+          envelopeLeftUrl={envelopeLeftUrl}
+        />
       )}
       <StickyBanner guestName={project.guest_name ?? project.quinceanera_name} />
       <EspecialHero project={project} decorationSrc={decorationSrc} />

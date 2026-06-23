@@ -62,9 +62,12 @@ export default function EspecialEventDate({ eventDate }: Props) {
               <span>Seg</span>
             </li>
           </ul>
-          <div className="mt-30 wow fadeInUp" style={{ marginTop: '30px' }}>
-            <p className="text-white" style={{ fontSize: '22px', letterSpacing: '2px' }}>
-              {day} de {month} de {year}
+          <div className="wow fadeInUp" style={{ marginTop: '30px' }}>
+            <p className="text-white" style={{ fontSize: '11px', letterSpacing: '6px', textTransform: 'uppercase', marginBottom: '8px', opacity: 0.75 }}>
+              ✦ fecha del evento ✦
+            </p>
+            <p className="texto-frase text-white" style={{ fontSize: '32px', letterSpacing: '3px', lineHeight: 1.1, whiteSpace: 'nowrap', textShadow: '0 2px 12px rgba(0,0,0,0.35)' }}>
+              {day} · {month} · {year}
             </p>
           </div>
         </div>

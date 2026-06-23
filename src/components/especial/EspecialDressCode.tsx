@@ -13,6 +13,7 @@ interface Props {
 export default function EspecialDressCode({ project, decorationSrc = '/images/flores-01.png' }: Props) {
   const showPalette = project.extra_config?.show_dress_palette === true
   const palette = (project.extra_config?.dress_palette as DressPaletteEntry[] | undefined) ?? []
+  const dressCodeImageUrl = (project.extra_config?.dress_code_image_url as string) || null
 
   if (!project.dress_code && !showPalette) return null
 
@@ -57,6 +58,15 @@ export default function EspecialDressCode({ project, decorationSrc = '/images/fl
                   </div>
                 )
               })}
+            </div>
+          )}
+          {dressCodeImageUrl && (
+            <div className="wow fadeInUp" style={{ marginTop: '24px' }}>
+              <img
+                src={dressCodeImageUrl}
+                alt="Referencia de vestimenta"
+                style={{ maxWidth: '100%', borderRadius: '12px' }}
+              />
             </div>
           )}
         </div>

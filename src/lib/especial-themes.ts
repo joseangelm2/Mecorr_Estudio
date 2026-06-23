@@ -60,6 +60,16 @@ export const ESPECIAL_THEMES: EspecialTheme[] = [
     filterValue: 'hue-rotate(260deg) saturate(1.2)',
     filterLight: 'hue-rotate(260deg) saturate(0.8) brightness(1.4)',
   },
+  {
+    id: 'marino',
+    label: 'Azul Marino',
+    swatch: '#1e3a6e',
+    primary: '#2b4f8a',
+    primaryDark: '#1e3a6e',
+    primaryLight: '#3b6cb0',
+    filterValue: 'hue-rotate(218deg) saturate(2) brightness(0.55)',
+    filterLight: 'hue-rotate(218deg) saturate(0.85) brightness(1.2)',
+  },
 ]
 
 export const DEFAULT_ESPECIAL_THEME = ESPECIAL_THEMES[0]
