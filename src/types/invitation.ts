@@ -84,4 +84,40 @@ export interface Project {
   confirmation_phrase: string | null
   confirmation_highlight_date: string | null
   extra_config: Record<string, unknown>
+  tiene_lista_invitados: boolean
+  pin_admin: string | null
+}
+
+// ─── Módulo Lista de Invitados ────────────────────────────────────────────────
+
+export type EstadoInvitado = 'alta' | 'enviado' | 'confirmo' | 'baja'
+export type ConfirmacionInvitado = 'SI' | 'NO'
+
+export interface GrupoEvento {
+  id: string
+  project_id: string
+  nombre: string
+  color: string
+  orden: number
+  created_at: string
+}
+
+export interface Invitado {
+  id: string
+  project_id: string
+  grupo_id: string
+  titular: string
+  num_invitados: number
+  whatsapp: string | null
+  token: string
+  estado: EstadoInvitado
+  confirmacion: ConfirmacionInvitado | null
+  fecha_envio: string | null
+  fecha_confirmacion: string | null
+  mensaje_felicitacion: string | null
+  device_id: string | null
+  created_at: string
+  updated_at: string
+  /** Join opcional para mostrar nombre/color del grupo en UI */
+  grupo?: GrupoEvento
 }

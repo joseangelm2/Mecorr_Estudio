@@ -83,3 +83,14 @@
 **Alternativas descartadas:** Un solo bucket (políticas de limpieza complejas, mezcla de tipos). Hash del contenido como nombre (deduplicación útil pero requiere calcular hash en cliente, complejidad extra). Nombres humanos/descriptivos (riesgo de colisión, requiere index UNIQUE en Storage).
 **Nota:** Sin deduplicación, reemplazar una imagen en el formulario deja el archivo anterior como huérfano en Storage — acumula basura con el tiempo.
 **Referencia:** `src/components/admin/MediaUploader.tsx:35,39-52`
+
+---
+
+### [2026-06-25] [orquestador] — Módulo Lista de Invitados: arquitectura de datos y rutas
+**Contexto:** Nuevo módulo opcional activado por evento para gestión de invitados con PIN, CRUD, WhatsApp, confirmaciones y boletos PDF. El módulo vive en rama `ListaInvitados` y se fusiona en un solo PR a `master`.
+**Decisión 1 — Tabla:** Campos nuevos (`tiene_lista_invitados`, `pin_admin`) se agregan directamente a `projects` vía migración. Sin tabla `eventos` separada. Nuevas tablas `grupos_evento` e `invitados` usan `project_id` como FK. `rsvp_phone` de `projects` actúa como `whatsapp_admin`; `ceremony.mapsUrl` es el `maps_url` del QR del boleto.
+**Decisión 2 — Ruta `/i/[slug]`:** Página inteligente: si `tiene_lista_invitados=true` → renderiza `PINLoginScreen`; si false → renderiza `TemplateRenderer` (sin breaking change para invitaciones existentes). Invitación personalizada del guest vive en `/i/[slug]/invitacion?token=[token]`.
+**Decisión 3 — Auth admin:** JWT efímero 30 min firmado con `LISTA_JWT_SECRET`. Se guarda en estado React (sin cookie, sin localStorage). PIN validado con bcrypt contra `projects.pin_admin`.
+**Por qué:** Sin tabla separada se evitan JOINs en cada lectura del módulo. La página inteligente no rompe links ya compartidos. El JWT en memoria garantiza que la sesión muere al cerrar la pestaña.
+**Alternativas descartadas:** Tabla `eventos` separada (JOINs, espejo del slug). Cookie de sesión (persiste más de lo necesario). Token en localStorage (superficie de ataque mayor).
+**Referencia:** `docs/ListaInvitados/PROYECTO_LISTA_INVITADOS_v3.md`, `docs/ListaInvitados/HANDOFF_MODULO_LISTA_INVITADOS.md`

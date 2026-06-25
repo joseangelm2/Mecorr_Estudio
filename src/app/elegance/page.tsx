@@ -70,6 +70,8 @@ const BASE_PROJECT: Omit<Project, 'color_theme'> = {
   confirmation_phrase: null,
   confirmation_highlight_date: null,
   extra_config: {},
+  tiene_lista_invitados: false,
+  pin_admin: null,
 }
 
 const FALLBACKS = [11, 21, 31, 41, 12, 22, 32]

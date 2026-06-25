@@ -25,6 +25,7 @@ export default function ColorSwitcher({ defaultTheme = "rosagold", variant = "fi
 
   useEffect(() => {
     const initial = THEMES.find((t) => t.id === defaultTheme) ?? THEMES[0];
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     applyTheme(initial);
   }, [defaultTheme]);
 

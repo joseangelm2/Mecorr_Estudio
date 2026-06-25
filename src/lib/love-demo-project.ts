@@ -66,4 +66,6 @@ export const LOVE_DEMO_PROJECT: Project = {
   confirmation_phrase: 'Favor de confirmar asistencia antes del 1 de Noviembre',
   confirmation_highlight_date: null,
   extra_config: {},
+  tiene_lista_invitados: false,
+  pin_admin: null,
 }

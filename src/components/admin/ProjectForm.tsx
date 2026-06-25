@@ -79,6 +79,8 @@ function toFormData(project?: Project): ProjectFormData {
       especial_dress_code_image_url: '',
       especial_envelope_right_url: '',
       especial_envelope_left_url: '',
+      tiene_lista_invitados: false,
+      pin_admin: '',
     }
   }
   return {
@@ -143,6 +145,8 @@ function toFormData(project?: Project): ProjectFormData {
     show_itinerary: project.show_itinerary ?? true,
     confirmation_phrase: project.confirmation_phrase ?? '',
     confirmation_highlight_date: project.confirmation_highlight_date ?? '',
+    tiene_lista_invitados: project.tiene_lista_invitados ?? false,
+    pin_admin: '',  // Nunca pre-llenar el hash; el admin ingresa un nuevo PIN si desea cambiarlo
   }
 }
 
@@ -904,7 +908,7 @@ export default function ProjectForm({ project }: Props) {
                   onChange={e => set('especial_seal_filter', hexToSealFilter(e.target.value))}
                 />
               </div>
-              <p className="text-xs text-gray-400 mt-1">Elige el tinte de color del sello. "Del tema" hereda el color de la invitación.</p>
+              <p className="text-xs text-gray-400 mt-1">Elige el tinte de color del sello. &ldquo;Del tema&rdquo; hereda el color de la invitación.</p>
             </Field>
           </SectionCard>
 
@@ -1162,6 +1166,28 @@ export default function ProjectForm({ project }: Props) {
           </SectionCard>
         </div>
       )}
+
+      {/* ── Módulo Lista de Invitados ── */}
+      <SectionCard title="Lista de invitados" description="Activa el portal de administración con PIN para gestionar invitados, envíos por WhatsApp, confirmaciones y boletos PDF.">
+        <div className="flex items-center justify-between mb-4">
+          <label className="text-sm font-medium text-gray-700">Activar módulo</label>
+          <Toggle checked={form.tiene_lista_invitados} onChange={v => set('tiene_lista_invitados', v)} label="" />
+        </div>
+        {form.tiene_lista_invitados && (
+          <Field title="PIN de acceso (4 dígitos)">
+            <input
+              type="password"
+              inputMode="numeric"
+              maxLength={4}
+              value={form.pin_admin}
+              onChange={e => set('pin_admin', e.target.value.replace(/\D/g, '').slice(0, 4))}
+              placeholder="••••"
+              className={input + ' tracking-widest text-center text-lg font-bold'}
+            />
+            <p className="text-xs text-gray-400 mt-1">Dejar vacío para conservar el PIN actual. Mínimo 4 dígitos numéricos.</p>
+          </Field>
+        )}
+      </SectionCard>
 
       {/* Error */}
       {error && (

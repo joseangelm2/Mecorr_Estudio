@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Research/spec docs — not production source
+    "docs/**",
   ]),
 ]);
 
