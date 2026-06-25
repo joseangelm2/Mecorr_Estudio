@@ -26,10 +26,7 @@ export default function EspecialDressCode({ project, decorationSrc = '/images/fl
           </div>
           <h2 className="titulo color-titulos mb-20 wow fadeInUp">Código de Vestimenta</h2>
           {project.dress_code?.colors && (
-            <p className="color-textos mb-20 wow fadeInUp" style={{ fontWeight: 600 }}>{project.dress_code.colors}</p>
-          )}
-          {project.dress_code?.notes && (
-            <p className="color-textos mb-30 wow fadeInUp" style={{ fontWeight: 600 }}>{project.dress_code.notes}</p>
+            <p className="color-textos mb-20 wow fadeInUp">{project.dress_code.colors}</p>
           )}
           {showPalette && palette.length > 0 && (
             <div
@@ -68,6 +65,9 @@ export default function EspecialDressCode({ project, decorationSrc = '/images/fl
                 style={{ maxWidth: '100%', borderRadius: '12px' }}
               />
             </div>
+          )}
+          {project.dress_code?.notes && (
+            <p className="mb-30 wow fadeInUp" style={{ fontWeight: 700, color: '#002366', fontSize: '1.1rem', marginTop: '40px' }}>{project.dress_code.notes}</p>
           )}
         </div>
       </div>
