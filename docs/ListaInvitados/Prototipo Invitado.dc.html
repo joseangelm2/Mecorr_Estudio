@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; background: #E7E5DF; }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.6); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; transform: scale(0.96); }
+      50%       { opacity: 1;   transform: scale(1);    }
+    }
+  </style>
+</helmet>
+
+<!-- ── PAGE WRAPPER ── -->
+<div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;gap:20px;font-family:'DM Sans',sans-serif;">
+
+  <!-- Top label -->
+  <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+    <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#A8A29E;">invitaxv.lol · Prototipo</div>
+    <div style="font-size:13px;color:#78716C;">Flujo del invitado — Juan Pérez</div>
+  </div>
+
+  <!-- ── PHONE FRAME ── -->
+  <div style="width:380px;height:780px;border-radius:44px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.22),0 0 0 1px rgba(0,0,0,.06);position:relative;flex:none;">
+
+    <!-- STATUS BAR (always on top) -->
+    <div style="position:absolute;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:16px 30px 0;font-size:15px;font-weight:600;color:{{ statusColor }};">
+      <span>9:41</span>
+      <div style="display:flex;gap:6px;align-items:center;">
+        <svg width="17" height="12" viewBox="0 0 17 12" fill="none">
+          <rect x="0" y="9" width="3" height="3" rx=".6" fill="{{ statusColor }}"/>
+          <rect x="4.5" y="6" width="3" height="6" rx=".6" fill="{{ statusColor }}"/>
+          <rect x="9" y="3" width="3" height="9" rx=".6" fill="{{ statusColor }}"/>
+          <rect x="13.5" y="0" width="3" height="12" rx=".6" fill="{{ statusColor }}"/>
+        </svg>
+        <svg width="27" height="13" viewBox="0 0 27 13" fill="none">
+          <rect x=".5" y=".5" width="22" height="12" rx="2.5" stroke="{{ statusColor }}" stroke-width="1"/>
+          <path d="M23.5 4.5h2a1 1 0 011 1v2a1 1 0 01-1 1h-2" fill="{{ statusColor }}"/>
+          <rect x="2" y="2" width="17" height="9" rx="1.5" fill="{{ statusColor }}"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════ -->
+    <!-- SCREEN 1: INVITACIÓN              -->
+    <!-- ══════════════════════════════════ -->
+    <sc-if value="{{ showInvitation }}" hint-placeholder-val="{{ true }}">
+      <div style="position:absolute;inset:0;opacity:1;background:#1C1917;animation:fadeIn 300ms ease;display:flex;flex-direction:column;">
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 32px 24px;">
+
+          <!-- Ornament -->
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:28px;">
+            <div style="height:1px;width:28px;background:rgba(196,149,106,.35);"></div>
+            <svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 0l1 4 4 1-4 1-1 4-1-4-4-1 4-1z" fill="#C4956A" opacity=".5"/></svg>
+            <div style="height:1px;width:28px;background:rgba(196,149,106,.35);"></div>
+          </div>
+
+          <div style="font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:rgba(196,149,106,.6);margin-bottom:8px;">Te invitamos a los</div>
+          <div style="font-family:'Playfair Display',serif;font-size:56px;font-weight:700;color:#F0EBE5;line-height:1;text-align:center;margin-bottom:2px;">XV</div>
+          <div style="font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:rgba(196,149,106,.6);margin-bottom:12px;">años de</div>
+          <div style="font-family:'Playfair Display',serif;font-size:40px;font-weight:700;color:#C4956A;line-height:1;text-align:center;margin-bottom:32px;">Sofía</div>
+
+          <!-- Greeting -->
+          <div style="font-size:13px;color:rgba(240,235,229,.45);margin-bottom:24px;">
+            Hola, <span style="color:#F0EBE5;font-weight:600;">Juan Pérez</span>
+          </div>
+
+          <!-- Event details card -->
+          <div style="width:100%;background:rgba(255,255,255,.05);border-radius:18px;padding:18px 20px;border:1px solid rgba(196,149,106,.12);display:flex;flex-direction:column;gap:12px;margin-bottom:28px;">
+            <div style="display:flex;align-items:center;gap:14px;">
+              <div style="width:32px;height:32px;border-radius:10px;background:rgba(196,149,106,.12);display:flex;align-items:center;justify-content:center;flex:none;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C4956A" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              </div>
+              <div style="font-size:14px;color:#F0EBE5;font-weight:500;">Sábado 2 de junio, 2025</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;">
+              <div style="width:32px;height:32px;border-radius:10px;background:rgba(196,149,106,.12);display:flex;align-items:center;justify-content:center;flex:none;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C4956A" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div style="font-size:14px;color:#F0EBE5;font-weight:500;">8:00 PM</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;">
+              <div style="width:32px;height:32px;border-radius:10px;background:rgba(196,149,106,.12);display:flex;align-items:center;justify-content:center;flex:none;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C4956A" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div style="font-size:14px;color:#F0EBE5;font-weight:500;">Salón El Jardín, CDMX</div>
+            </div>
+          </div>
+
+          <!-- CTA -->
+          <div onClick="{{ goToRsvp }}" style="width:100%;padding:18px;background:#C4956A;border-radius:16px;text-align:center;color:#fff;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:.2px;">Confirmar asistencia</div>
+
+          <!-- subtle note -->
+          <div style="font-size:12px;color:rgba(240,235,229,.25);margin-top:14px;text-align:center;">Invitados en tu pase: 4 personas</div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ══════════════════════════════════ -->
+    <!-- SCREEN 2: RSVP                    -->
+    <!-- ══════════════════════════════════ -->
+    <sc-if value="{{ showRsvp }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;inset:0;opacity:1;background:#F7F5F2;animation:slideUp 280ms ease;display:flex;flex-direction:column;">
+
+        <!-- Top bar -->
+        <div style="padding:60px 24px 0;display:flex;align-items:center;gap:12px;margin-bottom:28px;">
+          <div onClick="{{ goBack }}" style="width:36px;height:36px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;box-shadow:0 1px 4px rgba(0,0,0,.08);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#78716C" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </div>
+          <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#1C1917;">Confirmación</div>
+        </div>
+
+        <div style="flex:1;padding:0 24px 32px;display:flex;flex-direction:column;overflow-y:auto;">
+          <div style="font-size:14px;color:#78716C;margin-bottom:28px;line-height:1.5;">¿Podrás asistir a los XV de Sofía,<br><span style="font-weight:600;color:#1C1917;">Juan Pérez</span>?</div>
+
+          <!-- YES / NO -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px;">
+
+            <!-- YES -->
+            <div onClick="{{ selectYes }}" style="padding:22px 14px;background:{{ yesBg }};border-radius:20px;text-align:center;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:10px;border:2px solid {{ yesBorder }};box-shadow:{{ yesShadow }};transition:all 200ms ease;">
+              <div style="width:48px;height:48px;border-radius:50%;background:{{ yesIconBg }};display:flex;align-items:center;justify-content:center;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ yesIconColor }}" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div style="font-size:15px;font-weight:700;color:{{ yesTextColor }};">Sí, asistiré</div>
+              <div style="font-size:11px;color:{{ yesSubColor }};">4 personas</div>
+            </div>
+
+            <!-- NO -->
+            <div onClick="{{ selectNo }}" style="padding:22px 14px;background:{{ noBg }};border-radius:20px;text-align:center;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:10px;border:2px solid {{ noBorder }};box-shadow:{{ noShadow }};transition:all 200ms ease;">
+              <div style="width:48px;height:48px;border-radius:50%;background:{{ noIconBg }};display:flex;align-items:center;justify-content:center;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ noIconColor }}" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </div>
+              <div style="font-size:15px;font-weight:700;color:{{ noTextColor }};">No podré</div>
+              <div style="font-size:11px;color:{{ noSubColor }};">Lo sentimos mucho</div>
+            </div>
+          </div>
+
+          <!-- Mensaje opcional -->
+          <div style="margin-bottom:24px;">
+            <div style="font-size:11px;font-weight:600;color:#A8A29E;letter-spacing:.8px;text-transform:uppercase;margin-bottom:8px;">Mensaje para Sofía (opcional)</div>
+            <div style="position:relative;">
+              <textarea onChange="{{ updateMessage }}" value="{{ message }}" placeholder="Déjale un mensaje de felicitación…" style="width:100%;box-sizing:border-box;background:#fff;border-radius:14px;padding:14px 16px;border:1.5px solid #E7E5E3;font-family:'DM Sans',sans-serif;font-size:14px;color:#1C1917;resize:none;height:96px;outline:none;line-height:1.6;"></textarea>
+              <div style="position:absolute;bottom:10px;right:14px;font-size:11px;color:#C8C3BC;">{{ charCount }}/200</div>
+            </div>
+          </div>
+
+          <div style="flex:1;"></div>
+
+          <!-- CTA -->
+          <div onClick="{{ confirm }}" style="padding:18px;background:{{ ctaBg }};border-radius:16px;text-align:center;color:#fff;font-size:15px;font-weight:700;cursor:{{ ctaCursor }};transition:background 200ms ease;letter-spacing:.2px;">{{ ctaLabel }}</div>
+
+          <sc-if value="{{ noChoice }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:12px;color:#A8A29E;text-align:center;margin-top:10px;">Selecciona una opción para continuar</div>
+          </sc-if>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ══════════════════════════════════ -->
+    <!-- SCREEN 3: LOADING                 -->
+    <!-- ══════════════════════════════════ -->
+    <sc-if value="{{ showLoading }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;inset:0;opacity:1;background:#7C5C4A;animation:fadeIn 200ms ease;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;">
+        <div style="display:flex;align-items:center;justify-content:center;">{{ spinner }}</div>
+        <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:#fff;">Enviando…</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.5);">Sofía lo sabrá enseguida</div>
+      </div>
+    </sc-if>
+
+    <!-- ══════════════════════════════════ -->
+    <!-- SCREEN 4: SUCCESS                 -->
+    <!-- ══════════════════════════════════ -->
+    <sc-if value="{{ showSuccess }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;inset:0;opacity:1;background:#F7F5F2;animation:fadeIn 300ms ease;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 32px;">
+
+        <!-- Checkmark -->
+        <div style="margin-bottom:32px;display:flex;align-items:center;justify-content:center;">{{ checkmark }}</div>
+
+        <div style="font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:#1C1917;margin-bottom:8px;text-align:center;">{{ successTitle }}</div>
+        <div style="font-size:14px;color:#78716C;text-align:center;line-height:1.6;margin-bottom:36px;">{{ successBody }}</div>
+
+        <!-- If yes: show event reminder -->
+        <sc-if value="{{ confirmedYes }}" hint-placeholder-val="{{ false }}">
+          <div style="width:100%;background:#fff;border-radius:18px;padding:18px 20px;border:1px solid #E7E5E3;display:flex;flex-direction:column;gap:10px;margin-bottom:24px;animation:slideUp 300ms 200ms both ease;">
+            <div style="font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:#A8A29E;margin-bottom:2px;">Te esperamos</div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C4956A" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span style="font-size:13px;font-weight:600;color:#1C1917;">Sáb 2 de junio · 8:00 PM</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C4956A" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span style="font-size:13px;font-weight:600;color:#1C1917;">Salón El Jardín, CDMX</span>
+            </div>
+            <div style="background:#F7F5F2;border-radius:10px;padding:10px 12px;font-size:12px;color:#A8A29E;margin-top:4px;">
+              🎫 Recibirás tu boleto por WhatsApp
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- Reset -->
+        <div onClick="{{ reset }}" style="padding:14px 32px;border-radius:50px;border:1.5px solid #E7E5E3;font-size:13px;font-weight:600;color:#78716C;cursor:pointer;">Volver al inicio</div>
+      </div>
+    </sc-if>
+
+    <!-- Progress dots -->
+    <div style="position:absolute;bottom:18px;left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:50;">
+      <div style="width:{{ dot1w }}px;height:6px;border-radius:3px;background:{{ dot1c }};transition:all 300ms ease;"></div>
+      <div style="width:{{ dot2w }}px;height:6px;border-radius:3px;background:{{ dot2c }};transition:all 300ms ease;"></div>
+      <div style="width:{{ dot3w }}px;height:6px;border-radius:3px;background:{{ dot3c }};transition:all 300ms ease;"></div>
+      <div style="width:{{ dot4w }}px;height:6px;border-radius:3px;background:{{ dot4c }};transition:all 300ms ease;"></div>
+    </div>
+
+  </div>
+
+  <!-- Screen label below phone -->
+  <div style="font-size:12px;color:#A8A29E;font-weight:500;">{{ screenLabel }}</div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+class Component extends DCLogic {
+  state = {
+    screen: 'invitation',   // 'invitation' | 'rsvp' | 'loading' | 'success'
+    rsvpChoice: null,       // 'si' | 'no' | null
+    message: '',
+  };
+
+  renderVals() {
+    const { screen, rsvpChoice, message } = this.state;
+
+    const yesActive = rsvpChoice === 'si';
+    const noActive  = rsvpChoice === 'no';
+    const isDark = screen === 'invitation' || screen === 'loading';
+
+    // Progress dots
+    const screens = ['invitation', 'rsvp', 'loading', 'success'];
+    const idx = screens.indexOf(screen);
+    const dotActive = (i) => i === idx;
+    const dotColor = (i) => {
+      if (screen === 'invitation') return dotActive(i) ? '#C4956A' : 'rgba(196,149,106,.25)';
+      if (screen === 'loading')    return dotActive(i) ? '#fff'    : 'rgba(255,255,255,.25)';
+      return dotActive(i) ? '#7C5C4A' : '#D1CEC8';
+    };
+
+    // Spinner element
+    const spinner = React.createElement('div', {
+      style: {
+        width: 52, height: 52, borderRadius: '50%',
+        border: '3px solid rgba(255,255,255,.2)',
+        borderTopColor: '#fff',
+        animation: 'spin 800ms linear infinite',
+      }
+    });
+
+    // Checkmark element
+    const checkBg = rsvpChoice === 'si' ? '#16A34A' : '#78716C';
+    const checkmark = React.createElement('div', {
+      style: {
+        width: 88, height: 88, borderRadius: '50%', background: checkBg,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        animation: 'popIn 450ms cubic-bezier(0.34, 1.56, 0.64, 1)',
+        boxShadow: `0 8px 32px ${checkBg}55`,
+      }
+    },
+      React.createElement('svg', { width: 44, height: 44, viewBox: '0 0 24 24', fill: 'none', stroke: '#fff', strokeWidth: 2.5, strokeLinecap: 'round', strokeLinejoin: 'round' },
+        rsvpChoice === 'si'
+          ? React.createElement('polyline', { points: '20 6 9 17 4 12' })
+          : React.createElement('g', null,
+              React.createElement('line', { x1: 18, y1: 6, x2: 6, y2: 18 }),
+              React.createElement('line', { x1: 6, y1: 6, x2: 18, y2: 18 }),
+            )
+      )
+    );
+
+    return {
+      // Screen visibility
+      showInvitation: screen === 'invitation',
+      showRsvp:       screen === 'rsvp',
+      showLoading:    screen === 'loading',
+      showSuccess:    screen === 'success',
+      confirmedYes:   rsvpChoice === 'si',
+
+      // Status bar color
+      statusColor: isDark ? '#F0EBE5' : '#1C1917',
+
+      // YES button styles
+      yesBg:        yesActive ? '#16A34A' : '#fff',
+      yesBorder:    yesActive ? '#16A34A' : '#E7E5E3',
+      yesShadow:    yesActive ? '0 6px 24px rgba(22,163,74,.28)' : 'none',
+      yesIconBg:    yesActive ? 'rgba(255,255,255,.2)' : '#F0FDF4',
+      yesIconColor: yesActive ? '#fff' : '#16A34A',
+      yesTextColor: yesActive ? '#fff' : '#1C1917',
+      yesSubColor:  yesActive ? 'rgba(255,255,255,.65)' : '#A8A29E',
+
+      // NO button styles
+      noBg:        noActive ? '#1C1917' : '#fff',
+      noBorder:    noActive ? '#1C1917' : '#E7E5E3',
+      noShadow:    noActive ? '0 6px 24px rgba(28,25,23,.22)' : 'none',
+      noIconBg:    noActive ? 'rgba(255,255,255,.1)' : '#F5F5F4',
+      noIconColor: noActive ? '#fff' : '#A8A29E',
+      noTextColor: noActive ? '#fff' : '#1C1917',
+      noSubColor:  noActive ? 'rgba(255,255,255,.55)' : '#A8A29E',
+
+      // CTA
+      noChoice:  rsvpChoice === null,
+      ctaBg:     rsvpChoice ? '#7C5C4A' : '#D1CEC8',
+      ctaCursor: rsvpChoice ? 'pointer' : 'default',
+      ctaLabel:  rsvpChoice === 'si' ? '¡Confirmar que asisto!' : rsvpChoice === 'no' ? 'Enviar respuesta' : 'Enviar confirmación',
+
+      // Textarea
+      message,
+      charCount: message.length,
+
+      // Success texts
+      successTitle: rsvpChoice === 'si' ? '¡Nos vemos ahí!' : 'Gracias por avisar',
+      successBody:  rsvpChoice === 'si'
+        ? 'Sofía ya sabe que asistirás.\nTe esperamos el 2 de junio.'
+        : 'Sofía agradece que le avisas.\nEspera que puedan verse pronto.',
+
+      // Animated elements
+      spinner,
+      checkmark,
+
+      // Progress dots
+      dot1w: idx === 0 ? 20 : 6, dot1c: dotColor(0),
+      dot2w: idx === 1 ? 20 : 6, dot2c: dotColor(1),
+      dot3w: idx === 2 ? 20 : 6, dot3c: dotColor(2),
+      dot4w: idx === 3 ? 20 : 6, dot4c: dotColor(3),
+
+      // Screen label
+      screenLabel: ['Invitación digital', 'Confirmación de asistencia', 'Enviando…', 'Respuesta enviada'][idx] || '',
+
+      // Handlers
+      goToRsvp:      () => this.setState({ screen: 'rsvp' }),
+      goBack:        () => this.setState({ screen: 'invitation' }),
+      selectYes:     () => this.setState({ rsvpChoice: 'si' }),
+      selectNo:      () => this.setState({ rsvpChoice: 'no' }),
+      updateMessage: (e) => this.setState({ message: e.target.value }),
+      confirm: () => {
+        if (!this.state.rsvpChoice) return;
+        this.setState({ screen: 'loading' });
+        setTimeout(() => this.setState({ screen: 'success' }), 1800);
+      },
+      reset: () => this.setState({ screen: 'invitation', rsvpChoice: null, message: '' }),
+    };
+  }
+}
+
+</script>
+</body>
+</html>

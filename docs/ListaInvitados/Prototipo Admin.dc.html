@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; background: #E7E5DF; }
+    @keyframes fadeIn      { from { opacity:0; }                        to { opacity:1; } }
+    @keyframes slideUp     { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes sheetUp     { from { transform:translateY(110%); }       to { transform:translateY(0); } }
+    @keyframes popIn       { from { opacity:0; transform:scale(.88); }  to { opacity:1; transform:scale(1); } }
+    @keyframes shake   { 0%,100%{transform:translateX(0)} 15%{transform:translateX(-8px)} 30%{transform:translateX(8px)} 45%{transform:translateX(-6px)} 60%{transform:translateX(6px)} 75%{transform:translateX(-3px)} }
+    @keyframes dotIn   { from { transform:scale(0); }  to { transform:scale(1); } }
+    @keyframes spin    { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
+  </style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;gap:20px;font-family:'DM Sans',sans-serif;">
+
+  <!-- header label -->
+  <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+    <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#A8A29E;">invitaxv.lol · Admin · Prototipo</div>
+    <div style="font-size:13px;color:#78716C;">{{ screenLabel }}</div>
+  </div>
+
+  <!-- phone frame -->
+  <div style="width:380px;height:780px;border-radius:44px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.22),0 0 0 1px rgba(0,0,0,.06);position:relative;background:#F7F5F2;flex:none;">
+
+    <!-- status bar -->
+    <div style="position:absolute;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:16px 30px 0;font-size:15px;font-weight:600;color:#1C1917;">
+      <span>9:41</span>
+      <div style="display:flex;gap:6px;align-items:center;">
+        <svg width="17" height="12" viewBox="0 0 17 12" fill="none"><rect x="0" y="9" width="3" height="3" rx=".6" fill="#1C1917"/><rect x="4.5" y="6" width="3" height="6" rx=".6" fill="#1C1917"/><rect x="9" y="3" width="3" height="9" rx=".6" fill="#1C1917"/><rect x="13.5" y="0" width="3" height="12" rx=".6" fill="#1C1917"/></svg>
+        <svg width="27" height="13" viewBox="0 0 27 13" fill="none"><rect x=".5" y=".5" width="22" height="12" rx="2.5" stroke="#1C1917" stroke-width="1"/><path d="M23.5 4.5h2a1 1 0 011 1v2a1 1 0 01-1 1h-2" fill="#1C1917"/><rect x="2" y="2" width="17" height="9" rx="1.5" fill="#1C1917"/></svg>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- TAB: DASHBOARD                      -->
+    <!-- ═══════════════════════════════════ -->
+    <!-- ═══════════════════════════════════ -->
+    <!-- LOGIN FLOW                           -->
+    <!-- ═══════════════════════════════════ -->
+    <sc-if value="{{ showLogin }}" hint-placeholder-val="{{ true }}">
+      <sc-if value="{{ showPinEntry }}" hint-placeholder-val="{{ true }}">
+        <div style="position:absolute;inset:0;opacity:1;display:flex;flex-direction:column;align-items:center;padding-top:60px;">
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 36px;">
+            <div style="width:44px;height:1px;background:#C4956A;margin-bottom:28px;"></div>
+            <div style="font-size:11px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:#A8A29E;margin-bottom:6px;">La fiesta de</div>
+            <div style="font-family:'Playfair Display',serif;font-size:42px;font-weight:700;color:#1C1917;margin-bottom:6px;">Sofía</div>
+            <div style="width:44px;height:1px;background:#C4956A;margin-bottom:44px;"></div>
+            <div style="font-size:14px;color:#78716C;margin-bottom:28px;">Ingresa tu PIN de acceso</div>
+            <div style="display:flex;gap:12px;margin-bottom:16px;animation:{{ pinAnim }};">
+              <sc-for list="{{ pinBoxes }}" as="box" hint-placeholder-count="4">
+                <div style="width:60px;height:68px;border-radius:16px;border:{{ box.borderWidth }} solid {{ box.borderColor }};background:#fff;display:flex;align-items:center;justify-content:center;transition:border-color 150ms;">
+                  <sc-if value="{{ box.filled }}" hint-placeholder-val="{{ false }}">
+                    <div style="width:12px;height:12px;border-radius:50%;background:#7C5C4A;animation:dotIn 180ms cubic-bezier(.34,1.56,.64,1);opacity:1;"></div>
+                  </sc-if>
+                </div>
+              </sc-for>
+            </div>
+            <sc-if value="{{ pinHasError }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size:13px;font-weight:500;color:#DC2626;animation:fadeIn 200ms ease;opacity:1;">PIN incorrecto. Intenta de nuevo.</div>
+            </sc-if>
+            <div style="font-size:12px;color:#A8A29E;margin-top:16px;">Solicita tu PIN a la festejada</div>
+          </div>
+          <div style="width:100%;padding:0 24px 40px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
+            <sc-for list="{{ pinKeys }}" as="k" hint-placeholder-count="12">
+              <div onClick="{{ k.onPress }}" style="height:60px;border-radius:16px;background:{{ k.bg }};display:flex;align-items:center;justify-content:center;cursor:{{ k.cursor }};user-select:none;transition:background 100ms;">
+                <span style="font-family:{{ k.fontFamily }};font-size:{{ k.fontSize }};font-weight:600;color:{{ k.color }};">{{ k.label }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ showLoginLoading }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;inset:0;opacity:1;background:#7C5C4A;z-index:101;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;animation:fadeIn 200ms ease;">
+          <div>{{ loginSpinner }}</div>
+          <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:#fff;">Verificando…</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.5);">Un momento</div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ showLoginSuccess }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;inset:0;opacity:1;background:#16A34A;z-index:101;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;animation:fadeIn 300ms ease;">
+          <div>{{ loginCheckmark }}</div>
+          <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:#fff;animation:slideUp 300ms 200ms both ease;">¡Bienvenida!</div>
+          <div style="font-size:14px;color:rgba(255,255,255,.65);animation:slideUp 300ms 320ms both ease;">Accediendo al dashboard…</div>
+        </div>
+      </sc-if>
+    </sc-if>
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- TAB: DASHBOARD                      -->
+    <!-- ═══════════════════════════════════ -->
+    <sc-if value="{{ showDashboard }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;inset:0;opacity:1;background:#F7F5F2;overflow-y:auto;padding:56px 20px 76px;animation:fadeIn 200ms ease;">
+
+        <!-- header -->
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+          <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#1C1917;">Dashboard</div>
+          <div onClick="{{ openAddGrupo }}" style="padding:7px 14px;border:1.5px solid #7C5C4A;border-radius:20px;font-size:13px;font-weight:600;color:#7C5C4A;cursor:pointer;">+ Grupo</div>
+        </div>
+        <div style="font-size:13px;color:#A8A29E;margin-bottom:18px;">Fiesta de Sofía · 2 jun 2025</div>
+
+        <!-- hero card -->
+        <div style="background:#7C5C4A;border-radius:20px;padding:22px 24px;margin-bottom:14px;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:18px;">
+            <div>
+              <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.55);margin-bottom:4px;">Total invitados</div>
+              <div style="font-family:'Playfair Display',serif;font-size:44px;font-weight:700;color:#fff;line-height:1;">{{ totalPersonas }}</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.55);margin-bottom:4px;">Asistirán</div>
+              <div style="font-family:'Playfair Display',serif;font-size:44px;font-weight:700;color:#C4956A;line-height:1;">{{ asistiran }}</div>
+            </div>
+          </div>
+          <div style="height:5px;background:rgba(255,255,255,.15);border-radius:3px;overflow:hidden;margin-bottom:6px;">
+            <div style="width:{{ progressW }};height:100%;background:#C4956A;border-radius:3px;transition:width 400ms ease;"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;">
+            <div style="font-size:12px;color:rgba(255,255,255,.45);">{{ pct }}% confirmados</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.45);">{{ totalGuests }} grupos</div>
+          </div>
+        </div>
+
+        <!-- group cards -->
+        <sc-for list="{{ groupStats }}" as="grp" hint-placeholder-count="3">
+          <div onClick="{{ grp.onTap }}" style="background:#fff;border-radius:16px;padding:16px 18px;margin-bottom:10px;cursor:pointer;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div style="width:8px;height:8px;border-radius:4px;background:{{ grp.color }};flex:none;"></div>
+                <div style="font-size:14px;font-weight:600;color:#1C1917;">{{ grp.nombre }}</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px;">
+                <div style="font-size:12px;color:#A8A29E;">{{ grp.total }} personas</div>
+                <div onClick="{{ grp.onEdit }}" style="width:26px;height:26px;border-radius:8px;background:#F0EEEB;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#78716C" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </div>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D1CEC8" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              </div>
+            </div>
+            <div style="display:flex;gap:14px;">
+              <div style="flex:1;">
+                <div style="display:flex;justify-content:space-between;font-size:11px;color:#78716C;margin-bottom:5px;">
+                  <span>Enviados</span><span style="font-weight:600;color:#2563EB;">{{ grp.enviadosLabel }}</span>
+                </div>
+                <div style="height:4px;background:#F0EEEB;border-radius:2px;overflow:hidden;">
+                  <div style="width:{{ grp.enviadosPctStr }};height:100%;background:#2563EB;border-radius:2px;"></div>
+                </div>
+              </div>
+              <div style="flex:1;">
+                <div style="display:flex;justify-content:space-between;font-size:11px;color:#78716C;margin-bottom:5px;">
+                  <span>Confirmados</span><span style="font-weight:600;color:#16A34A;">{{ grp.confLabel }}</span>
+                </div>
+                <div style="height:4px;background:#F0EEEB;border-radius:2px;overflow:hidden;">
+                  <div style="width:{{ grp.confPctStr }};height:100%;background:#16A34A;border-radius:2px;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+
+        <div style="font-size:11px;color:#C8C3BC;text-align:center;margin-top:4px;">Toca un grupo para ver su lista →</div>
+      </div>
+    </sc-if>
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- TAB: LISTA                           -->
+    <!-- ═══════════════════════════════════ -->
+    <sc-if value="{{ showLista }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;inset:0;opacity:1;background:#F7F5F2;overflow-y:auto;padding:56px 0 76px;animation:slideUp 240ms ease;">
+
+        <!-- header -->
+        <div style="padding:14px 20px 0;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+            <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#1C1917;">Invitados</div>
+            <div onClick="{{ openAddModal }}" style="padding:8px 16px;background:#7C5C4A;border-radius:20px;font-size:13px;font-weight:600;color:#fff;cursor:pointer;">+ Agregar</div>
+          </div>
+
+          <!-- grupo filter banner -->
+          <sc-if value="{{ showGrupoFiltro }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;padding:8px 12px;background:#F4EDE6;border-radius:12px;opacity:1;">
+              <div style="width:8px;height:8px;border-radius:4px;background:#7C5C4A;flex:none;"></div>
+              <div style="flex:1;font-size:13px;font-weight:600;color:#7C5C4A;">Grupo: {{ grupoFiltroLabel }}</div>
+              <div onClick="{{ clearGrupoFiltro }}" style="width:22px;height:22px;border-radius:50%;background:#7C5C4A;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- filter pills -->
+          <div style="display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;">
+            <div onClick="{{ filterTodos }}" style="flex:none;padding:6px 14px;background:{{ filterTodosBg }};border-radius:20px;font-size:12px;font-weight:600;color:{{ filterTodosColor }};border:1px solid {{ filterTodosBorder }};cursor:pointer;transition:all 150ms;">Todos</div>
+            <div onClick="{{ filterAlta }}" style="flex:none;padding:6px 14px;background:{{ filterAltaBg }};border-radius:20px;font-size:12px;font-weight:600;color:{{ filterAltaColor }};border:1px solid {{ filterAltaBorder }};cursor:pointer;transition:all 150ms;">Alta</div>
+            <div onClick="{{ filterEnviado }}" style="flex:none;padding:6px 14px;background:{{ filterEnviadoBg }};border-radius:20px;font-size:12px;font-weight:600;color:{{ filterEnviadoColor }};border:1px solid {{ filterEnviadoBorder }};cursor:pointer;transition:all 150ms;">Enviado</div>
+            <div onClick="{{ filterConfirmo }}" style="flex:none;padding:6px 14px;background:{{ filterConfirmoBg }};border-radius:20px;font-size:12px;font-weight:600;color:{{ filterConfirmoColor }};border:1px solid {{ filterConfirmoBorder }};cursor:pointer;transition:all 150ms;">Confirmó</div>
+            <div onClick="{{ filterBaja }}" style="flex:none;padding:6px 14px;background:{{ filterBajaBg }};border-radius:20px;font-size:12px;font-weight:600;color:{{ filterBajaColor }};border:1px solid {{ filterBajaBorder }};cursor:pointer;transition:all 150ms;">Baja</div>
+          </div>
+        </div>
+
+        <!-- guest count -->
+        <div style="padding:0 20px 10px;font-size:12px;color:#A8A29E;">{{ guestCount }} invitados</div>
+
+        <!-- guest cards -->
+        <div style="padding:0 16px;display:flex;flex-direction:column;gap:8px;">
+          <sc-for list="{{ filteredGuests }}" as="g" hint-placeholder-count="3">
+            <div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:{{ g.cardShadow }};transition:box-shadow 200ms ease;">
+              <!-- card row -->
+              <div style="padding:14px 16px;display:flex;align-items:center;gap:10px;">
+                <div style="width:40px;height:40px;border-radius:12px;background:{{ g.avatarBg }};display:flex;align-items:center;justify-content:center;flex:none;font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:{{ g.avatarColor }};">{{ g.initial }}</div>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-size:14px;font-weight:600;color:{{ g.nameColor }};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-decoration:{{ g.nameDecoration }};">{{ g.titular }}</div>
+                  <div style="display:flex;align-items:center;gap:5px;margin-top:1px;">
+                    <div style="width:5px;height:5px;border-radius:50%;background:{{ g.gc }};flex:none;"></div>
+                    <span style="font-size:12px;color:#78716C;">{{ g.grupo }} · {{ g.numInv }} inv.</span>
+                  </div>
+                </div>
+                <div style="padding:4px 9px;background:{{ g.estadoBg }};border-radius:20px;font-size:10px;font-weight:600;color:{{ g.estadoColor }};flex:none;white-space:nowrap;">{{ g.estadoLabel }}</div>
+                <div onClick="{{ g.onToggle }}" style="width:30px;height:30px;border-radius:8px;background:{{ g.dotBg }};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5px;cursor:pointer;flex:none;transition:background 150ms;">
+                  <div style="width:3px;height:3px;border-radius:50%;background:{{ g.dotColor }};"></div>
+                  <div style="width:3px;height:3px;border-radius:50%;background:{{ g.dotColor }};"></div>
+                  <div style="width:3px;height:3px;border-radius:50%;background:{{ g.dotColor }};"></div>
+                </div>
+              </div>
+
+              <!-- action panel -->
+              <sc-if value="{{ g.isExpanded }}" hint-placeholder-val="{{ false }}">
+                <div style="background:#F7F5F2;padding:10px 14px 12px;border-top:1px solid #F0EEEB;display:flex;flex-wrap:wrap;gap:7px;opacity:1;animation:fadeIn 180ms ease;">
+
+                  <sc-if value="{{ g.isEnviado }}" hint-placeholder-val="{{ false }}">
+                    <div onClick="{{ g.onConfirmar }}" style="flex:1;min-width:44%;background:#F0FDF4;border-radius:11px;padding:9px 11px;display:flex;align-items:center;gap:7px;cursor:pointer;">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      <span style="font-size:12px;font-weight:600;color:#16A34A;">Confirmar</span>
+                    </div>
+                  </sc-if>
+
+                  <div onClick="{{ g.onEditar }}" style="flex:1;min-width:44%;background:#fff;border-radius:11px;padding:9px 11px;display:flex;align-items:center;gap:7px;cursor:pointer;border:1px solid #E7E5E3;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#78716C" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    <span style="font-size:12px;font-weight:600;color:#78716C;">Editar</span>
+                  </div>
+
+                  <sc-if value="{{ g.canSendWA }}" hint-placeholder-val="{{ false }}">
+                    <div onClick="{{ g.onEnviarWA }}" style="flex:1;min-width:44%;background:#DCFCE7;border-radius:11px;padding:9px 11px;display:flex;align-items:center;gap:7px;cursor:pointer;">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+                      <span style="font-size:12px;font-weight:600;color:#16A34A;">Enviar WA</span>
+                    </div>
+                  </sc-if>
+
+                  <sc-if value="{{ g.confSI }}" hint-placeholder-val="{{ false }}">
+                    <div onClick="{{ g.onBoleto }}" style="flex:1;min-width:44%;background:#FEF3C7;border-radius:11px;padding:9px 11px;display:flex;align-items:center;gap:7px;cursor:pointer;">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2" stroke-linecap="round"><path d="M15 5v2M15 11v2M15 17v2M5 5h14a2 2 0 012 2v3a2 2 0 000 4v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a2 2 0 000-4V7a2 2 0 012-2z"/></svg>
+                      <span style="font-size:12px;font-weight:600;color:#D97706;">Boleto</span>
+                    </div>
+                  </sc-if>
+
+                  <sc-if value="{{ g.canBaja }}" hint-placeholder-val="{{ false }}">
+                    <div onClick="{{ g.onDarBaja }}" style="flex:1;min-width:44%;background:#FEF2F2;border-radius:11px;padding:9px 11px;display:flex;align-items:center;gap:7px;cursor:pointer;">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2" stroke-linecap="round"><polyline points="17 11 12 6 7 11"/><line x1="12" y1="6" x2="12" y2="18"/></svg>
+                      <span style="font-size:12px;font-weight:600;color:#DC2626;">Dar de baja</span>
+                    </div>
+                  </sc-if>
+
+                  <sc-if value="{{ g.hasDevice }}" hint-placeholder-val="{{ false }}">
+                    <div onClick="{{ g.onDesvincular }}" style="flex:1;min-width:44%;background:#F7F5F2;border-radius:11px;padding:9px 11px;display:flex;align-items:center;gap:7px;cursor:pointer;border:1px solid #E7E5E3;">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#A8A29E" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 019.9-1"/></svg>
+                      <span style="font-size:12px;font-weight:600;color:#A8A29E;">Desvincular</span>
+                    </div>
+                  </sc-if>
+
+                  <sc-if value="{{ g.isBaja }}" hint-placeholder-val="{{ false }}">
+                    <div onClick="{{ g.onReactivar }}" style="flex:1;min-width:44%;background:#F7F5F2;border-radius:11px;padding:9px 11px;display:flex;align-items:center;gap:7px;cursor:pointer;border:1px solid #E7E5E3;">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#78716C" stroke-width="2" stroke-linecap="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+                      <span style="font-size:12px;font-weight:600;color:#78716C;">Reactivar</span>
+                    </div>
+                  </sc-if>
+
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+
+        <!-- empty state -->
+        <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 32px;gap:12px;opacity:1;">
+            <div style="width:56px;height:56px;border-radius:16px;background:#F0EEEB;display:flex;align-items:center;justify-content:center;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A8A29E" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            </div>
+            <div style="font-size:14px;font-weight:600;color:#78716C;">Sin invitados en este filtro</div>
+          </div>
+        </sc-if>
+
+      </div>
+    </sc-if>
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- OVERLAY: ADD MODAL                  -->
+    <!-- ═══════════════════════════════════ -->
+    <sc-if value="{{ showAddModal }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;inset:0;opacity:1;z-index:95;animation:fadeIn 150ms ease;">
+        <div onClick="{{ closeAddModal }}" style="position:absolute;inset:0;background:rgba(28,25,23,.45);"></div>
+        <div style="position:absolute;bottom:0;left:0;right:0;background:#fff;border-radius:28px 28px 44px 44px;animation:sheetUp 260ms cubic-bezier(.32,1,.28,1);padding:0 0 36px;">
+          <div style="display:flex;justify-content:center;padding:14px 0 0;">
+            <div style="width:36px;height:4px;border-radius:2px;background:#E7E5E3;"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 24px 20px;">
+            <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#1C1917;">{{ modalTitle }}</div>
+            <div onClick="{{ closeAddModal }}" style="width:32px;height:32px;border-radius:50%;background:#F7F5F2;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#78716C" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </div>
+          </div>
+          <div style="padding:0 24px;display:flex;flex-direction:column;gap:14px;">
+
+            <!-- titular -->
+            <div>
+              <div style="font-size:11px;font-weight:600;color:#A8A29E;letter-spacing:.8px;text-transform:uppercase;margin-bottom:7px;">Titular</div>
+              <input type="text" onInput="{{ onNewTitular }}" value="{{ newTitular }}" placeholder="Nombre del invitado o familia" style="width:100%;box-sizing:border-box;background:#F7F5F2;border-radius:14px;padding:14px 16px;border:1.5px solid #E7E5E3;font-family:'DM Sans',sans-serif;font-size:14px;color:#1C1917;outline:none;" />
+            </div>
+
+            <!-- grupo -->
+            <div>
+              <div style="font-size:11px;font-weight:600;color:#A8A29E;letter-spacing:.8px;text-transform:uppercase;margin-bottom:7px;">Grupo</div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <sc-for list="{{ grupoOptions }}" as="opt" hint-placeholder-count="3">
+                  <div onClick="{{ opt.onSelect }}" style="flex:1;min-width:60px;padding:10px;background:{{ opt.bg }};border-radius:12px;text-align:center;font-size:13px;font-weight:600;color:{{ opt.color }};cursor:pointer;transition:all 150ms;">{{ opt.nombre }}</div>
+                </sc-for>
+              </div>
+            </div>
+
+            <!-- num invitados -->
+            <div>
+              <div style="font-size:11px;font-weight:600;color:#A8A29E;letter-spacing:.8px;text-transform:uppercase;margin-bottom:7px;">Número de invitados</div>
+              <div style="background:#F7F5F2;border-radius:14px;padding:10px 16px;display:flex;align-items:center;gap:12px;">
+                <div onClick="{{ decNum }}" style="width:36px;height:36px;border-radius:10px;background:#E7E5E3;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px;font-weight:600;color:#78716C;user-select:none;">−</div>
+                <div style="flex:1;text-align:center;font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:#1C1917;">{{ newNumInv }}</div>
+                <div onClick="{{ incNum }}" style="width:36px;height:36px;border-radius:10px;background:#7C5C4A;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px;font-weight:700;color:#fff;user-select:none;">+</div>
+              </div>
+            </div>
+
+            <!-- save -->
+            <div onClick="{{ addGuest }}" style="margin-top:4px;padding:17px;background:{{ addCtaBg }};border-radius:16px;text-align:center;font-size:15px;font-weight:700;color:#fff;cursor:pointer;transition:background 200ms;">{{ saveLabel }}</div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- OVERLAY: DIALOG                     -->
+    <!-- ═══════════════════════════════════ -->
+    <sc-if value="{{ showDialog }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;inset:0;opacity:1;z-index:60;display:flex;align-items:center;justify-content:center;padding:28px;animation:fadeIn 150ms ease;">
+        <div onClick="{{ closeDialog }}" style="position:absolute;inset:0;background:rgba(28,25,23,.5);"></div>
+        <div style="position:relative;background:#fff;border-radius:24px;padding:28px;width:100%;z-index:1;animation:popIn 220ms cubic-bezier(.34,1.56,.64,1);">
+          <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#1C1917;margin-bottom:8px;">{{ dialogTitle }}</div>
+          <div style="font-size:14px;color:#78716C;line-height:1.5;margin-bottom:24px;">{{ dialogBody }}</div>
+          <div style="display:flex;gap:10px;">
+            <div onClick="{{ closeDialog }}" style="flex:1;padding:14px;background:#F7F5F2;border-radius:14px;text-align:center;font-size:14px;font-weight:600;color:#78716C;cursor:pointer;">Cancelar</div>
+            <div onClick="{{ dialogConfirm }}" style="flex:1;padding:14px;background:{{ dialogConfirmBg }};border-radius:14px;text-align:center;font-size:14px;font-weight:700;color:#fff;cursor:pointer;">{{ dialogConfirmLabel }}</div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- TAB: BOLETOS                        -->
+    <!-- ═══════════════════════════════════ -->
+    <sc-if value="{{ showBoletos }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;inset:0;opacity:1;background:#F7F5F2;overflow-y:auto;padding:56px 20px 80px;animation:fadeIn 200ms ease;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+          <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#1C1917;">Boletos</div>
+          <div style="padding:7px 14px;background:#7C5C4A;border-radius:20px;font-size:13px;font-weight:600;color:#fff;cursor:pointer;">⬇ Todos</div>
+        </div>
+        <div style="font-size:13px;color:#A8A29E;margin-bottom:20px;">Solo invitados con confirmación Sí</div>
+
+        <!-- confirmed guests list -->
+        <sc-if value="{{ hasConfirmed }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <sc-for list="{{ confirmedGuests }}" as="g" hint-placeholder-count="2">
+              <div style="background:#fff;border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:12px;">
+                <div style="width:42px;height:42px;border-radius:12px;background:#F0FDF4;display:flex;align-items:center;justify-content:center;flex:none;font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#16A34A;">{{ g.initial }}</div>
+                <div style="flex:1;">
+                  <div style="font-size:14px;font-weight:600;color:#1C1917;margin-bottom:2px;">{{ g.titular }}</div>
+                  <div style="display:flex;align-items:center;gap:6px;">
+                    <div style="width:5px;height:5px;border-radius:50%;background:{{ g.gc }};"></div>
+                    <span style="font-size:12px;color:#78716C;">{{ g.grupo }} · {{ g.numInv }} asientos</span>
+                  </div>
+                </div>
+                <div onClick="{{ g.onBoleto }}" style="width:36px;height:36px;border-radius:10px;background:#FEF3C7;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2" stroke-linecap="round"><path d="M15 5v2M15 11v2M15 17v2M5 5h14a2 2 0 012 2v3a2 2 0 000 4v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a2 2 0 000-4V7a2 2 0 012-2z"/></svg>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <!-- empty state -->
+        <sc-if value="{{ noConfirmed }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;align-items:center;padding:48px 0;gap:12px;opacity:1;">
+            <div style="width:56px;height:56px;border-radius:16px;background:#F0EEEB;display:flex;align-items:center;justify-content:center;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A8A29E" stroke-width="2" stroke-linecap="round"><path d="M15 5v2M15 11v2M15 17v2M5 5h14a2 2 0 012 2v3a2 2 0 000 4v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a2 2 0 000-4V7a2 2 0 012-2z"/></svg>
+            </div>
+            <div style="font-size:14px;font-weight:600;color:#78716C;">Sin confirmaciones aún</div>
+            <div style="font-size:12px;color:#A8A29E;text-align:center;">Los boletos aparecen cuando<br>un invitado confirma asistencia</div>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- OVERLAY: ADD GRUPO                  -->
+    <!-- ═══════════════════════════════════ -->
+    <sc-if value="{{ showAddGrupo }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;inset:0;opacity:1;z-index:95;animation:fadeIn 150ms ease;">
+        <div onClick="{{ closeAddGrupo }}" style="position:absolute;inset:0;background:rgba(28,25,23,.45);"></div>
+        <div style="position:absolute;bottom:0;left:0;right:0;background:#fff;border-radius:28px 28px 44px 44px;animation:sheetUp 260ms cubic-bezier(.32,1,.28,1);padding:0 0 40px;">
+          <div style="display:flex;justify-content:center;padding:14px 0 0;">
+            <div style="width:36px;height:4px;border-radius:2px;background:#E7E5E3;"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 24px 20px;">
+            <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#1C1917;">{{ grupoModalTitle }}</div>
+            <div onClick="{{ closeAddGrupo }}" style="width:32px;height:32px;border-radius:50%;background:#F7F5F2;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#78716C" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </div>
+          </div>
+          <div style="padding:0 24px;display:flex;flex-direction:column;gap:16px;">
+            <!-- nombre -->
+            <div>
+              <div style="font-size:11px;font-weight:600;color:#A8A29E;letter-spacing:.8px;text-transform:uppercase;margin-bottom:7px;">Nombre del grupo</div>
+              <input type="text" onInput="{{ onNewGrupoNombre }}" value="{{ newGrupoNombre }}" placeholder="Ej. Compañeros de trabajo" style="width:100%;box-sizing:border-box;background:#F7F5F2;border-radius:14px;padding:14px 16px;border:1.5px solid #E7E5E3;font-family:'DM Sans',sans-serif;font-size:14px;color:#1C1917;outline:none;" />
+            </div>
+            <!-- color -->
+            <div>
+              <div style="font-size:11px;font-weight:600;color:#A8A29E;letter-spacing:.8px;text-transform:uppercase;margin-bottom:10px;">Color del grupo</div>
+              <div style="display:flex;gap:10px;">
+                <sc-for list="{{ colorOpts }}" as="opt" hint-placeholder-count="6">
+                  <div onClick="{{ opt.setColor }}" style="width:40px;height:40px;border-radius:50%;background:{{ opt.color }};cursor:pointer;box-shadow:{{ opt.shadow }};transform:{{ opt.scale }};transition:all 150ms;display:flex;align-items:center;justify-content:center;">
+                    <sc-if value="{{ opt.active }}" hint-placeholder-val="{{ false }}">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </sc-if>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+            <!-- preview -->
+            <div style="background:#F7F5F2;border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:10px;">
+              <div style="width:10px;height:10px;border-radius:5px;background:{{ newGrupoColor }};flex:none;"></div>
+              <div style="font-size:14px;font-weight:600;color:{{ grupoPreviewColor }};">{{ grupoPreviewLabel }}</div>
+            </div>
+            <!-- save -->
+            <div onClick="{{ saveGrupo }}" style="padding:16px;background:{{ grupoCtaBg }};border-radius:16px;text-align:center;font-size:15px;font-weight:700;color:#fff;cursor:pointer;transition:background 200ms;">{{ grupoSaveCta }}</div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- OVERLAY: BOLETO                     -->
+    <!-- ═══════════════════════════════════ -->
+    <sc-if value="{{ showBoleto }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;inset:0;opacity:1;z-index:95;background:#F7F5F2;animation:slideUp 260ms ease;display:flex;flex-direction:column;">
+        <!-- header -->
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:56px 24px 20px;">
+          <div onClick="{{ closeBoleto }}" style="width:36px;height:36px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.08);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#78716C" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </div>
+          <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#1C1917;">Boleto</div>
+          <div style="width:36px;"></div>
+        </div>
+        <!-- ticket card -->
+        <div style="margin:0 20px;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.08);">
+          <!-- top -->
+          <div style="background:#7C5C4A;padding:24px 26px 20px;position:relative;">
+            <div style="position:absolute;top:-24px;right:-24px;width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.05);"></div>
+            <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:5px;">Boleto de entrada</div>
+            <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:#fff;line-height:1;margin-bottom:3px;">XV Años</div>
+            <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:#C4956A;">Sofía</div>
+          </div>
+          <!-- perforated divider -->
+          <div style="position:relative;height:0;display:flex;align-items:center;">
+            <div style="position:absolute;left:-12px;width:24px;height:24px;border-radius:50%;background:#F7F5F2;"></div>
+            <div style="flex:1;border-top:2px dashed #F0EEEB;margin:0 12px;"></div>
+            <div style="position:absolute;right:-12px;width:24px;height:24px;border-radius:50%;background:#F7F5F2;"></div>
+          </div>
+          <!-- bottom -->
+          <div style="padding:20px 26px;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;">
+              <div>
+                <div style="font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#A8A29E;margin-bottom:3px;">Invitado</div>
+                <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#1C1917;">{{ boletoTitular }}</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#A8A29E;margin-bottom:3px;">Asientos</div>
+                <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:#7C5C4A;line-height:1;">{{ boletoNumInv }}</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:20px;margin-bottom:18px;">
+              <div>
+                <div style="font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#A8A29E;margin-bottom:2px;">Fecha</div>
+                <div style="font-size:13px;font-weight:600;color:#1C1917;">Sáb 2 Jun 2025</div>
+              </div>
+              <div>
+                <div style="font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#A8A29E;margin-bottom:2px;">Hora</div>
+                <div style="font-size:13px;font-weight:600;color:#1C1917;">8:00 PM</div>
+              </div>
+            </div>
+            <!-- QR + location -->
+            <div style="display:flex;align-items:center;gap:14px;">
+              <div style="width:72px;height:72px;border-radius:10px;background:#F7F5F2;border:1px solid #E7E5E3;display:flex;align-items:center;justify-content:center;flex:none;">
+                <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+                  <rect x="2" y="2" width="16" height="16" rx="2" fill="#1C1917"/>
+                  <rect x="5" y="5" width="10" height="10" rx="1" fill="#F7F5F2"/>
+                  <rect x="7" y="7" width="6" height="6" rx=".5" fill="#1C1917"/>
+                  <rect x="26" y="2" width="16" height="16" rx="2" fill="#1C1917"/>
+                  <rect x="29" y="5" width="10" height="10" rx="1" fill="#F7F5F2"/>
+                  <rect x="31" y="7" width="6" height="6" rx=".5" fill="#1C1917"/>
+                  <rect x="2" y="26" width="16" height="16" rx="2" fill="#1C1917"/>
+                  <rect x="5" y="29" width="10" height="10" rx="1" fill="#F7F5F2"/>
+                  <rect x="7" y="31" width="6" height="6" rx=".5" fill="#1C1917"/>
+                  <rect x="26" y="26" width="6" height="6" rx=".5" fill="#1C1917"/>
+                  <rect x="34" y="26" width="6" height="6" rx=".5" fill="#1C1917"/>
+                  <rect x="26" y="34" width="6" height="6" rx=".5" fill="#1C1917"/>
+                  <rect x="34" y="34" width="6" height="6" rx=".5" fill="#1C1917"/>
+                </svg>
+              </div>
+              <div>
+                <div style="font-size:12px;font-weight:600;color:#1C1917;margin-bottom:2px;">Ver ubicación</div>
+                <div style="font-size:11px;color:#A8A29E;line-height:1.5;">Salón El Jardín<br>Calle Flores 123, CDMX</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- actions -->
+        <div style="padding:20px 20px 0;display:flex;flex-direction:column;gap:10px;">
+          <div style="padding:15px;background:#7C5C4A;border-radius:14px;text-align:center;font-size:14px;font-weight:700;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            Descargar PDF
+          </div>
+          <div style="padding:14px;background:#DCFCE7;border-radius:14px;text-align:center;font-size:14px;font-weight:700;color:#16A34A;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+            Enviar por WhatsApp
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- bottom nav -->
+    <sc-if value="{{ isAuthenticated }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;bottom:0;left:0;right:0;z-index:90;background:#fff;border-top:1px solid #F0EEEB;padding:10px 0 26px;display:flex;justify-content:space-around;opacity:1;">
+      <div onClick="{{ goToDashboard }}" style="display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ navDashColor }}" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        <span style="font-size:10px;font-weight:{{ navDashWeight }};color:{{ navDashColor }};">Dashboard</span>
+      </div>
+      <div onClick="{{ goToLista }}" style="display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ navListaColor }}" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        <span style="font-size:10px;font-weight:{{ navListaWeight }};color:{{ navListaColor }};">Invitados</span>
+      </div>
+      <div onClick="{{ goToBoletos }}" style="display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ navBoletosColor }}" stroke-width="2" stroke-linecap="round"><path d="M15 5v2M15 11v2M15 17v2M5 5h14a2 2 0 012 2v3a2 2 0 000 4v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a2 2 0 000-4V7a2 2 0 012-2z"/></svg>
+        <span style="font-size:10px;font-weight:{{ navBoletosWeight }};color:{{ navBoletosColor }};">Boletos</span>
+      </div>
+    </div>
+    </sc-if>
+
+  </div>
+
+  <!-- hint -->
+  <div style="font-size:12px;color:#A8A29E;">PIN correcto: <span style="font-weight:600;color:#7C5C4A;">1234</span> · Prueba uno incorrecto también</div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+class Component extends DCLogic {
+  state = {
+    authenticated: false,
+    loginScreen: 'pin',
+    loginDigits: [],
+    loginHasError: false,
+    tab: 'dashboard',
+    filter: 'todos',
+    grupoFiltro: null,
+    expandedId: null,
+    showAddModal: false,
+    editingId: null,
+    showBoleto: false,
+    boletoGuest: null,
+    showAddGrupo: false,
+    editingGrupoId: null,
+    newGrupoNombre: '',
+    newGrupoColor: '#8B6FB3',
+    grupos: [
+      { id: '1', nombre: 'Familia', color: '#C4956A' },
+      { id: '2', nombre: 'Amigos',  color: '#57A773' },
+      { id: '3', nombre: 'Trabajo', color: '#5B87B5' },
+    ],
+    dialog: null,
+    newTitular: '',
+    newGrupo: 'Familia',
+    newNumInv: 1,
+    guests: [
+      { id: '1', titular: 'Juan Pérez',     grupo: 'Familia', gc: '#C4956A', numInv: 4, estado: 'enviado',  conf: null, dev: 'abc' },
+      { id: '2', titular: 'Familia García', grupo: 'Amigos',  gc: '#57A773', numInv: 6, estado: 'alta',     conf: null, dev: null  },
+      { id: '3', titular: 'María López',    grupo: 'Familia', gc: '#C4956A', numInv: 3, estado: 'confirmo', conf: 'SI', dev: 'xyz' },
+      { id: '4', titular: 'Roberto Silva',  grupo: 'Trabajo', gc: '#5B87B5', numInv: 2, estado: 'enviado',  conf: null, dev: null  },
+      { id: '5', titular: 'Tía Carmen',     grupo: 'Familia', gc: '#C4956A', numInv: 5, estado: 'alta',     conf: null, dev: null  },
+    ],
+  };
+
+  updateGuest(id, updates) {
+    this.setState({ guests: this.state.guests.map(g => g.id === id ? { ...g, ...updates } : g) });
+  }
+
+  addLoginDigit(d) {
+    if (this.state.loginScreen !== 'pin' || this.state.loginDigits.length >= 4) return;
+    const next = [...this.state.loginDigits, d];
+    this.setState({ loginDigits: next, loginHasError: false });
+    if (next.length === 4) setTimeout(() => this.verifyLogin(next), 250);
+  }
+
+  deleteLoginDigit() {
+    if (this.state.loginScreen !== 'pin') return;
+    this.setState({ loginDigits: this.state.loginDigits.slice(0, -1), loginHasError: false });
+  }
+
+  verifyLogin(digits) {
+    this.setState({ loginScreen: 'loading' });
+    setTimeout(() => {
+      if (digits.join('') === '1234') {
+        this.setState({ loginScreen: 'success' });
+        setTimeout(() => this.setState({ authenticated: true }), 1800);
+      } else {
+        this.setState({ loginScreen: 'pin', loginHasError: true });
+        setTimeout(() => this.setState({ loginDigits: [], loginHasError: false }), 1600);
+      }
+    }, 1300);
+  }
+
+  renderVals() {
+    const { authenticated, loginScreen, loginDigits, loginHasError, tab, filter, grupoFiltro, expandedId, showAddModal, editingId, showBoleto, dialog, guests, newTitular, newGrupo, newNumInv, showAddGrupo, editingGrupoId, newGrupoNombre, newGrupoColor, grupos } = this.state;
+
+    // ── Stats ──
+    const active = guests.filter(g => g.estado !== 'baja');
+    const totalPersonas = active.reduce((s, g) => s + g.numInv, 0);
+    const asistiran = guests.filter(g => g.conf === 'SI').reduce((s, g) => s + g.numInv, 0);
+    const pct = totalPersonas ? Math.round(asistiran / totalPersonas * 100) : 0;
+
+    // ── Group stats ──
+    const groupDefs = grupos;
+    const groupStats = groupDefs.map(({ id, nombre, color }) => {
+      const gs = guests.filter(g => g.grupo === nombre && g.estado !== 'baja');
+      const total = gs.reduce((s, g) => s + g.numInv, 0);
+      const n = gs.length;
+      const sent = gs.filter(g => ['enviado', 'confirmo'].includes(g.estado)).length;
+      const ep = n ? Math.round(sent / n * 100) : 0;
+      const confP = gs.filter(g => g.conf === 'SI').reduce((s, g) => s + g.numInv, 0);
+      const confBase = gs.filter(g => ['enviado', 'confirmo'].includes(g.estado)).reduce((s, g) => s + g.numInv, 0);
+      const cp = confBase ? Math.round(confP / confBase * 100) : 0;
+      return {
+        nombre, color, total,
+        enviadosLabel: `${sent}/${n}`,
+        enviadosPctStr: `${ep}%`,
+        confLabel: `${confP}/${confBase}`,
+        confPctStr: `${cp}%`,
+        onTap:  () => this.setState({ tab: 'lista', grupoFiltro: nombre, filter: 'todos', expandedId: null }),
+        onEdit: (e) => { e.stopPropagation(); this.setState({ editingGrupoId: id, newGrupoNombre: nombre, newGrupoColor: color, showAddGrupo: true }); },
+      };
+    });
+
+    // ── Filter guests ──
+    const byGrupo = grupoFiltro ? guests.filter(g => g.grupo === grupoFiltro) : guests;
+    const byEstado = filter === 'todos' ? byGrupo : byGrupo.filter(g => g.estado === filter);
+
+    const estadoMap = {
+      alta:    { label: 'Alta',       bg: '#F4F0EE', color: '#78716C' },
+      enviado: { label: 'Enviado',    bg: '#EFF6FF', color: '#2563EB' },
+      confirmo:{ label: 'Confirmó ✓', bg: '#F0FDF4', color: '#16A34A' },
+      baja:    { label: 'Baja',       bg: '#F5F5F4', color: '#A8A29E' },
+    };
+    const avatarBgMap = {
+      alta:    '#F4F0EE', enviado: '#EFF6FF', confirmo: '#F0FDF4', baja: '#F5F5F4',
+    };
+    const avatarColorMap = {
+      alta:    '#78716C', enviado: '#2563EB', confirmo: '#16A34A', baja: '#A8A29E',
+    };
+
+    const filteredGuests = byEstado.map(g => {
+      const est = estadoMap[g.estado] || estadoMap.alta;
+      const isExp = g.id === expandedId;
+      return {
+        ...g,
+        initial: g.titular[0].toUpperCase(),
+        estadoLabel:  est.label,
+        estadoBg:     est.bg,
+        estadoColor:  est.color,
+        avatarBg:     avatarBgMap[g.estado] || '#F4F0EE',
+        avatarColor:  avatarColorMap[g.estado] || '#78716C',
+        nameColor:    g.estado === 'baja' ? '#A8A29E' : '#1C1917',
+        nameDecoration: g.estado === 'baja' ? 'line-through' : 'none',
+        cardShadow:   isExp ? '0 4px 20px rgba(124,92,74,.12)' : 'none',
+        isExpanded:   isExp,
+        dotBg:        isExp ? '#7C5C4A' : '#F7F5F2',
+        dotColor:     isExp ? '#fff'    : '#A8A29E',
+        isAlta:    g.estado === 'alta',
+        isEnviado: g.estado === 'enviado',
+        isConfirmo:g.estado === 'confirmo',
+        isBaja:    g.estado === 'baja',
+        hasDevice: !!g.dev,
+        confSI:    g.conf === 'SI',
+        canSendWA: g.estado === 'alta' || g.estado === 'enviado',
+        canBaja:   g.estado === 'alta' || g.estado === 'enviado',
+        canEliminar: g.estado === 'alta',
+        onToggle:      () => this.setState({ expandedId: expandedId === g.id ? null : g.id }),
+        onConfirmar:   () => this.setState({ dialog: { type: 'confirmar', guestId: g.id } }),
+        onDarBaja:     () => this.setState({ dialog: { type: 'baja',      guestId: g.id } }),
+        onEnviarWA:    () => this.setState({ dialog: { type: 'envioWA',   guestId: g.id } }),
+        onDesvincular: () => { this.updateGuest(g.id, { dev: null }); this.setState({ expandedId: null }); },
+        onReactivar:   () => { this.updateGuest(g.id, { estado: 'alta' }); this.setState({ expandedId: null }); },
+        onEditar:      () => this.setState({ editingId: g.id, newTitular: g.titular, newGrupo: g.grupo, newNumInv: g.numInv, showAddModal: true, expandedId: null }),
+        onBoleto:      () => this.setState({ showBoleto: true, boletoGuest: g, expandedId: null }),
+      };
+    });
+
+    // ── Filter pill styles ──
+    const pill = (f) => ({
+      bg:     filter === f ? '#7C5C4A' : '#fff',
+      color:  filter === f ? '#fff'    : '#78716C',
+      border: filter === f ? '#7C5C4A' : '#E7E5E3',
+    });
+    const pt = pill('todos'), pa = pill('alta'), pe = pill('enviado'), pc = pill('confirmo'), pb = pill('baja');
+
+    // ── Dialog ──
+    let dialogTitle = '', dialogBody = '', dialogConfirmLabel = '', dialogConfirmBg = '#7C5C4A';
+    let dialogConfirm = () => {};
+    if (dialog) {
+      if (dialog.type === 'confirmar') {
+        dialogTitle = 'Confirmar asistencia';
+        dialogBody  = '¿Confirmás que este invitado asistirá al evento?';
+        dialogConfirmLabel = 'Sí, asistirá';
+        dialogConfirm = () => { this.updateGuest(dialog.guestId, { estado: 'confirmo', conf: 'SI' }); this.setState({ dialog: null, expandedId: null }); };
+      } else if (dialog.type === 'baja') {
+        dialogTitle = 'Dar de baja';
+        dialogBody  = 'El invitado quedará inactivo. Podrás reactivarlo después.';
+        dialogConfirmLabel = 'Dar de baja';
+        dialogConfirmBg = '#DC2626';
+        dialogConfirm = () => { this.updateGuest(dialog.guestId, { estado: 'baja' }); this.setState({ dialog: null, expandedId: null }); };
+      } else if (dialog.type === 'envioWA') {
+        dialogTitle = '¿Se envió correctamente?';
+        dialogBody  = 'Confirmá que el mensaje de WhatsApp llegó al invitado.';
+        dialogConfirmLabel = 'Sí, se envió';
+        dialogConfirm = () => { this.updateGuest(dialog.guestId, { estado: 'enviado' }); this.setState({ dialog: null, expandedId: null }); };
+      }
+    }
+
+
+
+    const confirmedGuests = guests
+      .filter(g => g.conf === 'SI')
+      .map(g => ({ ...g, initial: g.titular[0].toUpperCase(), onBoleto: () => this.setState({ showBoleto: true, boletoGuest: g }) }));
+
+    return {
+      // Nav
+      showDashboard: authenticated && tab === 'dashboard',
+      showLista:     authenticated && tab === 'lista',
+      showBoletos:   authenticated && tab === 'boletos',
+      goToDashboard: () => this.setState({ tab: 'dashboard', expandedId: null }),
+      goToLista:     () => this.setState({ tab: 'lista' }),
+      goToBoletos:   () => this.setState({ tab: 'boletos', expandedId: null }),
+      navDashColor:     tab === 'dashboard' ? '#7C5C4A' : '#C8C3BC',
+      navDashWeight:    tab === 'dashboard' ? '600' : '400',
+      navListaColor:    tab === 'lista'     ? '#7C5C4A' : '#C8C3BC',
+      navListaWeight:   tab === 'lista'     ? '600' : '400',
+      navBoletosColor:  tab === 'boletos'   ? '#7C5C4A' : '#C8C3BC',
+      navBoletosWeight: tab === 'boletos'   ? '600' : '400',
+      confirmedGuests,
+      hasConfirmed: confirmedGuests.length > 0,
+      noConfirmed:  confirmedGuests.length === 0,
+      screenLabel: !authenticated
+        ? ({ pin: 'Autenticación con PIN', loading: 'Verificando acceso…', success: 'Acceso concedido' })[loginScreen] || ''
+        : ({ dashboard: 'Dashboard de grupos', lista: 'Lista de invitados', boletos: 'Boletos de entrada' })[tab] || '',
+
+      // Login
+      showLogin:        !authenticated,
+      isAuthenticated:  authenticated,
+      showPinEntry:     !authenticated && loginScreen === 'pin',
+      showLoginLoading: !authenticated && loginScreen === 'loading',
+      showLoginSuccess: !authenticated && loginScreen === 'success',
+      pinHasError: loginHasError,
+      pinAnim: loginHasError ? 'shake 420ms ease' : 'none',
+      pinBoxes: [0,1,2,3].map(i => ({
+        filled: loginDigits.length > i,
+        borderColor: loginHasError ? '#DC2626' : loginDigits.length >= i ? '#7C5C4A' : '#E7E5E3',
+        borderWidth: loginDigits.length >= i ? '2px' : '1.5px',
+      })),
+      pinKeys: ['1','2','3','4','5','6','7','8','9','','0','⌫'].map(label => {
+        const isEmpty = label === '', isDel = label === '⌫';
+        return {
+          label: label || ' ',
+          bg:     isEmpty ? 'transparent' : isDel ? '#EDE9E4' : '#fff',
+          cursor: isEmpty ? 'default' : 'pointer',
+          fontFamily: (isEmpty || isDel) ? "'DM Sans',sans-serif" : "'Playfair Display',serif",
+          fontSize:   isDel ? '18px' : isEmpty ? '18px' : '24px',
+          color:      isEmpty ? 'transparent' : isDel ? '#78716C' : '#1C1917',
+          onPress: isEmpty ? () => {} : isDel ? () => this.deleteLoginDigit() : () => this.addLoginDigit(label),
+        };
+      }),
+      loginSpinner: React.createElement('div', { style: { width:52, height:52, borderRadius:'50%', border:'3px solid rgba(255,255,255,.2)', borderTopColor:'#fff', animation:'spin 800ms linear infinite' } }),
+      loginCheckmark: React.createElement('div', {
+        style: { width:88, height:88, borderRadius:'50%', background:'rgba(255,255,255,.2)', display:'flex', alignItems:'center', justifyContent:'center', animation:'popIn 450ms cubic-bezier(0.34,1.56,0.64,1)' }
+      }, React.createElement('svg', { width:48, height:48, viewBox:'0 0 24 24', fill:'none', stroke:'#fff', strokeWidth:2.5, strokeLinecap:'round' },
+        React.createElement('polyline', { points:'20 6 9 17 4 12' })
+      )),
+
+      // Stats
+      totalPersonas, asistiran, pct,
+      progressW: `${pct}%`,
+      totalGuests: groupDefs.length,
+      groupStats,
+
+      // Lista
+      filteredGuests,
+      isEmpty: filteredGuests.length === 0,
+      guestCount: filteredGuests.length,
+      filter,
+      showGrupoFiltro: !!grupoFiltro,
+      grupoFiltroLabel: grupoFiltro || '',
+      clearGrupoFiltro: () => this.setState({ grupoFiltro: null, filter: 'todos', expandedId: null }),
+
+      filterTodos:   () => this.setState({ filter: 'todos',    expandedId: null }),
+      filterAlta:    () => this.setState({ filter: 'alta',     expandedId: null }),
+      filterEnviado: () => this.setState({ filter: 'enviado',  expandedId: null }),
+      filterConfirmo:() => this.setState({ filter: 'confirmo', expandedId: null }),
+      filterBaja:    () => this.setState({ filter: 'baja',     expandedId: null }),
+
+      filterTodosBg: pt.bg, filterTodosColor: pt.color, filterTodosBorder: pt.border,
+      filterAltaBg:  pa.bg, filterAltaColor:  pa.color, filterAltaBorder:  pa.border,
+      filterEnviadoBg: pe.bg, filterEnviadoColor: pe.color, filterEnviadoBorder: pe.border,
+      filterConfirmoBg: pc.bg, filterConfirmoColor: pc.color, filterConfirmoBorder: pc.border,
+      filterBajaBg:  pb.bg, filterBajaColor:  pb.color, filterBajaBorder:  pb.border,
+
+      // Add modal
+      showAddModal,
+      openAddModal:  () => this.setState({ showAddModal: true }),
+      closeAddModal: () => this.setState({ showAddModal: false, editingId: null, newTitular: '', newNumInv: 1 }),
+      modalTitle: editingId ? 'Editar invitado' : 'Agregar invitado',
+      saveLabel:  editingId ? 'Guardar cambios' : 'Guardar invitado',
+      newTitular, newGrupo, newNumInv,
+      onNewTitular: (e) => this.setState({ newTitular: e.target.value }),
+      grupoOptions: grupos.map(g => ({
+        nombre:   g.nombre,
+        bg:       newGrupo === g.nombre ? '#7C5C4A' : '#F7F5F2',
+        color:    newGrupo === g.nombre ? '#fff'    : '#78716C',
+        onSelect: () => this.setState({ newGrupo: g.nombre }),
+      })),
+      incNum: () => this.setState({ newNumInv: newNumInv + 1 }),
+      decNum: () => this.setState({ newNumInv: Math.max(1, newNumInv - 1) }),
+      addCtaBg:      newTitular.trim() ? '#7C5C4A' : '#C8C3BC',
+      addGuest: () => {
+        const t = this.state.newTitular.trim();
+        if (!t) return;
+        const grupoObj = this.state.grupos.find(g => g.nombre === this.state.newGrupo);
+        const gc = grupoObj ? grupoObj.color : '#C4956A';
+        if (this.state.editingId) {
+          this.updateGuest(this.state.editingId, { titular: t, grupo: this.state.newGrupo, gc, numInv: this.state.newNumInv });
+          this.setState({ showAddModal: false, editingId: null, newTitular: '', newNumInv: 1 });
+        } else {
+          this.setState({
+            guests: [...this.state.guests, { id: Date.now().toString(), titular: t, grupo: this.state.newGrupo, gc, numInv: this.state.newNumInv, estado: 'alta', conf: null, dev: null }],
+            showAddModal: false, newTitular: '', newNumInv: 1,
+          });
+        }
+      },
+
+      // Add grupo
+      showAddGrupo,
+      newGrupoNombre,
+      newGrupoColor,
+      openAddGrupo:       () => this.setState({ showAddGrupo: true }),
+      grupoModalTitle: editingGrupoId ? 'Editar grupo' : 'Nuevo grupo',
+      grupoSaveCta:    editingGrupoId ? 'Guardar cambios' : 'Crear grupo',
+      closeAddGrupo:   () => this.setState({ showAddGrupo: false, editingGrupoId: null, newGrupoNombre: '' }),
+      onNewGrupoNombre:   (e) => this.setState({ newGrupoNombre: e.target.value }),
+      setGrupoColor: (c) => () => this.setState({ newGrupoColor: c }),
+      colorOpts: ['#8B6FB3','#B55B5B','#5B9AB5','#7BA673','#B5A05B','#A8627A'].map(c => ({
+        color:    c,
+        active:   newGrupoColor === c,
+        shadow:   newGrupoColor === c ? `0 0 0 3px #fff, 0 0 0 5px ${c}` : 'none',
+        scale:    newGrupoColor === c ? 'scale(1.15)' : 'scale(1)',
+        setColor: () => this.setState({ newGrupoColor: c }),
+      })),
+      saveGrupo: () => {
+        const n = this.state.newGrupoNombre.trim();
+        if (!n) return;
+        const c = this.state.newGrupoColor;
+        if (this.state.editingGrupoId) {
+          const oldG = this.state.grupos.find(g => g.id === this.state.editingGrupoId);
+          const oldNombre = oldG ? oldG.nombre : null;
+          this.setState({
+            grupos: this.state.grupos.map(g => g.id === this.state.editingGrupoId ? { ...g, nombre: n, color: c } : g),
+            guests: this.state.guests.map(guest => oldNombre && guest.grupo === oldNombre ? { ...guest, grupo: n, gc: c } : guest),
+            showAddGrupo: false, editingGrupoId: null, newGrupoNombre: '', newGrupoColor: '#8B6FB3',
+          });
+        } else {
+          this.setState({ grupos: [...this.state.grupos, { id: Date.now().toString(), nombre: n, color: c }], showAddGrupo: false, newGrupoNombre: '', newGrupoColor: '#8B6FB3' });
+        }
+      },
+      grupoCtaBg: newGrupoNombre.trim() ? '#7C5C4A' : '#C8C3BC',
+      grupoPreviewLabel: newGrupoNombre.trim() || 'Vista previa del grupo',
+      grupoPreviewColor: newGrupoNombre.trim() ? '#1C1917' : '#A8A29E',
+
+      // Boleto
+      showBoleto: this.state.showBoleto,
+      boletoTitular: this.state.boletoGuest ? this.state.boletoGuest.titular : '',
+      boletoNumInv:  this.state.boletoGuest ? this.state.boletoGuest.numInv  : 0,
+      closeBoleto: () => this.setState({ showBoleto: false, boletoGuest: null }),
+
+      // Dialog
+      showDialog: !!dialog,
+      dialogTitle, dialogBody, dialogConfirmLabel, dialogConfirm, dialogConfirmBg,
+      closeDialog: () => this.setState({ dialog: null }),
+    };
+  }
+}
+
+</script>
+</body>
+</html>

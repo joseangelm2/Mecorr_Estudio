@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="design_doc_mode" content="canvas">
+  <style>
+    body { margin: 0; }
+    @keyframes shimmer { 0%,100%{opacity:.5} 50%{opacity:1} }
+  </style>
+</helmet>
+
+<!-- ═══════════════ DESIGN SYSTEM ═══════════════ -->
+<div style="position:absolute;left:0;top:0;width:700px;" data-screen-label="Design System">
+  <div data-drags-parent="1" style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#A8A29E;margin-bottom:14px;">Sistema de Diseño — invitaxv.lol</div>
+  <div style="background:#fff;border-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:32px;display:flex;gap:48px;flex-wrap:wrap;">
+    <!-- Colors -->
+    <div style="flex:none;">
+      <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:#1C1917;margin-bottom:18px;">Paleta</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;gap:8px;align-items:center;">
+          <div style="width:36px;height:36px;border-radius:8px;background:#7C5C4A;flex:none;"></div>
+          <div style="width:36px;height:36px;border-radius:8px;background:#C4956A;flex:none;"></div>
+          <div style="width:36px;height:36px;border-radius:8px;background:#F7F5F2;border:1px solid #E7E5E3;flex:none;"></div>
+          <div style="width:36px;height:36px;border-radius:8px;background:#1C1917;flex:none;"></div>
+          <div style="width:36px;height:36px;border-radius:8px;background:#E7E5E3;flex:none;"></div>
+        </div>
+        <div style="display:flex;gap:8px;font-size:9px;color:#A8A29E;font-family:'DM Sans',sans-serif;">
+          <div style="width:36px;text-align:center;">Primary</div>
+          <div style="width:36px;text-align:center;">Accent</div>
+          <div style="width:36px;text-align:center;">Surface</div>
+          <div style="width:36px;text-align:center;">Text</div>
+          <div style="width:36px;text-align:center;">Border</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;margin-top:8px;">
+          <div style="width:36px;height:36px;border-radius:8px;background:#16A34A;flex:none;"></div>
+          <div style="width:36px;height:36px;border-radius:8px;background:#2563EB;flex:none;"></div>
+          <div style="width:36px;height:36px;border-radius:8px;background:#DC2626;flex:none;"></div>
+          <div style="width:36px;height:36px;border-radius:8px;background:#78716C;flex:none;"></div>
+        </div>
+        <div style="display:flex;gap:8px;font-size:9px;color:#A8A29E;font-family:'DM Sans',sans-serif;">
+          <div style="width:36px;text-align:center;">Confirmó</div>
+          <div style="width:36px;text-align:center;">Enviado</div>
+          <div style="width:36px;text-align:center;">Baja</div>
+          <div style="width:36px;text-align:center;">Alta</div>
+        </div>
+        <!-- Dark palette -->
+        <div style="margin-top:12px;padding-top:12px;border-top:1px solid #F0EEEB;">
+          <div style="font-size:10px;font-weight:600;color:#A8A29E;margin-bottom:8px;font-family:'DM Sans',sans-serif;letter-spacing:.8px;text-transform:uppercase;">Modo Oscuro</div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <div style="width:36px;height:36px;border-radius:8px;background:#121110;border:1px solid #2E2B27;flex:none;"></div>
+            <div style="width:36px;height:36px;border-radius:8px;background:#1C1A18;border:1px solid #2E2B27;flex:none;"></div>
+            <div style="width:36px;height:36px;border-radius:8px;background:#2E2B27;flex:none;"></div>
+            <div style="width:36px;height:36px;border-radius:8px;background:#C4956A;flex:none;"></div>
+            <div style="width:36px;height:36px;border-radius:8px;background:#F0EBE5;flex:none;"></div>
+          </div>
+          <div style="display:flex;gap:8px;font-size:9px;color:#A8A29E;font-family:'DM Sans',sans-serif;margin-top:4px;">
+            <div style="width:36px;text-align:center;">BG</div>
+            <div style="width:36px;text-align:center;">Card</div>
+            <div style="width:36px;text-align:center;">Border</div>
+            <div style="width:36px;text-align:center;">Primary</div>
+            <div style="width:36px;text-align:center;">Text</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Typography -->
+    <div style="flex:none;width:200px;">
+      <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:#1C1917;margin-bottom:18px;">Tipografía</div>
+      <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#1C1917;line-height:1.1;">Playfair</div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:11px;color:#A8A29E;margin-bottom:14px;">Títulos · nombres · H1–H3 · 600/700</div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:20px;font-weight:500;color:#1C1917;">DM Sans</div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:11px;color:#A8A29E;margin-bottom:18px;">UI · body · labels · 400/500/600</div>
+      <div style="border-top:1px solid #F0EEEB;padding-top:14px;display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;">
+          <span style="font-family:'DM Sans',sans-serif;font-size:10px;color:#A8A29E;">H1</span>
+          <span style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#1C1917;">Sofía</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;">
+          <span style="font-family:'DM Sans',sans-serif;font-size:10px;color:#A8A29E;">H2</span>
+          <span style="font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:#1C1917;">Dashboard</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;">
+          <span style="font-family:'DM Sans',sans-serif;font-size:10px;color:#A8A29E;">Body</span>
+          <span style="font-family:'DM Sans',sans-serif;font-size:14px;color:#1C1917;">Juan Pérez · 4 inv.</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;">
+          <span style="font-family:'DM Sans',sans-serif;font-size:10px;color:#A8A29E;">Caption</span>
+          <span style="font-family:'DM Sans',sans-serif;font-size:12px;color:#78716C;">Hace 2 días</span>
+        </div>
+      </div>
+    </div>
+    <!-- States / Badges -->
+    <div style="flex:none;width:180px;">
+      <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:#1C1917;margin-bottom:18px;">Estados</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="padding:4px 10px;border-radius:20px;background:#F4F0EE;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:#78716C;">Alta</div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:11px;color:#A8A29E;">Sin enviar</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="padding:4px 10px;border-radius:20px;background:#EFF6FF;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:#2563EB;">Enviado</div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:11px;color:#A8A29E;">WA enviado</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="padding:4px 10px;border-radius:20px;background:#F0FDF4;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:#16A34A;">Confirmó ✓</div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:11px;color:#A8A29E;">Asistirá</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="padding:4px 10px;border-radius:20px;background:#FEF2F2;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:#DC2626;">No asistirá</div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:11px;color:#A8A29E;">Confirmó NO</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="padding:4px 10px;border-radius:20px;background:#F5F5F4;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:#A8A29E;text-decoration:line-through;">Baja</div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:11px;color:#A8A29E;">Desactivado</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ SECTION LABEL: ADMIN LIGHT ═══════════════ -->
+<div style="position:absolute;left:0;top:310px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#A8A29E;" data-drags-parent="1">Admin — Modo Claro</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 01 · PIN LOGIN                                 -->
+<!-- ══════════════════════════════════════════════ -->
+<div style="position:absolute;left:0;top:338px;width:380px;" data-screen-label="01 PIN Login">
+  <div data-drags-parent="1" style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#57534E;margin-bottom:10px;">01 · Acceso PIN</div>
+  <div style="width:380px;height:780px;background:#F7F5F2;border-radius:40px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.14);position:relative;">
+    <!-- Status bar -->
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 30px 0;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;color:#1C1917;">
+      <span>9:41</span>
+      <div style="display:flex;gap:6px;align-items:center;">
+        <svg width="17" height="12" viewBox="0 0 17 12" fill="none"><rect x="0" y="9" width="3" height="3" rx=".6" fill="#1C1917"/><rect x="4.5" y="6" width="3" height="6" rx=".6" fill="#1C1917"/><rect x="9" y="3" width="3" height="9" rx=".6" fill="#1C1917"/><rect x="13.5" y="0" width="3" height="12" rx=".6" fill="#1C1917"/></svg>
+        <svg width="27" height="13" viewBox="0 0 27 13" fill="none"><rect x=".5" y=".5" width="22" height="12" rx="2.5" stroke="#1C1917" stroke-width="1"/><path d="M23.5 4.5h2a1 1 0 011 1v2a1 1 0 01-1 1h-2" fill="#1C1917"/><rect x="2" y="2" width="17" height="9" rx="1.5" fill="#1C1917"/></svg>
+      </div>
+    </div>
+    <!-- Content -->
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:calc(100% - 52px);padding:0 36px;">
+      <div style="width:44px;height:1px;background:#C4956A;margin-bottom:28px;"></div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:#A8A29E;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:6px;">La fiesta de</div>
+      <div style="font-family:'Playfair Display',serif;font-size:44px;font-weight:700;color:#1C1917;margin-bottom:6px;text-align:center;">Sofía</div>
+      <div style="width:44px;height:1px;background:#C4956A;margin-bottom:52px;"></div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:14px;color:#78716C;margin-bottom:28px;">Ingresa tu PIN de acceso</div>
+      <!-- PIN boxes -->
+      <div style="display:flex;gap:12px;margin-bottom:40px;">
+        <div style="width:60px;height:68px;border-radius:16px;border:2px solid #7C5C4A;background:#fff;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:#1C1917;">3</div>
+        <div style="width:60px;height:68px;border-radius:16px;border:2px solid #7C5C4A;background:#fff;display:flex;align-items:center;justify-content:center;">
+          <div style="width:10px;height:10px;border-radius:50%;background:#7C5C4A;"></div>
+        </div>
+        <div style="width:60px;height:68px;border-radius:16px;border:1.5px solid #E7E5E3;background:#fff;display:flex;align-items:center;justify-content:center;"></div>
+        <div style="width:60px;height:68px;border-radius:16px;border:1.5px solid #E7E5E3;background:#fff;display:flex;align-items:center;justify-content:center;"></div>
+      </div>
+      <!-- CTA -->
+      <div style="width:100%;padding:17px;background:#7C5C4A;border-radius:16px;text-align:center;font-family:'DM Sans',sans-serif;color:#fff;font-size:15px;font-weight:600;letter-spacing:.2px;">Acceder</div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:#A8A29E;margin-top:22px;text-align:center;">Solicita tu PIN a la festejada</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 02 · DASHBOARD                                 -->
+<!-- ══════════════════════════════════════════════ -->
+<div style="position:absolute;left:460px;top:338px;width:380px;" data-screen-label="02 Dashboard">
+  <div data-drags-parent="1" style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#57534E;margin-bottom:10px;">02 · Dashboard</div>
+  <div style="width:380px;height:780px;background:#F7F5F2;border-radius:40px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.14);position:relative;">
+    <!-- Status bar -->
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 30px 0;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;color:#1C1917;">
+      <span>9:41</span>
+      <div style="display:flex;gap:6px;align-items:center;">
+        <svg width="17" height="12" viewBox="0 0 17 12" fill="none"><rect x="0" y="9" width="3" height="3" rx=".6" fill="#1C1917"/><rect x="4.5" y="6" width="3" height="6" rx=".6" fill="#1C1917"/><rect x="9" y="3" width="3" height="9" rx=".6" fill="#1C1917"/><rect x="13.5" y="0" width="3" height="12" rx=".6" fill="#1C1917"/></svg>
+        <svg width="27" height="13" viewBox="0 0 27 13" fill="none"><rect x=".5" y=".5" width="22" height="12" rx="2.5" stroke="#1C1917" stroke-width="1"/><path d="M23.5 4.5h2a1 1 0 011 1v2a1 1 0 01-1 1h-2" fill="#1C1917"/><rect x="2" y="2" width="17" height="9" rx="1.5" fill="#1C1917"/></svg>
+      </div>
+    </div>
+    <!-- Header -->
+    <div style="padding:18px 24px 0;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px;">
+        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#1C1917;">Dashboard</div>
+        <div style="font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:#7C5C4A;padding:6px 14px;border:1.5px solid #7C5C4A;border-radius:20px;">+ Grupo</div>
+      </div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:13px;color:#A8A29E;margin-bottom:18px;">Fiesta de Sofía · 2 jun 2025</div>
+    </div>
+    <!-- Hero stats card -->
+    <div style="margin:0 20px 14px;background:#7C5C4A;border-radius:20px;padding:22px 24px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:18px;">
+        <div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.6);margin-bottom:4px;">Total invitados</div>
+          <div style="font-family:'Playfair Display',serif;font-size:44px;font-weight:700;color:#fff;line-height:1;">45</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-family:'DM Sans',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.6);margin-bottom:4px;">Asistirán</div>
+          <div style="font-family:'Playfair Display',serif;font-size:44px;font-weight:700;color:#C4956A;line-height:1;">32</div>
+        </div>
+      </div>
+      <div style="height:5px;background:rgba(255,255,255,.15);border-radius:3px;overflow:hidden;margin-bottom:6px;">
+        <div style="width:71%;height:100%;background:#C4956A;border-radius:3px;"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:rgba(255,255,255,.5);">71% confirmados</div>
+        <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:rgba(255,255,255,.5);">3 grupos</div>
+      </div>
+    </div>
+    <!-- Group cards -->
+    <div style="padding:0 20px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;max-height:calc(780px - 340px);">
+      <!-- Familia -->
+      <div style="background:#fff;border-radius:16px;padding:16px 18px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div style="width:8px;height:8px;border-radius:4px;background:#C4956A;flex:none;"></div>
+            <div style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#1C1917;">Familia</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:#A8A29E;">20 personas</div>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D1CEC8" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;">
+          <div style="flex:1;">
+            <div style="display:flex;justify-content:space-between;font-family:'DM Sans',sans-serif;font-size:11px;color:#78716C;margin-bottom:5px;"><span>Enviados</span><span style="font-weight:600;color:#2563EB;">10/12</span></div>
+            <div style="height:4px;background:#F0EEEB;border-radius:2px;overflow:hidden;"><div style="width:83%;height:100%;background:#2563EB;border-radius:2px;"></div></div>
+          </div>
+          <div style="flex:1;">
+            <div style="display:flex;justify-content:space-between;font-family:'DM Sans',sans-serif;font-size:11px;color:#78716C;margin-bottom:5px;"><span>Confirmados</span><span style="font-weight:600;color:#16A34A;">8/10</span></div>
+            <div style="height:4px;background:#F0EEEB;border-radius:2px;overflow:hidden;"><div style="width:80%;height:100%;background:#16A34A;border-radius:2px;"></div></div>
+          </div>
+        </div>
+      </div>
+      <!-- Amigos -->
+      <div style="background:#fff;border-radius:16px;padding:16px 18px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div style="width:8px;height:8px;border-radius:4px;background:#57A773;flex:none;"></div>
+            <div style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#1C1917;">Amigos</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:#A8A29E;">15 personas</div>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D1CEC8" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;">
+          <div style="flex:1;">
+            <div style="display:flex;justify-content:space-between;font-family:'DM Sans',sans-serif;font-size:11px;color:#78716C;margin-bottom:5px;"><span>Enviados</span><span style="font-weight:600;color:#2563EB;">6/10</span></div>
+            <div style="height:4px;background:#F0EEEB;border-radius:2px;overflow:hidden;"><div style="width:60%;height:100%;background:#2563EB;border-radius:2px;"></div></div>
+          </div>
+          <div style="flex:1;">
+            <div style="display:flex;justify-content:space-between;font-family:'DM Sans',sans-serif;font-size:11px;color:#78716C;margin-bottom:5px;"><span>Confirmados</span><span style="font-weight:600;color:#16A34A;">4/6</span></div>
+            <div style="height:4px;background:#F0EEEB;border-radius:2px;overflow:hidden;"><div style="width:66%;height:100%;background:#16A34A;border-radius:2px;"></div></div>
+          </div>
+        </div>
+      </div>
+      <!-- Trabajo -->
+      <div style="background:#fff;border-radius:16px;padding:16px 18px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div style="width:8px;height:8px;border-radius:4px;background:#5B87B5;flex:none;"></div>
+            <div style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#1C1917;">Trabajo</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:#A8A29E;">10 personas</div>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D1CEC8" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;">
+          <div style="flex:1;">
+            <div style="display:flex;justify-content:space-between;font-family:'DM Sans',sans-serif;font-size:11px;color:#78716C;margin-bottom:5px;"><span>Enviados</span><span style="font-weight:600;color:#2563EB;">3/5</span></div>
+            <div style="height:4px;background:#F0EEEB;border-radius:2px;overflow:hidden;"><div style="width:60%;height:100%;background:#2563EB;border-radius:2px;"></div></div>
+          </div>
+          <div style="flex:1;">
+            <div style="display:flex;justify-content:space-between;font-family:'DM Sans',sans-serif;font-size:11px;color:#78716C;margin-bottom:5px;"><span>Confirmados</span><span style="font-weight:600;color:#16A34A;">2/3</span></div>
+            <div style="height:4px;background:#F0EEEB;border-radius:2px;overflow:hidden;"><div style="width:66%;height:100%;background:#16A34A;border-radius:2px;"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Bottom nav -->
+    <div style="position:absolute;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #F0EEEB;padding:10px 0 26px;display:flex;justify-content:space-around;">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7C5C4A" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        <span style="font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;color:#7C5C4A;">Dashboard</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C8C3BC" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        <span style="font-family:'DM Sans',sans-serif;font-size:10px;color:#C8C3BC;">Lista</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C8C3BC" stroke-width="2" stroke-linecap="round"><path d="M20 12v6a2 2 0 01-2 2H6a2 2 0 01-2-2v-6"/><rect x="2" y="7" width="20" height="5" rx="1"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>
+        <span style="font-family:'DM Sans',sans-serif;font-size:10px;color:#C8C3BC;">Boletos</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 03 · LISTA — OPCIÓN A (iconos visibles)        -->
+<!-- ══════════════════════════════════════════════ -->
+<div style="position:absolute;left:920px;top:338px;width:380px;" data-screen-label="03 Lista Opcion A">
+  <div data-drags-parent="1" style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#57534E;margin-bottom:4px;">03 · Lista — Opción A</div>
+  <div style="font-family:'DM Sans',sans-serif;font-size:11px;color:#A8A29E;margin-bottom:8px;">Iconos siempre visibles por tarjeta</div>
+  <div style="width:380px;height:780px;background:#F7F5F2;border-radius:40px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.14);position:relative;">
+    <!-- Status bar -->
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 30px 0;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;color:#1C1917;">
+      <span>9:41</span>
+      <div style="display:flex;gap:6px;align-items:center;">
+        <svg width="17" height="12" viewBox="0 0 17 12" fill="none"><rect x="0" y="9" width="3" height="3" rx=".6" fill="#1C1917"/><rect x="4.5" y="6" width="3" height="6" rx=".6" fill="#1C1917"/><rect x="9" y="3" width="3" height="9" rx=".6" fill="#1C1917"/><rect x="13.5" y="0" width="3" height="12" rx=".6" fill="#1C1917"/></svg>
+        <svg width="27" height="13" viewBox="0 0 27 13" fill="none"><rect x=".5" y=".5" width="22" height="12" rx="2.5" stroke="#1C1917" stroke-width="1"/><path d="M23.5 4.5h2a1 1 0 011 1v2a1 1 0 01-1 1h-2" fill="#1C1917"/><rect x="2" y="2" width="17" height="9" rx="1.5" fill="#1C1917"/></svg>
+      </div>
+    </div>
+    <!-- Header -->
+    <div style="padding:16px 22px 12px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#1C1917;">Invitados</div>
+        <div style="padding:8px 16px;background:#7C5C4A;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:#fff;">+ Agregar</div>
+      </div>
+      <!-- Filter pills -->
+      <div style="display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;">
+        <div style="flex:none;padding:6px 14px;background:#7C5C4A;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#fff;">Todos</div>
+        <div style="flex:none;padding:6px 14px;background:#fff;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:12px;color:#78716C;border:1px solid #E7E5E3;">Alta</div>
+        <div style="flex:none;padding:6px 14px;background:#fff;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:12px;color:#78716C;border:1px solid #E7E5E3;">Enviado</div>
+        <div style="flex:none;padding:6px 14px;background:#fff;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:12px;color:#78716C;border:1px solid #E7E5E3;">Confirmó</div>
+        <div style="flex:none;padding:6px 14px;background:#fff;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:12px;color:#78716C;border:1px solid #E7E5E3;">Baja</div>
+      </div>
+    </div>
+    <!-- Guest list -->
+    <div style="padding:0 16px;display:flex;flex-direction:column;gap:8px;overflow-y:auto;height:calc(780px - 210px);">
+
+      <!-- Card 1: Enviado -->
+      <div style="background:#fff;border-radius:16px;padding:14px 16px;">
+        <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;">
+          <div style="width:38px;height:38px;border-radius:12px;background:#EFF6FF;display:flex;align-items:center;justify-content:center;flex:none;font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#2563EB;">J</div>
+          <div style="flex:1;">
+            <div style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#1C1917;margin-bottom:2px;">Juan Pérez</div>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <div style="width:6px;height:6px;border-radius:3px;background:#C4956A;flex:none;"></div>
+              <span style="font-family:'DM Sans',sans-serif;font-size:12px;color:#78716C;">Familia</span>
+              <span style="font-family:'DM Sans',sans-serif;font-size:12px;color:#D1CEC8;">·</span>
+              <span style="font-family:'DM Sans',sans-serif;font-size:12px;color:#78716C;">4 inv.</span>
+            </div>
+          </div>
+          <div style="padding:4px 10px;background:#EFF6FF;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:#2563EB;flex:none;">Enviado</div>
+        </div>
+        <div style="border-top:1px solid #F7F5F2;padding-top:10px;display:flex;justify-content:space-between;align-items:center;">
+          <!-- Actions: Confirmar, Editar, Enviar WA, Dar baja, Desvincular -->
+          <div style="display:flex;gap:4px;">
+            <div style="width:34px;height:34px;border-radius:10px;background:#F0FDF4;display:flex;align-items:center;justify-content:center;" title="Confirmar">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div style="width:34px;height:34px;border-radius:10px;background:#F7F5F2;display:flex;align-items:center;justify-content:center;" title="Editar">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#78716C" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </div>
+            <div style="width:34px;height:34px;border-radius:10px;background:#F0FDF4;display:flex;align-items:center;justify-content:center;" title="Enviar WhatsApp">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+            </div>
+            <div style="width:34px;height:34px;border-radius:10px;background:#FEF2F2;display:flex;align-items:center;justify-content:center;" title="Dar de baja">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2" stroke-linecap="round"><polyline points="17 11 12 6 7 11"/><line x1="12" y1="6" x2="12" y2="18"/></svg>
+            </div>
+          </div>
+          <div style="width:34px;height:34px;border-radius:10px;background:#F7F5F2;display:flex;align-items:center;justify-content:center;" title="Desvincular dispositivo">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#A8A29E" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 019.9-1"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Alta -->
+      <div style="background:#fff;border-radius:16px;padding:14px 16px;">
+        <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;">
+          <div style="width:38px;height:38px;border-radius:12px;background:#F4F0EE;display:flex;align-items:center;justify-content:center;flex:none;font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#78716C;">F</div>
+          <div style="flex:1;">
+            <div style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#1C1917;margin-bottom:2px;">Familia García</div>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <div style="width:6px;height:6px;border-radius:3px;background:#57A773;flex:none;"></div>
+              <span style="font-family:'DM Sans',sans-serif;font-size:12px;color:#78716C;">Amigos</span>
+              <span style="font-family:'DM Sans',sans-serif;font-size:12px;color:#D1CEC8;">·</span>
+              <span style="font-family:'DM Sans',sans-serif;font-size:12px;color:#78716C;">6 inv.</span>
+            </div>
+          </div>
+          <div style="padding:4px 10px;background:#F4F0EE;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:#78716C;flex:none;">Alta</div>
+        </div>
+        <div style="border-top:1px solid #F7F5F2;padding-top:10px;display:flex;justify-content:space-between;align-items:center;">
+          <div style="display:flex;gap:4px;">
+            <div style="width:34px;height:34px;border-radius:10px;background:#F7F5F2;display:flex;align-items:center;justify-content:center;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#78716C" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </div>
+            <div style="width:34px;height:34px;border-radius:10px;background:#F0FDF4;display:flex;align-items:center;justify-content:center;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+            </div>
+            <div style="width:34px;height:34px;border-radius:10px;background:#FEF2F2;display:flex;align-items:center;justify-content:center;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>
+            </div>
+          </div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:11px;color:#A8A29E;font-style:italic;">Sin enviar</div>
+        </div>
+      </div>
+
+      <!-- Card 3: Confirmó SI -->
+      <div style="background:#fff;border-radius:16px;padding:14px 16px;border-left:3px solid #16A34A;">
+        <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;">
+          <div style="width:38px;height:38px;border-radius:12px;background:#F0FDF4;display:flex;align-items:center;justify-content:center;flex:none;font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#16A34A;">M</div>
+          <div style="flex:1;">
+            <div style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#1C1917;margin-bottom:2px;">María López</div>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <div style="width:6px;height:6px;border-radius:3px;background:#C4956A;flex:none;"></div>
+              <span style="font-family:'DM Sans',sans-serif;font-size:12px;color:#78716C;">Familia</span>
+              <span style="font-family:'DM Sans',sans-serif;font-size:12px;color:#D1CEC8;">·</span>
+              <span style="font-family:'DM Sans',sans-serif;font-size:12px;color:#78716C;">3 inv.</span>
+            </div>
+          </div>
+          <div style="padding:4px 10px;background:#F0FDF4;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:#16A34A;flex:none;">Confirmó ✓</div>
+        </div>
+        <div style="border-top:1px solid #F7F5F2;padding-top:10px;display:flex;justify-content:space-between;align-items:center;">
+          <div style="display:flex;gap:4px;">
+            <div style="width:34px;height:34px;border-radius:10px;background:#F7F5F2;display:flex;align-items:center;justify-content:center;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#78716C" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </div>
+            <div style="width:34px;height:34px;border-radius:10px;background:#FEF3C7;display:flex;align-items:center;justify-content:center;" title="Enviar boleto">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2" stroke-linecap="round"><path d="M15 5v2M15 11v2M15 17v2M5 5h14a2 2 0 012 2v3a2 2 0 000 4v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a2 2 0 000-4V7a2 2 0 012-2z"/></svg>
+            </div>
+          </div>
+          <div style="width:34px;height:34px;border-radius:10px;background:#F7F5F2;display:flex;align-items:center;justify-content:center;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#A8A29E" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 019.9-1"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: Baja -->
+      <div style="background:#F9F8F7;border-radius:16px;padding:14px 16px;opacity:.7;">
+        <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;">
+          <div style="width:38px;height:38px;border-radius:12px;background:#F5F5F4;display:flex;align-items:center;justify-content:center;flex:none;font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#A8A29E;">C</div>
+          <div style="flex:1;">
+            <div style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#A8A29E;margin-bottom:2px;text-decoration:line-through;">Carlos Ruiz</div>
+            <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:#C8C3BC;">Trabajo · 2 inv.</div>
+          </div>
+          <div style="padding:4px 10px;background:#F5F5F4;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:#A8A29E;flex:none;">Baja</div>
+        </div>
+        <div style="border-top:1px solid #F0EEEB;padding-top:10px;">
+          <div style="width:34px;height:34px;border-radius:10px;background:#F0EEEB;display:flex;align-items:center;justify-content:center;" title="Reactivar">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#78716C" stroke-width="2" stroke-linecap="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Bottom nav -->
+    <div style="position:absolute;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #F0EEEB;padding:10px 0 26px;display:flex;justify-content:space-around;">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C8C3BC" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        <span style="font-family:'DM Sans',sans-serif;font-size:10px;color:#C8C3BC;">Dashboard</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7C5C4A" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        <span style="font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;color:#7C5C4A;">Lista</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C8C3BC" stroke-width="2" stroke-linecap="round"><path d="M20 12v6a2 2 0 01-2 2H6a2 2 0 01-2-2v-6"/><rect x="2" y="7" width="20" height="5" rx="1"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>
+        <span style="font-family:'DM Sans',sans-serif;font-size:10px;color:#C8C3BC;">Boletos</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 04 · LISTA — OPCIÓN B (tap expansión)          -->
+<!-- ══════════════════════════════════════════════ -->
+<div style="position:absolute;left:1380px;top:338px;width:380px;" data-screen-label="04 Lista Opcion B">
+  <div data-drags-parent="1" style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#57534E;margin-bottom:4px;">04 · Lista — Opción B</div>
+  <div style="font-family:'DM Sans',sans-serif;font-size:11px;color:#A8A29E;margin-bottom:8px;">Tarjeta limpia · tap en "···" revela acciones</div>
+  <div style="width:380px;height:780px;background:#F7F5F2;border-radius:40px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.14);position:relative;">
+    <!-- Status bar -->
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 30px 0;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;color:#1C1917;">
+      <span>9:41</span>
+      <div style="display:flex;gap:6px;align-items:center;">
+        <svg width="17" height="12" viewBox="0 0 17 12" fill="none"><rect x="0" y="9" width="3" height="3" rx=".6" fill="#1C1917"/><rect x="4.5" y="6" width="3" height="6" rx=".6" fill="#1C1917"/><rect x="9" y="3" width="3" height="9" rx=".6" fill="#1C1917"/><rect x="13.5" y="0" width="3" height="12" rx=".6" fill="#1C1917"/></svg>
+        <svg width="27" height="13" viewBox="0 0 27 13" fill="none"><rect x=".5" y=".5" width="22" height="12" rx="2.5" stroke="#1C1917" stroke-width="1"/><path d="M23.5 4.5h2a1 1 0 011 1v2a1 1 0 01-1 1h-2" fill="#1C1917"/><rect x="2" y="2" width="17" height="9" rx="1.5" fill="#1C1917"/></svg>
+      </div>
+    </div>
+    <!-- Header -->
+    <div style="padding:16px 22px 12px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#1C1917;">Invitados</div>
+        <div style="padding:8px 16px;background:#7C5C4A;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:#fff;">+ Agregar</div>
+      </div>
+      <div style="display:flex;gap:6px;">
+        <div style="flex:none;padding:6px 14px;background:#7C5C4A;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#fff;">Todos</div>
+        <div style="flex:none;padding:6px 14px;background:#fff;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:12px;color:#78716C;border:1px solid #E7E5E3;">Alta</div>
+        <div style="flex:none;padding:6px 14px;background:#fff;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:12px;color:#78716C;border:1px solid #E7E5E3;">Enviado</div>
+        <div style="flex:none;padding:6px 14px;background:#fff;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:12px;color:#78716C;border:1px solid #E7E5E3;">Confirmó</div>
+      </div>
+    </div>
+    <!-- Guest list B -->
+    <div style="padding:0 16px;display:flex;flex-direction:column;gap:8px;">
+
+      <!-- Card 1: normal (closed) -->
+      <div style="background:#fff;border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:10px;">
+        <div style="width:38px;height:38px;border-radius:12px;background:#EFF6FF;display:flex;align-items:center;justify-content:center;flex:none;font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#2563EB;">J</div>
+        <div style="flex:1;">
+          <div style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#1C1917;margin-bottom:1px;">Juan Pérez</div>
+          <div style="display:flex;align-items:center;gap:6px;">
+            <div style="width:5px;height:5px;border-radius:50%;background:#C4956A;"></div>
+            <span style="font-family:'DM Sans',sans-serif;font-size:12px;color:#78716C;">Familia · 4 inv.</span>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;flex:none;">
+          <div style="padding:4px 10px;background:#EFF6FF;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:#2563EB;">Enviado</div>
+          <div style="width:28px;height:28px;border-radius:8px;background:#F7F5F2;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;">
+            <div style="width:3px;height:3px;border-radius:50%;background:#A8A29E;"></div>
+            <div style="width:3px;height:3px;border-radius:50%;background:#A8A29E;"></div>
+            <div style="width:3px;height:3px;border-radius:50%;background:#A8A29E;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: EXPANDED (shows actions) -->
+      <div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(124,92,74,.15);">
+        <div style="padding:14px 16px;display:flex;align-items:center;gap:10px;">
+          <div style="width:38px;height:38px;border-radius:12px;background:#F0FDF4;display:flex;align-items:center;justify-content:center;flex:none;font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#16A34A;">M</div>
+          <div style="flex:1;">
+            <div style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#1C1917;margin-bottom:1px;">María López</div>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <div style="width:5px;height:5px;border-radius:50%;background:#C4956A;"></div>
+              <span style="font-family:'DM Sans',sans-serif;font-size:12px;color:#78716C;">Familia · 3 inv.</span>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex:none;">
+            <div style="padding:4px 10px;background:#F0FDF4;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:#16A34A;">Confirmó ✓</div>
+            <div style="width:28px;height:28px;border-radius:8px;background:#7C5C4A;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;">
+              <div style="width:3px;height:3px;border-radius:50%;background:#fff;"></div>
+              <div style="width:3px;height:3px;border-radius:50%;background:#fff;"></div>
+              <div style="width:3px;height:3px;border-radius:50%;background:#fff;"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Actions panel -->
+        <div style="background:#F7F5F2;padding:12px 16px;display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+          <div style="background:#fff;border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#78716C" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            <span style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:#1C1917;">Editar</span>
+          </div>
+          <div style="background:#FEF3C7;border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2" stroke-linecap="round"><path d="M15 5v2M15 11v2M15 17v2M5 5h14a2 2 0 012 2v3a2 2 0 000 4v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a2 2 0 000-4V7a2 2 0 012-2z"/></svg>
+            <span style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:#D97706;">Boleto</span>
+          </div>
+          <div style="background:#F0FDF4;border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+            <span style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:#16A34A;">WhatsApp</span>
+          </div>
+          <div style="background:#fff;border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A8A29E" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 019.9-1"/></svg>
+            <span style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:#78716C;">Desvincular</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: normal (closed) -->
+      <div style="background:#fff;border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:10px;">
+        <div style="width:38px;height:38px;border-radius:12px;background:#F4F0EE;display:flex;align-items:center;justify-content:center;flex:none;font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#78716C;">F</div>
+        <div style="flex:1;">
+          <div style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#1C1917;margin-bottom:1px;">Familia García</div>
+          <div style="display:flex;align-items:center;gap:6px;">
+            <div style="width:5px;height:5px;border-radius:50%;background:#57A773;"></div>
+            <span style="font-family:'DM Sans',sans-serif;font-size:12px;color:#78716C;">Amigos · 6 inv.</span>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;flex:none;">
+          <div style="padding:4px 10px;background:#F4F0EE;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:#78716C;">Alta</div>
+          <div style="width:28px;height:28px;border-radius:8px;background:#F7F5F2;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;">
+            <div style="width:3px;height:3px;border-radius:50%;background:#A8A29E;"></div>
+            <div style="width:3px;height:3px;border-radius:50%;background:#A8A29E;"></div>
+            <div style="width:3px;height:3px;border-radius:50%;background:#A8A29E;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Bottom nav -->
+    <div style="position:absolute;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #F0EEEB;padding:10px 0 26px;display:flex;justify-content:space-around;">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C8C3BC" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        <span style="font-family:'DM Sans',sans-serif;font-size:10px;color:#C8C3BC;">Dashboard</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7C5C4A" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        <span style="font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;color:#7C5C4A;">Lista</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C8C3BC" stroke-width="2" stroke-linecap="round"><path d="M20 12v6a2 2 0 01-2 2H6a2 2 0 01-2-2v-6"/><rect x="2" y="7" width="20" height="5" rx="1"/><path d="M12 22V7"/></svg>
+        <span style="font-family:'DM Sans',sans-serif;font-size:10px;color:#C8C3BC;">Boletos</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 05 · MODAL AGREGAR INVITADO                    -->
+<!-- ══════════════════════════════════════════════ -->
+<div style="position:absolute;left:1840px;top:338px;width:380px;" data-screen-label="05 Modal Agregar">
+  <div data-drags-parent="1" style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#57534E;margin-bottom:10px;">05 · Modal Agregar Invitado</div>
+  <div style="width:380px;height:780px;border-radius:40px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.14);position:relative;">
+    <!-- Blurred background (list underneath) -->
+    <div style="position:absolute;inset:0;background:#F7F5F2;filter:blur(2px);opacity:.9;"></div>
+    <div style="position:absolute;inset:0;background:rgba(28,25,23,.4);"></div>
+    <!-- Status bar -->
+    <div style="position:relative;display:flex;justify-content:space-between;align-items:center;padding:16px 30px 0;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;color:#fff;">
+      <span>9:41</span>
+      <div style="display:flex;gap:6px;align-items:center;">
+        <svg width="17" height="12" viewBox="0 0 17 12" fill="none"><rect x="0" y="9" width="3" height="3" rx=".6" fill="#fff"/><rect x="4.5" y="6" width="3" height="6" rx=".6" fill="#fff"/><rect x="9" y="3" width="3" height="9" rx=".6" fill="#fff"/><rect x="13.5" y="0" width="3" height="12" rx=".6" fill="#fff"/></svg>
+        <svg width="27" height="13" viewBox="0 0 27 13" fill="none"><rect x=".5" y=".5" width="22" height="12" rx="2.5" stroke="#fff" stroke-width="1"/><path d="M23.5 4.5h2a1 1 0 011 1v2a1 1 0 01-1 1h-2" fill="#fff"/><rect x="2" y="2" width="17" height="9" rx="1.5" fill="#fff"/></svg>
+      </div>
+    </div>
+    <!-- Bottom sheet modal -->
+    <div style="position:absolute;bottom:0;left:0;right:0;background:#fff;border-radius:28px 28px 40px 40px;padding:0 0 36px;">
+      <!-- Handle -->
+      <div style="display:flex;justify-content:center;padding:14px 0 0;">
+        <div style="width:36px;height:4px;border-radius:2px;background:#E7E5E3;"></div>
+      </div>
+      <!-- Title -->
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:18px 24px 20px;">
+        <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#1C1917;">Agregar invitado</div>
+        <div style="width:32px;height:32px;border-radius:50%;background:#F7F5F2;display:flex;align-items:center;justify-content:center;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#78716C" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </div>
+      </div>
+      <!-- Form -->
+      <div style="padding:0 24px;display:flex;flex-direction:column;gap:14px;">
+        <!-- Titular -->
+        <div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#78716C;margin-bottom:6px;letter-spacing:.3px;">TITULAR</div>
+          <div style="background:#F7F5F2;border-radius:14px;padding:14px 16px;border:2px solid #7C5C4A;">
+            <div style="font-family:'DM Sans',sans-serif;font-size:15px;color:#1C1917;">Juan Pérez</div>
+          </div>
+        </div>
+        <!-- Grupo + Num invitados -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div>
+            <div style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#78716C;margin-bottom:6px;letter-spacing:.3px;">GRUPO</div>
+            <div style="background:#F7F5F2;border-radius:14px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;">
+              <div style="font-family:'DM Sans',sans-serif;font-size:15px;color:#1C1917;">Familia</div>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#A8A29E" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+          </div>
+          <div>
+            <div style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#78716C;margin-bottom:6px;letter-spacing:.3px;">INVITADOS</div>
+            <div style="background:#F7F5F2;border-radius:14px;padding:10px 16px;display:flex;align-items:center;gap:8px;">
+              <div style="width:28px;height:28px;border-radius:8px;background:#E7E5E3;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:700;color:#78716C;">−</div>
+              <div style="flex:1;text-align:center;font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#1C1917;">4</div>
+              <div style="width:28px;height:28px;border-radius:8px;background:#7C5C4A;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:700;color:#fff;">+</div>
+            </div>
+          </div>
+        </div>
+        <!-- WhatsApp -->
+        <div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#78716C;margin-bottom:6px;letter-spacing:.3px;">WHATSAPP</div>
+          <div style="background:#F7F5F2;border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:10px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A8A29E" stroke-width="2" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+            <div style="font-family:'DM Sans',sans-serif;font-size:15px;color:#1C1917;">+52 55 1234 5678</div>
+          </div>
+        </div>
+        <!-- Save button -->
+        <div style="margin-top:6px;padding:17px;background:#7C5C4A;border-radius:16px;text-align:center;font-family:'DM Sans',sans-serif;color:#fff;font-size:15px;font-weight:600;">Guardar invitado</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ IMPLEMENTATION NOTES ═══════════════ -->
+<div style="position:absolute;left:0;top:1148px;width:820px;" data-screen-label="Notas de Implementacion">
+  <div data-drags-parent="1" style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#A8A29E;margin-bottom:14px;">Implementación — Opción B seleccionada</div>
+  <div style="background:#fff;border-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:32px;display:flex;gap:48px;flex-wrap:wrap;">
+
+    <!-- State model -->
+    <div style="flex:none;width:360px;">
+      <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:#1C1917;margin-bottom:16px;">Estado React</div>
+      <div style="background:#F7F5F2;border-radius:12px;padding:16px 18px;font-family:'DM Sans',sans-serif;font-size:13px;color:#1C1917;line-height:2;">
+        <div style="color:#7C5C4A;font-weight:600;">// Un solo card expandido a la vez</div>
+        <div><span style="color:#5B87B5;">const</span> [expandedId, setExpandedId] = <span style="color:#5B87B5;">useState</span>&lt;<span style="color:#57A773;">string | null</span>&gt;(<span style="color:#C4956A;">null</span>)</div>
+        <div style="margin-top:8px;color:#7C5C4A;font-weight:600;">// Toggle: mismo id = cierra, distinto = abre</div>
+        <div><span style="color:#5B87B5;">const</span> toggle = (id: <span style="color:#57A773;">string</span>) =&gt;</div>
+        <div style="padding-left:16px;">setExpandedId(prev =&gt; prev === id ? <span style="color:#C4956A;">null</span> : id)</div>
+      </div>
+      <!-- Animation -->
+      <div style="margin-top:16px;">
+        <div style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#78716C;margin-bottom:8px;letter-spacing:.3px;text-transform:uppercase;">Animación del panel</div>
+        <div style="background:#F7F5F2;border-radius:12px;padding:14px 16px;font-family:'DM Sans',sans-serif;font-size:13px;color:#1C1917;line-height:1.8;">
+          <div style="color:#7C5C4A;font-weight:600;">// max-height transition — no "height: auto" bug</div>
+          <div>style={{ overflow: <span style="color:#C4956A;">'hidden'</span>,</div>
+          <div style="padding-left:16px;">maxHeight: isExpanded ? <span style="color:#C4956A;">'200px'</span> : <span style="color:#C4956A;">'0'</span>,</div>
+          <div style="padding-left:16px;">transition: <span style="color:#C4956A;">'max-height 220ms ease,</span></div>
+          <div style="padding-left:32px;color:#C4956A;">opacity 160ms ease'</span>,</div>
+          <div style="padding-left:16px;">opacity: isExpanded ? 1 : 0 }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action matrix -->
+    <div style="flex:none;width:360px;">
+      <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:#1C1917;margin-bottom:16px;">Acciones por estado</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+
+        <!-- alta -->
+        <div style="background:#F7F5F2;border-radius:12px;padding:12px 16px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+            <div style="padding:3px 10px;background:#F4F0EE;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:#78716C;">alta</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <div style="padding:4px 10px;background:#fff;border-radius:8px;border:1px solid #E7E5E3;font-family:'DM Sans',sans-serif;font-size:11px;color:#1C1917;">Editar</div>
+            <div style="padding:4px 10px;background:#F0FDF4;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:11px;color:#16A34A;">Enviar WA</div>
+            <div style="padding:4px 10px;background:#FEF2F2;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:11px;color:#DC2626;">Eliminar</div>
+          </div>
+        </div>
+
+        <!-- enviado -->
+        <div style="background:#F7F5F2;border-radius:12px;padding:12px 16px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+            <div style="padding:3px 10px;background:#EFF6FF;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:#2563EB;">enviado</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <div style="padding:4px 10px;background:#F0FDF4;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:11px;color:#16A34A;">Confirmar</div>
+            <div style="padding:4px 10px;background:#fff;border-radius:8px;border:1px solid #E7E5E3;font-family:'DM Sans',sans-serif;font-size:11px;color:#1C1917;">Editar</div>
+            <div style="padding:4px 10px;background:#FEF2F2;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:11px;color:#DC2626;">Dar de baja</div>
+            <div style="padding:4px 10px;background:#fff;border-radius:8px;border:1px solid #E7E5E3;font-family:'DM Sans',sans-serif;font-size:11px;color:#A8A29E;">Desvincular*</div>
+          </div>
+        </div>
+
+        <!-- confirmo SI -->
+        <div style="background:#F7F5F2;border-radius:12px;padding:12px 16px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+            <div style="padding:3px 10px;background:#F0FDF4;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:#16A34A;">confirmó SI</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <div style="padding:4px 10px;background:#fff;border-radius:8px;border:1px solid #E7E5E3;font-family:'DM Sans',sans-serif;font-size:11px;color:#1C1917;">Editar</div>
+            <div style="padding:4px 10px;background:#FEF3C7;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:11px;color:#D97706;">Boleto</div>
+            <div style="padding:4px 10px;background:#F0FDF4;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:11px;color:#16A34A;">Enviar boleto WA</div>
+            <div style="padding:4px 10px;background:#fff;border-radius:8px;border:1px solid #E7E5E3;font-family:'DM Sans',sans-serif;font-size:11px;color:#A8A29E;">Desvincular*</div>
+          </div>
+        </div>
+
+        <!-- confirmo NO -->
+        <div style="background:#F7F5F2;border-radius:12px;padding:12px 16px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+            <div style="padding:3px 10px;background:#FEF2F2;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:#DC2626;">confirmó NO</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <div style="padding:4px 10px;background:#fff;border-radius:8px;border:1px solid #E7E5E3;font-family:'DM Sans',sans-serif;font-size:11px;color:#1C1917;">Editar</div>
+          </div>
+        </div>
+
+        <!-- baja -->
+        <div style="background:#F7F5F2;border-radius:12px;padding:12px 16px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+            <div style="padding:3px 10px;background:#F5F5F4;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:#A8A29E;">baja</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <div style="padding:4px 10px;background:#fff;border-radius:8px;border:1px solid #E7E5E3;font-family:'DM Sans',sans-serif;font-size:11px;color:#78716C;">Reactivar</div>
+            <div style="padding:4px 10px;background:#fff;border-radius:8px;border:1px solid #E7E5E3;font-family:'DM Sans',sans-serif;font-size:11px;color:#1C1917;">Editar</div>
+          </div>
+        </div>
+
+        <div style="font-family:'DM Sans',sans-serif;font-size:11px;color:#A8A29E;padding-top:4px;">* Solo visible si <span style="font-family:monospace;background:#F0EEEB;padding:1px 5px;border-radius:4px;">device_id !== null</span></div>
+      </div>
+    </div>
+
+    <!-- Shadcn + Fase -->
+    <div style="flex:none;width:100%;border-top:1px solid #F0EEEB;padding-top:24px;display:flex;gap:48px;">
+      <div style="flex:1;">
+        <div style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#78716C;margin-bottom:10px;text-transform:uppercase;letter-spacing:.3px;">shadcn/ui a usar</div>
+        <div style="display:flex;flex-direction:column;gap:6px;font-family:'DM Sans',sans-serif;font-size:13px;color:#1C1917;">
+          <div style="display:flex;align-items:center;gap:8px;"><div style="width:6px;height:6px;border-radius:3px;background:#C4956A;flex:none;"></div><span style="font-family:monospace;background:#F7F5F2;padding:1px 6px;border-radius:4px;font-size:12px;">Badge</span> → estado del invitado</div>
+          <div style="display:flex;align-items:center;gap:8px;"><div style="width:6px;height:6px;border-radius:3px;background:#C4956A;flex:none;"></div><span style="font-family:monospace;background:#F7F5F2;padding:1px 6px;border-radius:4px;font-size:12px;">Dialog</span> → confirmación de acciones destructivas</div>
+          <div style="display:flex;align-items:center;gap:8px;"><div style="width:6px;height:6px;border-radius:3px;background:#C4956A;flex:none;"></div><span style="font-family:monospace;background:#F7F5F2;padding:1px 6px;border-radius:4px;font-size:12px;">Sheet</span> → modal Agregar/Editar (bottom sheet)</div>
+          <div style="display:flex;align-items:center;gap:8px;"><div style="width:6px;height:6px;border-radius:3px;background:#C4956A;flex:none;"></div><span style="font-family:monospace;background:#F7F5F2;padding:1px 6px;border-radius:4px;font-size:12px;">Select</span> → selector de grupo</div>
+          <div style="display:flex;align-items:center;gap:8px;"><div style="width:6px;height:6px;border-radius:3px;background:#C4956A;flex:none;"></div><span style="font-family:monospace;background:#F7F5F2;padding:1px 6px;border-radius:4px;font-size:12px;">Toaster/Sonner</span> → feedback de acciones</div>
+        </div>
+      </div>
+      <div style="flex:1;">
+        <div style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#78716C;margin-bottom:10px;text-transform:uppercase;letter-spacing:.3px;">Fase 2 del plan — Lista UI</div>
+        <div style="display:flex;flex-direction:column;gap:8px;font-family:'DM Sans',sans-serif;font-size:13px;color:#1C1917;">
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <div style="width:20px;height:20px;border-radius:50%;background:#7C5C4A;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex:none;margin-top:1px;">1</div>
+            <div>Componente <span style="font-family:monospace;font-size:11px;background:#F7F5F2;padding:1px 5px;border-radius:4px;">GuestCard</span> con prop <span style="font-family:monospace;font-size:11px;background:#F7F5F2;padding:1px 5px;border-radius:4px;">isExpanded</span> + <span style="font-family:monospace;font-size:11px;background:#F7F5F2;padding:1px 5px;border-radius:4px;">onToggle</span></div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <div style="width:20px;height:20px;border-radius:50%;background:#7C5C4A;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex:none;margin-top:1px;">2</div>
+            <div>Helper <span style="font-family:monospace;font-size:11px;background:#F7F5F2;padding:1px 5px;border-radius:4px;">getActions(invitado)</span> devuelve array de acciones según estado + device_id</div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <div style="width:20px;height:20px;border-radius:50%;background:#7C5C4A;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex:none;margin-top:1px;">3</div>
+            <div>Grid 2 columnas para el panel de acciones, máximo 4 botones visibles a la vez</div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <div style="width:20px;height:20px;border-radius:50%;background:#7C5C4A;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex:none;margin-top:1px;">4</div>
+            <div>Cerrar card abierta al hacer scroll (IntersectionObserver o scroll event)</div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <div style="width:20px;height:20px;border-radius:50%;background:#C4956A;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex:none;margin-top:1px;">★</div>
+            <div style="color:#78716C;">Optimistic UI: actualizar estado local inmediatamente, revertir si la API falla</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════ SECTION LABEL: DARK + GUEST ═══════════════ -->
+<div style="position:absolute;left:0;top:1190px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#A8A29E;" data-drags-parent="1">Admin — Modo Oscuro</div>
+<div style="position:absolute;left:920px;top:1190px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#A8A29E;" data-drags-parent="1">Vista del Invitado</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 06 · DASHBOARD — DARK                          -->
+<!-- ══════════════════════════════════════════════ -->
+<div style="position:absolute;left:0;top:1218px;width:380px;" data-screen-label="06 Dashboard Dark">
+  <div data-drags-parent="1" style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#57534E;margin-bottom:10px;">06 · Dashboard — Oscuro</div>
+  <div style="width:380px;height:780px;background:#121110;border-radius:40px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.5);position:relative;">
+    <!-- Status bar -->
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 30px 0;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;color:#F0EBE5;">
+      <span>9:41</span>
+      <div style="display:flex;gap:6px;align-items:center;">
+        <svg width="17" height="12" viewBox="0 0 17 12" fill="none"><rect x="0" y="9" width="3" height="3" rx=".6" fill="#F0EBE5"/><rect x="4.5" y="6" width="3" height="6" rx=".6" fill="#F0EBE5"/><rect x="9" y="3" width="3" height="9" rx=".6" fill="#F0EBE5"/><rect x="13.5" y="0" width="3" height="12" rx=".6" fill="#F0EBE5"/></svg>
+        <svg width="27" height="13" viewBox="0 0 27 13" fill="none"><rect x=".5" y=".5" width="22" height="12" rx="2.5" stroke="#F0EBE5" stroke-width="1"/><path d="M23.5 4.5h2a1 1 0 011 1v2a1 1 0 01-1 1h-2" fill="#F0EBE5"/><rect x="2" y="2" width="17" height="9" rx="1.5" fill="#F0EBE5"/></svg>
+      </div>
+    </div>
+    <!-- Header -->
+    <div style="padding:18px 24px 0;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px;">
+        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#F0EBE5;">Dashboard</div>
+        <div style="font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:#C4956A;padding:6px 14px;border:1.5px solid #C4956A;border-radius:20px;">+ Grupo</div>
+      </div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:13px;color:#57534E;margin-bottom:18px;">Fiesta de Sofía · 2 jun 2025</div>
+    </div>
+    <!-- Hero card dark -->
+    <div style="margin:0 20px 14px;background:#C4956A;border-radius:20px;padding:22px 24px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:18px;">
+        <div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.65);margin-bottom:4px;">Total invitados</div>
+          <div style="font-family:'Playfair Display',serif;font-size:44px;font-weight:700;color:#fff;line-height:1;">45</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-family:'DM Sans',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.65);margin-bottom:4px;">Asistirán</div>
+          <div style="font-family:'Playfair Display',serif;font-size:44px;font-weight:700;color:#1C1917;line-height:1;">32</div>
+        </div>
+      </div>
+      <div style="height:5px;background:rgba(28,25,23,.2);border-radius:3px;overflow:hidden;margin-bottom:6px;">
+        <div style="width:71%;height:100%;background:#1C1917;opacity:.6;border-radius:3px;"></div>
+      </div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:rgba(255,255,255,.6);">71% confirmados</div>
+    </div>
+    <!-- Group cards dark -->
+    <div style="padding:0 20px;display:flex;flex-direction:column;gap:10px;">
+      <div style="background:#1C1A18;border-radius:16px;padding:16px 18px;border:1px solid #2E2B27;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div style="width:8px;height:8px;border-radius:4px;background:#C4956A;"></div>
+            <div style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#F0EBE5;">Familia</div>
+          </div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:#57534E;">20 personas</div>
+        </div>
+        <div style="display:flex;gap:14px;">
+          <div style="flex:1;">
+            <div style="display:flex;justify-content:space-between;font-family:'DM Sans',sans-serif;font-size:11px;color:#57534E;margin-bottom:5px;"><span>Enviados</span><span style="font-weight:600;color:#6B9FD4;">10/12</span></div>
+            <div style="height:4px;background:#2E2B27;border-radius:2px;overflow:hidden;"><div style="width:83%;height:100%;background:#6B9FD4;border-radius:2px;"></div></div>
+          </div>
+          <div style="flex:1;">
+            <div style="display:flex;justify-content:space-between;font-family:'DM Sans',sans-serif;font-size:11px;color:#57534E;margin-bottom:5px;"><span>Confirmados</span><span style="font-weight:600;color:#4CAF70;">8/10</span></div>
+            <div style="height:4px;background:#2E2B27;border-radius:2px;overflow:hidden;"><div style="width:80%;height:100%;background:#4CAF70;border-radius:2px;"></div></div>
+          </div>
+        </div>
+      </div>
+      <div style="background:#1C1A18;border-radius:16px;padding:16px 18px;border:1px solid #2E2B27;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div style="width:8px;height:8px;border-radius:4px;background:#57A773;"></div>
+            <div style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#F0EBE5;">Amigos</div>
+          </div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:#57534E;">15 personas</div>
+        </div>
+        <div style="display:flex;gap:14px;">
+          <div style="flex:1;">
+            <div style="display:flex;justify-content:space-between;font-family:'DM Sans',sans-serif;font-size:11px;color:#57534E;margin-bottom:5px;"><span>Enviados</span><span style="font-weight:600;color:#6B9FD4;">6/10</span></div>
+            <div style="height:4px;background:#2E2B27;border-radius:2px;overflow:hidden;"><div style="width:60%;height:100%;background:#6B9FD4;border-radius:2px;"></div></div>
+          </div>
+          <div style="flex:1;">
+            <div style="display:flex;justify-content:space-between;font-family:'DM Sans',sans-serif;font-size:11px;color:#57534E;margin-bottom:5px;"><span>Confirmados</span><span style="font-weight:600;color:#4CAF70;">4/6</span></div>
+            <div style="height:4px;background:#2E2B27;border-radius:2px;overflow:hidden;"><div style="width:66%;height:100%;background:#4CAF70;border-radius:2px;"></div></div>
+          </div>
+        </div>
+      </div>
+      <div style="background:#1C1A18;border-radius:16px;padding:16px 18px;border:1px solid #2E2B27;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div style="width:8px;height:8px;border-radius:4px;background:#5B87B5;"></div>
+            <div style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#F0EBE5;">Trabajo</div>
+          </div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:#57534E;">10 personas</div>
+        </div>
+        <div style="display:flex;gap:14px;">
+          <div style="flex:1;">
+            <div style="display:flex;justify-content:space-between;font-family:'DM Sans',sans-serif;font-size:11px;color:#57534E;margin-bottom:5px;"><span>Enviados</span><span style="font-weight:600;color:#6B9FD4;">3/5</span></div>
+            <div style="height:4px;background:#2E2B27;border-radius:2px;overflow:hidden;"><div style="width:60%;height:100%;background:#6B9FD4;border-radius:2px;"></div></div>
+          </div>
+          <div style="flex:1;">
+            <div style="display:flex;justify-content:space-between;font-family:'DM Sans',sans-serif;font-size:11px;color:#57534E;margin-bottom:5px;"><span>Confirmados</span><span style="font-weight:600;color:#4CAF70;">2/3</span></div>
+            <div style="height:4px;background:#2E2B27;border-radius:2px;overflow:hidden;"><div style="width:66%;height:100%;background:#4CAF70;border-radius:2px;"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Bottom nav dark -->
+    <div style="position:absolute;bottom:0;left:0;right:0;background:#1C1A18;border-top:1px solid #2E2B27;padding:10px 0 26px;display:flex;justify-content:space-around;">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C4956A" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        <span style="font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;color:#C4956A;">Dashboard</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3D3A35" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        <span style="font-family:'DM Sans',sans-serif;font-size:10px;color:#3D3A35;">Lista</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3D3A35" stroke-width="2" stroke-linecap="round"><path d="M20 12v6a2 2 0 01-2 2H6a2 2 0 01-2-2v-6"/><rect x="2" y="7" width="20" height="5" rx="1"/></svg>
+        <span style="font-family:'DM Sans',sans-serif;font-size:10px;color:#3D3A35;">Boletos</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 07 · LISTA — DARK                              -->
+<!-- ══════════════════════════════════════════════ -->
+<div style="position:absolute;left:460px;top:1218px;width:380px;" data-screen-label="07 Lista Dark">
+  <div data-drags-parent="1" style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#57534E;margin-bottom:10px;">07 · Lista — Oscuro</div>
+  <div style="width:380px;height:780px;background:#121110;border-radius:40px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.5);position:relative;">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 30px 0;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;color:#F0EBE5;">
+      <span>9:41</span>
+      <div style="display:flex;gap:6px;align-items:center;">
+        <svg width="17" height="12" viewBox="0 0 17 12" fill="none"><rect x="0" y="9" width="3" height="3" rx=".6" fill="#F0EBE5"/><rect x="4.5" y="6" width="3" height="6" rx=".6" fill="#F0EBE5"/><rect x="9" y="3" width="3" height="9" rx=".6" fill="#F0EBE5"/><rect x="13.5" y="0" width="3" height="12" rx=".6" fill="#F0EBE5"/></svg>
+        <svg width="27" height="13" viewBox="0 0 27 13" fill="none"><rect x=".5" y=".5" width="22" height="12" rx="2.5" stroke="#F0EBE5" stroke-width="1"/><path d="M23.5 4.5h2a1 1 0 011 1v2a1 1 0 01-1 1h-2" fill="#F0EBE5"/><rect x="2" y="2" width="17" height="9" rx="1.5" fill="#F0EBE5"/></svg>
+      </div>
+    </div>
+    <div style="padding:16px 22px 12px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#F0EBE5;">Invitados</div>
+        <div style="padding:8px 16px;background:#C4956A;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:#fff;">+ Agregar</div>
+      </div>
+      <div style="display:flex;gap:6px;">
+        <div style="flex:none;padding:6px 14px;background:#C4956A;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#fff;">Todos</div>
+        <div style="flex:none;padding:6px 14px;background:#1C1A18;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:12px;color:#57534E;border:1px solid #2E2B27;">Alta</div>
+        <div style="flex:none;padding:6px 14px;background:#1C1A18;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:12px;color:#57534E;border:1px solid #2E2B27;">Enviado</div>
+        <div style="flex:none;padding:6px 14px;background:#1C1A18;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:12px;color:#57534E;border:1px solid #2E2B27;">Confirmó</div>
+      </div>
+    </div>
+    <div style="padding:0 16px;display:flex;flex-direction:column;gap:8px;">
+      <!-- card dark 1 -->
+      <div style="background:#1C1A18;border-radius:16px;padding:14px 16px;border:1px solid #2E2B27;display:flex;align-items:center;gap:10px;">
+        <div style="width:38px;height:38px;border-radius:12px;background:#1A2440;display:flex;align-items:center;justify-content:center;flex:none;font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#6B9FD4;">J</div>
+        <div style="flex:1;">
+          <div style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#F0EBE5;margin-bottom:1px;">Juan Pérez</div>
+          <div style="display:flex;align-items:center;gap:6px;">
+            <div style="width:5px;height:5px;border-radius:50%;background:#C4956A;"></div>
+            <span style="font-family:'DM Sans',sans-serif;font-size:12px;color:#57534E;">Familia · 4 inv.</span>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;flex:none;">
+          <div style="padding:4px 10px;background:#1A2440;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:#6B9FD4;">Enviado</div>
+          <div style="width:28px;height:28px;border-radius:8px;background:#2E2B27;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;">
+            <div style="width:3px;height:3px;border-radius:50%;background:#57534E;"></div>
+            <div style="width:3px;height:3px;border-radius:50%;background:#57534E;"></div>
+            <div style="width:3px;height:3px;border-radius:50%;background:#57534E;"></div>
+          </div>
+        </div>
+      </div>
+      <!-- card dark 2 expanded -->
+      <div style="background:#1C1A18;border-radius:16px;overflow:hidden;border:1px solid #C4956A;">
+        <div style="padding:14px 16px;display:flex;align-items:center;gap:10px;">
+          <div style="width:38px;height:38px;border-radius:12px;background:#1A2E1E;display:flex;align-items:center;justify-content:center;flex:none;font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#4CAF70;">M</div>
+          <div style="flex:1;">
+            <div style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#F0EBE5;margin-bottom:1px;">María López</div>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <div style="width:5px;height:5px;border-radius:50%;background:#C4956A;"></div>
+              <span style="font-family:'DM Sans',sans-serif;font-size:12px;color:#57534E;">Familia · 3 inv.</span>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex:none;">
+            <div style="padding:4px 10px;background:#1A2E1E;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:#4CAF70;">Confirmó ✓</div>
+            <div style="width:28px;height:28px;border-radius:8px;background:#C4956A;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;">
+              <div style="width:3px;height:3px;border-radius:50%;background:#fff;"></div>
+              <div style="width:3px;height:3px;border-radius:50%;background:#fff;"></div>
+              <div style="width:3px;height:3px;border-radius:50%;background:#fff;"></div>
+            </div>
+          </div>
+        </div>
+        <div style="background:#171512;padding:12px 16px;display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+          <div style="background:#1C1A18;border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:8px;border:1px solid #2E2B27;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#A8A29E" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            <span style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:#A8A29E;">Editar</span>
+          </div>
+          <div style="background:#2A200E;border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:8px;border:1px solid #3D2E13;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2" stroke-linecap="round"><path d="M15 5v2M15 11v2M15 17v2M5 5h14a2 2 0 012 2v3a2 2 0 000 4v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a2 2 0 000-4V7a2 2 0 012-2z"/></svg>
+            <span style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:#D97706;">Boleto</span>
+          </div>
+          <div style="background:#152019;border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:8px;border:1px solid #1D3524;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4CAF70" stroke-width="2" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+            <span style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:#4CAF70;">WhatsApp</span>
+          </div>
+          <div style="background:#1C1A18;border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:8px;border:1px solid #2E2B27;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#57534E" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 019.9-1"/></svg>
+            <span style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:#57534E;">Desvincular</span>
+          </div>
+        </div>
+      </div>
+      <!-- card dark 3 -->
+      <div style="background:#1C1A18;border-radius:16px;padding:14px 16px;border:1px solid #2E2B27;display:flex;align-items:center;gap:10px;">
+        <div style="width:38px;height:38px;border-radius:12px;background:#221E1A;display:flex;align-items:center;justify-content:center;flex:none;font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#57534E;">F</div>
+        <div style="flex:1;">
+          <div style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#F0EBE5;margin-bottom:1px;">Familia García</div>
+          <div style="display:flex;align-items:center;gap:6px;">
+            <div style="width:5px;height:5px;border-radius:50%;background:#57A773;"></div>
+            <span style="font-family:'DM Sans',sans-serif;font-size:12px;color:#57534E;">Amigos · 6 inv.</span>
+          </div>
+        </div>
+        <div style="padding:4px 10px;background:#222019;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:#57534E;flex:none;">Alta</div>
+      </div>
+    </div>
+    <!-- Bottom nav dark -->
+    <div style="position:absolute;bottom:0;left:0;right:0;background:#1C1A18;border-top:1px solid #2E2B27;padding:10px 0 26px;display:flex;justify-content:space-around;">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3D3A35" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        <span style="font-family:'DM Sans',sans-serif;font-size:10px;color:#3D3A35;">Dashboard</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C4956A" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        <span style="font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;color:#C4956A;">Lista</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3D3A35" stroke-width="2" stroke-linecap="round"><path d="M20 12v6a2 2 0 01-2 2H6a2 2 0 01-2-2v-6"/><rect x="2" y="7" width="20" height="5" rx="1"/></svg>
+        <span style="font-family:'DM Sans',sans-serif;font-size:10px;color:#3D3A35;">Boletos</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 08 · INVITACIÓN DIGITAL (vista del invitado)  -->
+<!-- ══════════════════════════════════════════════ -->
+<div style="position:absolute;left:920px;top:1218px;width:380px;" data-screen-label="08 Invitacion Digital">
+  <div data-drags-parent="1" style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#57534E;margin-bottom:10px;">08 · Invitación Digital</div>
+  <div style="width:380px;height:780px;background:#1C1917;border-radius:40px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.3);position:relative;display:flex;flex-direction:column;">
+    <!-- Status bar light on dark -->
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 30px 0;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;color:#F0EBE5;">
+      <span>9:41</span>
+      <div style="display:flex;gap:6px;align-items:center;">
+        <svg width="17" height="12" viewBox="0 0 17 12" fill="none"><rect x="0" y="9" width="3" height="3" rx=".6" fill="#F0EBE5"/><rect x="4.5" y="6" width="3" height="6" rx=".6" fill="#F0EBE5"/><rect x="9" y="3" width="3" height="9" rx=".6" fill="#F0EBE5"/><rect x="13.5" y="0" width="3" height="12" rx=".6" fill="#F0EBE5"/></svg>
+        <svg width="27" height="13" viewBox="0 0 27 13" fill="none"><rect x=".5" y=".5" width="22" height="12" rx="2.5" stroke="#F0EBE5" stroke-width="1"/><path d="M23.5 4.5h2a1 1 0 011 1v2a1 1 0 01-1 1h-2" fill="#F0EBE5"/><rect x="2" y="2" width="17" height="9" rx="1.5" fill="#F0EBE5"/></svg>
+      </div>
+    </div>
+    <!-- Invitation hero -->
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 36px 16px;position:relative;">
+      <!-- Decorative ring -->
+      <div style="position:absolute;top:10px;left:50%;transform:translateX(-50%);width:200px;height:200px;border-radius:50%;border:1px solid rgba(196,149,106,.15);"></div>
+      <div style="position:absolute;top:24px;left:50%;transform:translateX(-50%);width:172px;height:172px;border-radius:50%;border:1px solid rgba(196,149,106,.1);"></div>
+      <!-- Top ornament -->
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:24px;">
+        <div style="height:1px;width:32px;background:rgba(196,149,106,.4);"></div>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 0l1.2 4.8L12 6l-4.8 1.2L6 12l-1.2-4.8L0 6l4.8-1.2z" fill="#C4956A" opacity=".6"/></svg>
+        <div style="height:1px;width:32px;background:rgba(196,149,106,.4);"></div>
+      </div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:rgba(196,149,106,.7);margin-bottom:10px;">Te invitamos a los</div>
+      <div style="font-family:'Playfair Display',serif;font-size:52px;font-weight:700;color:#F0EBE5;line-height:1;margin-bottom:4px;text-align:center;">XV</div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:rgba(196,149,106,.7);margin-bottom:14px;">años de</div>
+      <div style="font-family:'Playfair Display',serif;font-size:38px;font-weight:700;color:#C4956A;line-height:1;text-align:center;margin-bottom:30px;">Sofía</div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:13px;color:rgba(240,235,229,.5);margin-bottom:8px;">Hola, <span style="color:#F0EBE5;font-weight:600;">Juan Pérez</span></div>
+      <!-- Event details -->
+      <div style="width:100%;background:rgba(255,255,255,.05);border-radius:16px;padding:16px 20px;border:1px solid rgba(196,149,106,.15);display:flex;flex-direction:column;gap:10px;margin-bottom:20px;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C4956A" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <div style="font-family:'DM Sans',sans-serif;font-size:14px;color:#F0EBE5;">Sábado 2 de junio, 2025</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C4956A" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <div style="font-family:'DM Sans',sans-serif;font-size:14px;color:#F0EBE5;">8:00 PM</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C4956A" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div style="font-family:'DM Sans',sans-serif;font-size:14px;color:#F0EBE5;">Salón El Jardín, CDMX</div>
+        </div>
+      </div>
+      <!-- RSVP button -->
+      <div style="width:100%;padding:17px;background:#C4956A;border-radius:16px;text-align:center;font-family:'DM Sans',sans-serif;color:#fff;font-size:15px;font-weight:600;">Confirmar asistencia</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 09 · RSVP + MENSAJE                           -->
+<!-- ══════════════════════════════════════════════ -->
+<div style="position:absolute;left:1380px;top:1218px;width:380px;" data-screen-label="09 RSVP Confirmacion">
+  <div data-drags-parent="1" style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#57534E;margin-bottom:10px;">09 · RSVP — Confirmar</div>
+  <div style="width:380px;height:780px;background:#F7F5F2;border-radius:40px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.14);position:relative;display:flex;flex-direction:column;">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 30px 0;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;color:#1C1917;">
+      <span>9:41</span>
+      <div style="display:flex;gap:6px;align-items:center;">
+        <svg width="17" height="12" viewBox="0 0 17 12" fill="none"><rect x="0" y="9" width="3" height="3" rx=".6" fill="#1C1917"/><rect x="4.5" y="6" width="3" height="6" rx=".6" fill="#1C1917"/><rect x="9" y="3" width="3" height="9" rx=".6" fill="#1C1917"/><rect x="13.5" y="0" width="3" height="12" rx=".6" fill="#1C1917"/></svg>
+        <svg width="27" height="13" viewBox="0 0 27 13" fill="none"><rect x=".5" y=".5" width="22" height="12" rx="2.5" stroke="#1C1917" stroke-width="1"/><path d="M23.5 4.5h2a1 1 0 011 1v2a1 1 0 01-1 1h-2" fill="#1C1917"/><rect x="2" y="2" width="17" height="9" rx="1.5" fill="#1C1917"/></svg>
+      </div>
+    </div>
+    <div style="flex:1;padding:28px 28px 32px;display:flex;flex-direction:column;">
+      <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:#1C1917;margin-bottom:6px;">¿Asistirás?</div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:14px;color:#78716C;margin-bottom:32px;">Tu respuesta llegará directo a Sofía</div>
+      <!-- YES/NO buttons -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:32px;">
+        <div style="padding:20px 16px;background:#16A34A;border-radius:18px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;box-shadow:0 4px 16px rgba(22,163,74,.25);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <div style="font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;color:#fff;">Sí, asistiré</div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:11px;color:rgba(255,255,255,.7);">4 personas</div>
+        </div>
+        <div style="padding:20px 16px;background:#fff;border-radius:18px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;border:2px solid #E7E5E3;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#A8A29E" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          <div style="font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;color:#78716C;">No podré ir</div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:11px;color:#A8A29E;">Lo lamentamos</div>
+        </div>
+      </div>
+      <!-- Message field -->
+      <div style="margin-bottom:24px;">
+        <div style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#78716C;margin-bottom:8px;letter-spacing:.3px;">MENSAJE PARA SOFÍA (opcional)</div>
+        <div style="background:#fff;border-radius:14px;padding:14px 16px;border:1.5px solid #E7E5E3;min-height:80px;position:relative;">
+          <div style="font-family:'DM Sans',sans-serif;font-size:14px;color:#1C1917;line-height:1.6;">¡Feliz cumpleaños! Estaremos ahí para celebrar contigo 🎉</div>
+          <div style="position:absolute;bottom:10px;right:14px;font-family:'DM Sans',sans-serif;font-size:11px;color:#A8A29E;">54 car.</div>
+        </div>
+      </div>
+      <div style="flex:1;"></div>
+      <!-- Confirm CTA -->
+      <div style="padding:17px;background:#7C5C4A;border-radius:16px;text-align:center;font-family:'DM Sans',sans-serif;color:#fff;font-size:15px;font-weight:600;">Enviar confirmación</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 10 · BOLETO PDF                               -->
+<!-- ══════════════════════════════════════════════ -->
+<div style="position:absolute;left:1840px;top:1218px;width:380px;" data-screen-label="10 Boleto">
+  <div data-drags-parent="1" style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#57534E;margin-bottom:10px;">10 · Boleto de Entrada</div>
+  <div style="width:380px;height:780px;background:#F7F5F2;border-radius:40px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.14);position:relative;display:flex;flex-direction:column;">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 30px 0;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;color:#1C1917;">
+      <span>9:41</span>
+      <div style="display:flex;gap:6px;align-items:center;">
+        <svg width="17" height="12" viewBox="0 0 17 12" fill="none"><rect x="0" y="9" width="3" height="3" rx=".6" fill="#1C1917"/><rect x="4.5" y="6" width="3" height="6" rx=".6" fill="#1C1917"/><rect x="9" y="3" width="3" height="9" rx=".6" fill="#1C1917"/><rect x="13.5" y="0" width="3" height="12" rx=".6" fill="#1C1917"/></svg>
+        <svg width="27" height="13" viewBox="0 0 27 13" fill="none"><rect x=".5" y=".5" width="22" height="12" rx="2.5" stroke="#1C1917" stroke-width="1"/><path d="M23.5 4.5h2a1 1 0 011 1v2a1 1 0 01-1 1h-2" fill="#1C1917"/><rect x="2" y="2" width="17" height="9" rx="1.5" fill="#1C1917"/></svg>
+      </div>
+    </div>
+    <!-- Header screen title -->
+    <div style="padding:16px 28px 12px;display:flex;align-items:center;gap:12px;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#78716C" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+      <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#1C1917;">Tu boleto</div>
+    </div>
+    <!-- Ticket card -->
+    <div style="margin:0 24px;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.08);position:relative;">
+      <!-- Top portion -->
+      <div style="background:#7C5C4A;padding:28px 28px 24px;position:relative;">
+        <!-- Decorative circles -->
+        <div style="position:absolute;top:-30px;right:-30px;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.05);"></div>
+        <div style="position:absolute;top:10px;right:10px;width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.05);"></div>
+        <div style="font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:6px;">Boleto de entrada</div>
+        <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:#fff;line-height:1;margin-bottom:4px;">XV Años</div>
+        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:#C4956A;">Sofía</div>
+      </div>
+      <!-- Perforated divider -->
+      <div style="position:relative;height:0;display:flex;align-items:center;">
+        <div style="position:absolute;left:-14px;width:28px;height:28px;border-radius:50%;background:#F7F5F2;"></div>
+        <div style="flex:1;border-top:2px dashed #F0EEEB;margin:0 14px;"></div>
+        <div style="position:absolute;right:-14px;width:28px;height:28px;border-radius:50%;background:#F7F5F2;"></div>
+      </div>
+      <!-- Bottom portion -->
+      <div style="padding:24px 28px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;">
+          <div>
+            <div style="font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#A8A29E;margin-bottom:4px;">Invitado</div>
+            <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#1C1917;">Juan Pérez</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#A8A29E;margin-bottom:4px;">Asientos</div>
+            <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:#7C5C4A;line-height:1;">4</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:20px;margin-bottom:24px;">
+          <div>
+            <div style="font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#A8A29E;margin-bottom:3px;">Fecha</div>
+            <div style="font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:#1C1917;">Sáb 2 Jun 2025</div>
+          </div>
+          <div>
+            <div style="font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#A8A29E;margin-bottom:3px;">Hora</div>
+            <div style="font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:#1C1917;">8:00 PM</div>
+          </div>
+        </div>
+        <!-- QR placeholder -->
+        <div style="display:flex;align-items:center;gap:16px;">
+          <div style="width:90px;height:90px;border-radius:12px;background:#F7F5F2;border:1px solid #E7E5E3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;flex:none;">
+            <!-- QR simulation -->
+            <div style="display:grid;grid-template-columns:repeat(7,8px);gap:1px;">
+              <div style="width:8px;height:8px;background:#1C1917;border-radius:1px;"></div><div style="width:8px;height:8px;background:#1C1917;border-radius:1px;"></div><div style="width:8px;height:8px;background:#1C1917;border-radius:1px;"></div><div style="width:8px;height:8px;background:#F7F5F2;border-radius:1px;"></div><div style="width:8px;height:8px;background:#1C1917;border-radius:1px;"></div><div style="width:8px;height:8px;background:#1C1917;border-radius:1px;"></div><div style="width:8px;height:8px;background:#1C1917;border-radius:1px;"></div>
+              <div style="width:8px;height:8px;background:#1C1917;border-radius:1px;"></div><div style="width:8px;height:8px;background:#F7F5F2;border-radius:1px;"></div><div style="width:8px;height:8px;background:#1C1917;border-radius:1px;"></div><div style="width:8px;height:8px;background:#1C1917;border-radius:1px;"></div><div style="width:8px;height:8px;background:#1C1917;border-radius:1px;"></div><div style="width:8px;height:8px;background:#F7F5F2;border-radius:1px;"></div><div style="width:8px;height:8px;background:#1C1917;border-radius:1px;"></div>
+              <div style="width:8px;height:8px;background:#1C1917;border-radius:1px;"></div><div style="width:8px;height:8px;background:#F7F5F2;border-radius:1px;"></div><div style="width:8px;height:8px;background:#F7F5F2;border-radius:1px;"></div><div style="width:8px;height:8px;background:#1C1917;border-radius:1px;"></div><div style="width:8px;height:8px;background:#F7F5F2;border-radius:1px;"></div><div style="width:8px;height:8px;background:#F7F5F2;border-radius:1px;"></div><div style="width:8px;height:8px;background:#1C1917;border-radius:1px;"></div>
+              <div style="width:8px;height:8px;background:#F7F5F2;border-radius:1px;"></div><div style="width:8px;height:8px;background:#1C1917;border-radius:1px;"></div><div style="width:8px;height:8px;background:#F7F5F2;border-radius:1px;"></div><div style="width:8px;height:8px;background:#F7F5F2;border-radius:1px;"></div><div style="width:8px;height:8px;background:#F7F5F2;border-radius:1px;"></div><div style="width:8px;height:8px;background:#1C1917;border-radius:1px;"></div><div style="width:8px;height:8px;background:#F7F5F2;border-radius:1px;"></div>
+              <div style="width:8px;height:8px;background:#1C1917;border-radius:1px;"></div><div style="width:8px;height:8px;background:#1C1917;border-radius:1px;"></div><div style="width:8px;height:8px;background:#F7F5F2;border-radius:1px;"></div><div style="width:8px;height:8px;background:#1C1917;border-radius:1px;"></div><div style="width:8px;height:8px;background:#F7F5F2;border-radius:1px;"></div><div style="width:8px;height:8px;background:#1C1917;border-radius:1px;"></div><div style="width:8px;height:8px;background:#1C1917;border-radius:1px;"></div>
+            </div>
+          </div>
+          <div>
+            <div style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#1C1917;margin-bottom:3px;">Ver ubicación</div>
+            <div style="font-family:'DM Sans',sans-serif;font-size:11px;color:#A8A29E;line-height:1.4;">Salón El Jardín<br>Calle Flores 123, CDMX</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Share button -->
+    <div style="padding:20px 24px 32px;display:flex;flex-direction:column;gap:10px;">
+      <div style="padding:15px;background:#7C5C4A;border-radius:14px;text-align:center;font-family:'DM Sans',sans-serif;color:#fff;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        Compartir boleto
+      </div>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+class Component extends DCLogic {
+  // Static design document — no state needed
+}
+
+</script>
+</body>
+</html>

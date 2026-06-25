@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de Usuario — Lista de Invitados</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #FBF9F6;
+    color: #2D2A26;
+    line-height: 1.7;
+    padding: 0 0 80px;
+  }
+
+  .header {
+    background: linear-gradient(135deg, #D4A574, #C48B5C);
+    color: white;
+    text-align: center;
+    padding: 48px 24px 40px;
+  }
+  .header h1 { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+  .header p { font-size: 15px; opacity: 0.9; }
+
+  .container { max-width: 480px; margin: 0 auto; padding: 0 20px; }
+
+  .step {
+    margin-top: 40px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    overflow: hidden;
+  }
+
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 20px 0;
+  }
+
+  .step-number {
+    width: 40px; height: 40px;
+    background: #D4A574;
+    color: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .step-title { font-size: 18px; font-weight: 600; }
+
+  .step-body { padding: 16px 20px 24px; }
+  .step-body p { font-size: 15px; color: #4A4540; margin-bottom: 12px; }
+  .step-body p:last-child { margin-bottom: 0; }
+
+  .tip {
+    background: #FFF8F0;
+    border-left: 3px solid #D4A574;
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 14px;
+    color: #8B6914;
+  }
+  .tip::before { content: "💡 "; }
+
+  .warning {
+    background: #FFF0F0;
+    border-left: 3px solid #E74C3C;
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 14px;
+    color: #C0392B;
+  }
+  .warning::before { content: "⚠️ "; }
+
+  /* Phone Mockup */
+  .phone {
+    width: 260px;
+    margin: 20px auto;
+    background: #1A1A1A;
+    border-radius: 28px;
+    padding: 12px 8px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  }
+  .phone-screen {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    font-size: 11px;
+  }
+
+  /* Screen Components */
+  .screen-header {
+    background: #D4A574;
+    color: white;
+    padding: 14px 12px 10px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .screen-body { padding: 12px; }
+
+  .pin-input {
+    display: flex; gap: 8px; justify-content: center; margin: 16px 0;
+  }
+  .pin-box {
+    width: 36px; height: 42px;
+    border: 2px solid #DDD;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 700; color: #D4A574;
+  }
+
+  .btn-mock {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 12px;
+    margin: 8px 0;
+    border: none;
+  }
+  .btn-primary { background: #D4A574; color: white; }
+  .btn-success { background: #27AE60; color: white; }
+  .btn-outline { background: white; color: #D4A574; border: 2px solid #D4A574; }
+  .btn-danger { background: #E74C3C; color: white; }
+  .btn-small {
+    display: inline-block; width: auto;
+    padding: 5px 10px; font-size: 10px;
+    border-radius: 6px; margin: 2px;
+  }
+
+  .card-mock {
+    background: #F8F6F3;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 6px 0;
+  }
+  .card-mock .name { font-weight: 600; font-size: 12px; }
+  .card-mock .meta { font-size: 10px; color: #888; margin: 2px 0; }
+  .card-mock .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 9px;
+    font-weight: 600;
+  }
+  .badge-alta { background: #EBF5FB; color: #2980B9; }
+  .badge-enviado { background: #FEF9E7; color: #F39C12; }
+  .badge-confirmado { background: #EAFAF1; color: #27AE60; }
+
+  .progress-bar {
+    height: 8px;
+    background: #EEE;
+    border-radius: 4px;
+    margin: 4px 0;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 4px;
+  }
+  .fill-orange { background: #F39C12; }
+  .fill-green { background: #27AE60; }
+
+  .stat-card {
+    background: #F8F6F3;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 6px 0;
+    text-align: center;
+  }
+  .stat-card .label { font-size: 10px; color: #888; text-transform: uppercase; }
+  .stat-card .value { font-size: 22px; font-weight: 700; color: #D4A574; }
+
+  .arrow-label {
+    text-align: center;
+    color: #D4A574;
+    font-weight: 600;
+    font-size: 12px;
+    margin: 12px 0;
+  }
+  .arrow-label::before { content: "👆 "; }
+
+  .section-divider {
+    text-align: center;
+    padding: 32px 0 0;
+    font-size: 32px;
+  }
+
+  .toc {
+    background: white;
+    border-radius: 16px;
+    margin-top: 32px;
+    padding: 24px 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .toc h2 { font-size: 18px; margin-bottom: 16px; }
+  .toc-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #F0EDE8;
+    font-size: 14px; color: #4A4540;
+  }
+  .toc-item:last-child { border: none; }
+  .toc-icon { font-size: 20px; }
+
+  .boleto-mock {
+    background: white;
+    border: 2px dashed #D4A574;
+    border-radius: 12px;
+    padding: 16px;
+    margin: 16px auto;
+    width: 220px;
+    text-align: center;
+  }
+  .boleto-mock .boleto-title { font-size: 14px; font-weight: 700; color: #D4A574; }
+  .boleto-mock .boleto-field { font-size: 11px; margin: 4px 0; color: #555; }
+  .boleto-mock .qr-placeholder {
+    width: 70px; height: 70px;
+    background: #F0EDE8;
+    margin: 10px auto;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+  }
+
+  .dialog-mock {
+    background: white;
+    border-radius: 14px;
+    padding: 20px;
+    margin: 12px 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    text-align: center;
+  }
+  .dialog-mock .dialog-title { font-weight: 600; font-size: 13px; margin-bottom: 8px; }
+  .dialog-mock .dialog-text { font-size: 11px; color: #666; margin-bottom: 12px; }
+
+  .blocked-screen {
+    text-align: center;
+    padding: 30px 16px;
+  }
+  .blocked-screen .blocked-icon { font-size: 48px; margin-bottom: 12px; }
+  .blocked-screen .blocked-title { font-size: 14px; font-weight: 600; color: #E74C3C; }
+  .blocked-screen .blocked-text { font-size: 11px; color: #888; margin-top: 6px; }
+
+  .import-area {
+    border: 2px dashed #CCC;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    margin: 10px 0;
+    font-size: 11px;
+    color: #999;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📋 Manual de Usuario</h1>
+  <p>Lista de Invitados — Guía paso a paso</p>
+</div>
+
+<div class="container">
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="toc">
+    <h2>¿Qué puedes hacer?</h2>
+    <div class="toc-item"><span class="toc-icon">🔑</span> Entrar a tu portal con tu PIN</div>
+    <div class="toc-item"><span class="toc-icon">👥</span> Agregar invitados uno por uno</div>
+    <div class="toc-item"><span class="toc-icon">📄</span> Importar muchos invitados de un archivo Excel</div>
+    <div class="toc-item"><span class="toc-icon">📲</span> Enviar la invitación por WhatsApp</div>
+    <div class="toc-item"><span class="toc-icon">✅</span> Ver quién confirmó y quién no</div>
+    <div class="toc-item"><span class="toc-icon">🎫</span> Generar y enviar boletos de entrada</div>
+    <div class="toc-item"><span class="toc-icon">📊</span> Exportar tu lista de invitados</div>
+    <div class="toc-item"><span class="toc-icon">🔓</span> Desvincular un dispositivo</div>
+  </div>
+
+  <!-- ==================== PASO 1 ==================== -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">1</div>
+      <div class="step-title">Entra a tu portal</div>
+    </div>
+    <div class="step-body">
+      <p>Abre este link en tu celular:</p>
+      <p style="background:#F0EDE8; padding:10px; border-radius:8px; text-align:center; font-weight:600; font-size:14px; word-break:break-all;">
+        invitaxv.lol/i/tu-evento
+      </p>
+      <p>Te pedirá tu <strong>PIN de 4 dígitos</strong>. Escríbelo y presiona <strong>"Acceder"</strong>.</p>
+
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="screen-header">🎉 Fiesta de Sofía</div>
+          <div class="screen-body" style="text-align:center; padding: 24px 16px;">
+            <p style="font-size:13px; font-weight:500; margin-bottom:4px;">Ingresa tu PIN</p>
+            <div class="pin-input">
+              <div class="pin-box">1</div>
+              <div class="pin-box">2</div>
+              <div class="pin-box">3</div>
+              <div class="pin-box">4</div>
+            </div>
+            <div class="btn-mock btn-primary">Acceder</div>
+          </div>
+        </div>
+      </div>
+      <div class="arrow-label">Escribe tu PIN y presiona "Acceder"</div>
+
+      <div class="tip">Tu PIN te lo dio la persona que creó tu invitación. Si no lo recuerdas, pídelo de nuevo.</div>
+    </div>
+  </div>
+
+  <!-- ==================== PASO 2 ==================== -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">2</div>
+      <div class="step-title">Conoce tu Dashboard</div>
+    </div>
+    <div class="step-body">
+      <p>Al entrar verás un <strong>resumen de tu evento</strong>: cuántos invitados ya recibieron la invitación y cuántos confirmaron.</p>
+
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="screen-header">📊 Dashboard</div>
+          <div class="screen-body">
+            <div class="stat-card">
+              <div class="label">Total invitados</div>
+              <div class="value">45</div>
+            </div>
+            <div class="card-mock">
+              <div class="name">👨‍👩‍👧 Familia</div>
+              <div class="meta">Enviados: 8 de 12</div>
+              <div class="progress-bar"><div class="progress-fill fill-orange" style="width:67%"></div></div>
+              <div class="meta">Confirmados: 6 de 8</div>
+              <div class="progress-bar"><div class="progress-fill fill-green" style="width:75%"></div></div>
+            </div>
+            <div class="card-mock">
+              <div class="name">🎉 Amigos</div>
+              <div class="meta">Enviados: 5 de 10</div>
+              <div class="progress-bar"><div class="progress-fill fill-orange" style="width:50%"></div></div>
+              <div class="meta">Confirmados: 3 de 5</div>
+              <div class="progress-bar"><div class="progress-fill fill-green" style="width:60%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="arrow-label">Aquí ves el avance de cada grupo</div>
+
+      <p>Más abajo está la <strong>lista de invitados</strong> y los botones para agregar, importar y exportar.</p>
+    </div>
+  </div>
+
+  <!-- ==================== PASO 3 ==================== -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">3</div>
+      <div class="step-title">Agrega invitados</div>
+    </div>
+    <div class="step-body">
+      <p>Presiona el botón <strong>"+ Agregar invitado"</strong> y llena los datos:</p>
+
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="screen-header">Nuevo Invitado</div>
+          <div class="screen-body">
+            <div style="margin-bottom:8px;">
+              <div style="font-size:10px; color:#888; margin-bottom:3px;">Nombre del invitado</div>
+              <div style="border:1px solid #DDD; border-radius:6px; padding:8px; font-size:11px;">Familia García</div>
+            </div>
+            <div style="margin-bottom:8px;">
+              <div style="font-size:10px; color:#888; margin-bottom:3px;">Grupo</div>
+              <div style="border:1px solid #DDD; border-radius:6px; padding:8px; font-size:11px; display:flex; justify-content:space-between;">
+                <span>Amigos</span><span style="color:#CCC;">▾</span>
+              </div>
+            </div>
+            <div style="margin-bottom:8px;">
+              <div style="font-size:10px; color:#888; margin-bottom:3px;">Número de invitados</div>
+              <div style="border:1px solid #DDD; border-radius:6px; padding:8px; font-size:11px;">4</div>
+            </div>
+            <div style="margin-bottom:8px;">
+              <div style="font-size:10px; color:#888; margin-bottom:3px;">WhatsApp</div>
+              <div style="border:1px solid #DDD; border-radius:6px; padding:8px; font-size:11px;">+52 55 1234 5678</div>
+            </div>
+            <div class="btn-mock btn-primary">Guardar</div>
+          </div>
+        </div>
+      </div>
+      <div class="arrow-label">Llena todos los campos y presiona "Guardar"</div>
+
+      <div class="tip"><strong>Nombre:</strong> Puede ser una persona ("Juan Pérez") o una familia ("Familia García").</div>
+      <div class="tip"><strong>Número de invitados:</strong> Tú decides cuántas personas puede llevar. Ese número incluye a la persona principal.</div>
+      <div class="tip"><strong>Grupo:</strong> Vienen 3 grupos listos (Familia, Amigos, Trabajo). Si necesitas más, presiona <strong>"+ Grupo"</strong> en el Dashboard.</div>
+    </div>
+  </div>
+
+  <!-- ==================== PASO 4 ==================== -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">4</div>
+      <div class="step-title">Importa muchos invitados de Excel</div>
+    </div>
+    <div class="step-body">
+      <p>Si ya tienes una lista en Excel o CSV, no tienes que agregar uno por uno. Presiona <strong>"⬆ Importar"</strong>.</p>
+
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="screen-header">Importar Invitados</div>
+          <div class="screen-body">
+            <div class="import-area">
+              📁<br>
+              <strong>Selecciona tu archivo</strong><br>
+              .csv o .xlsx
+            </div>
+            <div style="font-size:10px; color:#888; margin: 8px 0;">Tu archivo debe tener estas columnas:</div>
+            <div style="background:#F8F6F3; border-radius:8px; padding:8px; font-size:10px; font-family:monospace;">
+              Titular | Grupo | Num. Invitados | WhatsApp
+            </div>
+            <div style="margin-top:10px; background:#EAFAF1; border-radius:8px; padding:10px; text-align:center;">
+              <div style="font-size:11px; font-weight:600; color:#27AE60;">✅ 25 invitados listos para importar</div>
+              <div style="font-size:10px; color:#888;">2 grupos nuevos se crearán automáticamente</div>
+            </div>
+            <div class="btn-mock btn-success">Confirmar Importación</div>
+          </div>
+        </div>
+      </div>
+      <div class="arrow-label">Selecciona tu archivo y confirma</div>
+
+      <div class="tip"><strong>¿No tienes el formato correcto?</strong> Presiona <strong>"⬇ Exportar"</strong> con la lista vacía y se descargará una plantilla con las columnas correctas. Llénala y después impórtala.</div>
+      <div class="warning">Si alguna fila tiene errores (por ejemplo, sin nombre), el sistema te avisará y solo importará las filas correctas.</div>
+    </div>
+  </div>
+
+  <!-- ==================== PASO 5 ==================== -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">5</div>
+      <div class="step-title">Envía la invitación por WhatsApp</div>
+    </div>
+    <div class="step-body">
+      <p>En cada invitado verás un botón de <strong>WhatsApp (↗)</strong>. Al presionarlo se abrirá WhatsApp con el mensaje ya escrito.</p>
+
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="screen-body">
+            <div class="card-mock">
+              <div class="name">Familia García</div>
+              <div class="meta">Amigos · 4 invitados</div>
+              <div><span class="badge badge-alta">○ Alta</span></div>
+              <div style="margin-top:6px;">
+                <span class="btn-mock btn-small btn-outline" style="display:inline-block;">✎</span>
+                <span class="btn-mock btn-small btn-success" style="display:inline-block;">↗ Enviar</span>
+                <span class="btn-mock btn-small btn-outline" style="display:inline-block;">⬇</span>
+                <span class="btn-mock btn-small btn-outline" style="display:inline-block; color:#E74C3C; border-color:#E74C3C;">🗑</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="arrow-label">Presiona "↗ Enviar" en el invitado</div>
+
+      <p>WhatsApp se abrirá con un mensaje como este:</p>
+      <div style="background:#DCF8C6; border-radius:10px; padding:12px; font-size:12px; margin:12px 0;">
+        ¡Hola Familia García! 🎉<br><br>
+        Estás invitado/a a la fiesta de Sofía.<br>
+        Confirma tu asistencia aquí:<br>
+        <span style="color:#0066CC; text-decoration:underline;">invitaxv.lol/i/sofia-xv?token=abc123</span>
+      </div>
+
+      <p>Después de enviar el mensaje, regresa a la app. Te preguntará:</p>
+
+      <div class="dialog-mock">
+        <div class="dialog-title">¿Se envió correctamente?</div>
+        <div class="dialog-text">Confirma que el mensaje se envió por WhatsApp</div>
+        <span class="btn-mock btn-small btn-success" style="display:inline-block; width:80px;">Sí ✓</span>
+        <span class="btn-mock btn-small btn-outline" style="display:inline-block; width:80px;">No ✗</span>
+      </div>
+
+      <p>Si presionas <strong>"Sí"</strong>, el invitado cambiará a estado <strong>"Enviado"</strong>.</p>
+
+      <div class="warning">Solo presiona "Sí" si realmente se envió el mensaje. Si no, el invitado quedará como "No enviado" y podrás intentar después.</div>
+    </div>
+  </div>
+
+  <!-- ==================== PASO 6 ==================== -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">6</div>
+      <div class="step-title">Revisa las confirmaciones</div>
+    </div>
+    <div class="step-body">
+      <p>Cuando un invitado abre su link y confirma, su estado cambia automáticamente. Tú también recibirás un <strong>mensaje de WhatsApp</strong> avisándote.</p>
+
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="screen-body">
+            <div class="card-mock">
+              <div class="name">Juan Pérez</div>
+              <div class="meta">Familia · 4 invitados</div>
+              <div><span class="badge badge-confirmado">✔ Confirmó: SÍ</span></div>
+              <div style="margin-top:4px; font-size:10px; color:#888;">💬 "¡Felicidades Sofía! Te quiero mucho"</div>
+              <div style="margin-top:6px;">
+                <span class="btn-mock btn-small btn-outline" style="display:inline-block;">✎</span>
+                <span class="btn-mock btn-small btn-primary" style="display:inline-block;">🎫 Boleto</span>
+                <span class="btn-mock btn-small btn-outline" style="display:inline-block;">🔓</span>
+              </div>
+            </div>
+            <div class="card-mock">
+              <div class="name">Pedro Sánchez</div>
+              <div class="meta">Trabajo · 2 invitados</div>
+              <div><span class="badge badge-enviado">● Enviado</span></div>
+              <div style="margin-top:6px;">
+                <span class="btn-mock btn-small btn-outline" style="display:inline-block;">✓</span>
+                <span class="btn-mock btn-small btn-outline" style="display:inline-block;">✎</span>
+                <span class="btn-mock btn-small btn-outline" style="display:inline-block;">🔓</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="arrow-label">Los confirmados aparecen en verde</div>
+
+      <p>Si alguien te confirma <strong>por teléfono o en persona</strong> (no desde el link), tú puedes marcarlo manualmente presionando <strong>"✓ Confirmar"</strong>.</p>
+
+      <div class="tip">Los mensajes de felicitación que dejan tus invitados aparecen debajo de su nombre. También te llegarán por WhatsApp.</div>
+    </div>
+  </div>
+
+  <!-- ==================== PASO 7 ==================== -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">7</div>
+      <div class="step-title">Genera y envía los boletos</div>
+    </div>
+    <div class="step-body">
+      <p>Cuando tus invitados ya confirmaron, puedes generar sus <strong>boletos de entrada con código QR</strong>.</p>
+
+      <p><strong>Opción A — Un boleto individual:</strong><br>
+      Presiona <strong>"🎫 Boleto"</strong> en la fila del invitado confirmado. Se descargará su boleto y se abrirá WhatsApp para que se lo envíes.</p>
+
+      <p><strong>Opción B — Todos los boletos juntos:</strong><br>
+      Ve a la pestaña <strong>"Boletos"</strong> y presiona <strong>"Generar boletos"</strong>. Se descargará un PDF con todos los boletos de los invitados que confirmaron con SÍ.</p>
+
+      <div class="boleto-mock">
+        <div class="boleto-title">🎉 BOLETO DE ENTRADA</div>
+        <div style="margin:10px 0;">
+          <div class="boleto-field"><strong>Evento:</strong> Fiesta de Sofía</div>
+          <div class="boleto-field"><strong>Invitado:</strong> Juan Pérez</div>
+          <div class="boleto-field"><strong>Asientos:</strong> 4 personas</div>
+        </div>
+        <div class="qr-placeholder">📱</div>
+        <div class="boleto-field" style="font-size:10px;">Escanea el QR para ver<br>la ubicación de la recepción</div>
+      </div>
+      <div class="arrow-label">Así se ve cada boleto</div>
+
+      <div class="tip">El código QR del boleto lleva directo a Google Maps con la ubicación de tu recepción. ¡Así nadie se pierde!</div>
+      <div class="warning">Solo se generan boletos para invitados que confirmaron <strong>SÍ</strong>. Si alguien no ha confirmado, no aparecerá.</div>
+    </div>
+  </div>
+
+  <!-- ==================== PASO 8 ==================== -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">8</div>
+      <div class="step-title">Exporta tu lista</div>
+    </div>
+    <div class="step-body">
+      <p>Si quieres tener un respaldo o imprimir tu lista, presiona <strong>"⬇ Exportar"</strong>. Se descargará un archivo Excel con todos tus invitados y su estado actual.</p>
+
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="screen-body" style="padding: 16px;">
+            <div style="display:flex; gap:6px; justify-content:center;">
+              <div class="btn-mock btn-small btn-primary" style="display:inline-block;">+ Agregar</div>
+              <div class="btn-mock btn-small btn-outline" style="display:inline-block;">⬆ Importar</div>
+              <div class="btn-mock btn-small btn-outline" style="display:inline-block;">⬇ Exportar</div>
+            </div>
+            <div style="margin-top:12px; text-align:center; font-size:10px; color:#27AE60;">
+              ✅ Descargando: invitados_sofia.xlsx
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="arrow-label">Presiona "⬇ Exportar"</div>
+    </div>
+  </div>
+
+  <!-- ==================== PASO 9 ==================== -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">9</div>
+      <div class="step-title">Si alguien no puede abrir su invitación</div>
+    </div>
+    <div class="step-body">
+      <p>Por seguridad, cada invitación <strong>solo funciona en el celular donde se abrió por primera vez</strong>. Si alguien reenvía el link a otra persona, esa persona <strong>no podrá abrirlo</strong>.</p>
+
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="screen-body">
+            <div class="blocked-screen">
+              <div class="blocked-icon">🔒</div>
+              <div class="blocked-title">Acceso bloqueado</div>
+              <div class="blocked-text">Esta invitación ya fue abierta en otro dispositivo.<br><br>Si necesitas acceso, contacta a Sofía.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="arrow-label">Esto ve alguien que intenta abrir un link reenviado</div>
+
+      <p>Si tu invitado <strong>cambió de celular</strong> o <strong>borró el historial de su navegador</strong> y ya no puede entrar, tú puedes desbloquearlo:</p>
+
+      <p>1. Busca al invitado en tu lista<br>
+      2. Presiona el botón <strong>"🔓"</strong> (candado)<br>
+      3. Se desvinculará su dispositivo anterior<br>
+      4. La próxima vez que abra el link, se vinculará a su nuevo celular</p>
+
+      <div class="tip">Solo usa "🔓 Desvincular" cuando el invitado te lo pida. Así mantienes tu evento seguro.</div>
+    </div>
+  </div>
+
+  <!-- ==================== PASO 10 ==================== -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">10</div>
+      <div class="step-title">Dar de baja a un invitado</div>
+    </div>
+    <div class="step-body">
+      <p>Si ya no quieres que alguien asista, presiona <strong>"⬇ Dar de baja"</strong> en su tarjeta. El invitado no se borra, solo se desactiva.</p>
+      <p>Si cambias de opinión, puedes <strong>reactivarlo</strong> después.</p>
+
+      <div class="warning"><strong>No puedes eliminar</strong> a alguien si ya le enviaste la invitación o si ya confirmó. Solo puedes darlo de baja.</div>
+      <div class="tip">Solo puedes <strong>eliminar permanentemente</strong> a un invitado si todavía no le has enviado nada (estado "Alta").</div>
+    </div>
+  </div>
+
+  <!-- ==================== RESUMEN ==================== -->
+  <div class="section-divider">✨</div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number" style="background:#27AE60;">✓</div>
+      <div class="step-title">¡Eso es todo!</div>
+    </div>
+    <div class="step-body">
+      <p>Resumen rápido de lo que significan los <strong>colores de estado</strong>:</p>
+      <div style="margin: 12px 0;">
+        <div style="display:flex; align-items:center; gap:8px; margin:8px 0;">
+          <span class="badge badge-alta" style="font-size:11px; padding:4px 12px;">○ Alta</span>
+          <span style="font-size:13px;">Agregado a la lista, pero aún no se le envía nada</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px; margin:8px 0;">
+          <span class="badge badge-enviado" style="font-size:11px; padding:4px 12px;">● Enviado</span>
+          <span style="font-size:13px;">Ya se le envió la invitación por WhatsApp</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px; margin:8px 0;">
+          <span class="badge badge-confirmado" style="font-size:11px; padding:4px 12px;">✔ Confirmado</span>
+          <span style="font-size:13px;">Ya respondió si asiste o no</span>
+        </div>
+      </div>
+      <p>Si tienes dudas, ¡no te preocupes! Solo recuerda:</p>
+      <p>📲 <strong>Enviar</strong> = Abre WhatsApp con el mensaje listo<br>
+      ✓ <strong>Confirmar</strong> = Marca manualmente si alguien te dijo que sí va<br>
+      🎫 <strong>Boleto</strong> = Genera su boleto de entrada con QR<br>
+      🔓 <strong>Desvincular</strong> = Permite que abra su invitación en otro celular</p>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
