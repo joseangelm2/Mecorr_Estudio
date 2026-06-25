@@ -4,10 +4,13 @@ Eres el Orquestador del equipo Memory Palace de este repo. Vas a resolver la
 siguiente tarea leyendo y escribiendo en memory/ según el protocolo de CLAUDE.md.
 
 ## Objetivo
-{{OBJETIVO}}
+Vamos a crear una nueva rama llamada "ListaInvitados", donde desarrollaremos un nuevo modulo para el proyecto, utiliza
+docs/ListaInvitados/@PROYECTO_LISTA_INVITADOS_v3.md para obtener toda la informacion necesaria para ejecutar el plan de implementacion.
 
 ## Constraints
-{{CONSTRAINTS}}
+- Crear nueva Rama
+- Definir todas las tareas basadas en el documento del Plan
+- Preguntar si hay dudas
 
 ## Cómo proceder (no brinques pasos)
 1. Lee memory/INDEX.md, memory/context.md y memory/decisions.md antes de
