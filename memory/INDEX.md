@@ -13,6 +13,12 @@
 
 ## Últimas entradas
 <!-- formato: - [YYYY-MM-DD] [agente] → archivo#anchor — título -->
+- [2026-06-27] [orquestador] → decisions.md — Control granular de fotos en templates Sobre y Elegance
+- [2026-06-27] [coder] → code-notes.md — Admin: sobre_final_photo_url + labels por posición en galería
+- [2026-06-27] [coder] → code-notes.md — Templates Sobre y Elegance: video reordenado, foto final independiente, sin fallbacks en Elegance
+- [2026-06-27] [orquestador] → decisions.md — Fotos del álbum en columna vertical y uploader por posición
+- [2026-06-27] [coder] → code-notes.md — Fotos del álbum: columna vertical + uploader por posición
+- [2026-06-27] [investigador] → research.md — Mapa exhaustivo de distribución de fotos en Goldrose
 - [2026-06-24] [orquestador] → context.md — Misión, alcance, stack, templates, DB y flujos de Goldrose
 - [2026-06-24] [orquestador] → decisions.md — 9 ADRs: templates dinámicos, slugs, auth, temas CSS, RSVP, extra_config, storage
 - [2026-06-24] [orquestador] → glossary.md — Terminología del dominio, templates, secciones y términos técnicos propios

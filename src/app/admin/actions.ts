@@ -65,6 +65,10 @@ export interface ProjectFormData {
   especial_dress_code_image_url: string
   especial_envelope_right_url: string
   especial_envelope_left_url: string
+  sobre_final_photo_url: string
+  elegance_show_album: boolean
+  elegance_grid_retrato: string[]
+  elegance_grid_horizontal: string[]
 }
 
 function formDataToProject(data: ProjectFormData) {
@@ -152,6 +156,14 @@ function formDataToProject(data: ProjectFormData) {
       ...(data.especial_dress_code_image_url  ? { dress_code_image_url:  data.especial_dress_code_image_url  } : {}),
       ...(data.especial_envelope_right_url    ? { envelope_right_url:    data.especial_envelope_right_url    } : {}),
       ...(data.especial_envelope_left_url     ? { envelope_left_url:     data.especial_envelope_left_url     } : {}),
+      ...(data.sobre_final_photo_url          ? { final_photo_url:       data.sobre_final_photo_url          } : {}),
+      ...(data.elegance_show_album ? { show_album: true } : {}),
+      ...(data.elegance_grid_retrato.filter(Boolean).length > 0
+        ? { grid_retrato: data.elegance_grid_retrato.filter(Boolean) }
+        : {}),
+      ...(data.elegance_grid_horizontal.filter(Boolean).length > 0
+        ? { grid_horizontal: data.elegance_grid_horizontal.filter(Boolean) }
+        : {}),
     },
   }
 }

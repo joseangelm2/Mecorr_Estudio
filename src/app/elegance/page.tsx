@@ -181,7 +181,7 @@ export default function ElegancePage() {
         <GalleryPhoto src={photos[2]} />
         <EleganceGifts project={project} />
         <GalleryPhoto src={photos[3]} />
-        <ElegancePhotoGrid photos={photos} />
+        <ElegancePhotoGrid gridRetrato={[]} gridHorizontal={[]} />
         {project.show_itinerary && <GalleryPhoto src={photos[4]} />}
         {project.show_itinerary && <EleganceItinerary project={project} />}
         <GalleryPhoto src={photos[5]} />

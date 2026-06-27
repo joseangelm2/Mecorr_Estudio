@@ -19,13 +19,6 @@ import EleganceRSVP from '@/components/elegance/EleganceRSVP'
 import EleganceFooter from '@/components/elegance/EleganceFooter'
 import EleganceVideo from '@/components/elegance/EleganceVideo'
 
-const FALLBACKS = [11, 21, 31, 41, 12, 22, 32, 13, 23, 33]
-
-function getPhotos(project: Project): string[] {
-  const photos = project.photos ?? []
-  return FALLBACKS.map((fb, i) => photos[i] ?? `/images/elegance/${fb}.jpg`)
-}
-
 function GalleryPhoto({ src }: { src: string }) {
   return (
     <div className="foto-con-degradado">
@@ -73,7 +66,6 @@ export default function EleganceTemplate({ project }: Props) {
     audioRef.current?.play().catch(() => {})
   }
 
-  const photos = getPhotos(project)
   const hashtag = project.hashtag ?? ''
 
   return (
@@ -86,15 +78,20 @@ export default function EleganceTemplate({ project }: Props) {
       <EleganceDecorations />
       <div className="contenido">
         <EleganceHero project={project} />
-        <GalleryPhoto src={photos[0]} />
+        {project.photos[0] && <GalleryPhoto src={project.photos[0]} />}
         <EleganceParents project={project} />
-        <GalleryPhoto src={photos[1]} />
+        {project.photos[1] && <GalleryPhoto src={project.photos[1]} />}
         <EleganceEventDate eventDate={project.event_date} />
         <EleganceLocations project={project} />
-        <GalleryPhoto src={photos[2]} />
+        {project.photos[2] && <GalleryPhoto src={project.photos[2]} />}
         <EleganceGifts project={project} />
-        <GalleryPhoto src={photos[3]} />
-        <ElegancePhotoGrid photos={photos} />
+        {project.photos[3] && <GalleryPhoto src={project.photos[3]} />}
+        {(project.extra_config?.show_album as boolean) && (
+          <ElegancePhotoGrid
+            gridRetrato={(project.extra_config?.grid_retrato as string[]) ?? []}
+            gridHorizontal={(project.extra_config?.grid_horizontal as string[]) ?? []}
+          />
+        )}
         {project.show_video && (
           <EleganceVideo
             youtubeId={project.video_youtube_id ?? undefined}
@@ -102,12 +99,12 @@ export default function EleganceTemplate({ project }: Props) {
             audioRef={audioRef}
           />
         )}
-        {project.show_itinerary && <GalleryPhoto src={photos[4]} />}
+        {project.show_itinerary && project.photos[4] && <GalleryPhoto src={project.photos[4]} />}
         {project.show_itinerary && <EleganceItinerary project={project} />}
-        <GalleryPhoto src={photos[5]} />
+        {project.photos[5] && <GalleryPhoto src={project.photos[5]} />}
         <EleganceWishes phone={project.rsvp_phone ?? ''} hashtag={hashtag} dressCodeNotes={project.dress_code?.notes || undefined} />
         <EleganceRSVP project={project} />
-        <GalleryPhoto src={photos[6]} />
+        {project.photos[6] && <GalleryPhoto src={project.photos[6]} />}
         <EleganceFooter />
       </div>
     </div>

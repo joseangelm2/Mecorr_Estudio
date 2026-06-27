@@ -4,14 +4,16 @@ Eres el Orquestador del equipo Memory Palace de este repo. Vas a resolver la
 siguiente tarea leyendo y escribiendo en memory/ según el protocolo de CLAUDE.md.
 
 ## Objetivo
-Vamos a crear una nueva rama llamada "ListaInvitados", donde desarrollaremos un nuevo modulo para el proyecto, utiliza
-docs/ListaInvitados/@PROYECTO_LISTA_INVITADOS_v3.md para obtener toda la informacion necesaria para ejecutar el plan de implementacion.
+Vamos a revisar la distribucion de fotos en la invitacion sobre y elegance para tener mejor control de donde se visualiza cada foto
 
 ## Constraints
-- Crear nueva Rama
-- Definir todas las tareas basadas en el documento del Plan
-- Preguntar si hay dudas
-
+- ubicar todas las fotos en la invitacion
+- en el admin subir foto espesifica por seccion como en elegan indicande despues de que seccion va
+- las fotos del momentos en sobre y grid de fotos en elegance se carga en la misma seccion del admin
+- la ultima foto de sobre sea independiente de hero
+- en sobre mueve la seccion de video despues de momentos 
+- quita el fall back de elegance de todas las fotos
+  
 ## Cómo proceder (no brinques pasos)
 1. Lee memory/INDEX.md, memory/context.md y memory/decisions.md antes de
    mover un dedo. Si encuentras una decisión previa que resuelve parte de la

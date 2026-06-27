@@ -83,3 +83,26 @@
 **Alternativas descartadas:** Un solo bucket (políticas de limpieza complejas, mezcla de tipos). Hash del contenido como nombre (deduplicación útil pero requiere calcular hash en cliente, complejidad extra). Nombres humanos/descriptivos (riesgo de colisión, requiere index UNIQUE en Storage).
 **Nota:** Sin deduplicación, reemplazar una imagen en el formulario deja el archivo anterior como huérfano en Storage — acumula basura con el tiempo.
 **Referencia:** `src/components/admin/MediaUploader.tsx:35,39-52`
+
+---
+
+### [2026-06-27] [orquestador] — Fotos del álbum en columna vertical y uploader por posición
+**Contexto:** El template Especial mostraba las fotos del álbum (`photos[]`) como un carrusel horizontal con auto-play e intervalos. El admin tenía un único MediaUploader genérico que agregaba fotos al final del array sin indicar en qué posición visual aparecerían.
+**Decisión:** (1) `EspecialPhotos.tsx` reescrito como columna vertical: todas las fotos se apilan de arriba a abajo sin JavaScript de navegación ni estado de carrusel. (2) `ProjectForm.tsx` tab Media rediseñado: cada posición del array `photos` tiene su propio `MediaUploader` con `onUploadComplete={url => setArrayItem('photos', i, url)}` y etiqueta "Foto N — Posición N en la sección Momentos".
+**Por qué:** El carrusel ocultaba fotos que el usuario final nunca veía por completo (avance automático); la columna vertical garantiza que todas las fotos sean vistas con scroll natural, especialmente en mobile. El uploader por posición da al admin control exacto: sabe que "Foto 3" es la tercera que aparece al bajar en la invitación.
+**Alternativas descartadas:** Mantener carrusel con flechas (requiere JS, oculta fotos). Uploader único con append (admin no sabe en qué posición cae cada foto). Grid 2 columnas (rompe el diseño de ancho completo del template Especial).
+**Trampa activa:** NO poner `.wow fadeInUp` en las fotos del map — el IntersectionObserver de `EspecialScrollInit` solo observa elementos presentes al montar; fotos generadas por iteración quedarían `visibility: hidden` para siempre. El `.wow` solo va en el heading "Momentos".
+**Referencia:** `src/components/especial/EspecialPhotos.tsx`, `src/components/admin/ProjectForm.tsx:603-636`
+
+---
+
+### [2026-06-27] [orquestador] — Control granular de fotos en templates Sobre y Elegance
+**Contexto:** Ambos templates usaban fotos sin etiquetas claras en el admin, Sobre reutilizaba `hero_photo_url` para la sección final, Elegance tenía 10 fallbacks hardcodeados que enmascaraban fotos no cargadas, y el video de Sobre aparecía al final después del RSVP.
+**Decisiones:**
+1. **Video en Sobre** movido a justo después de `FotosCarousel` (`SobreTemplate.tsx:96`).
+2. **Foto final de Sobre** usa `extra_config.final_photo_url` (campo `sobre_final_photo_url` en el form), con fallback a `hero_photo_url`. Nuevo uploader en Tab 6 "Estilo" solo visible cuando `template === 'sobre'`.
+3. **Fallbacks de Elegance** eliminados: `FALLBACKS` y `getPhotos()` removidos. Cada `GalleryPhoto` y `ElegancePhotoGrid` es condicional — solo renderiza si la foto existe.
+4. **Labels por posición en admin**: Tab 7 "Media" muestra etiquetas específicas según template: para `elegance` cada posición indica después de qué sección aparece; para `sobre` indica que es el carrusel Momentos.
+**Por qué:** El admin debe reflejar exactamente la estructura visual de la invitación — el editor sabe qué foto sube y dónde quedará. Sin fallbacks, Elegance no muestra imágenes vacías confusas.
+**Alternativas descartadas:** Tab separado por template para fotos (rompe el constraint "misma sección del admin"). Fallback a placeholder genérico (sigue enmascarando fotos no cargadas). Campo `final_photo_url` como columna nueva en DB (violación del ADR de extra_config).
+**Referencia:** `src/components/templates/SobreTemplate.tsx:95-123`, `src/components/templates/EleganceTemplate.tsx:80-103`, `src/components/elegance/ElegancePhotoGrid.tsx`, `src/app/admin/actions.ts:68,156`, `src/components/admin/ProjectForm.tsx:580-645`
