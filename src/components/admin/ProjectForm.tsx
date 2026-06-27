@@ -81,6 +81,10 @@ function toFormData(project?: Project): ProjectFormData {
       especial_envelope_left_url: '',
       tiene_lista_invitados: false,
       pin_admin: '',
+      sobre_final_photo_url: '',
+      elegance_show_album: false,
+      elegance_grid_retrato: [],
+      elegance_grid_horizontal: [],
     }
   }
   return {
@@ -133,6 +137,10 @@ function toFormData(project?: Project): ProjectFormData {
     especial_dress_code_image_url: (project.extra_config?.dress_code_image_url as string) ?? '',
     especial_envelope_right_url: (project.extra_config?.envelope_right_url as string) ?? '',
     especial_envelope_left_url: (project.extra_config?.envelope_left_url as string) ?? '',
+    sobre_final_photo_url: (project.extra_config?.final_photo_url as string) ?? '',
+    elegance_show_album:      (project.extra_config?.show_album      as boolean) ?? false,
+    elegance_grid_retrato:    (project.extra_config?.grid_retrato    as string[]) ?? [],
+    elegance_grid_horizontal: (project.extra_config?.grid_horizontal as string[]) ?? [],
     color_theme: project.color_theme ?? 'rosagold',
     invitation_text: project.invitation_text ?? '',
     show_video: project.show_video ?? false,
@@ -578,6 +586,23 @@ export default function ProjectForm({ project }: Props) {
             <input type="url" value={form.hero_photo_url} onChange={e => set('hero_photo_url', e.target.value)} className={input} placeholder="O pega una URL directamente..." />
           </SectionCard>
 
+          {form.template === 'sobre' && (
+            <SectionCard title="Foto de cierre" description="Imagen del fondo en la última sección. Si no se define, se reutiliza la foto de portada.">
+              {project?.id ? (
+                <MediaUploader projectId={project.id} bucket="invitation-media" accept="image/*" onUploadComplete={url => set('sobre_final_photo_url', url)} label="Subir foto de cierre" />
+              ) : (
+                <p className="text-sm text-amber-600 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">Guarda el proyecto primero para poder subir archivos.</p>
+              )}
+              {form.sobre_final_photo_url && (
+                <div className="relative rounded-xl overflow-hidden border border-gray-100">
+                  <img src={form.sobre_final_photo_url} alt="Cierre" className="w-full max-h-56 object-cover" />
+                  <button type="button" onClick={() => set('sobre_final_photo_url', '')} className="absolute top-2 right-2 w-7 h-7 rounded-full bg-black/50 text-white text-sm flex items-center justify-center hover:bg-black/70">✕</button>
+                </div>
+              )}
+              <input type="url" value={form.sobre_final_photo_url} onChange={e => set('sobre_final_photo_url', e.target.value)} className={input} placeholder="O pega una URL directamente..." />
+            </SectionCard>
+          )}
+
           <SectionCard title="Código de vestimenta">
             <Field title="Colores">
               <input type="text" value={form.dress_code_colors} onChange={e => set('dress_code_colors', e.target.value)} className={input} placeholder="Rosa pastel, blanco y dorado" />
@@ -604,34 +629,149 @@ export default function ProjectForm({ project }: Props) {
           </SectionCard>
 
           {/* Gallery */}
-          <SectionCard title="Galería de fotos" description="Mínimo 4 fotos para un buen carrusel">
-            {project?.id && (
-              <MediaUploader
-                projectId={project.id}
-                bucket="invitation-media"
-                accept="image/*"
-                onUploadComplete={url => setForm(prev => ({ ...prev, photos: [...prev.photos.filter(Boolean), url] }))}
-                label="Subir foto a la galería"
-              />
-            )}
-            <div className="space-y-3">
-              {form.photos.map((url, i) => (
-                <div key={i} className="flex gap-3 items-center">
-                  {url ? (
-                    <img src={url} alt="" className="w-12 h-12 object-cover rounded-xl border border-gray-200 shrink-0" />
-                  ) : (
-                    <div className="w-12 h-12 rounded-xl border-2 border-dashed border-gray-200 shrink-0 flex items-center justify-center text-gray-300 text-sm">{i + 1}</div>
-                  )}
-                  <input type="url" value={url} onChange={e => setArrayItem('photos', i, e.target.value)} className={input} placeholder="URL de imagen" />
-                  <button type="button" onClick={() => removeArrayItem('photos', i)} className="w-10 h-10 rounded-xl border border-red-200 text-red-400 hover:bg-red-50 flex items-center justify-center transition-colors shrink-0">✕</button>
-                </div>
-              ))}
+          <SectionCard title="Galería de fotos" description={
+            form.template === 'elegance'
+              ? 'Fotos intercaladas entre secciones (máx. 7)'
+              : 'Fotos del carrusel que aparecen en la sección Momentos'
+          }>
+            <div className="space-y-6">
+              {form.photos.map((url, i) => {
+                // Etiqueta según template
+                let photoLabel = `Foto ${i + 1}`
+                let photoDescription = `Posición ${i + 1} en la sección Momentos`
+                if (form.template === 'elegance') {
+                  const eleganceLabels: Record<number, { label: string; description: string }> = {
+                    0: { label: 'Foto 1', description: 'Aparece después del Hero' },
+                    1: { label: 'Foto 2', description: 'Aparece después de Padres y padrinos' },
+                    2: { label: 'Foto 3', description: 'Aparece después de Ubicaciones' },
+                    3: { label: 'Foto 4', description: 'Aparece después de Regalos' },
+                    4: { label: 'Foto 5', description: 'Aparece antes del Itinerario (solo si itinerario activo)' },
+                    5: { label: 'Foto 6', description: 'Aparece después del Itinerario' },
+                    6: { label: 'Foto 7', description: 'Aparece después del RSVP' },
+                  }
+                  const entry = eleganceLabels[i]
+                  if (entry) { photoLabel = entry.label; photoDescription = entry.description }
+                }
+                return (
+                  <div key={i} className="rounded-xl border border-gray-100 bg-gray-50/50 p-4 space-y-3">
+                    <div>
+                      <p className="text-sm font-semibold text-gray-800">{photoLabel}</p>
+                      <p className="text-xs text-gray-400 mt-0.5">{photoDescription}</p>
+                    </div>
+                    {project?.id && (
+                      <MediaUploader
+                        projectId={project.id}
+                        bucket="invitation-media"
+                        accept="image/*"
+                        onUploadComplete={url => setArrayItem('photos', i, url)}
+                        label={`Subir ${photoLabel.toLowerCase()}`}
+                      />
+                    )}
+                    <div className="flex gap-3 items-center">
+                      {url ? (
+                        <img src={url} alt="" className="w-12 h-12 object-cover rounded-xl border border-gray-200 shrink-0" />
+                      ) : (
+                        <div className="w-12 h-12 rounded-xl border-2 border-dashed border-gray-200 shrink-0 flex items-center justify-center text-gray-300 text-sm">{i + 1}</div>
+                      )}
+                      <input type="url" value={url} onChange={e => setArrayItem('photos', i, e.target.value)} className={input} placeholder="URL de imagen" />
+                      <button type="button" onClick={() => removeArrayItem('photos', i)} className="w-10 h-10 rounded-xl border border-red-200 text-red-400 hover:bg-red-50 flex items-center justify-center transition-colors shrink-0">✕</button>
+                    </div>
+                  </div>
+                )
+              })}
               <button type="button" onClick={() => addArrayItem('photos')} className="text-sm text-rose-500 hover:text-rose-600 font-medium flex items-center gap-2 mt-1">
                 <span className="w-5 h-5 rounded-full bg-rose-100 flex items-center justify-center text-xs">+</span>
-                Agregar URL manualmente
+                Agregar posición
               </button>
             </div>
           </SectionCard>
+
+          {/* Toggle álbum — solo elegance */}
+          {form.template === 'elegance' && (
+            <div className="rounded-xl border border-gray-100 bg-gray-50/50 overflow-hidden">
+              <div className="flex items-center justify-between px-5 py-4">
+                <div>
+                  <p className="text-base font-semibold text-gray-800">Álbum de fotos (grid)</p>
+                  <p className="text-sm text-gray-400 mt-0.5">Sección con crossfade de fotos retrato y horizontal</p>
+                </div>
+                <Toggle checked={form.elegance_show_album} onChange={v => set('elegance_show_album', v)} label="Mostrar álbum" />
+              </div>
+            </div>
+          )}
+
+          {/* Grid retrato — solo elegance */}
+          {form.template === 'elegance' && form.elegance_show_album && (
+            <SectionCard title="Grid — Sección retrato (3:4)" description="4 fotos en crossfade, formato vertical">
+              <div className="space-y-6">
+                {Array.from({ length: 4 }, (_, i) => {
+                  const url = form.elegance_grid_retrato[i] ?? ''
+                  return (
+                    <div key={i} className="rounded-xl border border-gray-100 bg-gray-50/50 p-4 space-y-3">
+                      <div>
+                        <p className="text-sm font-semibold text-gray-800">Foto {i + 1} — Retrato</p>
+                        <p className="text-xs text-gray-400 mt-0.5">Ciclo {i + 1} de 4 en la sección vertical</p>
+                      </div>
+                      {project?.id && (
+                        <MediaUploader
+                          projectId={project.id}
+                          bucket="invitation-media"
+                          accept="image/*"
+                          onUploadComplete={u => setForm(prev => { const g = [...prev.elegance_grid_retrato]; g[i] = u; return { ...prev, elegance_grid_retrato: g } })}
+                          label={`Subir foto retrato ${i + 1}`}
+                        />
+                      )}
+                      <div className="flex gap-3 items-center">
+                        {url ? (
+                          <img src={url} alt="" className="w-12 h-12 object-cover rounded-xl border border-gray-200 shrink-0" />
+                        ) : (
+                          <div className="w-12 h-12 rounded-xl border-2 border-dashed border-gray-200 shrink-0 flex items-center justify-center text-gray-300 text-sm">{i + 1}</div>
+                        )}
+                        <input type="url" value={url} onChange={e => setForm(prev => { const g = [...prev.elegance_grid_retrato]; g[i] = e.target.value; return { ...prev, elegance_grid_retrato: g } })} className={input} placeholder="URL de imagen" />
+                        {url && <button type="button" onClick={() => setForm(prev => { const g = [...prev.elegance_grid_retrato]; g[i] = ''; return { ...prev, elegance_grid_retrato: g } })} className="w-10 h-10 rounded-xl border border-red-200 text-red-400 hover:bg-red-50 flex items-center justify-center transition-colors shrink-0">✕</button>}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </SectionCard>
+          )}
+
+          {/* Grid horizontal — solo elegance */}
+          {form.template === 'elegance' && form.elegance_show_album && (
+            <SectionCard title="Grid — Sección horizontal (16:9)" description="4 fotos en crossfade, formato panorámico">
+              <div className="space-y-6">
+                {Array.from({ length: 4 }, (_, i) => {
+                  const url = form.elegance_grid_horizontal[i] ?? ''
+                  return (
+                    <div key={i} className="rounded-xl border border-gray-100 bg-gray-50/50 p-4 space-y-3">
+                      <div>
+                        <p className="text-sm font-semibold text-gray-800">Foto {i + 1} — Horizontal</p>
+                        <p className="text-xs text-gray-400 mt-0.5">Ciclo {i + 1} de 4 en la sección panorámica</p>
+                      </div>
+                      {project?.id && (
+                        <MediaUploader
+                          projectId={project.id}
+                          bucket="invitation-media"
+                          accept="image/*"
+                          onUploadComplete={u => setForm(prev => { const g = [...prev.elegance_grid_horizontal]; g[i] = u; return { ...prev, elegance_grid_horizontal: g } })}
+                          label={`Subir foto horizontal ${i + 1}`}
+                        />
+                      )}
+                      <div className="flex gap-3 items-center">
+                        {url ? (
+                          <img src={url} alt="" className="w-12 h-12 object-cover rounded-xl border border-gray-200 shrink-0" />
+                        ) : (
+                          <div className="w-12 h-12 rounded-xl border-2 border-dashed border-gray-200 shrink-0 flex items-center justify-center text-gray-300 text-sm">{i + 1}</div>
+                        )}
+                        <input type="url" value={url} onChange={e => setForm(prev => { const g = [...prev.elegance_grid_horizontal]; g[i] = e.target.value; return { ...prev, elegance_grid_horizontal: g } })} className={input} placeholder="URL de imagen" />
+                        {url && <button type="button" onClick={() => setForm(prev => { const g = [...prev.elegance_grid_horizontal]; g[i] = ''; return { ...prev, elegance_grid_horizontal: g } })} className="w-10 h-10 rounded-xl border border-red-200 text-red-400 hover:bg-red-50 flex items-center justify-center transition-colors shrink-0">✕</button>}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </SectionCard>
+          )}
 
           {/* Feature toggles */}
           <div className="space-y-4">

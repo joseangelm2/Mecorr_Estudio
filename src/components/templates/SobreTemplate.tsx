@@ -93,6 +93,12 @@ export default function SobreTemplate({ project }: Props) {
       {dress_code && <VestimentaSection dressCode={dress_code} />}
       {hashtag && <HashtagSection hashtag={hashtag} />}
       {photos.length > 0 && <FotosCarousel photos={photos} />}
+      {show_video && (
+        <VideoSection
+          youtubeId={video_youtube_id ?? undefined}
+          localVideo={video_url ?? undefined}
+        />
+      )}
       {gift_registry?.liverpoolLink && (
         <MesaRegalosSection liverpoolLink={gift_registry.liverpoolLink} />
       )}
@@ -113,14 +119,8 @@ export default function SobreTemplate({ project }: Props) {
       />
       <FinalSection
         quinceaneraName={quinceanera_name}
-        finalPhotoUrl={hero_photo_url ?? undefined}
+        finalPhotoUrl={(project.extra_config?.final_photo_url as string) || hero_photo_url || undefined}
       />
-      {show_video && (
-        <VideoSection
-          youtubeId={video_youtube_id ?? undefined}
-          localVideo={video_url ?? undefined}
-        />
-      )}
     </>
   );
 }
