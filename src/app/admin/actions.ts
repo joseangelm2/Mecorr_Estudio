@@ -66,6 +66,13 @@ export interface ProjectFormData {
   especial_envelope_right_url: string
   especial_envelope_left_url: string
   sobre_final_photo_url: string
+  elegance_photo_after_hero: string
+  elegance_photo_after_parents: string
+  elegance_photo_after_locations: string
+  elegance_photo_after_gifts: string
+  elegance_photo_before_itinerary: string
+  elegance_photo_after_itinerary: string
+  elegance_photo_after_rsvp: string
   elegance_show_album: boolean
   elegance_grid_retrato: string[]
   elegance_grid_horizontal: string[]
@@ -156,7 +163,14 @@ function formDataToProject(data: ProjectFormData) {
       ...(data.especial_dress_code_image_url  ? { dress_code_image_url:  data.especial_dress_code_image_url  } : {}),
       ...(data.especial_envelope_right_url    ? { envelope_right_url:    data.especial_envelope_right_url    } : {}),
       ...(data.especial_envelope_left_url     ? { envelope_left_url:     data.especial_envelope_left_url     } : {}),
-      ...(data.sobre_final_photo_url          ? { final_photo_url:       data.sobre_final_photo_url          } : {}),
+      ...(data.sobre_final_photo_url           ? { final_photo_url:        data.sobre_final_photo_url           } : {}),
+      ...(data.elegance_photo_after_hero       ? { photo_after_hero:       data.elegance_photo_after_hero       } : {}),
+      ...(data.elegance_photo_after_parents    ? { photo_after_parents:    data.elegance_photo_after_parents    } : {}),
+      ...(data.elegance_photo_after_locations  ? { photo_after_locations:  data.elegance_photo_after_locations  } : {}),
+      ...(data.elegance_photo_after_gifts      ? { photo_after_gifts:      data.elegance_photo_after_gifts      } : {}),
+      ...(data.elegance_photo_before_itinerary ? { photo_before_itinerary: data.elegance_photo_before_itinerary } : {}),
+      ...(data.elegance_photo_after_itinerary  ? { photo_after_itinerary:  data.elegance_photo_after_itinerary  } : {}),
+      ...(data.elegance_photo_after_rsvp       ? { photo_after_rsvp:       data.elegance_photo_after_rsvp       } : {}),
       ...(data.elegance_show_album ? { show_album: true } : {}),
       ...(data.elegance_grid_retrato.filter(Boolean).length > 0
         ? { grid_retrato: data.elegance_grid_retrato.filter(Boolean) }

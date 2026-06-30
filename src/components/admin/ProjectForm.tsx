@@ -80,6 +80,13 @@ function toFormData(project?: Project): ProjectFormData {
       especial_envelope_right_url: '',
       especial_envelope_left_url: '',
       sobre_final_photo_url: '',
+      elegance_photo_after_hero: '',
+      elegance_photo_after_parents: '',
+      elegance_photo_after_locations: '',
+      elegance_photo_after_gifts: '',
+      elegance_photo_before_itinerary: '',
+      elegance_photo_after_itinerary: '',
+      elegance_photo_after_rsvp: '',
       elegance_show_album: false,
       elegance_grid_retrato: [],
       elegance_grid_horizontal: [],
@@ -136,6 +143,13 @@ function toFormData(project?: Project): ProjectFormData {
     especial_envelope_right_url: (project.extra_config?.envelope_right_url as string) ?? '',
     especial_envelope_left_url: (project.extra_config?.envelope_left_url as string) ?? '',
     sobre_final_photo_url: (project.extra_config?.final_photo_url as string) ?? '',
+    elegance_photo_after_hero:       (project.extra_config?.photo_after_hero       as string) ?? '',
+    elegance_photo_after_parents:    (project.extra_config?.photo_after_parents    as string) ?? '',
+    elegance_photo_after_locations:  (project.extra_config?.photo_after_locations  as string) ?? '',
+    elegance_photo_after_gifts:      (project.extra_config?.photo_after_gifts      as string) ?? '',
+    elegance_photo_before_itinerary: (project.extra_config?.photo_before_itinerary as string) ?? '',
+    elegance_photo_after_itinerary:  (project.extra_config?.photo_after_itinerary  as string) ?? '',
+    elegance_photo_after_rsvp:       (project.extra_config?.photo_after_rsvp       as string) ?? '',
     elegance_show_album:      (project.extra_config?.show_album      as boolean) ?? false,
     elegance_grid_retrato:    (project.extra_config?.grid_retrato    as string[]) ?? [],
     elegance_grid_horizontal: (project.extra_config?.grid_horizontal as string[]) ?? [],
@@ -624,35 +638,54 @@ export default function ProjectForm({ project }: Props) {
             <input type="url" value={form.music_url} onChange={e => set('music_url', e.target.value)} className={input} placeholder="O pega la URL del archivo de audio..." />
           </SectionCard>
 
-          {/* Gallery */}
-          <SectionCard title="Galería de fotos" description={
-            form.template === 'elegance'
-              ? 'Fotos intercaladas entre secciones (máx. 7)'
-              : 'Fotos del carrusel que aparecen en la sección Momentos'
-          }>
-            <div className="space-y-6">
-              {form.photos.map((url, i) => {
-                // Etiqueta según template
-                let photoLabel = `Foto ${i + 1}`
-                let photoDescription = `Posición ${i + 1} en la sección Momentos`
-                if (form.template === 'elegance') {
-                  const eleganceLabels: Record<number, { label: string; description: string }> = {
-                    0: { label: 'Foto 1', description: 'Aparece después del Hero' },
-                    1: { label: 'Foto 2', description: 'Aparece después de Padres y padrinos' },
-                    2: { label: 'Foto 3', description: 'Aparece después de Ubicaciones' },
-                    3: { label: 'Foto 4', description: 'Aparece después de Regalos' },
-                    4: { label: 'Foto 5', description: 'Aparece antes del Itinerario (solo si itinerario activo)' },
-                    5: { label: 'Foto 6', description: 'Aparece después del Itinerario' },
-                    6: { label: 'Foto 7', description: 'Aparece después del RSVP' },
-                  }
-                  const entry = eleganceLabels[i]
-                  if (entry) { photoLabel = entry.label; photoDescription = entry.description }
-                }
-                return (
+          {/* Gallery — elegance usa campos nombrados, otros templates usan array */}
+          {form.template === 'elegance' ? (
+            <SectionCard title="Fotos entre secciones" description="Una foto por posición — si está vacía, la sección no aparece en la invitación">
+              <div className="space-y-6">
+                {([
+                  { key: 'elegance_photo_after_hero',       label: 'Foto después del Hero' },
+                  { key: 'elegance_photo_after_parents',    label: 'Foto después de Padres y padrinos' },
+                  { key: 'elegance_photo_after_locations',  label: 'Foto después de Ubicaciones' },
+                  { key: 'elegance_photo_after_gifts',      label: 'Foto después de Regalos' },
+                  { key: 'elegance_photo_before_itinerary', label: 'Foto antes del Itinerario' },
+                  { key: 'elegance_photo_after_itinerary',  label: 'Foto después del Itinerario' },
+                  { key: 'elegance_photo_after_rsvp',       label: 'Foto después del RSVP' },
+                ] as const).map(({ key, label }) => {
+                  const url = form[key] as string
+                  return (
+                    <div key={key} className="rounded-xl border border-gray-100 bg-gray-50/50 p-4 space-y-3">
+                      <p className="text-sm font-semibold text-gray-800">{label}</p>
+                      {project?.id && (
+                        <MediaUploader
+                          projectId={project.id}
+                          bucket="invitation-media"
+                          accept="image/*"
+                          onUploadComplete={u => set(key, u)}
+                          label={`Subir ${label.toLowerCase()}`}
+                        />
+                      )}
+                      <div className="flex gap-3 items-center">
+                        {url ? (
+                          <img src={url} alt="" className="w-12 h-12 object-cover rounded-xl border border-gray-200 shrink-0" />
+                        ) : (
+                          <div className="w-12 h-12 rounded-xl border-2 border-dashed border-gray-200 shrink-0 flex items-center justify-center text-gray-300 text-xs">sin foto</div>
+                        )}
+                        <input type="url" value={url} onChange={e => set(key, e.target.value)} className={input} placeholder="URL de imagen" />
+                        {url && <button type="button" onClick={() => set(key, '')} className="w-10 h-10 rounded-xl border border-red-200 text-red-400 hover:bg-red-50 flex items-center justify-center transition-colors shrink-0">✕</button>}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </SectionCard>
+          ) : (
+            <SectionCard title="Galería de fotos" description="Fotos del carrusel que aparecen en la sección Momentos">
+              <div className="space-y-6">
+                {form.photos.map((url, i) => (
                   <div key={i} className="rounded-xl border border-gray-100 bg-gray-50/50 p-4 space-y-3">
                     <div>
-                      <p className="text-sm font-semibold text-gray-800">{photoLabel}</p>
-                      <p className="text-xs text-gray-400 mt-0.5">{photoDescription}</p>
+                      <p className="text-sm font-semibold text-gray-800">Foto {i + 1}</p>
+                      <p className="text-xs text-gray-400 mt-0.5">Posición {i + 1} en la sección Momentos</p>
                     </div>
                     {project?.id && (
                       <MediaUploader
@@ -660,7 +693,7 @@ export default function ProjectForm({ project }: Props) {
                         bucket="invitation-media"
                         accept="image/*"
                         onUploadComplete={url => setArrayItem('photos', i, url)}
-                        label={`Subir ${photoLabel.toLowerCase()}`}
+                        label={`Subir foto ${i + 1}`}
                       />
                     )}
                     <div className="flex gap-3 items-center">
@@ -673,14 +706,14 @@ export default function ProjectForm({ project }: Props) {
                       <button type="button" onClick={() => removeArrayItem('photos', i)} className="w-10 h-10 rounded-xl border border-red-200 text-red-400 hover:bg-red-50 flex items-center justify-center transition-colors shrink-0">✕</button>
                     </div>
                   </div>
-                )
-              })}
-              <button type="button" onClick={() => addArrayItem('photos')} className="text-sm text-rose-500 hover:text-rose-600 font-medium flex items-center gap-2 mt-1">
-                <span className="w-5 h-5 rounded-full bg-rose-100 flex items-center justify-center text-xs">+</span>
-                Agregar posición
-              </button>
-            </div>
-          </SectionCard>
+                ))}
+                <button type="button" onClick={() => addArrayItem('photos')} className="text-sm text-rose-500 hover:text-rose-600 font-medium flex items-center gap-2 mt-1">
+                  <span className="w-5 h-5 rounded-full bg-rose-100 flex items-center justify-center text-xs">+</span>
+                  Agregar posición
+                </button>
+              </div>
+            </SectionCard>
+          )}
 
           {/* Toggle álbum — solo elegance */}
           {form.template === 'elegance' && (
