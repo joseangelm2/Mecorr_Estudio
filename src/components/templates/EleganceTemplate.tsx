@@ -78,14 +78,14 @@ export default function EleganceTemplate({ project }: Props) {
       <EleganceDecorations />
       <div className="contenido">
         <EleganceHero project={project} />
-        {project.photos[0] && <GalleryPhoto src={project.photos[0]} />}
+        {(project.extra_config?.photo_after_hero as string) && <GalleryPhoto src={project.extra_config.photo_after_hero as string} />}
         <EleganceParents project={project} />
-        {project.photos[1] && <GalleryPhoto src={project.photos[1]} />}
+        {(project.extra_config?.photo_after_parents as string) && <GalleryPhoto src={project.extra_config.photo_after_parents as string} />}
         <EleganceEventDate eventDate={project.event_date} />
         <EleganceLocations project={project} />
-        {project.photos[2] && <GalleryPhoto src={project.photos[2]} />}
+        {(project.extra_config?.photo_after_locations as string) && <GalleryPhoto src={project.extra_config.photo_after_locations as string} />}
         <EleganceGifts project={project} />
-        {project.photos[3] && <GalleryPhoto src={project.photos[3]} />}
+        {(project.extra_config?.photo_after_gifts as string) && <GalleryPhoto src={project.extra_config.photo_after_gifts as string} />}
         {(project.extra_config?.show_album as boolean) && (
           <ElegancePhotoGrid
             gridRetrato={(project.extra_config?.grid_retrato as string[]) ?? []}
@@ -99,12 +99,12 @@ export default function EleganceTemplate({ project }: Props) {
             audioRef={audioRef}
           />
         )}
-        {project.show_itinerary && project.photos[4] && <GalleryPhoto src={project.photos[4]} />}
+        {project.show_itinerary && (project.extra_config?.photo_before_itinerary as string) && <GalleryPhoto src={project.extra_config.photo_before_itinerary as string} />}
         {project.show_itinerary && <EleganceItinerary project={project} />}
-        {project.photos[5] && <GalleryPhoto src={project.photos[5]} />}
+        {(project.extra_config?.photo_after_itinerary as string) && <GalleryPhoto src={project.extra_config.photo_after_itinerary as string} />}
         <EleganceWishes phone={project.rsvp_phone ?? ''} hashtag={hashtag} dressCodeNotes={project.dress_code?.notes || undefined} />
         <EleganceRSVP project={project} />
-        {project.photos[6] && <GalleryPhoto src={project.photos[6]} />}
+        {(project.extra_config?.photo_after_rsvp as string) && <GalleryPhoto src={project.extra_config.photo_after_rsvp as string} />}
         <EleganceFooter />
       </div>
     </div>
