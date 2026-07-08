@@ -44,3 +44,7 @@ $$;
 CREATE TRIGGER set_updated_at
   BEFORE UPDATE ON projects
   FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+GRANT SELECT ON projects TO anon;
+GRANT ALL ON projects TO authenticated;
+GRANT ALL ON projects TO service_role;

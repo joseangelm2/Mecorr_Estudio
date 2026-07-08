@@ -34,3 +34,6 @@ CREATE POLICY "service_role_all_invitados"
 CREATE TRIGGER set_invitados_updated_at
   BEFORE UPDATE ON invitados
   FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+GRANT ALL ON invitados TO authenticated;
+GRANT ALL ON invitados TO service_role;

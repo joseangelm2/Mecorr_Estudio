@@ -17,3 +17,6 @@ ALTER TABLE grupos_evento ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "service_role_all_grupos"
   ON grupos_evento FOR ALL
   USING (auth.role() = 'service_role');
+
+GRANT ALL ON grupos_evento TO authenticated;
+GRANT ALL ON grupos_evento TO service_role;
