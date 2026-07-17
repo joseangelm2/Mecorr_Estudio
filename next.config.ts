@@ -14,6 +14,15 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  allowedDevOrigins: ['rake-ducktail-compactor.ngrok-free.dev'],
+  async rewrites() {
+    return [
+      {
+        source: '/api/_supabase/:path*',
+        destination: 'http://127.0.0.1:54321/:path*',
+      },
+    ]
+  },
 };
 
 export default nextConfig;
