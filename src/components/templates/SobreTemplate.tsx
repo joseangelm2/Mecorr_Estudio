@@ -80,7 +80,7 @@ export default function SobreTemplate({ project }: Props) {
       <CelebracionSection
         quinceaneraName={quinceanera_name}
         parentNames={parent_names.length > 0 ? parent_names : undefined}
-        padrinos={padrinos.length > 0 ? padrinos : undefined}
+        padrinos={padrinos}
         invitationText={invitation_text ?? undefined}
       />
       <ContadorSection
