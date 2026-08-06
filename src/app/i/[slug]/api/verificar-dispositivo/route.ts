@@ -29,8 +29,16 @@ export async function GET(req: NextRequest, { params }: Params) {
     return NextResponse.json({ allowed: false, reason: 'given_up' })
   }
 
-  // Primera vez: sin device_id en DB
+  // Primera vez: sin device_id en DB → vinculamos el dispositivo aquí mismo
   if (!inv.device_id) {
+    if (deviceId) {
+      const update: Record<string, unknown> = { device_id: deviceId }
+      if (inv.estado === 'alta') {
+        update.estado = 'enviado'
+        update.fecha_envio = new Date().toISOString()
+      }
+      await supabase.from('invitados').update(update).eq('id', inv.id)
+    }
     return NextResponse.json({ allowed: true, firstTime: true, invitadoId: inv.id, titular: inv.titular })
   }
 

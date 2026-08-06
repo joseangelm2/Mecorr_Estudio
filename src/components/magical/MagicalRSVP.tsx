@@ -2,13 +2,18 @@
 
 import { FormEvent, useState } from "react";
 import type { Project } from "@/types/invitation";
+import { useGuestContext } from '@/lib/lista/GuestContext'
+import { TokenRSVPForm } from '@/components/lista/TokenRSVPForm'
 
 interface Props {
   project: Project
 }
 
 export default function MagicalRSVP({ project }: Props) {
+  const guest = useGuestContext()
   const [attending, setAttending] = useState(true);
+
+  if (guest.token) return <TokenRSVPForm festejada={project.quinceanera_name} />
   const phone = `52${project.rsvp_phone ?? ""}`;
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {

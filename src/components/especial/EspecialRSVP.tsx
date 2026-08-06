@@ -2,6 +2,8 @@
 
 import { useRef, useState } from 'react'
 import type { Project } from '@/types/invitation'
+import { useGuestContext } from '@/lib/lista/GuestContext'
+import { TokenRSVPForm } from '@/components/lista/TokenRSVPForm'
 
 interface RsvpPhone {
   phone: string
@@ -14,7 +16,10 @@ interface Props {
 }
 
 export default function EspecialRSVP({ project, decorationSrc = '/images/flores-01.png' }: Props) {
+  const guest = useGuestContext()
   const nameRef    = useRef<HTMLInputElement>(null)
+
+  if (guest.token) return <TokenRSVPForm festejada={project.quinceanera_name} />
   const [attending, setAttending] = useState(true)
   const [submitted, setSubmitted] = useState(false)
   const [guestName, setGuestName] = useState('')

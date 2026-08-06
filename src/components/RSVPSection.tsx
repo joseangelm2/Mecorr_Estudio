@@ -1,11 +1,14 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { useGuestContext } from '@/lib/lista/GuestContext'
+import { TokenRSVPForm } from '@/components/lista/TokenRSVPForm'
 
 interface Props {
   rsvpPhone?: string;
   confirmationPhrase?: string;
   highlightDate?: string;
+  festejada?: string;
 }
 
 function formatHighlightDate(dateStr: string): string {
@@ -21,8 +24,12 @@ export default function RSVPSection({
   rsvpPhone = "5214438569931",
   confirmationPhrase,
   highlightDate,
+  festejada = '',
 }: Props) {
+  const guest = useGuestContext()
   const [attending, setAttending] = useState(true);
+
+  if (guest.token) return <TokenRSVPForm festejada={festejada} />
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();

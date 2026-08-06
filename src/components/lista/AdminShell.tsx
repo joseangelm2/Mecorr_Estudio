@@ -169,7 +169,14 @@ export function AdminShell({ slug, festejada, eventDate, rsvpPhone, mapsUrl }: P
   }
 
   async function handleDesvincular(id: string) {
-    await apiPut(id, { device_id: null })
+    await apiPut(id, { device_id: null, estado: 'alta' })
+  }
+
+  async function handleEnviarWA(invitado: Invitado) {
+    await apiPut(invitado.id, {
+      estado: 'enviado',
+      fecha_envio: new Date().toISOString(),
+    })
   }
 
   async function handleEnviarBoleto(invitado: Invitado) {
@@ -329,6 +336,7 @@ export function AdminShell({ slug, festejada, eventDate, rsvpPhone, mapsUrl }: P
                   onDelete={() => handleDelete(inv.id)}
                   onDesvincular={() => handleDesvincular(inv.id)}
                   onEnviarBoleto={() => handleEnviarBoleto(inv)}
+                  onEnviarWA={() => handleEnviarWA(inv)}
                 />
               ))
             )}

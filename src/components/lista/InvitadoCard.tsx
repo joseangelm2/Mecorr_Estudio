@@ -27,6 +27,7 @@ interface Props {
   onDelete: () => void
   onDesvincular: () => void
   onEnviarBoleto: () => void
+  onEnviarWA: () => void
 }
 
 const AVATAR_STYLES: Record<EstadoInvitado, { bg: string; color: string }> = {
@@ -38,7 +39,7 @@ const AVATAR_STYLES: Record<EstadoInvitado, { bg: string; color: string }> = {
 
 export function InvitadoCard({
   invitado, festejada, slug,
-  isExpanded, onToggle, onEdit, onConfirm, onBaja, onReactivar, onDelete, onDesvincular, onEnviarBoleto,
+  isExpanded, onToggle, onEdit, onConfirm, onBaja, onReactivar, onDelete, onDesvincular, onEnviarBoleto, onEnviarWA,
 }: Props) {
   const avatar = AVATAR_STYLES[invitado.estado]
   const initials = invitado.titular.split(' ').slice(0, 2).map(w => w[0]).join('').toUpperCase()
@@ -46,6 +47,7 @@ export function InvitadoCard({
 
   function handleEnviarWA() {
     const url = buildWhatsAppUrl(invitado, festejada, slug)
+    onEnviarWA()
     window.open(url, '_blank')
   }
 

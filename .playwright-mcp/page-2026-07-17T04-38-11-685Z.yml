@@ -1,0 +1,42 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - button "Abrir invitación" [ref=e4] [cursor=pointer]:
+        - img "Abrir" [ref=e5]
+      - generic [ref=e6]:
+        - generic [ref=e7]: Paleta
+        - generic [ref=e8]:
+          - button "Tema Rosa Gold" [ref=e9] [cursor=pointer]: Rosa Gold
+          - button "Tema Azul" [ref=e10] [cursor=pointer]: Azul
+          - button "Tema Lila" [ref=e11] [cursor=pointer]: Lila
+          - button "Tema Rojo" [ref=e12] [cursor=pointer]: Rojo
+          - button "Tema Negro" [ref=e13] [cursor=pointer]: Negro
+          - button "Tema Mariposas" [ref=e14] [cursor=pointer]: Mariposas
+          - button "Tema Blanco Oro" [ref=e15] [cursor=pointer]: Blanco Oro
+    - paragraph [ref=e18]: Aime Ferreira
+    - generic [ref=e19]:
+      - img "Aime Ferreira" [ref=e20]
+      - generic [ref=e22]:
+        - img [ref=e24]
+        - img [ref=e27]
+    - generic [ref=e32]:
+      - paragraph [ref=e33]: Mis XV Años
+      - heading "Aime Ferreira" [level=1] [ref=e34]
+    - link "Compartir Fotos" [ref=e55] [cursor=pointer]:
+      - /url: ""
+    - generic [ref=e70]:
+      - textbox "Nombre" [ref=e72]
+      - generic [ref=e73]:
+        - radio "Asistiré" [checked] [ref=e74] [cursor=pointer]
+        - generic [ref=e75] [cursor=pointer]: Asistiré
+      - generic [ref=e76]:
+        - radio "No Asistiré" [ref=e77] [cursor=pointer]
+        - generic [ref=e78] [cursor=pointer]: No Asistiré
+      - textbox "Escribe un lindo mensaje..." [ref=e80]
+      - button "Enviar Confirmación" [ref=e82] [cursor=pointer]
+    - generic [ref=e86]:
+      - paragraph [ref=e87]: ¡Te Espero!
+      - heading "Aime Ferreira" [level=1] [ref=e88]
+  - button "Open Next.js Dev Tools" [ref=e94] [cursor=pointer]:
+    - img [ref=e95]
+  - alert [ref=e98]

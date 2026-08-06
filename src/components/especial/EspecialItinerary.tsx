@@ -2,13 +2,13 @@ import type { Project, TimelineItem } from '@/types/invitation'
 
 
 const DEFAULT_ITINERARY: TimelineItem[] = [
-  { title: 'Misa',           time: '05:00 PM', iconSrc: '/images/sobre-derecho.png' },
-  { title: 'Recepción',      time: '07:00 PM', iconSrc: '/images/sobre-derecho.png' },
-  { title: 'Coctelería',     time: '08:00 PM', iconSrc: '/images/sobre-derecho.png' },
-  { title: 'Cena',           time: '09:00 PM', iconSrc: '/images/sobre-derecho.png' },
-  { title: 'Vals',           time: '10:20 PM', iconSrc: '/images/sobre-derecho.png' },
-  { title: 'Baile',          time: '11:30 PM', iconSrc: '/images/sobre-derecho.png' },
-  { title: 'Fin del Evento', time: '03:00 AM', iconSrc: '/images/sobre-derecho.png' },
+  { title: 'Misa',           time: '05:00 PM', iconSrc: '/images/especial/misa.png' },
+  { title: 'Recepción',      time: '07:00 PM', iconSrc: '/images/especial/recepcion.png' },
+  { title: 'Coctelería',     time: '08:00 PM', iconSrc: '/images/especial/coctel.png' },
+  { title: 'Cena',           time: '09:00 PM', iconSrc: '/images/especial/comida.png' },
+  { title: 'Vals',           time: '10:20 PM', iconSrc: '/images/especial/vals.png' },
+  { title: 'Baile',          time: '11:30 PM', iconSrc: '/images/especial/baile.png' },
+  { title: 'Fin del Evento', time: '03:00 AM', iconSrc: '/images/especial/fin.png' },
 ]
 
 interface Props {
@@ -35,9 +35,11 @@ export default function EspecialItinerary({ project, decorationSrc = '/images/fl
                   <h3 className="color-textos">{item.title}</h3>
                   <p className="color-textos">{item.time}</p>
                   <div className="icon-holder">
-                    {(item.icon || item.iconSrc) && (
-                      <img src={item.icon || item.iconSrc} alt={item.title} width="38" />
-                    )}
+                    {(item.icon || item.iconSrc) && (() => {
+                      const src = item.icon || item.iconSrc || ''
+                      const resolved = src.startsWith('http') || src.startsWith('/') ? src : `/images/especial/${src}`
+                      return <img src={resolved} alt={item.title} width="38" />
+                    })()}
                   </div>
                 </li>
               ))}

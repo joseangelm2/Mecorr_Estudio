@@ -21,7 +21,7 @@ export async function POST(req: NextRequest, { params }: Params) {
     .single()
 
   if (!inv) return NextResponse.json({ error: 'Token inválido' }, { status: 404 })
-  if (inv.estado !== 'enviado') {
+  if (!['alta', 'enviado'].includes(inv.estado)) {
     return NextResponse.json({ error: 'El invitado no puede confirmar en este estado' }, { status: 422 })
   }
 

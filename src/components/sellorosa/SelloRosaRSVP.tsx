@@ -1,12 +1,17 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { useGuestContext } from '@/lib/lista/GuestContext'
+import { TokenRSVPForm } from '@/components/lista/TokenRSVPForm'
 
 interface Props {
   phone: string
+  festejada?: string
 }
 
-export default function SelloRosaRSVP({ phone }: Props) {
+export default function SelloRosaRSVP({ phone, festejada = '' }: Props) {
+  const guest = useGuestContext()
+  if (guest.token) return <TokenRSVPForm festejada={festejada} />
   const nombreRef = useRef<HTMLInputElement>(null);
   const mensajeRef = useRef<HTMLTextAreaElement>(null);
   const [asistira, setAsistira] = useState(true);

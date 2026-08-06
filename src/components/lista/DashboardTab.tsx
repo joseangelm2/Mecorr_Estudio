@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import type { Invitado, GrupoEvento } from '@/types/invitation'
 
 interface Props {
@@ -28,6 +29,8 @@ function ProgressBar({ value, max, color }: { value: number; max: number; color:
 }
 
 export function DashboardTab({ invitados, grupos, festejada, eventDate, onAddGrupo, onSelectGrupo }: Props) {
+  const [showManual, setShowManual] = useState(false)
+
   const totalPersonas = invitados
     .filter(i => i.estado !== 'baja')
     .reduce((s, i) => s + i.num_invitados, 0)
@@ -43,14 +46,29 @@ export function DashboardTab({ invitados, grupos, festejada, eventDate, onAddGru
   return (
     <div style={{ padding: '56px 20px 20px' }}>
       {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 4 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
         <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 22, fontWeight: 700, color: '#1C1917', margin: 0 }}>Dashboard</h1>
-        <button
-          onClick={onAddGrupo}
-          style={{ border: '1.5px solid #7C5C4A', color: '#7C5C4A', background: 'none', borderRadius: 20, padding: '7px 14px', fontFamily: 'DM Sans, sans-serif', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}
-        >
-          + Grupo
-        </button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <button
+            onClick={() => setShowManual(true)}
+            title="Manual de usuario"
+            style={{
+              width: 28, height: 28, borderRadius: '50%',
+              background: '#F7F5F2', border: '1.5px solid #E7E5E3',
+              color: '#78716C', cursor: 'pointer',
+              fontFamily: 'DM Sans, sans-serif', fontSize: 13, fontWeight: 700,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}
+          >
+            ?
+          </button>
+          <button
+            onClick={onAddGrupo}
+            style={{ border: '1.5px solid #7C5C4A', color: '#7C5C4A', background: 'none', borderRadius: 20, padding: '7px 14px', fontFamily: 'DM Sans, sans-serif', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}
+          >
+            + Grupo
+          </button>
+        </div>
       </div>
       <p style={{ fontFamily: 'DM Sans, sans-serif', fontSize: 13, color: '#A8A29E', marginTop: 4, marginBottom: 18 }}>
         Fiesta de {festejada} · {date}
@@ -120,6 +138,37 @@ export function DashboardTab({ invitados, grupos, festejada, eventDate, onAddGru
       {grupos.length === 0 && (
         <div style={{ textAlign: 'center', padding: '32px 0', color: '#A8A29E', fontFamily: 'DM Sans, sans-serif', fontSize: 14 }}>
           Sin grupos. Usa &ldquo;+ Grupo&rdquo; para crear el primero.
+        </div>
+      )}
+
+      {/* Overlay del manual */}
+      {showManual && (
+        <div style={{ position: 'fixed', inset: 0, zIndex: 100, background: '#fff', display: 'flex', flexDirection: 'column' }}>
+          <div style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            padding: '12px 16px', borderBottom: '1px solid #E7E5E3',
+            background: '#fff', flexShrink: 0,
+          }}>
+            <span style={{ fontFamily: 'DM Sans, sans-serif', fontSize: 15, fontWeight: 600, color: '#1C1917' }}>
+              Manual de usuario
+            </span>
+            <button
+              onClick={() => setShowManual(false)}
+              style={{
+                width: 32, height: 32, borderRadius: '50%',
+                background: '#F7F5F2', border: 'none',
+                cursor: 'pointer', fontSize: 18, color: '#1C1917',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}
+            >
+              ✕
+            </button>
+          </div>
+          <iframe
+            src="/manual-lista.html"
+            style={{ flex: 1, border: 'none', width: '100%' }}
+            title="Manual de usuario — Lista de Invitados"
+          />
         </div>
       )}
     </div>

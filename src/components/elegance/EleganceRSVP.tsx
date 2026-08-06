@@ -2,6 +2,8 @@
 
 import { useRef, useState } from 'react'
 import type { Project } from '@/types/invitation'
+import { useGuestContext } from '@/lib/lista/GuestContext'
+import { TokenRSVPForm } from '@/components/lista/TokenRSVPForm'
 
 function sendWhatsApp(phone: string, message: string) {
   window.open(
@@ -15,8 +17,11 @@ interface Props {
 }
 
 export default function EleganceRSVP({ project }: Props) {
+  const guest = useGuestContext()
   const nameRef = useRef<HTMLInputElement>(null)
   const [attending, setAttending] = useState(true)
+
+  if (guest.token) return <TokenRSVPForm festejada={project.quinceanera_name} />
 
   const phone = project.rsvp_phone
   if (!phone) return null

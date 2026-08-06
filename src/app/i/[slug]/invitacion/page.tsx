@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
-import { InvitacionGuest } from '@/components/lista/InvitacionGuest'
+import { TemplateRenderer } from '@/components/templates/TemplateRenderer'
+import { GuestProvider } from '@/lib/lista/GuestContext'
 import type { Project } from '@/types/invitation'
 
 interface Props {
@@ -16,7 +17,7 @@ export default async function InvitacionPage({ params, searchParams }: Props) {
 
   const { data, error } = await supabase
     .from('projects')
-    .select('id, slug, quinceanera_name, rsvp_phone, ceremony, reception, event_date, tiene_lista_invitados')
+    .select('*')
     .eq('slug', slug)
     .eq('status', 'published')
     .single()
@@ -26,14 +27,13 @@ export default async function InvitacionPage({ params, searchParams }: Props) {
   const project = data as Project
 
   return (
-    <InvitacionGuest
+    <GuestProvider
+      token={project.tiene_lista_invitados ? (token ?? null) : null}
       slug={slug}
-      token={token ?? null}
-      festejada={project.quinceanera_name}
-      eventDate={project.event_date}
-      ceremony={project.ceremony}
       rsvpPhone={project.rsvp_phone ?? ''}
-      tieneListaInvitados={project.tiene_lista_invitados}
-    />
+      festejada={project.quinceanera_name}
+    >
+      <TemplateRenderer project={project} />
+    </GuestProvider>
   )
 }

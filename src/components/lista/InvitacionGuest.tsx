@@ -24,6 +24,7 @@ export function InvitacionGuest({ slug, token, festejada, eventDate, ceremony, r
   const [rsvpChoice, setRsvpChoice] = useState<'SI' | 'NO' | null>(null)
   const [mensaje, setMensaje] = useState('')
   const [sending, setSending] = useState(false)
+  const [sendError, setSendError] = useState<string | null>(null)
 
   const date = new Date(eventDate).toLocaleDateString('es-MX', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
 
@@ -31,25 +32,20 @@ export function InvitacionGuest({ slug, token, festejada, eventDate, ceremony, r
     if (!tieneListaInvitados || !token) return
 
     async function verificar() {
-      const deviceId = localStorage.getItem(`device_id_${slug}`)
-      const url = `/i/${slug}/api/verificar-dispositivo?token=${token}${deviceId ? `&device_id=${deviceId}` : ''}`
+      // Generar/recuperar device_id antes de llamar al servidor para que lo registre en el mismo request
+      let deviceId = localStorage.getItem(`device_id_${slug}`)
+      if (!deviceId) {
+        deviceId = crypto.randomUUID()
+        localStorage.setItem(`device_id_${slug}`, deviceId)
+      }
+
+      const url = `/i/${slug}/api/verificar-dispositivo?token=${token}&device_id=${deviceId}`
       const res = await fetch(url)
       const json = await res.json()
 
       if (!json.allowed) {
         setScreen('blocked')
         return
-      }
-
-      if (json.firstTime) {
-        const newDeviceId = crypto.randomUUID()
-        localStorage.setItem(`device_id_${slug}`, newDeviceId)
-
-        await fetch(`/i/${slug}/api/invitados/${json.invitadoId}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ device_id: newDeviceId }),
-        })
       }
 
       setTitular(json.titular ?? '')
@@ -62,6 +58,7 @@ export function InvitacionGuest({ slug, token, festejada, eventDate, ceremony, r
   async function handleConfirmar() {
     if (!rsvpChoice || sending) return
     setSending(true)
+    setSendError(null)
 
     const res = await fetch(`/i/${slug}/api/confirmar`, {
       method: 'POST',
@@ -70,10 +67,12 @@ export function InvitacionGuest({ slug, token, festejada, eventDate, ceremony, r
     })
 
     if (res.ok) {
-      // Notificar al admin por WhatsApp
       const waUrl = buildAdminNotifUrl(rsvpPhone, titular || 'Un invitado', rsvpChoice, festejada, mensaje)
       window.open(waUrl, '_blank')
       setScreen('success')
+    } else {
+      const json = await res.json().catch(() => ({}))
+      setSendError(json.error ?? 'Error al enviar. Intenta de nuevo.')
     }
     setSending(false)
   }
@@ -236,6 +235,13 @@ export function InvitacionGuest({ slug, token, festejada, eventDate, ceremony, r
           />
           <span style={{ fontFamily: 'DM Sans, sans-serif', fontSize: 11, color: '#A8A29E' }}>{mensaje.length}/200</span>
         </label>
+
+        {/* Error */}
+        {sendError && (
+          <p style={{ fontFamily: 'DM Sans, sans-serif', fontSize: 13, color: '#DC2626', textAlign: 'center', marginBottom: 12 }}>
+            {sendError}
+          </p>
+        )}
 
         {/* CTA Enviar */}
         <button
