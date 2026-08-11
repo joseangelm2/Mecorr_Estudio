@@ -79,7 +79,7 @@ export default function EspecialTemplate({ project }: Props) {
       <EspecialParents project={project} decorationSrc={decorationSrc} />
       <EspecialEventDate eventDate={project.event_date} />
       <EspecialLocations project={project} decorationSrc={decorationSrc} />
-      {project.show_itinerary && <EspecialItinerary project={project} decorationSrc={decorationSrc} />}
+      {project.show_itinerary && project.itinerary.length > 0 && <EspecialItinerary project={project} decorationSrc={decorationSrc} />}
       {showDressCode && <EspecialDressCode project={project} decorationSrc={decorationSrc} />}
       {project.hashtag && <EspecialHashtag hashtag={project.hashtag} decorationSrc={decorationSrc} />}
       {project.photos.length > 0 && <EspecialPhotos photos={project.photos} decorationSrc={decorationSrc} />}
