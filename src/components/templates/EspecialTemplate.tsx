@@ -34,6 +34,7 @@ export default function EspecialTemplate({ project }: Props) {
   const sealFilter = (project.extra_config?.seal_filter as string) ?? ''
   const sealOffsetX = Number(project.extra_config?.seal_offset_x) || 0
   const sealOffsetY = Number(project.extra_config?.seal_offset_y) || 0
+  const bgOpacity = Number(project.extra_config?.bg_opacity ?? 50) / 100
   const envelopeRightUrl = (project.extra_config?.envelope_right_url as string) || '/images/sobre-derecho.png'
   const envelopeLeftUrl  = (project.extra_config?.envelope_left_url  as string) || '/images/sobre-izquierdo.png'
   const showDressCode = Boolean(project.dress_code) || project.extra_config?.show_dress_palette === true
@@ -46,14 +47,15 @@ export default function EspecialTemplate({ project }: Props) {
     root.style.setProperty('--inv-border',        theme.primary)
     root.style.setProperty('--inv-filter',        theme.filterValue)
     root.style.setProperty('--inv-seal-filter',   sealFilter !== '' ? sealFilter : theme.filterValue)
+    root.style.setProperty('--inv-bg-opacity',    String(bgOpacity))
     if (bgUrl) {
       root.style.setProperty('--inv-bg-url', `url(${bgUrl})`)
     }
     return () => {
-      const vars = ['--inv-primary', '--inv-primary-dark', '--inv-primary-light', '--inv-border', '--inv-filter', '--inv-seal-filter', '--inv-bg-url']
+      const vars = ['--inv-primary', '--inv-primary-dark', '--inv-primary-light', '--inv-border', '--inv-filter', '--inv-seal-filter', '--inv-bg-opacity', '--inv-bg-url']
       vars.forEach(v => root.style.removeProperty(v))
     }
-  }, [theme, bgUrl, sealFilter])
+  }, [theme, bgUrl, sealFilter, bgOpacity])
 
   return (
     <div>
