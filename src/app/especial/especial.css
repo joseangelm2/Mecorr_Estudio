@@ -13,7 +13,6 @@
   --inv-primary-dark: #96585a;
   --inv-primary-light: #a8686a;
   --inv-border: #a8686a;
-  --inv-filter-light: hue-rotate(0deg) saturate(0.65) brightness(1.45);
 }
 
 /* ======================================
@@ -49,8 +48,6 @@ body {
   background-size: cover;
   background-position: center;
   content: "";
-  filter: var(--inv-bg-filter, var(--inv-filter-light, hue-rotate(0deg) brightness(1.4)));
-  transition: filter 0.4s;
 }
 
 @media (min-width: 769px) {
@@ -192,8 +189,8 @@ p, a, li {
   backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
 }
 
-.sobre-izquierdo { position: absolute; left: 0; top: 0; bottom: 0; margin: auto; height: 100%; filter: var(--inv-filter-light, hue-rotate(0deg) brightness(1.4)); transition: filter 0.4s; }
-.sobre-derecho   { position: absolute; right: 0; top: 0; height: 100%; filter: var(--inv-filter-light, hue-rotate(0deg) brightness(1.4)); transition: filter 0.4s; }
+.sobre-izquierdo { position: absolute; left: 0; top: 0; bottom: 0; margin: auto; height: 100%; }
+.sobre-derecho   { position: absolute; right: 0; top: 0; height: 100%; }
 .sello           { position: absolute; width: 120px; top: 45%; left: 40%; }
 .sello-img       { filter: var(--inv-seal-filter, hue-rotate(0deg)); transition: filter 0.4s; }
 

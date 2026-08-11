@@ -8,9 +8,11 @@ interface Props {
   sealUrl?: string
   envelopeRightUrl?: string
   envelopeLeftUrl?: string
+  sealOffsetX?: number
+  sealOffsetY?: number
 }
 
-export default function EspecialEnvelope({ onSealClick, onOpen, sealUrl = '/images/sello.png', envelopeRightUrl = '/images/sobre-derecho.png', envelopeLeftUrl = '/images/sobre-izquierdo.png' }: Props) {
+export default function EspecialEnvelope({ onSealClick, onOpen, sealUrl = '/images/sello.png', envelopeRightUrl = '/images/sobre-derecho.png', envelopeLeftUrl = '/images/sobre-izquierdo.png', sealOffsetX = 0, sealOffsetY = 0 }: Props) {
   const introRef = useRef<HTMLElement>(null)
   const sDerechoRef = useRef<HTMLImageElement>(null)
   const sIzquierdoRef = useRef<HTMLImageElement>(null)
@@ -31,7 +33,7 @@ export default function EspecialEnvelope({ onSealClick, onOpen, sealUrl = '/imag
       <img ref={sIzquierdoRef} id="s-izquierdo" className="sobre-izquierdo" src={envelopeLeftUrl} alt="" />
       <button
         onClick={openEnvelope}
-        style={{ cursor: 'pointer', background: 'none', border: 'none', padding: 0, position: 'absolute', top: '45%', left: '40%', zIndex: 99999 }}
+        style={{ cursor: 'pointer', background: 'none', border: 'none', padding: 0, position: 'absolute', top: '45%', left: '40%', transform: `translate(${sealOffsetX}px, ${sealOffsetY}px)`, zIndex: 99999 }}
         aria-label="Abrir invitación"
       >
         <img className="sello-img" src={sealUrl} alt="Abrir" style={{ width: '120px', animation: 'pulse 4000ms infinite' }} />

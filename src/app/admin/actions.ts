@@ -63,6 +63,8 @@ export interface ProjectFormData {
   especial_rsvp_email: string
   especial_seal_url: string
   especial_seal_filter: string
+  especial_seal_offset_x: string
+  especial_seal_offset_y: string
   especial_dress_code_image_url: string
   especial_envelope_right_url: string
   especial_envelope_left_url: string
@@ -169,6 +171,8 @@ async function formDataToProject(data: ProjectFormData) {
       ...(data.especial_rsvp_email ? { rsvp_email: data.especial_rsvp_email } : {}),
       ...(data.especial_seal_url    ? { seal_url:    data.especial_seal_url    } : {}),
       ...(data.especial_seal_filter !== '' ? { seal_filter: data.especial_seal_filter } : {}),
+      ...(Number(data.especial_seal_offset_x) !== 0 ? { seal_offset_x: Number(data.especial_seal_offset_x) } : {}),
+      ...(Number(data.especial_seal_offset_y) !== 0 ? { seal_offset_y: Number(data.especial_seal_offset_y) } : {}),
       ...(data.especial_dress_code_image_url  ? { dress_code_image_url:  data.especial_dress_code_image_url  } : {}),
       ...(data.especial_envelope_right_url    ? { envelope_right_url:    data.especial_envelope_right_url    } : {}),
       ...(data.especial_envelope_left_url     ? { envelope_left_url:     data.especial_envelope_left_url     } : {}),
