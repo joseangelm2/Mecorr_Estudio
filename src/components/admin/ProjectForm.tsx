@@ -76,6 +76,8 @@ function toFormData(project?: Project): ProjectFormData {
       especial_rsvp_email: '',
       especial_seal_url: '',
       especial_seal_filter: '',
+      especial_seal_offset_x: '0',
+      especial_seal_offset_y: '0',
       especial_dress_code_image_url: '',
       especial_envelope_right_url: '',
       especial_envelope_left_url: '',
@@ -139,6 +141,8 @@ function toFormData(project?: Project): ProjectFormData {
     especial_rsvp_email: (project.extra_config?.rsvp_email as string) ?? '',
     especial_seal_url: (project.extra_config?.seal_url as string) ?? '',
     especial_seal_filter: (project.extra_config?.seal_filter as string) ?? '',
+    especial_seal_offset_x: String((project.extra_config?.seal_offset_x as number) ?? 0),
+    especial_seal_offset_y: String((project.extra_config?.seal_offset_y as number) ?? 0),
     especial_dress_code_image_url: (project.extra_config?.dress_code_image_url as string) ?? '',
     especial_envelope_right_url: (project.extra_config?.envelope_right_url as string) ?? '',
     especial_envelope_left_url: (project.extra_config?.envelope_left_url as string) ?? '',
@@ -1078,6 +1082,36 @@ export default function ProjectForm({ project }: Props) {
                 />
               </div>
               <p className="text-xs text-gray-400 mt-1">Elige el tinte de color del sello. "Del tema" hereda el color de la invitación.</p>
+            </Field>
+            <Field title="Posición del sello">
+              <div className="flex gap-3 items-end">
+                <div className="flex-1">
+                  <label className="text-xs text-gray-400">Eje X</label>
+                  <input
+                    type="number"
+                    value={form.especial_seal_offset_x}
+                    onChange={e => set('especial_seal_offset_x', e.target.value)}
+                    className={input}
+                  />
+                </div>
+                <div className="flex-1">
+                  <label className="text-xs text-gray-400">Eje Y</label>
+                  <input
+                    type="number"
+                    value={form.especial_seal_offset_y}
+                    onChange={e => set('especial_seal_offset_y', e.target.value)}
+                    className={input}
+                  />
+                </div>
+                <button
+                  type="button"
+                  onClick={() => { set('especial_seal_offset_x', '0'); set('especial_seal_offset_y', '0') }}
+                  className="px-3 py-2.5 rounded-lg text-sm border-2 border-gray-100 bg-white text-gray-500 hover:border-gray-200 transition-all whitespace-nowrap"
+                >
+                  Centrar
+                </button>
+              </div>
+              <p className="text-xs text-gray-400 mt-1">Ajusta la posición del sello respecto al centro (0 = posición por defecto).</p>
             </Field>
           </SectionCard>
 

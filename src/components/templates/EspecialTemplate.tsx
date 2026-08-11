@@ -32,6 +32,8 @@ export default function EspecialTemplate({ project }: Props) {
   const decorationSrc = (project.extra_config?.decoration_url as string) || '/images/flores-01.png'
   const sealUrl = (project.extra_config?.seal_url as string) || '/images/sello.png'
   const sealFilter = (project.extra_config?.seal_filter as string) ?? ''
+  const sealOffsetX = Number(project.extra_config?.seal_offset_x) || 0
+  const sealOffsetY = Number(project.extra_config?.seal_offset_y) || 0
   const envelopeRightUrl = (project.extra_config?.envelope_right_url as string) || '/images/sobre-derecho.png'
   const envelopeLeftUrl  = (project.extra_config?.envelope_left_url  as string) || '/images/sobre-izquierdo.png'
   const showDressCode = Boolean(project.dress_code) || project.extra_config?.show_dress_palette === true
@@ -43,14 +45,12 @@ export default function EspecialTemplate({ project }: Props) {
     root.style.setProperty('--inv-primary-light', theme.primaryLight)
     root.style.setProperty('--inv-border',        theme.primary)
     root.style.setProperty('--inv-filter',        theme.filterValue)
-    root.style.setProperty('--inv-filter-light',  theme.filterLight)
     root.style.setProperty('--inv-seal-filter',   sealFilter !== '' ? sealFilter : theme.filterValue)
     if (bgUrl) {
       root.style.setProperty('--inv-bg-url', `url(${bgUrl})`)
-      root.style.setProperty('--inv-bg-filter', 'none')
     }
     return () => {
-      const vars = ['--inv-primary', '--inv-primary-dark', '--inv-primary-light', '--inv-border', '--inv-filter', '--inv-filter-light', '--inv-seal-filter', '--inv-bg-url', '--inv-bg-filter']
+      const vars = ['--inv-primary', '--inv-primary-dark', '--inv-primary-light', '--inv-border', '--inv-filter', '--inv-seal-filter', '--inv-bg-url']
       vars.forEach(v => root.style.removeProperty(v))
     }
   }, [theme, bgUrl, sealFilter])
@@ -68,6 +68,8 @@ export default function EspecialTemplate({ project }: Props) {
           sealUrl={sealUrl}
           envelopeRightUrl={envelopeRightUrl}
           envelopeLeftUrl={envelopeLeftUrl}
+          sealOffsetX={sealOffsetX}
+          sealOffsetY={sealOffsetY}
         />
       )}
       <StickyBanner guestName={project.guest_name ?? project.quinceanera_name} />
