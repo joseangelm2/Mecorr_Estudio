@@ -4,6 +4,7 @@ import '@/app/especial/especial.css'
 import { useState, useRef, useEffect } from 'react'
 import type { Project } from '@/types/invitation'
 import { ESPECIAL_THEMES, DEFAULT_ESPECIAL_THEME } from '@/lib/especial-themes'
+import { hexToFilter, shadeHex } from '@/lib/color'
 import EspecialScrollInit from '@/components/especial/EspecialScrollInit'
 import EspecialEnvelope from '@/components/especial/EspecialEnvelope'
 import EspecialHero from '@/components/especial/EspecialHero'
@@ -27,7 +28,19 @@ interface Props {
 export default function EspecialTemplate({ project }: Props) {
   const [envelopeOpen, setEnvelopeOpen] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
-  const theme = ESPECIAL_THEMES.find(t => t.id === project.color_theme) ?? DEFAULT_ESPECIAL_THEME
+  const customColor = (project.extra_config?.custom_color as string) || ''
+  const theme = project.color_theme === 'custom' && customColor
+    ? {
+        id: 'custom',
+        label: 'Personalizado',
+        swatch: customColor,
+        primary: customColor,
+        primaryDark: shadeHex(customColor, -12),
+        primaryLight: shadeHex(customColor, 15),
+        filterValue: hexToFilter(customColor),
+        filterLight: '',
+      }
+    : ESPECIAL_THEMES.find(t => t.id === project.color_theme) ?? DEFAULT_ESPECIAL_THEME
   const bgUrl = (project.extra_config?.background_url as string) || null
   const decorationSrc = (project.extra_config?.decoration_url as string) || '/images/flores-01.png'
   const sealUrl = (project.extra_config?.seal_url as string) || '/images/sello.png'
