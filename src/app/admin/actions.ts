@@ -52,6 +52,7 @@ export interface ProjectFormData {
   confirmation_highlight_date: string
   especial_background_url: string
   especial_bg_opacity: string
+  especial_custom_color: string
   especial_decoration_url: string
   especial_decoration_style: string
   especial_banner_text: string
@@ -150,6 +151,8 @@ function formDataToProject(data: ProjectFormData) {
       ...(data.especial_background_url  ? { background_url:      data.especial_background_url  } : {}),
       ...(data.especial_bg_opacity !== '' && data.especial_bg_opacity !== '50'
         ? { bg_opacity: Number(data.especial_bg_opacity) } : {}),
+      ...(data.color_theme === 'custom' && data.especial_custom_color
+        ? { custom_color: data.especial_custom_color } : {}),
       ...(data.especial_decoration_url  ? { decoration_url:      data.especial_decoration_url  } : {}),
       ...(data.especial_decoration_style !== 'flores' ? { decoration_style: data.especial_decoration_style } : {}),
       ...(data.especial_banner_text     ? { banner_text:         data.especial_banner_text     } : {}),

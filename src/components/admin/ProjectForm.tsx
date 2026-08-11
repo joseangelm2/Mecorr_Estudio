@@ -66,6 +66,7 @@ function toFormData(project?: Project): ProjectFormData {
       confirmation_phrase: '', confirmation_highlight_date: '',
       especial_background_url: '',
       especial_bg_opacity: '50',
+      especial_custom_color: '',
       especial_decoration_url: '',
       especial_decoration_style: 'flores',
       especial_banner_text: '',
@@ -132,6 +133,7 @@ function toFormData(project?: Project): ProjectFormData {
     padrinos_title: (project.extra_config?.padrinos_title as string) ?? '',
     especial_background_url: (project.extra_config?.background_url as string) ?? '',
     especial_bg_opacity: String((project.extra_config?.bg_opacity as number) ?? 50),
+    especial_custom_color: (project.extra_config?.custom_color as string) ?? '',
     especial_decoration_url: (project.extra_config?.decoration_url as string) ?? '',
     especial_decoration_style: (project.extra_config?.decoration_style as string) ?? 'flores',
     especial_banner_text: (project.extra_config?.banner_text as string) ?? '',
@@ -393,6 +395,27 @@ export default function ProjectForm({ project }: Props) {
                     <span className={`text-xs font-medium ${form.color_theme === theme.id ? 'text-rose-500' : 'text-gray-400'}`}>{theme.label}</span>
                   </button>
                 ))}
+                {form.template === 'especial' && (
+                  <div className="flex flex-col items-center gap-2">
+                    <label
+                      className="w-10 h-10 rounded-full border-4 cursor-pointer transition-all relative overflow-hidden block"
+                      style={{
+                        background: form.especial_custom_color || 'conic-gradient(from 0deg, red, yellow, lime, cyan, blue, magenta, red)',
+                        borderColor: form.color_theme === 'custom' ? '#f43f5e' : 'transparent',
+                        boxShadow: form.color_theme === 'custom' ? '0 0 0 2px #fda4af' : '0 0 0 2px #e5e7eb',
+                      }}
+                      title="Personalizado"
+                    >
+                      <input
+                        type="color"
+                        value={form.especial_custom_color || '#d4819a'}
+                        onChange={e => { set('especial_custom_color', e.target.value); set('color_theme', 'custom') }}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                      />
+                    </label>
+                    <span className={`text-xs font-medium ${form.color_theme === 'custom' ? 'text-rose-500' : 'text-gray-400'}`}>Personalizado</span>
+                  </div>
+                )}
               </div>
             </Field>
           )}
