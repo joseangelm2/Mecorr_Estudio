@@ -65,6 +65,7 @@ function toFormData(project?: Project): ProjectFormData {
       show_itinerary: true,
       confirmation_phrase: '', confirmation_highlight_date: '',
       especial_background_url: '',
+      especial_bg_opacity: '50',
       especial_decoration_url: '',
       especial_decoration_style: 'flores',
       especial_banner_text: '',
@@ -130,6 +131,7 @@ function toFormData(project?: Project): ProjectFormData {
     parents_title:  (project.extra_config?.parents_title  as string) ?? '',
     padrinos_title: (project.extra_config?.padrinos_title as string) ?? '',
     especial_background_url: (project.extra_config?.background_url as string) ?? '',
+    especial_bg_opacity: String((project.extra_config?.bg_opacity as number) ?? 50),
     especial_decoration_url: (project.extra_config?.decoration_url as string) ?? '',
     especial_decoration_style: (project.extra_config?.decoration_style as string) ?? 'flores',
     especial_banner_text: (project.extra_config?.banner_text as string) ?? '',
@@ -943,6 +945,20 @@ export default function ProjectForm({ project }: Props) {
               ) : (
                 <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para subir archivos.</p>
               )}
+            </Field>
+            <Field title="Opacidad del fondo">
+              <div className="flex items-center gap-3">
+                <input
+                  type="range"
+                  min={0}
+                  max={100}
+                  value={form.especial_bg_opacity}
+                  onChange={e => set('especial_bg_opacity', e.target.value)}
+                  className="flex-1"
+                />
+                <span className="text-sm text-gray-500 w-12 text-right">{form.especial_bg_opacity}%</span>
+              </div>
+              <p className="text-xs text-gray-400 mt-1">Solo afecta el fondo — las fotos y textos de la invitación siempre se ven al 100%.</p>
             </Field>
             <Field title="Decoraciones">
               <div className="flex gap-2 flex-wrap">
