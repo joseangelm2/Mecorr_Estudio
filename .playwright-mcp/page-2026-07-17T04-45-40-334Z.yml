@@ -1,8 +1,0 @@
-- generic [active] [ref=e1]:
-  - generic [ref=e3]:
-    - button "Abrir invitación" [ref=e5] [cursor=pointer]:
-      - img "Abrir" [ref=e6]
-    - paragraph [ref=e9]: Sofía
-    - paragraph [ref=e28]: ¡Te Esperamos!
-  - button "Open Next.js Dev Tools" [ref=e34] [cursor=pointer]:
-    - img [ref=e35]
