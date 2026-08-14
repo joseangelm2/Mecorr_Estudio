@@ -16,19 +16,6 @@ interface Invitation {
 
 const invitations: Invitation[] = [
   {
-    title: 'Esmeralda',
-    description: [
-      'Elegancia en cada detalle — un círculo animado enmarca la foto principal, mientras decoraciones florales dan vida a cada sección. Una invitación que cautiva desde el primer instante.',
-    ],
-    image: '/promo/esmeralda.webp',
-    imageAlt: 'Invitación digital Esmeralda',
-    accent: 'accent-green',
-    reversed: true,
-    demoHref: '/esmeralda',
-    demoLabel: 'Ver demo',
-    internalRoute: '/esmeralda',
-  },
-  {
     title: 'Sobre Animado',
     description: [
       'Una experiencia que comienza con un sobre que se abre para revelar la invitación. Incluye itinerario animado, cuenta regresiva y confirmación por WhatsApp. Disponible en 6 paletas de color.',
@@ -40,6 +27,32 @@ const invitations: Invitation[] = [
     demoHref: '/sobre',
     demoLabel: 'Ver demo con selector de color',
     internalRoute: '/sobre',
+  },
+  {
+    title: 'Elegance',
+    description: [
+      'Una invitación que transforma el sueño de una quinceañera en realidad digital. Paleta blanco marfil, detalles dorados y una atmósfera de cuento que conquistará a cada invitado.',
+    ],
+    image: '/promo/elegance.jpg',
+    imageAlt: 'Invitación Elegance',
+    accent: 'accent-blue1',
+    reversed: true,
+    demoHref: '/elegance',
+    demoLabel: 'Ver demo',
+    internalRoute: '/elegance',
+  },
+  {
+    title: 'Esmeralda',
+    description: [
+      'Elegancia en cada detalle — un círculo animado enmarca la foto principal, mientras decoraciones florales dan vida a cada sección. Una invitación que cautiva desde el primer instante.',
+    ],
+    image: '/promo/esmeralda.webp',
+    imageAlt: 'Invitación digital Esmeralda',
+    accent: 'accent-green',
+    reversed: true,
+    demoHref: '/esmeralda',
+    demoLabel: 'Ver demo',
+    internalRoute: '/esmeralda',
   },
   {
     title: 'Love',
@@ -81,19 +94,6 @@ const invitations: Invitation[] = [
     internalRoute: '/pink',
   },
   {
-    title: 'Elegance',
-    description: [
-      'Una invitación que transforma el sueño de una quinceañera en realidad digital. Paleta blanco marfil, detalles dorados y una atmósfera de cuento que conquistará a cada invitado.',
-    ],
-    image: '/promo/elegance.png',
-    imageAlt: 'Invitación Elegance',
-    accent: 'accent-blue1',
-    reversed: true,
-    demoHref: '/elegance',
-    demoLabel: 'Ver demo',
-    internalRoute: '/elegance',
-  },
-  {
     title: 'Rosa Gold',
     description: [
       'Rosa y dorado en perfecta armonía. Tipografía de alta gama que resalta el nombre de la quinceañera, galería de fotos, itinerario y confirmación de asistencia. Elegancia en cada scroll.',
@@ -105,19 +105,6 @@ const invitations: Invitation[] = [
     demoHref: '/rosagold',
     demoLabel: 'Ver demo',
     internalRoute: '/rosagold',
-  },
-  {
-    title: 'Hogwarts',
-    description: [
-      'El mundo mágico de Harry Potter llega a tu celebración. Tipografía inspirada en los libros, gráficos del universo mágico y una atmósfera que hará sentir a todos parte de la magia.',
-    ],
-    image: '/promo/harrys.png',
-    imageAlt: 'Invitación Hogwarts',
-    accent: 'accent-harry',
-    reversed: true,
-    demoHref: '/hogwarts',
-    demoLabel: 'Ver demo',
-    internalRoute: '/hogwarts',
   },
   {
     title: 'Sello Rosa',
@@ -137,7 +124,7 @@ const invitations: Invitation[] = [
     description: [
       'Un cosmos de fantasía con estrellas animadas, paleta de morado profundo y oro mágico. Efectos de brillo en cada sección, sobre de apertura mágico, galería con lightbox y cuenta regresiva estelar.',
     ],
-    image: '/promo/magical.webp',
+    image: '/promo/Magical.jpg',
     imageAlt: 'Invitación Magical',
     accent: 'accent-magical',
     reversed: true,

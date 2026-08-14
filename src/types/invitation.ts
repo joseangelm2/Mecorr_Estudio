@@ -38,7 +38,6 @@ export type TemplateId =
   | 'love'
   | 'zafiro'
   | 'elegance'
-  | 'hogwarts'
   | 'sellorosa'
   | 'rosagold'
   | 'magical'
@@ -56,6 +55,7 @@ export interface Project {
   event_date: string
   rsvp_phone: string | null
   hashtag: string | null
+  instagram_mode: 'instagram' | 'album'
   music_url: string | null
   hero_photo_url: string | null
   parent_names: string[]

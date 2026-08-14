@@ -12,6 +12,7 @@ export const DEMO_PROJECT: Project = {
   event_date: '2026-11-22T17:00:00',
   rsvp_phone: '4438569931',
   hashtag: '#XVAlison',
+  instagram_mode: 'instagram',
   music_url: '/images/esmeralda/musica.mp3',
   hero_photo_url: '/images/esmeralda/foto.jpg',
   parent_names: ['Elías Moises Galván Juárez', 'Esperanza Méndez Hernández'],

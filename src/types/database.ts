@@ -152,6 +152,7 @@ export type Database = {
           hashtag: string | null
           hero_photo_url: string | null
           id: string
+          instagram_mode: string
           itinerary: Json | null
           music_url: string | null
           padrinos: Json | null
@@ -181,6 +182,7 @@ export type Database = {
           hashtag?: string | null
           hero_photo_url?: string | null
           id?: string
+          instagram_mode?: string
           itinerary?: Json | null
           music_url?: string | null
           padrinos?: Json | null
@@ -210,6 +212,7 @@ export type Database = {
           hashtag?: string | null
           hero_photo_url?: string | null
           id?: string
+          instagram_mode?: string
           itinerary?: Json | null
           music_url?: string | null
           padrinos?: Json | null

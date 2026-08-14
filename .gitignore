@@ -50,3 +50,6 @@ temp/
 
 # Git worktrees
 .worktrees/
+
+# Playwright MCP output (screenshots, snapshots, console logs)
+.playwright-mcp/

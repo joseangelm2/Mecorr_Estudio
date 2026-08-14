@@ -8,6 +8,7 @@ import type { Project, TemplateId } from '@/types/invitation'
 import { THEMES } from '@/lib/themes'
 import { ELEGANCE_THEMES } from '@/lib/elegance-themes'
 import { ESPECIAL_THEMES } from '@/lib/especial-themes'
+import AlbumMediaAdminPanel from '@/components/admin/AlbumMediaAdminPanel'
 
 // Lazy: arrastra el cliente de Supabase — no necesario en el bundle inicial
 const MediaUploader = dynamic(() => import('@/components/admin/MediaUploader'), { ssr: false })
@@ -19,7 +20,6 @@ const TEMPLATES: { value: TemplateId; label: string; emoji: string }[] = [
   { value: 'love', label: 'Love', emoji: '❤️' },
   { value: 'zafiro', label: 'Zafiro', emoji: '💎' },
   { value: 'elegance', label: 'Elegance', emoji: '👑' },
-  { value: 'hogwarts', label: 'Hogwarts', emoji: '🪄' },
   { value: 'sellorosa', label: 'Sello Rosa', emoji: '🌹' },
   { value: 'rosagold', label: 'Rosa Gold', emoji: '✨' },
   { value: 'magical', label: 'Magical', emoji: '🦋' },
@@ -36,6 +36,7 @@ const TABS = [
   { label: 'Estilo', icon: '🎨' },
   { label: 'Media', icon: '🖼' },
   { label: 'Especial', icon: '⭐' },
+  { label: 'Álbum digital', icon: '📷' },
 ]
 
 interface DressPaletteEntry {
@@ -48,7 +49,7 @@ function toFormData(project?: Project): ProjectFormData {
     return {
       slug: '', template: 'sobre', status: 'draft',
       quinceanera_name: '', guest_name: '', event_date: '',
-      rsvp_phone: '', hashtag: '', music_url: '', hero_photo_url: '',
+      rsvp_phone: '', hashtag: '', instagram_mode: 'instagram', music_url: '', hero_photo_url: '',
       parent_names: ['', ''], padrinos: ['', ''],
       ceremony_venue: '', ceremony_address: '', ceremony_time: '', ceremony_map_link: '', ceremony_photo_url: '',
       reception_venue: '', reception_address: '', reception_time: '', reception_map_link: '', reception_photo_url: '',
@@ -107,6 +108,7 @@ function toFormData(project?: Project): ProjectFormData {
     event_date: project.event_date ? project.event_date.slice(0, 16) : '',
     rsvp_phone: project.rsvp_phone ?? '',
     hashtag: project.hashtag ?? '',
+    instagram_mode: project.instagram_mode ?? 'instagram',
     music_url: project.music_url ?? '',
     hero_photo_url: project.hero_photo_url ?? '',
     parent_names: project.parent_names.length ? project.parent_names : ['', ''],
@@ -439,8 +441,36 @@ export default function ProjectForm({ project }: Props) {
             <Field title="WhatsApp RSVP (sin +)">
               <input type="text" value={form.rsvp_phone} onChange={e => set('rsvp_phone', e.target.value)} className={input} placeholder="5218001234567" />
             </Field>
-            <Field title="Hashtag">
-              <input type="text" value={form.hashtag} onChange={e => set('hashtag', e.target.value)} className={input} placeholder="#XVValeria" />
+            <Field title="Sección de Instagram">
+              <div className="flex gap-2 mb-2">
+                <button
+                  type="button"
+                  onClick={() => set('instagram_mode', 'instagram')}
+                  className={`flex-1 py-2 rounded-lg text-sm font-medium transition-all border-2 ${
+                    form.instagram_mode === 'instagram'
+                      ? 'border-rose-400 bg-rose-50 text-rose-600'
+                      : 'border-gray-100 bg-white text-gray-500 hover:border-gray-200'
+                  }`}
+                >
+                  Instagram
+                </button>
+                <button
+                  type="button"
+                  onClick={() => set('instagram_mode', 'album')}
+                  className={`flex-1 py-2 rounded-lg text-sm font-medium transition-all border-2 ${
+                    form.instagram_mode === 'album'
+                      ? 'border-rose-400 bg-rose-50 text-rose-600'
+                      : 'border-gray-100 bg-white text-gray-500 hover:border-gray-200'
+                  }`}
+                >
+                  Álbum digital
+                </button>
+              </div>
+              {form.instagram_mode === 'instagram' ? (
+                <input type="text" value={form.hashtag} onChange={e => set('hashtag', e.target.value)} className={input} placeholder="#XVValeria" />
+              ) : (
+                <p className="text-xs text-gray-400">Los invitados verán un QR para subir fotos y videos. Revisa la pestaña &quot;Álbum digital&quot; para verlos.</p>
+              )}
             </Field>
           </div>
           <Field title="Frase de confirmación">
@@ -1409,6 +1439,19 @@ export default function ProjectForm({ project }: Props) {
                 placeholder="confirmaciones@ejemplo.com"
               />
             </Field>
+          </SectionCard>
+        </div>
+      )}
+
+      {/* Tab 9: Álbum digital */}
+      {activeTab === 9 && (
+        <div className="space-y-6">
+          <SectionCard title="Álbum digital" description="Los invitados escanean un QR y suben fotos/videos directo desde su celular (requiere activar el modo &quot;Álbum digital&quot; en la pestaña Contacto).">
+            {project?.id ? (
+              <AlbumMediaAdminPanel projectId={project.id} slug={form.slug} />
+            ) : (
+              <p className="text-sm text-amber-600 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">Guarda el proyecto primero para activar el álbum digital.</p>
+            )}
           </SectionCard>
         </div>
       )}

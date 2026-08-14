@@ -225,7 +225,7 @@ header .logo img {
 }
 
 @media (max-width: 1024px) {
-  .section-body {
+  .promo-section .section-body {
     flex-direction: column-reverse;
   }
 }

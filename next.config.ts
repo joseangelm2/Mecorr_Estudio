@@ -5,6 +5,11 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
   },
+  experimental: {
+    // El proxy /api/_supabase/* pasa por este límite antes de llegar a Supabase Storage;
+    // sin esto, videos >10MB se cortan a medio subir ("socket hang up").
+    proxyClientMaxBodySize: '100mb',
+  },
   images: {
     remotePatterns: [
       {

@@ -29,7 +29,8 @@ export default function ZafiroPage() {
   const [open, setOpen] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  const photos = DEMO_PROJECT.photos.length ? DEMO_PROJECT.photos : DEFAULT_PHOTOS;
+  const photos = DEFAULT_PHOTOS;
+  const project = { ...DEMO_PROJECT, hero_photo_url: "/images/zafiro/foto.jpg" };
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
@@ -54,7 +55,7 @@ export default function ZafiroPage() {
         <img className="bottom-img" src="/images/zafiro/453.png" alt="" />
       </div>
       <div className="contenido">
-        <ZafiroHero project={DEMO_PROJECT} />
+        <ZafiroHero project={project} />
         {photos[0] && (
           <div className="foto-con-degradado">
             <img className="foto-full show-p-y" src={photos[0]} alt="" />
