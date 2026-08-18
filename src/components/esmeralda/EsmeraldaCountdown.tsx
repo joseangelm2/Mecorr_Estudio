@@ -2,14 +2,17 @@
 
 import { useEffect, useState } from "react";
 
-const TARGET = new Date("November 22, 2026 17:00:00").getTime();
+interface Props {
+  eventDate: string;
+}
 
-export default function EsmeraldaCountdown() {
+export default function EsmeraldaCountdown({ eventDate }: Props) {
   const [t, setT] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
+    const target = new Date(eventDate).getTime();
     function tick() {
-      const distance = TARGET - Date.now();
+      const distance = target - Date.now();
       if (distance < 0) return;
       setT({
         days: Math.floor(distance / 86400000),
@@ -21,7 +24,7 @@ export default function EsmeraldaCountdown() {
     tick();
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
-  }, []);
+  }, [eventDate]);
 
   return (
     <div className="time no-print">

@@ -2,21 +2,22 @@
 
 import { useState } from "react";
 
-const gridImages = [
-  "/images/esmeralda/11.jpg",
-  "/images/esmeralda/12.jpg",
-  "/images/esmeralda/21.jpg",
-  "/images/esmeralda/22.jpg",
-  "/images/esmeralda/31.jpg",
-  "/images/esmeralda/32.jpg",
-  "/images/esmeralda/41.jpg",
-  "/images/esmeralda/42.jpg",
-  "/images/esmeralda/43.jpg",
-];
+interface Props {
+  photos: string[];
+}
 
-export default function EsmeraldaPhotoGrid() {
+export default function EsmeraldaPhotoGrid({ photos }: Props) {
   const [modalOpen, setModalOpen] = useState(false);
   const [currentIdx, setCurrentIdx] = useState(0);
+
+  if (!photos.length) return null;
+
+  // Primeras 6 fotos en 3 columnas de 2 apiladas; el resto, a ancho completo.
+  const columns: string[][] = [];
+  for (let i = 0; i < Math.min(photos.length, 6); i += 2) {
+    columns.push(photos.slice(i, i + 2));
+  }
+  const fullWidthPhotos = photos.slice(6);
 
   function openModal(idx: number) {
     setCurrentIdx(idx);
@@ -28,40 +29,41 @@ export default function EsmeraldaPhotoGrid() {
   }
 
   function prev() {
-    setCurrentIdx((i) => (i - 1 + gridImages.length) % gridImages.length);
+    setCurrentIdx((i) => (i - 1 + photos.length) % photos.length);
   }
 
   function next() {
-    setCurrentIdx((i) => (i + 1) % gridImages.length);
+    setCurrentIdx((i) => (i + 1) % photos.length);
   }
 
   return (
     <>
       <section id="grid" className="no-print">
         <div className="container-grid">
-          {/* 3-column pairs */}
-          <div className="column">
-            <img className="object-grid show-p-y" src="/images/esmeralda/11.jpg" alt="" onClick={() => openModal(0)} />
-            <img className="object-grid show-p-y" src="/images/esmeralda/12.jpg" alt="" onClick={() => openModal(1)} />
-          </div>
-          <div className="column">
-            <img className="object-grid show-p-y" src="/images/esmeralda/21.jpg" alt="" onClick={() => openModal(2)} />
-            <img className="object-grid show-p-y" src="/images/esmeralda/22.jpg" alt="" onClick={() => openModal(3)} />
-          </div>
-          <div className="column">
-            <img className="object-grid show-p-y" src="/images/esmeralda/31.jpg" alt="" onClick={() => openModal(4)} />
-            <img className="object-grid show-p-y" src="/images/esmeralda/32.jpg" alt="" onClick={() => openModal(5)} />
-          </div>
-          {/* Full-width singles */}
-          <div className="column full-width show-p-y">
-            <img className="object-grid" src="/images/esmeralda/41.jpg" alt="" onClick={() => openModal(6)} />
-          </div>
-          <div className="column full-width show-p-y">
-            <img className="object-grid" src="/images/esmeralda/42.jpg" alt="" onClick={() => openModal(7)} />
-          </div>
-          <div className="column full-width show-p-y">
-            <img className="object-grid" src="/images/esmeralda/43.jpg" alt="" onClick={() => openModal(8)} />
-          </div>
+          {columns.map((col, ci) => (
+            <div key={ci} className="column">
+              {col.map((src, i) => {
+                const idx = ci * 2 + i;
+                return (
+                  <img
+                    key={idx}
+                    className="object-grid show-p-y"
+                    src={src}
+                    alt=""
+                    onClick={() => openModal(idx)}
+                  />
+                );
+              })}
+            </div>
+          ))}
+          {fullWidthPhotos.map((src, i) => {
+            const idx = 6 + i;
+            return (
+              <div key={idx} className="column full-width show-p-y">
+                <img className="object-grid" src={src} alt="" onClick={() => openModal(idx)} />
+              </div>
+            );
+          })}
         </div>
       </section>
 
@@ -77,7 +79,7 @@ export default function EsmeraldaPhotoGrid() {
           </span>
           <img
             className="modal-img"
-            src={gridImages[currentIdx]}
+            src={photos[currentIdx]}
             alt=""
             onClick={(e) => e.stopPropagation()}
           />

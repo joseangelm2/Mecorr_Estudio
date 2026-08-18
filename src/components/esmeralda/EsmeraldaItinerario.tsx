@@ -1,14 +1,25 @@
-const events = [
-  { name: "Misa", time: "05:00 PM", icon: "/images/esmeralda/misa.png", side: "izquierda" },
-  { name: "Recepción", time: "07:00 PM", icon: "/images/esmeralda/recepcion.png", side: "derecha" },
-  { name: "Coctelería", time: "08:00 PM", icon: "/images/esmeralda/coctel.png", side: "izquierda" },
-  { name: "Cena", time: "09:00 PM", icon: "/images/esmeralda/comida.png", side: "derecha" },
-  { name: "Vals", time: "10:20 PM", icon: "/images/esmeralda/vals.png", side: "izquierda" },
-  { name: "Baile", time: "11:30 PM", icon: "/images/esmeralda/baile.png", side: "derecha" },
-  { name: "Fin del Evento", time: "03:00 AM", icon: "/images/esmeralda/fin.png", side: "izquierda" },
-] as const;
+import type { Project } from "@/types/invitation";
 
-export default function EsmeraldaItinerario() {
+interface Props {
+  project: Project;
+}
+
+function resolveIcon(icon: string | undefined): string {
+  if (!icon) return "/images/esmeralda/iglesia.png";
+  if (icon.startsWith("http") || icon.startsWith("/")) return icon;
+  return `/images/esmeralda/${icon}`;
+}
+
+export default function EsmeraldaItinerario({ project }: Props) {
+  if (!project.show_itinerary || !project.itinerary.length) return null;
+
+  const events = project.itinerary.map((ev, i) => ({
+    name: ev.title,
+    time: ev.time,
+    icon: resolveIcon(ev.icon ?? ev.iconSrc),
+    side: i % 2 === 0 ? "izquierda" : "derecha",
+  }));
+
   return (
     <div className="itinerario show-p-y no-print" style={{ marginTop: "-3%" }}>
       <h2>Programa del Evento</h2>

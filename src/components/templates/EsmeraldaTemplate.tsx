@@ -20,7 +20,7 @@ interface Props {
   project: Project
 }
 
-export default function EsmeraldaTemplate({ project: _project }: Props) {
+export default function EsmeraldaTemplate({ project }: Props) {
   const [envelopeOpen, setEnvelopeOpen] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
 
@@ -33,19 +33,19 @@ export default function EsmeraldaTemplate({ project: _project }: Props) {
     <div style={{ position: 'relative' }}>
       <EsmeraldaScrollInit />
       <audio ref={audioRef} id="music" loop>
-        <source src="/images/esmeralda/musica.mp3" type="audio/mpeg" />
+        <source src={project.music_url ?? '/images/esmeralda/musica.mp3'} type="audio/mpeg" />
       </audio>
       <EsmeraldaDecorations />
       {!envelopeOpen && <EnvelopeSobre onOpen={handleOpen} />}
       <div className="background">
-        <EsmeraldaHero />
-        <EsmeraldaCountdown />
-        <EsmeraldaParents />
-        <EsmeraldaLocations />
-        <EsmeraldaPhotoGrid />
-        <EsmeraldaItinerario />
-        <EsmeraldaGifts />
-        <EsmeraldaRSVP />
+        <EsmeraldaHero project={project} />
+        <EsmeraldaCountdown eventDate={project.event_date} />
+        <EsmeraldaParents project={project} />
+        <EsmeraldaLocations project={project} />
+        <EsmeraldaPhotoGrid photos={project.photos} />
+        <EsmeraldaItinerario project={project} />
+        <EsmeraldaGifts project={project} />
+        <EsmeraldaRSVP project={project} />
         <EsmeraldaFooter />
       </div>
     </div>

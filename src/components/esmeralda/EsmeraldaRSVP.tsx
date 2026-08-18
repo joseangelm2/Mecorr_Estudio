@@ -1,18 +1,29 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import type { Project } from "@/types/invitation";
 import { useGuestContext } from '@/lib/lista/GuestContext'
 import { TokenRSVPForm } from '@/components/lista/TokenRSVPForm'
 
-const PHONE = "5214438569931";
+interface Props {
+  project: Project;
+}
 
-interface Props { festejada?: string }
-
-export default function EsmeraldaRSVP({ festejada = '' }: Props) {
+export default function EsmeraldaRSVP({ project }: Props) {
   const guest = useGuestContext()
   const [attending, setAttending] = useState(true);
 
-  if (guest.token) return <TokenRSVPForm festejada={festejada} />
+  if (guest.token) return <TokenRSVPForm festejada={project.quinceanera_name} />
+
+  const phone = project.rsvp_phone ?? "";
+  const sectionTitle = project.confirmation_phrase || "Favor de confirmar asistencia";
+  const highlightDate = project.confirmation_highlight_date
+    ? new Date(project.confirmation_highlight_date).toLocaleDateString("es-MX", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      })
+    : null;
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -31,26 +42,25 @@ export default function EsmeraldaRSVP({ festejada = '' }: Props) {
       : `Hola, soy ${familia} y lamentablemente, no podré asistir.`;
 
     window.open(
-      `https://api.whatsapp.com/send?phone=${PHONE}&text=${encodeURIComponent(msg)}`,
+      `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(msg)}`,
       "_blank"
     );
   }
 
   return (
     <>
-      <section className="informacion-importante no-print" style={{ marginTop: "1%", marginBottom: "2%" }}>
-        <h2>Información Importante</h2>
-        <p className="texto">❖ No se permiten niños.</p>
-        <p className="texto">
-          ❖ El color oro rosa queda reservado exclusivamente para la Quinceañera.
-        </p>
-      </section>
+      {project.dress_code?.notes && (
+        <section className="informacion-importante no-print" style={{ marginTop: "1%", marginBottom: "2%" }}>
+          <h2>Información Importante</h2>
+          <p className="texto">❖ {project.dress_code.notes}</p>
+        </section>
+      )}
 
       <section className="confirmacion-asistencia" style={{ marginTop: "1%", marginBottom: "3%" }}>
-        <h2>
-          Favor de confirmar asistencia <br />
-          antes del 14 de Julio
-        </h2>
+        <h2>{sectionTitle}</h2>
+        {highlightDate && (
+          <p className="texto" style={{ marginTop: "-1%" }}>Antes del {highlightDate}</p>
+        )}
         <form method="POST" onSubmit={handleSubmit}>
           <label htmlFor="familia" className="texto">
             Nombre y Apellido:
