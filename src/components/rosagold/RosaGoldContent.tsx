@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import type { Project } from "@/types/invitation";
+import { getRsvpContacts, getRsvpEmail } from "@/lib/rsvp";
 import RosaGoldCarousel from "./RosaGoldCarousel";
 import RosaGoldRSVP from "./RosaGoldRSVP";
 
@@ -101,7 +102,7 @@ export default function RosaGoldContent({ project }: Props) {
           <div className="anim-up anim-pause-3">
             {project.parent_names.filter(Boolean).length > 0 && (
               <>
-                <div className="rg-announcement" style={{ fontSize: "clamp(1.5rem, 4vw, 2rem)" }}>Mis Padres:</div>
+                <div className="rg-announcement" style={{ fontSize: "clamp(1.5rem, 4vw, 2rem)" }}>{(project.extra_config?.parents_title as string) || "Mis Padres"}:</div>
                 <div className="rg-text">
                   <strong>{project.parent_names.filter(Boolean).join("\n").split("\n").map((n, i) => <span key={i}>{n}<br /></span>)}</strong>
                 </div>
@@ -110,7 +111,7 @@ export default function RosaGoldContent({ project }: Props) {
             )}
             {project.padrinos.filter(Boolean).length > 0 && (
               <>
-                <div className="rg-announcement" style={{ fontSize: "clamp(1.5rem, 4vw, 2rem)" }}>Mis Padrinos:</div>
+                <div className="rg-announcement" style={{ fontSize: "clamp(1.5rem, 4vw, 2rem)" }}>{(project.extra_config?.padrinos_title as string) || "Mis Padrinos"}:</div>
                 <div className="rg-text">
                   <strong>{project.padrinos.filter(Boolean).join("\n").split("\n").map((n, i) => <span key={i}>{n}<br /></span>)}</strong>
                 </div>
@@ -320,7 +321,7 @@ export default function RosaGoldContent({ project }: Props) {
             <br />
           </p>
           <div className="anim-up anim-pause-15">
-            <RosaGoldRSVP phone={phone} />
+            <RosaGoldRSVP contacts={getRsvpContacts(project)} email={getRsvpEmail(project)} />
           </div>
           <div className="esp-med" />
           {project.dress_code && (

@@ -3,6 +3,8 @@ interface Props {
   parentNames?: string[];
   padrinos?: string[];
   invitationText?: string;
+  parentsTitle?: string;
+  padrinosTitle?: string;
 }
 
 export default function CelebracionSection({
@@ -10,6 +12,8 @@ export default function CelebracionSection({
   parentNames = ["Felipe Ferreira", "Paola Mendoza"],
   padrinos = ["Sergio García", "Graciela Santos"],
   invitationText,
+  parentsTitle = "Mis Padres",
+  padrinosTitle = "Mis Padrinos",
 }: Props) {
   return (
     <section
@@ -42,7 +46,7 @@ export default function CelebracionSection({
               <img src="/images/flores-01.png" width="160" alt="" />
             </div>
             <h1 className="titulo mb-20 color-titulos text-center wow fadeInUp">
-              Mis Padres
+              {parentsTitle}
             </h1>
             <p className="mb-30 color-textos text-center wow fadeInUp">
               {parentNames.map((name, i) => (
@@ -58,7 +62,7 @@ export default function CelebracionSection({
                   <img src="/images/flores-01.png" width="160" alt="" />
                 </div>
                 <h1 className="titulo mb-20 color-titulos text-center wow fadeInUp">
-                  Mis Padrinos
+                  {padrinosTitle}
                 </h1>
                 <p className="mb-30 color-textos text-center wow fadeInUp">
                   {padrinos.map((name, i) => (

@@ -7,6 +7,8 @@ interface Props {
 export default function EsmeraldaParents({ project }: Props) {
   const parents = project.parent_names.filter(Boolean);
   const padrinos = project.padrinos.filter(Boolean);
+  const parentsTitle = (project.extra_config?.parents_title as string) || "Mis Padres";
+  const padrinosTitle = (project.extra_config?.padrinos_title as string) || "Padrinos";
 
   if (!parents.length && !padrinos.length) return null;
 
@@ -14,7 +16,7 @@ export default function EsmeraldaParents({ project }: Props) {
     <>
       {parents.length > 0 && (
         <section className="parents-container no-print">
-          <h2>Mis Padres</h2>
+          <h2>{parentsTitle}</h2>
           <img className="vector-long" src="/images/esmeralda/9_separador.png" alt="" />
           <div className="parents texto">
             <p>
@@ -31,7 +33,7 @@ export default function EsmeraldaParents({ project }: Props) {
 
       {padrinos.length > 0 && (
         <section className="parents-container no-print" style={{ marginTop: "5%" }}>
-          <h2>Padrinos</h2>
+          <h2>{padrinosTitle}</h2>
           <img className="vector-long" src="/images/esmeralda/9_separador.png" alt="" />
           <div className="parents texto">
             <p>

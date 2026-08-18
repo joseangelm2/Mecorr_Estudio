@@ -75,8 +75,8 @@ function toFormData(project?: Project): ProjectFormData {
       especial_show_dress_palette: false,
       especial_dress_palette: [],
       especial_gift_registries: [],
-      especial_rsvp_phones: [],
-      especial_rsvp_email: '',
+      rsvp_phones: [],
+      rsvp_email: '',
       especial_seal_url: '',
       especial_seal_filter: '',
       especial_seal_offset_x: '0',
@@ -145,8 +145,8 @@ function toFormData(project?: Project): ProjectFormData {
     especial_show_dress_palette: (project.extra_config?.show_dress_palette as boolean) ?? false,
     especial_dress_palette: (project.extra_config?.dress_palette as DressPaletteEntry[]) ?? [],
     especial_gift_registries: (project.extra_config?.gift_registries as Array<{ giftStore: string; liverpoolLink: string }>) ?? [],
-    especial_rsvp_phones: (project.extra_config?.rsvp_phones as Array<{ phone: string; label: string }>) ?? [],
-    especial_rsvp_email: (project.extra_config?.rsvp_email as string) ?? '',
+    rsvp_phones: (project.extra_config?.rsvp_phones as Array<{ phone: string; label: string }>) ?? [],
+    rsvp_email: (project.extra_config?.rsvp_email as string) ?? '',
     especial_seal_url: (project.extra_config?.seal_url as string) ?? '',
     especial_seal_filter: (project.extra_config?.seal_filter as string) ?? '',
     especial_seal_offset_x: String((project.extra_config?.seal_offset_x as number) ?? 0),
@@ -441,6 +441,63 @@ export default function ProjectForm({ project }: Props) {
             <Field title="WhatsApp RSVP (sin +)">
               <input type="text" value={form.rsvp_phone} onChange={e => set('rsvp_phone', e.target.value)} className={input} placeholder="5218001234567" />
             </Field>
+            <Field title="Correo para confirmaciones">
+              <input
+                type="email"
+                value={form.rsvp_email}
+                onChange={e => set('rsvp_email', e.target.value)}
+                className={input}
+                placeholder="confirmaciones@ejemplo.com"
+              />
+            </Field>
+          </div>
+          <SectionCard title="Números adicionales de WhatsApp" description="Para recibir confirmaciones en más de un número. El invitado elige a quién enviar.">
+            <div className="space-y-4">
+              {form.rsvp_phones.map((entry, i) => (
+                <div key={i} className="rounded-xl border border-gray-100 bg-gray-50/60 p-4 space-y-3">
+                  <div className="flex items-center gap-3">
+                    <input
+                      type="text"
+                      value={entry.label}
+                      onChange={e => {
+                        const updated = [...form.rsvp_phones]
+                        updated[i] = { ...updated[i], label: e.target.value }
+                        set('rsvp_phones', updated)
+                      }}
+                      className={input}
+                      placeholder="Etiqueta (ej. Mamá, Organizador)"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => set('rsvp_phones', form.rsvp_phones.filter((_, idx) => idx !== i))}
+                      className="w-10 h-10 rounded-xl border border-red-200 text-red-400 hover:bg-red-50 flex items-center justify-center transition-colors shrink-0"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                  <input
+                    type="text"
+                    value={entry.phone}
+                    onChange={e => {
+                      const updated = [...form.rsvp_phones]
+                      updated[i] = { ...updated[i], phone: e.target.value }
+                      set('rsvp_phones', updated)
+                    }}
+                    className={input}
+                    placeholder="Número sin + (ej. 5218001234567)"
+                  />
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={() => set('rsvp_phones', [...form.rsvp_phones, { phone: '', label: '' }])}
+                className="w-full py-4 border-2 border-dashed border-gray-200 rounded-xl text-sm text-gray-400 hover:border-rose-300 hover:text-rose-400 transition-all font-medium"
+              >
+                + Agregar número de WhatsApp
+              </button>
+            </div>
+          </SectionCard>
+          <div>
             <Field title="Sección de Instagram">
               <div className="flex gap-2 mb-2">
                 <button
@@ -485,18 +542,16 @@ export default function ProjectForm({ project }: Props) {
       {/* Tab 2: Familia */}
       {activeTab === 2 && (
         <div className="space-y-6">
-          {(form.template === 'elegance' || form.template === 'especial') && (
-            <SectionCard title="Títulos de sección" description="Personaliza los encabezados (dejar vacío = valor por defecto)">
-              <div className="space-y-4">
-                <Field title="Título sección Padres">
-                  <input value={form.parents_title} onChange={e => set('parents_title', e.target.value)} className={input} placeholder="Mis Padres" />
-                </Field>
-                <Field title="Título sección Padrinos">
-                  <input value={form.padrinos_title} onChange={e => set('padrinos_title', e.target.value)} className={input} placeholder="Mis Padrinos" />
-                </Field>
-              </div>
-            </SectionCard>
-          )}
+          <SectionCard title="Títulos de sección" description="Personaliza los encabezados (dejar vacío = valor por defecto)">
+            <div className="space-y-4">
+              <Field title="Título sección Padres">
+                <input value={form.parents_title} onChange={e => set('parents_title', e.target.value)} className={input} placeholder="Mis Padres" />
+              </Field>
+              <Field title="Título sección Padrinos">
+                <input value={form.padrinos_title} onChange={e => set('padrinos_title', e.target.value)} className={input} placeholder="Mis Padrinos" />
+              </Field>
+            </div>
+          </SectionCard>
 
           <SectionCard title="Padres" description="Nombres que aparecerán en la invitación">
             <div className="space-y-3">
@@ -1411,63 +1466,6 @@ export default function ProjectForm({ project }: Props) {
               ) : (
                 <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para subir archivos.</p>
               )}
-            </Field>
-          </SectionCard>
-
-          <SectionCard title="Confirmación (WhatsApp y Correo)">
-            <div className="space-y-4">
-              <p className="text-xs text-gray-500">Números adicionales de WhatsApp para recibir confirmaciones. El invitado elige a quién enviar.</p>
-              {form.especial_rsvp_phones.map((entry, i) => (
-                <div key={i} className="rounded-xl border border-gray-100 bg-gray-50/60 p-4 space-y-3">
-                  <div className="flex items-center gap-3">
-                    <input
-                      type="text"
-                      value={entry.label}
-                      onChange={e => {
-                        const updated = [...form.especial_rsvp_phones]
-                        updated[i] = { ...updated[i], label: e.target.value }
-                        set('especial_rsvp_phones', updated)
-                      }}
-                      className={input}
-                      placeholder="Etiqueta (ej. Mamá, Organizador)"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => set('especial_rsvp_phones', form.especial_rsvp_phones.filter((_, idx) => idx !== i))}
-                      className="w-10 h-10 rounded-xl border border-red-200 text-red-400 hover:bg-red-50 flex items-center justify-center transition-colors shrink-0"
-                    >
-                      ✕
-                    </button>
-                  </div>
-                  <input
-                    type="text"
-                    value={entry.phone}
-                    onChange={e => {
-                      const updated = [...form.especial_rsvp_phones]
-                      updated[i] = { ...updated[i], phone: e.target.value }
-                      set('especial_rsvp_phones', updated)
-                    }}
-                    className={input}
-                    placeholder="Número sin + (ej. 5218001234567)"
-                  />
-                </div>
-              ))}
-              <button
-                type="button"
-                onClick={() => set('especial_rsvp_phones', [...form.especial_rsvp_phones, { phone: '', label: '' }])}
-                className="w-full py-4 border-2 border-dashed border-gray-200 rounded-xl text-sm text-gray-400 hover:border-rose-300 hover:text-rose-400 transition-all font-medium"
-              >
-                + Agregar número de WhatsApp
-              </button>
-            </div>
-            <Field title="Correo para confirmaciones">
-              <input
-                type="email"
-                value={form.especial_rsvp_email}
-                onChange={e => set('especial_rsvp_email', e.target.value)}
-                className={input}
-                placeholder="confirmaciones@ejemplo.com"
-              />
             </Field>
           </SectionCard>
         </div>

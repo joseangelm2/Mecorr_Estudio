@@ -7,6 +7,8 @@ interface Props {
 export default function ZafiroParents({ project }: Props) {
   const hasParents = project.parent_names.filter(Boolean).length > 0;
   const hasPadrinos = project.padrinos.filter(Boolean).length > 0;
+  const parentsTitle = (project.extra_config?.parents_title as string) || "Mis Padres";
+  const padrinosTitle = (project.extra_config?.padrinos_title as string) || "Mis Padrinos";
 
   if (!hasParents && !hasPadrinos) return null;
 
@@ -18,7 +20,7 @@ export default function ZafiroParents({ project }: Props) {
             Con la bendición de Dios y de
           </div>
           <div className="familia show-p-y">
-            <h3 style={{ fontStyle: "italic" }}>Mis Padres</h3>
+            <h3 style={{ fontStyle: "italic" }}>{parentsTitle}</h3>
             {project.parent_names.filter(Boolean).map((n, i, arr) => (
               <span key={i}>
                 <p className="nombre">{n}</p>
@@ -35,7 +37,7 @@ export default function ZafiroParents({ project }: Props) {
             Y la compañía de
           </div>
           <div className="familia show-p-y">
-            <h3 style={{ fontStyle: "italic" }}>Mis Padrinos</h3>
+            <h3 style={{ fontStyle: "italic" }}>{padrinosTitle}</h3>
             {project.padrinos.filter(Boolean).map((n, i, arr) => (
               <span key={i}>
                 <p className="nombre">{n}</p>

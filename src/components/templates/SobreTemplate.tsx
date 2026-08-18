@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import "@/app/sobre/sobre.css";
 import { THEMES } from "@/lib/themes";
 import type { Project } from "@/types/invitation";
+import { getRsvpContacts, getRsvpEmail } from "@/lib/rsvp";
 import WowInit from "@/components/WowInit";
 import IntroEnvelope from "@/components/IntroEnvelope";
 import StickyBanner from "@/components/StickyBanner";
@@ -82,6 +83,8 @@ export default function SobreTemplate({ project }: Props) {
         parentNames={parent_names.length > 0 ? parent_names : undefined}
         padrinos={padrinos}
         invitationText={invitation_text ?? undefined}
+        parentsTitle={(project.extra_config?.parents_title as string) || undefined}
+        padrinosTitle={(project.extra_config?.padrinos_title as string) || undefined}
       />
       <ContadorSection
         eventDate={event_date}
@@ -116,6 +119,8 @@ export default function SobreTemplate({ project }: Props) {
       )}
       <RSVPSection
         rsvpPhone={rsvp_phone ?? undefined}
+        rsvpContacts={getRsvpContacts(project)}
+        rsvpEmail={getRsvpEmail(project) ?? undefined}
         confirmationPhrase={confirmation_phrase ?? undefined}
         highlightDate={confirmation_highlight_date ?? undefined}
       />

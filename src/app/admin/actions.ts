@@ -62,8 +62,8 @@ export interface ProjectFormData {
   especial_show_dress_palette: boolean
   especial_dress_palette: Array<{ name: string; colors: string[] }>
   especial_gift_registries: Array<{ giftStore: string; liverpoolLink: string }>
-  especial_rsvp_phones: Array<{ phone: string; label: string }>
-  especial_rsvp_email: string
+  rsvp_phones: Array<{ phone: string; label: string }>
+  rsvp_email: string
   especial_seal_url: string
   especial_seal_filter: string
   especial_seal_offset_x: string
@@ -173,10 +173,10 @@ async function formDataToProject(data: ProjectFormData) {
       ...(data.especial_gift_registries.filter(r => r.liverpoolLink).length > 0
         ? { gift_registries: data.especial_gift_registries.filter(r => r.liverpoolLink) }
         : {}),
-      ...(data.especial_rsvp_phones.filter(p => p.phone).length > 0
-        ? { rsvp_phones: data.especial_rsvp_phones.filter(p => p.phone) }
+      ...(data.rsvp_phones.filter(p => p.phone).length > 0
+        ? { rsvp_phones: data.rsvp_phones.filter(p => p.phone) }
         : {}),
-      ...(data.especial_rsvp_email ? { rsvp_email: data.especial_rsvp_email } : {}),
+      ...(data.rsvp_email ? { rsvp_email: data.rsvp_email } : {}),
       ...(data.especial_seal_url    ? { seal_url:    data.especial_seal_url    } : {}),
       ...(data.especial_seal_filter !== '' ? { seal_filter: data.especial_seal_filter } : {}),
       ...(Number(data.especial_seal_offset_x) !== 0 ? { seal_offset_x: Number(data.especial_seal_offset_x) } : {}),

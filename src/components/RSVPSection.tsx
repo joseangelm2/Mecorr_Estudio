@@ -3,9 +3,12 @@
 import { FormEvent, useState } from "react";
 import { useGuestContext } from '@/lib/lista/GuestContext'
 import { TokenRSVPForm } from '@/components/lista/TokenRSVPForm'
+import type { RsvpContact } from "@/lib/rsvp";
 
 interface Props {
   rsvpPhone?: string;
+  rsvpContacts?: RsvpContact[];
+  rsvpEmail?: string;
   confirmationPhrase?: string;
   highlightDate?: string;
   festejada?: string;
@@ -22,14 +25,27 @@ function formatHighlightDate(dateStr: string): string {
 
 export default function RSVPSection({
   rsvpPhone = "5214438569931",
+  rsvpContacts,
+  rsvpEmail,
   confirmationPhrase,
   highlightDate,
   festejada = '',
 }: Props) {
   const guest = useGuestContext()
   const [attending, setAttending] = useState(true);
+  const [submitted, setSubmitted] = useState(false);
+  const [guestName, setGuestName] = useState("");
+  const [guestMessage, setGuestMessage] = useState("");
 
   if (guest.token) return <TokenRSVPForm festejada={festejada} />
+
+  const contacts = rsvpContacts && rsvpContacts.length > 0 ? rsvpContacts : [{ phone: rsvpPhone, label: "" }];
+
+  function buildMessage(nombre: string, mensaje: string) {
+    return attending
+      ? `Hola, soy ${nombre} y confirmo mi asistencia. Mi Mensaje: ${mensaje}`
+      : `Hola, soy ${nombre} y lamentablemente, no podré asistir.`;
+  }
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -38,19 +54,21 @@ export default function RSVPSection({
       .value;
     const mensaje = (form.elements.namedItem("mensaje") as HTMLTextAreaElement)
       .value;
+    setGuestName(nombre);
+    setGuestMessage(mensaje);
+    setSubmitted(true);
+  }
 
-    const confirmMsg = attending
-      ? "¿Estás seguro de mandar esta confirmación de asistencia?"
-      : "¿Estás seguro de no asistir al evento?";
-
-    if (!confirm(confirmMsg)) return;
-
-    const mensajeCA = attending
-      ? `Hola, soy ${nombre} y confirmo mi asistencia. Mi Mensaje: ${mensaje}`
-      : `Hola, soy ${nombre} y lamentablemente, no podré asistir.`;
-
-    const url = `https://api.whatsapp.com/send?phone=${rsvpPhone}&text=${encodeURIComponent(mensajeCA)}`;
+  function sendWhatsApp(phone: string) {
+    const url = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(buildMessage(guestName, guestMessage))}`;
     window.open(url, "_blank");
+  }
+
+  function sendEmail() {
+    if (!rsvpEmail) return;
+    const subject = encodeURIComponent("Confirmación de asistencia");
+    const body = encodeURIComponent(buildMessage(guestName, guestMessage));
+    window.open(`mailto:${rsvpEmail}?subject=${subject}&body=${body}`, "_self");
   }
 
   return (
@@ -95,62 +113,90 @@ export default function RSVPSection({
             </span>
           </div>
         )}
-        <form onSubmit={handleSubmit}>
-          <div className="mb-30">
-            <input
-              name="nombre"
-              id="nombre"
-              type="text"
-              className="form-campo"
-              placeholder="Nombre"
-              required
-              autoComplete="off"
-            />
-          </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px" }}>
-            <input
-              type="radio"
-              id="asistire"
-              name="confirmacion"
-              value="asistire"
-              checked={attending}
-              onChange={() => setAttending(true)}
-              style={{ width: "auto", cursor: "pointer", flexShrink: 0 }}
-            />
-            <label htmlFor="asistire" style={{ color: "black", cursor: "pointer", margin: 0, fontSize: "18px" }}>
-              Asistiré
-            </label>
-          </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "24px" }}>
-            <input
-              type="radio"
-              id="noAsistire"
-              name="confirmacion"
-              value="noAsistire"
-              checked={!attending}
-              onChange={() => setAttending(false)}
-              style={{ width: "auto", cursor: "pointer", flexShrink: 0 }}
-            />
-            <label htmlFor="noAsistire" style={{ color: "black", cursor: "pointer", margin: 0, fontSize: "18px" }}>
-              No Asistiré
-            </label>
-          </div>
-          <div className="mb-40">
-            <textarea
-              name="mensaje"
-              id="mensaje"
-              className="form-campo"
-              rows={5}
-              placeholder="Escribe un lindo mensaje..."
-              required
-            />
-          </div>
-          <div className="mb-30 text-center">
-            <button type="submit" className="btn-form">
-              Enviar Confirmación
+        {!submitted ? (
+          <form onSubmit={handleSubmit}>
+            <div className="mb-30">
+              <input
+                name="nombre"
+                id="nombre"
+                type="text"
+                className="form-campo"
+                placeholder="Nombre"
+                required
+                autoComplete="off"
+              />
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px" }}>
+              <input
+                type="radio"
+                id="asistire"
+                name="confirmacion"
+                value="asistire"
+                checked={attending}
+                onChange={() => setAttending(true)}
+                style={{ width: "auto", cursor: "pointer", flexShrink: 0 }}
+              />
+              <label htmlFor="asistire" style={{ color: "black", cursor: "pointer", margin: 0, fontSize: "18px" }}>
+                Asistiré
+              </label>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "24px" }}>
+              <input
+                type="radio"
+                id="noAsistire"
+                name="confirmacion"
+                value="noAsistire"
+                checked={!attending}
+                onChange={() => setAttending(false)}
+                style={{ width: "auto", cursor: "pointer", flexShrink: 0 }}
+              />
+              <label htmlFor="noAsistire" style={{ color: "black", cursor: "pointer", margin: 0, fontSize: "18px" }}>
+                No Asistiré
+              </label>
+            </div>
+            <div className="mb-40">
+              <textarea
+                name="mensaje"
+                id="mensaje"
+                className="form-campo"
+                rows={5}
+                placeholder="Escribe un lindo mensaje..."
+                required
+              />
+            </div>
+            <div className="mb-30 text-center">
+              <button type="submit" className="btn-form">
+                Enviar Confirmación
+              </button>
+            </div>
+          </form>
+        ) : (
+          <div className="mb-30" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
+            <p className="color-textos">Elige cómo enviar tu confirmación:</p>
+            {contacts.map((entry, i) => (
+              <button
+                key={i}
+                type="button"
+                className="btn-form"
+                onClick={() => sendWhatsApp(entry.phone)}
+              >
+                WhatsApp — {entry.label || `Contacto ${i + 1}`}
+              </button>
+            ))}
+            {rsvpEmail && (
+              <button type="button" className="btn-form" onClick={sendEmail}>
+                Enviar por correo
+              </button>
+            )}
+            <button
+              type="button"
+              style={{ background: "none", border: "none", cursor: "pointer", fontSize: "18px", marginTop: "4px", color: "black" }}
+              onClick={() => setSubmitted(false)}
+            >
+              ← Volver
             </button>
           </div>
-        </form>
+        )}
       </div>
     </section>
   );

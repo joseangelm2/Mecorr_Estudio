@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { Project } from "@/types/invitation";
+import { getRsvpContacts, getRsvpEmail } from "@/lib/rsvp";
 import SelloRosaRSVP from "./SelloRosaRSVP";
 
 interface Props {
@@ -104,7 +105,7 @@ export default function SelloRosaContent({ project }: Props) {
         <div className="sr-parents show-p-y">
           {project.parent_names?.length > 0 && (
             <section className="sr-section">
-              <h2 className="sr-section-title">Mis Padres</h2>
+              <h2 className="sr-section-title">{(project.extra_config?.parents_title as string) || "Mis Padres"}</h2>
               <hr className="sr-section-line" />
               <p className="sr-parent-name">
                 {project.parent_names.map((name, i) => (
@@ -115,7 +116,7 @@ export default function SelloRosaContent({ project }: Props) {
           )}
           {project.padrinos?.length > 0 && (
             <section className="sr-section" style={{ paddingTop: 0 }}>
-              <h2 className="sr-section-title">Padrinos</h2>
+              <h2 className="sr-section-title">{(project.extra_config?.padrinos_title as string) || "Padrinos"}</h2>
               <hr className="sr-section-line" />
               <p className="sr-parent-name">
                 {project.padrinos.map((name, i) => (
@@ -276,7 +277,7 @@ export default function SelloRosaContent({ project }: Props) {
           {project.confirmation_phrase && (
             <p className="sr-text" style={{ marginBottom: "24px" }}>{project.confirmation_phrase}</p>
           )}
-          <SelloRosaRSVP phone={project.rsvp_phone ?? ""} />
+          <SelloRosaRSVP contacts={getRsvpContacts(project)} email={getRsvpEmail(project)} />
         </section>
       </div>
 
