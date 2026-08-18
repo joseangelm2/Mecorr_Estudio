@@ -264,11 +264,17 @@ html, body {
 }
 
 .ubicacion .hora {
+  display: block;
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 4vw;
   font-weight: 700;
   color: #775197;
   margin: 1vw 0;
+}
+
+.ubicacion .boton {
+  display: block;
+  width: fit-content;
 }
 
 /* ==============================
