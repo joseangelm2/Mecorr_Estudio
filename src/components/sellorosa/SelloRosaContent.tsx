@@ -8,16 +8,6 @@ interface Props {
   project: Project
 }
 
-const DEFAULT_EVENTS = [
-  { label: "Misa", hour: "5:00 PM", icon: "misa.png", reverse: false },
-  { label: "Recepción", hour: "7:00 PM", icon: "recepcion.png", reverse: true },
-  { label: "Coctelería", hour: "8:00 PM", icon: "coctel.png", reverse: false },
-  { label: "Cena", hour: "9:00 PM", icon: "comida.png", reverse: true },
-  { label: "Vals", hour: "10:20 PM", icon: "vals.png", reverse: false },
-  { label: "Baile", hour: "11:30 PM", icon: "baile.png", reverse: true },
-  { label: "Fin del Evento", hour: "3:00 AM", icon: "fin.png", reverse: false },
-];
-
 function resolveIcon(icon: string | undefined): string {
   if (!icon) return "/images/esmeralda/iglesia.png";
   if (icon.startsWith("http") || icon.startsWith("/")) return icon;
@@ -69,14 +59,12 @@ export default function SelloRosaContent({ project }: Props) {
   const nameParts = project.quinceanera_name.split(" ");
   const firstName = nameParts[0];
 
-  const events = project.itinerary?.length
-    ? project.itinerary.map((ev, i) => ({
-        label: ev.title,
-        hour: ev.time,
-        icon: resolveIcon(ev.icon ?? ev.iconSrc),
-        reverse: i % 2 !== 0,
-      }))
-    : DEFAULT_EVENTS.map((ev) => ({ ...ev, icon: `/images/esmeralda/${ev.icon}` }));
+  const events = (project.itinerary ?? []).map((ev, i) => ({
+    label: ev.title,
+    hour: ev.time,
+    icon: resolveIcon(ev.icon ?? ev.iconSrc),
+    reverse: i % 2 !== 0,
+  }));
 
   function handleCopyAccount() {
     const account = project.gift_registry?.bankAccount ?? "";

@@ -46,7 +46,15 @@ const BASE_PROJECT: Omit<Project, 'color_theme'> = {
     address: 'C. Quintero Arce 280, Puerta Grande, 83246 Hermosillo, Son.',
     mapsUrl: 'https://maps.app.goo.gl/NEusLqQqZhirLnCAA',
   },
-  itinerary: [],
+  itinerary: [
+    { title: 'Misa',           time: '05:00 PM', iconSrc: '/images/elegance/iglesia.png'  },
+    { title: 'Recepción',      time: '07:00 PM', iconSrc: '/images/elegance/recepcion.png' },
+    { title: 'Coctelería',     time: '08:00 PM', iconSrc: '/images/elegance/coctel.png'    },
+    { title: 'Cena',           time: '09:00 PM', iconSrc: '/images/elegance/comida.png'    },
+    { title: 'Vals',           time: '10:20 PM', iconSrc: '/images/elegance/vals.png'      },
+    { title: 'Baile',          time: '11:30 PM', iconSrc: '/images/elegance/baile.png'     },
+    { title: 'Fin del Evento', time: '03:00 AM', iconSrc: '/images/elegance/fin.png'       },
+  ],
   dress_code: { colors: 'Vestimenta Formal', notes: '' },
   photos: [
     '/images/elegance/11.jpg',
@@ -185,8 +193,8 @@ export default function ElegancePage() {
         <EleganceGifts project={project} />
         <GalleryPhoto src={photos[3]} />
         <ElegancePhotoGrid gridRetrato={[]} gridHorizontal={[]} />
-        {project.show_itinerary && <GalleryPhoto src={photos[4]} />}
-        {project.show_itinerary && <EleganceItinerary project={project} />}
+        {project.show_itinerary && project.itinerary.length > 0 && <GalleryPhoto src={photos[4]} />}
+        {project.show_itinerary && project.itinerary.length > 0 && <EleganceItinerary project={project} />}
         <GalleryPhoto src={photos[5]} />
         <EleganceWishes phone={project.rsvp_phone ?? ''} hashtag={hashtag} dressCodeNotes={project.dress_code?.notes || undefined} />
         <EleganceRSVP project={project} />

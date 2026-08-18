@@ -15,15 +15,12 @@ interface Props {
 }
 
 export default function LoveItinerary({ project }: Props) {
-  if (!project.show_itinerary) return null;
+  if (!project.show_itinerary || !project.itinerary.length) return null;
 
-  const events =
-    project.itinerary.length
-      ? project.itinerary.map((e, i) => ({
-          ...e,
-          icon: e.icon || DEFAULT_EVENTS[i % DEFAULT_EVENTS.length]?.icon || "misa.png",
-        }))
-      : DEFAULT_EVENTS;
+  const events = project.itinerary.map((e, i) => ({
+    ...e,
+    icon: e.icon || DEFAULT_EVENTS[i % DEFAULT_EVENTS.length]?.icon || "misa.png",
+  }));
 
   return (
     <div className="itinerario show-p-y">

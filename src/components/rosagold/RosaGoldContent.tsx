@@ -5,16 +5,6 @@ import type { Project } from "@/types/invitation";
 import RosaGoldCarousel from "./RosaGoldCarousel";
 import RosaGoldRSVP from "./RosaGoldRSVP";
 
-const DEFAULT_EVENTS = [
-  { description: "Ceremonia Religiosa", time: "5:00 PM", icon: "misa.png" },
-  { description: "Recepción Bienvenida", time: "7:00 PM", icon: "recepcion.png" },
-  { description: "Coctelería", time: "8:00 PM", icon: "coctel.png" },
-  { description: "Cena", time: "9:00 PM", icon: "comida.png" },
-  { description: "Vals", time: "10:20 PM", icon: "vals.png" },
-  { description: "Baile", time: "11:30 PM", icon: "baile.png" },
-  { description: "Fin del Evento", time: "3:00 AM", icon: "fin.png" },
-];
-
 function RosaGoldCountdown({ eventDate }: { eventDate: string }) {
   const [t, setT] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   useEffect(() => {
@@ -57,9 +47,7 @@ export default function RosaGoldContent({ project }: Props) {
   const monthStr = d.toLocaleDateString("es-MX", { month: "short" }).toUpperCase();
   const year = d.getFullYear();
 
-  const events = (project.show_itinerary && project.itinerary.length)
-    ? project.itinerary.map((e, i) => ({ ...e, icon: e.icon || DEFAULT_EVENTS[i % DEFAULT_EVENTS.length]?.icon || "misa.png" }))
-    : DEFAULT_EVENTS;
+  const events = project.itinerary.map((e) => ({ ...e, icon: e.icon || "misa.png" }));
 
   const phone = project.rsvp_phone ?? "";
 
@@ -204,7 +192,7 @@ export default function RosaGoldContent({ project }: Props) {
       </section>
 
       {/* ITINERARIO */}
-      {project.show_itinerary && (
+      {project.show_itinerary && events.length > 0 && (
         <div className="rg-itinerario-container">
           <table style={{ width: "100%" }}><tbody><tr><td>
             <div className="rg-itinerario-header">
