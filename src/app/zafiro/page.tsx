@@ -31,6 +31,7 @@ export default function ZafiroPage() {
 
   const photos = DEFAULT_PHOTOS;
   const project = { ...DEMO_PROJECT, hero_photo_url: "/images/zafiro/foto.jpg" };
+  const finalPhoto = photos[photos.length - 1] ?? project.hero_photo_url;
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
@@ -86,6 +87,14 @@ export default function ZafiroPage() {
         <div className="extra">
           <img src="/images/zafiro/corona_bottom.png" style={{ width: "30%", marginBottom: "-5%" }} alt="" />
         </div>
+        {finalPhoto && (
+          <div className="foto-final show-p-y" style={{ backgroundImage: `url(${finalPhoto})` }}>
+            <div className="foto-final-texto">
+              <p>¡Te Espero!</p>
+              <h2>{DEMO_PROJECT.quinceanera_name}</h2>
+            </div>
+          </div>
+        )}
         <div className="despedida">¡Te Esperamos!</div>
       </div>
     </div>

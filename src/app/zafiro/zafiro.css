@@ -512,6 +512,50 @@ html, body {
 }
 
 /* ==============================
+   FOTO FINAL
+   ============================== */
+
+.foto-final {
+  width: 100%;
+  min-height: 65vw;
+  margin: 5vw 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+}
+
+.foto-final::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.foto-final-texto {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: #fff;
+}
+
+.foto-final-texto p {
+  font-family: var(--font-albert), "Albert Sans", sans-serif;
+  font-size: 3.5vw;
+  margin: 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.foto-final-texto h2 {
+  font-family: var(--font-beau), "Beau Rivage", cursive;
+  font-size: 10vw;
+  margin: 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* ==============================
    DESPEDIDA
    ============================== */
 
@@ -799,6 +843,18 @@ html, body {
   }
 
   .despedida {
+    font-size: 60px;
+  }
+
+  .foto-final {
+    min-height: 420px;
+  }
+
+  .foto-final-texto p {
+    font-size: 20px;
+  }
+
+  .foto-final-texto h2 {
     font-size: 60px;
   }
 }

@@ -34,6 +34,11 @@ export default function ZafiroTemplate({ project }: Props) {
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const photos = project.photos.length ? project.photos : DEFAULT_PHOTOS;
+  const finalPhoto =
+    (project.extra_config?.final_photo_url as string) ||
+    photos[photos.length - 1] ||
+    project.hero_photo_url ||
+    undefined;
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
@@ -84,16 +89,19 @@ export default function ZafiroTemplate({ project }: Props) {
           </div>
         )}
         <ZafiroPhotoGrid photos={photos.slice(4)} />
-        {photos[4] && (
-          <div className="foto-con-degradado">
-            <img className="foto-full show-p-y" src={photos[4]} alt="" />
-          </div>
-        )}
         <ZafiroItinerary project={project} />
         <ZafiroRSVP project={project} />
         <div className="extra">
           <img src="/images/zafiro/v1.png" style={{ width: "40%", marginBottom: "-8%" }} alt="" />
         </div>
+        {finalPhoto && (
+          <div className="foto-final show-p-y" style={{ backgroundImage: `url(${finalPhoto})` }}>
+            <div className="foto-final-texto">
+              <p>¡Te Espero!</p>
+              <h2>{project.quinceanera_name}</h2>
+            </div>
+          </div>
+        )}
         <div className="despedida">¡Te Esperamos!</div>
       </div>
     </div>
