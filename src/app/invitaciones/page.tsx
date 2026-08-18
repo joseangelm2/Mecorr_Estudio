@@ -59,7 +59,7 @@ const invitations: Invitation[] = [
     description: [
       'Diseñada para protagonizar tus fotos. Colores vibrantes, aire fresco y juvenil que convierten cada imagen en el elemento principal. La elección perfecta para quienes quieren impactar.',
     ],
-    image: '/promo/rubi.webp',
+    image: '/promo/love.jpg',
     imageAlt: 'Invitación Love',
     accent: 'accent-red',
     reversed: true,
