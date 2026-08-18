@@ -12,7 +12,6 @@ const templateMap: Record<TemplateId, TemplateComponent> = {
   love: dynamic(() => import('./LoveTemplate')),
   zafiro: dynamic(() => import('./ZafiroTemplate')),
   elegance: dynamic(() => import('./EleganceTemplate')),
-  hogwarts: dynamic(() => import('./HogwartsTemplate')),
   sellorosa: dynamic(() => import('./SelloRosaTemplate')),
   rosagold: dynamic(() => import('./RosaGoldTemplate')),
   magical: dynamic(() => import('./MagicalTemplate')),

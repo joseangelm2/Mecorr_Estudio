@@ -33,3 +33,5 @@
 - [2026-06-24] [coder] → code-notes.md — Proxy Supabase SSR: patrón setAll obligatorio
 - [2026-06-24] [coder] → code-notes.md — RSVP sin persistencia: diseño por privacidad
 - [2026-06-24] [coder] → code-notes.md — MediaUploader: dos buckets, sin deduplicación
+- [2026-06-25] [orquestador] → decisions.md — Módulo ListaInvitados: agregar a projects, ruta inteligente, JWT efímero
+- [2026-06-25] [coder] → decisions.md — ListaInvitados implementado completo (7 fases) en rama ListaInvitados; npm run check ✅

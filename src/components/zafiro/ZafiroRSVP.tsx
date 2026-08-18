@@ -2,14 +2,19 @@
 
 import { useRef, useState } from "react";
 import type { Project } from "@/types/invitation";
+import { useGuestContext } from '@/lib/lista/GuestContext'
+import { TokenRSVPForm } from '@/components/lista/TokenRSVPForm'
 
 interface Props {
   project: Project;
 }
 
 export default function ZafiroRSVP({ project }: Props) {
+  const guest = useGuestContext()
   const nameRef = useRef<HTMLInputElement>(null);
   const [attending, setAttending] = useState(true);
+
+  if (guest.token) return <TokenRSVPForm festejada={project.quinceanera_name} />
   const phone = project.rsvp_phone ?? "";
 
   function sendWA(msg: string) {

@@ -16,7 +16,7 @@ import MagicalDecorations from "@/components/magical/MagicalDecorations";
 import MagicalScrollInit from "@/components/magical/MagicalScrollInit";
 import { DEMO_PROJECT } from "@/lib/demo-project";
 
-const FALLBACK_PHOTOS = [
+const MAGICAL_PHOTOS = [
   "/images/magical/11.jpg",
   "/images/magical/12.jpg",
   "/images/magical/21.jpg",
@@ -32,7 +32,8 @@ export default function MagicalPage() {
   const [envelopeOpen, setEnvelopeOpen] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  const photos = DEMO_PROJECT.photos?.length ? DEMO_PROJECT.photos : FALLBACK_PHOTOS;
+  const photos = MAGICAL_PHOTOS;
+  const project = { ...DEMO_PROJECT, hero_photo_url: "/images/magical/foto.jpg" };
 
   function handleOpen() {
     setEnvelopeOpen(true);
@@ -48,7 +49,7 @@ export default function MagicalPage() {
       <MagicalDecorations />
       {!envelopeOpen && <MagicalEnvelope onOpen={handleOpen} />}
       <div className="background">
-        <MagicalHero project={DEMO_PROJECT} />
+        <MagicalHero project={project} />
         <MagicalCountdown eventDate={DEMO_PROJECT.event_date} />
         <MagicalParents project={DEMO_PROJECT} />
         <MagicalLocations project={DEMO_PROJECT} />

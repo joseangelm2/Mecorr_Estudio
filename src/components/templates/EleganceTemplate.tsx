@@ -102,7 +102,7 @@ export default function EleganceTemplate({ project }: Props) {
         {project.show_itinerary && (project.extra_config?.photo_before_itinerary as string) && <GalleryPhoto src={project.extra_config.photo_before_itinerary as string} />}
         {project.show_itinerary && <EleganceItinerary project={project} />}
         {(project.extra_config?.photo_after_itinerary as string) && <GalleryPhoto src={project.extra_config.photo_after_itinerary as string} />}
-        <EleganceWishes phone={project.rsvp_phone ?? ''} hashtag={hashtag} dressCodeNotes={project.dress_code?.notes || undefined} />
+        <EleganceWishes phone={project.rsvp_phone ?? ''} hashtag={hashtag} mode={project.instagram_mode} slug={project.slug} dressCodeNotes={project.dress_code?.notes || undefined} />
         <EleganceRSVP project={project} />
         {(project.extra_config?.photo_after_rsvp as string) && <GalleryPhoto src={project.extra_config.photo_after_rsvp as string} />}
         <EleganceFooter />

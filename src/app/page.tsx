@@ -22,9 +22,9 @@ const slides = [
     subtitle: 'Sobre de apertura, cuenta regresiva, galería de fotos y confirmación de asistencia en un solo enlace.',
   },
   {
-    src: '/promo/harrys.png',
-    title: 'Temáticas Sin Límite',
-    subtitle: 'Desde mundos mágicos hasta elegancia clásica — encontramos el estilo perfecto para ti.',
+    src: '/promo/elegance.jpg',
+    title: 'Un Cuento Hecho Realidad',
+    subtitle: 'Paleta blanco marfil, detalles dorados y una atmósfera de cuento que conquista a cada invitado.',
   },
 ]
 

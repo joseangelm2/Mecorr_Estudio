@@ -86,6 +86,27 @@
 
 ---
 
+### [2026-06-25] [orquestador] — Módulo Lista de Invitados: arquitectura de datos y rutas
+**Contexto:** Nuevo módulo opcional activado por evento para gestión de invitados con PIN, CRUD, WhatsApp, confirmaciones y boletos PDF. El módulo vive en rama `ListaInvitados` y se fusiona en un solo PR a `master`.
+**Decisión 1 — Tabla:** Campos nuevos (`tiene_lista_invitados`, `pin_admin`) se agregan directamente a `projects` vía migración. Sin tabla `eventos` separada. Nuevas tablas `grupos_evento` e `invitados` usan `project_id` como FK. `rsvp_phone` de `projects` actúa como `whatsapp_admin`; `ceremony.mapsUrl` es el `maps_url` del QR del boleto.
+**Decisión 2 — Ruta `/i/[slug]`:** Página inteligente: si `tiene_lista_invitados=true` → renderiza `PINLoginScreen`; si false → renderiza `TemplateRenderer` (sin breaking change para invitaciones existentes). Invitación personalizada del guest vive en `/i/[slug]/invitacion?token=[token]`.
+**Decisión 3 — Auth admin:** JWT efímero 30 min firmado con `LISTA_JWT_SECRET`. Se guarda en estado React (sin cookie, sin localStorage). PIN validado con bcrypt contra `projects.pin_admin`.
+**Por qué:** Sin tabla separada se evitan JOINs en cada lectura del módulo. La página inteligente no rompe links ya compartidos. El JWT en memoria garantiza que la sesión muere al cerrar la pestaña.
+**Alternativas descartadas:** Tabla `eventos` separada (JOINs, espejo del slug). Cookie de sesión (persiste más de lo necesario). Token en localStorage (superficie de ataque mayor).
+**Referencia:** `docs/ListaInvitados/PROYECTO_LISTA_INVITADOS_v3.md`, `docs/ListaInvitados/HANDOFF_MODULO_LISTA_INVITADOS.md`
+
+---
+
+### [2026-06-25] [coder] — ListaInvitados: implementación completada en rama ListaInvitados
+**Contexto:** Las 7 fases del módulo fueron implementadas y commiteadas en la rama `ListaInvitados`. `npm run check` pasa con 0 errores.
+**Decisión — Device binding:** JWT efímero + `device_id` UUID generado en cliente la primera vez se guarda en `localStorage` Y en `invitados.device_id`. La API `/verificar-dispositivo` compara: firstTime (sin device_id), allowed (mismo device_id), blocked (device_id distinto).
+**Decisión — PDF:** `@react-pdf/renderer` server-side en route handlers. `React.createElement(BoletoPDF, props) as any` necesario por mismatch de tipos entre `ReactElement` y `FunctionComponentElement`.
+**Decisión — Lint:** `docs/` excluido de ESLint (archivos de investigación). `react-hooks/set-state-in-effect` suprimido con eslint-disable para `fetchData()` en `AdminShell` (async — todos los setState ocurren después de await). `InvitacionGuest` usa lazy initializer `useState(() => ...)` para evitar setState sincrónico en effect.
+**Estado:** Listo para PR a `master`. Pendiente: aplicar migraciones en Supabase producción y agregar `LISTA_JWT_SECRET` a Vercel (Preview + Production).
+**Archivos clave:** `src/components/lista/`, `src/app/i/[slug]/admin/`, `src/app/i/[slug]/api/`, `src/lib/lista/`, `supabase/migrations/0004-0006`
+
+---
+
 ### [2026-06-27] [orquestador] — Fotos del álbum en columna vertical y uploader por posición
 **Contexto:** El template Especial mostraba las fotos del álbum (`photos[]`) como un carrusel horizontal con auto-play e intervalos. El admin tenía un único MediaUploader genérico que agregaba fotos al final del array sin indicar en qué posición visual aparecerían.
 **Decisión:** (1) `EspecialPhotos.tsx` reescrito como columna vertical: todas las fotos se apilan de arriba a abajo sin JavaScript de navegación ni estado de carrusel. (2) `ProjectForm.tsx` tab Media rediseñado: cada posición del array `photos` tiene su propio `MediaUploader` con `onUploadComplete={url => setArrayItem('photos', i, url)}` y etiqueta "Foto N — Posición N en la sección Momentos".

@@ -1,4 +1,0 @@
-[     646ms] TypeError: Cannot read properties of null (reading 'addEventListener')
-    at https://invitaelegante.com/zafiro.html:628:20
-[     675ms] TypeError: Cannot read properties of null (reading 'addEventListener')
-    at HTMLDocument.<anonymous> (https://invitaelegante.com/xvmorada_files/reproductor_lila.js:21:12)

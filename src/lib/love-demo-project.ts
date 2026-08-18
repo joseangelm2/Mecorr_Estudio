@@ -12,6 +12,7 @@ export const LOVE_DEMO_PROJECT: Project = {
   event_date: '2026-11-22T17:00:00',
   rsvp_phone: '4438569931',
   hashtag: '#XVCamila',
+  instagram_mode: 'instagram',
   music_url: '/images/love/musica.mp3',
   hero_photo_url: '/images/love/foto1.jpg',
   parent_names: ['Elías Moises Galván Juárez', 'Esperanza Méndez Hernández'],
@@ -66,4 +67,6 @@ export const LOVE_DEMO_PROJECT: Project = {
   confirmation_phrase: 'Favor de confirmar asistencia antes del 1 de Noviembre',
   confirmation_highlight_date: null,
   extra_config: {},
+  tiene_lista_invitados: false,
+  pin_admin: null,
 }

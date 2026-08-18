@@ -3,6 +3,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
+import bcrypt from 'bcryptjs'
 import type { Project, TemplateId } from '@/types/invitation'
 
 export interface ProjectFormData {
@@ -14,6 +15,7 @@ export interface ProjectFormData {
   event_date: string
   rsvp_phone: string
   hashtag: string
+  instagram_mode: string
   music_url: string
   hero_photo_url: string
   parent_names: string[]
@@ -69,6 +71,9 @@ export interface ProjectFormData {
   especial_dress_code_image_url: string
   especial_envelope_right_url: string
   especial_envelope_left_url: string
+  // Módulo Lista de Invitados
+  tiene_lista_invitados: boolean
+  pin_admin: string  // PIN en texto plano; se hashea en el servidor
   sobre_final_photo_url: string
   elegance_photo_after_hero: string
   elegance_photo_after_parents: string
@@ -82,7 +87,12 @@ export interface ProjectFormData {
   elegance_grid_horizontal: string[]
 }
 
-function formDataToProject(data: ProjectFormData) {
+async function formDataToProject(data: ProjectFormData) {
+  let pin_admin: string | null = null
+  if (data.tiene_lista_invitados && data.pin_admin?.match(/^\d{4}$/)) {
+    pin_admin = await bcrypt.hash(data.pin_admin, 10)
+  }
+
   return {
     slug: data.slug,
     template: data.template,
@@ -92,6 +102,7 @@ function formDataToProject(data: ProjectFormData) {
     event_date: data.event_date,
     rsvp_phone: data.rsvp_phone || null,
     hashtag: data.hashtag || null,
+    instagram_mode: data.instagram_mode || 'instagram',
     music_url: data.music_url || null,
     hero_photo_url: data.hero_photo_url || null,
     parent_names: data.parent_names.filter(Boolean),
@@ -189,6 +200,8 @@ function formDataToProject(data: ProjectFormData) {
         ? { grid_horizontal: data.elegance_grid_horizontal.filter(Boolean) }
         : {}),
     },
+    tiene_lista_invitados: data.tiene_lista_invitados,
+    ...(pin_admin ? { pin_admin } : {}),
   }
 }
 
@@ -196,7 +209,7 @@ export async function createProject(data: ProjectFormData): Promise<void> {
   const supabase = await createClient()
   const { data: created, error } = await supabase
     .from('projects')
-    .insert(formDataToProject(data))
+    .insert(await formDataToProject(data))
     .select('id')
     .single()
 
@@ -209,7 +222,7 @@ export async function updateProject(id: string, data: ProjectFormData): Promise<
   const supabase = await createClient()
   const { error } = await supabase
     .from('projects')
-    .update(formDataToProject(data))
+    .update(await formDataToProject(data))
     .eq('id', id)
 
   if (error) throw new Error(error.message)

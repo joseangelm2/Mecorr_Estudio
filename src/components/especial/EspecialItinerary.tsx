@@ -24,9 +24,11 @@ export default function EspecialItinerary({ project, decorationSrc = '/images/fl
                   <h3 className="color-textos">{item.title}</h3>
                   <p className="color-textos">{item.time}</p>
                   <div className="icon-holder">
-                    {(item.icon || item.iconSrc) && (
-                      <img src={item.icon || item.iconSrc} alt={item.title} width="38" />
-                    )}
+                    {(item.icon || item.iconSrc) && (() => {
+                      const src = item.icon || item.iconSrc || ''
+                      const resolved = src.startsWith('http') || src.startsWith('/') ? src : `/images/especial/${src}`
+                      return <img src={resolved} alt={item.title} width="38" />
+                    })()}
                   </div>
                 </li>
               ))}

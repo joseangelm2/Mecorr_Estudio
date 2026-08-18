@@ -30,7 +30,8 @@ const DEFAULT_PHOTOS = [
 export default function PinkPage() {
   const [open, setOpen] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
-  const photos = DEMO_PROJECT.photos.length ? DEMO_PROJECT.photos : DEFAULT_PHOTOS;
+  const photos = DEFAULT_PHOTOS;
+  const project = { ...DEMO_PROJECT, hero_photo_url: "/images/pink/foto.jpg" };
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
@@ -55,7 +56,7 @@ export default function PinkPage() {
         <img className="bottom-img" src="/images/pink/453.png" alt="" />
       </div>
       <div className="contenido">
-        <PinkHero project={DEMO_PROJECT} />
+        <PinkHero project={project} />
         {photos[0] && <div className="foto-con-degradado"><img className="foto-full show-p-y" src={photos[0]} alt="" /></div>}
         <PinkParents project={DEMO_PROJECT} />
         {photos[1] && <div className="foto-con-degradado"><img className="foto-full show-p-y" src={photos[1]} alt="" /></div>}

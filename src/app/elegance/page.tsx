@@ -29,6 +29,7 @@ const BASE_PROJECT: Omit<Project, 'color_theme'> = {
   event_date: '2026-11-22T17:00:00',
   rsvp_phone: '524438569931',
   hashtag: 'XVAlison',
+  instagram_mode: 'instagram',
   music_url: '/images/elegance/musica.mp3',
   hero_photo_url: '/images/elegance/foto.jpg',
   parent_names: ['Elías Moises Galván Juárez', 'Esperanza Méndez Hernández'],
@@ -70,6 +71,8 @@ const BASE_PROJECT: Omit<Project, 'color_theme'> = {
   confirmation_phrase: null,
   confirmation_highlight_date: null,
   extra_config: {},
+  tiene_lista_invitados: false,
+  pin_admin: null,
 }
 
 const FALLBACKS = [11, 21, 31, 41, 12, 22, 32]

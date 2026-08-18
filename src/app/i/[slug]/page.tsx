@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
 import { TemplateRenderer } from '@/components/templates/TemplateRenderer'
+import { PINLoginScreen } from '@/components/lista/PINLoginScreen'
 import type { Project } from '@/types/invitation'
 
 interface Props {
@@ -20,5 +21,13 @@ export default async function InvitationPage({ params }: Props) {
 
   if (error || !data) notFound()
 
-  return <TemplateRenderer project={data as Project} />
+  const project = data as Project
+
+  // Cuando el módulo está activo, esta ruta es el portal de admin (PIN login).
+  // La invitación personalizada del invitado vive en /i/[slug]/invitacion?token=
+  if (project.tiene_lista_invitados) {
+    return <PINLoginScreen slug={slug} festejada={project.quinceanera_name} />
+  }
+
+  return <TemplateRenderer project={project} />
 }

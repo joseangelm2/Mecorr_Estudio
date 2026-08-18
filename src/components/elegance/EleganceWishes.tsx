@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
+import AlbumQRCode from '@/components/AlbumQRCode'
 
 function sendWhatsApp(phone: string, message: string) {
   window.open(
@@ -12,10 +13,12 @@ function sendWhatsApp(phone: string, message: string) {
 interface Props {
   phone: string
   hashtag: string
+  mode?: 'instagram' | 'album'
+  slug?: string
   dressCodeNotes?: string
 }
 
-export default function EleganceWishes({ phone, hashtag, dressCodeNotes }: Props) {
+export default function EleganceWishes({ phone, hashtag, mode = 'instagram', slug, dressCodeNotes }: Props) {
   const messageRef = useRef<HTMLTextAreaElement>(null)
 
   return (
@@ -36,7 +39,15 @@ export default function EleganceWishes({ phone, hashtag, dressCodeNotes }: Props
         </div>
       )}
 
-      {hashtag && (
+      {mode === 'album' && slug ? (
+        <div className="extra show-p-y">
+          <h3>Álbum Digital</h3>
+          <p className="texto">Escanea el código y sube tus fotos y videos del evento</p>
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '4%' }}>
+            <AlbumQRCode slug={slug} />
+          </div>
+        </div>
+      ) : hashtag && (
         <a className="extra show-p-y" href={`https://www.instagram.com/explore/tags/${hashtag}/`} target="_self">
           <img src="/images/elegance/instagram.png" style={{ width: '50%', marginBottom: '4%' }} alt="Instagram" />
           <h3>Hashtag en Instagram</h3>

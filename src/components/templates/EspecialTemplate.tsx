@@ -94,7 +94,9 @@ export default function EspecialTemplate({ project }: Props) {
       <EspecialLocations project={project} decorationSrc={decorationSrc} />
       {project.show_itinerary && project.itinerary.length > 0 && <EspecialItinerary project={project} decorationSrc={decorationSrc} />}
       {showDressCode && <EspecialDressCode project={project} decorationSrc={decorationSrc} />}
-      {project.hashtag && <EspecialHashtag hashtag={project.hashtag} decorationSrc={decorationSrc} />}
+      {(project.instagram_mode === 'album' || project.hashtag) && (
+        <EspecialHashtag hashtag={project.hashtag ?? ''} mode={project.instagram_mode} slug={project.slug} decorationSrc={decorationSrc} />
+      )}
       {project.photos.length > 0 && <EspecialPhotos photos={project.photos} decorationSrc={decorationSrc} />}
       {project.show_video && (
         <EspecialVideo

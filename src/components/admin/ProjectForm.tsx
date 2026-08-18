@@ -8,6 +8,7 @@ import type { Project, TemplateId } from '@/types/invitation'
 import { THEMES } from '@/lib/themes'
 import { ELEGANCE_THEMES } from '@/lib/elegance-themes'
 import { ESPECIAL_THEMES } from '@/lib/especial-themes'
+import AlbumMediaAdminPanel from '@/components/admin/AlbumMediaAdminPanel'
 
 // Lazy: arrastra el cliente de Supabase — no necesario en el bundle inicial
 const MediaUploader = dynamic(() => import('@/components/admin/MediaUploader'), { ssr: false })
@@ -19,7 +20,6 @@ const TEMPLATES: { value: TemplateId; label: string; emoji: string }[] = [
   { value: 'love', label: 'Love', emoji: '❤️' },
   { value: 'zafiro', label: 'Zafiro', emoji: '💎' },
   { value: 'elegance', label: 'Elegance', emoji: '👑' },
-  { value: 'hogwarts', label: 'Hogwarts', emoji: '🪄' },
   { value: 'sellorosa', label: 'Sello Rosa', emoji: '🌹' },
   { value: 'rosagold', label: 'Rosa Gold', emoji: '✨' },
   { value: 'magical', label: 'Magical', emoji: '🦋' },
@@ -36,6 +36,7 @@ const TABS = [
   { label: 'Estilo', icon: '🎨' },
   { label: 'Media', icon: '🖼' },
   { label: 'Especial', icon: '⭐' },
+  { label: 'Álbum digital', icon: '📷' },
 ]
 
 interface DressPaletteEntry {
@@ -48,7 +49,7 @@ function toFormData(project?: Project): ProjectFormData {
     return {
       slug: '', template: 'sobre', status: 'draft',
       quinceanera_name: '', guest_name: '', event_date: '',
-      rsvp_phone: '', hashtag: '', music_url: '', hero_photo_url: '',
+      rsvp_phone: '', hashtag: '', instagram_mode: 'instagram', music_url: '', hero_photo_url: '',
       parent_names: ['', ''], padrinos: ['', ''],
       ceremony_venue: '', ceremony_address: '', ceremony_time: '', ceremony_map_link: '', ceremony_photo_url: '',
       reception_venue: '', reception_address: '', reception_time: '', reception_map_link: '', reception_photo_url: '',
@@ -83,6 +84,8 @@ function toFormData(project?: Project): ProjectFormData {
       especial_dress_code_image_url: '',
       especial_envelope_right_url: '',
       especial_envelope_left_url: '',
+      tiene_lista_invitados: false,
+      pin_admin: '',
       sobre_final_photo_url: '',
       elegance_photo_after_hero: '',
       elegance_photo_after_parents: '',
@@ -105,6 +108,7 @@ function toFormData(project?: Project): ProjectFormData {
     event_date: project.event_date ? project.event_date.slice(0, 16) : '',
     rsvp_phone: project.rsvp_phone ?? '',
     hashtag: project.hashtag ?? '',
+    instagram_mode: project.instagram_mode ?? 'instagram',
     music_url: project.music_url ?? '',
     hero_photo_url: project.hero_photo_url ?? '',
     parent_names: project.parent_names.length ? project.parent_names : ['', ''],
@@ -173,6 +177,8 @@ function toFormData(project?: Project): ProjectFormData {
     show_itinerary: project.show_itinerary ?? true,
     confirmation_phrase: project.confirmation_phrase ?? '',
     confirmation_highlight_date: project.confirmation_highlight_date ?? '',
+    tiene_lista_invitados: project.tiene_lista_invitados ?? false,
+    pin_admin: '',  // Nunca pre-llenar el hash; el admin ingresa un nuevo PIN si desea cambiarlo
   }
 }
 
@@ -435,8 +441,36 @@ export default function ProjectForm({ project }: Props) {
             <Field title="WhatsApp RSVP (sin +)">
               <input type="text" value={form.rsvp_phone} onChange={e => set('rsvp_phone', e.target.value)} className={input} placeholder="5218001234567" />
             </Field>
-            <Field title="Hashtag">
-              <input type="text" value={form.hashtag} onChange={e => set('hashtag', e.target.value)} className={input} placeholder="#XVValeria" />
+            <Field title="Sección de Instagram">
+              <div className="flex gap-2 mb-2">
+                <button
+                  type="button"
+                  onClick={() => set('instagram_mode', 'instagram')}
+                  className={`flex-1 py-2 rounded-lg text-sm font-medium transition-all border-2 ${
+                    form.instagram_mode === 'instagram'
+                      ? 'border-rose-400 bg-rose-50 text-rose-600'
+                      : 'border-gray-100 bg-white text-gray-500 hover:border-gray-200'
+                  }`}
+                >
+                  Instagram
+                </button>
+                <button
+                  type="button"
+                  onClick={() => set('instagram_mode', 'album')}
+                  className={`flex-1 py-2 rounded-lg text-sm font-medium transition-all border-2 ${
+                    form.instagram_mode === 'album'
+                      ? 'border-rose-400 bg-rose-50 text-rose-600'
+                      : 'border-gray-100 bg-white text-gray-500 hover:border-gray-200'
+                  }`}
+                >
+                  Álbum digital
+                </button>
+              </div>
+              {form.instagram_mode === 'instagram' ? (
+                <input type="text" value={form.hashtag} onChange={e => set('hashtag', e.target.value)} className={input} placeholder="#XVValeria" />
+              ) : (
+                <p className="text-xs text-gray-400">Los invitados verán un QR para subir fotos y videos. Revisa la pestaña &quot;Álbum digital&quot; para verlos.</p>
+              )}
             </Field>
           </div>
           <Field title="Frase de confirmación">
@@ -1120,7 +1154,37 @@ export default function ProjectForm({ project }: Props) {
                   onChange={e => set('especial_seal_filter', hexToSealFilter(e.target.value))}
                 />
               </div>
-              <p className="text-xs text-gray-400 mt-1">Elige el tinte de color del sello. "Del tema" hereda el color de la invitación.</p>
+              <p className="text-xs text-gray-400 mt-1">Elige el tinte de color del sello. &ldquo;Del tema&rdquo; hereda el color de la invitación.</p>
+            </Field>
+            <Field title="Posición del sello">
+              <div className="flex gap-3 items-end">
+                <div className="flex-1">
+                  <label className="text-xs text-gray-400">Eje X</label>
+                  <input
+                    type="number"
+                    value={form.especial_seal_offset_x}
+                    onChange={e => set('especial_seal_offset_x', e.target.value)}
+                    className={input}
+                  />
+                </div>
+                <div className="flex-1">
+                  <label className="text-xs text-gray-400">Eje Y</label>
+                  <input
+                    type="number"
+                    value={form.especial_seal_offset_y}
+                    onChange={e => set('especial_seal_offset_y', e.target.value)}
+                    className={input}
+                  />
+                </div>
+                <button
+                  type="button"
+                  onClick={() => { set('especial_seal_offset_x', '0'); set('especial_seal_offset_y', '0') }}
+                  className="px-3 py-2.5 rounded-lg text-sm border-2 border-gray-100 bg-white text-gray-500 hover:border-gray-200 transition-all whitespace-nowrap"
+                >
+                  Centrar
+                </button>
+              </div>
+              <p className="text-xs text-gray-400 mt-1">Ajusta la posición del sello respecto al centro (0 = posición por defecto).</p>
             </Field>
             <Field title="Posición del sello">
               <div className="flex gap-3 items-end">
@@ -1408,6 +1472,41 @@ export default function ProjectForm({ project }: Props) {
           </SectionCard>
         </div>
       )}
+
+      {/* Tab 9: Álbum digital */}
+      {activeTab === 9 && (
+        <div className="space-y-6">
+          <SectionCard title="Álbum digital" description="Los invitados escanean un QR y suben fotos/videos directo desde su celular (requiere activar el modo &quot;Álbum digital&quot; en la pestaña Contacto).">
+            {project?.id ? (
+              <AlbumMediaAdminPanel projectId={project.id} slug={form.slug} />
+            ) : (
+              <p className="text-sm text-amber-600 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">Guarda el proyecto primero para activar el álbum digital.</p>
+            )}
+          </SectionCard>
+        </div>
+      )}
+
+      {/* ── Módulo Lista de Invitados ── */}
+      <SectionCard title="Lista de invitados" description="Activa el portal de administración con PIN para gestionar invitados, envíos por WhatsApp, confirmaciones y boletos PDF.">
+        <div className="flex items-center justify-between mb-4">
+          <label className="text-sm font-medium text-gray-700">Activar módulo</label>
+          <Toggle checked={form.tiene_lista_invitados} onChange={v => set('tiene_lista_invitados', v)} label="" />
+        </div>
+        {form.tiene_lista_invitados && (
+          <Field title="PIN de acceso (4 dígitos)">
+            <input
+              type="password"
+              inputMode="numeric"
+              maxLength={4}
+              value={form.pin_admin}
+              onChange={e => set('pin_admin', e.target.value.replace(/\D/g, '').slice(0, 4))}
+              placeholder="••••"
+              className={input + ' tracking-widest text-center text-lg font-bold'}
+            />
+            <p className="text-xs text-gray-400 mt-1">Dejar vacío para conservar el PIN actual. Mínimo 4 dígitos numéricos.</p>
+          </Field>
+        )}
+      </SectionCard>
 
       {/* Error */}
       {error && (

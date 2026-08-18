@@ -11,7 +11,6 @@ const TEMPLATE_COLORS: Record<string, string> = {
   love: 'bg-red-100 text-red-700',
   zafiro: 'bg-blue-100 text-blue-700',
   elegance: 'bg-sky-100 text-sky-700',
-  hogwarts: 'bg-yellow-100 text-yellow-700',
   sellorosa: 'bg-fuchsia-100 text-fuchsia-700',
   rosagold: 'bg-orange-100 text-orange-700',
   magical: 'bg-purple-100 text-purple-700',
