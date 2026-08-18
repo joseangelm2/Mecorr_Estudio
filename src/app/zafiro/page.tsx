@@ -90,7 +90,6 @@ export default function ZafiroPage() {
         {finalPhoto && (
           <div className="foto-final show-p-y" style={{ backgroundImage: `url(${finalPhoto})` }}>
             <div className="foto-final-texto">
-              <p>¡Te Espero!</p>
               <h2>{DEMO_PROJECT.quinceanera_name}</h2>
             </div>
           </div>

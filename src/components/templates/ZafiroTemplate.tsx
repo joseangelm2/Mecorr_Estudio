@@ -91,13 +91,9 @@ export default function ZafiroTemplate({ project }: Props) {
         <ZafiroPhotoGrid photos={photos.slice(4)} />
         <ZafiroItinerary project={project} />
         <ZafiroRSVP project={project} />
-        <div className="extra">
-          <img src="/images/zafiro/v1.png" style={{ width: "40%", marginBottom: "-8%" }} alt="" />
-        </div>
         {finalPhoto && (
           <div className="foto-final show-p-y" style={{ backgroundImage: `url(${finalPhoto})` }}>
             <div className="foto-final-texto">
-              <p>¡Te Espero!</p>
               <h2>{project.quinceanera_name}</h2>
             </div>
           </div>
