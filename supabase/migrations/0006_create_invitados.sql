@@ -1,5 +1,5 @@
 -- Tabla de invitados por evento (project)
-CREATE TABLE invitados (
+CREATE TABLE IF NOT EXISTS invitados (
   id                   UUID        PRIMARY KEY DEFAULT gen_random_uuid(),
   project_id           UUID        NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
   grupo_id             UUID        NOT NULL REFERENCES grupos_evento(id) ON DELETE RESTRICT,
@@ -18,19 +18,21 @@ CREATE TABLE invitados (
   updated_at           TIMESTAMPTZ DEFAULT now()
 );
 
-CREATE INDEX idx_invitados_project ON invitados(project_id);
-CREATE UNIQUE INDEX idx_invitados_token ON invitados(token);
-CREATE INDEX idx_invitados_estado  ON invitados(estado);
-CREATE INDEX idx_invitados_grupo   ON invitados(grupo_id);
+CREATE INDEX IF NOT EXISTS idx_invitados_project ON invitados(project_id);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_invitados_token ON invitados(token);
+CREATE INDEX IF NOT EXISTS idx_invitados_estado  ON invitados(estado);
+CREATE INDEX IF NOT EXISTS idx_invitados_grupo   ON invitados(grupo_id);
 
 ALTER TABLE invitados ENABLE ROW LEVEL SECURITY;
 
 -- Solo el service role puede operar esta tabla
+DROP POLICY IF EXISTS "service_role_all_invitados" ON invitados;
 CREATE POLICY "service_role_all_invitados"
   ON invitados FOR ALL
   USING (auth.role() = 'service_role');
 
 -- Trigger updated_at reutiliza la función ya existente en la migración 0001
+DROP TRIGGER IF EXISTS set_invitados_updated_at ON invitados;
 CREATE TRIGGER set_invitados_updated_at
   BEFORE UPDATE ON invitados
   FOR EACH ROW EXECUTE FUNCTION update_updated_at();
