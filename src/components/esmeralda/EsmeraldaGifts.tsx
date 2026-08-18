@@ -14,6 +14,7 @@ function CutLine() {
 export default function EsmeraldaGifts({ project }: Props) {
   const messageRef = useRef<HTMLTextAreaElement>(null);
   const [copied, setCopied] = useState(false);
+  const [visible, setVisible] = useState(false);
   const phone = project.rsvp_phone ?? "";
 
   function enviarMensaje() {
@@ -75,17 +76,25 @@ export default function EsmeraldaGifts({ project }: Props) {
                 {project.datos_bancarios_text ||
                   "Si lo prefieres puedes hacer una transferencia bancaria como regalo:"}
               </p>
-              <div className="texto" style={{ marginTop: "2%" }}>
-                {project.gift_registry.bankBeneficiary && (
-                  <p><b>Beneficiaria:</b> {project.gift_registry.bankBeneficiary}</p>
-                )}
-                <p><b>CLABE:</b> {project.gift_registry.bankAccount}</p>
-              </div>
+              {visible && (
+                <div className="texto" style={{ marginTop: "2%" }}>
+                  {project.gift_registry.bankBeneficiary && (
+                    <p><b>Beneficiaria:</b> {project.gift_registry.bankBeneficiary}</p>
+                  )}
+                  <p><b>CLABE:</b> {project.gift_registry.bankAccount}</p>
+                </div>
+              )}
             </div>
             <div className="liverpool-container">
-              <button type="button" className="button" onClick={handleCopy} style={{ cursor: "pointer", border: "none" }}>
-                {copied ? "¡Copiado!" : "Copiar CLABE"}
-              </button>
+              {!visible ? (
+                <button type="button" className="button" onClick={() => setVisible(true)} style={{ cursor: "pointer", border: "none" }}>
+                  Mostrar cuenta
+                </button>
+              ) : (
+                <button type="button" className="button" onClick={handleCopy} style={{ cursor: "pointer", border: "none" }}>
+                  {copied ? "¡Copiado!" : "Copiar CLABE"}
+                </button>
+              )}
             </div>
           </section>
         </>

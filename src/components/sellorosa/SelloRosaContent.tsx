@@ -51,6 +51,7 @@ function SelloRosaCountdown({ eventDate }: { eventDate: string }) {
 
 export default function SelloRosaContent({ project }: Props) {
   const [copied, setCopied] = useState(false);
+  const [accountVisible, setAccountVisible] = useState(false);
 
   const eventDate = new Date(project.event_date);
   const day = eventDate.getDate().toString().padStart(2, "0");
@@ -222,16 +223,20 @@ export default function SelloRosaContent({ project }: Props) {
           <section className="sr-section">
             <h2 className="sr-section-title">Datos Bancarios</h2>
             <hr className="sr-section-line" />
-            <p className="sr-info-item"><b>Cuenta:</b> {project.gift_registry.bankAccount}</p>
-            {project.gift_registry.bankBeneficiary && (
-              <p className="sr-info-item"><b>Beneficiaria:</b> {project.gift_registry.bankBeneficiary}</p>
+            {accountVisible && (
+              <>
+                <p className="sr-info-item"><b>Cuenta:</b> {project.gift_registry.bankAccount}</p>
+                {project.gift_registry.bankBeneficiary && (
+                  <p className="sr-info-item"><b>Beneficiaria:</b> {project.gift_registry.bankBeneficiary}</p>
+                )}
+              </>
             )}
             <button
-              onClick={handleCopyAccount}
+              onClick={() => (accountVisible ? handleCopyAccount() : setAccountVisible(true))}
               className="sr-btn"
               style={{ marginTop: "12px", cursor: "pointer", background: "none", border: "1px solid rgba(255,255,255,0.4)", borderRadius: "8px", padding: "6px 16px" }}
             >
-              {copied ? "¡Copiado!" : "Copiar número de cuenta"}
+              {!accountVisible ? "Mostrar cuenta" : copied ? "¡Copiado!" : "Copiar número de cuenta"}
             </button>
           </section>
         </div>

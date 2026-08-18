@@ -41,6 +41,7 @@ interface Props { project: Project }
 
 export default function RosaGoldContent({ project }: Props) {
   const [copied, setCopied] = useState(false);
+  const [accountVisible, setAccountVisible] = useState(false);
   const mensajeRef = useRef<HTMLTextAreaElement>(null);
 
   const d = new Date(project.event_date);
@@ -258,14 +259,22 @@ export default function RosaGoldContent({ project }: Props) {
           <hr style={{ width: "230px", margin: "8px auto", border: "none", borderTop: "1px solid #ce9e5f" }} />
           <div className="esp-peq" />
           <p className="rg-text anim-up">{project.datos_bancarios_text || "Si lo prefieres puedes hacer una transferencia bancaria como regalo:"}</p>
-          {project.gift_registry.bankBeneficiary && (
-            <p className="rg-text"><strong>Beneficiaria:</strong> {project.gift_registry.bankBeneficiary}</p>
+          {accountVisible && (
+            <>
+              {project.gift_registry.bankBeneficiary && (
+                <p className="rg-text"><strong>Beneficiaria:</strong> {project.gift_registry.bankBeneficiary}</p>
+              )}
+              <p className="rg-text" style={{ letterSpacing: "2px", fontWeight: 600 }}>
+                CLABE: {project.gift_registry.bankAccount}
+              </p>
+            </>
           )}
-          <p className="rg-text" style={{ letterSpacing: "2px", fontWeight: 600 }}>
-            CLABE: {project.gift_registry.bankAccount}
-          </p>
-          <button onClick={handleCopy} className="rg-location-btn" style={{ cursor: "pointer" }}>
-            {copied ? "¡Copiado!" : "Copiar CLABE"}
+          <button
+            onClick={() => (accountVisible ? handleCopy() : setAccountVisible(true))}
+            className="rg-location-btn"
+            style={{ cursor: "pointer" }}
+          >
+            {!accountVisible ? "Mostrar cuenta" : copied ? "¡Copiado!" : "Copiar CLABE"}
           </button>
           <div className="esp-med" />
         </section>

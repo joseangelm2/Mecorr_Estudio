@@ -10,6 +10,7 @@ interface Props {
 export default function ZafiroGifts({ project }: Props) {
   const messageRef = useRef<HTMLTextAreaElement>(null);
   const [copied, setCopied] = useState(false);
+  const [visible, setVisible] = useState(false);
   const phone = project.rsvp_phone ?? "";
 
   function sendWA(msg: string) {
@@ -60,15 +61,23 @@ export default function ZafiroGifts({ project }: Props) {
             {project.datos_bancarios_text ||
               "Si lo prefieres puedes hacer una transferencia bancaria como regalo:"}
           </p>
-          <div className="texto" style={{ marginTop: "2%" }}>
-            {project.gift_registry.bankBeneficiary && (
-              <p><b>Beneficiaria:</b> {project.gift_registry.bankBeneficiary}</p>
-            )}
-            <p><b>CLABE:</b> {project.gift_registry.bankAccount}</p>
-          </div>
-          <button onClick={handleCopy} className="boton" style={{ marginTop: "2%", cursor: "pointer" }}>
-            {copied ? "¡Copiado!" : "Copiar CLABE"}
-          </button>
+          {!visible ? (
+            <button onClick={() => setVisible(true)} className="boton" style={{ marginTop: "2%", cursor: "pointer" }}>
+              Mostrar cuenta
+            </button>
+          ) : (
+            <>
+              <div className="texto" style={{ marginTop: "2%" }}>
+                {project.gift_registry.bankBeneficiary && (
+                  <p><b>Beneficiaria:</b> {project.gift_registry.bankBeneficiary}</p>
+                )}
+                <p><b>CLABE:</b> {project.gift_registry.bankAccount}</p>
+              </div>
+              <button onClick={handleCopy} className="boton" style={{ marginTop: "2%", cursor: "pointer" }}>
+                {copied ? "¡Copiado!" : "Copiar CLABE"}
+              </button>
+            </>
+          )}
         </div>
       )}
 

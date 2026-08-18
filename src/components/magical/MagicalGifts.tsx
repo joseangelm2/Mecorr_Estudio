@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import type { Project } from "@/types/invitation";
 
 interface Props {
@@ -9,11 +9,21 @@ interface Props {
 
 export default function MagicalGifts({ project }: Props) {
   const mensajeRef = useRef<HTMLTextAreaElement>(null);
+  const [visible, setVisible] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   function enviarMensaje() {
     const msg = mensajeRef.current?.value ?? "";
     const url = `https://api.whatsapp.com/send?phone=52${project.rsvp_phone ?? ""}&text=${encodeURIComponent(msg)}`;
     window.open(url, "_blank");
+  }
+
+  function handleCopy() {
+    const account = (project.gift_registry?.bankAccount ?? "").replace(/\s/g, "");
+    navigator.clipboard.writeText(account).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    });
   }
 
   const hashtag = project.hashtag ?? "#XVMagical";
@@ -55,9 +65,16 @@ export default function MagicalGifts({ project }: Props) {
           <div className="gift-object-container">
             <img src="/images/magical/mesa_regalos.png" className="icon-image" alt="Transferencia" />
             <p className="texto">{project.datos_bancarios_text ?? "Si lo prefieres, puedes hacer una transferencia bancaria:"}</p>
-            <p className="texto"><b>Cuenta:</b> {project.gift_registry.bankAccount}</p>
-            {project.gift_registry.bankBeneficiary && (
-              <p className="texto"><b>Beneficiaria:</b> {project.gift_registry.bankBeneficiary}</p>
+            {!visible ? (
+              <div className="button" onClick={() => setVisible(true)}>Mostrar cuenta</div>
+            ) : (
+              <>
+                <p className="texto"><b>Cuenta:</b> {project.gift_registry.bankAccount}</p>
+                {project.gift_registry.bankBeneficiary && (
+                  <p className="texto"><b>Beneficiaria:</b> {project.gift_registry.bankBeneficiary}</p>
+                )}
+                <div className="button" onClick={handleCopy}>{copied ? "¡Copiado!" : "Copiar cuenta"}</div>
+              </>
             )}
           </div>
         </section>

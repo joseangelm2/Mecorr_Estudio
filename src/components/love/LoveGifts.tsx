@@ -10,6 +10,7 @@ interface Props {
 export default function LoveGifts({ project }: Props) {
   const mensajeRef = useRef<HTMLTextAreaElement>(null);
   const [copied, setCopied] = useState(false);
+  const [visible, setVisible] = useState(false);
   const phone = project.rsvp_phone ?? "";
 
   function enviarMensaje() {
@@ -92,19 +93,29 @@ export default function LoveGifts({ project }: Props) {
                 {project.datos_bancarios_text ||
                   "Si lo prefieres puedes hacer una transferencia bancaria como regalo:"}
               </p>
-              {project.gift_registry.bankBeneficiary && (
+              {visible && (
                 <>
-                  <strong className="texto">Beneficiaria:</strong>
-                  <p className="texto">{project.gift_registry.bankBeneficiary}</p>
+                  {project.gift_registry.bankBeneficiary && (
+                    <>
+                      <strong className="texto">Beneficiaria:</strong>
+                      <p className="texto">{project.gift_registry.bankBeneficiary}</p>
+                    </>
+                  )}
+                  <strong className="texto">CLABE:</strong>
+                  <p className="texto">{project.gift_registry.bankAccount}</p>
                 </>
               )}
-              <strong className="texto">CLABE:</strong>
-              <p className="texto">{project.gift_registry.bankAccount}</p>
             </div>
             <div className="liverpool-container">
-              <button className="button" onClick={copiarCuenta} style={{ width: "auto" }}>
-                {copied ? "¡Copiado!" : "Copiar"}
-              </button>
+              {!visible ? (
+                <button className="button" onClick={() => setVisible(true)} style={{ width: "auto" }}>
+                  Mostrar cuenta
+                </button>
+              ) : (
+                <button className="button" onClick={copiarCuenta} style={{ width: "auto" }}>
+                  {copied ? "¡Copiado!" : "Copiar"}
+                </button>
+              )}
             </div>
           </section>
         )}
