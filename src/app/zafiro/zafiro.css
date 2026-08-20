@@ -593,7 +593,7 @@ html, body {
   position: fixed;
   inset: 0;
   z-index: 100;
-  background: radial-gradient(ellipse at center, #1a0a2e 0%, #0d0618 100%);
+  background: radial-gradient(ellipse at center, var(--zafiro-env-bg-1, #1a0a2e) 0%, var(--zafiro-env-bg-2, #0d0618) 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -606,7 +606,7 @@ html, body {
 }
 
 .zafiro-envelope-label {
-  color: rgba(200, 180, 255, 0.8);
+  color: rgba(var(--zafiro-env-accent-rgb, 200, 180, 255), 0.8);
   font-family: var(--font-beau), "Beau Rivage", cursive;
   font-size: 8vw;
   margin-bottom: 6vw;
@@ -625,7 +625,7 @@ html, body {
   height: 0;
   border-left: 36vw solid transparent;
   border-right: 36vw solid transparent;
-  border-bottom: 24vw solid #3a1f5e;
+  border-bottom: 24vw solid var(--zafiro-env-flap, #3a1f5e);
   max-width: none;
   position: relative;
   z-index: 2;
@@ -639,8 +639,8 @@ html, body {
 
 /* Cuerpo del sobre */
 .zafiro-envelope-body {
-  background: linear-gradient(160deg, #2d1254 0%, #4a1f7a 100%);
-  border: 0.5vw solid rgba(150, 100, 220, 0.4);
+  background: linear-gradient(160deg, var(--zafiro-env-body-1, #2d1254) 0%, var(--zafiro-env-body-2, #4a1f7a) 100%);
+  border: 0.5vw solid rgba(var(--zafiro-env-accent-rgb, 200, 180, 255), 0.4);
   border-top: none;
   height: 36vw;
   max-height: 160px;
@@ -648,7 +648,7 @@ html, body {
   align-items: center;
   justify-content: center;
   border-radius: 0 0 3vw 3vw;
-  box-shadow: 0 8px 40px rgba(80, 20, 160, 0.5);
+  box-shadow: 0 8px 40px rgba(var(--zafiro-env-glow-rgb, 150, 80, 230), 0.5);
 }
 
 .zafiro-envelope-lines {
@@ -663,7 +663,7 @@ html, body {
   width: 40vw;
   max-width: 160px;
   height: 0.4vw;
-  background: rgba(200, 160, 255, 0.6);
+  background: rgba(var(--zafiro-env-accent-rgb, 200, 180, 255), 0.6);
   border-radius: 2px;
 }
 
@@ -683,9 +683,9 @@ html, body {
   max-width: 80px;
   max-height: 80px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #9b59d0, #5c1e99);
-  border: 0.5vw solid rgba(220, 180, 255, 0.6);
-  box-shadow: 0 0 20px rgba(150, 80, 230, 0.8), inset 0 0 10px rgba(0,0,0,0.3);
+  background: radial-gradient(circle at 35% 35%, var(--zafiro-env-seal-1, #9b59d0), var(--zafiro-env-seal-2, #5c1e99));
+  border: 0.5vw solid rgba(var(--zafiro-env-accent-rgb, 200, 180, 255), 0.6);
+  box-shadow: 0 0 20px rgba(var(--zafiro-env-glow-rgb, 150, 80, 230), 0.8), inset 0 0 10px rgba(0,0,0,0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -701,7 +701,7 @@ html, body {
 }
 
 .zafiro-seal:hover {
-  box-shadow: 0 0 30px rgba(150, 80, 230, 1), inset 0 0 10px rgba(0,0,0,0.3);
+  box-shadow: 0 0 30px rgba(var(--zafiro-env-glow-rgb, 150, 80, 230), 1), inset 0 0 10px rgba(0,0,0,0.3);
 }
 
 .zafiro-seal-letter {
@@ -713,7 +713,7 @@ html, body {
 }
 
 .zafiro-envelope-hint {
-  color: rgba(200, 180, 255, 0.6);
+  color: rgba(var(--zafiro-env-accent-rgb, 200, 180, 255), 0.6);
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 3.5vw;
   margin-top: 6vw;
@@ -721,8 +721,8 @@ html, body {
 }
 
 @keyframes zafiro-pulse {
-  0%, 100% { box-shadow: 0 0 20px rgba(150, 80, 230, 0.8), inset 0 0 10px rgba(0,0,0,0.3); }
-  50%       { box-shadow: 0 0 40px rgba(150, 80, 230, 1),   inset 0 0 10px rgba(0,0,0,0.3); }
+  0%, 100% { box-shadow: 0 0 20px rgba(var(--zafiro-env-glow-rgb, 150, 80, 230), 0.8), inset 0 0 10px rgba(0,0,0,0.3); }
+  50%       { box-shadow: 0 0 40px rgba(var(--zafiro-env-glow-rgb, 150, 80, 230), 1),   inset 0 0 10px rgba(0,0,0,0.3); }
 }
 
 @media (min-width: 600px) {
