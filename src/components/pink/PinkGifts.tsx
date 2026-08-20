@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import type { Project } from "@/types/invitation";
+import DressCodePalette from "@/components/DressCodePalette";
 
 interface Props { project: Project }
 
@@ -71,6 +72,7 @@ export default function PinkGifts({ project }: Props) {
           <h3>Código de Vestimenta</h3>
           <p className="texto">{project.dress_code.colors || "Vestimenta Formal"}</p>
           {project.dress_code.notes && <p className="texto">{project.dress_code.notes}</p>}
+          <DressCodePalette project={project} />
         </div>
       )}
 

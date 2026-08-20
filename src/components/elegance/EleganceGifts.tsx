@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import type { Project } from '@/types/invitation'
+import DressCodePalette from '@/components/DressCodePalette'
 
 interface Props {
   project: Project
@@ -88,6 +89,7 @@ export default function EleganceGifts({ project }: Props) {
           <img src="/images/elegance/vestimenta.png" style={{ width: '30%', marginBottom: '3%' }} alt="Vestimenta" />
           <h3>Código de Vestimenta</h3>
           <p className="texto">{project.dress_code.colors}</p>
+          <DressCodePalette project={project} />
         </div>
       )}
     </>

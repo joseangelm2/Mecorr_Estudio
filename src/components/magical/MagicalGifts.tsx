@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import type { Project } from "@/types/invitation";
+import DressCodePalette from "@/components/DressCodePalette";
 
 interface Props {
   project: Project
@@ -41,6 +42,7 @@ export default function MagicalGifts({ project }: Props) {
             {project.dress_code.notes && (
               <p className="texto" style={{ fontSize: "3.5vw", marginTop: "2%" }}>❖ {project.dress_code.notes}</p>
             )}
+            <DressCodePalette project={project} />
           </div>
         </section>
       )}

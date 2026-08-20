@@ -60,8 +60,8 @@ export interface ProjectFormData {
   especial_decoration_style: string
   especial_banner_text: string
   especial_footer_text: string
-  especial_show_dress_palette: boolean
-  especial_dress_palette: Array<{ name: string; colors: string[] }>
+  show_dress_palette: boolean
+  dress_palette: Array<{ name: string; colors: string[] }>
   especial_gift_registries: Array<{ giftStore: string; liverpoolLink: string }>
   rsvp_phones: Array<{ phone: string; label: string }>
   rsvp_email: string
@@ -69,7 +69,7 @@ export interface ProjectFormData {
   especial_seal_filter: string
   especial_seal_offset_x: string
   especial_seal_offset_y: string
-  especial_dress_code_image_url: string
+  dress_code_image_url: string
   especial_envelope_right_url: string
   especial_envelope_left_url: string
   // Módulo Lista de Invitados
@@ -160,6 +160,10 @@ async function formDataToProject(data: ProjectFormData) {
     extra_config: {
       ...(data.parents_title  ? { parents_title:  data.parents_title  } : {}),
       ...(data.padrinos_title ? { padrinos_title: data.padrinos_title } : {}),
+      // dress code palette / reference image — disponible para todas las plantillas
+      ...(data.show_dress_palette ? { show_dress_palette: true } : {}),
+      ...(data.dress_palette.length > 0 ? { dress_palette: data.dress_palette } : {}),
+      ...(data.dress_code_image_url  ? { dress_code_image_url:  data.dress_code_image_url  } : {}),
       // especial fields
       ...(data.especial_background_url  ? { background_url:      data.especial_background_url  } : {}),
       ...(data.especial_bg_opacity !== '' && data.especial_bg_opacity !== '50'
@@ -170,8 +174,6 @@ async function formDataToProject(data: ProjectFormData) {
       ...(data.especial_decoration_style !== 'flores' ? { decoration_style: data.especial_decoration_style } : {}),
       ...(data.especial_banner_text     ? { banner_text:         data.especial_banner_text     } : {}),
       ...(data.especial_footer_text     ? { footer_text:         data.especial_footer_text     } : {}),
-      ...(data.especial_show_dress_palette ? { show_dress_palette: true } : {}),
-      ...(data.especial_dress_palette.length > 0 ? { dress_palette: data.especial_dress_palette } : {}),
       ...(data.especial_gift_registries.filter(r => r.liverpoolLink).length > 0
         ? { gift_registries: data.especial_gift_registries.filter(r => r.liverpoolLink) }
         : {}),
@@ -183,7 +185,6 @@ async function formDataToProject(data: ProjectFormData) {
       ...(data.especial_seal_filter !== '' ? { seal_filter: data.especial_seal_filter } : {}),
       ...(Number(data.especial_seal_offset_x) !== 0 ? { seal_offset_x: Number(data.especial_seal_offset_x) } : {}),
       ...(Number(data.especial_seal_offset_y) !== 0 ? { seal_offset_y: Number(data.especial_seal_offset_y) } : {}),
-      ...(data.especial_dress_code_image_url  ? { dress_code_image_url:  data.especial_dress_code_image_url  } : {}),
       ...(data.especial_envelope_right_url    ? { envelope_right_url:    data.especial_envelope_right_url    } : {}),
       ...(data.especial_envelope_left_url     ? { envelope_left_url:     data.especial_envelope_left_url     } : {}),
       ...(data.sobre_final_photo_url           ? { final_photo_url:        data.sobre_final_photo_url           } : {}),

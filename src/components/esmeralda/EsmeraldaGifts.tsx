@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import type { Project } from "@/types/invitation";
+import DressCodePalette from "@/components/DressCodePalette";
 
 interface Props {
   project: Project;
@@ -42,6 +43,7 @@ export default function EsmeraldaGifts({ project }: Props) {
             <div className="dress-code-container">
               <img src="/images/esmeralda/vestimenta.png" alt="Vestimenta" />
               <p className="texto">{project.dress_code.colors || "Vestimenta Formal"}</p>
+              <DressCodePalette project={project} />
             </div>
           </section>
         </>

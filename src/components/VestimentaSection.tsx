@@ -1,3 +1,6 @@
+import type { Project } from "@/types/invitation";
+import DressCodePalette from "@/components/DressCodePalette";
+
 interface DressCode {
   colors: string;
   notes?: string;
@@ -5,6 +8,7 @@ interface DressCode {
 
 interface Props {
   dressCode?: DressCode;
+  project?: Project;
 }
 
 export default function VestimentaSection({
@@ -12,6 +16,7 @@ export default function VestimentaSection({
     colors: "Formal",
     notes: "Los colores amarillo y dorado están destinados solo para la Quinceañera",
   },
+  project,
 }: Props) {
   return (
     <section
@@ -45,6 +50,7 @@ export default function VestimentaSection({
                 {dressCode.notes}
               </p>
             ) : null}
+            {project && <DressCodePalette project={project} />}
           </div>
         </div>
       </div>

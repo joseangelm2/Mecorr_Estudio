@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import type { Project } from "@/types/invitation";
 import { getRsvpContacts, getRsvpEmail } from "@/lib/rsvp";
+import DressCodePalette from "@/components/DressCodePalette";
 import RosaGoldCarousel from "./RosaGoldCarousel";
 import RosaGoldRSVP from "./RosaGoldRSVP";
 
@@ -340,6 +341,7 @@ export default function RosaGoldContent({ project }: Props) {
               <div className="esp-peq" />
               <div className="rg-greeting">{project.dress_code.colors || "Formal"}</div>
               {project.dress_code.notes && <><br /><div className="rg-text">{project.dress_code.notes}</div></>}
+              <DressCodePalette project={project} />
               <br />
               <div className="rg-announcement-color" style={{ fontSize: "clamp(1.5rem, 4vw, 2rem)" }}>Te Espero</div>
             </div>

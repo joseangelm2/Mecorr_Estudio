@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import type { Project } from "@/types/invitation";
 import { getRsvpContacts, getRsvpEmail } from "@/lib/rsvp";
+import DressCodePalette from "@/components/DressCodePalette";
 import SelloRosaRSVP from "./SelloRosaRSVP";
 
 interface Props {
@@ -189,6 +190,7 @@ export default function SelloRosaContent({ project }: Props) {
             {project.dress_code.notes && (
               <p className="sr-text" style={{ marginTop: "8px", fontSize: "13px", color: "#f5babc" }}>❖ {project.dress_code.notes}</p>
             )}
+            <DressCodePalette project={project} />
           </section>
         </div>
       )}

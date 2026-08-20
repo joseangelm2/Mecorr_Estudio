@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import type { Project } from "@/types/invitation";
+import DressCodePalette from "@/components/DressCodePalette";
 
 interface Props {
   project: Project;
@@ -88,6 +89,7 @@ export default function ZafiroGifts({ project }: Props) {
           <h3>Código de Vestimenta</h3>
           <p className="texto">{project.dress_code.colors || "Vestimenta Formal"}</p>
           {project.dress_code.notes && <p className="texto">{project.dress_code.notes}</p>}
+          <DressCodePalette project={project} />
         </div>
       )}
 
@@ -107,7 +109,7 @@ export default function ZafiroGifts({ project }: Props) {
       </div>
 
       {/* Hashtag */}
-      {project.hashtag && (
+      {project.show_instagram_album && project.hashtag && (
         <a
           className="extra show-p-y"
           href={`https://www.instagram.com/explore/tags/${project.hashtag.replace("#", "")}/`}

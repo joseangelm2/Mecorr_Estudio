@@ -93,7 +93,7 @@ export default function SobreTemplate({ project }: Props) {
       {ceremony && <CeremoniaSection ceremony={ceremony} />}
       {reception && <RecepcionSection reception={reception} />}
       {itinerary.length > 0 && <ItinerarioSection itinerary={itinerary} />}
-      {dress_code && <VestimentaSection dressCode={dress_code} />}
+      {dress_code && <VestimentaSection dressCode={dress_code} project={project} />}
       {project.show_instagram_album && (project.instagram_mode === 'album' || hashtag) && (
         <HashtagSection hashtag={hashtag ?? undefined} mode={project.instagram_mode} slug={project.slug} />
       )}

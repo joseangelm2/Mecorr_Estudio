@@ -72,8 +72,8 @@ function toFormData(project?: Project): ProjectFormData {
       especial_decoration_style: 'flores',
       especial_banner_text: '',
       especial_footer_text: '',
-      especial_show_dress_palette: false,
-      especial_dress_palette: [],
+      show_dress_palette: false,
+      dress_palette: [],
       especial_gift_registries: [],
       rsvp_phones: [],
       rsvp_email: '',
@@ -81,7 +81,7 @@ function toFormData(project?: Project): ProjectFormData {
       especial_seal_filter: '',
       especial_seal_offset_x: '0',
       especial_seal_offset_y: '0',
-      especial_dress_code_image_url: '',
+      dress_code_image_url: '',
       especial_envelope_right_url: '',
       especial_envelope_left_url: '',
       tiene_lista_invitados: false,
@@ -143,8 +143,8 @@ function toFormData(project?: Project): ProjectFormData {
     especial_decoration_style: (project.extra_config?.decoration_style as string) ?? 'flores',
     especial_banner_text: (project.extra_config?.banner_text as string) ?? '',
     especial_footer_text: (project.extra_config?.footer_text as string) ?? '',
-    especial_show_dress_palette: (project.extra_config?.show_dress_palette as boolean) ?? false,
-    especial_dress_palette: (project.extra_config?.dress_palette as DressPaletteEntry[]) ?? [],
+    show_dress_palette: (project.extra_config?.show_dress_palette as boolean) ?? false,
+    dress_palette: (project.extra_config?.dress_palette as DressPaletteEntry[]) ?? [],
     especial_gift_registries: (project.extra_config?.gift_registries as Array<{ giftStore: string; liverpoolLink: string }>) ?? [],
     rsvp_phones: (project.extra_config?.rsvp_phones as Array<{ phone: string; label: string }>) ?? [],
     rsvp_email: (project.extra_config?.rsvp_email as string) ?? '',
@@ -152,7 +152,7 @@ function toFormData(project?: Project): ProjectFormData {
     especial_seal_filter: (project.extra_config?.seal_filter as string) ?? '',
     especial_seal_offset_x: String((project.extra_config?.seal_offset_x as number) ?? 0),
     especial_seal_offset_y: String((project.extra_config?.seal_offset_y as number) ?? 0),
-    especial_dress_code_image_url: (project.extra_config?.dress_code_image_url as string) ?? '',
+    dress_code_image_url: (project.extra_config?.dress_code_image_url as string) ?? '',
     especial_envelope_right_url: (project.extra_config?.envelope_right_url as string) ?? '',
     especial_envelope_left_url: (project.extra_config?.envelope_left_url as string) ?? '',
     sobre_final_photo_url: (project.extra_config?.final_photo_url as string) ?? '',
@@ -742,6 +742,117 @@ export default function ProjectForm({ project }: Props) {
             </Field>
             <Field title="Notas adicionales">
               <textarea value={form.dress_code_notes} onChange={e => set('dress_code_notes', e.target.value)} className={input} rows={3} placeholder="Preferiblemente ropa formal, evitar color negro..." />
+            </Field>
+          </SectionCard>
+
+          <SectionCard title="Paleta de colores (código de vestimenta)">
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-semibold text-gray-700">Mostrar paleta de colores</span>
+              <Toggle
+                checked={form.show_dress_palette}
+                onChange={v => set('show_dress_palette', v)}
+                label="Mostrar paleta"
+              />
+            </div>
+            {form.show_dress_palette && (
+              <div className="space-y-3 mt-4">
+                {form.dress_palette.map((entry, i) => (
+                  <div key={i} className="rounded-xl border border-gray-100 bg-gray-50/60 p-4 space-y-3">
+                    <div className="flex items-center gap-3">
+                      <input
+                        type="text"
+                        value={entry.name}
+                        onChange={e => {
+                          const updated = [...form.dress_palette]
+                          updated[i] = { ...updated[i], name: e.target.value }
+                          set('dress_palette', updated)
+                        }}
+                        className={input}
+                        placeholder="Nombre del color"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const updated = form.dress_palette.filter((_, idx) => idx !== i)
+                          set('dress_palette', updated)
+                        }}
+                        className="w-10 h-10 rounded-xl border border-red-200 text-red-400 hover:bg-red-50 flex items-center justify-center transition-colors shrink-0"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {entry.colors.map((color, j) => (
+                        <div key={j} className="flex items-center gap-1">
+                          <input
+                            type="color"
+                            value={color}
+                            onChange={e => {
+                              const updated = [...form.dress_palette]
+                              const colors = [...updated[i].colors]
+                              colors[j] = e.target.value
+                              updated[i] = { ...updated[i], colors }
+                              set('dress_palette', updated)
+                            }}
+                            className="w-9 h-9 rounded cursor-pointer border border-gray-200"
+                          />
+                          {entry.colors.length > 1 && (
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const updated = [...form.dress_palette]
+                                updated[i] = { ...updated[i], colors: updated[i].colors.filter((_, ci) => ci !== j) }
+                                set('dress_palette', updated)
+                              }}
+                              className="text-gray-400 hover:text-red-400 text-xs"
+                            >
+                              ✕
+                            </button>
+                          )}
+                        </div>
+                      ))}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const updated = [...form.dress_palette]
+                          updated[i] = { ...updated[i], colors: [...updated[i].colors, '#ffffff'] }
+                          set('dress_palette', updated)
+                        }}
+                        className="w-9 h-9 rounded border-2 border-dashed border-gray-300 text-gray-400 hover:border-rose-300 hover:text-rose-400 flex items-center justify-center text-sm font-bold transition-all"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  onClick={() => set('dress_palette', [...form.dress_palette, { name: '', colors: ['#ffffff'] }])}
+                  className="w-full py-4 border-2 border-dashed border-gray-200 rounded-xl text-sm text-gray-400 hover:border-rose-300 hover:text-rose-400 transition-all font-medium"
+                >
+                  + Agregar color
+                </button>
+              </div>
+            )}
+            <Field title="Imagen de referencia (vestimenta)">
+              <input
+                type="url"
+                value={form.dress_code_image_url}
+                onChange={e => set('dress_code_image_url', e.target.value)}
+                className={input}
+                placeholder="https://..."
+              />
+              {project?.id ? (
+                <MediaUploader
+                  projectId={project.id}
+                  bucket="invitation-media"
+                  accept="image/*"
+                  onUploadComplete={url => set('dress_code_image_url', url)}
+                  label="Subir imagen de vestimenta"
+                />
+              ) : (
+                <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para subir archivos.</p>
+              )}
             </Field>
           </SectionCard>
         </div>
@@ -1361,117 +1472,6 @@ export default function ProjectForm({ project }: Props) {
                 + Agregar mesa de regalos
               </button>
             </div>
-          </SectionCard>
-
-          <SectionCard title="Paleta de colores (código de vestimenta)">
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-semibold text-gray-700">Mostrar paleta de colores</span>
-              <Toggle
-                checked={form.especial_show_dress_palette}
-                onChange={v => set('especial_show_dress_palette', v)}
-                label="Mostrar paleta"
-              />
-            </div>
-            {form.especial_show_dress_palette && (
-              <div className="space-y-3 mt-4">
-                {form.especial_dress_palette.map((entry, i) => (
-                  <div key={i} className="rounded-xl border border-gray-100 bg-gray-50/60 p-4 space-y-3">
-                    <div className="flex items-center gap-3">
-                      <input
-                        type="text"
-                        value={entry.name}
-                        onChange={e => {
-                          const updated = [...form.especial_dress_palette]
-                          updated[i] = { ...updated[i], name: e.target.value }
-                          set('especial_dress_palette', updated)
-                        }}
-                        className={input}
-                        placeholder="Nombre del color"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => {
-                          const updated = form.especial_dress_palette.filter((_, idx) => idx !== i)
-                          set('especial_dress_palette', updated)
-                        }}
-                        className="w-10 h-10 rounded-xl border border-red-200 text-red-400 hover:bg-red-50 flex items-center justify-center transition-colors shrink-0"
-                      >
-                        ✕
-                      </button>
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      {entry.colors.map((color, j) => (
-                        <div key={j} className="flex items-center gap-1">
-                          <input
-                            type="color"
-                            value={color}
-                            onChange={e => {
-                              const updated = [...form.especial_dress_palette]
-                              const colors = [...updated[i].colors]
-                              colors[j] = e.target.value
-                              updated[i] = { ...updated[i], colors }
-                              set('especial_dress_palette', updated)
-                            }}
-                            className="w-9 h-9 rounded cursor-pointer border border-gray-200"
-                          />
-                          {entry.colors.length > 1 && (
-                            <button
-                              type="button"
-                              onClick={() => {
-                                const updated = [...form.especial_dress_palette]
-                                updated[i] = { ...updated[i], colors: updated[i].colors.filter((_, ci) => ci !== j) }
-                                set('especial_dress_palette', updated)
-                              }}
-                              className="text-gray-400 hover:text-red-400 text-xs"
-                            >
-                              ✕
-                            </button>
-                          )}
-                        </div>
-                      ))}
-                      <button
-                        type="button"
-                        onClick={() => {
-                          const updated = [...form.especial_dress_palette]
-                          updated[i] = { ...updated[i], colors: [...updated[i].colors, '#ffffff'] }
-                          set('especial_dress_palette', updated)
-                        }}
-                        className="w-9 h-9 rounded border-2 border-dashed border-gray-300 text-gray-400 hover:border-rose-300 hover:text-rose-400 flex items-center justify-center text-sm font-bold transition-all"
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-                ))}
-                <button
-                  type="button"
-                  onClick={() => set('especial_dress_palette', [...form.especial_dress_palette, { name: '', colors: ['#ffffff'] }])}
-                  className="w-full py-4 border-2 border-dashed border-gray-200 rounded-xl text-sm text-gray-400 hover:border-rose-300 hover:text-rose-400 transition-all font-medium"
-                >
-                  + Agregar color
-                </button>
-              </div>
-            )}
-            <Field title="Imagen de referencia (vestimenta)">
-              <input
-                type="url"
-                value={form.especial_dress_code_image_url}
-                onChange={e => set('especial_dress_code_image_url', e.target.value)}
-                className={input}
-                placeholder="https://..."
-              />
-              {project?.id ? (
-                <MediaUploader
-                  projectId={project.id}
-                  bucket="invitation-media"
-                  accept="image/*"
-                  onUploadComplete={url => set('especial_dress_code_image_url', url)}
-                  label="Subir imagen de vestimenta"
-                />
-              ) : (
-                <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para subir archivos.</p>
-              )}
-            </Field>
           </SectionCard>
         </div>
       )}
