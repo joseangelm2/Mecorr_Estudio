@@ -13,11 +13,7 @@ export default function ZafiroPhotoGrid({ photos }: Props) {
 
   return (
     <>
-      <div className="encabezado">
-        <h3 className="evento" style={{ textAlign: "center", marginTop: "5%", marginBottom: "-5%" }}>
-          Álbum de fotos
-        </h3>
-      </div>
+      <h3 className="titulo-seccion">Álbum de fotos</h3>
       <div id="grid">
         <div className="container-grid">
           {pairs.map(([a, b], i) => (
