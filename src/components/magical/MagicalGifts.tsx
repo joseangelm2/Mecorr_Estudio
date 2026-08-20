@@ -123,7 +123,7 @@ export default function MagicalGifts({ project }: Props) {
       </section>
 
       {/* Hashtag Instagram */}
-      {hashtag && (
+      {project.show_instagram_album && hashtag && (
         <section className="gift-liverpool-container show-p-y no-print" style={{ marginTop: "8%" }}>
           <h2>Hashtag en Instagram</h2>
           <div className="gift-liverpool-object-container">

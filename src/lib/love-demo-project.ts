@@ -13,6 +13,7 @@ export const LOVE_DEMO_PROJECT: Project = {
   rsvp_phone: '4438569931',
   hashtag: '#XVCamila',
   instagram_mode: 'instagram',
+  show_instagram_album: true,
   music_url: '/images/love/musica.mp3',
   hero_photo_url: '/images/love/foto1.jpg',
   parent_names: ['Elías Moises Galván Juárez', 'Esperanza Méndez Hernández'],

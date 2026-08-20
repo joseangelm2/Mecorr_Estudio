@@ -94,7 +94,7 @@ export default function SobreTemplate({ project }: Props) {
       {reception && <RecepcionSection reception={reception} />}
       {itinerary.length > 0 && <ItinerarioSection itinerary={itinerary} />}
       {dress_code && <VestimentaSection dressCode={dress_code} />}
-      {(project.instagram_mode === 'album' || hashtag) && (
+      {project.show_instagram_album && (project.instagram_mode === 'album' || hashtag) && (
         <HashtagSection hashtag={hashtag ?? undefined} mode={project.instagram_mode} slug={project.slug} />
       )}
       {photos.length > 0 && <FotosCarousel photos={photos} />}

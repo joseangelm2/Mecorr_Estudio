@@ -49,7 +49,7 @@ function toFormData(project?: Project): ProjectFormData {
     return {
       slug: '', template: 'sobre', status: 'draft',
       quinceanera_name: '', guest_name: '', event_date: '',
-      rsvp_phone: '', hashtag: '', instagram_mode: 'instagram', music_url: '', hero_photo_url: '',
+      rsvp_phone: '', hashtag: '', instagram_mode: 'instagram', show_instagram_album: true, music_url: '', hero_photo_url: '',
       parent_names: ['', ''], padrinos: ['', ''],
       ceremony_venue: '', ceremony_address: '', ceremony_time: '', ceremony_map_link: '', ceremony_photo_url: '',
       reception_venue: '', reception_address: '', reception_time: '', reception_map_link: '', reception_photo_url: '',
@@ -109,6 +109,7 @@ function toFormData(project?: Project): ProjectFormData {
     rsvp_phone: project.rsvp_phone ?? '',
     hashtag: project.hashtag ?? '',
     instagram_mode: project.instagram_mode ?? 'instagram',
+    show_instagram_album: project.show_instagram_album ?? true,
     music_url: project.music_url ?? '',
     hero_photo_url: project.hero_photo_url ?? '',
     parent_names: project.parent_names.length ? project.parent_names : ['', ''],
@@ -499,6 +500,10 @@ export default function ProjectForm({ project }: Props) {
           </SectionCard>
           <div>
             <Field title="Sección de Instagram">
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-xs text-gray-400">Comparte fotos en Instagram o recibe fotos/videos en un álbum digital</p>
+                <Toggle checked={form.show_instagram_album} onChange={v => set('show_instagram_album', v)} label="Mostrar sección" />
+              </div>
               <div className="flex gap-2 mb-2">
                 <button
                   type="button"

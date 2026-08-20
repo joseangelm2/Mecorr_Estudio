@@ -16,9 +16,10 @@ interface Props {
   mode?: 'instagram' | 'album'
   slug?: string
   dressCodeNotes?: string
+  showInstagramAlbum?: boolean
 }
 
-export default function EleganceWishes({ phone, hashtag, mode = 'instagram', slug, dressCodeNotes }: Props) {
+export default function EleganceWishes({ phone, hashtag, mode = 'instagram', slug, dressCodeNotes, showInstagramAlbum = true }: Props) {
   const messageRef = useRef<HTMLTextAreaElement>(null)
 
   return (
@@ -39,7 +40,7 @@ export default function EleganceWishes({ phone, hashtag, mode = 'instagram', slu
         </div>
       )}
 
-      {mode === 'album' && slug ? (
+      {showInstagramAlbum && (mode === 'album' && slug ? (
         <div className="extra show-p-y">
           <h3>Álbum Digital</h3>
           <p className="texto">Escanea el código y sube tus fotos y videos del evento</p>
@@ -54,7 +55,7 @@ export default function EleganceWishes({ phone, hashtag, mode = 'instagram', slu
           <p className="texto">Comparte tus mejores momentos con el Hashtag de Instagram <br />#{hashtag}</p>
           <div className="boton" style={{ width: '30%' }}>Ver Fotos</div>
         </a>
-      )}
+      ))}
 
       {dressCodeNotes && (
         <div className="extra show-p-y">

@@ -243,7 +243,7 @@ export default function SelloRosaContent({ project }: Props) {
       )}
 
       {/* Hashtag */}
-      {project.hashtag && (
+      {project.show_instagram_album && project.hashtag && (
         <div className="sr-hashtag show-p-y">
           <div className="sr-hashtag-text">{project.hashtag}</div>
           <div style={{ marginTop: "16px" }}>

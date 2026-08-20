@@ -56,6 +56,7 @@ export interface Project {
   rsvp_phone: string | null
   hashtag: string | null
   instagram_mode: 'instagram' | 'album'
+  show_instagram_album: boolean
   music_url: string | null
   hero_photo_url: string | null
   parent_names: string[]

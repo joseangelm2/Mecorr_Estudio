@@ -289,7 +289,7 @@ export default function RosaGoldContent({ project }: Props) {
       </section>
 
       {/* HASHTAG */}
-      {project.hashtag && (
+      {project.show_instagram_album && project.hashtag && (
         <section className="rg-cuando-donde" style={{ paddingTop: "30px" }}>
           <div className="rg-announcement anim-up">Hashtag en Instagram</div>
           <hr style={{ width: "230px", margin: "8px auto", border: "none", borderTop: "1px solid #ce9e5f" }} />

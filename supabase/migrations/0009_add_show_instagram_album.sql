@@ -1,0 +1,2 @@
+ALTER TABLE projects
+  ADD COLUMN IF NOT EXISTS show_instagram_album BOOLEAN NOT NULL DEFAULT true;

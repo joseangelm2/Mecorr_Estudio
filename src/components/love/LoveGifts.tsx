@@ -137,7 +137,7 @@ export default function LoveGifts({ project }: Props) {
         </section>
 
         {/* Hashtag Instagram */}
-        {project.hashtag && (
+        {project.show_instagram_album && project.hashtag && (
           <section className="dress-code show-p-y" style={{ marginTop: "8%" }}>
             <h2 className="subtitulo">Hashtag en Instagram</h2>
             <img src="/images/love/9_separador.png" className="separador" alt="" />

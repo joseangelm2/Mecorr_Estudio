@@ -147,7 +147,7 @@ export default function EsmeraldaGifts({ project }: Props) {
       </section>
 
       {/* Hashtag Instagram */}
-      {project.hashtag && (
+      {project.show_instagram_album && project.hashtag && (
         <>
           <CutLine />
           <section className="gift-liverpool-container show-p-y no-print" style={{ marginTop: "4vw" }}>

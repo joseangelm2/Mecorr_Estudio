@@ -84,7 +84,7 @@ export default function PinkGifts({ project }: Props) {
         </div>
       </div>
 
-      {project.hashtag && (
+      {project.show_instagram_album && project.hashtag && (
         <a className="extra show-p-y"
           href={`https://www.instagram.com/explore/tags/${project.hashtag.replace("#", "")}/`} target="_self">
           <img src="/images/pink/instagram.png" style={{ width: "50%", marginBottom: "4%" }} alt="Instagram" />

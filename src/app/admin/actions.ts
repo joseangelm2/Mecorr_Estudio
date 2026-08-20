@@ -16,6 +16,7 @@ export interface ProjectFormData {
   rsvp_phone: string
   hashtag: string
   instagram_mode: string
+  show_instagram_album: boolean
   music_url: string
   hero_photo_url: string
   parent_names: string[]
@@ -103,6 +104,7 @@ async function formDataToProject(data: ProjectFormData) {
     rsvp_phone: data.rsvp_phone || null,
     hashtag: data.hashtag || null,
     instagram_mode: data.instagram_mode || 'instagram',
+    show_instagram_album: data.show_instagram_album,
     music_url: data.music_url || null,
     hero_photo_url: data.hero_photo_url || null,
     parent_names: data.parent_names.filter(Boolean),
