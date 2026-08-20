@@ -3,6 +3,8 @@
 import "@/app/zafiro/zafiro.css";
 import { useState, useRef, useEffect } from "react";
 import type { Project } from "@/types/invitation";
+import { ZAFIRO_THEMES, DEFAULT_ZAFIRO_THEME, ZAFIRO_ICON_BASE } from "@/lib/zafiro-themes";
+import { shadeHex, hexToFilterFrom } from "@/lib/color";
 import {
   ZafiroScrollInit,
   ZafiroEnvelope,
@@ -40,9 +42,34 @@ export default function ZafiroTemplate({ project }: Props) {
     project.hero_photo_url ||
     undefined;
 
+  const customColor = (project.extra_config?.custom_color as string) || "";
+  const theme = project.color_theme === "custom" && customColor
+    ? {
+        id: "custom",
+        label: "Personalizado",
+        swatch: customColor,
+        primary: customColor,
+        primaryLight: shadeHex(customColor, 45),
+        bgColor: shadeHex(customColor, 62),
+        iconFilterDark: hexToFilterFrom(shadeHex(customColor, -20), ZAFIRO_ICON_BASE),
+      }
+    : ZAFIRO_THEMES.find(t => t.id === project.color_theme) ?? DEFAULT_ZAFIRO_THEME;
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
   }, []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.style.setProperty("--color-principal", theme.primary);
+    root.style.setProperty("--color-principal-light", theme.primaryLight);
+    root.style.setProperty("--bg-color", theme.bgColor);
+    root.style.setProperty("--zafiro-dark-filter", theme.iconFilterDark);
+    return () => {
+      const vars = ["--color-principal", "--color-principal-light", "--bg-color", "--zafiro-dark-filter"];
+      vars.forEach(v => root.style.removeProperty(v));
+    };
+  }, [theme]);
 
   function handleOpen() {
     setOpen(true);

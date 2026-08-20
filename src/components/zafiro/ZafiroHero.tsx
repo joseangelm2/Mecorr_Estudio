@@ -28,7 +28,7 @@ export default function ZafiroHero({ project }: Props) {
       <img
         className="foto-full show-p-y"
         src="/images/zafiro/corona.png"
-        style={{ width: "30%", marginTop: "3%", marginBottom: "-5%" }}
+        style={{ width: "30%", marginTop: "3%", marginBottom: "-5%", filter: "var(--zafiro-dark-filter)" }}
         alt=""
       />
 

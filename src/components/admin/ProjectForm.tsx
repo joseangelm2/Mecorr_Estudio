@@ -8,6 +8,7 @@ import type { Project, TemplateId } from '@/types/invitation'
 import { THEMES } from '@/lib/themes'
 import { ELEGANCE_THEMES } from '@/lib/elegance-themes'
 import { ESPECIAL_THEMES } from '@/lib/especial-themes'
+import { ZAFIRO_THEMES } from '@/lib/zafiro-themes'
 import AlbumMediaAdminPanel from '@/components/admin/AlbumMediaAdminPanel'
 
 // Lazy: arrastra el cliente de Supabase — no necesario en el bundle inicial
@@ -376,12 +377,13 @@ export default function ProjectForm({ project }: Props) {
             </div>
           </Field>
 
-          {(form.template === 'sobre' || form.template === 'elegance' || form.template === 'especial') && (
+          {(form.template === 'sobre' || form.template === 'elegance' || form.template === 'especial' || form.template === 'zafiro') && (
             <Field title="Paleta de color">
               <div className="flex flex-wrap gap-4">
                 {(
                   form.template === 'sobre' ? THEMES :
                   form.template === 'especial' ? ESPECIAL_THEMES :
+                  form.template === 'zafiro' ? ZAFIRO_THEMES :
                   ELEGANCE_THEMES
                 ).map(theme => (
                   <button
@@ -402,7 +404,7 @@ export default function ProjectForm({ project }: Props) {
                     <span className={`text-xs font-medium ${form.color_theme === theme.id ? 'text-rose-500' : 'text-gray-400'}`}>{theme.label}</span>
                   </button>
                 ))}
-                {form.template === 'especial' && (
+                {(form.template === 'especial' || form.template === 'zafiro') && (
                   <div className="flex flex-col items-center gap-2">
                     <label
                       className="w-10 h-10 rounded-full border-4 cursor-pointer transition-all relative overflow-hidden block"

@@ -33,13 +33,26 @@ html, body {
   padding-top: 5vw;
   position: relative;
   z-index: 1;
-  background: url(/images/zafiro/lila3.jpg);
-  background-size: contain;
-  background-position: center top;
   text-shadow:
     2px 2px 2px rgba(255,255,255,0.3),
     -2px -2px 2px rgba(255,255,255,0.3),
     0 2px 2px rgba(255,255,255,0.3);
+}
+
+/* Fondo decorativo en su propia capa para poder tematizarlo (filter) sin afectar el contenido */
+.contenido::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  background: url(/images/zafiro/lila3.jpg);
+  background-size: contain;
+  background-position: center top;
+  filter: var(--zafiro-dark-filter, none);
 }
 
 /* ==============================
@@ -86,7 +99,7 @@ html, body {
 .nombre-principal {
   font-family: var(--font-beau), "Beau Rivage", cursive;
   font-size: 13vw;
-  color: #775197;
+  color: var(--color-principal);
   margin: 0;
   line-height: 1.1;
 }
@@ -143,7 +156,7 @@ html, body {
 .familia h3 {
   font-family: var(--font-beau), "Beau Rivage", cursive;
   font-size: 9vw;
-  color: #775197;
+  color: var(--color-principal);
   margin: 0 0 1vw;
   font-style: italic;
 }
@@ -173,13 +186,13 @@ html, body {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 7vw;
   font-weight: 600;
-  color: #775197;
+  color: var(--color-principal);
 }
 
 .fecha .barra {
   width: 0.4vw;
   height: 8vw;
-  background: #775197;
+  background: var(--color-principal);
 }
 
 /* ==============================
@@ -194,7 +207,7 @@ html, body {
   width: 90%;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 5vw;
-  border: 0.4vw solid #775197;
+  border: 0.4vw solid var(--color-principal);
   padding: 1vw;
 }
 
@@ -211,7 +224,7 @@ html, body {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 4vw;
   font-weight: 900;
-  color: #775197;
+  color: var(--color-principal);
   margin-right: 2vw;
   text-shadow: none;
 }
@@ -234,7 +247,7 @@ html, body {
   text-align: center;
   width: 90%;
   margin: 3vw auto;
-  background: rgba(119, 81, 151, 0.08);
+  background: color-mix(in srgb, var(--color-principal) 8%, transparent);
   border-radius: 3vw;
   padding: 4vw;
   text-decoration: none;
@@ -252,7 +265,7 @@ html, body {
 .ubicacion .lugar-titulo {
   font-family: var(--font-beau), "Beau Rivage", cursive;
   font-size: 10vw;
-  color: #775197;
+  color: var(--color-principal);
   margin: 0 0 1vw;
 }
 
@@ -268,7 +281,7 @@ html, body {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 4vw;
   font-weight: 700;
-  color: #775197;
+  color: var(--color-principal);
   margin: 1vw 0;
 }
 
@@ -282,8 +295,8 @@ html, body {
    ============================== */
 
 .boton {
-  background: #e5bdff;
-  color: #775197;
+  background: var(--color-principal-light);
+  color: var(--color-principal);
   padding: 1vw 6vw;
   border-radius: 2vw;
   font-family: var(--font-albert), "Albert Sans", sans-serif;
@@ -319,7 +332,7 @@ html, body {
 .extra h3 {
   font-family: var(--font-beau), "Beau Rivage", cursive;
   font-size: 9vw;
-  color: #775197;
+  color: var(--color-principal);
   margin: 0 0 2vw;
 }
 
@@ -393,7 +406,7 @@ html, body {
 .itinerario h3 {
   font-family: var(--font-beau), "Beau Rivage", cursive;
   font-size: 9vw;
-  color: #775197;
+  color: var(--color-principal);
   margin: 0 0 4vw;
 }
 
@@ -421,7 +434,7 @@ html, body {
   width: 16vw;
   height: 16vw;
   border-radius: 50%;
-  background: #775197;
+  background: var(--color-principal);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -452,7 +465,7 @@ html, body {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 4vw;
   font-weight: 700;
-  color: #775197;
+  color: var(--color-principal);
   margin: 0;
 }
 
@@ -466,7 +479,7 @@ html, body {
   font-size: 3.5vw;
   border-radius: 2vw;
   padding: 1.5vw;
-  border: 0.4vw solid #775197;
+  border: 0.4vw solid var(--color-principal);
   margin: 2vw 0;
   resize: none;
   background: white;
@@ -485,7 +498,7 @@ html, body {
 .confirmacion-asistencia h3 {
   font-family: var(--font-beau), "Beau Rivage", cursive;
   font-size: 9vw;
-  color: #775197;
+  color: var(--color-principal);
 }
 
 .confirmacion-asistencia form {
@@ -498,7 +511,7 @@ html, body {
 .familia-input {
   border-radius: 2vw;
   width: 70%;
-  border: 0.4vw solid #775197;
+  border: 0.4vw solid var(--color-principal);
   padding: 1.5vw;
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 3.5vw;
@@ -547,7 +560,7 @@ html, body {
 .despedida {
   font-family: var(--font-beau), "Beau Rivage", cursive;
   font-size: 10vw;
-  color: #775197;
+  color: var(--color-principal);
   text-align: center;
   margin: 5vw 0;
 }

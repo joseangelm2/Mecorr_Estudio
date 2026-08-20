@@ -51,7 +51,7 @@ export default function ZafiroRSVP({ project }: Props) {
 
   return (
     <section className="confirmacion-asistencia show-p-y">
-      <img src="/images/zafiro/buzon.png" style={{ width: "18%" }} alt="WhatsApp" />
+      <img src="/images/zafiro/buzon.png" style={{ width: "18%", filter: "var(--zafiro-dark-filter)" }} alt="WhatsApp" />
       <h3>Confirma tu asistencia</h3>
       {project.confirmation_phrase && (
         <p className="texto" style={{ marginBottom: "4%" }}>{project.confirmation_phrase}</p>
