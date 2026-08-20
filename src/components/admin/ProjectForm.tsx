@@ -66,6 +66,7 @@ function toFormData(project?: Project): ProjectFormData {
       show_datos_bancarios: false, datos_bancarios_text: '',
       show_itinerary: true,
       confirmation_phrase: '', confirmation_highlight_date: '',
+      important_info_text: '',
       especial_background_url: '',
       especial_bg_opacity: '50',
       especial_custom_color: '',
@@ -178,6 +179,7 @@ function toFormData(project?: Project): ProjectFormData {
     datos_bancarios_text: project.datos_bancarios_text ?? '',
     show_itinerary: project.show_itinerary ?? true,
     confirmation_phrase: project.confirmation_phrase ?? '',
+    important_info_text: project.important_info_text ?? '',
     confirmation_highlight_date: project.confirmation_highlight_date ?? '',
     tiene_lista_invitados: project.tiene_lista_invitados ?? false,
     pin_admin: '',  // Nunca pre-llenar el hash; el admin ingresa un nuevo PIN si desea cambiarlo
@@ -543,6 +545,11 @@ export default function ProjectForm({ project }: Props) {
           <Field title="Fecha resaltada en confirmación">
             <input type="date" value={form.confirmation_highlight_date} onChange={e => set('confirmation_highlight_date', e.target.value)} className={input} />
           </Field>
+          {form.template === 'zafiro' && (
+            <Field title="Información importante">
+              <textarea value={form.important_info_text} onChange={e => set('important_info_text', e.target.value)} className={input} rows={2} placeholder="Texto para la sección 'Información Importante' (déjalo vacío para ocultarla)" />
+            </Field>
+          )}
         </div>
       )}
 

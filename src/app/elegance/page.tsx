@@ -78,6 +78,7 @@ const BASE_PROJECT: Omit<Project, 'color_theme'> = {
   datos_bancarios_text: null,
   show_itinerary: true,
   confirmation_phrase: null,
+  important_info_text: null,
   confirmation_highlight_date: null,
   extra_config: {},
   tiene_lista_invitados: false,

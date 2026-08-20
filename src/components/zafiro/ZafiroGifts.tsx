@@ -125,10 +125,10 @@ export default function ZafiroGifts({ project }: Props) {
       )}
 
       {/* Información Importante */}
-      {project.dress_code?.notes && (
+      {project.important_info_text && (
         <div className="extra show-p-y">
           <h3>Información Importante</h3>
-          <p className="importante">❖ {project.dress_code.notes}</p>
+          <p className="importante">❖ {project.important_info_text}</p>
         </div>
       )}
     </>

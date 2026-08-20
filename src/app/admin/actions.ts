@@ -53,6 +53,7 @@ export interface ProjectFormData {
   show_itinerary: boolean
   confirmation_phrase: string
   confirmation_highlight_date: string
+  important_info_text: string
   especial_background_url: string
   especial_bg_opacity: string
   especial_custom_color: string
@@ -157,6 +158,7 @@ async function formDataToProject(data: ProjectFormData) {
     show_itinerary: data.show_itinerary,
     confirmation_phrase: data.confirmation_phrase || null,
     confirmation_highlight_date: data.confirmation_highlight_date || null,
+    important_info_text: data.important_info_text || null,
     extra_config: {
       ...(data.parents_title  ? { parents_title:  data.parents_title  } : {}),
       ...(data.padrinos_title ? { padrinos_title: data.padrinos_title } : {}),
