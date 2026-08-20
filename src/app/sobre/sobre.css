@@ -4,6 +4,12 @@
   src: url(/fonts/marchila.otf) format("opentype");
 }
 
+/* Custom font: Handlee (body text) */
+@font-face {
+  font-family: "Handlee";
+  src: url(/fonts/Handlee-Regular.ttf) format("truetype");
+}
+
 /* ======================================
    COLOR VARIABLES — overridable via JS
    ====================================== */
@@ -35,7 +41,7 @@ body {
   position: relative;
   background-color: #222;
   overflow-x: hidden !important;
-  font-family: var(--font-raleway), "Raleway", sans-serif;
+  font-family: "Handlee", cursive;
 }
 
 .bg-invitacion::after {
@@ -79,7 +85,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 p, a, li {
-  font-family: var(--font-raleway), "Raleway", sans-serif;
+  font-family: "Handlee", cursive;
   font-size: 18px;
 }
 
@@ -239,7 +245,7 @@ ul.tiempo { margin: 0; padding: 0; text-align: center; display: flex; justify-co
 
 .btn-form {
   color: #fff; font-size: 14px;
-  font-family: var(--font-raleway), "Raleway", sans-serif;
+  font-family: "Handlee", cursive;
   padding: 10px 40px; border: 1px solid var(--inv-primary);
   letter-spacing: 1px; border-radius: 30px;
   background: linear-gradient(to right, var(--inv-primary-dark), var(--inv-primary), var(--inv-primary-light)); cursor: pointer;
@@ -255,7 +261,7 @@ ul.tiempo { margin: 0; padding: 0; text-align: center; display: flex; justify-co
   background: rgba(255, 255, 255, 0.3); width: 100%;
   border: 1px solid var(--inv-border); padding: 10px 10px;
   color: #000; border-radius: 15px;
-  font-family: var(--font-raleway), "Raleway", sans-serif;
+  font-family: "Handlee", cursive;
   transition: border-color 0.4s;
 }
 .form-campo::placeholder { color: #000; }
@@ -342,7 +348,7 @@ ul.tiempo { margin: 0; padding: 0; text-align: center; display: flex; justify-co
 }
 
 .color-switcher-label {
-  font-family: var(--font-raleway), "Raleway", sans-serif;
+  font-family: "Handlee", cursive;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.1em;

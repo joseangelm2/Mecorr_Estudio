@@ -1,12 +1,5 @@
 import type { Metadata } from "next";
-import { Raleway } from "next/font/google";
 import "./sobre.css";
-
-const raleway = Raleway({
-  variable: "--font-raleway",
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-});
 
 export const metadata: Metadata = {
   title: "Mis XV Años — Invitación Digital",
@@ -15,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function SobreLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div id="body" className={`bg-invitacion ${raleway.variable}`}>
+    <div id="body" className="bg-invitacion">
       {children}
     </div>
   );

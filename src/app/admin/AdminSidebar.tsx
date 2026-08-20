@@ -12,8 +12,8 @@ const NAV = [
 export default function AdminSidebar() {
   const pathname = usePathname()
 
-  // No renderizar en la página de login
-  if (pathname === '/admin/login') return null
+  // No renderizar en las páginas públicas de autenticación
+  if (pathname === '/admin/login' || pathname === '/admin/forgot-password' || pathname === '/admin/reset-password') return null
 
   return (
     <aside className="w-60 bg-white border-r border-gray-100 flex flex-col shrink-0 shadow-sm">

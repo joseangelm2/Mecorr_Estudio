@@ -72,6 +72,10 @@ export default function AdminLoginPage() {
             {loading ? 'Verificando...' : 'Iniciar sesión'}
           </button>
         </form>
+
+        <a href="/admin/forgot-password" className="admin-login-forgot">
+          ¿Olvidaste tu contraseña?
+        </a>
       </div>
     </div>
   )

@@ -43,7 +43,9 @@ export default async function proxy(request: NextRequest) {
   // Refresca la sesión — actualiza cookies antes de verificar
   const { data: { user } } = await supabase.auth.getUser()
 
-  if (!user && pathname !== '/admin/login') {
+  const publicAdminPaths = ['/admin/login', '/admin/forgot-password', '/admin/reset-password']
+
+  if (!user && !publicAdminPaths.includes(pathname)) {
     return NextResponse.redirect(new URL('/admin/login', request.url))
   }
 

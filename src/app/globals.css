@@ -1040,6 +1040,28 @@ footer.site-footer .social-row {
 .admin-login-btn:hover { background: #6fa3ff; }
 .admin-login-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
+.admin-login-forgot {
+  display: block;
+  text-align: center;
+  margin-top: 18px;
+  font-size: 13px;
+  color: rgba(241,241,248,0.5);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.admin-login-forgot:hover { color: #6fa3ff; }
+
+.admin-login-success {
+  background: rgba(34,197,94,0.12);
+  border: 1px solid rgba(34,197,94,0.3);
+  color: #86efac;
+  font-size: 13px;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 16px;
+}
+
 /* Page offset for fixed header */
 .page-top-offset {
   padding-top: 65px;
