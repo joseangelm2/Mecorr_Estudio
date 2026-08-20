@@ -85,6 +85,7 @@ export interface Project {
   confirmation_phrase: string | null
   confirmation_highlight_date: string | null
   important_info_text: string | null
+  mesa_regalos_text: string | null
   extra_config: Record<string, unknown>
   tiene_lista_invitados: boolean
   pin_admin: string | null

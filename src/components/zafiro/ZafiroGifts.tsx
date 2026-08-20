@@ -36,7 +36,7 @@ export default function ZafiroGifts({ project }: Props) {
         <a className="extra show-p-y" href={project.gift_registry.liverpoolLink} target="_self">
           <img style={{ width: "50%", marginBottom: "3%", filter: "var(--zafiro-dark-filter)" }} src="/images/zafiro/liverpool.png" alt="Liverpool" />
           <h3>Mesa de Regalos</h3>
-          <p className="texto">Tu presencia ilumina nuestro evento. Si deseas regalarme algo, te comparto las siguientes opciones:</p>
+          {project.mesa_regalos_text && <p className="texto">{project.mesa_regalos_text}</p>}
           <div className="boton" style={{ marginTop: "1%" }}>Ver Lista de Deseos</div>
         </a>
       )}

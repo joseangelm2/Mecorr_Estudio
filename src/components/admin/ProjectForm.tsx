@@ -57,7 +57,7 @@ function toFormData(project?: Project): ProjectFormData {
       itinerary: [{ time: '', description: '', icon: '' }],
       dress_code_colors: '', dress_code_notes: '',
       photos: [''],
-      liverpool_link: '', bank_account: '', bank_beneficiary: '', gift_store: 'liverpool',
+      liverpool_link: '', bank_account: '', bank_beneficiary: '', gift_store: 'liverpool', mesa_regalos_text: '',
       parents_title: '', padrinos_title: '',
       color_theme: 'rosagold',
       invitation_text: '',
@@ -133,6 +133,7 @@ function toFormData(project?: Project): ProjectFormData {
     dress_code_notes: project.dress_code?.notes ?? '',
     photos: project.photos.length ? project.photos : [''],
     liverpool_link: project.gift_registry?.liverpoolLink ?? '',
+    mesa_regalos_text: project.mesa_regalos_text ?? '',
     bank_account: project.gift_registry?.bankAccount ?? '',
     bank_beneficiary: project.gift_registry?.bankBeneficiary ?? '',
     gift_store: project.gift_registry?.giftStore ?? 'liverpool',
@@ -1154,6 +1155,9 @@ export default function ProjectForm({ project }: Props) {
             </Field>
             <Field title={`Link de ${form.gift_store === 'liverpool' ? 'Liverpool' : form.gift_store === 'amazon' ? 'Amazon' : form.gift_store === 'palacio' ? 'Palacio de Hierro' : 'Mesa de Regalos'}`}>
               <input type="url" value={form.liverpool_link} onChange={e => set('liverpool_link', e.target.value)} className={input} placeholder="https://..." />
+            </Field>
+            <Field title="Texto (opcional)">
+              <textarea value={form.mesa_regalos_text} onChange={e => set('mesa_regalos_text', e.target.value)} className={input} rows={2} placeholder="Tu presencia ilumina nuestro evento. Si deseas regalarme algo, te comparto las siguientes opciones:" />
             </Field>
           </SectionCard>
         </div>
