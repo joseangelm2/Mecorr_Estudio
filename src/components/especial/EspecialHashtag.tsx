@@ -9,7 +9,7 @@ interface Props {
 
 export default function EspecialHashtag({ hashtag, mode = 'instagram', slug, decorationSrc = '/images/flores-01.png' }: Props) {
   return (
-    <section className="padding-section text-center">
+    <section id="hashtag" className="padding-section text-center">
       <div className="row justify-content-center">
         <div className="col-md-10">
           <div className="mb-10 wow fadeInUp">

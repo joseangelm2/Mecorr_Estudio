@@ -61,7 +61,7 @@ export default function EleganceRSVP({ project }: Props) {
   }
 
   return (
-    <section className="confirmacion-asistencia show-p-y" style={{ zIndex: 4 }}>
+    <section id="confirmar" className="confirmacion-asistencia show-p-y" style={{ zIndex: 4 }}>
       <h3>{sectionTitle}</h3>
       {highlightDate && (
         <p className="texto" style={{ color: '#F7BB52', fontWeight: 600, marginBottom: '2%' }}>

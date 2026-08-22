@@ -15,7 +15,7 @@ export default function EspecialParents({ project, decorationSrc = '/images/flor
   if (!hasParents && !hasPadrinos) return null
 
   return (
-    <section className="padding-section text-center">
+    <section id="familia" className="padding-section text-center">
       <div className="row justify-content-center">
         <div className="col-md-10">
           <div className="mb-10 wow fadeInUp">

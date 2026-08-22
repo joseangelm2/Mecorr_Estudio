@@ -15,6 +15,20 @@ import EsmeraldaRSVP from '@/components/esmeralda/EsmeraldaRSVP'
 import EsmeraldaFooter from '@/components/esmeralda/EsmeraldaFooter'
 import EsmeraldaDecorations from '@/components/esmeralda/EsmeraldaDecorations'
 import EsmeraldaScrollInit from '@/components/esmeralda/EsmeraldaScrollInit'
+import FloatingMusicToggle from '@/components/FloatingMusicToggle'
+import FloatingSectionNav from '@/components/FloatingSectionNav'
+
+const NAV_CANDIDATES = [
+  { id: 'portada', label: 'Portada' },
+  { id: 'familia', label: 'Familia' },
+  { id: 'countdown', label: 'Cuenta Regresiva' },
+  { id: 'ubicaciones', label: 'Ubicaciones' },
+  { id: 'grid', label: 'Fotos' },
+  { id: 'itinerario', label: 'Itinerario' },
+  { id: 'regalos', label: 'Regalos' },
+  { id: 'confirmar', label: 'Confirmar Asistencia' },
+  { id: 'despedida', label: 'Despedida' },
+]
 
 interface Props {
   project: Project
@@ -36,17 +50,23 @@ export default function EsmeraldaTemplate({ project }: Props) {
         <source src={project.music_url ?? '/images/esmeralda/musica.mp3'} type="audio/mpeg" />
       </audio>
       <EsmeraldaDecorations />
+      {project.show_floating_controls !== false && (
+        <>
+          <FloatingMusicToggle audioRef={audioRef} colorVar="var(--color-principal, #098074)" />
+          <FloatingSectionNav candidates={NAV_CANDIDATES} colorVar="var(--color-principal, #098074)" />
+        </>
+      )}
       {!envelopeOpen && <EnvelopeSobre onOpen={handleOpen} />}
       <div className="background">
-        <EsmeraldaHero project={project} />
+        <div id="portada"><EsmeraldaHero project={project} /></div>
         <EsmeraldaCountdown eventDate={project.event_date} />
-        <EsmeraldaParents project={project} />
-        <EsmeraldaLocations project={project} />
+        <div id="familia"><EsmeraldaParents project={project} /></div>
+        <div id="ubicaciones"><EsmeraldaLocations project={project} /></div>
         <EsmeraldaPhotoGrid photos={project.photos} />
-        <EsmeraldaItinerario project={project} />
-        <EsmeraldaGifts project={project} />
-        <EsmeraldaRSVP project={project} />
-        <EsmeraldaFooter />
+        <div id="itinerario"><EsmeraldaItinerario project={project} /></div>
+        <div id="regalos"><EsmeraldaGifts project={project} /></div>
+        <div id="confirmar"><EsmeraldaRSVP project={project} /></div>
+        <div id="despedida"><EsmeraldaFooter /></div>
       </div>
     </div>
   )

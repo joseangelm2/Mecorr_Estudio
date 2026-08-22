@@ -18,6 +18,22 @@ import EleganceWishes from '@/components/elegance/EleganceWishes'
 import EleganceRSVP from '@/components/elegance/EleganceRSVP'
 import EleganceFooter from '@/components/elegance/EleganceFooter'
 import EleganceVideo from '@/components/elegance/EleganceVideo'
+import FloatingMusicToggle from '@/components/FloatingMusicToggle'
+import FloatingSectionNav from '@/components/FloatingSectionNav'
+
+const NAV_CANDIDATES = [
+  { id: 'portada', label: 'Portada' },
+  { id: 'familia', label: 'Familia' },
+  { id: 'cuenta-regresiva', label: 'Cuenta Regresiva' },
+  { id: 'ubicaciones', label: 'Ubicaciones' },
+  { id: 'regalos', label: 'Regalos' },
+  { id: 'album', label: 'Álbum de Fotos' },
+  { id: 'video', label: 'Video' },
+  { id: 'itinerario', label: 'Itinerario' },
+  { id: 'deseos', label: 'Buzón de Deseos' },
+  { id: 'confirmar', label: 'Confirmar Asistencia' },
+  { id: 'despedida', label: 'Despedida' },
+]
 
 function GalleryPhoto({ src }: { src: string }) {
   return (
@@ -75,37 +91,65 @@ export default function EleganceTemplate({ project }: Props) {
         <source src={project.music_url ?? '/images/esmeralda/musica.mp3'} type="audio/mpeg" />
       </audio>
       {!envelopeOpen && <EleganceEnvelope onOpen={handleOpen} primaryColor={theme.colorPrincipal} />}
+      {project.show_floating_controls !== false && (
+        <>
+          <FloatingMusicToggle audioRef={audioRef} colorVar="var(--color-principal, #b08968)" />
+          <FloatingSectionNav candidates={NAV_CANDIDATES} colorVar="var(--color-principal, #b08968)" />
+        </>
+      )}
       <EleganceDecorations />
       <div className="contenido">
-        <EleganceHero project={project} />
-        {(project.extra_config?.photo_after_hero as string) && <GalleryPhoto src={project.extra_config.photo_after_hero as string} />}
-        <EleganceParents project={project} />
-        {(project.extra_config?.photo_after_parents as string) && <GalleryPhoto src={project.extra_config.photo_after_parents as string} />}
-        <EleganceEventDate eventDate={project.event_date} />
-        <EleganceLocations project={project} />
-        {(project.extra_config?.photo_after_locations as string) && <GalleryPhoto src={project.extra_config.photo_after_locations as string} />}
-        <EleganceGifts project={project} />
-        {(project.extra_config?.photo_after_gifts as string) && <GalleryPhoto src={project.extra_config.photo_after_gifts as string} />}
+        <div id="portada">
+          <EleganceHero project={project} />
+          {(project.extra_config?.photo_after_hero as string) && <GalleryPhoto src={project.extra_config.photo_after_hero as string} />}
+        </div>
+        <div id="familia">
+          <EleganceParents project={project} />
+          {(project.extra_config?.photo_after_parents as string) && <GalleryPhoto src={project.extra_config.photo_after_parents as string} />}
+        </div>
+        <div id="cuenta-regresiva">
+          <EleganceEventDate eventDate={project.event_date} />
+        </div>
+        <div id="ubicaciones">
+          <EleganceLocations project={project} />
+          {(project.extra_config?.photo_after_locations as string) && <GalleryPhoto src={project.extra_config.photo_after_locations as string} />}
+        </div>
+        <div id="regalos">
+          <EleganceGifts project={project} />
+          {(project.extra_config?.photo_after_gifts as string) && <GalleryPhoto src={project.extra_config.photo_after_gifts as string} />}
+        </div>
         {(project.extra_config?.show_album as boolean) && (
-          <ElegancePhotoGrid
-            gridRetrato={(project.extra_config?.grid_retrato as string[]) ?? []}
-            gridHorizontal={(project.extra_config?.grid_horizontal as string[]) ?? []}
-          />
+          <div id="album">
+            <ElegancePhotoGrid
+              gridRetrato={(project.extra_config?.grid_retrato as string[]) ?? []}
+              gridHorizontal={(project.extra_config?.grid_horizontal as string[]) ?? []}
+            />
+          </div>
         )}
         {project.show_video && (
-          <EleganceVideo
-            youtubeId={project.video_youtube_id ?? undefined}
-            localVideo={project.video_url ?? undefined}
-            audioRef={audioRef}
-          />
+          <div id="video">
+            <EleganceVideo
+              youtubeId={project.video_youtube_id ?? undefined}
+              localVideo={project.video_url ?? undefined}
+              audioRef={audioRef}
+            />
+          </div>
         )}
-        {project.show_itinerary && project.itinerary.length > 0 && (project.extra_config?.photo_before_itinerary as string) && <GalleryPhoto src={project.extra_config.photo_before_itinerary as string} />}
-        {project.show_itinerary && project.itinerary.length > 0 && <EleganceItinerary project={project} />}
+        {project.show_itinerary && project.itinerary.length > 0 && (
+          <div id="itinerario">
+            {(project.extra_config?.photo_before_itinerary as string) && <GalleryPhoto src={project.extra_config.photo_before_itinerary as string} />}
+            <EleganceItinerary project={project} />
+          </div>
+        )}
         {(project.extra_config?.photo_after_itinerary as string) && <GalleryPhoto src={project.extra_config.photo_after_itinerary as string} />}
-        <EleganceWishes phone={project.rsvp_phone ?? ''} hashtag={hashtag} mode={project.instagram_mode} slug={project.slug} dressCodeNotes={project.dress_code?.notes || undefined} showInstagramAlbum={project.show_instagram_album} />
+        <div id="deseos">
+          <EleganceWishes phone={project.rsvp_phone ?? ''} hashtag={hashtag} mode={project.instagram_mode} slug={project.slug} dressCodeNotes={project.dress_code?.notes || undefined} showInstagramAlbum={project.show_instagram_album} />
+        </div>
         <EleganceRSVP project={project} />
         {(project.extra_config?.photo_after_rsvp as string) && <GalleryPhoto src={project.extra_config.photo_after_rsvp as string} />}
-        <EleganceFooter />
+        <div id="despedida">
+          <EleganceFooter />
+        </div>
       </div>
     </div>
   )

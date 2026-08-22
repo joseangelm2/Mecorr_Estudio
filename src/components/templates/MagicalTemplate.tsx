@@ -15,6 +15,20 @@ import MagicalRSVP from '@/components/magical/MagicalRSVP'
 import MagicalFooter from '@/components/magical/MagicalFooter'
 import MagicalDecorations from '@/components/magical/MagicalDecorations'
 import MagicalScrollInit from '@/components/magical/MagicalScrollInit'
+import FloatingMusicToggle from '@/components/FloatingMusicToggle'
+import FloatingSectionNav from '@/components/FloatingSectionNav'
+
+const NAV_CANDIDATES = [
+  { id: 'portada', label: 'Portada' },
+  { id: 'countdown', label: 'Cuenta Regresiva' },
+  { id: 'familia', label: 'Familia' },
+  { id: 'ubicaciones', label: 'Ubicaciones' },
+  { id: 'grid', label: 'Fotos' },
+  { id: 'itinerario', label: 'Itinerario' },
+  { id: 'regalos', label: 'Regalos' },
+  { id: 'confirmar', label: 'Confirmar Asistencia' },
+  { id: 'despedida', label: 'Despedida' },
+]
 
 const FALLBACK_PHOTOS = [
   '/images/magical/11.jpg',
@@ -50,17 +64,23 @@ export default function MagicalTemplate({ project }: Props) {
         <source src={project.music_url ?? '/images/magical/musica.mp3'} type="audio/mpeg" />
       </audio>
       <MagicalDecorations />
+      {project.show_floating_controls !== false && (
+        <>
+          <FloatingMusicToggle audioRef={audioRef} colorVar="var(--color-principal, #2d1b69)" />
+          <FloatingSectionNav candidates={NAV_CANDIDATES} colorVar="var(--color-principal, #2d1b69)" />
+        </>
+      )}
       {!envelopeOpen && <MagicalEnvelope onOpen={handleOpen} />}
       <div className="background">
-        <MagicalHero project={project} />
+        <div id="portada"><MagicalHero project={project} /></div>
         <MagicalCountdown eventDate={project.event_date} />
-        <MagicalParents project={project} />
-        <MagicalLocations project={project} />
+        <div id="familia"><MagicalParents project={project} /></div>
+        <div id="ubicaciones"><MagicalLocations project={project} /></div>
         <MagicalPhotoGrid photos={photos} />
-        {project.show_itinerary && <MagicalItinerario project={project} />}
-        <MagicalGifts project={project} />
-        <MagicalRSVP project={project} />
-        <MagicalFooter />
+        {project.show_itinerary && <div id="itinerario"><MagicalItinerario project={project} /></div>}
+        <div id="regalos"><MagicalGifts project={project} /></div>
+        <div id="confirmar"><MagicalRSVP project={project} /></div>
+        <div id="despedida"><MagicalFooter /></div>
       </div>
     </div>
   )

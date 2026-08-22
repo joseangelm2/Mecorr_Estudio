@@ -1,21 +1,24 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, type RefObject } from "react";
 import ColorSwitcher from "@/components/ColorSwitcher";
 
 interface Props {
   musicUrl?: string;
   showSwitcher?: boolean;
+  audioRef?: RefObject<HTMLAudioElement | null>;
 }
 
 export default function IntroEnvelope({
   musicUrl = "https://invitadigitalmanitas.com/musica/nocrezcasmas.mp3",
   showSwitcher = true,
+  audioRef: externalAudioRef,
 }: Props) {
   const introRef = useRef<HTMLElement>(null);
   const sDerechoRef = useRef<HTMLImageElement>(null);
   const sIzquierdoRef = useRef<HTMLImageElement>(null);
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const internalAudioRef = useRef<HTMLAudioElement>(null);
+  const audioRef = externalAudioRef ?? internalAudioRef;
 
   function openEnvelope() {
     if (introRef.current) {

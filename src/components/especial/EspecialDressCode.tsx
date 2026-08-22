@@ -12,7 +12,7 @@ export default function EspecialDressCode({ project, decorationSrc = '/images/fl
   if (!project.dress_code && !showPalette) return null
 
   return (
-    <section className="padding-section text-center" style={{ paddingBottom: '20px' }}>
+    <section id="vestimenta" className="padding-section text-center" style={{ paddingBottom: '20px' }}>
       <div className="row justify-content-center">
         <div className="col-md-10">
           <div className="mb-10 wow fadeInUp">

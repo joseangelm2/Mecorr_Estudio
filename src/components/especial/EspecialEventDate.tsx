@@ -38,6 +38,7 @@ export default function EspecialEventDate({ eventDate }: Props) {
 
   return (
     <section
+      id="cuenta-regresiva"
       className="padding-section text-center bg-overlay-contador bg-img"
       style={{ backgroundImage: 'var(--inv-bg-url, url(/images/background-mob.jpg))', paddingBottom: '20px' }}
     >

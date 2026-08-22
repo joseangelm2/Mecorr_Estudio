@@ -82,6 +82,7 @@ export interface Project {
   show_datos_bancarios: boolean
   datos_bancarios_text: string | null
   show_itinerary: boolean
+  show_floating_controls: boolean
   confirmation_phrase: string | null
   confirmation_highlight_date: string | null
   important_info_text: string | null

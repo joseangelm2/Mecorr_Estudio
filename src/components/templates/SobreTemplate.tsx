@@ -1,12 +1,14 @@
 'use client'
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import "@/app/sobre/sobre.css";
 import { THEMES } from "@/lib/themes";
 import type { Project } from "@/types/invitation";
 import { getRsvpContacts, getRsvpEmail } from "@/lib/rsvp";
 import WowInit from "@/components/WowInit";
 import IntroEnvelope from "@/components/IntroEnvelope";
+import FloatingMusicToggle from "@/components/FloatingMusicToggle";
+import FloatingSectionNav from "@/components/FloatingSectionNav";
 import StickyBanner from "@/components/StickyBanner";
 import HeroSection from "@/components/HeroSection";
 import CelebracionSection from "@/components/CelebracionSection";
@@ -28,7 +30,26 @@ interface Props {
   project: Project;
 }
 
+const NAV_CANDIDATES = [
+  { id: "portada", label: "Portada" },
+  { id: "celebracion", label: "Bienvenida" },
+  { id: "contador", label: "Cuenta Regresiva" },
+  { id: "ceremonia", label: "Ceremonia" },
+  { id: "recepcion", label: "Recepción" },
+  { id: "itinerario", label: "Itinerario" },
+  { id: "vestimenta", label: "Vestimenta" },
+  { id: "hashtag", label: "Comparte el Momento" },
+  { id: "fotos", label: "Fotos" },
+  { id: "video", label: "Video" },
+  { id: "mesa-regalos", label: "Mesa de Regalos" },
+  { id: "lluvia-sobres", label: "Lluvia de Sobres" },
+  { id: "datos-bancarios", label: "Datos Bancarios" },
+  { id: "deseos", label: "Confirmar Asistencia" },
+  { id: "nombre", label: "Despedida" },
+];
+
 export default function SobreTemplate({ project }: Props) {
+  const audioRef = useRef<HTMLAudioElement>(null);
   const {
     quinceanera_name,
     guest_name,
@@ -72,7 +93,13 @@ export default function SobreTemplate({ project }: Props) {
   return (
     <>
       <WowInit />
-      <IntroEnvelope musicUrl={music_url ?? undefined} showSwitcher={false} />
+      <IntroEnvelope musicUrl={music_url ?? undefined} showSwitcher={false} audioRef={audioRef} />
+      {project.show_floating_controls !== false && (
+        <>
+          <FloatingMusicToggle audioRef={audioRef} />
+          <FloatingSectionNav candidates={NAV_CANDIDATES} />
+        </>
+      )}
       <StickyBanner guestName={guest_name ?? quinceanera_name} />
       <HeroSection
         heroPhotoUrl={hero_photo_url ?? undefined}

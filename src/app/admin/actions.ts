@@ -51,6 +51,7 @@ export interface ProjectFormData {
   show_datos_bancarios: boolean
   datos_bancarios_text: string
   show_itinerary: boolean
+  show_floating_controls: boolean
   confirmation_phrase: string
   confirmation_highlight_date: string
   important_info_text: string
@@ -157,6 +158,7 @@ async function formDataToProject(data: ProjectFormData) {
     show_datos_bancarios: data.show_datos_bancarios,
     datos_bancarios_text: data.datos_bancarios_text || null,
     show_itinerary: data.show_itinerary,
+    show_floating_controls: data.show_floating_controls,
     confirmation_phrase: data.confirmation_phrase || null,
     confirmation_highlight_date: data.confirmation_highlight_date || null,
     important_info_text: data.important_info_text || null,

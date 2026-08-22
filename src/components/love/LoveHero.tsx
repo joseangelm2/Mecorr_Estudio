@@ -16,7 +16,7 @@ export default function LoveHero({ project }: Props) {
     : {};
 
   return (
-    <section className="parallax-container parallax-1" style={bgStyle}>
+    <section id="portada" className="parallax-container parallax-1" style={bgStyle}>
       <div className="hero-container">
         <div className="nombre">
           <h2 className="nombre-titulo">{firstName}</h2>

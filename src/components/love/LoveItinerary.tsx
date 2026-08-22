@@ -23,7 +23,7 @@ export default function LoveItinerary({ project }: Props) {
   }));
 
   return (
-    <div className="itinerario show-p-y">
+    <div id="itinerario" className="itinerario show-p-y">
       <h2 className="subtitulo">Programa del Evento</h2>
       <img src="/images/love/9_separador.png" className="separador" alt="" />
       <div style={{ marginTop: "4vw" }}>

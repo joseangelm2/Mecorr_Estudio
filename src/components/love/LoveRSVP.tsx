@@ -50,7 +50,7 @@ export default function LoveRSVP({ project }: Props) {
   }
 
   return (
-    <div className="contain">
+    <div id="confirmar" className="contain">
       <div className="extra">
         <section className="confirmacion-asistencia show-p-y" style={{ marginTop: "8%" }}>
           <h2 className="subtitulo">

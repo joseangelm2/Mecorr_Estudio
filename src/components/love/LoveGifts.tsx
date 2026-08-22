@@ -31,7 +31,7 @@ export default function LoveGifts({ project }: Props) {
   }
 
   return (
-    <div className="contain">
+    <div id="regalos" className="contain">
       <div className="extra">
 
         {/* Código de Vestimenta */}

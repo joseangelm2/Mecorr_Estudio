@@ -65,6 +65,7 @@ export const DEMO_PROJECT: Project = {
   show_datos_bancarios: true,
   datos_bancarios_text: null,
   show_itinerary: true,
+  show_floating_controls: true,
   confirmation_phrase: 'Favor de confirmar asistencia antes del 1 de Noviembre',
   important_info_text: null,
   mesa_regalos_text: null,

@@ -19,6 +19,8 @@ import EspecialVideo from '@/components/especial/EspecialVideo'
 import EspecialGifts from '@/components/especial/EspecialGifts'
 import EspecialRSVP from '@/components/especial/EspecialRSVP'
 import EspecialFooter from '@/components/especial/EspecialFooter'
+import EspecialMusicToggle from '@/components/especial/EspecialMusicToggle'
+import EspecialSectionNav from '@/components/especial/EspecialSectionNav'
 import StickyBanner from '@/components/StickyBanner'
 
 interface Props {
@@ -76,6 +78,12 @@ export default function EspecialTemplate({ project }: Props) {
       <audio ref={audioRef} loop>
         <source src={project.music_url ?? '/images/esmeralda/musica.mp3'} type="audio/mpeg" />
       </audio>
+      {project.show_floating_controls !== false && (
+        <>
+          <EspecialMusicToggle audioRef={audioRef} />
+          <EspecialSectionNav />
+        </>
+      )}
       {!envelopeOpen && (
         <EspecialEnvelope
           onSealClick={() => audioRef.current?.play().catch(() => {})}

@@ -49,7 +49,7 @@ export default function EspecialGifts({ project, decorationSrc = '/images/flores
   }
 
   return (
-    <section className="padding-section">
+    <section id="regalos" className="padding-section">
       <div className="row justify-content-center">
         <div className="col-md-10 text-center">
           <div className="mb-10 wow fadeInUp">

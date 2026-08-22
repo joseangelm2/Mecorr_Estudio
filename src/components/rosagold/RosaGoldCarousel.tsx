@@ -19,7 +19,7 @@ export default function RosaGoldCarousel({ photos }: Props) {
   function next() { setCurrent((c) => (c === images.length - 1 ? 0 : c + 1)); }
 
   return (
-    <section className="rg-galeria">
+    <section id="fotos" className="rg-galeria">
       <div className="rg-slider-container">
         <div className="rg-slider">
           {images.map((src, i) => (

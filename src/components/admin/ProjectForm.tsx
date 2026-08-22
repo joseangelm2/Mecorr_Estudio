@@ -65,6 +65,7 @@ function toFormData(project?: Project): ProjectFormData {
       show_lluvia_sobres: false, lluvia_sobres_text: '',
       show_datos_bancarios: false, datos_bancarios_text: '',
       show_itinerary: true,
+      show_floating_controls: true,
       confirmation_phrase: '', confirmation_highlight_date: '',
       important_info_text: '',
       especial_background_url: '',
@@ -179,6 +180,7 @@ function toFormData(project?: Project): ProjectFormData {
     show_datos_bancarios: project.show_datos_bancarios ?? false,
     datos_bancarios_text: project.datos_bancarios_text ?? '',
     show_itinerary: project.show_itinerary ?? true,
+    show_floating_controls: project.show_floating_controls ?? true,
     confirmation_phrase: project.confirmation_phrase ?? '',
     important_info_text: project.important_info_text ?? '',
     confirmation_highlight_date: project.confirmation_highlight_date ?? '',
@@ -880,6 +882,18 @@ export default function ProjectForm({ project }: Props) {
             )}
             {form.music_url && <p className="text-sm text-green-600 flex items-center gap-1.5 font-medium">✓ Música cargada</p>}
             <input type="url" value={form.music_url} onChange={e => set('music_url', e.target.value)} className={input} placeholder="O pega la URL del archivo de audio..." />
+          </SectionCard>
+
+          {/* Controles flotantes */}
+          <SectionCard title="Controles flotantes" description="Botones flotantes en la invitación pública: silenciar música y menú de secciones">
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-semibold text-gray-700">Mostrar controles flotantes</span>
+              <Toggle
+                checked={form.show_floating_controls}
+                onChange={v => set('show_floating_controls', v)}
+                label="Mostrar controles"
+              />
+            </div>
           </SectionCard>
 
           {/* Gallery — elegance usa campos nombrados, otros templates usan array */}

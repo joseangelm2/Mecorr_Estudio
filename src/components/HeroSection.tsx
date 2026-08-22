@@ -10,7 +10,7 @@ export default function HeroSection({
   quinceaneraName = "Aime Ferreira",
 }: Props) {
   return (
-    <section style={{ backgroundColor: "rgba(255,255,255,.5)" }}>
+    <section id="portada" style={{ backgroundColor: "rgba(255,255,255,.5)" }}>
       <img src={heroPhotoUrl} width="100%" alt={quinceaneraName} />
       <div
         className="text-center"

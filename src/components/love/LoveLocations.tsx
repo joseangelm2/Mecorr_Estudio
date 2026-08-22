@@ -6,7 +6,7 @@ interface Props {
 
 export default function LoveLocations({ project }: Props) {
   return (
-    <div className="contain">
+    <div id="ubicaciones" className="contain">
       <div className="frase-container show-p-y">
         <h2 className="subtitulo">Te Invito a mis XV</h2>
         <img src="/images/love/9_separador.png" className="separador" alt="" />

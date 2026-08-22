@@ -9,7 +9,7 @@ export default function EspecialLocations({ project, decorationSrc = '/images/fl
   return (
     <>
       {project.ceremony && (
-        <section className="padding-section text-center" style={{ paddingBottom: '20px' }}>
+        <section id="ceremonia" className="padding-section text-center" style={{ paddingBottom: '20px' }}>
           <div className="row justify-content-center">
             <div className="col-md-10">
               <div className="mb-10 wow fadeInUp">
@@ -33,7 +33,7 @@ export default function EspecialLocations({ project, decorationSrc = '/images/fl
       )}
 
       {project.reception && (
-        <section className="padding-section text-center" style={{ paddingBottom: '20px' }}>
+        <section id="recepcion" className="padding-section text-center" style={{ paddingBottom: '20px' }}>
           <div className="row justify-content-center">
             <div className="col-md-10">
               <div className="mb-10 wow fadeInUp">

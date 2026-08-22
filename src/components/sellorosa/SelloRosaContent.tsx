@@ -36,7 +36,7 @@ function SelloRosaCountdown({ eventDate }: { eventDate: string }) {
   }, [eventDate]);
 
   return (
-    <div className="sr-countdown-wrapper">
+    <div id="cuenta-regresiva" className="sr-countdown-wrapper">
       <div className="sr-countdown-title">Solo faltan</div>
       <div className="sr-countdown-grid">
         {[{ v: t.days, l: "Días" }, { v: t.hours, l: "Hrs" }, { v: t.minutes, l: "Min" }, { v: t.seconds, l: "Seg" }].map(({ v, l }) => (
@@ -80,7 +80,7 @@ export default function SelloRosaContent({ project }: Props) {
   return (
     <main className="sr-main">
       {/* Hero */}
-      <section className="sr-hero">
+      <section id="portada" className="sr-hero">
         <div className="sr-hero-content">
           <h1 className="sr-hero-title">{firstName}</h1>
           <div className="sr-hero-xv">XV Años</div>
@@ -104,7 +104,7 @@ export default function SelloRosaContent({ project }: Props) {
 
       {/* Padres & Padrinos */}
       {(project.parent_names?.length > 0 || project.padrinos?.length > 0) && (
-        <div className="sr-parents show-p-y">
+        <div id="familia" className="sr-parents show-p-y">
           {project.parent_names?.length > 0 && (
             <section className="sr-section">
               <h2 className="sr-section-title">{(project.extra_config?.parents_title as string) || "Mis Padres"}</h2>
@@ -131,7 +131,7 @@ export default function SelloRosaContent({ project }: Props) {
       )}
 
       {/* Venues */}
-      <div className="sr-venues show-p-y">
+      <div id="ubicaciones" className="sr-venues show-p-y">
         <section className="sr-section">
           <h2 className="sr-section-title">¿Dónde &amp; Cuándo?</h2>
           <hr className="sr-section-line" />
@@ -160,7 +160,7 @@ export default function SelloRosaContent({ project }: Props) {
 
       {/* Itinerario */}
       {project.show_itinerary && events.length > 0 && (
-        <div className="sr-itinerario show-p-y">
+        <div id="itinerario" className="sr-itinerario show-p-y">
           <section className="sr-section" style={{ background: "transparent", color: "white" }}>
             <h2 className="sr-section-title">Programa del Evento</h2>
             <hr className="sr-section-line" style={{ background: "linear-gradient(to right, transparent, rgba(255,255,255,0.5), transparent)" }} />
@@ -181,7 +181,7 @@ export default function SelloRosaContent({ project }: Props) {
 
       {/* Vestimenta */}
       {project.dress_code && (
-        <div className="sr-vestimenta show-p-y">
+        <div id="vestimenta" className="sr-vestimenta show-p-y">
           <section className="sr-section">
             <h2 className="sr-section-title">Código de Vestimenta</h2>
             <hr className="sr-section-line" />
@@ -197,7 +197,7 @@ export default function SelloRosaContent({ project }: Props) {
 
       {/* Liverpool */}
       {project.gift_registry?.liverpoolLink && (
-        <div className="sr-info show-p-y">
+        <div id="regalos" className="sr-info show-p-y">
           <section className="sr-section">
             <h2 className="sr-section-title">Mesa de Regalos</h2>
             <hr className="sr-section-line" />
@@ -210,7 +210,7 @@ export default function SelloRosaContent({ project }: Props) {
 
       {/* Lluvia de Sobres */}
       {project.show_lluvia_sobres && (
-        <div className="sr-info show-p-y">
+        <div id="lluvia-sobres" className="sr-info show-p-y">
           <section className="sr-section">
             <h2 className="sr-section-title">Lluvia de Sobres</h2>
             <hr className="sr-section-line" />
@@ -221,7 +221,7 @@ export default function SelloRosaContent({ project }: Props) {
 
       {/* Datos Bancarios */}
       {project.show_datos_bancarios && project.gift_registry?.bankAccount && (
-        <div className="sr-info show-p-y">
+        <div id="datos-bancarios" className="sr-info show-p-y">
           <section className="sr-section">
             <h2 className="sr-section-title">Datos Bancarios</h2>
             <hr className="sr-section-line" />
@@ -246,7 +246,7 @@ export default function SelloRosaContent({ project }: Props) {
 
       {/* Hashtag */}
       {project.show_instagram_album && project.hashtag && (
-        <div className="sr-hashtag show-p-y">
+        <div id="hashtag" className="sr-hashtag show-p-y">
           <div className="sr-hashtag-text">{project.hashtag}</div>
           <div style={{ marginTop: "16px" }}>
             <a
@@ -277,7 +277,7 @@ export default function SelloRosaContent({ project }: Props) {
       </div>
 
       {/* RSVP */}
-      <div className="sr-rsvp show-p-y">
+      <div id="confirmar" className="sr-rsvp show-p-y">
         <section className="sr-section">
           <h2 className="sr-section-title">Confirma tu Asistencia</h2>
           <hr className="sr-section-line" />

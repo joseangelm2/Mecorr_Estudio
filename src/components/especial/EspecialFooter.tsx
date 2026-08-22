@@ -9,6 +9,7 @@ export default function EspecialFooter({ project }: Props) {
 
   return (
     <section
+      id="despedida"
       className="padding-final text-center bg-img bg-overlay-contador"
       style={{ backgroundImage: 'var(--inv-bg-url, url(/images/background-mob.jpg))' }}
     >

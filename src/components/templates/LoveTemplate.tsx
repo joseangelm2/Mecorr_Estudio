@@ -14,6 +14,18 @@ import {
   LoveGifts,
   LoveRSVP,
 } from "@/components/love";
+import FloatingMusicToggle from "@/components/FloatingMusicToggle";
+import FloatingSectionNav from "@/components/FloatingSectionNav";
+
+const NAV_CANDIDATES = [
+  { id: "portada", label: "Portada" },
+  { id: "ubicaciones", label: "Ubicaciones" },
+  { id: "familia", label: "Familia" },
+  { id: "grid", label: "Fotos" },
+  { id: "itinerario", label: "Itinerario" },
+  { id: "regalos", label: "Regalos" },
+  { id: "confirmar", label: "Confirmar Asistencia" },
+];
 
 const DEFAULT_PHOTOS = [
   "/images/love/foto1.jpg",
@@ -50,6 +62,12 @@ export default function LoveTemplate({ project }: Props) {
       <audio ref={audioRef} id="music" loop>
         <source src={project.music_url ?? "/images/love/musica.mp3"} type="audio/mpeg" />
       </audio>
+      {project.show_floating_controls !== false && (
+        <>
+          <FloatingMusicToggle audioRef={audioRef} colorVar="#d50f12" />
+          <FloatingSectionNav candidates={NAV_CANDIDATES} colorVar="#d50f12" />
+        </>
+      )}
       {!open && <LoveEnvelope onOpen={handleOpen} />}
       <main>
         <LoveHero project={project} />

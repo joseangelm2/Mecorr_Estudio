@@ -9,7 +9,7 @@ export default function EspecialItinerary({ project, decorationSrc = '/images/fl
   const itinerary = project.itinerary
 
   return (
-    <section className="padding-section text-center" style={{ paddingBottom: '20px' }}>
+    <section id="itinerario" className="padding-section text-center" style={{ paddingBottom: '20px' }}>
       <div className="row justify-content-center">
         <div className="col-md-10">
           <div className="mb-10 wow fadeInUp">

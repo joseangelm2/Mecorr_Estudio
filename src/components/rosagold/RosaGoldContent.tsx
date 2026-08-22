@@ -70,7 +70,7 @@ export default function RosaGoldContent({ project }: Props) {
   return (
     <div id="rg-main">
       {/* HERO */}
-      <section className="rg-hero">
+      <section id="portada" className="rg-hero">
         <div className="rg-hero-content anim-fade-in">
           <div className="rg-name-container">
             <div className="rg-names">{project.quinceanera_name}</div>
@@ -80,7 +80,7 @@ export default function RosaGoldContent({ project }: Props) {
       </section>
 
       {/* MENSAJE */}
-      <section className="rg-mensaje">
+      <section id="familia" className="rg-mensaje">
         <div className="rg-mensaje-recuadro">
           <div className="rg-announcement anim-up">¡Festeja con nosotros!</div>
           <hr style={{ width: "230px", margin: "8px auto", border: "none", borderTop: "1px solid #ce9e5f" }} />
@@ -124,7 +124,7 @@ export default function RosaGoldContent({ project }: Props) {
       </section>
 
       {/* APARTA LA FECHA */}
-      <section className="rg-aparta-fecha">
+      <section id="cuenta-regresiva" className="rg-aparta-fecha">
         <div className="rg-contenido-aparta">
           <div className="rg-announcement-white anim-up">Aparta la fecha</div>
           <div className="rg-datenew">
@@ -142,7 +142,7 @@ export default function RosaGoldContent({ project }: Props) {
 
       {/* VENUES */}
       <div className="esp-med" />
-      <section className="rg-cuando-donde">
+      <section id="ubicaciones" className="rg-cuando-donde">
         <div className="rg-announcement anim-up">¿Cuándo y dónde?</div>
         <hr style={{ width: "230px", margin: "8px auto", border: "none", borderTop: "1px solid #ce9e5f" }} />
         <div className="esp-med" />
@@ -196,7 +196,7 @@ export default function RosaGoldContent({ project }: Props) {
 
       {/* ITINERARIO */}
       {project.show_itinerary && events.length > 0 && (
-        <div className="rg-itinerario-container">
+        <div id="itinerario" className="rg-itinerario-container">
           <table style={{ width: "100%" }}><tbody><tr><td>
             <div className="rg-itinerario-header">
               <div className="rg-announcement-white anim-up">Itinerario</div>
@@ -227,7 +227,7 @@ export default function RosaGoldContent({ project }: Props) {
 
       {/* MESA DE REGALOS */}
       <div className="esp-med" />
-      <section className="rg-cuando-donde">
+      <section id="regalos" className="rg-cuando-donde">
         <div className="rg-announcement anim-up">Mesa de regalos</div>
         <hr style={{ width: "230px", margin: "8px auto", border: "none", borderTop: "1px solid #ce9e5f" }} />
         <div className="esp-med" />
@@ -255,7 +255,7 @@ export default function RosaGoldContent({ project }: Props) {
 
       {/* DATOS BANCARIOS */}
       {project.show_datos_bancarios && project.gift_registry?.bankAccount && (
-        <section className="rg-cuando-donde" style={{ marginTop: "20px" }}>
+        <section id="datos-bancarios" className="rg-cuando-donde" style={{ marginTop: "20px" }}>
           <div className="rg-announcement anim-up">Datos Bancarios</div>
           <hr style={{ width: "230px", margin: "8px auto", border: "none", borderTop: "1px solid #ce9e5f" }} />
           <div className="esp-peq" />
@@ -291,7 +291,7 @@ export default function RosaGoldContent({ project }: Props) {
 
       {/* HASHTAG */}
       {project.show_instagram_album && project.hashtag && (
-        <section className="rg-cuando-donde" style={{ paddingTop: "30px" }}>
+        <section id="hashtag" className="rg-cuando-donde" style={{ paddingTop: "30px" }}>
           <div className="rg-announcement anim-up">Hashtag en Instagram</div>
           <hr style={{ width: "230px", margin: "8px auto", border: "none", borderTop: "1px solid #ce9e5f" }} />
           <div className="esp-peq" />
@@ -306,7 +306,7 @@ export default function RosaGoldContent({ project }: Props) {
       )}
 
       {/* BUZÓN DE DESEOS */}
-      <section className="rg-cuando-donde" style={{ paddingTop: "30px" }}>
+      <section id="deseos" className="rg-cuando-donde" style={{ paddingTop: "30px" }}>
         <div className="rg-announcement anim-up">Buzón de Deseos</div>
         <hr style={{ width: "230px", margin: "8px auto", border: "none", borderTop: "1px solid #ce9e5f" }} />
         <div className="esp-peq" />
@@ -321,7 +321,7 @@ export default function RosaGoldContent({ project }: Props) {
       </section>
 
       {/* CONFIRMACIÓN */}
-      <section className="rg-confirmacion">
+      <section id="confirmar" className="rg-confirmacion">
         <div className="rg-mensaje-recuadro">
           <div className="rg-announcement anim-up">¿Asistirás?</div>
           <hr style={{ width: "230px", margin: "8px auto", border: "none", borderTop: "1px solid #ce9e5f" }} />

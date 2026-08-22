@@ -13,7 +13,7 @@ export default function LoveParents({ project }: Props) {
   if (!hasParents && !hasPadrinos) return null;
 
   return (
-    <div className="contain">
+    <div id="familia" className="contain">
       <div className="familiares">
         {hasParents && (
           <section className="parents-container show-n-x">

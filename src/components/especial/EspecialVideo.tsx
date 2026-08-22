@@ -19,7 +19,7 @@ export default function EspecialVideo({ youtubeId, localVideo, audioRef, decorat
   if (!youtubeId && !localVideo) return null
 
   return (
-    <section className="padding-section">
+    <section id="video" className="padding-section">
       <div className="row justify-content-center">
         <div className="col-md-10">
           <div className="mb-10 text-center wow fadeInUp">
