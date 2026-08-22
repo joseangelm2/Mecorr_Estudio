@@ -115,7 +115,7 @@ export default function RSVPSection({
         )}
         {!submitted ? (
           <form onSubmit={handleSubmit}>
-            <div className="mb-30">
+            <div className="mb-30" style={{ maxWidth: "360px" }}>
               <input
                 name="nombre"
                 id="nombre"

@@ -84,43 +84,45 @@ export default function EspecialRSVP({ project, decorationSrc = '/images/flores-
 
           {!submitted ? (
             <form onSubmit={handleSubmit} className="wow fadeInUp">
-              <div className="mb-20">
-                <label className="color-textos" style={{ display: 'block', marginBottom: '8px' }}>
-                  Nombre y Apellido:
-                </label>
-                <input
-                  type="text"
-                  maxLength={30}
-                  className="form-campo"
-                  placeholder="Escribe tu nombre"
-                  ref={nameRef}
-                  required
-                />
-              </div>
-              <div className="mb-30" style={{ textAlign: 'left' }}>
-                <div className="mb-10">
-                  <input
-                    type="radio"
-                    id="asistire"
-                    name="confirmacion"
-                    checked={attending}
-                    onChange={() => setAttending(true)}
-                  />
-                  <label htmlFor="asistire" className="color-textos" style={{ marginLeft: '8px' }}>
-                    Asistiré
+              <div style={{ maxWidth: '360px', margin: '0 auto' }}>
+                <div className="mb-20">
+                  <label className="color-textos" style={{ display: 'block', marginBottom: '8px' }}>
+                    Nombre y Apellido:
                   </label>
+                  <input
+                    type="text"
+                    maxLength={30}
+                    className="form-campo"
+                    placeholder="Escribe tu nombre"
+                    ref={nameRef}
+                    required
+                  />
                 </div>
-                <div>
-                  <input
-                    type="radio"
-                    id="noAsistire"
-                    name="confirmacion"
-                    checked={!attending}
-                    onChange={() => setAttending(false)}
-                  />
-                  <label htmlFor="noAsistire" className="color-textos" style={{ marginLeft: '8px' }}>
-                    No Asistiré
-                  </label>
+                <div className="mb-30" style={{ textAlign: 'left' }}>
+                  <div className="mb-10">
+                    <input
+                      type="radio"
+                      id="asistire"
+                      name="confirmacion"
+                      checked={attending}
+                      onChange={() => setAttending(true)}
+                    />
+                    <label htmlFor="asistire" className="color-textos" style={{ marginLeft: '8px' }}>
+                      Asistiré
+                    </label>
+                  </div>
+                  <div>
+                    <input
+                      type="radio"
+                      id="noAsistire"
+                      name="confirmacion"
+                      checked={!attending}
+                      onChange={() => setAttending(false)}
+                    />
+                    <label htmlFor="noAsistire" className="color-textos" style={{ marginLeft: '8px' }}>
+                      No Asistiré
+                    </label>
+                  </div>
                 </div>
               </div>
               <button type="submit" className="btn-form">Confirmar</button>

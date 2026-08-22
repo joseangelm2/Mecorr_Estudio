@@ -3,6 +3,10 @@
     "playwright": {
       "command": "/home/jamermx/.npm-global/bin/playwright-mcp",
       "args": ["--headless", "--browser", "chromium", "--executable-path", "/home/jamermx/.cache/ms-playwright/chromium-1224/chrome-linux64/chrome"]
+    },
+    "n8n": {
+      "type": "http",
+      "url": "https://n8n.mecorr.com.mx/mcp-server/http"
     }
   }
 }

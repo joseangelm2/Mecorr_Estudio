@@ -61,7 +61,7 @@ export default function EspecialGifts({ project, decorationSrc = '/images/flores
             <div className="mb-20 wow fadeInUp">
               <img src="/images/elegance/sobre.png" style={{ width: '80px', marginBottom: '16px' }} alt="Sobre" />
               <h3 className="titulo color-titulos mb-10">Lluvia de Sobres</h3>
-              <p className="color-textos">
+              <p className="color-textos mb-20">
                 {project.lluvia_sobres_text || 'Es la tradición de regalar dinero en efectivo dentro de un sobre.'}
               </p>
             </div>

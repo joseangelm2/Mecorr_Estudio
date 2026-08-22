@@ -22,7 +22,7 @@ export default function FinalSection({
         <div className="row justify-content-center">
           <div className="col-md-10">
             <p className="mb-0 text-white sombra text-center">¡Te Espero!</p>
-            <h1 className="titulo mb-0 text-white sombra text-center">
+            <h1 className="titulo mb-0 text-white sombra text-center" style={{ wordSpacing: "0.3em" }}>
               {quinceaneraName}
             </h1>
           </div>

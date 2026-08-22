@@ -24,7 +24,7 @@ export default function EspecialDressCode({ project, decorationSrc = '/images/fl
           )}
           <DressCodePalette project={project} />
           {project.dress_code?.notes && (
-            <p className="color-textos mb-30 wow fadeInUp" style={{ fontWeight: 700, fontSize: '1.1rem', marginTop: '40px' }}>{project.dress_code.notes}</p>
+            <p className="color-textos mb-20 wow fadeInUp" style={{ fontWeight: 700, fontSize: '1.1rem' }}>{project.dress_code.notes}</p>
           )}
         </div>
       </div>

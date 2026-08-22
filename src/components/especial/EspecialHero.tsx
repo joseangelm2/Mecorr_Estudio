@@ -20,7 +20,7 @@ export default function EspecialHero({ project, decorationSrc = '/images/flores-
           <div className="mb-10 wow fadeInUp">
             <img src={decorationSrc} width="160" alt="" />
           </div>
-          <h1 className="titulo color-titulos mb-20 wow fadeInUp">
+          <h1 className="titulo color-titulos mb-20 wow fadeInUp" style={{ wordSpacing: '0.3em' }}>
             {project.quinceanera_name}
           </h1>
           {heroPhoto && (

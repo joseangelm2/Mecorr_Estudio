@@ -44,7 +44,7 @@ export default function VestimentaSection({
             </p>
             {dressCode.notes ? (
               <p
-                className="mb-0 color-textos text-center wow fadeInUp"
+                className="mb-30 color-textos text-center wow fadeInUp"
                 style={{ fontSize: "15px", fontStyle: "italic" }}
               >
                 {dressCode.notes}

@@ -35,7 +35,7 @@ export default function CelebracionSection({
             </p>
             <h1
               className="titulo mb-20 color-titulos text-center wow fadeInUp"
-              style={{ fontSize: "60px" }}
+              style={{ fontSize: "60px", wordSpacing: "0.3em" }}
             >
               {quinceaneraName}
             </h1>

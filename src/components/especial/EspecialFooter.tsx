@@ -23,7 +23,7 @@ export default function EspecialFooter({ project }: Props) {
               style={{ borderRadius: '8px', marginBottom: '20px' }}
             />
           )}
-          <h2 className="titulo text-white wow fadeInUp">{project.quinceanera_name}</h2>
+          <h2 className="titulo text-white wow fadeInUp" style={{ wordSpacing: '0.3em' }}>{project.quinceanera_name}</h2>
           <p className="text-white texto-frase" style={{ marginTop: '16px' }}>
             {footerText}
           </p>
