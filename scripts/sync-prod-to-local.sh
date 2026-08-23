@@ -90,9 +90,22 @@ VALUES ('$bucket', '$bucket', true)
 ON CONFLICT (id) DO NOTHING;
 SQL
 
-  $SUPABASE storage cp -r --linked "ss:///$bucket" "$TMP_DIR/$bucket" || true
+  $SUPABASE storage cp -r --experimental --linked "ss:///$bucket" "$TMP_DIR/$bucket" || true
   if [[ -d "$TMP_DIR/$bucket" ]]; then
-    $SUPABASE storage cp -r --local "$TMP_DIR/$bucket" "ss:///$bucket"
+    # Sube cada subcarpeta (una por proyecto) por separado: copiar el
+    # directorio del bucket completo de una sola vez anida su propio
+    # nombre dentro del destino (ss:///bucket/bucket/...) en vez de
+    # subir su contenido directamente al bucket.
+    found=0
+    for dir in "$TMP_DIR/$bucket"/*/; do
+      [[ -d "$dir" ]] || continue
+      found=1
+      name="$(basename "$dir")"
+      $SUPABASE storage cp -r --experimental --local "$dir" "ss:///$bucket/$name"
+    done
+    if [[ "$found" -eq 0 ]]; then
+      echo "     (bucket vacío en producción, se omite)"
+    fi
   else
     echo "     (bucket vacío o inexistente en producción, se omite)"
   fi
