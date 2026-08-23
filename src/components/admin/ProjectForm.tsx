@@ -285,6 +285,14 @@ export default function ProjectForm({ project }: Props) {
     })
   }
 
+  function insertArrayItem(field: 'parent_names' | 'padrinos' | 'photos', index: number) {
+    setForm(prev => {
+      const arr = [...(prev[field] as string[])]
+      arr.splice(index, 0, '')
+      return { ...prev, [field]: arr }
+    })
+  }
+
   function setItineraryItem(index: number, key: 'time' | 'description' | 'icon', value: string) {
     setForm(prev => {
       const arr = [...prev.itinerary]
@@ -940,28 +948,39 @@ export default function ProjectForm({ project }: Props) {
             <SectionCard title="Galería de fotos" description="Fotos del carrusel que aparecen en la sección Momentos">
               <div className="space-y-6">
                 {form.photos.map((url, i) => (
-                  <div key={i} className="rounded-xl border border-gray-100 bg-gray-50/50 p-4 space-y-3">
-                    <div>
-                      <p className="text-sm font-semibold text-gray-800">Foto {i + 1}</p>
-                      <p className="text-xs text-gray-400 mt-0.5">Posición {i + 1} en la sección Momentos</p>
-                    </div>
-                    {project?.id && (
-                      <MediaUploader
-                        projectId={project.id}
-                        bucket="invitation-media"
-                        accept="image/*"
-                        onUploadComplete={url => setArrayItem('photos', i, url)}
-                        label={`Subir foto ${i + 1}`}
-                      />
-                    )}
-                    <div className="flex gap-3 items-center">
-                      {url ? (
-                        <img src={url} alt="" className="w-12 h-12 object-cover rounded-xl border border-gray-200 shrink-0" />
-                      ) : (
-                        <div className="w-12 h-12 rounded-xl border-2 border-dashed border-gray-200 shrink-0 flex items-center justify-center text-gray-300 text-sm">{i + 1}</div>
+                  <div key={i} className="space-y-2">
+                    <button
+                      type="button"
+                      onClick={() => insertArrayItem('photos', i)}
+                      className="w-full text-xs text-gray-300 hover:text-rose-500 font-medium flex items-center gap-2 transition-colors"
+                    >
+                      <span className="flex-1 border-t border-dashed border-gray-200" />
+                      + Insertar aquí
+                      <span className="flex-1 border-t border-dashed border-gray-200" />
+                    </button>
+                    <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-4 space-y-3">
+                      <div>
+                        <p className="text-sm font-semibold text-gray-800">Foto {i + 1}</p>
+                        <p className="text-xs text-gray-400 mt-0.5">Posición {i + 1} en la sección Momentos</p>
+                      </div>
+                      {project?.id && (
+                        <MediaUploader
+                          projectId={project.id}
+                          bucket="invitation-media"
+                          accept="image/*"
+                          onUploadComplete={url => setArrayItem('photos', i, url)}
+                          label={`Subir foto ${i + 1}`}
+                        />
                       )}
-                      <input type="url" value={url} onChange={e => setArrayItem('photos', i, e.target.value)} className={input} placeholder="URL de imagen" />
-                      <button type="button" onClick={() => removeArrayItem('photos', i)} className="w-10 h-10 rounded-xl border border-red-200 text-red-400 hover:bg-red-50 flex items-center justify-center transition-colors shrink-0">✕</button>
+                      <div className="flex gap-3 items-center">
+                        {url ? (
+                          <img src={url} alt="" className="w-12 h-12 object-cover rounded-xl border border-gray-200 shrink-0" />
+                        ) : (
+                          <div className="w-12 h-12 rounded-xl border-2 border-dashed border-gray-200 shrink-0 flex items-center justify-center text-gray-300 text-sm">{i + 1}</div>
+                        )}
+                        <input type="url" value={url} onChange={e => setArrayItem('photos', i, e.target.value)} className={input} placeholder="URL de imagen" />
+                        <button type="button" onClick={() => removeArrayItem('photos', i)} className="w-10 h-10 rounded-xl border border-red-200 text-red-400 hover:bg-red-50 flex items-center justify-center transition-colors shrink-0">✕</button>
+                      </div>
                     </div>
                   </div>
                 ))}
