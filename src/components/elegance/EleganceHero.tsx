@@ -15,7 +15,7 @@ export default function EleganceHero({ project }: Props) {
 
   return (
     <>
-      <div style={{ display: 'grid', width: '70%', marginTop: '3%', marginBottom: '-3%' }}>
+      <div style={{ display: 'grid', width: '70%', margin: '3% auto -3%' }}>
         <img src="/images/elegance/Logo.png" style={{ gridArea: '1/1', width: '100%', display: 'block' }} alt="" />
         <div style={{
           gridArea: '1/1',

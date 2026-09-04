@@ -16,7 +16,7 @@ export interface EleganceTheme {
   iconFilter: string
 }
 
-const GOLD_IMG_FILTER = 'sepia(1) saturate(4) hue-rotate(8deg) brightness(0.9)'
+export const GOLD_IMG_FILTER = 'sepia(1) saturate(4) hue-rotate(8deg) brightness(0.9)'
 
 export const ELEGANCE_THEMES: EleganceTheme[] = [
   {
@@ -132,7 +132,7 @@ export const ELEGANCE_THEMES: EleganceTheme[] = [
     subtitulosColor: '#F7BB52',
     textosColor: '#F2D67F',
     cuentaTexto: '#F2D67F',
-    overlay: 'rgba(139, 26, 26, 0.55)',
+    overlay: 'rgba(139, 26, 26, 0.85)',
     botonColor: '#F2D67F',
     botonTextoColor: '#BA8100',
     imgFilter: 'none',

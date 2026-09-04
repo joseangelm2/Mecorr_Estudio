@@ -1,4 +1,5 @@
 import type { Project } from '@/types/invitation'
+import { GOLD_IMG_FILTER } from '@/lib/elegance-themes'
 
 interface Props {
   project: Project
@@ -13,7 +14,7 @@ export default function EleganceParents({ project }: Props) {
       <img
         className="foto-full show-p-y"
         src="/images/elegance/cenicienta3.png"
-        style={{ width: '35%', marginTop: '3%', marginBottom: '-3%', filter: 'var(--img-filter, none)' }}
+        style={{ width: '35%', margin: '3% auto -3%', filter: GOLD_IMG_FILTER }}
         alt=""
       />
 

@@ -38,6 +38,11 @@ html, body {
   background-size: 100% 100%, contain;
   background-position: center;
   background-color: var(--color-principal);
+  /* Cenicienta.png es azul; sin blend-mode, temas con un tono distinto (rojo,
+     verde, etc.) se mezclan con ese azul y salen morados/apagados en vez del
+     color del tema. "color" toma el tono/saturación del overlay y conserva
+     la luminosidad de la textura, así cualquier color tiñe la imagen bien. */
+  background-blend-mode: color, normal;
   width: 100%;
   max-width: 600px;
   display: flex;
@@ -97,6 +102,8 @@ html, body {
   width: 60%;
   line-height: 1.3;
   margin-top: var(--separacion);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ---- Fotos ---- */
@@ -111,6 +118,8 @@ html, body {
   flex-direction: column;
   text-align: center;
   margin-top: var(--separacion);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .familia h3 {
