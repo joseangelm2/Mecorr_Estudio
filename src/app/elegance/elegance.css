@@ -34,7 +34,7 @@ html, body {
   margin: auto;
   background-image:
     linear-gradient(var(--color-overlay), var(--color-overlay)),
-    url(/images/elegance/Elegance.png);
+    url(/images/elegance/Cenicienta.png);
   background-size: 100% 100%, contain;
   background-position: center;
   background-color: var(--color-principal);
