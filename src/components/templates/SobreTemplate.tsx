@@ -132,7 +132,7 @@ export default function SobreTemplate({ project }: Props) {
         />
       )}
       {gift_registry?.liverpoolLink && (
-        <MesaRegalosSection liverpoolLink={gift_registry.liverpoolLink} />
+        <MesaRegalosSection liverpoolLink={gift_registry.liverpoolLink} giftStore={gift_registry.giftStore} />
       )}
       {show_lluvia_sobres && (
         <LluviaSobresSection text={lluvia_sobres_text ?? undefined} />

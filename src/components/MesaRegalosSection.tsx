@@ -1,10 +1,29 @@
+const STORE_ICONS: Record<string, string> = {
+  liverpool: "/images/elegance/liverpool.png",
+  amazon: "/images/elegance/amazon.svg",
+  palacio: "/images/elegance/palacio.svg",
+  generic: "/images/elegance/mesa_regalos.png",
+};
+
+const STORE_LABELS: Record<string, string> = {
+  liverpool: "Liverpool",
+  amazon: "Amazon",
+  palacio: "El Palacio de Hierro",
+  generic: "Mesa de Regalos",
+};
+
 interface Props {
   liverpoolLink?: string;
+  giftStore?: string;
 }
 
 export default function MesaRegalosSection({
   liverpoolLink = "https://mesaderegalos.liverpool.com.mx/milistaderegalos/51309081",
+  giftStore = "liverpool",
 }: Props) {
+  const storeIcon = STORE_ICONS[giftStore] ?? STORE_ICONS.liverpool;
+  const storeLabel = STORE_LABELS[giftStore] ?? STORE_LABELS.liverpool;
+
   return (
     <section
       id="mesa-regalos"
@@ -20,10 +39,13 @@ export default function MesaRegalosSection({
             <h1 className="titulo mb-20 color-titulos text-center wow fadeInUp">
               Mesa de Regalos
             </h1>
-            <p className="mb-30 color-textos text-center wow fadeInUp">
+            <p className="mb-20 color-textos text-center wow fadeInUp">
               Si deseas hacerme un regalo, con mucho cariño he preparado una
               selección de opciones para ti.
             </p>
+            <div className="mb-20 text-center wow fadeInUp">
+              <img src={storeIcon} alt={storeLabel} width="120" style={{ display: "inline-block" }} />
+            </div>
             <div className="mb-10 text-center wow fadeInUp">
               <a
                 href={liverpoolLink}
