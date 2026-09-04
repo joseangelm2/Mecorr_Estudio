@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 const DEFAULT_EVENT_DATE = "2026-11-22T15:00:00";
-const DEFAULT_DISPLAY_DATE = "22 Noviembre 2026";
+const DEFAULT_DISPLAY_DATE = "22 de noviembre 2026";
 const DEFAULT_CALENDAR_LINK =
   "https://calendar.google.com/calendar/r/eventedit?text=XV+Años+Aime+Ferreira&dates=20261122T150000/20261123T020000&details=Ceremonia+y+Recepción";
 
@@ -22,10 +22,10 @@ export default function ContadorSection({
     const d = new Date(eventDate);
     if (isNaN(d.getTime())) return DEFAULT_DISPLAY_DATE;
     const months = [
-      "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-      "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre",
+      "enero", "febrero", "marzo", "abril", "mayo", "junio",
+      "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre",
     ];
-    return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+    return `${d.getDate()} de ${months[d.getMonth()]} ${d.getFullYear()}`;
   })();
 
   const calendarLink = (() => {
