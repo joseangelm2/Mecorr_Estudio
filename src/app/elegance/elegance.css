@@ -31,18 +31,9 @@ html, body {
 /* ---- Fondo con textura ---- */
 .contenido {
   position: relative;
+  z-index: 0; /* crea su propio contexto de apilamiento para que ::before (z-index:-1) quede justo detrás del contenido y no se escape detrás de otros elementos */
   margin: auto;
-  background-image:
-    linear-gradient(var(--color-overlay), var(--color-overlay)),
-    url(/images/elegance/Cenicienta.png);
-  background-size: 100% 100%, contain;
-  background-position: center;
   background-color: var(--color-principal);
-  /* Cenicienta.png es azul; sin blend-mode, temas con un tono distinto (rojo,
-     verde, etc.) se mezclan con ese azul y salen morados/apagados en vez del
-     color del tema. "color" toma el tono/saturación del overlay y conserva
-     la luminosidad de la textura, así cualquier color tiñe la imagen bien. */
-  background-blend-mode: color, normal;
   width: 100%;
   max-width: 600px;
   display: flex;
@@ -51,6 +42,26 @@ html, body {
   align-items: center;
   padding-top: var(--espacio-arriba);
   padding-bottom: var(--espacio-abajo);
+}
+
+.contenido::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(var(--color-overlay), var(--color-overlay)),
+    url(/images/elegance/Cenicienta.png);
+  background-size: 100% 100%, contain;
+  background-position: center;
+  /* Cenicienta.png es azul; "color" toma el tono/saturación del overlay y
+     conserva la luminosidad de la textura, así cualquier color tiñe la
+     imagen bien (sin esto, temas con otro tono salen morados/apagados). El
+     centro de la imagen es bastante claro, así que sin oscurecer un poco el
+     resultado sale más rosado/pálido que el color real del tema — por eso
+     el brightness() aparte, aplicado solo al fondo y no al contenido. */
+  background-blend-mode: color, normal;
+  filter: brightness(0.65);
 }
 
 /* ---- Decoraciones fijas ---- */

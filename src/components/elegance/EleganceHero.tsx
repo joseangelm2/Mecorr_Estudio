@@ -52,7 +52,7 @@ export default function EleganceHero({ project }: Props) {
         {lastNames && <h1 className="evento">{lastNames}</h1>}
       </div>
 
-      <div className="frase show" style={{ marginBottom: '30%', color: '#BA8100' }}>
+      <div className="frase show" style={{ marginTop: '2%', marginBottom: '30%', color: '#BA8100' }}>
         {invitationText}
       </div>
     </>
