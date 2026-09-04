@@ -558,6 +558,17 @@ html, body {
 .active { opacity: 1; }
 
 @media (min-width: 600px) {
+  /* Las decoraciones .top/.bottom son fixed y sin límite de ancho, así que
+     por default ocupan casi todo el viewport en vez de solo enmarcar la
+     tarjeta de .contenido (max-width: 600px, centrada). Se recentran aquí
+     para que el marco siga alineado con el contenido en pantallas anchas. */
+  .top, .bottom {
+    left: 50%;
+    right: auto;
+    width: 100%;
+    max-width: 600px;
+    transform: translateX(-50%);
+  }
   .nombre-principal { font-size: 108px; }
   .evento { font-size: 42px; }
   .frase { font-size: 20px; }
