@@ -983,13 +983,13 @@ h2 {
 }
 
 .decorations .item1 { position: absolute; width: 17vw; right: 4vw; top: 2vw; animation: rotar 2.5s linear infinite; }
-.decorations .item2 { position: absolute; width: 14vw; left: 3vw; top: 96vw; animation: rotar 2.5s linear infinite; }
+.decorations .item2 { position: absolute; width: 14vw; left: -3vw; top: 96vw; animation: rotar 2.5s linear infinite; }
 .decorations .item3 { position: absolute; width: 14vw; right: 3vw; top: 143vw; animation: rotar 2.5s linear infinite; }
 .decorations .item4 { position: absolute; width: 14vw; left: 3vw; top: 350vw; animation: rotar 2.5s linear infinite; }
 .decorations .item5 { position: absolute; width: 13vw; right: 4vw; top: 1110vw; animation: rotar 2.5s linear infinite; }
 
 .decorations .item11 { position: absolute; width: 14vw; left: 4vw; top: 4vw; animation: aumentar 2.5s linear infinite; }
-.decorations .item12 { position: absolute; width: 12vw; right: 5vw; top: 97vw; animation: aumentar 2.5s linear infinite; }
+.decorations .item12 { position: absolute; width: 12vw; right: -3vw; top: 97vw; animation: aumentar 2.5s linear infinite; }
 .decorations .item13 { position: absolute; width: 14vw; left: 4vw; top: 144vw; animation: aumentar 2.5s linear infinite; }
 .decorations .item14 { position: absolute; width: 12vw; right: 4vw; top: 525vw; animation: aumentar 2.5s linear infinite; }
 .decorations .item15 { position: absolute; width: 12vw; left: 5vw; top: 900vw; animation: aumentar 2.5s linear infinite; }
