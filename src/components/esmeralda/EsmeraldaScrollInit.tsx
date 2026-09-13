@@ -4,6 +4,11 @@ import { useEffect } from "react";
 
 export default function EsmeraldaScrollInit() {
   useEffect(() => {
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+
     const classMap: Record<string, string> = {
       "show-p-y": "active-p-y",
       "show-n-x": "active-n-x",
