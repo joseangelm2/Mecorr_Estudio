@@ -72,7 +72,7 @@ export default function EsmeraldaTemplate({ project }: Props) {
   const hasItinerario = project.show_itinerary && project.itinerary.length > 0
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={{ position: 'relative', overflow: 'hidden' }}>
       <EsmeraldaScrollInit />
       <audio ref={audioRef} id="music" loop>
         <source src={project.music_url ?? '/images/esmeralda/musica.mp3'} type="audio/mpeg" />
