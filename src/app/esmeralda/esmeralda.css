@@ -8,6 +8,7 @@
   --color-principal: #098074;
   --color-elementos: rgb(26, 161, 134);
   --color-sobre: var(--color-principal);
+  --color-overlay: rgba(9, 128, 116, 0.6);
   --nombre-color: #b78946;
   --subtitulos-color: #f2c96a;
   --texto-color: rgb(255, 255, 255);
@@ -23,11 +24,11 @@
    FONTS
    ====================================== */
 
-/* h1 — event title */
+/* h1 — event title: misma tipografía/color/tamaño que .person-name (nombre de la quinceañera) */
 h1 {
-  font-family: var(--font-cormorant), "Cormorant Garamond", serif;
-  font-size: 6vw;
-  color: #585858;
+  font-family: var(--font-carattere), "Carattere", cursive;
+  font-size: 10vw;
+  color: var(--nombre-color) !important;
   margin-bottom: 0;
   z-index: 2;
 }
@@ -76,7 +77,12 @@ body {
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
-  background: url(/images/esmeralda/verde_oro.jpg);
+  /* verde_oro.jpg es verde/dorado; "color" toma el tono del overlay del tema
+     y conserva la luminosidad de la textura, así cualquier paleta la tiñe
+     bien sin perder el patrón original. */
+  background-image: linear-gradient(var(--color-overlay), var(--color-overlay)),
+    url(/images/esmeralda/verde_oro.jpg);
+  background-blend-mode: color, normal;
   animation: moveBackground 50s infinite;
   background-size: cover;
 }
@@ -89,7 +95,7 @@ body {
 
 .background {
   margin: auto;
-  background: rgba(9, 128, 116, 0.6);
+  background: var(--color-overlay);
   -webkit-box-shadow: 0px 3px 23px 0px rgb(4, 43, 25);
   box-shadow: 0px 3px 23px 0px rgb(4, 43, 25);
   -webkit-backdrop-filter: blur(5px);
@@ -109,6 +115,22 @@ body {
 
 .texto {
   color: var(--texto-color);
+}
+
+/* Wrappers de sección (anclas del menú flotante) — deben replicar el
+   centrado flex de .background; si no, sus hijos con ancho < 100%
+   (.foto, .mensaje, .lugar, .itinerario, etc.) quedan pegados a la izquierda. */
+#portada,
+#familia,
+#ubicaciones,
+#itinerario,
+#regalos,
+#confirmar,
+#despedida {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 h2 {
@@ -972,7 +994,7 @@ h2 {
 .decorations .item14 { position: absolute; width: 12vw; right: 4vw; top: 525vw; animation: aumentar 2.5s linear infinite; }
 .decorations .item15 { position: absolute; width: 12vw; left: 5vw; top: 900vw; animation: aumentar 2.5s linear infinite; }
 
-.decorations .item21 { position: absolute; width: 10vw; left: 46vw; top: 2vw; }
+.decorations .item21 { position: absolute; width: 10vw; left: 46vw; top: -6vw; }
 .decorations .item22 { position: absolute; width: 12vw; left: 5vw; top: 40vw; }
 .decorations .item23 { position: absolute; width: 12vw; right: 4vw; top: 65vw; }
 .decorations .item24 { position: absolute; width: 10vw; right: 6vw; top: 240vw; }
@@ -997,7 +1019,7 @@ h2 {
 
 @media (min-width: 1100px) {
   .background { width: 600px; margin-top: 30px; margin-bottom: 30px; }
-  h1 { font-size: 40px; }
+  h1 { font-size: 60px; }
   h2 { font-size: 60px; }
   h3 { font-size: 40px; margin-top: 30px; }
   h4 { font-size: 26px; }

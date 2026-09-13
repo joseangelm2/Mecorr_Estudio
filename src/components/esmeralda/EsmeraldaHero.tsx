@@ -7,7 +7,7 @@ interface Props {
 }
 
 export default function EsmeraldaHero({ project }: Props) {
-  const [firstName] = (project.quinceanera_name ?? "").split(" ");
+  const fullName = project.quinceanera_name ?? "";
   const d = new Date(project.event_date);
   const dateStr = `${String(d.getDate()).padStart(2, "0")}.${MONTHS[d.getMonth()]}.${d.getFullYear()}`;
 
@@ -39,7 +39,7 @@ export default function EsmeraldaHero({ project }: Props) {
       <div className="name show-hero-left" style={{ transitionDelay: "5.6s" }}>
         <img className="tarjet" src="/images/esmeralda/banda.png" alt="" />
         <h2 className="person-name" style={{ textAlign: "center" }}>
-          {firstName}
+          {fullName}
         </h2>
       </div>
 

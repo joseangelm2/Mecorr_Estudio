@@ -1,8 +1,9 @@
 'use client'
 
 import '@/app/esmeralda/esmeralda.css'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import type { Project } from '@/types/invitation'
+import { ESMERALDA_THEMES, DEFAULT_ESMERALDA_THEME } from '@/lib/esmeralda-themes'
 import EnvelopeSobre from '@/components/esmeralda/EnvelopeSobre'
 import EsmeraldaHero from '@/components/esmeralda/EsmeraldaHero'
 import EsmeraldaCountdown from '@/components/esmeralda/EsmeraldaCountdown'
@@ -37,11 +38,38 @@ interface Props {
 export default function EsmeraldaTemplate({ project }: Props) {
   const [envelopeOpen, setEnvelopeOpen] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
+  const theme = ESMERALDA_THEMES.find(t => t.id === project.color_theme) ?? DEFAULT_ESMERALDA_THEME
+
+  useEffect(() => {
+    const root = document.documentElement
+    root.style.setProperty('--color-principal', theme.colorPrincipal)
+    root.style.setProperty('--color-elementos', theme.colorElementos)
+    root.style.setProperty('--color-overlay', theme.colorOverlay)
+    root.style.setProperty('--nombre-color', theme.nombreColor)
+    root.style.setProperty('--subtitulos-color', theme.subtitulosColor)
+    root.style.setProperty('--itinerario-card-color', theme.itinerarioCardColor)
+    root.style.setProperty('--line-sobre', theme.lineSobre)
+    root.style.setProperty('--text-sello-shadow1', theme.selloShadow1)
+    root.style.setProperty('--text-sello-shadow2', theme.selloShadow2)
+    root.style.setProperty('--button-background-color', theme.colorElementos)
+    return () => {
+      const vars = [
+        '--color-principal', '--color-elementos', '--color-overlay', '--nombre-color',
+        '--subtitulos-color', '--itinerario-card-color', '--line-sobre',
+        '--text-sello-shadow1', '--text-sello-shadow2', '--button-background-color',
+      ]
+      vars.forEach(v => root.style.removeProperty(v))
+    }
+  }, [theme])
 
   function handleOpen() {
     setEnvelopeOpen(true)
     audioRef.current?.play().catch(() => {})
   }
+
+  const hasFamilia = project.parent_names.filter(Boolean).length > 0 || project.padrinos.filter(Boolean).length > 0
+  const hasUbicaciones = Boolean(project.ceremony || project.reception)
+  const hasItinerario = project.show_itinerary && project.itinerary.length > 0
 
   return (
     <div style={{ position: 'relative' }}>
@@ -60,10 +88,10 @@ export default function EsmeraldaTemplate({ project }: Props) {
       <div className="background">
         <div id="portada"><EsmeraldaHero project={project} /></div>
         <EsmeraldaCountdown eventDate={project.event_date} />
-        <div id="familia"><EsmeraldaParents project={project} /></div>
-        <div id="ubicaciones"><EsmeraldaLocations project={project} /></div>
+        {hasFamilia && <div id="familia"><EsmeraldaParents project={project} /></div>}
+        {hasUbicaciones && <div id="ubicaciones"><EsmeraldaLocations project={project} /></div>}
         <EsmeraldaPhotoGrid photos={project.photos} />
-        <div id="itinerario"><EsmeraldaItinerario project={project} /></div>
+        {hasItinerario && <div id="itinerario"><EsmeraldaItinerario project={project} /></div>}
         <div id="regalos"><EsmeraldaGifts project={project} /></div>
         <div id="confirmar"><EsmeraldaRSVP project={project} /></div>
         <div id="despedida"><EsmeraldaFooter /></div>

@@ -7,6 +7,7 @@ import { createProject, updateProject, type ProjectFormData } from '@/app/admin/
 import type { Project, TemplateId } from '@/types/invitation'
 import { THEMES } from '@/lib/themes'
 import { ELEGANCE_THEMES } from '@/lib/elegance-themes'
+import { ESMERALDA_THEMES } from '@/lib/esmeralda-themes'
 import { ESPECIAL_THEMES } from '@/lib/especial-themes'
 import { ZAFIRO_THEMES } from '@/lib/zafiro-themes'
 import AlbumMediaAdminPanel from '@/components/admin/AlbumMediaAdminPanel'
@@ -390,13 +391,14 @@ export default function ProjectForm({ project }: Props) {
             </div>
           </Field>
 
-          {(form.template === 'sobre' || form.template === 'elegance' || form.template === 'especial' || form.template === 'zafiro') && (
+          {(form.template === 'sobre' || form.template === 'elegance' || form.template === 'especial' || form.template === 'zafiro' || form.template === 'esmeralda') && (
             <Field title="Paleta de color">
               <div className="flex flex-wrap gap-4">
                 {(
                   form.template === 'sobre' ? THEMES :
                   form.template === 'especial' ? ESPECIAL_THEMES :
                   form.template === 'zafiro' ? ZAFIRO_THEMES :
+                  form.template === 'esmeralda' ? ESMERALDA_THEMES :
                   ELEGANCE_THEMES
                 ).map(theme => (
                   <button
