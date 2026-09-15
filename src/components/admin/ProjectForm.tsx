@@ -58,7 +58,7 @@ function toFormData(project?: Project): ProjectFormData {
       itinerary: [{ time: '', description: '', icon: '' }],
       dress_code_colors: '', dress_code_notes: '',
       photos: [''],
-      liverpool_link: '', bank_account: '', bank_beneficiary: '', gift_store: 'liverpool', mesa_regalos_text: '',
+      liverpool_link: '', bank_account: '', bank_beneficiary: '', bank_account_type: 'clabe', gift_store: 'liverpool', mesa_regalos_text: '',
       parents_title: '', padrinos_title: '',
       color_theme: 'rosagold',
       invitation_text: '',
@@ -138,6 +138,7 @@ function toFormData(project?: Project): ProjectFormData {
     mesa_regalos_text: project.mesa_regalos_text ?? '',
     bank_account: project.gift_registry?.bankAccount ?? '',
     bank_beneficiary: project.gift_registry?.bankBeneficiary ?? '',
+    bank_account_type: project.gift_registry?.bankAccountType ?? 'clabe',
     gift_store: project.gift_registry?.giftStore ?? 'liverpool',
     parents_title:  (project.extra_config?.parents_title  as string) ?? '',
     padrinos_title: (project.extra_config?.padrinos_title as string) ?? '',
@@ -1140,12 +1141,23 @@ export default function ProjectForm({ project }: Props) {
               </div>
               {form.show_datos_bancarios && (
                 <div className="px-5 pb-5 space-y-4 border-t border-gray-100 pt-4">
+                  <Field title="Tipo de cuenta">
+                    <div className="flex items-center gap-3">
+                      <span className={`text-sm font-medium ${form.bank_account_type === 'clabe' ? 'text-gray-800' : 'text-gray-400'}`}>CLABE</span>
+                      <Toggle
+                        checked={form.bank_account_type === 'tarjeta'}
+                        onChange={v => set('bank_account_type', v ? 'tarjeta' : 'clabe')}
+                        label="Tipo de cuenta bancaria"
+                      />
+                      <span className={`text-sm font-medium ${form.bank_account_type === 'tarjeta' ? 'text-gray-800' : 'text-gray-400'}`}>TARJETA</span>
+                    </div>
+                  </Field>
                   <div className="grid grid-cols-2 gap-4">
                     <Field title="Beneficiario">
                       <input type="text" value={form.bank_beneficiary} onChange={e => set('bank_beneficiary', e.target.value)} className={input} placeholder="María García López" />
                     </Field>
-                    <Field title="CLABE (18 dígitos)">
-                      <input type="text" value={form.bank_account} onChange={e => set('bank_account', e.target.value)} className={input} placeholder="000000000000000000" maxLength={18} />
+                    <Field title={form.bank_account_type === 'tarjeta' ? 'Número de tarjeta (16 dígitos)' : 'CLABE (18 dígitos)'}>
+                      <input type="text" value={form.bank_account} onChange={e => set('bank_account', e.target.value)} className={input} placeholder={form.bank_account_type === 'tarjeta' ? '0000000000000000' : '000000000000000000'} maxLength={form.bank_account_type === 'tarjeta' ? 16 : 18} />
                     </Field>
                   </div>
                   <Field title="Texto personalizado">

@@ -141,6 +141,7 @@ export default function SobreTemplate({ project }: Props) {
         <DatosBancariosSection
           bankAccount={gift_registry?.bankAccount}
           bankBeneficiary={gift_registry?.bankBeneficiary}
+          bankAccountType={gift_registry?.bankAccountType}
           text={datos_bancarios_text ?? undefined}
         />
       )}

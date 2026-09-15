@@ -37,6 +37,7 @@ export default function EspecialGifts({ project, decorationSrc = '/images/flores
   const hasGiftLink     = hasExtraLinks || hasFallbackLink
   const hasLluvia       = project.show_lluvia_sobres
   const hasBancarios    = project.show_datos_bancarios && Boolean(project.gift_registry?.bankAccount)
+  const accountLabel    = project.gift_registry?.bankAccountType === 'tarjeta' ? 'TARJETA' : 'CLABE'
 
   if (!hasGiftLink && !hasLluvia && !hasBancarios) return null
 
@@ -111,12 +112,12 @@ export default function EspecialGifts({ project, decorationSrc = '/images/flores
                 <button className="btn-form" onClick={() => setVisible(true)}>Mostrar cuenta</button>
               ) : (
                 <div className="color-textos">
-                  <p><b>Cuenta:</b> {project.gift_registry!.bankAccount}</p>
+                  <p><b>{accountLabel}:</b> {project.gift_registry!.bankAccount}</p>
                   {project.gift_registry?.bankBeneficiary && (
                     <p><b>Beneficiaria:</b> {project.gift_registry.bankBeneficiary}</p>
                   )}
                   <button className="btn-form" style={{ marginTop: '16px' }} onClick={handleCopy}>
-                    {copied ? '¡Copiado!' : 'Copiar número'}
+                    {copied ? '¡Copiado!' : `Copiar ${accountLabel}`}
                   </button>
                 </div>
               )}

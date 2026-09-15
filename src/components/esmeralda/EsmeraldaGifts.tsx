@@ -17,6 +17,7 @@ export default function EsmeraldaGifts({ project }: Props) {
   const [copied, setCopied] = useState(false);
   const [visible, setVisible] = useState(false);
   const phone = project.rsvp_phone ?? "";
+  const accountLabel = project.gift_registry?.bankAccountType === "tarjeta" ? "TARJETA" : "CLABE";
 
   function enviarMensaje() {
     const msg = messageRef.current?.value ?? "";
@@ -83,7 +84,7 @@ export default function EsmeraldaGifts({ project }: Props) {
                   {project.gift_registry.bankBeneficiary && (
                     <p><b>Beneficiaria:</b> {project.gift_registry.bankBeneficiary}</p>
                   )}
-                  <p><b>CLABE:</b> {project.gift_registry.bankAccount}</p>
+                  <p><b>{accountLabel}:</b> {project.gift_registry.bankAccount}</p>
                 </div>
               )}
             </div>
@@ -94,7 +95,7 @@ export default function EsmeraldaGifts({ project }: Props) {
                 </button>
               ) : (
                 <button type="button" className="button" onClick={handleCopy} style={{ cursor: "pointer", border: "none" }}>
-                  {copied ? "¡Copiado!" : "Copiar CLABE"}
+                  {copied ? "¡Copiado!" : `Copiar ${accountLabel}`}
                 </button>
               )}
             </div>

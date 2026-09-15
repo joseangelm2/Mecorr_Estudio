@@ -38,6 +38,7 @@ export interface ProjectFormData {
   liverpool_link: string
   bank_account: string
   bank_beneficiary: string
+  bank_account_type: string
   gift_store: string
   parents_title: string
   padrinos_title: string
@@ -146,6 +147,7 @@ async function formDataToProject(data: ProjectFormData) {
       liverpoolLink: data.liverpool_link || undefined,
       bankAccount: data.bank_account || undefined,
       bankBeneficiary: data.bank_beneficiary || undefined,
+      bankAccountType: (data.bank_account_type || 'clabe') as 'clabe' | 'tarjeta',
       giftStore: (data.gift_store || 'liverpool') as 'liverpool' | 'amazon' | 'palacio' | 'generic',
     } : null,
     color_theme: data.color_theme || 'rosagold',

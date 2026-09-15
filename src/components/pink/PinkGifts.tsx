@@ -11,6 +11,7 @@ export default function PinkGifts({ project }: Props) {
   const [copied, setCopied] = useState(false);
   const [visible, setVisible] = useState(false);
   const phone = project.rsvp_phone ?? "";
+  const accountLabel = project.gift_registry?.bankAccountType === "tarjeta" ? "TARJETA" : "CLABE";
 
   function sendWA(msg: string) {
     window.open(`https://api.whatsapp.com/send?phone=52${phone}&text=${encodeURIComponent(msg)}`, "_self");
@@ -56,10 +57,10 @@ export default function PinkGifts({ project }: Props) {
             <>
               <div className="texto" style={{ marginTop: "2%" }}>
                 {project.gift_registry.bankBeneficiary && <p><b>Beneficiaria:</b> {project.gift_registry.bankBeneficiary}</p>}
-                <p><b>CLABE:</b> {project.gift_registry.bankAccount}</p>
+                <p><b>{accountLabel}:</b> {project.gift_registry.bankAccount}</p>
               </div>
               <button onClick={handleCopy} className="boton" style={{ marginTop: "2%", cursor: "pointer" }}>
-                {copied ? "¡Copiado!" : "Copiar CLABE"}
+                {copied ? "¡Copiado!" : `Copiar ${accountLabel}`}
               </button>
             </>
           )}

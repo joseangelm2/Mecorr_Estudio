@@ -61,6 +61,7 @@ export default function SelloRosaContent({ project }: Props) {
 
   const nameParts = project.quinceanera_name.split(" ");
   const firstName = nameParts[0];
+  const accountLabel = project.gift_registry?.bankAccountType === "tarjeta" ? "TARJETA" : "CLABE";
 
   const events = (project.itinerary ?? []).map((ev, i) => ({
     label: ev.title,
@@ -227,7 +228,7 @@ export default function SelloRosaContent({ project }: Props) {
             <hr className="sr-section-line" />
             {accountVisible && (
               <>
-                <p className="sr-info-item"><b>Cuenta:</b> {project.gift_registry.bankAccount}</p>
+                <p className="sr-info-item"><b>{accountLabel}:</b> {project.gift_registry.bankAccount}</p>
                 {project.gift_registry.bankBeneficiary && (
                   <p className="sr-info-item"><b>Beneficiaria:</b> {project.gift_registry.bankBeneficiary}</p>
                 )}
@@ -238,7 +239,7 @@ export default function SelloRosaContent({ project }: Props) {
               className="sr-btn"
               style={{ marginTop: "12px", cursor: "pointer", background: "none", border: "1px solid rgba(255,255,255,0.4)", borderRadius: "8px", padding: "6px 16px" }}
             >
-              {!accountVisible ? "Mostrar cuenta" : copied ? "¡Copiado!" : "Copiar número de cuenta"}
+              {!accountVisible ? "Mostrar cuenta" : copied ? "¡Copiado!" : `Copiar ${accountLabel}`}
             </button>
           </section>
         </div>

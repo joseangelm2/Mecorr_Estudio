@@ -5,16 +5,19 @@ import { useState } from 'react'
 interface Props {
   bankAccount?: string
   bankBeneficiary?: string
+  bankAccountType?: 'clabe' | 'tarjeta'
   text?: string
 }
 
 export default function DatosBancariosSection({
   bankAccount = '',
   bankBeneficiary,
+  bankAccountType,
   text,
 }: Props) {
   const [visible, setVisible] = useState(false)
   const [copied, setCopied] = useState(false)
+  const accountLabel = bankAccountType === 'tarjeta' ? 'TARJETA' : 'CLABE'
 
   function handleCopy() {
     const clean = (bankAccount ?? '').replace(/\s/g, '')
@@ -59,14 +62,14 @@ export default function DatosBancariosSection({
                     className="color-textos mb-20"
                     style={{ fontSize: '18px', letterSpacing: '2px', fontWeight: 600 }}
                   >
-                    CLABE: {bankAccount}
+                    {accountLabel}: {bankAccount}
                   </p>
                   <button
                     onClick={handleCopy}
                     className="btn-form"
                     style={{ transition: 'background 0.2s' }}
                   >
-                    {copied ? '¡Copiado!' : 'Copiar número'}
+                    {copied ? '¡Copiado!' : `Copiar ${accountLabel}`}
                   </button>
                 </div>
               )}

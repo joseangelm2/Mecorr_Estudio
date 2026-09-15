@@ -13,6 +13,7 @@ export default function LoveGifts({ project }: Props) {
   const [copied, setCopied] = useState(false);
   const [visible, setVisible] = useState(false);
   const phone = project.rsvp_phone ?? "";
+  const accountLabel = project.gift_registry?.bankAccountType === "tarjeta" ? "TARJETA" : "CLABE";
 
   function enviarMensaje() {
     const msg = mensajeRef.current?.value ?? "";
@@ -103,7 +104,7 @@ export default function LoveGifts({ project }: Props) {
                       <p className="texto">{project.gift_registry.bankBeneficiary}</p>
                     </>
                   )}
-                  <strong className="texto">CLABE:</strong>
+                  <strong className="texto">{accountLabel}:</strong>
                   <p className="texto">{project.gift_registry.bankAccount}</p>
                 </>
               )}

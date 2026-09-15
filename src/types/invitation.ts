@@ -70,6 +70,7 @@ export interface Project {
     liverpoolLink?: string
     bankAccount?: string
     bankBeneficiary?: string
+    bankAccountType?: 'clabe' | 'tarjeta'
     giftStore?: 'liverpool' | 'amazon' | 'palacio' | 'generic'
   } | null
   color_theme: string

@@ -28,6 +28,7 @@ export default function MagicalGifts({ project }: Props) {
   }
 
   const hashtag = project.hashtag ?? "#XVMagical";
+  const accountLabel = project.gift_registry?.bankAccountType === "tarjeta" ? "TARJETA" : "CLABE";
   const hashtagClean = hashtag.replace("#", "");
 
   return (
@@ -71,11 +72,11 @@ export default function MagicalGifts({ project }: Props) {
               <div className="button" onClick={() => setVisible(true)}>Mostrar cuenta</div>
             ) : (
               <>
-                <p className="texto"><b>Cuenta:</b> {project.gift_registry.bankAccount}</p>
+                <p className="texto"><b>{accountLabel}:</b> {project.gift_registry.bankAccount}</p>
                 {project.gift_registry.bankBeneficiary && (
                   <p className="texto"><b>Beneficiaria:</b> {project.gift_registry.bankBeneficiary}</p>
                 )}
-                <div className="button" onClick={handleCopy}>{copied ? "¡Copiado!" : "Copiar cuenta"}</div>
+                <div className="button" onClick={handleCopy}>{copied ? "¡Copiado!" : `Copiar ${accountLabel}`}</div>
               </>
             )}
           </div>

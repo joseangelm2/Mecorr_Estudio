@@ -29,6 +29,7 @@ export default function EleganceGifts({ project }: Props) {
   const giftStore = project.gift_registry?.giftStore ?? 'liverpool'
   const storeIcon = STORE_ICONS[giftStore] ?? STORE_ICONS.liverpool
   const storeLabel = STORE_LABELS[giftStore] ?? 'Liverpool'
+  const accountLabel = project.gift_registry?.bankAccountType === 'tarjeta' ? 'TARJETA' : 'CLABE'
 
   function handleCopy() {
     const clean = (project.gift_registry?.bankAccount ?? '').replace(/\s/g, '')
@@ -72,12 +73,12 @@ export default function EleganceGifts({ project }: Props) {
             </button>
           ) : (
             <div className="texto" style={{ marginTop: '2%' }}>
-              <p><b>Cuenta:</b> {project.gift_registry.bankAccount}</p>
+              <p><b>{accountLabel}:</b> {project.gift_registry.bankAccount}</p>
               {project.gift_registry.bankBeneficiary && (
                 <p><b>Beneficiaria:</b> {project.gift_registry.bankBeneficiary}</p>
               )}
               <button className="boton" style={{ marginTop: '4%' }} onClick={handleCopy}>
-                {copied ? '¡Copiado!' : 'Copiar número'}
+                {copied ? '¡Copiado!' : `Copiar ${accountLabel}`}
               </button>
             </div>
           )}

@@ -53,6 +53,7 @@ export default function RosaGoldContent({ project }: Props) {
   const events = project.itinerary.map((e) => ({ ...e, icon: e.icon || "misa.png" }));
 
   const phone = project.rsvp_phone ?? "";
+  const accountLabel = project.gift_registry?.bankAccountType === "tarjeta" ? "TARJETA" : "CLABE";
 
   function handleCopy() {
     const account = (project.gift_registry?.bankAccount ?? "").replace(/\s/g, "");
@@ -266,7 +267,7 @@ export default function RosaGoldContent({ project }: Props) {
                 <p className="rg-text"><strong>Beneficiaria:</strong> {project.gift_registry.bankBeneficiary}</p>
               )}
               <p className="rg-text" style={{ letterSpacing: "2px", fontWeight: 600 }}>
-                CLABE: {project.gift_registry.bankAccount}
+                {accountLabel}: {project.gift_registry.bankAccount}
               </p>
             </>
           )}
@@ -275,7 +276,7 @@ export default function RosaGoldContent({ project }: Props) {
             className="rg-location-btn"
             style={{ cursor: "pointer" }}
           >
-            {!accountVisible ? "Mostrar cuenta" : copied ? "¡Copiado!" : "Copiar CLABE"}
+            {!accountVisible ? "Mostrar cuenta" : copied ? "¡Copiado!" : `Copiar ${accountLabel}`}
           </button>
           <div className="esp-med" />
         </section>
