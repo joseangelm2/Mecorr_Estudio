@@ -20,7 +20,7 @@ export default async function AdminDashboard() {
   const supabase = await createClient()
   const { data: projects, error } = await supabase
     .from('projects')
-    .select('id, slug, template, status, quinceanera_name, event_date, updated_at')
+    .select('id, slug, template, status, quinceanera_name, event_date, updated_at, show_instagram_album, instagram_mode, tiene_lista_invitados')
     .order('updated_at', { ascending: false })
 
   if (error) {
@@ -33,7 +33,7 @@ export default async function AdminDashboard() {
     )
   }
 
-  const list = (projects ?? []) as Pick<Project, 'id' | 'slug' | 'template' | 'status' | 'quinceanera_name' | 'event_date' | 'updated_at'>[]
+  const list = (projects ?? []) as Pick<Project, 'id' | 'slug' | 'template' | 'status' | 'quinceanera_name' | 'event_date' | 'updated_at' | 'show_instagram_album' | 'instagram_mode' | 'tiene_lista_invitados'>[]
   const published = list.filter(p => p.status === 'published').length
   const drafts = list.filter(p => p.status === 'draft').length
 
@@ -80,12 +80,14 @@ export default async function AdminDashboard() {
         </div>
       ) : (
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-          <div className="grid grid-cols-[1fr_120px_100px_110px_110px_160px] text-xs font-semibold text-gray-400 uppercase tracking-wide px-6 py-3 border-b border-gray-100 bg-gray-50">
+          <div className="grid grid-cols-[1fr_120px_100px_110px_110px_90px_90px_160px] text-xs font-semibold text-gray-400 uppercase tracking-wide px-6 py-3 border-b border-gray-100 bg-gray-50">
             <span>Nombre</span>
             <span>Template</span>
             <span>Estado</span>
             <span>Evento</span>
             <span>Actualizado</span>
+            <span className="text-center">Álbum</span>
+            <span className="text-center">Invitados</span>
             <span className="text-right">Acciones</span>
           </div>
           <div className="divide-y divide-gray-50">
@@ -99,7 +101,7 @@ export default async function AdminDashboard() {
   )
 }
 
-function ProjectRow({ project }: { project: Pick<Project, 'id' | 'slug' | 'template' | 'status' | 'quinceanera_name' | 'event_date' | 'updated_at'> }) {
+function ProjectRow({ project }: { project: Pick<Project, 'id' | 'slug' | 'template' | 'status' | 'quinceanera_name' | 'event_date' | 'updated_at' | 'show_instagram_album' | 'instagram_mode' | 'tiene_lista_invitados'> }) {
   const eventDate = new Date(project.event_date).toLocaleDateString('es-MX', { day: 'numeric', month: 'short', year: 'numeric' })
   const updatedDate = new Date(project.updated_at).toLocaleDateString('es-MX', { day: 'numeric', month: 'short' })
 
@@ -108,9 +110,13 @@ function ProjectRow({ project }: { project: Pick<Project, 'id' | 'slug' | 'templ
 
   const initials = project.quinceanera_name.split(' ').slice(0, 2).map(w => w[0]).join('').toUpperCase()
   const templateColor = TEMPLATE_COLORS[project.template] ?? 'bg-gray-100 text-gray-600'
+  const hasAlbumDigital = project.show_instagram_album && project.instagram_mode === 'album'
+  const eventDatePlus30 = new Date(project.event_date)
+  eventDatePlus30.setDate(eventDatePlus30.getDate() + 30)
+  const isPastEvent = eventDatePlus30 < new Date(new Date().toDateString())
 
   return (
-    <div className="grid grid-cols-[1fr_120px_100px_110px_110px_160px] items-center px-6 py-3.5 hover:bg-gray-50/70 transition-colors">
+    <div className="grid grid-cols-[1fr_120px_100px_110px_110px_90px_90px_160px] items-center px-6 py-3.5 hover:bg-gray-50/70 transition-colors">
       {/* Name */}
       <div className="flex items-center gap-3 min-w-0">
         <div className="w-8 h-8 rounded-full bg-rose-100 flex items-center justify-center text-rose-600 text-xs font-bold shrink-0">
@@ -140,10 +146,34 @@ function ProjectRow({ project }: { project: Pick<Project, 'id' | 'slug' | 'templ
       </div>
 
       {/* Event date */}
-      <span className="text-sm text-gray-600">{eventDate}</span>
+      <span className={`text-sm ${isPastEvent ? 'text-red-600 font-medium line-through' : 'text-gray-600'}`}>{eventDate}</span>
 
       {/* Updated */}
       <span className="text-sm text-gray-400">{updatedDate}</span>
+
+      {/* Álbum digital */}
+      <div className="flex justify-center">
+        <span
+          title={hasAlbumDigital ? 'Álbum digital activo' : 'Sin álbum digital'}
+          className={`inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold ${
+            hasAlbumDigital ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-300'
+          }`}
+        >
+          {hasAlbumDigital ? '✓' : '–'}
+        </span>
+      </div>
+
+      {/* Lista de invitados */}
+      <div className="flex justify-center">
+        <span
+          title={project.tiene_lista_invitados ? 'Lista de invitados activa' : 'Sin lista de invitados'}
+          className={`inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold ${
+            project.tiene_lista_invitados ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-300'
+          }`}
+        >
+          {project.tiene_lista_invitados ? '✓' : '–'}
+        </span>
+      </div>
 
       {/* Actions */}
       <div className="flex items-center justify-end gap-1.5">
