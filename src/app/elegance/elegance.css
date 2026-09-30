@@ -49,21 +49,23 @@ html, body {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background-image:
-    linear-gradient(var(--color-overlay), var(--color-overlay)),
-    url(/images/elegance/Cenicienta.png);
-  background-size: 100% 100%, contain;
-  background-position: center;
-  /* Cenicienta.png es azul; "color" toma el tono/saturación del overlay y
-     conserva la luminosidad de la textura, así cualquier color tiñe la
-     imagen bien (sin esto, temas con otro tono salen morados/apagados). El
-     centro de la imagen es bastante claro, así que sin ajustar el resultado
-     sale más pálido/desaturado que el color real del tema (el del sobre) —
-     brightness() lo oscurece un poco y saturate() le devuelve intensidad,
-     todo aparte del contenido real (solo afecta este fondo). Comparado por
-     RGB contra el color base del tema para acercarlo lo más posible. */
-  background-blend-mode: color, normal;
-  filter: brightness(0.8) saturate(1.5);
+  /* Cenicienta.png es una foto oscura/azul, opaca (sin alpha). Usarla como
+     blend-mode "color" solo reemplaza tono/saturación y conserva SU propia
+     luminosidad oscura, así que temas claros (blanco, rosa) quedaban
+     apagados/morados en vez del color real de la paleta. En su lugar, se
+     usa la imagen como mask de luminancia (zonas claras de la foto = más
+     visibles) sobre un tono aclarado de --color-principal (siempre el
+     mismo matiz del tema elegido, nunca el azul original de la foto), así
+     el patrón se ve como un realce sutil en vez de quedar plano o desviado. */
+  background-color: color-mix(in srgb, var(--color-principal) 80%, white 20%);
+  -webkit-mask-image: url(/images/elegance/Cenicienta.png);
+  mask-image: url(/images/elegance/Cenicienta.png);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-mode: luminance;
+  mask-mode: luminance;
 }
 
 /* ---- Decoraciones fijas ---- */

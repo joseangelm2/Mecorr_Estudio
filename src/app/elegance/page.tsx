@@ -149,7 +149,6 @@ export default function ElegancePage() {
     const root = document.documentElement
     root.style.setProperty('--color-principal',    theme.colorPrincipal)
     root.style.setProperty('--bg-color',           theme.bgColor)
-    root.style.setProperty('--color-overlay',      theme.overlay)
     root.style.setProperty('--img-filter',         theme.imgFilter)
     root.style.setProperty('--icon-filter',        theme.iconFilter)
     root.style.setProperty('--cuenta-color-fondo', theme.cuentaFondo)
@@ -162,7 +161,7 @@ export default function ElegancePage() {
     root.style.setProperty('--cuenta-color-borde', theme.cuentaTexto)
     return () => {
       const vars = [
-        '--color-principal', '--bg-color', '--color-overlay', '--img-filter', '--icon-filter', '--cuenta-color-fondo', '--nombre-color',
+        '--color-principal', '--bg-color', '--img-filter', '--icon-filter', '--cuenta-color-fondo', '--nombre-color',
         '--subtitulos-color', '--textos-color', '--boton-color',
         '--boton-texto-color', '--cuenta-color-texto', '--cuenta-color-borde',
       ]

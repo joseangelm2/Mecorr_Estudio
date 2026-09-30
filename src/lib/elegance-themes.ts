@@ -9,7 +9,6 @@ export interface EleganceTheme {
   subtitulosColor: string
   textosColor: string
   cuentaTexto: string
-  overlay: string
   botonColor: string
   botonTextoColor: string
   imgFilter: string
@@ -30,7 +29,6 @@ export const ELEGANCE_THEMES: EleganceTheme[] = [
     subtitulosColor: '#F7BB52',
     textosColor: '#F2D67F',
     cuentaTexto: '#F2D67F',
-    overlay: 'rgba(27, 72, 143, 0.55)',
     botonColor: '#F2D67F',
     botonTextoColor: '#BA8100',
     imgFilter: 'none',
@@ -47,7 +45,6 @@ export const ELEGANCE_THEMES: EleganceTheme[] = [
     subtitulosColor: '#F7BB52',
     textosColor: '#F2D67F',
     cuentaTexto: '#F2D67F',
-    overlay: 'rgba(135, 114, 185, 0.65)',
     botonColor: '#F2D67F',
     botonTextoColor: '#BA8100',
     imgFilter: 'none',
@@ -64,7 +61,6 @@ export const ELEGANCE_THEMES: EleganceTheme[] = [
     subtitulosColor: '#F7BB52',
     textosColor: '#F2D67F',
     cuentaTexto: '#F2D67F',
-    overlay: 'rgba(13, 36, 97, 0.55)',
     botonColor: '#F2D67F',
     botonTextoColor: '#BA8100',
     imgFilter: 'none',
@@ -81,7 +77,6 @@ export const ELEGANCE_THEMES: EleganceTheme[] = [
     subtitulosColor: '#F7BB52',
     textosColor: '#F2D67F',
     cuentaTexto: '#F2D67F',
-    overlay: 'rgba(13, 92, 74, 0.55)',
     botonColor: '#F2D67F',
     botonTextoColor: '#BA8100',
     imgFilter: 'none',
@@ -98,7 +93,6 @@ export const ELEGANCE_THEMES: EleganceTheme[] = [
     subtitulosColor: '#B8860B',
     textosColor: '#8B6914',
     cuentaTexto: '#5C3D00',
-    overlay: 'rgba(250, 246, 238, 0.93)',
     botonColor: 'linear-gradient(180deg, #fffbe0 0%, #f5c842 12%, #c8880c 28%, #ffd700 44%, #7a4e00 56%, #e8a800 68%, #b8780a 80%, #ffe585 92%, #c89010 100%)',
     botonTextoColor: '#FFFFFF',
     imgFilter: GOLD_IMG_FILTER,
@@ -115,7 +109,6 @@ export const ELEGANCE_THEMES: EleganceTheme[] = [
     subtitulosColor: '#F7BB52',
     textosColor: '#F2D67F',
     cuentaTexto: '#F2D67F',
-    overlay: 'rgba(226, 127, 198, 0.50)',
     botonColor: '#F2D67F',
     botonTextoColor: '#BA8100',
     imgFilter: 'none',
@@ -132,7 +125,6 @@ export const ELEGANCE_THEMES: EleganceTheme[] = [
     subtitulosColor: '#F7BB52',
     textosColor: '#F2D67F',
     cuentaTexto: '#F2D67F',
-    overlay: 'rgba(139, 26, 26, 0.85)',
     botonColor: '#F2D67F',
     botonTextoColor: '#BA8100',
     imgFilter: 'none',
@@ -149,7 +141,6 @@ export const ELEGANCE_THEMES: EleganceTheme[] = [
     subtitulosColor: '#F7BB52',
     textosColor: '#F2D67F',
     cuentaTexto: '#F2D67F',
-    overlay: 'rgba(0, 169, 195, 0.55)',
     botonColor: '#F2D67F',
     botonTextoColor: '#BA8100',
     imgFilter: 'none',
