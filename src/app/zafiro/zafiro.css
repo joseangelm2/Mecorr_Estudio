@@ -309,8 +309,8 @@ html, body {
    ============================== */
 
 .boton {
-  background: var(--color-principal-light);
-  color: var(--color-principal);
+  background: var(--color-principal);
+  color: #fff;
   padding: 1vw 6vw;
   border-radius: 2vw;
   font-family: var(--font-albert), "Albert Sans", sans-serif;
