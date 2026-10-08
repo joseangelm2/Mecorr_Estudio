@@ -12,6 +12,7 @@ const STORE_ICONS: Record<string, string> = {
   liverpool: '/images/elegance/liverpool.png',
   amazon:    '/images/elegance/amazon.svg',
   palacio:   '/images/elegance/palacio.svg',
+  sears:     '/images/elegance/sears.svg',
   generic:   '/images/elegance/mesa_regalos.png',
 }
 
@@ -19,6 +20,7 @@ const STORE_LABELS: Record<string, string> = {
   liverpool: 'Liverpool',
   amazon:    'Amazon',
   palacio:   'El Palacio de Hierro',
+  sears:     'Sears',
   generic:   'Mesa de Regalos',
 }
 

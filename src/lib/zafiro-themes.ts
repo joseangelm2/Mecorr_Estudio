@@ -1,9 +1,15 @@
 import { shadeHex, hexToFilterFrom, hexToRgbTriplet } from './color'
 
-// Native color baked into the zafiro icon/crown/background artwork (vestimenta.png,
-// buzon.png, liverpool.png, corona.png, lila3.jpg, etc.) — used as the baseline to
-// re-hue those assets toward each theme's dark tone.
+// Native color baked into the zafiro icon/crown artwork (vestimenta.png, buzon.png,
+// liverpool.png, corona.png, etc.) — used as the baseline to re-hue those assets
+// toward each theme's dark tone.
 export const ZAFIRO_ICON_BASE = '#775197'
+
+// lila3.jpg (fondo decorativo de .contenido::before) es un tono mucho más pálido
+// (~#f1e2f6) que los íconos — reusar iconFilterDark ahí lo dejaba gris/apagado en
+// cualquier tema distinto al morado. Se re-tiñe aparte, hacia bgColor (siempre un
+// tono pastel), no hacia el tono oscuro de los íconos.
+export const ZAFIRO_BG_BASE = '#f1e2f6'
 
 export interface ZafiroTheme {
   id: string
@@ -13,6 +19,7 @@ export interface ZafiroTheme {
   primaryLight: string
   bgColor: string
   iconFilterDark: string
+  bgFilter: string
   // Sobre (envelope) — familia de tonos derivados del primario
   envBg1: string
   envBg2: string
@@ -26,7 +33,7 @@ export interface ZafiroTheme {
 }
 
 type PresetOverrides = Partial<Pick<ZafiroTheme,
-  | 'primaryLight' | 'bgColor' | 'iconFilterDark'
+  | 'primaryLight' | 'bgColor' | 'iconFilterDark' | 'bgFilter'
   | 'envBg1' | 'envBg2' | 'envFlap' | 'envBody1' | 'envBody2'
   | 'envSeal1' | 'envSeal2' | 'envAccentRgb' | 'envGlowRgb'
 >>
@@ -34,7 +41,7 @@ type PresetOverrides = Partial<Pick<ZafiroTheme,
 const PRESETS: Array<Pick<ZafiroTheme, 'id' | 'label' | 'primary'> & PresetOverrides> = [
   {
     id: 'morado', label: 'Morado (original)', primary: '#775197',
-    primaryLight: '#e5bdff', bgColor: '#ead4ff', iconFilterDark: 'none',
+    primaryLight: '#e5bdff', bgColor: '#ead4ff', iconFilterDark: 'none', bgFilter: 'none',
     envBg1: '#1a0a2e', envBg2: '#0d0618', envFlap: '#3a1f5e',
     envBody1: '#2d1254', envBody2: '#4a1f7a',
     envSeal1: '#9b59d0', envSeal2: '#5c1e99',
@@ -52,14 +59,16 @@ const PRESETS: Array<Pick<ZafiroTheme, 'id' | 'label' | 'primary'> & PresetOverr
 export const ZAFIRO_THEMES: ZafiroTheme[] = PRESETS.map(t => {
   const primaryLight = t.primaryLight ?? shadeHex(t.primary, 45)
   const envSeal1 = t.envSeal1 ?? shadeHex(t.primary, 14)
+  const bgColor = t.bgColor ?? shadeHex(t.primary, 62)
   return {
     id: t.id,
     label: t.label,
     swatch: t.primary,
     primary: t.primary,
     primaryLight,
-    bgColor: t.bgColor ?? shadeHex(t.primary, 62),
+    bgColor,
     iconFilterDark: t.iconFilterDark ?? hexToFilterFrom(shadeHex(t.primary, -20), ZAFIRO_ICON_BASE),
+    bgFilter: t.bgFilter ?? hexToFilterFrom(bgColor, ZAFIRO_BG_BASE),
     envBg1: t.envBg1 ?? shadeHex(t.primary, -35),
     envBg2: t.envBg2 ?? shadeHex(t.primary, -40),
     envFlap: t.envFlap ?? shadeHex(t.primary, -22),

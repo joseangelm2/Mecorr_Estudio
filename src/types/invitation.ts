@@ -71,7 +71,7 @@ export interface Project {
     bankAccount?: string
     bankBeneficiary?: string
     bankAccountType?: 'clabe' | 'tarjeta'
-    giftStore?: 'liverpool' | 'amazon' | 'palacio' | 'generic'
+    giftStore?: 'liverpool' | 'amazon' | 'palacio' | 'sears' | 'generic'
   } | null
   color_theme: string
   invitation_text: string | null

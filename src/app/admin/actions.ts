@@ -148,7 +148,7 @@ async function formDataToProject(data: ProjectFormData) {
       bankAccount: data.bank_account || undefined,
       bankBeneficiary: data.bank_beneficiary || undefined,
       bankAccountType: (data.bank_account_type || 'clabe') as 'clabe' | 'tarjeta',
-      giftStore: (data.gift_store || 'liverpool') as 'liverpool' | 'amazon' | 'palacio' | 'generic',
+      giftStore: (data.gift_store || 'liverpool') as 'liverpool' | 'amazon' | 'palacio' | 'sears' | 'generic',
     } : null,
     color_theme: data.color_theme || 'rosagold',
     invitation_text: data.invitation_text || null,

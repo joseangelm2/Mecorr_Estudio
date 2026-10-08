@@ -3,7 +3,7 @@
 import "@/app/zafiro/zafiro.css";
 import { useState, useRef, useEffect } from "react";
 import type { Project } from "@/types/invitation";
-import { ZAFIRO_THEMES, DEFAULT_ZAFIRO_THEME, ZAFIRO_ICON_BASE } from "@/lib/zafiro-themes";
+import { ZAFIRO_THEMES, DEFAULT_ZAFIRO_THEME, ZAFIRO_ICON_BASE, ZAFIRO_BG_BASE } from "@/lib/zafiro-themes";
 import { shadeHex, hexToFilterFrom, hexToRgbTriplet } from "@/lib/color";
 import {
   ZafiroScrollInit,
@@ -58,6 +58,7 @@ export default function ZafiroTemplate({ project }: Props) {
   const customColor = (project.extra_config?.custom_color as string) || "";
   const customPrimaryLight = shadeHex(customColor, 45);
   const customEnvSeal1 = shadeHex(customColor, 14);
+  const customBgColor = shadeHex(customColor, 62);
   const theme = project.color_theme === "custom" && customColor
     ? {
         id: "custom",
@@ -65,8 +66,9 @@ export default function ZafiroTemplate({ project }: Props) {
         swatch: customColor,
         primary: customColor,
         primaryLight: customPrimaryLight,
-        bgColor: shadeHex(customColor, 62),
+        bgColor: customBgColor,
         iconFilterDark: hexToFilterFrom(shadeHex(customColor, -20), ZAFIRO_ICON_BASE),
+        bgFilter: hexToFilterFrom(customBgColor, ZAFIRO_BG_BASE),
         envBg1: shadeHex(customColor, -35),
         envBg2: shadeHex(customColor, -40),
         envFlap: shadeHex(customColor, -22),
@@ -89,6 +91,7 @@ export default function ZafiroTemplate({ project }: Props) {
     root.style.setProperty("--color-principal-light", theme.primaryLight);
     root.style.setProperty("--bg-color", theme.bgColor);
     root.style.setProperty("--zafiro-dark-filter", theme.iconFilterDark);
+    root.style.setProperty("--zafiro-bg-filter", theme.bgFilter);
     root.style.setProperty("--zafiro-env-bg-1", theme.envBg1);
     root.style.setProperty("--zafiro-env-bg-2", theme.envBg2);
     root.style.setProperty("--zafiro-env-flap", theme.envFlap);
@@ -100,7 +103,7 @@ export default function ZafiroTemplate({ project }: Props) {
     root.style.setProperty("--zafiro-env-glow-rgb", theme.envGlowRgb);
     return () => {
       const vars = [
-        "--color-principal", "--color-principal-light", "--bg-color", "--zafiro-dark-filter",
+        "--color-principal", "--color-principal-light", "--bg-color", "--zafiro-dark-filter", "--zafiro-bg-filter",
         "--zafiro-env-bg-1", "--zafiro-env-bg-2", "--zafiro-env-flap",
         "--zafiro-env-body-1", "--zafiro-env-body-2",
         "--zafiro-env-seal-1", "--zafiro-env-seal-2",

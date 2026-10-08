@@ -39,7 +39,10 @@ html, body {
     0 2px 2px rgba(255,255,255,0.3);
 }
 
-/* Fondo decorativo en su propia capa para poder tematizarlo (filter) sin afectar el contenido */
+/* Fondo decorativo en su propia capa para poder tematizarlo (filter) sin afectar el contenido.
+   lila3.jpg es pálido (~#f1e2f6), muy distinto del morado oscuro de los íconos, así que usa
+   su propio filtro (--zafiro-bg-filter) calculado hacia bgColor — reusar --zafiro-dark-filter
+   (pensado para los íconos) lo dejaba gris/apagado en cualquier tema que no fuera el morado. */
 .contenido::before {
   content: "";
   position: absolute;
@@ -52,7 +55,7 @@ html, body {
   background: url(/images/zafiro/lila3.jpg);
   background-size: contain;
   background-position: center top;
-  filter: var(--zafiro-dark-filter, none);
+  filter: var(--zafiro-bg-filter, none);
 }
 
 /* ==============================

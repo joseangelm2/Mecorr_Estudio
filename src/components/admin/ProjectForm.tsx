@@ -1185,6 +1185,7 @@ export default function ProjectForm({ project }: Props) {
                   { id: 'liverpool', label: 'Liverpool',        logo: '/images/elegance/liverpool.png' },
                   { id: 'amazon',    label: 'Amazon',           logo: '/images/elegance/amazon.svg'    },
                   { id: 'palacio',   label: 'Palacio de Hierro', logo: '/images/elegance/palacio.svg'  },
+                  { id: 'sears',     label: 'Sears',            logo: '/images/elegance/sears.svg'    },
                   { id: 'generic',   label: 'Genérico',         logo: '/images/elegance/mesa_regalos.png' },
                 ] as const).map(store => (
                   <button
@@ -1200,7 +1201,7 @@ export default function ProjectForm({ project }: Props) {
                 ))}
               </div>
             </Field>
-            <Field title={`Link de ${form.gift_store === 'liverpool' ? 'Liverpool' : form.gift_store === 'amazon' ? 'Amazon' : form.gift_store === 'palacio' ? 'Palacio de Hierro' : 'Mesa de Regalos'}`}>
+            <Field title={`Link de ${form.gift_store === 'liverpool' ? 'Liverpool' : form.gift_store === 'amazon' ? 'Amazon' : form.gift_store === 'palacio' ? 'Palacio de Hierro' : form.gift_store === 'sears' ? 'Sears' : 'Mesa de Regalos'}`}>
               <input type="url" value={form.liverpool_link} onChange={e => set('liverpool_link', e.target.value)} className={input} placeholder="https://..." />
             </Field>
             <Field title="Texto (opcional)">
@@ -1489,6 +1490,7 @@ export default function ProjectForm({ project }: Props) {
                       { id: 'liverpool', label: 'Liverpool',         logo: '/images/elegance/liverpool.png' },
                       { id: 'amazon',    label: 'Amazon',            logo: '/images/elegance/amazon.svg'    },
                       { id: 'palacio',   label: 'Palacio de Hierro', logo: '/images/elegance/palacio.svg'   },
+                      { id: 'sears',     label: 'Sears',             logo: '/images/elegance/sears.svg'    },
                       { id: 'generic',   label: 'Genérico',          logo: '/images/elegance/mesa_regalos.png' },
                     ] as const).map(store => (
                       <button

@@ -24,21 +24,19 @@ export default function EleganceWishes({ phone, hashtag, mode = 'instagram', slu
 
   return (
     <>
-      {phone && (
-        <div id="whatsappLink" className="extra show-p-y">
-          <img src="/images/elegance/buzon.png" style={{ width: '25%', marginBottom: '3%' }} alt="Buzón" />
-          <h3>Buzón de Deseos</h3>
-          <p className="texto" style={{ width: '90%' }}>Déjame un lindo mensaje por mis XV años, recibo tus palabras con cariño en este buzón:</p>
-          <textarea className="mensaje" ref={messageRef} placeholder="Escribe tu mensaje aquí" />
-          <div
-            className="boton"
-            style={{ width: '30%' }}
-            onClick={() => sendWhatsApp(phone, messageRef.current?.value ?? '')}
-          >
-            Enviar Mensaje
-          </div>
+      <div id="whatsappLink" className="extra show-p-y">
+        <img src="/images/elegance/buzon.png" style={{ width: '25%', marginBottom: '3%' }} alt="Buzón" />
+        <h3>Buzón de Deseos</h3>
+        <p className="texto" style={{ width: '90%' }}>Déjame un lindo mensaje por mis XV años, recibo tus palabras con cariño en este buzón:</p>
+        <textarea className="mensaje" ref={messageRef} placeholder="Escribe tu mensaje aquí" />
+        <div
+          className="boton"
+          style={{ width: '30%' }}
+          onClick={() => sendWhatsApp(phone, messageRef.current?.value ?? '')}
+        >
+          Enviar Mensaje
         </div>
-      )}
+      </div>
 
       {showInstagramAlbum && (mode === 'album' && slug ? (
         <div className="extra show-p-y">
