@@ -39,6 +39,17 @@ html, body {
     0 2px 2px rgba(255,255,255,0.3);
 }
 
+/* Cada sección va envuelta en un <div id="..."> (ver ZafiroTemplate.tsx). Sin su propio
+   flex+align-items:center, ese div se estira al 100% del ancho (por hijos con width:100%
+   como .encabezado) y el contenido con width:X% sin margin:auto —la corona, .cuenta, etc.—
+   queda pegado a la izquierda en vez de centrado. */
+#portada, #familia, #fecha, #ubicaciones, #regalos, #fotos, #itinerario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 /* Fondo decorativo en su propia capa para poder tematizarlo (filter) sin afectar el contenido.
    lila3.jpg es pálido (~#f1e2f6), muy distinto del morado oscuro de los íconos, así que usa
    su propio filtro (--zafiro-bg-filter) calculado hacia bgColor — reusar --zafiro-dark-filter
