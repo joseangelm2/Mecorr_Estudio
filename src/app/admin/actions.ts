@@ -76,6 +76,29 @@ export interface ProjectFormData {
   dress_code_image_url: string
   especial_envelope_right_url: string
   especial_envelope_left_url: string
+  esmeralda_estrella_url: string
+  esmeralda_regalo_url: string
+  esmeralda_decorativo1_url: string
+  esmeralda_decorativo2_url: string
+  esmeralda_decorativo3_url: string
+  esmeralda_decorativo4_url: string
+  esmeralda_decorativo5_url: string
+  esmeralda_separador_url: string
+  esmeralda_banda_url: string
+  esmeralda_numero_url: string
+  esmeralda_mis_xv_text: string
+  esmeralda_titulos_color: string
+  esmeralda_boton_texto_color: string
+  esmeralda_reloj_url: string
+  esmeralda_aro_url: string
+  esmeralda_aro_gif_url: string
+  esmeralda_icono_vestimenta_url: string
+  esmeralda_icono_sobre_url: string
+  esmeralda_icono_datos_bancarios_url: string
+  esmeralda_icono_mesa_regalos_url: string
+  esmeralda_icono_buzon_url: string
+  esmeralda_icono_instagram_url: string
+  esmeralda_icono_tienda_url: string
   // Módulo Lista de Invitados
   tiene_lista_invitados: boolean
   pin_admin: string  // PIN en texto plano; se hashea en el servidor
@@ -195,6 +218,29 @@ async function formDataToProject(data: ProjectFormData) {
       ...(Number(data.especial_seal_offset_y) !== 0 ? { seal_offset_y: Number(data.especial_seal_offset_y) } : {}),
       ...(data.especial_envelope_right_url    ? { envelope_right_url:    data.especial_envelope_right_url    } : {}),
       ...(data.especial_envelope_left_url     ? { envelope_left_url:     data.especial_envelope_left_url     } : {}),
+      ...(data.esmeralda_estrella_url   ? { estrella_url:   data.esmeralda_estrella_url   } : {}),
+      ...(data.esmeralda_regalo_url     ? { regalo_url:     data.esmeralda_regalo_url     } : {}),
+      ...(data.esmeralda_decorativo1_url ? { decorativo1_url: data.esmeralda_decorativo1_url } : {}),
+      ...(data.esmeralda_decorativo2_url ? { decorativo2_url: data.esmeralda_decorativo2_url } : {}),
+      ...(data.esmeralda_decorativo3_url ? { decorativo3_url: data.esmeralda_decorativo3_url } : {}),
+      ...(data.esmeralda_decorativo4_url ? { decorativo4_url: data.esmeralda_decorativo4_url } : {}),
+      ...(data.esmeralda_decorativo5_url ? { decorativo5_url: data.esmeralda_decorativo5_url } : {}),
+      ...(data.esmeralda_separador_url  ? { separador_url:  data.esmeralda_separador_url  } : {}),
+      ...(data.esmeralda_banda_url      ? { banda_url:      data.esmeralda_banda_url      } : {}),
+      ...(data.esmeralda_numero_url     ? { numero_url:     data.esmeralda_numero_url     } : {}),
+      ...(data.esmeralda_mis_xv_text    ? { mis_xv_text:    data.esmeralda_mis_xv_text    } : {}),
+      ...(data.esmeralda_titulos_color  ? { titulos_color:  data.esmeralda_titulos_color  } : {}),
+      ...(data.esmeralda_boton_texto_color ? { boton_texto_color: data.esmeralda_boton_texto_color } : {}),
+      ...(data.esmeralda_reloj_url   ? { reloj_url:   data.esmeralda_reloj_url   } : {}),
+      ...(data.esmeralda_aro_url     ? { aro_url:     data.esmeralda_aro_url     } : {}),
+      ...(data.esmeralda_aro_gif_url ? { aro_gif_url: data.esmeralda_aro_gif_url } : {}),
+      ...(data.esmeralda_icono_vestimenta_url      ? { icono_vestimenta_url:      data.esmeralda_icono_vestimenta_url      } : {}),
+      ...(data.esmeralda_icono_sobre_url           ? { icono_sobre_url:           data.esmeralda_icono_sobre_url           } : {}),
+      ...(data.esmeralda_icono_datos_bancarios_url ? { icono_datos_bancarios_url: data.esmeralda_icono_datos_bancarios_url } : {}),
+      ...(data.esmeralda_icono_mesa_regalos_url    ? { icono_mesa_regalos_url:    data.esmeralda_icono_mesa_regalos_url    } : {}),
+      ...(data.esmeralda_icono_buzon_url           ? { icono_buzon_url:           data.esmeralda_icono_buzon_url           } : {}),
+      ...(data.esmeralda_icono_instagram_url       ? { icono_instagram_url:       data.esmeralda_icono_instagram_url       } : {}),
+      ...(data.esmeralda_icono_tienda_url          ? { icono_tienda_url:          data.esmeralda_icono_tienda_url          } : {}),
       ...(data.sobre_final_photo_url           ? { final_photo_url:        data.sobre_final_photo_url           } : {}),
       ...(data.elegance_photo_after_hero       ? { photo_after_hero:       data.elegance_photo_after_hero       } : {}),
       ...(data.elegance_photo_after_parents    ? { photo_after_parents:    data.elegance_photo_after_parents    } : {}),

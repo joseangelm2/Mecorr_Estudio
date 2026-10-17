@@ -9,6 +9,7 @@ export default function EsmeraldaParents({ project }: Props) {
   const padrinos = project.padrinos.filter(Boolean);
   const parentsTitle = (project.extra_config?.parents_title as string) || "Mis Padres";
   const padrinosTitle = (project.extra_config?.padrinos_title as string) || "Padrinos";
+  const separadorSrc = (project.extra_config?.separador_url as string) || "/images/esmeralda/9_separador.png";
 
   if (!parents.length && !padrinos.length) return null;
 
@@ -17,7 +18,7 @@ export default function EsmeraldaParents({ project }: Props) {
       {parents.length > 0 && (
         <section className="parents-container no-print">
           <h2>{parentsTitle}</h2>
-          <img className="vector-long" src="/images/esmeralda/9_separador.png" alt="" />
+          <img className="vector-long" src={separadorSrc} alt="" />
           <div className="parents texto">
             <p>
               {parents.map((n, i) => (
@@ -34,7 +35,7 @@ export default function EsmeraldaParents({ project }: Props) {
       {padrinos.length > 0 && (
         <section className="parents-container no-print" style={{ marginTop: "5%" }}>
           <h2>{padrinosTitle}</h2>
-          <img className="vector-long" src="/images/esmeralda/9_separador.png" alt="" />
+          <img className="vector-long" src={separadorSrc} alt="" />
           <div className="parents texto">
             <p>
               {padrinos.map((n, i) => (

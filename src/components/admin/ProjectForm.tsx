@@ -26,6 +26,7 @@ const TEMPLATES: { value: TemplateId; label: string; emoji: string }[] = [
   { value: 'rosagold', label: 'Rosa Gold', emoji: '✨' },
   { value: 'magical', label: 'Magical', emoji: '🦋' },
   { value: 'especial', label: 'Especial', emoji: '⭐' },
+  { value: 'esmeralda-especial', label: 'Esmeralda Especial', emoji: '💚⭐' },
 ]
 
 const TABS = [
@@ -88,6 +89,29 @@ function toFormData(project?: Project): ProjectFormData {
       dress_code_image_url: '',
       especial_envelope_right_url: '',
       especial_envelope_left_url: '',
+      esmeralda_estrella_url: '',
+      esmeralda_regalo_url: '',
+      esmeralda_decorativo1_url: '',
+      esmeralda_decorativo2_url: '',
+      esmeralda_decorativo3_url: '',
+      esmeralda_decorativo4_url: '',
+      esmeralda_decorativo5_url: '',
+      esmeralda_separador_url: '',
+      esmeralda_banda_url: '',
+      esmeralda_numero_url: '',
+      esmeralda_mis_xv_text: '',
+      esmeralda_titulos_color: '',
+      esmeralda_boton_texto_color: '',
+      esmeralda_reloj_url: '',
+      esmeralda_aro_url: '',
+      esmeralda_aro_gif_url: '',
+      esmeralda_icono_vestimenta_url: '',
+      esmeralda_icono_sobre_url: '',
+      esmeralda_icono_datos_bancarios_url: '',
+      esmeralda_icono_mesa_regalos_url: '',
+      esmeralda_icono_buzon_url: '',
+      esmeralda_icono_instagram_url: '',
+      esmeralda_icono_tienda_url: '',
       tiene_lista_invitados: false,
       pin_admin: '',
       sobre_final_photo_url: '',
@@ -161,6 +185,29 @@ function toFormData(project?: Project): ProjectFormData {
     dress_code_image_url: (project.extra_config?.dress_code_image_url as string) ?? '',
     especial_envelope_right_url: (project.extra_config?.envelope_right_url as string) ?? '',
     especial_envelope_left_url: (project.extra_config?.envelope_left_url as string) ?? '',
+    esmeralda_estrella_url: (project.extra_config?.estrella_url as string) ?? '',
+    esmeralda_regalo_url: (project.extra_config?.regalo_url as string) ?? '',
+    esmeralda_decorativo1_url: (project.extra_config?.decorativo1_url as string) ?? '',
+    esmeralda_decorativo2_url: (project.extra_config?.decorativo2_url as string) ?? '',
+    esmeralda_decorativo3_url: (project.extra_config?.decorativo3_url as string) ?? '',
+    esmeralda_decorativo4_url: (project.extra_config?.decorativo4_url as string) ?? '',
+    esmeralda_decorativo5_url: (project.extra_config?.decorativo5_url as string) ?? '',
+    esmeralda_separador_url: (project.extra_config?.separador_url as string) ?? '',
+    esmeralda_banda_url: (project.extra_config?.banda_url as string) ?? '',
+    esmeralda_numero_url: (project.extra_config?.numero_url as string) ?? '',
+    esmeralda_mis_xv_text: (project.extra_config?.mis_xv_text as string) ?? '',
+    esmeralda_titulos_color: (project.extra_config?.titulos_color as string) ?? '',
+    esmeralda_boton_texto_color: (project.extra_config?.boton_texto_color as string) ?? '',
+    esmeralda_reloj_url: (project.extra_config?.reloj_url as string) ?? '',
+    esmeralda_aro_url: (project.extra_config?.aro_url as string) ?? '',
+    esmeralda_aro_gif_url: (project.extra_config?.aro_gif_url as string) ?? '',
+    esmeralda_icono_vestimenta_url: (project.extra_config?.icono_vestimenta_url as string) ?? '',
+    esmeralda_icono_sobre_url: (project.extra_config?.icono_sobre_url as string) ?? '',
+    esmeralda_icono_datos_bancarios_url: (project.extra_config?.icono_datos_bancarios_url as string) ?? '',
+    esmeralda_icono_mesa_regalos_url: (project.extra_config?.icono_mesa_regalos_url as string) ?? '',
+    esmeralda_icono_buzon_url: (project.extra_config?.icono_buzon_url as string) ?? '',
+    esmeralda_icono_instagram_url: (project.extra_config?.icono_instagram_url as string) ?? '',
+    esmeralda_icono_tienda_url: (project.extra_config?.icono_tienda_url as string) ?? '',
     sobre_final_photo_url: (project.extra_config?.final_photo_url as string) ?? '',
     elegance_photo_after_hero:       (project.extra_config?.photo_after_hero       as string) ?? '',
     elegance_photo_after_parents:    (project.extra_config?.photo_after_parents    as string) ?? '',
@@ -328,7 +375,7 @@ export default function ProjectForm({ project }: Props) {
       {/* Tabs */}
       <div className="flex gap-1 mb-8 bg-gray-100 p-1.5 rounded-2xl overflow-x-auto">
         {TABS.map((tab, i) => {
-          if (i === 8 && form.template !== 'especial') return null
+          if (i === 8 && form.template !== 'especial' && form.template !== 'esmeralda-especial') return null
           return (
           <button
             key={tab.label}
@@ -392,14 +439,14 @@ export default function ProjectForm({ project }: Props) {
             </div>
           </Field>
 
-          {(form.template === 'sobre' || form.template === 'elegance' || form.template === 'especial' || form.template === 'zafiro' || form.template === 'esmeralda') && (
+          {(form.template === 'sobre' || form.template === 'elegance' || form.template === 'especial' || form.template === 'zafiro' || form.template === 'esmeralda' || form.template === 'esmeralda-especial') && (
             <Field title="Paleta de color">
               <div className="flex flex-wrap gap-4">
                 {(
                   form.template === 'sobre' ? THEMES :
                   form.template === 'especial' ? ESPECIAL_THEMES :
                   form.template === 'zafiro' ? ZAFIRO_THEMES :
-                  form.template === 'esmeralda' ? ESMERALDA_THEMES :
+                  (form.template === 'esmeralda' || form.template === 'esmeralda-especial') ? ESMERALDA_THEMES :
                   ELEGANCE_THEMES
                 ).map(theme => (
                   <button
@@ -420,7 +467,7 @@ export default function ProjectForm({ project }: Props) {
                     <span className={`text-xs font-medium ${form.color_theme === theme.id ? 'text-rose-500' : 'text-gray-400'}`}>{theme.label}</span>
                   </button>
                 ))}
-                {(form.template === 'especial' || form.template === 'zafiro') && (
+                {(form.template === 'especial' || form.template === 'zafiro' || form.template === 'esmeralda-especial') && (
                   <div className="flex flex-col items-center gap-2">
                     <label
                       className="w-10 h-10 rounded-full border-4 cursor-pointer transition-all relative overflow-hidden block"
@@ -439,6 +486,56 @@ export default function ProjectForm({ project }: Props) {
                       />
                     </label>
                     <span className={`text-xs font-medium ${form.color_theme === 'custom' ? 'text-rose-500' : 'text-gray-400'}`}>Personalizado</span>
+                  </div>
+                )}
+                {form.template === 'esmeralda-especial' && (
+                  <div className="flex flex-col items-center gap-2">
+                    <label
+                      className="w-10 h-10 rounded-full border-4 cursor-pointer transition-all relative overflow-hidden block"
+                      style={{
+                        background: form.esmeralda_titulos_color || 'repeating-conic-gradient(#e5e7eb 0% 25%, white 0% 50%) 50% / 10px 10px',
+                        borderColor: form.esmeralda_titulos_color ? '#f43f5e' : '#e5e7eb',
+                      }}
+                      title="Color de títulos, nombre y botones"
+                    >
+                      <input
+                        type="color"
+                        value={form.esmeralda_titulos_color || '#f2c96a'}
+                        onChange={e => set('esmeralda_titulos_color', e.target.value)}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                      />
+                    </label>
+                    <span className={`text-xs font-medium ${form.esmeralda_titulos_color ? 'text-rose-500' : 'text-gray-400'}`}>Títulos, nombre y botones</span>
+                    {form.esmeralda_titulos_color && (
+                      <button type="button" onClick={() => set('esmeralda_titulos_color', '')} className="text-xs text-gray-400 hover:text-rose-500">
+                        Quitar
+                      </button>
+                    )}
+                  </div>
+                )}
+                {form.template === 'esmeralda-especial' && (
+                  <div className="flex flex-col items-center gap-2">
+                    <label
+                      className="w-10 h-10 rounded-full border-4 cursor-pointer transition-all relative overflow-hidden block"
+                      style={{
+                        background: form.esmeralda_boton_texto_color || 'repeating-conic-gradient(#e5e7eb 0% 25%, white 0% 50%) 50% / 10px 10px',
+                        borderColor: form.esmeralda_boton_texto_color ? '#f43f5e' : '#e5e7eb',
+                      }}
+                      title="Color de texto de los botones"
+                    >
+                      <input
+                        type="color"
+                        value={form.esmeralda_boton_texto_color || '#ffffff'}
+                        onChange={e => set('esmeralda_boton_texto_color', e.target.value)}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                      />
+                    </label>
+                    <span className={`text-xs font-medium ${form.esmeralda_boton_texto_color ? 'text-rose-500' : 'text-gray-400'}`}>Texto de botones</span>
+                    {form.esmeralda_boton_texto_color && (
+                      <button type="button" onClick={() => set('esmeralda_boton_texto_color', '')} className="text-xs text-gray-400 hover:text-rose-500">
+                        Quitar
+                      </button>
+                    )}
                   </div>
                 )}
               </div>
@@ -1212,7 +1309,7 @@ export default function ProjectForm({ project }: Props) {
       )}
 
       {/* Tab 8: Especial */}
-      {activeTab === 8 && form.template === 'especial' && (
+      {activeTab === 8 && (form.template === 'especial' || form.template === 'esmeralda-especial') && (
         <div className="space-y-6">
           <SectionCard title="Fondo y decoraciones">
             <Field title="Imagen de fondo personalizada">
@@ -1249,67 +1346,71 @@ export default function ProjectForm({ project }: Props) {
               </div>
               <p className="text-xs text-gray-400 mt-1">Solo afecta el fondo — las fotos y textos de la invitación siempre se ven al 100%.</p>
             </Field>
-            <Field title="Decoraciones">
-              <div className="flex gap-2 flex-wrap">
-                {(['flores', 'mariposas', 'estrellas', 'personalizado'] as const).map(style => (
-                  <button
-                    key={style}
-                    type="button"
-                    onClick={() => set('especial_decoration_style', style)}
-                    className={`flex-1 min-w-[100px] py-3 rounded-xl border-2 text-sm font-medium capitalize transition-all ${
-                      form.especial_decoration_style === style
-                        ? 'border-rose-400 bg-rose-50 text-rose-600'
-                        : 'border-gray-100 bg-white text-gray-500 hover:border-gray-200'
-                    }`}
-                  >
-                    {style}
-                  </button>
-                ))}
-              </div>
-              {form.especial_decoration_style === 'personalizado' && (
-                <div className="mt-3 space-y-2">
-                  <input
-                    type="url"
-                    value={form.especial_decoration_url}
-                    onChange={e => set('especial_decoration_url', e.target.value)}
-                    className={input}
-                    placeholder="https://... (imagen de decoración)"
-                  />
-                  {project?.id ? (
-                    <MediaUploader
-                      projectId={project.id}
-                      bucket="invitation-media"
-                      accept="image/*"
-                      onUploadComplete={url => set('especial_decoration_url', url)}
-                      label="Subir imagen de decoración"
-                    />
-                  ) : (
-                    <p className="text-xs text-gray-400">Guarda el proyecto primero para subir archivos.</p>
-                  )}
+            {form.template === 'especial' && (
+              <Field title="Decoraciones">
+                <div className="flex gap-2 flex-wrap">
+                  {(['flores', 'mariposas', 'estrellas', 'personalizado'] as const).map(style => (
+                    <button
+                      key={style}
+                      type="button"
+                      onClick={() => set('especial_decoration_style', style)}
+                      className={`flex-1 min-w-[100px] py-3 rounded-xl border-2 text-sm font-medium capitalize transition-all ${
+                        form.especial_decoration_style === style
+                          ? 'border-rose-400 bg-rose-50 text-rose-600'
+                          : 'border-gray-100 bg-white text-gray-500 hover:border-gray-200'
+                      }`}
+                    >
+                      {style}
+                    </button>
+                  ))}
                 </div>
-              )}
-            </Field>
-            <Field title="Sello personalizado">
-              <input
-                type="url"
-                value={form.especial_seal_url}
-                onChange={e => set('especial_seal_url', e.target.value)}
-                className={input}
-                placeholder="https://..."
-              />
-              {project?.id ? (
-                <MediaUploader
-                  projectId={project.id}
-                  bucket="invitation-media"
-                  accept="image/*"
-                  onUploadComplete={url => set('especial_seal_url', url)}
-                  label="Subir sello"
+                {form.especial_decoration_style === 'personalizado' && (
+                  <div className="mt-3 space-y-2">
+                    <input
+                      type="url"
+                      value={form.especial_decoration_url}
+                      onChange={e => set('especial_decoration_url', e.target.value)}
+                      className={input}
+                      placeholder="https://... (imagen de decoración)"
+                    />
+                    {project?.id ? (
+                      <MediaUploader
+                        projectId={project.id}
+                        bucket="invitation-media"
+                        accept="image/*"
+                        onUploadComplete={url => set('especial_decoration_url', url)}
+                        label="Subir imagen de decoración"
+                      />
+                    ) : (
+                      <p className="text-xs text-gray-400">Guarda el proyecto primero para subir archivos.</p>
+                    )}
+                  </div>
+                )}
+              </Field>
+            )}
+            {form.template === 'especial' && (
+              <Field title="Sello personalizado">
+                <input
+                  type="url"
+                  value={form.especial_seal_url}
+                  onChange={e => set('especial_seal_url', e.target.value)}
+                  className={input}
+                  placeholder="https://..."
                 />
-              ) : (
-                <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para subir archivos.</p>
-              )}
-            </Field>
-            <Field title="Sobre derecho (imagen)">
+                {project?.id ? (
+                  <MediaUploader
+                    projectId={project.id}
+                    bucket="invitation-media"
+                    accept="image/*"
+                    onUploadComplete={url => set('especial_seal_url', url)}
+                    label="Subir sello"
+                  />
+                ) : (
+                  <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para subir archivos.</p>
+                )}
+              </Field>
+            )}
+            <Field title={form.template === 'esmeralda-especial' ? 'Sobre personalizado (imagen)' : 'Sobre derecho (imagen)'}>
               <input
                 type="url"
                 value={form.especial_envelope_right_url}
@@ -1323,71 +1424,76 @@ export default function ProjectForm({ project }: Props) {
                   bucket="invitation-media"
                   accept="image/*"
                   onUploadComplete={url => set('especial_envelope_right_url', url)}
-                  label="Subir sobre derecho"
+                  label={form.template === 'esmeralda-especial' ? 'Subir imagen del sobre' : 'Subir sobre derecho'}
                 />
               ) : (
                 <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para subir archivos.</p>
               )}
             </Field>
-            <Field title="Sobre izquierdo (imagen)">
-              <input
-                type="url"
-                value={form.especial_envelope_left_url}
-                onChange={e => set('especial_envelope_left_url', e.target.value)}
-                className={input}
-                placeholder="https://..."
-              />
-              {project?.id ? (
-                <MediaUploader
-                  projectId={project.id}
-                  bucket="invitation-media"
-                  accept="image/*"
-                  onUploadComplete={url => set('especial_envelope_left_url', url)}
-                  label="Subir sobre izquierdo"
-                />
-              ) : (
-                <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para subir archivos.</p>
-              )}
-            </Field>
-            <Field title="Color del sello">
-              <div className="flex flex-wrap gap-2 items-center">
-                <button
-                  type="button"
-                  onClick={() => set('especial_seal_filter', '')}
-                  className={`px-3 py-1.5 rounded-lg text-sm border-2 transition-all ${form.especial_seal_filter === '' ? 'border-rose-400 bg-rose-50 text-rose-600' : 'border-gray-100 bg-white text-gray-500 hover:border-gray-200'}`}
-                >
-                  Del tema
-                </button>
-                <button
-                  type="button"
-                  onClick={() => set('especial_seal_filter', 'none')}
-                  className={`px-3 py-1.5 rounded-lg text-sm border-2 transition-all ${form.especial_seal_filter === 'none' ? 'border-rose-400 bg-rose-50 text-rose-600' : 'border-gray-100 bg-white text-gray-500 hover:border-gray-200'}`}
-                >
-                  Sin filtro
-                </button>
-                {ESPECIAL_THEMES.map(t => (
-                  <button
-                    key={t.id}
-                    type="button"
-                    title={t.label}
-                    onClick={() => set('especial_seal_filter', t.filterValue)}
-                    style={{
-                      width: 26, height: 26, borderRadius: '50%',
-                      background: t.primary,
-                      border: form.especial_seal_filter === t.filterValue ? '3px solid #f43f5e' : '2px solid #e5e7eb',
-                      flexShrink: 0,
-                    }}
-                  />
-                ))}
+            {form.template === 'especial' && (
+              <Field title="Sobre izquierdo (imagen)">
                 <input
-                  type="color"
-                  title="Color personalizado"
-                  className="w-8 h-8 rounded cursor-pointer border-2 border-gray-200 p-0.5 bg-white"
-                  onChange={e => set('especial_seal_filter', hexToSealFilter(e.target.value))}
+                  type="url"
+                  value={form.especial_envelope_left_url}
+                  onChange={e => set('especial_envelope_left_url', e.target.value)}
+                  className={input}
+                  placeholder="https://..."
                 />
-              </div>
-              <p className="text-xs text-gray-400 mt-1">Elige el tinte de color del sello. &ldquo;Del tema&rdquo; hereda el color de la invitación.</p>
-            </Field>
+                {project?.id ? (
+                  <MediaUploader
+                    projectId={project.id}
+                    bucket="invitation-media"
+                    accept="image/*"
+                    onUploadComplete={url => set('especial_envelope_left_url', url)}
+                    label="Subir sobre izquierdo"
+                  />
+                ) : (
+                  <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para subir archivos.</p>
+                )}
+              </Field>
+            )}
+            {form.template === 'especial' && (
+              <Field title="Color del sello">
+                <div className="flex flex-wrap gap-2 items-center">
+                  <button
+                    type="button"
+                    onClick={() => set('especial_seal_filter', '')}
+                    className={`px-3 py-1.5 rounded-lg text-sm border-2 transition-all ${form.especial_seal_filter === '' ? 'border-rose-400 bg-rose-50 text-rose-600' : 'border-gray-100 bg-white text-gray-500 hover:border-gray-200'}`}
+                  >
+                    Del tema
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => set('especial_seal_filter', 'none')}
+                    className={`px-3 py-1.5 rounded-lg text-sm border-2 transition-all ${form.especial_seal_filter === 'none' ? 'border-rose-400 bg-rose-50 text-rose-600' : 'border-gray-100 bg-white text-gray-500 hover:border-gray-200'}`}
+                  >
+                    Sin filtro
+                  </button>
+                  {ESPECIAL_THEMES.map(t => (
+                    <button
+                      key={t.id}
+                      type="button"
+                      title={t.label}
+                      onClick={() => set('especial_seal_filter', t.filterValue)}
+                      style={{
+                        width: 26, height: 26, borderRadius: '50%',
+                        background: t.primary,
+                        border: form.especial_seal_filter === t.filterValue ? '3px solid #f43f5e' : '2px solid #e5e7eb',
+                        flexShrink: 0,
+                      }}
+                    />
+                  ))}
+                  <input
+                    type="color"
+                    title="Color personalizado"
+                    className="w-8 h-8 rounded cursor-pointer border-2 border-gray-200 p-0.5 bg-white"
+                    onChange={e => set('especial_seal_filter', hexToSealFilter(e.target.value))}
+                  />
+                </div>
+                <p className="text-xs text-gray-400 mt-1">Elige el tinte de color del sello. &ldquo;Del tema&rdquo; hereda el color de la invitación.</p>
+              </Field>
+            )}
+            {form.template === 'especial' && (
             <Field title="Posición del sello">
               <div className="flex gap-3 items-end">
                 <div className="flex-1">
@@ -1418,37 +1524,95 @@ export default function ProjectForm({ project }: Props) {
               </div>
               <p className="text-xs text-gray-400 mt-1">Ajusta la posición del sello respecto al centro (0 = posición por defecto).</p>
             </Field>
-            <Field title="Posición del sello">
-              <div className="flex gap-3 items-end">
-                <div className="flex-1">
-                  <label className="text-xs text-gray-400">Eje X</label>
-                  <input
-                    type="number"
-                    value={form.especial_seal_offset_x}
-                    onChange={e => set('especial_seal_offset_x', e.target.value)}
-                    className={input}
-                  />
-                </div>
-                <div className="flex-1">
-                  <label className="text-xs text-gray-400">Eje Y</label>
-                  <input
-                    type="number"
-                    value={form.especial_seal_offset_y}
-                    onChange={e => set('especial_seal_offset_y', e.target.value)}
-                    className={input}
-                  />
-                </div>
-                <button
-                  type="button"
-                  onClick={() => { set('especial_seal_offset_x', '0'); set('especial_seal_offset_y', '0') }}
-                  className="px-3 py-2.5 rounded-lg text-sm border-2 border-gray-100 bg-white text-gray-500 hover:border-gray-200 transition-all whitespace-nowrap"
-                >
-                  Centrar
-                </button>
-              </div>
-              <p className="text-xs text-gray-400 mt-1">Ajusta la posición del sello respecto al centro (0 = posición por defecto).</p>
-            </Field>
+            )}
           </SectionCard>
+
+          {form.template === 'esmeralda-especial' && (
+            <SectionCard title="Elementos decorativos">
+              <p className="text-xs text-gray-400 -mt-2 mb-2">Opcional — si no subes una imagen, se usa el elemento original de Esmeralda.</p>
+              {([
+                { key: 'esmeralda_estrella_url' as const,    title: 'Estrella',  label: 'Subir estrella' },
+                { key: 'esmeralda_regalo_url' as const,      title: 'Regalo',    label: 'Subir regalo' },
+                { key: 'esmeralda_decorativo1_url' as const, title: 'Decorativo 1', label: 'Subir decorativo 1' },
+                { key: 'esmeralda_decorativo2_url' as const, title: 'Decorativo 2', label: 'Subir decorativo 2' },
+                { key: 'esmeralda_decorativo3_url' as const, title: 'Decorativo 3', label: 'Subir decorativo 3' },
+                { key: 'esmeralda_decorativo4_url' as const, title: 'Decorativo 4', label: 'Subir decorativo 4' },
+                { key: 'esmeralda_decorativo5_url' as const, title: 'Decorativo 5', label: 'Subir decorativo 5' },
+                { key: 'esmeralda_separador_url' as const,   title: 'Separador', label: 'Subir separador' },
+                { key: 'esmeralda_banda_url' as const,       title: 'Banda (detrás del nombre)', label: 'Subir banda' },
+                { key: 'esmeralda_numero_url' as const,      title: 'Número "15"', label: 'Subir número' },
+                { key: 'esmeralda_reloj_url' as const,        title: 'Reloj (cuenta regresiva)', label: 'Subir reloj' },
+                { key: 'esmeralda_aro_url' as const,          title: 'Aro (marco de la foto)', label: 'Subir aro' },
+                { key: 'esmeralda_aro_gif_url' as const,      title: 'Aro animado (GIF)', label: 'Subir GIF del aro' },
+              ]).map(({ key, title, label }) => (
+                <Field key={key} title={title}>
+                  <input
+                    type="url"
+                    value={form[key]}
+                    onChange={e => set(key, e.target.value)}
+                    className={input}
+                    placeholder="https://..."
+                  />
+                  {project?.id ? (
+                    <MediaUploader
+                      projectId={project.id}
+                      bucket="invitation-media"
+                      accept="image/*"
+                      onUploadComplete={url => set(key, url)}
+                      label={label}
+                    />
+                  ) : (
+                    <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para subir archivos.</p>
+                  )}
+                </Field>
+              ))}
+              <Field title='Texto "Mis XV"'>
+                <input
+                  type="text"
+                  value={form.esmeralda_mis_xv_text}
+                  onChange={e => set('esmeralda_mis_xv_text', e.target.value)}
+                  className={input}
+                  placeholder="¡Mis XV!"
+                />
+              </Field>
+            </SectionCard>
+          )}
+
+          {form.template === 'esmeralda-especial' && (
+            <SectionCard title="Íconos de secciones">
+              <p className="text-xs text-gray-400 -mt-2 mb-2">Opcional — el ícono que aparece arriba del título de cada sección. Si no subes nada, se usa el original de Esmeralda.</p>
+              {([
+                { key: 'esmeralda_icono_vestimenta_url' as const,     title: 'Código de Vestimenta', label: 'Subir ícono' },
+                { key: 'esmeralda_icono_sobre_url' as const,          title: 'Lluvia de Sobres',     label: 'Subir ícono' },
+                { key: 'esmeralda_icono_datos_bancarios_url' as const, title: 'Datos Bancarios',      label: 'Subir ícono' },
+                { key: 'esmeralda_icono_mesa_regalos_url' as const,   title: 'Mesa de Regalos',       label: 'Subir ícono' },
+                { key: 'esmeralda_icono_buzon_url' as const,          title: 'Buzón de Deseos',       label: 'Subir ícono' },
+                { key: 'esmeralda_icono_instagram_url' as const,      title: 'Hashtag en Instagram',  label: 'Subir ícono' },
+                { key: 'esmeralda_icono_tienda_url' as const,         title: 'Logo de la tienda (Mesa de Regalos)', label: 'Subir logo' },
+              ]).map(({ key, title, label }) => (
+                <Field key={key} title={title}>
+                  <input
+                    type="url"
+                    value={form[key]}
+                    onChange={e => set(key, e.target.value)}
+                    className={input}
+                    placeholder="https://..."
+                  />
+                  {project?.id ? (
+                    <MediaUploader
+                      projectId={project.id}
+                      bucket="invitation-media"
+                      accept="image/*"
+                      onUploadComplete={url => set(key, url)}
+                      label={label}
+                    />
+                  ) : (
+                    <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para subir archivos.</p>
+                  )}
+                </Field>
+              ))}
+            </SectionCard>
+          )}
 
           <SectionCard title="Textos opcionales">
             <Field title="Texto del banner (nombre del invitado)">
@@ -1471,6 +1635,7 @@ export default function ProjectForm({ project }: Props) {
             </Field>
           </SectionCard>
 
+          {form.template === 'especial' && (
           <SectionCard title="Mesas de Regalos">
             <div className="space-y-4">
               {form.especial_gift_registries.map((reg, i) => (
@@ -1535,6 +1700,7 @@ export default function ProjectForm({ project }: Props) {
               </button>
             </div>
           </SectionCard>
+          )}
         </div>
       )}
 

@@ -10,23 +10,28 @@ export default function EsmeraldaHero({ project }: Props) {
   const fullName = project.quinceanera_name ?? "";
   const d = new Date(project.event_date);
   const dateStr = `${String(d.getDate()).padStart(2, "0")}.${MONTHS[d.getMonth()]}.${d.getFullYear()}`;
+  const misXvText = (project.extra_config?.mis_xv_text as string) || "¡Mis XV!";
+  const numeroSrc = (project.extra_config?.numero_url as string) || "/images/esmeralda/15.png";
+  const bandaSrc = (project.extra_config?.banda_url as string) || "/images/esmeralda/banda.png";
+  const aroSrc = (project.extra_config?.aro_url as string) || "/images/esmeralda/aro.png";
+  const aroGifSrc = (project.extra_config?.aro_gif_url as string) || "/images/esmeralda/aro.gif";
 
   return (
     <>
       <h1 className="event texto" style={{ textAlign: "center", marginTop: "5vw" }}>
-        ¡Mis XV!
+        {misXvText}
       </h1>
 
       {/* Foto — entra primero, sube desde abajo */}
       <div className="foto show-hero-up" style={{ transitionDelay: "3.5s" }}>
         <img className="principal" src={project.hero_photo_url || "/images/esmeralda/foto.jpg"} alt={project.quinceanera_name} />
-        <img className="aro-foto" src="/images/esmeralda/aro.png" alt="" />
-        <img className="aro" src="/images/esmeralda/aro.gif" alt="" />
+        <img className="aro-foto" src={aroSrc} alt="" />
+        <img className="aro" src={aroGifSrc} alt="" />
       </div>
 
       {/* Globo de 15 — sube a los pies de la foto */}
       <div className="photo show-hero-up" style={{ marginTop: "-4%", transitionDelay: "4.2s" }}>
-        <img className="age" src="/images/esmeralda/15.png" alt="15" />
+        <img className="age" src={numeroSrc} alt="15" />
       </div>
 
       {/* Frase — entra desde la izquierda */}
@@ -37,7 +42,7 @@ export default function EsmeraldaHero({ project }: Props) {
 
       {/* Nombre — entra desde la izquierda */}
       <div className="name show-hero-left" style={{ transitionDelay: "5.6s" }}>
-        <img className="tarjet" src="/images/esmeralda/banda.png" alt="" />
+        <img className="tarjet" src={bandaSrc} alt="" />
         <h2 className="person-name" style={{ textAlign: "center" }}>
           {fullName}
         </h2>

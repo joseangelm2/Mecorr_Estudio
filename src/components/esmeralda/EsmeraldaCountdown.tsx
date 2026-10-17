@@ -1,13 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { Project } from "@/types/invitation";
 
 interface Props {
   eventDate: string;
+  project?: Project;
 }
 
-export default function EsmeraldaCountdown({ eventDate }: Props) {
+export default function EsmeraldaCountdown({ eventDate, project }: Props) {
   const [t, setT] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const relojSrc = (project?.extra_config?.reloj_url as string) || "/images/esmeralda/reloj.png";
 
   useEffect(() => {
     const target = new Date(eventDate).getTime();
@@ -28,7 +31,7 @@ export default function EsmeraldaCountdown({ eventDate }: Props) {
 
   return (
     <div className="time no-print">
-      <img src="/images/esmeralda/reloj.png" alt="Reloj" />
+      <img src={relojSrc} alt="Reloj" />
       <section id="countdown">
         <div className="container">
           <div className="countdown-container">

@@ -12,12 +12,40 @@ function CutLine() {
   return <div className="cut-line" />;
 }
 
+const STORE_ICONS: Record<string, string> = {
+  liverpool: "/images/esmeralda/liverpool.png",
+  amazon:    "/images/elegance/amazon.svg",
+  palacio:   "/images/elegance/palacio.svg",
+  sears:     "/images/elegance/sears.svg",
+  generic:   "/images/esmeralda/mesa_regalos.png",
+};
+
+const STORE_LABELS: Record<string, string> = {
+  liverpool: "Liverpool",
+  amazon:    "Amazon",
+  palacio:   "El Palacio de Hierro",
+  sears:     "Sears",
+  generic:   "Mesa de Regalos",
+};
+
 export default function EsmeraldaGifts({ project }: Props) {
   const messageRef = useRef<HTMLTextAreaElement>(null);
   const [copied, setCopied] = useState(false);
   const [visible, setVisible] = useState(false);
   const phone = project.rsvp_phone ?? "";
   const accountLabel = project.gift_registry?.bankAccountType === "tarjeta" ? "TARJETA" : "CLABE";
+  const giftStore = project.gift_registry?.giftStore ?? "liverpool";
+  const storeLabel = STORE_LABELS[giftStore] ?? "Liverpool";
+  // El logo de la tienda sigue la tienda elegida (Liverpool/Amazon/Palacio/Sears/
+  // Genérico), igual que en Elegance/Zafiro/Especial. "icono_tienda_url" permite
+  // además subir un logo propio que reemplaza al de la tienda, si se desea.
+  const storeIcon = (project.extra_config?.icono_tienda_url as string) || STORE_ICONS[giftStore] || STORE_ICONS.liverpool;
+  const iconoVestimenta = (project.extra_config?.icono_vestimenta_url as string) || "/images/esmeralda/vestimenta.png";
+  const iconoSobre = (project.extra_config?.icono_sobre_url as string) || "/images/esmeralda/sobre.png";
+  const iconoDatosBancarios = (project.extra_config?.icono_datos_bancarios_url as string) || "/images/esmeralda/mesa_regalos.png";
+  const iconoMesaRegalos = (project.extra_config?.icono_mesa_regalos_url as string) || "/images/esmeralda/mesa_regalos.png";
+  const iconoBuzon = (project.extra_config?.icono_buzon_url as string) || "/images/esmeralda/buzon.png";
+  const iconoInstagram = (project.extra_config?.icono_instagram_url as string) || "/images/esmeralda/instagram.png";
 
   function enviarMensaje() {
     const msg = messageRef.current?.value ?? "";
@@ -42,7 +70,7 @@ export default function EsmeraldaGifts({ project }: Props) {
           <section className="dress-code show-p-y no-print" style={{ marginTop: "4vw" }}>
             <h2>Código de Vestimenta</h2>
             <div className="dress-code-container">
-              <img src="/images/esmeralda/vestimenta.png" alt="Vestimenta" />
+              <img src={iconoVestimenta} alt="Vestimenta" />
               <p className="texto">{project.dress_code.colors || "Vestimenta Formal"}</p>
               <DressCodePalette project={project} />
             </div>
@@ -57,7 +85,7 @@ export default function EsmeraldaGifts({ project }: Props) {
           <section id="gift-table" className="gift-container show-p-y no-print" style={{ marginTop: "4vw" }}>
             <h2>Lluvia de Sobres</h2>
             <div className="gift-object-container">
-              <img src="/images/esmeralda/sobre.png" alt="Sobre" />
+              <img src={iconoSobre} alt="Sobre" />
               <p className="texto">
                 {project.lluvia_sobres_text ||
                   "Es la tradición de regalar dinero en efectivo dentro de un sobre"}
@@ -74,7 +102,7 @@ export default function EsmeraldaGifts({ project }: Props) {
           <section className="gift-liverpool-container show-p-y no-print" style={{ marginTop: "4vw" }}>
             <h2>Datos Bancarios</h2>
             <div className="gift-liverpool-object-container">
-              <img src="/images/esmeralda/mesa_regalos.png" className="icon-image" alt="Transferencia" />
+              <img src={iconoDatosBancarios} className="icon-image" alt="Transferencia" />
               <p className="texto">
                 {project.datos_bancarios_text ||
                   "Si lo prefieres puedes hacer una transferencia bancaria como regalo:"}
@@ -110,11 +138,11 @@ export default function EsmeraldaGifts({ project }: Props) {
           <section className="gift-liverpool-container show-p-y no-print" style={{ marginTop: "4vw" }}>
             <h2>Mesa de Regalos</h2>
             <div className="gift-liverpool-object-container">
-              <img src="/images/esmeralda/mesa_regalos.png" className="icon-image" alt="Mesa de regalos" />
+              <img src={iconoMesaRegalos} className="icon-image" alt="Mesa de regalos" />
               <p className="texto">Valoro enormemente tu compañía por encima de cualquier obsequio.</p>
             </div>
             <div className="liverpool-container">
-              <img src="/images/esmeralda/liverpool.png" alt="Liverpool" />
+              <img src={storeIcon} alt={storeLabel} />
               <a
                 className="button"
                 href={project.gift_registry.liverpoolLink}
@@ -133,7 +161,7 @@ export default function EsmeraldaGifts({ project }: Props) {
       <section className="gift-container show-p-y no-print" style={{ marginTop: "4vw" }}>
         <h2>Buzón de Deseos</h2>
         <div className="gift-object-container">
-          <img src="/images/esmeralda/buzon.png" alt="Buzón" />
+          <img src={iconoBuzon} alt="Buzón" />
           <p className="texto">
             Si quieres dejarme un lindo mensaje por mis XV, puedes hacerlo
             escribiéndome un mensaje:
@@ -156,7 +184,7 @@ export default function EsmeraldaGifts({ project }: Props) {
           <section className="gift-liverpool-container show-p-y no-print" style={{ marginTop: "4vw" }}>
             <h2>Hashtag en Instagram</h2>
             <div className="gift-liverpool-object-container">
-              <img src="/images/esmeralda/instagram.png" className="icon-image" alt="Instagram" />
+              <img src={iconoInstagram} className="icon-image" alt="Instagram" />
               <p className="texto" style={{ width: "90%", marginTop: "2%" }}>
                 Comparte tus mejores momentos con el hastag en Instagram:{" "}
                 <br />{project.hashtag}

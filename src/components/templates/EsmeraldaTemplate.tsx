@@ -77,7 +77,7 @@ export default function EsmeraldaTemplate({ project }: Props) {
       <audio ref={audioRef} id="music" loop>
         <source src={project.music_url ?? '/images/esmeralda/musica.mp3'} type="audio/mpeg" />
       </audio>
-      <EsmeraldaDecorations />
+      <EsmeraldaDecorations project={project} />
       {project.show_floating_controls !== false && (
         <>
           <FloatingMusicToggle audioRef={audioRef} colorVar="var(--color-principal, #098074)" />
@@ -87,7 +87,7 @@ export default function EsmeraldaTemplate({ project }: Props) {
       {!envelopeOpen && <EnvelopeSobre onOpen={handleOpen} />}
       <div className="background">
         <div id="portada"><EsmeraldaHero project={project} /></div>
-        <EsmeraldaCountdown eventDate={project.event_date} />
+        <EsmeraldaCountdown eventDate={project.event_date} project={project} />
         {hasFamilia && <div id="familia"><EsmeraldaParents project={project} /></div>}
         {hasUbicaciones && <div id="ubicaciones"><EsmeraldaLocations project={project} /></div>}
         <EsmeraldaPhotoGrid photos={project.photos} />
