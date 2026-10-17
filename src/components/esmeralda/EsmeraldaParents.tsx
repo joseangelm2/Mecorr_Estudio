@@ -13,12 +13,17 @@ export default function EsmeraldaParents({ project }: Props) {
 
   if (!parents.length && !padrinos.length) return null;
 
+  // Esmeralda Especial: sin separador bajo cada título; un solo separador entre
+  // padres y padrinos (con aire propio para no encimarse con el título de
+  // padrinos) y "&" en vez de "y" entre padrinos.
+  const especial = project.template === "esmeralda-especial";
+
   return (
     <>
       {parents.length > 0 && (
         <section className="parents-container no-print">
           <h2>{parentsTitle}</h2>
-          <img className="vector-long" src={separadorSrc} alt="" />
+          {!especial && <img className="vector-long" src={separadorSrc} alt="" />}
           <div className="parents texto">
             <p>
               {parents.map((n, i) => (
@@ -32,16 +37,22 @@ export default function EsmeraldaParents({ project }: Props) {
         </section>
       )}
 
+      {especial && parents.length > 0 && padrinos.length > 0 && (
+        <div style={{ display: "flex", justifyContent: "center", margin: "7vw 0 5vw" }}>
+          <img className="vector-long" style={{ marginTop: 0 }} src={separadorSrc} alt="" />
+        </div>
+      )}
+
       {padrinos.length > 0 && (
-        <section className="parents-container no-print" style={{ marginTop: "5%" }}>
+        <section className="parents-container no-print" style={especial ? undefined : { marginTop: "5%" }}>
           <h2>{padrinosTitle}</h2>
-          <img className="vector-long" src={separadorSrc} alt="" />
+          {!especial && <img className="vector-long" src={separadorSrc} alt="" />}
           <div className="parents texto">
             <p>
               {padrinos.map((n, i) => (
                 <span key={i}>
                   {n}
-                  {i < padrinos.length - 1 && <><br />y<br /></>}
+                  {i < padrinos.length - 1 && (especial ? <><br /> &amp; <br /></> : <><br />y<br /></>)}
                 </span>
               ))}
             </p>
