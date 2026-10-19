@@ -66,7 +66,7 @@ export interface ProjectFormData {
   especial_footer_text: string
   show_dress_palette: boolean
   dress_palette: Array<{ name: string; colors: string[] }>
-  especial_gift_registries: Array<{ giftStore: string; liverpoolLink: string }>
+  especial_gift_registries: Array<{ giftStore: string; liverpoolLink: string; iconUrl?: string }>
   rsvp_phones: Array<{ phone: string; label: string }>
   rsvp_email: string
   especial_seal_url: string

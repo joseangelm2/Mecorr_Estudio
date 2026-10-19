@@ -40,6 +40,23 @@ export default function EsmeraldaGifts({ project }: Props) {
   // Genérico), igual que en Elegance/Zafiro/Especial. "icono_tienda_url" permite
   // además subir un logo propio que reemplaza al de la tienda, si se desea.
   const storeIcon = (project.extra_config?.icono_tienda_url as string) || STORE_ICONS[giftStore] || STORE_ICONS.liverpool;
+  // Esmeralda Especial: además de la mesa principal (Mesa de regalos del tab General),
+  // admite mesas adicionales (extra_config.gift_registries) — todas se listan en la
+  // misma sección, cada una con su logo de tienda y su botón.
+  const extraRegistries = project.template === "esmeralda-especial"
+    ? ((project.extra_config?.gift_registries as { giftStore: string; liverpoolLink: string; iconUrl?: string }[] | undefined) ?? [])
+        .filter((r) => r.liverpoolLink)
+    : [];
+  const registries = [
+    ...(project.gift_registry?.liverpoolLink
+      ? [{ link: project.gift_registry.liverpoolLink, icon: storeIcon, label: storeLabel }]
+      : []),
+    ...extraRegistries.map((r) => ({
+      link: r.liverpoolLink,
+      icon: r.iconUrl || STORE_ICONS[r.giftStore] || STORE_ICONS.liverpool,
+      label: STORE_LABELS[r.giftStore] || "Mesa de Regalos",
+    })),
+  ];
   const iconoVestimenta = (project.extra_config?.icono_vestimenta_url as string) || "/images/esmeralda/vestimenta.png";
   const iconoSobre = (project.extra_config?.icono_sobre_url as string) || "/images/esmeralda/sobre.png";
   const iconoDatosBancarios = (project.extra_config?.icono_datos_bancarios_url as string) || "/images/esmeralda/mesa_regalos.png";
@@ -132,25 +149,32 @@ export default function EsmeraldaGifts({ project }: Props) {
       )}
 
       {/* Mesa de Regalos Liverpool */}
-      {project.gift_registry?.liverpoolLink && (
+      {registries.length > 0 && (
         <>
           <CutLine />
           <section className="gift-liverpool-container show-p-y no-print" style={{ marginTop: "4vw" }}>
-            <h2>Mesa de Regalos</h2>
+            <h2>{registries.length > 1 ? "Mesas de Regalos" : "Mesa de Regalos"}</h2>
             <div className="gift-liverpool-object-container">
               <img src={iconoMesaRegalos} className="icon-image" alt="Mesa de regalos" />
               <p className="texto">Valoro enormemente tu compañía por encima de cualquier obsequio.</p>
             </div>
             <div className="liverpool-container">
-              <img src={storeIcon} alt={storeLabel} />
-              <a
-                className="button"
-                href={project.gift_registry.liverpoolLink}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Ver Lista de Deseos
-              </a>
+              {registries.map((r, i) => (
+                <div
+                  key={i}
+                  style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: i > 0 ? "6vw" : 0 }}
+                >
+                  <img src={r.icon} alt={r.label} />
+                  <a
+                    className="button"
+                    href={r.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Ver Lista de Deseos
+                  </a>
+                </div>
+              ))}
             </div>
           </section>
         </>

@@ -177,7 +177,7 @@ function toFormData(project?: Project): ProjectFormData {
     especial_footer_text: (project.extra_config?.footer_text as string) ?? '',
     show_dress_palette: (project.extra_config?.show_dress_palette as boolean) ?? false,
     dress_palette: (project.extra_config?.dress_palette as DressPaletteEntry[]) ?? [],
-    especial_gift_registries: (project.extra_config?.gift_registries as Array<{ giftStore: string; liverpoolLink: string }>) ?? [],
+    especial_gift_registries: (project.extra_config?.gift_registries as Array<{ giftStore: string; liverpoolLink: string; iconUrl?: string }>) ?? [],
     rsvp_phones: (project.extra_config?.rsvp_phones as Array<{ phone: string; label: string }>) ?? [],
     rsvp_email: (project.extra_config?.rsvp_email as string) ?? '',
     especial_seal_url: (project.extra_config?.seal_url as string) ?? '',
@@ -1676,8 +1676,11 @@ export default function ProjectForm({ project }: Props) {
             </Field>
           </SectionCard>
 
-          {form.template === 'especial' && (
+          {(form.template === 'especial' || form.template === 'esmeralda-especial') && (
           <SectionCard title="Mesas de Regalos">
+            {form.template === 'esmeralda-especial' && (
+              <p className="text-xs text-gray-400 -mt-2 mb-2">Se muestran junto con la mesa principal del tab General (si la hay): primero esa y después estas.</p>
+            )}
             <div className="space-y-4">
               {form.especial_gift_registries.map((reg, i) => (
                 <div key={i} className="rounded-xl border border-gray-100 bg-gray-50/60 p-4 space-y-3">
@@ -1730,6 +1733,37 @@ export default function ProjectForm({ project }: Props) {
                     className={input}
                     placeholder="https://..."
                   />
+                  {form.template === 'esmeralda-especial' && (
+                    <div className="pt-2 border-t border-gray-100">
+                      <label className="text-xs text-gray-500">Imagen personalizada de esta mesa (opcional — reemplaza el logo de la tienda)</label>
+                      <input
+                        type="url"
+                        value={reg.iconUrl ?? ''}
+                        onChange={e => {
+                          const updated = [...form.especial_gift_registries]
+                          updated[i] = { ...updated[i], iconUrl: e.target.value }
+                          set('especial_gift_registries', updated)
+                        }}
+                        className={input}
+                        placeholder="https://..."
+                      />
+                      {project?.id ? (
+                        <MediaUploader
+                          projectId={project.id}
+                          bucket="invitation-media"
+                          accept="image/*"
+                          onUploadComplete={url => {
+                            const updated = [...form.especial_gift_registries]
+                            updated[i] = { ...updated[i], iconUrl: url }
+                            set('especial_gift_registries', updated)
+                          }}
+                          label="Subir imagen de la mesa"
+                        />
+                      ) : (
+                        <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para subir archivos.</p>
+                      )}
+                    </div>
+                  )}
                 </div>
               ))}
               <button
