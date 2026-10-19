@@ -100,6 +100,8 @@ function toFormData(project?: Project): ProjectFormData {
       esmeralda_banda_url: '',
       esmeralda_numero_url: '',
       esmeralda_mis_xv_text: '',
+      esmeralda_mis_xv_mode: 'texto',
+      esmeralda_mis_xv_image_url: '',
       esmeralda_titulos_color: '',
       esmeralda_boton_texto_color: '',
       esmeralda_reloj_url: '',
@@ -196,6 +198,8 @@ function toFormData(project?: Project): ProjectFormData {
     esmeralda_banda_url: (project.extra_config?.banda_url as string) ?? '',
     esmeralda_numero_url: (project.extra_config?.numero_url as string) ?? '',
     esmeralda_mis_xv_text: (project.extra_config?.mis_xv_text as string) ?? '',
+    esmeralda_mis_xv_mode: (project.extra_config?.mis_xv_mode as string) === 'imagen' ? 'imagen' : 'texto',
+    esmeralda_mis_xv_image_url: (project.extra_config?.mis_xv_image_url as string) ?? '',
     esmeralda_titulos_color: (project.extra_config?.titulos_color as string) ?? '',
     esmeralda_boton_texto_color: (project.extra_config?.boton_texto_color as string) ?? '',
     esmeralda_reloj_url: (project.extra_config?.reloj_url as string) ?? '',
@@ -1566,14 +1570,51 @@ export default function ProjectForm({ project }: Props) {
                   )}
                 </Field>
               ))}
-              <Field title='Texto "Mis XV"'>
-                <input
-                  type="text"
-                  value={form.esmeralda_mis_xv_text}
-                  onChange={e => set('esmeralda_mis_xv_text', e.target.value)}
-                  className={input}
-                  placeholder="¡Mis XV!"
-                />
+              <Field title='Título "Mis XV"'>
+                <div className="flex items-center gap-3 mb-3">
+                  <span className={`text-sm font-medium ${form.esmeralda_mis_xv_mode !== 'imagen' ? 'text-gray-800' : 'text-gray-400'}`}>Texto</span>
+                  <Toggle
+                    checked={form.esmeralda_mis_xv_mode === 'imagen'}
+                    onChange={v => set('esmeralda_mis_xv_mode', v ? 'imagen' : 'texto')}
+                    label="Usar imagen como título"
+                  />
+                  <span className={`text-sm font-medium ${form.esmeralda_mis_xv_mode === 'imagen' ? 'text-gray-800' : 'text-gray-400'}`}>Imagen</span>
+                </div>
+                {form.esmeralda_mis_xv_mode === 'imagen' ? (
+                  <>
+                    <input
+                      type="url"
+                      value={form.esmeralda_mis_xv_image_url}
+                      onChange={e => set('esmeralda_mis_xv_image_url', e.target.value)}
+                      className={input}
+                      placeholder="https://..."
+                    />
+                    {project?.id ? (
+                      <MediaUploader
+                        projectId={project.id}
+                        bucket="invitation-media"
+                        accept="image/*"
+                        onUploadComplete={url => set('esmeralda_mis_xv_image_url', url)}
+                        label="Subir imagen del título"
+                      />
+                    ) : (
+                      <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para subir archivos.</p>
+                    )}
+                    <p className="text-xs text-gray-400 mt-2">
+                      Tamaño recomendado: <b>640 × 270 px</b> (proporción 2.4:1), PNG con fondo transparente.
+                      Ocupa el mismo alto que el texto (59 px en celular, 90 px en escritorio); si tu imagen
+                      es más ancha o más angosta se ajusta sin deformarse.
+                    </p>
+                  </>
+                ) : (
+                  <input
+                    type="text"
+                    value={form.esmeralda_mis_xv_text}
+                    onChange={e => set('esmeralda_mis_xv_text', e.target.value)}
+                    className={input}
+                    placeholder="¡Mis XV!"
+                  />
+                )}
               </Field>
             </SectionCard>
           )}

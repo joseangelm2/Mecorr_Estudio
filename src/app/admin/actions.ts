@@ -87,6 +87,8 @@ export interface ProjectFormData {
   esmeralda_banda_url: string
   esmeralda_numero_url: string
   esmeralda_mis_xv_text: string
+  esmeralda_mis_xv_mode: string
+  esmeralda_mis_xv_image_url: string
   esmeralda_titulos_color: string
   esmeralda_boton_texto_color: string
   esmeralda_reloj_url: string
@@ -229,6 +231,8 @@ async function formDataToProject(data: ProjectFormData) {
       ...(data.esmeralda_banda_url      ? { banda_url:      data.esmeralda_banda_url      } : {}),
       ...(data.esmeralda_numero_url     ? { numero_url:     data.esmeralda_numero_url     } : {}),
       ...(data.esmeralda_mis_xv_text    ? { mis_xv_text:    data.esmeralda_mis_xv_text    } : {}),
+      ...(data.esmeralda_mis_xv_mode === 'imagen' ? { mis_xv_mode: 'imagen' } : {}),
+      ...(data.esmeralda_mis_xv_image_url ? { mis_xv_image_url: data.esmeralda_mis_xv_image_url } : {}),
       ...(data.esmeralda_titulos_color  ? { titulos_color:  data.esmeralda_titulos_color  } : {}),
       ...(data.esmeralda_boton_texto_color ? { boton_texto_color: data.esmeralda_boton_texto_color } : {}),
       ...(data.esmeralda_reloj_url   ? { reloj_url:   data.esmeralda_reloj_url   } : {}),

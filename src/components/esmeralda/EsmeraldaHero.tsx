@@ -11,6 +11,9 @@ export default function EsmeraldaHero({ project }: Props) {
   const d = new Date(project.event_date);
   const dateStr = `${String(d.getDate()).padStart(2, "0")}.${MONTHS[d.getMonth()]}.${d.getFullYear()}`;
   const misXvText = (project.extra_config?.mis_xv_text as string) || "¡Mis XV!";
+  const misXvImage = project.extra_config?.mis_xv_mode === "imagen"
+    ? (project.extra_config?.mis_xv_image_url as string) || ""
+    : "";
   const numeroSrc = (project.extra_config?.numero_url as string) || "/images/esmeralda/15.png";
   const bandaSrc = (project.extra_config?.banda_url as string) || "/images/esmeralda/banda.png";
   const aroSrc = (project.extra_config?.aro_url as string) || "/images/esmeralda/aro.png";
@@ -19,7 +22,9 @@ export default function EsmeraldaHero({ project }: Props) {
   return (
     <>
       <h1 className="event texto" style={{ textAlign: "center", marginTop: "5vw" }}>
-        {misXvText}
+        {misXvImage
+          ? <img className="event-img" src={misXvImage} alt={misXvText} />
+          : misXvText}
       </h1>
 
       {/* Foto — entra primero, sube desde abajo */}
