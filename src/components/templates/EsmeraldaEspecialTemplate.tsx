@@ -20,6 +20,7 @@ import EsmeraldaScrollInit from '@/components/esmeralda/EsmeraldaScrollInit'
 import FloatingMusicToggle from '@/components/FloatingMusicToggle'
 import FloatingSectionNav from '@/components/FloatingSectionNav'
 import StickyBanner from '@/components/StickyBanner'
+import { TITULO_FUENTES } from '@/lib/titulo-fuentes'
 
 const NAV_CANDIDATES = [
   { id: 'portada', label: 'Portada' },
@@ -76,6 +77,9 @@ export default function EsmeraldaEspecialTemplate({ project }: Props) {
   const nombreColorFinal = titulosColor || theme.nombreColor
   // Color de texto de los botones — independiente del color de fondo de arriba.
   const botonTextoColor = (project.extra_config?.boton_texto_color as string) || ''
+  // Fuente de títulos (h1/h2). Se pone en el div raíz y no en :root porque las
+  // variables --font-* las define el layout de /i/[slug], no el <html>.
+  const tituloFuente = TITULO_FUENTES.find(f => f.id === project.extra_config?.titulo_fuente)
 
   useEffect(() => {
     const root = document.documentElement
@@ -120,7 +124,7 @@ export default function EsmeraldaEspecialTemplate({ project }: Props) {
   const hasItinerario = project.show_itinerary && project.itinerary.length > 0
 
   return (
-    <div style={{ position: 'relative', overflow: 'clip' }}>
+    <div style={{ position: 'relative', overflow: 'clip', ...(tituloFuente ? ({ '--esp-titulo-font': tituloFuente.css } as React.CSSProperties) : {}) }}>
       <EsmeraldaScrollInit />
       <audio ref={audioRef} id="music" loop>
         <source src={project.music_url ?? '/images/esmeralda/musica.mp3'} type="audio/mpeg" />

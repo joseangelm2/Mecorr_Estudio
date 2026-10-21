@@ -10,6 +10,7 @@ import { ELEGANCE_THEMES } from '@/lib/elegance-themes'
 import { ESMERALDA_THEMES } from '@/lib/esmeralda-themes'
 import { ESPECIAL_THEMES } from '@/lib/especial-themes'
 import { ZAFIRO_THEMES } from '@/lib/zafiro-themes'
+import { TITULO_FUENTES } from '@/lib/titulo-fuentes'
 import AlbumMediaAdminPanel from '@/components/admin/AlbumMediaAdminPanel'
 
 // Lazy: arrastra el cliente de Supabase — no necesario en el bundle inicial
@@ -103,6 +104,7 @@ function toFormData(project?: Project): ProjectFormData {
       esmeralda_mis_xv_mode: 'texto',
       esmeralda_mis_xv_image_url: '',
       esmeralda_titulos_color: '',
+      esmeralda_titulo_fuente: 'carattere',
       esmeralda_boton_texto_color: '',
       esmeralda_reloj_url: '',
       esmeralda_aro_url: '',
@@ -201,6 +203,7 @@ function toFormData(project?: Project): ProjectFormData {
     esmeralda_mis_xv_mode: (project.extra_config?.mis_xv_mode as string) === 'imagen' ? 'imagen' : 'texto',
     esmeralda_mis_xv_image_url: (project.extra_config?.mis_xv_image_url as string) ?? '',
     esmeralda_titulos_color: (project.extra_config?.titulos_color as string) ?? '',
+    esmeralda_titulo_fuente: (project.extra_config?.titulo_fuente as string) ?? 'carattere',
     esmeralda_boton_texto_color: (project.extra_config?.boton_texto_color as string) ?? '',
     esmeralda_reloj_url: (project.extra_config?.reloj_url as string) ?? '',
     esmeralda_aro_url: (project.extra_config?.aro_url as string) ?? '',
@@ -1656,6 +1659,22 @@ export default function ProjectForm({ project }: Props) {
           )}
 
           <SectionCard title="Textos opcionales">
+            {form.template === 'esmeralda-especial' && (
+              <Field title="Fuente de los títulos">
+                <select
+                  value={form.esmeralda_titulo_fuente}
+                  onChange={e => set('esmeralda_titulo_fuente', e.target.value)}
+                  className={input}
+                >
+                  {TITULO_FUENTES.map(f => (
+                    <option key={f.id} value={f.id}>{f.label}</option>
+                  ))}
+                </select>
+                <p className="text-xs text-gray-400 mt-1">
+                  Aplica a &ldquo;Mis XV&rdquo;, el nombre de la quinceañera y los títulos de cada sección. Cámbiala y abre la invitación para ver cómo queda.
+                </p>
+              </Field>
+            )}
             <Field title="Texto del banner (nombre del invitado)">
               <input
                 type="text"

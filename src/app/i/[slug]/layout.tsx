@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import {
   Raleway, Albert_Sans, Beau_Rivage, Mea_Culpa,
   Carattere, Bellefair, Cormorant_Garamond, Old_Standard_TT,
-  Dancing_Script, Tangerine, DM_Sans,
+  Dancing_Script, Tangerine, DM_Sans, Playfair_Display, Libre_Bodoni,
 } from 'next/font/google'
 
 const raleway     = Raleway({ variable: '--font-raleway',      subsets: ['latin'], weight: ['400', '600', '700'] })
@@ -16,6 +16,8 @@ const oldStandard = Old_Standard_TT({ variable: '--font-old-standard', subsets: 
 const dancing     = Dancing_Script({ variable: '--font-dancing',   subsets: ['latin'], weight: ['400', '700'] })
 const tangerine   = Tangerine({ variable: '--font-tangerine',      subsets: ['latin'], weight: ['400', '700'] })
 const dmSans      = DM_Sans({ variable: '--font-dm-sans',          subsets: ['latin'] })
+const playfair    = Playfair_Display({ variable: '--font-playfair',      subsets: ['latin'] })
+const libreBodoni  = Libre_Bodoni({ variable: '--font-libre-bodoni', subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Invitación',
@@ -26,7 +28,7 @@ export default function InvitationLayout({ children }: { children: React.ReactNo
   const fonts = [
     raleway.variable, albert.variable, beau.variable, meaCulpa.variable,
     carattere.variable, bellefair.variable, cormorant.variable, oldStandard.variable,
-    dancing.variable, tangerine.variable, dmSans.variable,
+    dancing.variable, tangerine.variable, dmSans.variable, playfair.variable, libreBodoni.variable,
   ].join(' ')
 
   return (
