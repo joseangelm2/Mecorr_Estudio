@@ -22,6 +22,8 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: ['rake-ducktail-compactor.ngrok-free.dev'],
   async rewrites() {
     return [
+      // Demo2 de Esmeralda vive fuera de /esmeralda para no heredar su layout/CSS.
+      { source: '/esmeralda/demo2', destination: '/esmeralda-especial/demo2' },
       {
         source: '/api/_supabase/:path*',
         destination: 'http://127.0.0.1:54321/:path*',

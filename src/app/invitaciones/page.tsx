@@ -12,6 +12,7 @@ interface Invitation {
   demoHref: string
   demoLabel?: string
   internalRoute?: string
+  extraDemo?: { href: string; label: string }
 }
 
 const invitations: Invitation[] = [
@@ -53,6 +54,7 @@ const invitations: Invitation[] = [
     demoHref: '/esmeralda',
     demoLabel: 'Ver demo',
     internalRoute: '/esmeralda',
+    extraDemo: { href: '/esmeralda/demo2', label: 'Ver demo 2' },
   },
   {
     title: 'Love',
@@ -163,6 +165,11 @@ export default function InvitacionesPage() {
                   <Link href={inv.internalRoute ?? inv.demoHref} className="btn-demo btn-primary">
                     {inv.demoLabel ?? 'Ver demo'}
                   </Link>
+                  {inv.extraDemo && (
+                    <Link href={inv.extraDemo.href} className="btn-demo btn-primary">
+                      {inv.extraDemo.label}
+                    </Link>
+                  )}
                 </div>
               </div>
               <div className="main-image">
