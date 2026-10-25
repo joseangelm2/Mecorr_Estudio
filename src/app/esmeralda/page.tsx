@@ -33,7 +33,7 @@ export default function EsmeraldaPage() {
     <div style={{ position: "relative" }}>
       <EsmeraldaScrollInit />
       <audio ref={audioRef} id="music" loop>
-        <source src={DEMO_PROJECT.music_url ?? "/images/esmeralda/musica.mp3"} type="audio/mpeg" />
+        <source src="/images/esmeralda/base/musica.mp3" type="audio/mpeg" />
       </audio>
       <DemoFloatingControls candidates={NAV_ESMERALDA} colorVar="var(--color-principal, #098074)" />
       <EsmeraldaDecorations />

@@ -22,7 +22,7 @@ export default function SobrePage() {
     <>
       <WowInit />
       <DemoFloatingControls candidates={NAV_SOBRE} />
-      <IntroEnvelope assetBase="/images/sobre" />
+      <IntroEnvelope assetBase="/images/sobre" musicUrl="/images/sobre/MiPrincesa.mp3" />
       <StickyBanner guestName="Aime Ferreira" />
       <HeroSection assetBase="/images/sobre" />
       <CelebracionSection assetBase="/images/sobre" />

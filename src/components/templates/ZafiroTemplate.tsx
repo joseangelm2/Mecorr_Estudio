@@ -122,7 +122,7 @@ export default function ZafiroTemplate({ project }: Props) {
     <div className="t-zafiro" style={{ position: "relative" }}>
       <ZafiroScrollInit />
       <audio ref={audioRef} loop>
-        <source src={project.music_url ?? "/images/zafiro/musica.mp3"} type="audio/mpeg" />
+        <source src={project.music_url ?? "/images/love/musica.mp3"} type="audio/mpeg" />
       </audio>
       {project.show_floating_controls !== false && (
         <>

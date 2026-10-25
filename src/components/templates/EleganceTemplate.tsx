@@ -89,7 +89,7 @@ export default function EleganceTemplate({ project }: Props) {
     <div className="t-elegance" style={{ position: 'relative' }}>
       <EleganceScrollInit />
       <audio ref={audioRef} loop>
-        <source src={project.music_url ?? '/images/esmeralda/musica.mp3'} type="audio/mpeg" />
+        <source src={project.music_url ?? '/images/love/musica.mp3'} type="audio/mpeg" />
       </audio>
       {!envelopeOpen && <EleganceEnvelope onOpen={handleOpen} primaryColor={theme.colorPrincipal} />}
       {project.show_floating_controls !== false && (

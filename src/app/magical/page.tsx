@@ -48,7 +48,7 @@ export default function MagicalPage() {
     <div style={{ position: "relative" }}>
       <MagicalScrollInit />
       <audio ref={audioRef} id="music" loop>
-        <source src="/images/magical/musica.mp3" type="audio/mpeg" />
+        <source src="/images/magical/base/musica.mp3" type="audio/mpeg" />
       </audio>
       <DemoFloatingControls candidates={NAV_MAGICAL} colorVar="var(--color-principal, #2d1b69)" />
       <MagicalDecorations />
