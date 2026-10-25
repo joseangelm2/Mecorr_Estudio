@@ -95,6 +95,7 @@ export const NAV_SELLOROSA: NavCandidate[] = [
   { id: 'familia', label: 'Familia' },
   { id: 'ubicaciones', label: 'Ubicaciones' },
   { id: 'itinerario', label: 'Itinerario' },
+  { id: 'fotos', label: 'Fotos' },
   { id: 'vestimenta', label: 'Vestimenta' },
   { id: 'regalos', label: 'Regalos' },
   { id: 'lluvia-sobres', label: 'Lluvia de Sobres' },

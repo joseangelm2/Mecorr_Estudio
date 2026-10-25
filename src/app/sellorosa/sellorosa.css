@@ -56,49 +56,37 @@ body:has(.t-sellorosa) {
   display: none;
 }
 
-.t-sellorosa .sr-envelope-card {
-  background: white;
-  border-radius: 16px;
-  padding: 40px 32px;
-  text-align: center;
-  max-width: 320px;
-  width: 85vw;
-  box-shadow: 0 8px 32px rgba(203, 153, 126, 0.3);
-  position: relative;
-}
-
-.t-sellorosa .sr-envelope-flap {
-  position: absolute;
-  top: -1px;
-  left: 0;
-  width: 100%;
-  height: 50%;
-  background: linear-gradient(135deg, #f5babc, #cb997e);
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-  transition: transform 1.2s ease, opacity 0.8s ease;
-  transform-origin: top center;
-}
-
-.t-sellorosa .sr-envelope-flap.open {
-  transform: rotateX(180deg);
-  opacity: 0;
-}
-
 .t-sellorosa .sr-envelope-name {
-  font-size: clamp(2.5rem, 12vw, 5rem);
-  color: #cb997e;
+  font-size: clamp(2.4rem, 12vw, 4.2rem);
+  color: #fff;
   font-family: Georgia, serif;
   font-weight: 400;
-  margin: 16px 0 8px;
-  text-shadow: 0 2px 8px rgba(203, 153, 126, 0.3);
+  line-height: 1.05;
+  margin-bottom: 6px;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
 }
 
 .t-sellorosa .sr-envelope-tagline {
-  font-size: 12px;
-  letter-spacing: 4px;
+  font-size: clamp(1.15rem, 5.5vw, 1.7rem); /* mayor que antes, pero menor que el nombre */
+  letter-spacing: 5px;
   text-transform: uppercase;
-  color: #f5babc;
-  margin-bottom: 24px;
+  color: rgba(255, 255, 255, 0.92);
+  margin-bottom: 22px;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Bloque inferior: nombre, fecha y botón casi al final de la pantalla. */
+.t-sellorosa .sr-envelope-pie {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: max(7vh, 36px);
+  z-index: 1;
+  padding: 0 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .t-sellorosa .sr-sello-btn {
@@ -583,4 +571,222 @@ body:has(.t-sellorosa) {
 .t-sellorosa .show-p-x.active-p-x {
   opacity: 1;
   transform: translateX(0);
+}
+
+
+/* ======================================
+   PORTADA = SOBRE CON FOTO
+   ====================================== */
+
+.t-sellorosa .sr-envelope--foto {
+  background-size: cover, cover;
+  background-position: center top, center;
+  background-repeat: no-repeat;
+}
+
+/* Velo rosa para que la frase y el sobre se lean sobre cualquier foto. */
+.t-sellorosa .sr-envelope::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(87, 45, 56, 0.55) 0%, rgba(245, 186, 188, 0.1) 40%, rgba(87, 45, 56, 0.7) 100%);
+}
+
+.t-sellorosa .sr-envelope-titulo {
+  position: absolute;
+  top: max(5vh, 28px);
+  left: 0;
+  right: 0;
+  z-index: 1;
+  padding: 0 16px;
+  text-align: center;
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(2rem, 10.5vw, 4.4rem);
+  white-space: nowrap;
+  line-height: 1;
+  color: #fff;
+  letter-spacing: 1px;
+  text-shadow:
+    0 0 14px rgba(245, 186, 188, 0.95),
+    0 0 34px rgba(203, 153, 126, 0.85),
+    0 4px 18px rgba(0, 0, 0, 0.45);
+}
+
+/* ======================================
+   PRIMERA PANTALLA TRAS ABRIR EL SOBRE
+   (frase, cuenta regresiva, padres y padrinos, compactos para caber juntos)
+   ====================================== */
+
+.t-sellorosa .sr-inicio {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #fff0f3;
+}
+
+.t-sellorosa .sr-inicio .sr-section {
+  padding: 14px 20px;
+}
+
+.t-sellorosa .sr-inicio .sr-section-title {
+  font-size: clamp(1.45rem, 5.5vw, 2rem);
+  margin-bottom: 2px;
+}
+
+.t-sellorosa .sr-inicio .sr-section-line {
+  margin: 6px auto 10px;
+}
+
+.t-sellorosa .sr-inicio .sr-text {
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.t-sellorosa .sr-inicio .sr-countdown-wrapper {
+  padding: 16px 16px 18px;
+}
+
+.t-sellorosa .sr-inicio .sr-countdown-title {
+  font-size: clamp(1.1rem, 4vw, 1.5rem);
+  margin-bottom: 10px;
+}
+
+.t-sellorosa .sr-inicio .sr-countdown-num {
+  font-size: clamp(2rem, 9vw, 3rem);
+}
+
+.t-sellorosa .sr-inicio .sr-countdown-label {
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+.t-sellorosa .sr-inicio .sr-parents {
+  padding: 8px 12px 14px;
+}
+
+.t-sellorosa .sr-inicio .sr-parent-name {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* ======================================
+   GALERÍA "MOMENTOS"
+   ====================================== */
+
+.t-sellorosa .sr-fotos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 16px 32px;
+}
+
+.t-sellorosa .sr-foto {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(164, 113, 122, 0.25);
+  display: block;
+}
+
+/* La primera foto abre la galería a todo el ancho. */
+.t-sellorosa .sr-foto:first-child {
+  grid-column: 1 / -1;
+  aspect-ratio: 4 / 3;
+}
+
+/* Si la última queda sola en su fila, también ocupa todo el ancho. */
+.t-sellorosa .sr-foto:last-child:nth-child(even) {
+  grid-column: 1 / -1;
+  aspect-ratio: 4 / 3;
+}
+
+/* ======================================
+   FOTO DE CIERRE
+   ====================================== */
+
+.t-sellorosa .sr-cierre {
+  position: relative;
+  width: 100%;
+  min-height: 70vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.t-sellorosa .sr-cierre::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 40%, rgba(87, 45, 56, 0.75) 100%);
+}
+
+.t-sellorosa .sr-cierre-texto {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 0 20px 36px;
+  color: white;
+  font-family: Georgia, serif;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+}
+
+.t-sellorosa .sr-cierre-texto span {
+  font-size: 1rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.t-sellorosa .sr-cierre-texto strong {
+  font-size: clamp(2.6rem, 14vw, 5rem);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+/* ======================================
+   PÉTALOS CAYENDO
+   ====================================== */
+
+.t-sellorosa .sr-petalos {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 50;
+}
+
+.t-sellorosa .sr-petalo {
+  position: absolute;
+  top: -40px;
+  /* Forma de pétalo: dos esquinas opuestas muy redondeadas. */
+  border-radius: 100% 0 100% 0;
+  background: radial-gradient(ellipse at 30% 25%, #fff0f1 0%, #f5babc 45%, #d98a96 100%);
+  box-shadow: inset -2px -2px 4px rgba(164, 113, 122, 0.25);
+  animation-name: sr-petalo-caer;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+@keyframes sr-petalo-caer {
+  0%   { transform: translate3d(0, -5vh, 0) rotate(0deg); }
+  25%  { transform: translate3d(var(--sr-drift), 28vh, 0) rotate(calc(var(--sr-giro) * 0.25)); }
+  50%  { transform: translate3d(calc(var(--sr-drift) * -0.6), 58vh, 0) rotate(calc(var(--sr-giro) * 0.5)); }
+  75%  { transform: translate3d(calc(var(--sr-drift) * 0.8), 86vh, 0) rotate(calc(var(--sr-giro) * 0.75)); }
+  100% { transform: translate3d(calc(var(--sr-drift) * -0.3), 112vh, 0) rotate(var(--sr-giro)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .t-sellorosa .sr-petalos { display: none; }
 }

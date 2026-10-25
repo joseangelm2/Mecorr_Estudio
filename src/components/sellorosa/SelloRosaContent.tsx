@@ -55,12 +55,14 @@ export default function SelloRosaContent({ project }: Props) {
   const [accountVisible, setAccountVisible] = useState(false);
 
   const eventDate = new Date(project.event_date);
-  const day = eventDate.getDate().toString().padStart(2, "0");
-  const month = eventDate.toLocaleString("es-MX", { month: "short" }).toUpperCase();
   const year = eventDate.getFullYear();
 
   const nameParts = project.quinceanera_name.split(" ");
   const firstName = nameParts[0];
+  const photos = (project.photos ?? []).filter(Boolean);
+  const heroPhoto = project.hero_photo_url || "";
+  // Foto de cierre: la subida; si no, la última del álbum o la de portada (igual que las demás plantillas).
+  const finalPhoto = (project.extra_config?.final_photo_url as string) || photos[photos.length - 1] || heroPhoto;
   const accountLabel = project.gift_registry?.bankAccountType === "tarjeta" ? "TARJETA" : "CLABE";
 
   const events = (project.itinerary ?? []).map((ev, i) => ({
@@ -80,56 +82,48 @@ export default function SelloRosaContent({ project }: Props) {
 
   return (
     <main className="sr-main">
-      {/* Hero */}
-      <section id="portada" className="sr-hero">
-        <div className="sr-hero-content">
-          <h1 className="sr-hero-title">{firstName}</h1>
-          <div className="sr-hero-xv">XV Años</div>
-          <div className="sr-hero-date">{day} · {month} · {year}</div>
-        </div>
-      </section>
+      {/* Portada: lo primero que se ve al abrir el sobre (frase, cuenta regresiva, padres y padrinos) */}
+      <div id="portada" className="sr-inicio">
+        {/* Invitación */}
+        <section className="sr-section show-p-y">
+          <h2 className="sr-section-title">Te Invito a mis XV</h2>
+          <hr className="sr-section-line" />
+          <p className="sr-text">
+            {project.invitation_text ?? "Mis quince años serán un sueño hecho realidad, y quiero que tú formes parte de este capítulo único en mi vida. Con todo mi amor, te invito a celebrar conmigo este día tan especial."}
+          </p>
+        </section>
 
-      <div className="sr-divider" />
+        {/* Countdown */}
+        <SelloRosaCountdown eventDate={project.event_date} />
 
-      {/* Invitación */}
-      <section className="sr-section show-p-y">
-        <h2 className="sr-section-title">Te Invito a mis XV</h2>
-        <hr className="sr-section-line" />
-        <p className="sr-text">
-          {project.invitation_text ?? "Mis quince años serán un sueño hecho realidad, y quiero que tú formes parte de este capítulo único en mi vida. Con todo mi amor, te invito a celebrar conmigo este día tan especial."}
-        </p>
-      </section>
-
-      {/* Countdown */}
-      <SelloRosaCountdown eventDate={project.event_date} />
-
-      {/* Padres & Padrinos */}
-      {(project.parent_names?.length > 0 || project.padrinos?.length > 0) && (
-        <div id="familia" className="sr-parents show-p-y">
-          {project.parent_names?.length > 0 && (
-            <section className="sr-section">
-              <h2 className="sr-section-title">{(project.extra_config?.parents_title as string) || "Mis Padres"}</h2>
-              <hr className="sr-section-line" />
-              <p className="sr-parent-name">
-                {project.parent_names.map((name, i) => (
-                  <span key={i}>{name}{i < project.parent_names.length - 1 ? <><br />&amp;<br /></> : null}</span>
-                ))}
-              </p>
-            </section>
-          )}
-          {project.padrinos?.length > 0 && (
-            <section className="sr-section" style={{ paddingTop: 0 }}>
-              <h2 className="sr-section-title">{(project.extra_config?.padrinos_title as string) || "Padrinos"}</h2>
-              <hr className="sr-section-line" />
-              <p className="sr-parent-name">
-                {project.padrinos.map((name, i) => (
-                  <span key={i}>{name}{i < project.padrinos.length - 1 ? <><br />&amp;<br /></> : null}</span>
-                ))}
-              </p>
-            </section>
-          )}
-        </div>
-      )}
+        {/* Padres & Padrinos */}
+        {(project.parent_names?.length > 0 || project.padrinos?.length > 0) && (
+          <div id="familia" className="sr-parents show-p-y">
+            {project.parent_names?.length > 0 && (
+              <section className="sr-section">
+                <h2 className="sr-section-title">{(project.extra_config?.parents_title as string) || "Mis Padres"}</h2>
+                <hr className="sr-section-line" />
+                <p className="sr-parent-name">
+                  {project.parent_names.map((name, i) => (
+                    <span key={i}>{name}{i < project.parent_names.length - 1 ? <><br />&amp;<br /></> : null}</span>
+                  ))}
+                </p>
+              </section>
+            )}
+            {project.padrinos?.length > 0 && (
+              <section className="sr-section" style={{ paddingTop: 0 }}>
+                <h2 className="sr-section-title">{(project.extra_config?.padrinos_title as string) || "Padrinos"}</h2>
+                <hr className="sr-section-line" />
+                <p className="sr-parent-name">
+                  {project.padrinos.map((name, i) => (
+                    <span key={i}>{name}{i < project.padrinos.length - 1 ? <><br />&amp;<br /></> : null}</span>
+                  ))}
+                </p>
+              </section>
+            )}
+          </div>
+        )}
+      </div>
 
       {/* Venues */}
       <div id="ubicaciones" className="sr-venues show-p-y">
@@ -175,6 +169,21 @@ export default function SelloRosaContent({ project }: Props) {
                   <div className="sr-itinerario-hour">{ev.hour}</div>
                 </div>
               </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Galería */}
+      {photos.length > 0 && (
+        <div id="fotos" className="sr-fotos show-p-y">
+          <section className="sr-section" style={{ paddingBottom: 16 }}>
+            <h2 className="sr-section-title">Momentos</h2>
+            <hr className="sr-section-line" />
+          </section>
+          <div className="sr-fotos-grid">
+            {photos.map((src, i) => (
+              <img key={`${src}-${i}`} src={src} alt={`${project.quinceanera_name} — foto ${i + 1}`} className="sr-foto" loading="lazy" />
             ))}
           </div>
         </div>
@@ -276,6 +285,16 @@ export default function SelloRosaContent({ project }: Props) {
           )}
         </section>
       </div>
+
+      {/* Foto de cierre */}
+      {finalPhoto && (
+        <div className="sr-cierre show-p-y" style={{ backgroundImage: `url(${finalPhoto})` }}>
+          <div className="sr-cierre-texto">
+            <span>¡Te espero!</span>
+            <strong>{firstName}</strong>
+          </div>
+        </div>
+      )}
 
       {/* RSVP */}
       <div id="confirmar" className="sr-rsvp show-p-y">

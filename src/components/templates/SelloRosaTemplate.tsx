@@ -6,6 +6,7 @@ import type { Project } from '@/types/invitation'
 import EsmeraldaScrollInit from '@/components/esmeralda/EsmeraldaScrollInit'
 import SelloRosaEnvelope from '@/components/sellorosa/SelloRosaEnvelope'
 import SelloRosaContent from '@/components/sellorosa/SelloRosaContent'
+import SelloRosaPetalos from '@/components/sellorosa/SelloRosaPetalos'
 import FloatingMusicToggle from '@/components/FloatingMusicToggle'
 import FloatingSectionNav from '@/components/FloatingSectionNav'
 
@@ -15,6 +16,7 @@ const NAV_CANDIDATES = [
   { id: 'familia', label: 'Familia' },
   { id: 'ubicaciones', label: 'Ubicaciones' },
   { id: 'itinerario', label: 'Itinerario' },
+  { id: 'fotos', label: 'Fotos' },
   { id: 'vestimenta', label: 'Vestimenta' },
   { id: 'regalos', label: 'Regalos' },
   { id: 'lluvia-sobres', label: 'Lluvia de Sobres' },
@@ -48,7 +50,8 @@ export default function SelloRosaTemplate({ project }: Props) {
           <FloatingSectionNav candidates={NAV_CANDIDATES} colorVar="#cb997e" />
         </>
       )}
-      {!open && <SelloRosaEnvelope onOpen={handleOpen} />}
+      {!open && <SelloRosaEnvelope onOpen={handleOpen} project={project} />}
+      {open && <SelloRosaPetalos />}
       <SelloRosaContent project={project} />
     </div>
   )
