@@ -37,7 +37,7 @@ export default function SelloRosaTemplate({ project }: Props) {
   }
 
   return (
-    <div>
+    <div className="t-sellorosa">
       <EsmeraldaScrollInit />
       <audio ref={audioRef} loop preload="auto">
         <source src={project.music_url ?? '/images/esmeralda/musica.mp3'} type="audio/mpeg" />

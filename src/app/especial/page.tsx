@@ -15,27 +15,30 @@ import RSVPSection from "@/components/RSVPSection";
 import FinalSection from "@/components/FinalSection";
 import MesaRegalosSection from "@/components/MesaRegalosSection";
 import LluviaSobresSection from "@/components/LluviaDesobresSection";
+import DemoFloatingControls from "@/components/DemoFloatingControls";
+import { NAV_SOBRE } from "@/lib/demo-nav";
 
 export default function EspecialPage() {
   return (
     <>
       <WowInit />
-      <IntroEnvelope />
+      <DemoFloatingControls candidates={NAV_SOBRE} />
+      <IntroEnvelope assetBase="/images/especial/base" />
       <StickyBanner guestName="Aime Ferreira" />
-      <HeroSection />
-      <CelebracionSection />
-      <ContadorSection />
-      <CeremoniaSection />
-      <RecepcionSection />
-      <ItinerarioSection />
-      <VestimentaSection />
-      <HashtagSection />
-      <FotosCarousel />
-      <VideoSection />
-      <MesaRegalosSection />
+      <HeroSection assetBase="/images/especial/base" />
+      <CelebracionSection assetBase="/images/especial/base" />
+      <ContadorSection assetBase="/images/especial/base" />
+      <CeremoniaSection assetBase="/images/especial/base" />
+      <RecepcionSection assetBase="/images/especial/base" />
+      <ItinerarioSection assetBase="/images/especial/base" />
+      <VestimentaSection assetBase="/images/especial/base" />
+      <HashtagSection assetBase="/images/especial/base" />
+      <FotosCarousel assetBase="/images/especial/base" />
+      <VideoSection assetBase="/images/especial/base" />
+      <MesaRegalosSection assetBase="/images/especial/base" />
       <LluviaSobresSection />
-      <RSVPSection />
-      <FinalSection />
+      <RSVPSection assetBase="/images/especial/base" />
+      <FinalSection assetBase="/images/especial/base" />
     </>
   );
 }

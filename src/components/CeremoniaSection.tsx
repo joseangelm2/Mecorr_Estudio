@@ -7,6 +7,8 @@ interface CeremonyInfo {
 }
 
 interface Props {
+  /** Carpeta base de las imágenes (cada demo usa la suya). Por defecto, la raíz /images. */
+  assetBase?: string;
   ceremony?: CeremonyInfo;
 }
 
@@ -17,7 +19,7 @@ const DEFAULT_CEREMONY: CeremonyInfo = {
   mapsUrl: "https://maps.app.goo.gl/3Yw9GdtUXRA9KNz4A",
 };
 
-export default function CeremoniaSection({ ceremony = DEFAULT_CEREMONY }: Props) {
+export default function CeremoniaSection({ assetBase = "/images", ceremony = DEFAULT_CEREMONY }: Props) {
   const mapsHref = ceremony.mapLink ?? ceremony.mapsUrl ?? DEFAULT_CEREMONY.mapsUrl ?? "";
   return (
     <section
@@ -30,13 +32,13 @@ export default function CeremoniaSection({ ceremony = DEFAULT_CEREMONY }: Props)
         style={{ maxWidth: "100%", padding: "0 15px" }}
       >
         <div className="mb-10 text-center wow fadeInUp">
-          <img src="/images/flores-01.png" width="160" alt="" />
+          <img src={`${assetBase}/flores-01.png`} width="160" alt="" />
         </div>
         <h1 className="titulo color-titulos mb-20 text-center wow fadeInUp">
           Ceremonia
         </h1>
         <div className="mb-20 text-center wow fadeInUp">
-          <img src="/images/iglesia.png" width="60" alt="Ceremonia" />
+          <img src={`${assetBase}/iglesia.png`} width="60" alt="Ceremonia" />
         </div>
         <div className="row">
           <div className="col-md-12 wow fadeInUp">

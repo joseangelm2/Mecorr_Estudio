@@ -1,12 +1,15 @@
 import { ScrollDownIcon } from "./icons";
 
 interface Props {
+  /** Carpeta base de las imágenes (cada demo usa la suya). Por defecto, la raíz /images. */
+  assetBase?: string;
   heroPhotoUrl?: string;
   quinceaneraName?: string;
 }
 
 export default function HeroSection({
-  heroPhotoUrl = "/images/IMG_8198.JPG",
+  assetBase = "/images",
+  heroPhotoUrl = `${assetBase}/IMG_8198.JPG`,
   quinceaneraName = "Aime Ferreira",
 }: Props) {
   return (

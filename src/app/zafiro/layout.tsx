@@ -8,5 +8,5 @@ const beau = Beau_Rivage({ variable: "--font-beau", subsets: ["latin"], weight: 
 export const metadata: Metadata = { title: "Mis XV — Zafiro", description: "Te Invito a Mi Día Más Especial" };
 
 export default function ZafiroLayout({ children }: { children: React.ReactNode }) {
-  return <div className={`${albert.variable} ${beau.variable}`}>{children}</div>;
+  return <div className={`${albert.variable} ${beau.variable}`}><div className="t-zafiro">{children}</div></div>;
 }

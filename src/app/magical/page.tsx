@@ -14,7 +14,11 @@ import MagicalRSVP from "@/components/magical/MagicalRSVP";
 import MagicalFooter from "@/components/magical/MagicalFooter";
 import MagicalDecorations from "@/components/magical/MagicalDecorations";
 import MagicalScrollInit from "@/components/magical/MagicalScrollInit";
-import { DEMO_PROJECT } from "@/lib/demo-project";
+import { demoProjectFor } from "@/lib/demo-project";
+import DemoFloatingControls from "@/components/DemoFloatingControls";
+import { NAV_MAGICAL } from "@/lib/demo-nav";
+
+const DEMO_PROJECT = demoProjectFor("magical");
 
 const MAGICAL_PHOTOS = [
   "/images/magical/11.jpg",
@@ -46,18 +50,19 @@ export default function MagicalPage() {
       <audio ref={audioRef} id="music" loop>
         <source src="/images/magical/musica.mp3" type="audio/mpeg" />
       </audio>
+      <DemoFloatingControls candidates={NAV_MAGICAL} colorVar="var(--color-principal, #2d1b69)" />
       <MagicalDecorations />
       {!envelopeOpen && <MagicalEnvelope onOpen={handleOpen} />}
       <div className="background">
-        <MagicalHero project={project} />
+        <div id="portada"><MagicalHero project={project} /></div>
         <MagicalCountdown eventDate={DEMO_PROJECT.event_date} />
-        <MagicalParents project={DEMO_PROJECT} />
-        <MagicalLocations project={DEMO_PROJECT} />
+        <div id="familia"><MagicalParents project={DEMO_PROJECT} /></div>
+        <div id="ubicaciones"><MagicalLocations project={DEMO_PROJECT} /></div>
         <MagicalPhotoGrid photos={photos} />
-        {DEMO_PROJECT.show_itinerary && <MagicalItinerario project={DEMO_PROJECT} />}
-        <MagicalGifts project={DEMO_PROJECT} />
-        <MagicalRSVP project={DEMO_PROJECT} />
-        <MagicalFooter />
+        {DEMO_PROJECT.show_itinerary && <div id="itinerario"><MagicalItinerario project={DEMO_PROJECT} /></div>}
+        <div id="regalos"><MagicalGifts project={DEMO_PROJECT} /></div>
+        <div id="confirmar"><MagicalRSVP project={DEMO_PROJECT} /></div>
+        <div id="despedida"><MagicalFooter /></div>
       </div>
     </div>
   );

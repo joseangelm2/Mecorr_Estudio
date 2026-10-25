@@ -1,3 +1,4 @@
+/* scoped:t-sobrered */
 /* Custom font: Marchila (Titles) */
 @font-face {
   font-family: "Titles";
@@ -8,17 +9,17 @@
    GLOBAL LAYOUT
    ====================================== */
 
-html {
+html:has(.t-sobrered) {
   overflow: hidden;
   position: relative;
   overflow-x: hidden !important;
 }
 
-html.con-scroll {
+html.con-scroll:has(.t-sobrered) {
   overflow-y: scroll;
 }
 
-body {
+body:has(.t-sobrered) {
   margin: 0;
   position: relative;
   background-color: #222;
@@ -26,32 +27,32 @@ body {
   font-family: var(--font-raleway), "Raleway", sans-serif;
 }
 
-.bg-invitacion::after {
+.bg-invitacion:has(.t-sobrered)::after {
   position: fixed;
   z-index: -1;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
-  background-image: url(/images/background-mob.jpg);
+  background-image: url(/images/sobrered/background-mob.jpg);
   background-size: cover;
   background-position: center;
   content: "";
 }
 
 @media (min-width: 769px) {
-  #body {
+  #body:has(.t-sobrered) {
     width: 30%;
     position: relative;
     margin: 0 auto;
     background-color: #222;
   }
-  .bg-invitacion::after {
+  .bg-invitacion:has(.t-sobrered)::after {
     right: 35%;
     width: 30%;
     left: auto;
   }
-  .invitado {
+  .t-sobrered .invitado {
     width: 30% !important;
   }
 }
@@ -60,16 +61,16 @@ body {
    TYPOGRAPHY
    ====================================== */
 
-h1, h2, h3, h4, h5, h6 {
+.t-sobrered h1,.t-sobrered  h2,.t-sobrered  h3,.t-sobrered  h4,.t-sobrered  h5,.t-sobrered  h6 {
   font-family: "Titles", serif !important;
 }
 
-p, a, li {
+.t-sobrered p,.t-sobrered  a,.t-sobrered  li {
   font-family: var(--font-raleway), "Raleway", sans-serif;
   font-size: 18px;
 }
 
-.titulo {
+.t-sobrered .titulo {
   font-size: 30px;
   font-family: "Titles", serif !important;
 }
@@ -78,9 +79,9 @@ p, a, li {
    COLORS
    ====================================== */
 
-.color-principal { background: #ff3131; }
+.t-sobrered .color-principal { background: #ff3131; }
 
-.color-titulos {
+.t-sobrered .color-titulos {
   background: linear-gradient(to right, #ff3131 0%, #ff3131 100%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -88,35 +89,35 @@ p, a, li {
   padding: 5px 0 !important;
 }
 
-.color-textos { color: #292929; }
-.sombra { text-shadow: #000 0.05em 0.05em 0.05em; }
+.t-sobrered .color-textos { color: #292929; }
+.t-sobrered .sombra { text-shadow: #000 0.05em 0.05em 0.05em; }
 
 /* ======================================
    SPACING
    ====================================== */
 
-.mb-0  { margin-bottom: 0 !important; }
-.mb-10 { margin-bottom: 10px !important; }
-.mb-20 { margin-bottom: 20px !important; }
-.mb-30 { margin-bottom: 30px !important; }
-.mb-40 { margin-bottom: 40px !important; }
-.mb-50 { margin-bottom: 50px !important; }
-.mb-60 { margin-bottom: 60px !important; }
+.t-sobrered .mb-0  { margin-bottom: 0 !important; }
+.t-sobrered .mb-10 { margin-bottom: 10px !important; }
+.t-sobrered .mb-20 { margin-bottom: 20px !important; }
+.t-sobrered .mb-30 { margin-bottom: 30px !important; }
+.t-sobrered .mb-40 { margin-bottom: 40px !important; }
+.t-sobrered .mb-50 { margin-bottom: 50px !important; }
+.t-sobrered .mb-60 { margin-bottom: 60px !important; }
 
-.text-center { text-align: center; }
-.text-white  { color: #fff !important; }
+.t-sobrered .text-center { text-align: center; }
+.t-sobrered .text-white  { color: #fff !important; }
 
 /* ======================================
    SECTIONS
    ====================================== */
 
-.padding-section { padding: 50px 0; position: relative; }
-.padding-final   { padding: 450px 0 40px 0; }
+.t-sobrered .padding-section { padding: 50px 0; position: relative; }
+.t-sobrered .padding-final   { padding: 450px 0 40px 0; }
 
-.bg-img { background-position: center; background-size: cover; }
+.t-sobrered .bg-img { background-position: center; background-size: cover; }
 
-.bg-overlay-contador { position: relative; z-index: 1; }
-.bg-overlay-contador::after {
+.t-sobrered .bg-overlay-contador { position: relative; z-index: 1; }
+.t-sobrered .bg-overlay-contador::after {
   position: absolute; z-index: -1; top: 0; left: 0;
   width: 100%; height: 100%;
   background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 31%, rgba(0,0,0,0.65) 100%);
@@ -127,49 +128,49 @@ p, a, li {
    INTRO ENVELOPE
    ====================================== */
 
-.bg-overlay-intro { position: relative; z-index: 1; }
-.bg-overlay-intro::after {
+.t-sobrered .bg-overlay-intro { position: relative; z-index: 1; }
+.t-sobrered .bg-overlay-intro::after {
   position: absolute; z-index: -1; top: 0; left: 0;
   width: 100%; height: 100%;
   background-color: #fff; opacity: 0.6; content: "";
 }
 
-.bg-intro {
-  background-image: url(/images/background-mob.jpg);
+.t-sobrered .bg-intro {
+  background-image: url(/images/sobrered/background-mob.jpg);
   background-size: cover; background-position: center; background-color: #222;
 }
 
-#intro {
+.t-sobrered #intro {
   width: 100%; height: 100vh; z-index: 99999999;
   position: fixed; top: 0; left: 0;
   display: flex; justify-content: center; align-content: center; flex-direction: column;
   backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
 }
 
-.sobre-izquierdo { position: absolute; left: 0; top: 0; bottom: 0; margin: auto; height: 100%; }
-.sobre-derecho   { position: absolute; right: 0; top: 0; height: 100%; }
-.sello           { position: absolute; width: 120px; top: 45%; left: 40%; }
+.t-sobrered .sobre-izquierdo { position: absolute; left: 0; top: 0; bottom: 0; margin: auto; height: 100%; }
+.t-sobrered .sobre-derecho   { position: absolute; right: 0; top: 0; height: 100%; }
+.t-sobrered .sello           { position: absolute; width: 120px; top: 45%; left: 40%; }
 
-.desaparecer   { visibility: hidden; opacity: 0; transition: all 3s; }
-.efecto-derecha { right: -800px !important; transition: all 3s; position: absolute; }
-.efecto-izquierda { left: -800px !important; transition: all 3s; position: absolute; }
+.t-sobrered .desaparecer   { visibility: hidden; opacity: 0; transition: all 3s; }
+.t-sobrered .efecto-derecha { right: -800px !important; transition: all 3s; position: absolute; }
+.t-sobrered .efecto-izquierda { left: -800px !important; transition: all 3s; position: absolute; }
 
 /* ======================================
    STICKY BANNER
    ====================================== */
 
-.invitado { padding: 5px 0; width: 100%; position: fixed; top: 0; z-index: 10; }
-#cintillo { opacity: 0; transition-duration: 0.5s; }
-#cintillo.cintillo-scrolled { opacity: 1 !important; transition-duration: 0.5s; }
+.t-sobrered .invitado { padding: 5px 0; width: 100%; position: fixed; top: 0; z-index: 10; }
+.t-sobrered #cintillo { opacity: 0; transition-duration: 0.5s; }
+.t-sobrered #cintillo.cintillo-scrolled { opacity: 1 !important; transition-duration: 0.5s; }
 
 /* ======================================
    SCROLL ARROW
    ====================================== */
 
-.scroll       { display: block; width: 18px; }
-.scroll_arrow { display: block; height: 10px; animation: downarrow 2.5s infinite; }
+.t-sobrered .scroll       { display: block; width: 18px; }
+.t-sobrered .scroll_arrow { display: block; height: 10px; animation: downarrow-t-sobrered 2.5s infinite; }
 
-@keyframes downarrow {
+@keyframes downarrow-t-sobrered {
   0%   { transform: translate(0, 0); opacity: 0; }
   50%  { transform: translate(0, 10px); opacity: 1; }
   100% { transform: translate(0, 0); opacity: 0; }
@@ -179,10 +180,10 @@ p, a, li {
    COUNTDOWN
    ====================================== */
 
-ul.tiempo { margin: 0; padding: 0; text-align: center; }
-.tiempo li { display: inline-block; list-style-type: none; margin: 0; color: #fff; padding: 0 15px; font-size: 18px; }
-.tiempo li span { display: block; }
-.circulo-tiempo {
+.t-sobrered ul.tiempo { margin: 0; padding: 0; text-align: center; }
+.t-sobrered .tiempo li { display: inline-block; list-style-type: none; margin: 0; color: #fff; padding: 0 15px; font-size: 18px; }
+.t-sobrered .tiempo li span { display: block; }
+.t-sobrered .circulo-tiempo {
   list-style-type: none; margin: 0; color: #000; font-size: 18px;
   border-radius: 50%; background: #ff3131; border: solid 1px #fff;
   width: 50px; height: 50px;
@@ -194,88 +195,88 @@ ul.tiempo { margin: 0; padding: 0; text-align: center; }
    BUTTONS & LINKS
    ====================================== */
 
-.link-abrir { color: #fff; font-size: 14px; padding: 10px 40px; text-decoration: none; letter-spacing: 1px; border-radius: 30px; }
-.link-abrir:hover { color: #fff; }
+.t-sobrered .link-abrir { color: #fff; font-size: 14px; padding: 10px 40px; text-decoration: none; letter-spacing: 1px; border-radius: 30px; }
+.t-sobrered .link-abrir:hover { color: #fff; }
 
-.btn-form {
+.t-sobrered .btn-form {
   color: #fff; font-size: 14px;
   font-family: var(--font-raleway), "Raleway", sans-serif;
   padding: 10px 40px; border: 1px solid #ff3131;
   letter-spacing: 1px; border-radius: 30px;
   background: #ff3131; cursor: pointer;
 }
-.btn-form:hover { background: #e02b2b; border-color: #e02b2b; transition-duration: 0.2s; }
+.t-sobrered .btn-form:hover { background: #e02b2b; border-color: #e02b2b; transition-duration: 0.2s; }
 
 /* ======================================
    FORM
    ====================================== */
 
-.form-campo {
+.t-sobrered .form-campo {
   background: rgba(255, 255, 255, 0.3); width: 100%;
   border: 1px solid #ff3131; padding: 10px 10px;
   color: #000; border-radius: 15px;
   font-family: var(--font-raleway), "Raleway", sans-serif;
 }
-.form-campo::placeholder { color: #000; }
-.form-campo:focus { color: #000; outline: none; }
+.t-sobrered .form-campo::placeholder { color: #000; }
+.t-sobrered .form-campo:focus { color: #000; outline: none; }
 
 /* ======================================
    TIMELINE
    ====================================== */
 
-.timeline-container { display: flex; justify-content: center; }
-.timeline-container .vertical-scrollable-timeline { width: 100%; list-style-type: none; position: relative; padding: 0; }
-.timeline-container .vertical-scrollable-timeline .list-progress {
+.t-sobrered .timeline-container { display: flex; justify-content: center; }
+.t-sobrered .timeline-container .vertical-scrollable-timeline { width: 100%; list-style-type: none; position: relative; padding: 0; }
+.t-sobrered .timeline-container .vertical-scrollable-timeline .list-progress {
   width: 8px; height: 100%; background-color: #ff3131;
   position: absolute; left: 53px; top: 0; overflow: hidden;
 }
-.timeline-container .vertical-scrollable-timeline .list-progress .inner {
+.t-sobrered .timeline-container .vertical-scrollable-timeline .list-progress .inner {
   position: absolute; right: 0; bottom: 0; height: 100%;
   background-color: #c5c3cb; width: 100%;
 }
-.timeline-container .vertical-scrollable-timeline li { position: relative; padding: 0px 0px 80px 100px; }
-.timeline-container .vertical-scrollable-timeline li .icon-holder {
+.t-sobrered .timeline-container .vertical-scrollable-timeline li { position: relative; padding: 0px 0px 80px 100px; }
+.t-sobrered .timeline-container .vertical-scrollable-timeline li .icon-holder {
   position: absolute; left: 0; top: 0; width: 50px; height: 50px;
   display: flex; justify-content: center; align-items: center;
   background-color: #c5c3cb; border-radius: 50%; z-index: 1; transition: 0.4s all;
 }
-.timeline-container .vertical-scrollable-timeline li .icon-holder::before {
+.t-sobrered .timeline-container .vertical-scrollable-timeline li .icon-holder::before {
   content: ""; width: 100px; height: 100px; border: 4px solid #fff;
   position: absolute; background-color: #c5c3cb; border-radius: 50%; z-index: -1; transition: 0.4s all;
 }
-.timeline-container .vertical-scrollable-timeline li::before {
+.t-sobrered .timeline-container .vertical-scrollable-timeline li::before {
   content: ""; position: absolute; height: 100%; width: 8px;
   background-color: transparent; left: 48px; z-index: 0;
 }
-.timeline-container .vertical-scrollable-timeline li.active .icon-holder { background-color: #ff3131; }
-.timeline-container .vertical-scrollable-timeline li.active .icon-holder img { filter: invert(100%); }
-.timeline-container .vertical-scrollable-timeline li.active .icon-holder::before { background-color: #ff3131; }
+.t-sobrered .timeline-container .vertical-scrollable-timeline li.active .icon-holder { background-color: #ff3131; }
+.t-sobrered .timeline-container .vertical-scrollable-timeline li.active .icon-holder img { filter: invert(100%); }
+.t-sobrered .timeline-container .vertical-scrollable-timeline li.active .icon-holder::before { background-color: #ff3131; }
 
 /* ======================================
    CAROUSEL DOTS
    ====================================== */
 
-.owl-fotos .owl-dots { text-align: center; margin-top: 40px; }
-.owl-fotos .owl-dots .owl-dot { display: inline-block; }
-.owl-fotos .owl-dots .owl-dot span {
+.t-sobrered .owl-fotos .owl-dots { text-align: center; margin-top: 40px; }
+.t-sobrered .owl-fotos .owl-dots .owl-dot { display: inline-block; }
+.t-sobrered .owl-fotos .owl-dots .owl-dot span {
   width: 8px; height: 8px; margin: 5px; background: #999;
   display: block; border-radius: 50%; transition: opacity 200ms ease;
 }
-.owl-fotos .owl-dots .owl-dot.active span,
+.t-sobrered .owl-fotos .owl-dots .owl-dot.active span,.t-sobrered 
 .owl-fotos .owl-dots .owl-dot:hover span { background: #ff3131; }
 
 /* ======================================
    WOW ANIMATIONS
    ====================================== */
 
-@keyframes fadeInUp {
+@keyframes fadeInUp-t-sobrered {
   from { opacity: 0; transform: translate3d(0, 40px, 0); }
   to   { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
-.wow { visibility: hidden; }
-.wow.animated { visibility: visible; }
-.wow.animated.fadeInUp { visibility: visible; animation-name: fadeInUp; animation-fill-mode: both; }
+.t-sobrered .wow { visibility: hidden; }
+.t-sobrered .wow.animated { visibility: visible; }
+.t-sobrered .wow.animated.fadeInUp { visibility: visible; animation-name: fadeInUp-t-sobrered; animation-fill-mode: both; }
 
 @keyframes pulse {
   0%   { transform: scale(1); }
@@ -287,6 +288,6 @@ ul.tiempo { margin: 0; padding: 0; text-align: center; }
    SCROLLBAR
    ====================================== */
 
-::-webkit-scrollbar { width: 10px; background-color: #fff; }
-::-webkit-scrollbar-track { background-color: #000; }
-::-webkit-scrollbar-thumb { background-color: #ff3131; }
+.t-sobrered ::-webkit-scrollbar { width: 10px; background-color: #fff; }
+.t-sobrered ::-webkit-scrollbar-track { background-color: #000; }
+.t-sobrered ::-webkit-scrollbar-thumb { background-color: #ff3131; }

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div id="body" className={`bg-invitacion ${raleway.variable}`}>
-      {children}
+      <div className="t-sobrered">{children}</div>
     </div>
   );
 }

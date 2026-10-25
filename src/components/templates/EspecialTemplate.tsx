@@ -73,7 +73,7 @@ export default function EspecialTemplate({ project }: Props) {
   }, [theme, bgUrl, sealFilter, bgOpacity])
 
   return (
-    <div>
+    <div className="t-especial">
       <EspecialScrollInit />
       <audio ref={audioRef} loop>
         <source src={project.music_url ?? '/images/esmeralda/musica.mp3'} type="audio/mpeg" />

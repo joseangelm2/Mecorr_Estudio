@@ -12,24 +12,27 @@ import HashtagSection from "@/components/HashtagSection";
 import FotosCarousel from "@/components/FotosCarousel";
 import RSVPSection from "@/components/RSVPSection";
 import FinalSection from "@/components/FinalSection";
+import DemoFloatingControls from "@/components/DemoFloatingControls";
+import { NAV_SOBRE } from "@/lib/demo-nav";
 
 export default function RousePage() {
   return (
     <>
       <WowInit />
-      <IntroEnvelope />
+      <DemoFloatingControls candidates={NAV_SOBRE} />
+      <IntroEnvelope assetBase="/images/mariposas" />
       <StickyBanner guestName="Aime Ferreira" />
-      <HeroSection />
-      <CelebracionSection />
-      <ContadorSection />
-      <CeremoniaSection />
-      <RecepcionSection />
-      <ItinerarioSection />
-      <VestimentaSection />
-      <HashtagSection />
-      <FotosCarousel />
-      <RSVPSection />
-      <FinalSection />
+      <HeroSection assetBase="/images/mariposas" />
+      <CelebracionSection assetBase="/images/mariposas" />
+      <ContadorSection assetBase="/images/mariposas" />
+      <CeremoniaSection assetBase="/images/mariposas" />
+      <RecepcionSection assetBase="/images/mariposas" />
+      <ItinerarioSection assetBase="/images/mariposas" />
+      <VestimentaSection assetBase="/images/mariposas" />
+      <HashtagSection assetBase="/images/mariposas" />
+      <FotosCarousel assetBase="/images/mariposas" />
+      <RSVPSection assetBase="/images/mariposas" />
+      <FinalSection assetBase="/images/mariposas" />
     </>
   );
 }

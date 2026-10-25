@@ -57,10 +57,10 @@ export default function PinkTemplate({ project }: Props) {
   }
 
   return (
-    <div style={{ position: "relative" }}>
+    <div className="t-pink" style={{ position: "relative" }}>
       <PinkScrollInit />
       <audio ref={audioRef} loop>
-        <source src={project.music_url ?? "/images/pink/musica.mp3"} type="audio/mpeg" />
+        <source src={project.music_url ?? "/images/pink/base/musica.mp3"} type="audio/mpeg" />
       </audio>
       {project.show_floating_controls !== false && (
         <>
@@ -90,7 +90,7 @@ export default function PinkTemplate({ project }: Props) {
         <div id="itinerario"><PinkItinerary project={project} /></div>
         <PinkRSVP project={project} />
         <div className="extra">
-          <img src="/images/pink/v2.png" style={{ width: "40%", marginBottom: "-8%" }} alt="" />
+          <img src="/images/pink/base/v2.png" style={{ width: "40%", marginBottom: "-8%" }} alt="" />
         </div>
         <div className="despedida">¡Te Esperamos!</div>
       </div>

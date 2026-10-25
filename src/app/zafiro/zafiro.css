@@ -1,19 +1,20 @@
+/* scoped:t-zafiro */
 @import "tailwindcss";
 
 /* ==============================
    ZAFIRO — Purple Theme #775197
    ============================== */
 
-:root {
+:root:has(.t-zafiro) {
   --color-principal: #775197;
   --bg-color: #ead4ff;
 }
 
-* {
+.t-zafiro * {
   box-sizing: border-box;
 }
 
-html, body {
+html:has(.t-zafiro), body:has(.t-zafiro) {
   margin: 0;
   padding: 0;
   background-color: var(--bg-color);
@@ -24,7 +25,7 @@ html, body {
    CONTENIDO WRAPPER
    ============================== */
 
-.contenido {
+.t-zafiro .contenido {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,7 +44,7 @@ html, body {
    flex+align-items:center, ese div se estira al 100% del ancho (por hijos con width:100%
    como .encabezado) y el contenido con width:X% sin margin:auto —la corona, .cuenta, etc.—
    queda pegado a la izquierda en vez de centrado. */
-#portada, #familia, #fecha, #ubicaciones, #regalos, #fotos, #itinerario {
+.t-zafiro #portada,.t-zafiro  #familia,.t-zafiro  #fecha,.t-zafiro  #ubicaciones,.t-zafiro  #regalos,.t-zafiro  #fotos,.t-zafiro  #itinerario {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -54,7 +55,7 @@ html, body {
    lila3.jpg es pálido (~#f1e2f6), muy distinto del morado oscuro de los íconos, así que usa
    su propio filtro (--zafiro-bg-filter) calculado hacia bgColor — reusar --zafiro-dark-filter
    (pensado para los íconos) lo dejaba gris/apagado en cualquier tema que no fuera el morado. */
-.contenido::before {
+.t-zafiro .contenido::before {
   content: "";
   position: absolute;
   top: 0;
@@ -73,33 +74,33 @@ html, body {
    DECORATIONS
    ============================== */
 
-.top,
+.t-zafiro .top,.t-zafiro 
 .bottom {
   position: fixed;
   pointer-events: none;
   z-index: 3;
 }
 
-.top {
+.t-zafiro .top {
   top: 0;
   left: 0;
   width: 100%;
 }
 
-.bottom {
+.t-zafiro .bottom {
   bottom: 0;
   left: 0;
   width: 100%;
 }
 
-.top-img {
+.t-zafiro .top-img {
   width: 100%;
   transform: scale(1.5);
   transform-origin: top center;
   opacity: 0.9;
 }
 
-.bottom-img {
+.t-zafiro .bottom-img {
   width: 100%;
   transform: scale(1.5);
   transform-origin: bottom center;
@@ -110,7 +111,7 @@ html, body {
    TYPOGRAPHY
    ============================== */
 
-.nombre-principal {
+.t-zafiro .nombre-principal {
   font-family: var(--font-beau), "Beau Rivage", cursive;
   font-size: 13vw;
   color: var(--color-principal);
@@ -118,7 +119,7 @@ html, body {
   line-height: 1.1;
 }
 
-.evento {
+.t-zafiro .evento {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 6vw;
   color: #333;
@@ -126,12 +127,12 @@ html, body {
   margin: 0;
 }
 
-.encabezado {
+.t-zafiro .encabezado {
   text-align: center;
   width: 100%;
 }
 
-.frase {
+.t-zafiro .frase {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 4vw;
   text-align: center;
@@ -145,13 +146,13 @@ html, body {
    PHOTO
    ============================== */
 
-.foto-con-degradado {
+.t-zafiro .foto-con-degradado {
   width: 90%;
   position: relative;
   margin: 3vw auto;
 }
 
-.foto-full {
+.t-zafiro .foto-full {
   width: 100%;
   border-radius: 2vw;
   display: block;
@@ -161,13 +162,13 @@ html, body {
    FAMILY / GODPARENTS
    ============================== */
 
-.familia {
+.t-zafiro .familia {
   text-align: center;
   margin: 4vw 0;
   width: 100%;
 }
 
-.familia h3 {
+.t-zafiro .familia h3 {
   font-family: var(--font-beau), "Beau Rivage", cursive;
   font-size: 9vw;
   color: var(--color-principal);
@@ -175,7 +176,7 @@ html, body {
   font-style: italic;
 }
 
-.familia p.nombre {
+.t-zafiro .familia p.nombre {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 4vw;
   color: #444;
@@ -186,7 +187,7 @@ html, body {
    DATE
    ============================== */
 
-.fecha {
+.t-zafiro .fecha {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -194,8 +195,8 @@ html, body {
   margin: 5vw 0;
 }
 
-.fecha .dia,
-.fecha .mes,
+.t-zafiro .fecha .dia,.t-zafiro 
+.fecha .mes,.t-zafiro 
 .fecha .anio {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 7vw;
@@ -203,7 +204,7 @@ html, body {
   color: var(--color-principal);
 }
 
-.fecha .barra {
+.t-zafiro .fecha .barra {
   width: 0.4vw;
   height: 8vw;
   background: var(--color-principal);
@@ -213,7 +214,7 @@ html, body {
    COUNTDOWN
    ============================== */
 
-.cuenta {
+.t-zafiro .cuenta {
   display: flex;
   gap: 0;
   justify-content: center;
@@ -225,7 +226,7 @@ html, body {
   padding: 1vw;
 }
 
-.segmento {
+.t-zafiro .segmento {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -234,7 +235,7 @@ html, body {
   margin: 0;
 }
 
-.numero {
+.t-zafiro .numero {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 4vw;
   font-weight: 900;
@@ -243,7 +244,7 @@ html, body {
   text-shadow: none;
 }
 
-.unidad {
+.t-zafiro .unidad {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 3vw;
   color: #666;
@@ -254,7 +255,7 @@ html, body {
    LOCATIONS
    ============================== */
 
-.ubicacion {
+.t-zafiro .ubicacion {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -268,7 +269,7 @@ html, body {
   color: inherit;
 }
 
-.ubicacion .lugar {
+.t-zafiro .ubicacion .lugar {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 4.5vw;
   font-weight: 600;
@@ -276,21 +277,21 @@ html, body {
   margin: 1vw 0;
 }
 
-.ubicacion .lugar-titulo {
+.t-zafiro .ubicacion .lugar-titulo {
   font-family: var(--font-beau), "Beau Rivage", cursive;
   font-size: 10vw;
   color: var(--color-principal);
   margin: 0 0 1vw;
 }
 
-.ubicacion .direccion {
+.t-zafiro .ubicacion .direccion {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 3.5vw;
   color: #666;
   margin: 0.5vw 0;
 }
 
-.ubicacion .hora {
+.t-zafiro .ubicacion .hora {
   display: block;
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 4vw;
@@ -299,7 +300,7 @@ html, body {
   margin: 1vw 0;
 }
 
-.ubicacion .boton {
+.t-zafiro .ubicacion .boton {
   display: block;
   width: fit-content;
 }
@@ -308,7 +309,7 @@ html, body {
    BUTTONS
    ============================== */
 
-.boton {
+.t-zafiro .boton {
   background: var(--color-principal);
   color: #fff;
   padding: 1vw 6vw;
@@ -324,7 +325,7 @@ html, body {
   text-shadow: none;
 }
 
-.boton:hover {
+.t-zafiro .boton:hover {
   opacity: 0.85;
 }
 
@@ -332,7 +333,7 @@ html, body {
    EXTRAS (gifts, hashtag, etc.)
    ============================== */
 
-.extra {
+.t-zafiro .extra {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -343,14 +344,14 @@ html, body {
   color: inherit;
 }
 
-.extra h3 {
+.t-zafiro .extra h3 {
   font-family: var(--font-beau), "Beau Rivage", cursive;
   font-size: 9vw;
   color: var(--color-principal);
   margin: 0 0 2vw;
 }
 
-.titulo-seccion {
+.t-zafiro .titulo-seccion {
   font-family: var(--font-beau), "Beau Rivage", cursive;
   font-size: 9vw;
   color: var(--color-principal);
@@ -358,7 +359,7 @@ html, body {
   margin: 0 0 5vw;
 }
 
-.extra .texto {
+.t-zafiro .extra .texto {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 3.5vw;
   color: #555;
@@ -366,7 +367,7 @@ html, body {
   line-height: 1.6;
 }
 
-.extra img.invertir {
+.t-zafiro .extra img.invertir {
   filter: none;
 }
 
@@ -374,38 +375,38 @@ html, body {
    PHOTO GRID
    ============================== */
 
-#grid {
+.t-zafiro #grid {
   width: 90%;
   margin: 3vw auto;
 }
 
-.container-grid {
+.t-zafiro .container-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 2vw;
   justify-content: space-between;
 }
 
-.dos-fotos {
+.t-zafiro .dos-fotos {
   display: flex;
   gap: 2vw;
   width: 100%;
 }
 
-.dos-fotos img {
+.t-zafiro .dos-fotos img {
   flex: 1;
   border-radius: 2vw;
 }
 
-.column {
+.t-zafiro .column {
   flex: 0 0 calc(33.33% - 2vw);
 }
 
-.column.full-width {
+.t-zafiro .column.full-width {
   flex-basis: 100%;
 }
 
-.object-grid {
+.t-zafiro .object-grid {
   width: 100%;
   border-radius: 2vw;
   display: block;
@@ -416,7 +417,7 @@ html, body {
    ITINERARIO
    ============================== */
 
-.itinerario {
+.t-zafiro .itinerario {
   width: 90%;
   margin: 5vw auto;
   display: flex;
@@ -425,14 +426,14 @@ html, body {
   text-align: center;
 }
 
-.itinerario h3 {
+.t-zafiro .itinerario h3 {
   font-family: var(--font-beau), "Beau Rivage", cursive;
   font-size: 9vw;
   color: var(--color-principal);
   margin: 0 0 4vw;
 }
 
-.itinerario .evento {
+.t-zafiro .itinerario .evento {
   display: grid;
   grid-template-columns: 45% 45%;
   column-gap: 10%;
@@ -444,14 +445,14 @@ html, body {
   backdrop-filter: blur(1vw);
 }
 
-.itinerario .evento .icono {
+.t-zafiro .itinerario .evento .icono {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.itinerario .evento .icono .circulo {
+.t-zafiro .itinerario .evento .icono .circulo {
   margin: auto;
   width: 16vw;
   height: 16vw;
@@ -462,20 +463,20 @@ html, body {
   align-items: center;
 }
 
-.itinerario .evento .icono .circulo img {
+.t-zafiro .itinerario .evento .icono .circulo img {
   margin: auto;
   width: 60%;
   filter: invert(100%);
 }
 
-.itinerario .evento .item {
+.t-zafiro .itinerario .evento .item {
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
 }
 
-.itinerario .evento .item .nombre {
+.t-zafiro .itinerario .evento .item .nombre {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 5vw;
   font-weight: 600;
@@ -483,7 +484,7 @@ html, body {
   margin: 0;
 }
 
-.itinerario .evento .item .hora {
+.t-zafiro .itinerario .evento .item .hora {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 4vw;
   font-weight: 700;
@@ -495,7 +496,7 @@ html, body {
    WHATSAPP / MESSAGE
    ============================== */
 
-.mensaje {
+.t-zafiro .mensaje {
   width: 70%;
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 3.5vw;
@@ -511,26 +512,26 @@ html, body {
    RSVP / CONFIRMACION
    ============================== */
 
-.confirmacion-asistencia {
+.t-zafiro .confirmacion-asistencia {
   width: 90%;
   margin: 5vw auto;
   text-align: center;
 }
 
-.confirmacion-asistencia h3 {
+.t-zafiro .confirmacion-asistencia h3 {
   font-family: var(--font-beau), "Beau Rivage", cursive;
   font-size: 9vw;
   color: var(--color-principal);
 }
 
-.confirmacion-asistencia form {
+.t-zafiro .confirmacion-asistencia form {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.5vw;
 }
 
-.familia-input {
+.t-zafiro .familia-input {
   border-radius: 2vw;
   width: 70%;
   border: 0.4vw solid var(--color-principal);
@@ -540,7 +541,7 @@ html, body {
   background: white;
 }
 
-.texto {
+.t-zafiro .texto {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 3.5vw;
   color: #555;
@@ -550,7 +551,7 @@ html, body {
    FOTO FINAL
    ============================== */
 
-.foto-final {
+.t-zafiro .foto-final {
   width: 100%;
   min-height: 65vw;
   margin: 5vw 0;
@@ -559,7 +560,7 @@ html, body {
   background-position: center;
 }
 
-.foto-final-texto {
+.t-zafiro .foto-final-texto {
   position: absolute;
   top: 6%;
   left: 50%;
@@ -568,7 +569,7 @@ html, body {
   color: #fff;
 }
 
-.foto-final-texto h2 {
+.t-zafiro .foto-final-texto h2 {
   font-family: var(--font-beau), "Beau Rivage", cursive;
   font-size: 10vw;
   margin: 0;
@@ -579,7 +580,7 @@ html, body {
    DESPEDIDA
    ============================== */
 
-.despedida {
+.t-zafiro .despedida {
   font-family: var(--font-beau), "Beau Rivage", cursive;
   font-size: 10vw;
   color: var(--color-principal);
@@ -591,7 +592,7 @@ html, body {
    INFORMACION IMPORTANTE
    ============================== */
 
-.importante {
+.t-zafiro .importante {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 3.5vw;
   color: #555;
@@ -603,7 +604,7 @@ html, body {
    ZAFIRO ENVELOPE (SOBRE)
    ============================== */
 
-.zafiro-envelope-screen {
+.t-zafiro .zafiro-envelope-screen {
   position: fixed;
   inset: 0;
   z-index: 100;
@@ -615,11 +616,11 @@ html, body {
   transition: opacity 0.8s ease;
 }
 
-.zafiro-envelope-screen.fading {
+.t-zafiro .zafiro-envelope-screen.fading {
   opacity: 0;
 }
 
-.zafiro-envelope-label {
+.t-zafiro .zafiro-envelope-label {
   color: rgba(var(--zafiro-env-accent-rgb, 200, 180, 255), 0.8);
   font-family: var(--font-beau), "Beau Rivage", cursive;
   font-size: 8vw;
@@ -627,14 +628,14 @@ html, body {
   letter-spacing: 0.05em;
 }
 
-.zafiro-envelope-wrap {
+.t-zafiro .zafiro-envelope-wrap {
   position: relative;
   width: 72vw;
   max-width: 320px;
 }
 
 /* Flap (parte superior del sobre, triángulo) */
-.zafiro-flap {
+.t-zafiro .zafiro-flap {
   width: 0;
   height: 0;
   border-left: 36vw solid transparent;
@@ -647,12 +648,12 @@ html, body {
   transition: transform 1.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.zafiro-envelope-wrap.opening .zafiro-flap {
+.t-zafiro .zafiro-envelope-wrap.opening .zafiro-flap {
   transform: rotateX(180deg);
 }
 
 /* Cuerpo del sobre */
-.zafiro-envelope-body {
+.t-zafiro .zafiro-envelope-body {
   background: linear-gradient(160deg, var(--zafiro-env-body-1, #2d1254) 0%, var(--zafiro-env-body-2, #4a1f7a) 100%);
   border: 0.5vw solid rgba(var(--zafiro-env-accent-rgb, 200, 180, 255), 0.4);
   border-top: none;
@@ -665,7 +666,7 @@ html, body {
   box-shadow: 0 8px 40px rgba(var(--zafiro-env-glow-rgb, 150, 80, 230), 0.5);
 }
 
-.zafiro-envelope-lines {
+.t-zafiro .zafiro-envelope-lines {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -673,7 +674,7 @@ html, body {
   opacity: 0.4;
 }
 
-.zafiro-line {
+.t-zafiro .zafiro-line {
   width: 40vw;
   max-width: 160px;
   height: 0.4vw;
@@ -681,13 +682,13 @@ html, body {
   border-radius: 2px;
 }
 
-.zafiro-line.short {
+.t-zafiro .zafiro-line.short {
   width: 24vw;
   max-width: 100px;
 }
 
 /* Sello de lacre */
-.zafiro-seal {
+.t-zafiro .zafiro-seal {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -709,16 +710,16 @@ html, body {
   transition: transform 0.3s ease, opacity 0.6s ease;
 }
 
-.zafiro-seal.breaking {
+.t-zafiro .zafiro-seal.breaking {
   transform: translate(-50%, -20%) scale(0);
   opacity: 0;
 }
 
-.zafiro-seal:hover {
+.t-zafiro .zafiro-seal:hover {
   box-shadow: 0 0 30px rgba(var(--zafiro-env-glow-rgb, 150, 80, 230), 1), inset 0 0 10px rgba(0,0,0,0.3);
 }
 
-.zafiro-seal-letter {
+.t-zafiro .zafiro-seal-letter {
   color: white;
   font-family: var(--font-beau), "Beau Rivage", cursive;
   font-size: 5vw;
@@ -726,7 +727,7 @@ html, body {
   text-shadow: 0 1px 4px rgba(0,0,0,0.5);
 }
 
-.zafiro-envelope-hint {
+.t-zafiro .zafiro-envelope-hint {
   color: rgba(var(--zafiro-env-accent-rgb, 200, 180, 255), 0.6);
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 3.5vw;
@@ -740,10 +741,10 @@ html, body {
 }
 
 @media (min-width: 600px) {
-  .zafiro-envelope-label { font-size: 48px; }
-  .zafiro-seal-letter    { font-size: 28px; }
-  .zafiro-envelope-hint  { font-size: 16px; }
-  .zafiro-flap {
+  .t-zafiro .zafiro-envelope-label { font-size: 48px; }
+  .t-zafiro .zafiro-seal-letter    { font-size: 28px; }
+  .t-zafiro .zafiro-envelope-hint  { font-size: 16px; }
+  .t-zafiro .zafiro-flap {
     border-left-width: 160px;
     border-right-width: 160px;
     border-bottom-width: 110px;
@@ -754,45 +755,45 @@ html, body {
    SCROLL ANIMATIONS
    ============================== */
 
-.show-p-y {
+.t-zafiro .show-p-y {
   opacity: 0;
   transform: translateY(80px);
   transition: all 1.5s ease;
 }
 
-.active-p-y {
+.t-zafiro .active-p-y {
   transform: translateY(0px);
   opacity: 1;
 }
 
-.show-n-x {
+.t-zafiro .show-n-x {
   opacity: 0;
   transform: translateX(80px);
   transition: all 1.5s ease;
 }
 
-.active-n-x {
+.t-zafiro .active-n-x {
   transform: translateX(0px);
   opacity: 1;
 }
 
-.show-p-x {
+.t-zafiro .show-p-x {
   opacity: 0;
   transform: translateX(-80px);
   transition: all 1.5s ease;
 }
 
-.active-p-x {
+.t-zafiro .active-p-x {
   transform: translateX(0px);
   opacity: 1;
 }
 
-.show {
+.t-zafiro .show {
   opacity: 0;
   transition: all 1.5s ease;
 }
 
-.active {
+.t-zafiro .active {
   opacity: 1;
 }
 
@@ -801,80 +802,80 @@ html, body {
    ============================== */
 
 @media (min-width: 600px) {
-  .nombre-principal {
+  .t-zafiro .nombre-principal {
     font-size: 108px;
   }
 
-  .evento {
+  .t-zafiro .evento {
     font-size: 42px;
   }
 
-  .frase {
+  .t-zafiro .frase {
     font-size: 18px;
   }
 
-  .familia h3 {
+  .t-zafiro .familia h3 {
     font-size: 54px;
   }
 
-  .familia p.nombre {
+  .t-zafiro .familia p.nombre {
     font-size: 18px;
   }
 
-  .fecha .dia,
-  .fecha .mes,
+  .t-zafiro .fecha .dia,.t-zafiro 
+  .fecha .mes,.t-zafiro 
   .fecha .anio {
     font-size: 42px;
   }
 
-  .numero {
+  .t-zafiro .numero {
     font-size: 24px;
   }
 
-  .unidad {
+  .t-zafiro .unidad {
     font-size: 14px;
   }
 
-  .ubicacion .lugar {
+  .t-zafiro .ubicacion .lugar {
     font-size: 22px;
   }
 
-  .ubicacion .hora {
+  .t-zafiro .ubicacion .hora {
     font-size: 20px;
   }
 
-  .boton {
+  .t-zafiro .boton {
     font-size: 16px;
     padding: 8px 24px;
   }
 
-  .extra h3 {
+  .t-zafiro .extra h3 {
     font-size: 54px;
   }
 
-  .titulo-seccion {
+  .t-zafiro .titulo-seccion {
     font-size: 54px;
   }
 
-  .extra .texto {
+  .t-zafiro .extra .texto {
     font-size: 16px;
   }
 
-  .sello {
+  .t-zafiro .sello {
     font-size: 18px;
     width: 150px;
     height: 150px;
   }
 
-  .despedida {
+  .t-zafiro .despedida {
     font-size: 60px;
   }
 
-  .foto-final {
+  .t-zafiro .foto-final {
     min-height: 420px;
   }
 
-  .foto-final-texto h2 {
+  .t-zafiro .foto-final-texto h2 {
     font-size: 60px;
   }
 }

@@ -46,7 +46,7 @@ export default function PinkRSVP({ project }: Props) {
 
   return (
     <section id="confirmar" className="confirmacion-asistencia show-p-y">
-      <img src="/images/pink/buzon.png" style={{ width: "18%" }} alt="WhatsApp" />
+      <img src="/images/pink/base/buzon.png" style={{ width: "18%" }} alt="WhatsApp" />
       <h3>Confirma tu asistencia</h3>
       {project.confirmation_phrase && (
         <p className="texto" style={{ marginBottom: "4%" }}>{project.confirmation_phrase}</p>

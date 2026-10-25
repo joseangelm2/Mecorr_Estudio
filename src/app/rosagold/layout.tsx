@@ -9,5 +9,5 @@ const meaCulpa = Mea_Culpa({ variable: "--font-meaculpa", subsets: ["latin"], we
 export const metadata: Metadata = { title: "Mis XV", description: "Te Invito a Mi Día Más Especial" };
 
 export default function RosaGoldLayout({ children }: { children: ReactNode }) {
-  return <div className={`${raleway.variable} ${meaCulpa.variable}`}>{children}</div>;
+  return <div className={`${raleway.variable} ${meaCulpa.variable}`}><div className="t-rosagold">{children}</div></div>;
 }

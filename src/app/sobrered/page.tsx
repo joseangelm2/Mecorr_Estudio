@@ -12,24 +12,27 @@ import HashtagSection from "@/components/HashtagSection";
 import FotosCarousel from "@/components/FotosCarousel";
 import RSVPSection from "@/components/RSVPSection";
 import FinalSection from "@/components/FinalSection";
+import DemoFloatingControls from "@/components/DemoFloatingControls";
+import { NAV_SOBRE } from "@/lib/demo-nav";
 
 export default function RousePage() {
   return (
     <>
       <WowInit />
-      <IntroEnvelope />
+      <DemoFloatingControls candidates={NAV_SOBRE} />
+      <IntroEnvelope assetBase="/images/sobrered" />
       <StickyBanner guestName="Aime Ferreira" />
-      <HeroSection />
-      <CelebracionSection />
-      <ContadorSection />
-      <CeremoniaSection />
-      <RecepcionSection />
-      <ItinerarioSection />
-      <VestimentaSection />
-      <HashtagSection />
-      <FotosCarousel />
-      <RSVPSection />
-      <FinalSection />
+      <HeroSection assetBase="/images/sobrered" />
+      <CelebracionSection assetBase="/images/sobrered" />
+      <ContadorSection assetBase="/images/sobrered" />
+      <CeremoniaSection assetBase="/images/sobrered" />
+      <RecepcionSection assetBase="/images/sobrered" />
+      <ItinerarioSection assetBase="/images/sobrered" />
+      <VestimentaSection assetBase="/images/sobrered" />
+      <HashtagSection assetBase="/images/sobrered" />
+      <FotosCarousel assetBase="/images/sobrered" />
+      <RSVPSection assetBase="/images/sobrered" />
+      <FinalSection assetBase="/images/sobrered" />
     </>
   );
 }

@@ -11,9 +11,9 @@ interface Props {
 }
 
 function resolveIcon(icon: string | undefined): string {
-  if (!icon) return "/images/esmeralda/iglesia.png";
+  if (!icon) return "/images/sellorosa/base/iglesia.png";
   if (icon.startsWith("http") || icon.startsWith("/")) return icon;
-  return `/images/esmeralda/${icon}`;
+  return `/images/sellorosa/base/${icon}`;
 }
 
 function SelloRosaCountdown({ eventDate }: { eventDate: string }) {
@@ -139,7 +139,7 @@ export default function SelloRosaContent({ project }: Props) {
         </section>
         {project.ceremony && (
           <a href={project.ceremony.mapsUrl} target="_blank" rel="noopener noreferrer" className="sr-venue-card show-n-x">
-            <img src={project.ceremony.photoUrl ?? "/images/love/iglesia.jpg"} alt={project.ceremony.venue} className="sr-venue-img" />
+            <img src={project.ceremony.photoUrl ?? "/images/sellorosa/love/iglesia.jpg"} alt={project.ceremony.venue} className="sr-venue-img" />
             <div className="sr-venue-name">{project.ceremony.venue}</div>
             <div className="sr-venue-address">{project.ceremony.address}</div>
             <div className="sr-venue-time">{project.ceremony.time}</div>
@@ -148,7 +148,7 @@ export default function SelloRosaContent({ project }: Props) {
         )}
         {project.reception && (
           <a href={project.reception.mapsUrl} target="_blank" rel="noopener noreferrer" className="sr-venue-card show-p-x">
-            <img src={project.reception.photoUrl ?? "/images/love/evento.jpg"} alt={project.reception.venue} className="sr-venue-img" />
+            <img src={project.reception.photoUrl ?? "/images/sellorosa/love/evento.jpg"} alt={project.reception.venue} className="sr-venue-img" />
             <div className="sr-venue-name">{project.reception.venue}</div>
             <div className="sr-venue-address">{project.reception.address}</div>
             <div className="sr-venue-time">{project.reception.time}</div>
@@ -186,7 +186,7 @@ export default function SelloRosaContent({ project }: Props) {
           <section className="sr-section">
             <h2 className="sr-section-title">Código de Vestimenta</h2>
             <hr className="sr-section-line" />
-            <img src="/images/esmeralda/vestimenta.png" alt="Vestimenta" className="sr-vestimenta-img" />
+            <img src="/images/sellorosa/base/vestimenta.png" alt="Vestimenta" className="sr-vestimenta-img" />
             <p className="sr-text">{project.dress_code.colors}</p>
             {project.dress_code.notes && (
               <p className="sr-text" style={{ marginTop: "8px", fontSize: "13px", color: "#f5babc" }}>❖ {project.dress_code.notes}</p>

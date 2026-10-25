@@ -15,26 +15,29 @@ import FinalSection from "@/components/FinalSection";
 import VideoSection from "@/components/VideoSection";
 import MesaRegalosSection from "@/components/MesaRegalosSection";
 import LluviaSobresSection from "@/components/LluviaDesobresSection";
+import DemoFloatingControls from "@/components/DemoFloatingControls";
+import { NAV_SOBRE } from "@/lib/demo-nav";
 export default function SobrePage() {
   return (
     <>
       <WowInit />
-      <IntroEnvelope />
+      <DemoFloatingControls candidates={NAV_SOBRE} />
+      <IntroEnvelope assetBase="/images/sobre" />
       <StickyBanner guestName="Aime Ferreira" />
-      <HeroSection />
-      <CelebracionSection />
-      <ContadorSection />
-      <CeremoniaSection />
-      <RecepcionSection />
-      <ItinerarioSection />
-      <VestimentaSection />
-      <HashtagSection />
-      <MesaRegalosSection />
+      <HeroSection assetBase="/images/sobre" />
+      <CelebracionSection assetBase="/images/sobre" />
+      <ContadorSection assetBase="/images/sobre" />
+      <CeremoniaSection assetBase="/images/sobre" />
+      <RecepcionSection assetBase="/images/sobre" />
+      <ItinerarioSection assetBase="/images/sobre" />
+      <VestimentaSection assetBase="/images/sobre" />
+      <HashtagSection assetBase="/images/sobre" />
+      <MesaRegalosSection assetBase="/images/sobre" />
       <LluviaSobresSection />
-      <FotosCarousel />
-      <VideoSection />
-      <RSVPSection />
-      <FinalSection />
+      <FotosCarousel assetBase="/images/sobre" />
+      <VideoSection assetBase="/images/sobre" />
+      <RSVPSection assetBase="/images/sobre" />
+      <FinalSection assetBase="/images/sobre" />
     </>
   );
 }

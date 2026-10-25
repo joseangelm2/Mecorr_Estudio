@@ -2,18 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const DEFAULT_PHOTOS = [
-  "/images/IMG_8201.JPG",
-  "/images/IMG_8202.JPG",
-  "/images/IMG_8203.JPG",
-  "/images/IMG_8204.JPG",
+const defaultPhotos = (base: string) => [
+  `${base}/IMG_8201.JPG`,
+  `${base}/IMG_8202.JPG`,
+  `${base}/IMG_8203.JPG`,
+  `${base}/IMG_8204.JPG`,
 ];
 
 interface Props {
+  /** Carpeta base de las imágenes (cada demo usa la suya). Por defecto, la raíz /images. */
+  assetBase?: string;
   photos?: string[];
 }
 
-export default function FotosCarousel({ photos = DEFAULT_PHOTOS }: Props) {
+export default function FotosCarousel({ assetBase = "/images", photos = defaultPhotos(assetBase) }: Props) {
   const [current, setCurrent] = useState(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -47,7 +49,7 @@ export default function FotosCarousel({ photos = DEFAULT_PHOTOS }: Props) {
         style={{ maxWidth: "100%", padding: "0 15px" }}
       >
         <div className="mb-10 text-center wow fadeInUp">
-          <img src="/images/flores-01.png" width="160" alt="" />
+          <img src={`${assetBase}/flores-01.png`} width="160" alt="" />
         </div>
         <h1 className="titulo color-titulos mb-30 text-center wow fadeInUp">
           Momentos

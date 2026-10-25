@@ -14,6 +14,8 @@ import {
   LoveGifts,
   LoveRSVP,
 } from "@/components/love";
+import DemoFloatingControls from "@/components/DemoFloatingControls";
+import { NAV_LOVE } from "@/lib/demo-nav";
 
 const DEFAULT_PHOTOS = [
   "/images/love/foto1.jpg",
@@ -44,6 +46,7 @@ export default function LovePage() {
       <audio ref={audioRef} id="music" loop>
         <source src={DEMO_PROJECT.music_url ?? "/images/love/musica.mp3"} type="audio/mpeg" />
       </audio>
+      <DemoFloatingControls candidates={NAV_LOVE} colorVar="#d50f12" />
       {!open && <LoveEnvelope onOpen={handleOpen} />}
       <main>
         <LoveHero project={DEMO_PROJECT} />

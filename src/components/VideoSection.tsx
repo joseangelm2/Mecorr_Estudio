@@ -3,6 +3,8 @@
 import { useState } from 'react'
 
 interface Props {
+  /** Carpeta base de las imágenes (cada demo usa la suya). Por defecto, la raíz /images. */
+  assetBase?: string;
   youtubeId?: string;
   localVideo?: string;
 }
@@ -13,6 +15,7 @@ function pauseBackgroundMusic() {
 }
 
 export default function VideoSection({
+  assetBase = "/images",
   youtubeId = "",
   localVideo = "",
 }: Props) {
@@ -25,7 +28,7 @@ export default function VideoSection({
     >
       <div style={{ maxWidth: "100%", padding: "0 15px" }}>
         <div className="mb-10 text-center wow fadeInUp">
-          <img src="/images/flores-01.png" width="160" alt="" />
+          <img src={`${assetBase}/flores-01.png`} width="160" alt="" />
         </div>
         <h1 className="titulo mb-20 color-titulos text-center wow fadeInUp">
           Nuestro Video

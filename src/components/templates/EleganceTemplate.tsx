@@ -3,7 +3,7 @@
 import '@/app/elegance/elegance.css'
 import { useState, useRef, useEffect } from 'react'
 import type { Project } from '@/types/invitation'
-import { ELEGANCE_THEMES, DEFAULT_ELEGANCE_THEME } from '@/lib/elegance-themes'
+import { ELEGANCE_THEMES, DEFAULT_ELEGANCE_THEME, texturaFor } from '@/lib/elegance-themes'
 import EleganceEnvelope from '@/components/elegance/EleganceEnvelope'
 import EleganceScrollInit from '@/components/elegance/EleganceScrollInit'
 import EleganceDecorations from '@/components/elegance/EleganceDecorations'
@@ -56,6 +56,8 @@ export default function EleganceTemplate({ project }: Props) {
     const root = document.documentElement
     root.style.setProperty('--color-principal',    theme.colorPrincipal)
     root.style.setProperty('--bg-color',           theme.bgColor)
+    const textura = texturaFor(theme.colorPrincipal)
+    if (textura) root.style.setProperty('--textura-color', textura)
     root.style.setProperty('--img-filter',         theme.imgFilter)
     root.style.setProperty('--icon-filter',        theme.iconFilter)
     root.style.setProperty('--cuenta-color-fondo', theme.cuentaFondo)
@@ -68,7 +70,7 @@ export default function EleganceTemplate({ project }: Props) {
     root.style.setProperty('--cuenta-color-borde', theme.cuentaTexto)
     return () => {
       const vars = [
-        '--color-principal', '--bg-color', '--img-filter', '--icon-filter', '--cuenta-color-fondo', '--nombre-color',
+        '--color-principal', '--bg-color', '--textura-color', '--img-filter', '--icon-filter', '--cuenta-color-fondo', '--nombre-color',
         '--subtitulos-color', '--textos-color', '--boton-color',
         '--boton-texto-color', '--cuenta-color-texto', '--cuenta-color-borde',
       ]
@@ -84,7 +86,7 @@ export default function EleganceTemplate({ project }: Props) {
   const hashtag = project.hashtag ?? ''
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div className="t-elegance" style={{ position: 'relative' }}>
       <EleganceScrollInit />
       <audio ref={audioRef} loop>
         <source src={project.music_url ?? '/images/esmeralda/musica.mp3'} type="audio/mpeg" />

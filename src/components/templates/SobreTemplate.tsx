@@ -91,7 +91,7 @@ export default function SobreTemplate({ project }: Props) {
   }, [color_theme]);
 
   return (
-    <>
+    <div className="t-sobre">
       <WowInit />
       <IntroEnvelope musicUrl={music_url ?? undefined} showSwitcher={false} audioRef={audioRef} />
       {project.show_floating_controls !== false && (
@@ -156,6 +156,6 @@ export default function SobreTemplate({ project }: Props) {
         quinceaneraName={quinceanera_name}
         finalPhotoUrl={(project.extra_config?.final_photo_url as string) || hero_photo_url || undefined}
       />
-    </>
+    </div>
   );
 }

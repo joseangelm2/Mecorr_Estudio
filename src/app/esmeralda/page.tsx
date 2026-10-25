@@ -13,6 +13,8 @@ import EsmeraldaRSVP from "@/components/esmeralda/EsmeraldaRSVP";
 import EsmeraldaDecorations from "@/components/esmeralda/EsmeraldaDecorations";
 import EsmeraldaScrollInit from "@/components/esmeralda/EsmeraldaScrollInit";
 import { DEMO_PROJECT } from "@/lib/demo-project";
+import DemoFloatingControls from "@/components/DemoFloatingControls";
+import { NAV_ESMERALDA } from "@/lib/demo-nav";
 
 export default function EsmeraldaPage() {
   const [envelopeOpen, setEnvelopeOpen] = useState(false);
@@ -33,17 +35,18 @@ export default function EsmeraldaPage() {
       <audio ref={audioRef} id="music" loop>
         <source src={DEMO_PROJECT.music_url ?? "/images/esmeralda/musica.mp3"} type="audio/mpeg" />
       </audio>
+      <DemoFloatingControls candidates={NAV_ESMERALDA} colorVar="var(--color-principal, #098074)" />
       <EsmeraldaDecorations />
       {!envelopeOpen && <EnvelopeSobre onOpen={handleOpen} />}
       <div className="background">
-        <EsmeraldaHero project={DEMO_PROJECT} />
+        <div id="portada"><EsmeraldaHero project={DEMO_PROJECT} /></div>
         <EsmeraldaCountdown eventDate={DEMO_PROJECT.event_date} />
-        <EsmeraldaParents project={DEMO_PROJECT} />
-        <EsmeraldaLocations project={DEMO_PROJECT} />
+        <div id="familia"><EsmeraldaParents project={DEMO_PROJECT} /></div>
+        <div id="ubicaciones"><EsmeraldaLocations project={DEMO_PROJECT} /></div>
         <EsmeraldaPhotoGrid photos={DEMO_PROJECT.photos} />
-        <EsmeraldaItinerario project={DEMO_PROJECT} />
-        <EsmeraldaGifts project={DEMO_PROJECT} />
-        <EsmeraldaRSVP project={DEMO_PROJECT} />
+        <div id="itinerario"><EsmeraldaItinerario project={DEMO_PROJECT} /></div>
+        <div id="regalos"><EsmeraldaGifts project={DEMO_PROJECT} /></div>
+        <div id="confirmar"><EsmeraldaRSVP project={DEMO_PROJECT} /></div>
       </div>
     </div>
   );

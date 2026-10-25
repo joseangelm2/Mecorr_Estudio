@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function Demo2Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className={`${carattere.variable} ${bellefair.variable} ${cormorant.variable} ${oldStandard.variable}`}>
-      {children}
+      <div className="t-esmeralda-especial">{children}</div>
     </div>
   )
 }

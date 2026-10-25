@@ -4,20 +4,20 @@ import { useState, useRef, useEffect } from "react";
 import type { Project } from "@/types/invitation";
 
 const DEFAULT_PHOTOS = [
-  "/images/esmeralda/21.jpg",
-  "/images/esmeralda/31.jpg",
-  "/images/esmeralda/41.jpg",
-  "/images/esmeralda/12.jpg",
+  "/images/zafiro/base/21.jpg",
+  "/images/zafiro/base/31.jpg",
+  "/images/zafiro/base/41.jpg",
+  "/images/zafiro/base/12.jpg",
 ];
 
 const DEFAULT_EVENTS = [
-  { description: "Misa", time: "05:00 PM", icon: "/images/esmeralda/iglesia.png" },
-  { description: "Recepción", time: "07:00 PM", icon: "/images/esmeralda/recepcion.png" },
-  { description: "Coctelería", time: "08:00 PM", icon: "/images/esmeralda/coctel.png" },
-  { description: "Cena", time: "09:00 PM", icon: "/images/esmeralda/comida.png" },
-  { description: "Vals", time: "10:20 PM", icon: "/images/esmeralda/vals.png" },
-  { description: "Baile", time: "11:30 PM", icon: "/images/esmeralda/baile.png" },
-  { description: "Fin del Evento", time: "03:00 AM", icon: "/images/esmeralda/fin.png" },
+  { description: "Misa", time: "05:00 PM", icon: "/images/zafiro/base/iglesia.png" },
+  { description: "Recepción", time: "07:00 PM", icon: "/images/zafiro/base/recepcion.png" },
+  { description: "Coctelería", time: "08:00 PM", icon: "/images/zafiro/base/coctel.png" },
+  { description: "Cena", time: "09:00 PM", icon: "/images/zafiro/base/comida.png" },
+  { description: "Vals", time: "10:20 PM", icon: "/images/zafiro/base/vals.png" },
+  { description: "Baile", time: "11:30 PM", icon: "/images/zafiro/base/baile.png" },
+  { description: "Fin del Evento", time: "03:00 AM", icon: "/images/zafiro/base/fin.png" },
 ];
 
 interface Props { project: Project }
@@ -47,7 +47,7 @@ export default function ZafiroContent({ project }: Props) {
   const phone = project.rsvp_phone ?? "";
   const photos = project.photos.length ? project.photos : DEFAULT_PHOTOS;
   const events = (project.show_itinerary && project.itinerary.length)
-    ? project.itinerary.map((e, i) => ({ ...e, icon: e.icon || DEFAULT_EVENTS[i % DEFAULT_EVENTS.length]?.icon || "/images/esmeralda/iglesia.png" }))
+    ? project.itinerary.map((e, i) => ({ ...e, icon: e.icon || DEFAULT_EVENTS[i % DEFAULT_EVENTS.length]?.icon || "/images/zafiro/base/iglesia.png" }))
     : DEFAULT_EVENTS;
 
   const d = new Date(project.event_date);
@@ -222,7 +222,7 @@ export default function ZafiroContent({ project }: Props) {
       {/* Mesa de Regalos */}
       {project.gift_registry?.liverpoolLink && (
         <a className="extra show-p-y" href={project.gift_registry.liverpoolLink} target="_self">
-          <img style={{ width: "50%", marginBottom: "3%" }} src="/images/esmeralda/liverpool.png" alt="Liverpool" />
+          <img style={{ width: "50%", marginBottom: "3%" }} src="/images/zafiro/base/liverpool.png" alt="Liverpool" />
           <h3>Mesa de Regalos</h3>
           <p className="texto">Tu presencia ilumina nuestro evento. Si deseas regalarme algo, te comparto las siguientes opciones:</p>
           <div className="boton" style={{ marginTop: "1%" }}>Ver Lista de Deseos</div>
@@ -232,7 +232,7 @@ export default function ZafiroContent({ project }: Props) {
       {/* Lluvia de Sobres */}
       {project.show_lluvia_sobres && (
         <div className="extra show-p-y">
-          <img src="/images/esmeralda/sobre.png" style={{ width: "25%" }} alt="Sobre" />
+          <img src="/images/zafiro/base/sobre.png" style={{ width: "25%" }} alt="Sobre" />
           <h3>Lluvia de Sobres</h3>
           <p className="texto">{project.lluvia_sobres_text || "Es la tradición de regalar dinero en efectivo dentro de un sobre."}</p>
         </div>
@@ -241,7 +241,7 @@ export default function ZafiroContent({ project }: Props) {
       {/* Datos Bancarios */}
       {project.show_datos_bancarios && project.gift_registry?.bankAccount && (
         <div className="extra show-p-y" style={{ width: "100%" }}>
-          <img src="/images/esmeralda/mesa_regalos.png" style={{ width: "20%", marginBottom: "3%" }} alt="Transferencia" />
+          <img src="/images/zafiro/base/mesa_regalos.png" style={{ width: "20%", marginBottom: "3%" }} alt="Transferencia" />
           <h3>Datos Bancarios</h3>
           <p className="texto">{project.datos_bancarios_text || "Si lo prefieres puedes hacer una transferencia bancaria como regalo:"}</p>
           <div className="texto" style={{ marginTop: "2%" }}>
@@ -257,7 +257,7 @@ export default function ZafiroContent({ project }: Props) {
       {/* Dress Code */}
       {project.dress_code && (
         <div className="extra show-p-y">
-          <img src="/images/esmeralda/vestimenta.png" style={{ width: "30%", marginBottom: "3%" }} alt="Vestimenta" />
+          <img src="/images/zafiro/base/vestimenta.png" style={{ width: "30%", marginBottom: "3%" }} alt="Vestimenta" />
           <h3>Código de Vestimenta</h3>
           <p className="texto">{project.dress_code.colors || "Vestimenta Formal"}</p>
           {project.dress_code.notes && <p className="texto">{project.dress_code.notes}</p>}
@@ -302,7 +302,7 @@ export default function ZafiroContent({ project }: Props) {
           <div style={{ width: "100%" }}>
             {events.map((ev, i) => {
               const side = i % 2 === 0 ? "izquierda" : "derecha";
-              const iconSrc = ev.icon?.startsWith("http") || ev.icon?.startsWith("/") ? ev.icon : `/images/esmeralda/${ev.icon || "iglesia.png"}`;
+              const iconSrc = ev.icon?.startsWith("http") || ev.icon?.startsWith("/") ? ev.icon : `/images/zafiro/base/${ev.icon || "iglesia.png"}`;
               return (
                 <div key={i} className={`evento ${side}`} style={i === 0 ? { marginTop: "4vw" } : undefined}>
                   {side === "izquierda" ? (
@@ -331,7 +331,7 @@ export default function ZafiroContent({ project }: Props) {
 
       {/* Buzón de Deseos */}
       <div id="whatsappLink" className="extra show-p-y">
-        <img src="/images/esmeralda/buzon.png" style={{ width: "25%", marginBottom: "3%" }} alt="Buzón" />
+        <img src="/images/zafiro/base/buzon.png" style={{ width: "25%", marginBottom: "3%" }} alt="Buzón" />
         <h3>Buzón de Deseos</h3>
         <p className="texto" style={{ width: "90%" }}>Déjame un lindo mensaje por mis XV años:</p>
         <textarea className="mensaje" ref={messageRef} placeholder="Escribe tu mensaje aquí" />
@@ -341,7 +341,7 @@ export default function ZafiroContent({ project }: Props) {
       {/* Hashtag */}
       {project.show_instagram_album && project.hashtag && (
         <a className="extra show-p-y" href={`https://www.instagram.com/explore/tags/${project.hashtag.replace("#", "")}/`} target="_self">
-          <img src="/images/esmeralda/instagram.png" style={{ width: "50%", marginBottom: "4%" }} alt="Instagram" />
+          <img src="/images/zafiro/base/instagram.png" style={{ width: "50%", marginBottom: "4%" }} alt="Instagram" />
           <h3>Hashtag en Instagram</h3>
           <p className="texto">Comparte tus mejores momentos con el Hashtag <br />{project.hashtag}</p>
           <div className="boton" style={{ width: "30%" }}>Ver Fotos</div>
@@ -358,7 +358,7 @@ export default function ZafiroContent({ project }: Props) {
 
       {/* RSVP */}
       <section className="confirmacion-asistencia show-p-y">
-        <img src="/images/esmeralda/buzon.png" style={{ width: "18%" }} alt="WhatsApp" />
+        <img src="/images/zafiro/base/buzon.png" style={{ width: "18%" }} alt="WhatsApp" />
         <h3>Confirma tu asistencia</h3>
         {project.confirmation_phrase && (
           <p className="texto" style={{ marginBottom: "4%" }}>{project.confirmation_phrase}</p>
@@ -380,7 +380,7 @@ export default function ZafiroContent({ project }: Props) {
       </section>
 
       <div className="extra">
-        <img src="/images/esmeralda/v1.png" style={{ width: "40%", marginBottom: "-8%" }} alt="" />
+        <img src="/images/zafiro/base/v1.png" style={{ width: "40%", marginBottom: "-8%" }} alt="" />
       </div>
       <div className="despedida">¡Te Esperamos!</div>
     </div>

@@ -1,10 +1,11 @@
+/* scoped:t-magical */
 @import "tailwindcss";
 
 /* ======================================
    CSS CUSTOM PROPERTIES — Magical
    ====================================== */
 
-:root {
+:root:has(.t-magical) {
   --color-principal: #2d1b69;
   --color-elementos: #7c3aed;
   --color-sobre: #1a0a3e;
@@ -23,7 +24,7 @@
    FONTS
    ====================================== */
 
-h1 {
+.t-magical h1 {
   font-family: var(--font-cinzel), "Cinzel", serif;
   font-size: 6vw;
   color: #f0e6ff;
@@ -32,13 +33,13 @@ h1 {
   text-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
 }
 
-h2 {
+.t-magical h2 {
   font-family: var(--font-sacramento), "Sacramento", cursive;
   font-size: 9vw;
   color: var(--subtitulos-color);
 }
 
-h3 {
+.t-magical h3 {
   font-family: var(--font-cinzel), "Cinzel", serif;
   font-size: 6vw;
   font-weight: 500;
@@ -47,7 +48,7 @@ h3 {
   letter-spacing: 0.15em;
 }
 
-h4 {
+.t-magical h4 {
   font-family: var(--font-playfair), "Playfair Display", serif;
   font-size: 3vw;
   font-weight: 500;
@@ -56,7 +57,7 @@ h4 {
   color: #f0e6ff;
 }
 
-h5 {
+.t-magical h5 {
   font-family: var(--font-cinzel), "Cinzel", serif;
   font-size: 4vw;
   font-weight: 700;
@@ -68,7 +69,7 @@ h5 {
    BODY & LAYOUT
    ====================================== */
 
-body {
+body:has(.t-magical) {
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -77,16 +78,16 @@ body {
   background-image:
     radial-gradient(ellipse at 20% 10%, rgba(124, 58, 237, 0.3) 0%, transparent 50%),
     radial-gradient(ellipse at 80% 90%, rgba(45, 27, 105, 0.5) 0%, transparent 50%);
-  animation: moveBackground 60s infinite;
+  animation: moveBackground-t-magical 60s infinite;
 }
 
-@keyframes moveBackground {
+@keyframes moveBackground-t-magical {
   0%   { background-position: 0% 0%; }
   50%  { background-position: 100% 100%; }
   100% { background-position: 0% 0%; }
 }
 
-.background {
+.t-magical .background {
   margin: auto;
   background: rgba(26, 10, 62, 0.75);
   box-shadow: 0px 3px 40px 0px rgba(124, 58, 237, 0.5);
@@ -104,11 +105,11 @@ body {
   margin-bottom: 19vw;
 }
 
-.texto {
+.t-magical .texto {
   color: var(--texto-color);
 }
 
-h2 {
+.t-magical h2 {
   color: var(--subtitulos-color);
 }
 
@@ -118,7 +119,7 @@ h2 {
    BUTTON
    ====================================== */
 
-.button {
+.t-magical .button {
   font-family: var(--font-cinzel), "Cinzel", serif;
   font-size: 2vw;
   font-weight: 700;
@@ -136,7 +137,7 @@ h2 {
   letter-spacing: 0.05em;
 }
 
-.button:hover {
+.t-magical .button:hover {
   transform: scale(1.1);
   box-shadow: 0 0 30px rgba(212, 175, 55, 0.8), 1vw 1vw 2vw -1vw rgba(0,0,0,0.4);
 }
@@ -145,14 +146,14 @@ h2 {
    PHOTO SECTION
    ====================================== */
 
-.foto {
+.t-magical .foto {
   width: 80%;
   position: relative;
   margin-bottom: -4%;
   margin-top: -3%;
 }
 
-.foto .principal,
+.t-magical .foto .principal,.t-magical 
 .foto .aro-foto {
   position: absolute;
   border-radius: 50%;
@@ -163,12 +164,12 @@ h2 {
   top: 12%;
 }
 
-.foto .aro {
+.t-magical .foto .aro {
   width: 100%;
   filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.7));
 }
 
-.photo {
+.t-magical .photo {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -176,7 +177,7 @@ h2 {
   align-items: center;
 }
 
-.photo .age {
+.t-magical .photo .age {
   width: 20%;
   margin-top: -8vw;
   filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6));
@@ -186,7 +187,7 @@ h2 {
    QUOTE
    ====================================== */
 
-.mensaje {
+.t-magical .mensaje {
   width: 90%;
   font-size: 4vw;
   font-family: var(--font-playfair), "Playfair Display", serif;
@@ -200,14 +201,14 @@ h2 {
    NAME BANNER
    ====================================== */
 
-.name {
+.t-magical .name {
   width: 100%;
   position: relative;
   margin-top: 5vw;
   display: grid;
 }
 
-.name img {
+.t-magical .name img {
   grid-area: 1 / 1;
   height: 16vw;
   width: 100%;
@@ -215,7 +216,7 @@ h2 {
   display: block;
 }
 
-.name h2 {
+.t-magical .name h2 {
   grid-area: 1 / 1;
   display: flex;
   align-items: center;
@@ -225,7 +226,7 @@ h2 {
   white-space: nowrap;
 }
 
-.person-name {
+.t-magical .person-name {
   color: var(--nombre-color) !important;
   font-size: 11vw;
   text-shadow:
@@ -239,13 +240,13 @@ h2 {
    COUNTDOWN
    ====================================== */
 
-.time {
+.t-magical .time {
   width: 100%;
   display: grid;
   padding-bottom: 4vw;
 }
 
-.time img {
+.t-magical .time img {
   grid-area: 1 / 1;
   width: 100%;
   margin: 0 auto;
@@ -253,7 +254,7 @@ h2 {
   filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.5));
 }
 
-#countdown {
+.t-magical #countdown {
   grid-area: 1 / 1;
   display: flex;
   flex-direction: column;
@@ -266,13 +267,13 @@ h2 {
   z-index: 2;
 }
 
-.countdown-container {
+.t-magical .countdown-container {
   display: flex;
   gap: 4vw;
   line-height: 1.2;
 }
 
-.countdown-container .number {
+.t-magical .countdown-container .number {
   font-size: 7vw;
   color: #0a0418;
   display: block;
@@ -280,7 +281,7 @@ h2 {
   line-height: 1;
 }
 
-.countdown-container .unit {
+.t-magical .countdown-container .unit {
   font-size: 2.7vw;
   color: #2d1b69;
   display: block;
@@ -288,7 +289,7 @@ h2 {
   letter-spacing: 0.05em;
 }
 
-.countdown-container .segment {
+.t-magical .countdown-container .segment {
   display: flex;
   text-align: center;
   flex-direction: column;
@@ -299,7 +300,7 @@ h2 {
    PARENTS SECTION
    ====================================== */
 
-.parents-container {
+.t-magical .parents-container {
   width: 100%;
   margin: auto;
   display: flex;
@@ -309,13 +310,13 @@ h2 {
   margin-top: 4vw;
 }
 
-.parents-container h2 {
+.t-magical .parents-container h2 {
   font-size: 7vw;
   margin-top: 0;
   margin-bottom: 2vw;
 }
 
-.parents p {
+.t-magical .parents p {
   font-size: 4vw;
   width: 100%;
   text-align: center;
@@ -325,7 +326,7 @@ h2 {
   line-height: 1.6;
 }
 
-.vector-long {
+.t-magical .vector-long {
   margin-top: 0;
   width: 50vw;
   filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.4));
@@ -335,7 +336,7 @@ h2 {
    LOCATION CARDS
    ====================================== */
 
-.lugar {
+.t-magical .lugar {
   margin: auto;
   width: 95%;
   display: flex;
@@ -347,21 +348,21 @@ h2 {
   z-index: 4;
 }
 
-.lugar img.con-foto {
+.t-magical .lugar img.con-foto {
   width: 100%;
   border-radius: 2vw;
   margin-bottom: 1vw;
   border: 1px solid rgba(212, 175, 55, 0.3);
 }
 
-.lugar .nombre {
+.t-magical .lugar .nombre {
   font-size: 4vw;
   color: #f0e6ff;
   margin: 2vw 0 1vw;
   line-height: 1.3;
 }
 
-.lugar .direccion {
+.t-magical .lugar .direccion {
   font-size: 3vw;
   color: rgba(240, 230, 255, 0.75);
   margin: 1vw 0;
@@ -369,7 +370,7 @@ h2 {
   line-height: 1.4;
 }
 
-.lugar .hora {
+.t-magical .lugar .hora {
   font-size: 4vw;
   font-weight: 700;
   margin: 2vw 0 1vw;
@@ -377,7 +378,7 @@ h2 {
   line-height: 1.3;
 }
 
-.lugar .button {
+.t-magical .lugar .button {
   margin-top: 3vw;
   margin-bottom: 1vw;
   font-size: max(3.5vw, 14px);
@@ -387,7 +388,7 @@ h2 {
    PHOTO GRID
    ====================================== */
 
-#grid {
+.t-magical #grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -395,7 +396,7 @@ h2 {
   margin-top: 5%;
 }
 
-#grid .container-grid {
+.t-magical #grid .container-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -403,15 +404,15 @@ h2 {
   width: 100%;
 }
 
-#grid .column {
+.t-magical #grid .column {
   flex: 0 0 calc(33.33% - 2%);
 }
 
-#grid .column.full-width {
+.t-magical #grid .column.full-width {
   flex-basis: 100%;
 }
 
-#grid img {
+.t-magical #grid img {
   width: 100%;
   height: auto;
   display: block;
@@ -426,7 +427,7 @@ h2 {
    ITINERARIO
    ====================================== */
 
-.itinerario {
+.t-magical .itinerario {
   width: 80%;
   margin: auto;
   display: flex;
@@ -436,7 +437,7 @@ h2 {
   margin-top: 5%;
 }
 
-.itinerario .evento {
+.t-magical .itinerario .evento {
   display: grid;
   grid-template-columns: 45% 45%;
   column-gap: 10%;
@@ -448,14 +449,14 @@ h2 {
   border: 1px solid rgba(212, 175, 55, 0.1);
 }
 
-.itinerario .evento .icono {
+.t-magical .itinerario .evento .icono {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.itinerario .evento .icono .circulo {
+.t-magical .itinerario .evento .icono .circulo {
   margin: auto;
   width: 16vw;
   height: 16vw;
@@ -468,26 +469,26 @@ h2 {
   box-shadow: 0 0 15px rgba(124, 58, 237, 0.4);
 }
 
-.itinerario .evento .icono .circulo img {
+.t-magical .itinerario .evento .icono .circulo img {
   margin: auto;
   width: 60%;
   filter: var(--invertir-img-itinerario);
 }
 
-.itinerario .evento .item {
+.t-magical .itinerario .evento .item {
   display: flex;
   flex-direction: column;
   text-align: center;
 }
 
-.itinerario .evento .item .nombre {
+.t-magical .itinerario .evento .item .nombre {
   font-size: 5vw;
   color: var(--texto-color);
   font-family: var(--font-playfair), "Playfair Display", serif;
   margin: auto;
 }
 
-.itinerario .evento .item .hora {
+.t-magical .itinerario .evento .item .hora {
   font-size: 4vw;
   color: #d4af37;
   font-weight: 700;
@@ -499,7 +500,7 @@ h2 {
    DRESS CODE
    ====================================== */
 
-.dress-code {
+.t-magical .dress-code {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -509,13 +510,13 @@ h2 {
   margin-top: 2vw;
 }
 
-.dress-code h2 {
+.t-magical .dress-code h2 {
   font-size: 6vw;
   margin-bottom: 2vw;
   margin-top: 0;
 }
 
-.dress-code-container {
+.t-magical .dress-code-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -523,13 +524,13 @@ h2 {
   gap: 2vw;
 }
 
-.dress-code-container img {
+.t-magical .dress-code-container img {
   width: 13vw;
   margin: 0;
   filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.5));
 }
 
-.dress-code p {
+.t-magical .dress-code p {
   font-family: var(--font-playfair), "Playfair Display", serif;
   font-size: 3vw;
   text-align: center;
@@ -541,7 +542,7 @@ h2 {
    GIFT / SOBRES / BUZON
    ====================================== */
 
-.gift-container {
+.t-magical .gift-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -551,13 +552,13 @@ h2 {
   margin-top: 4vw;
 }
 
-.gift-container h2 {
+.t-magical .gift-container h2 {
   font-size: 6vw;
   margin-bottom: 2vw;
   margin-top: 0;
 }
 
-.gift-object-container {
+.t-magical .gift-object-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -565,13 +566,13 @@ h2 {
   gap: 3vw;
 }
 
-.gift-object-container img {
+.t-magical .gift-object-container img {
   width: 14vw;
   margin: 0;
   filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
 }
 
-.gift-container p {
+.t-magical .gift-container p {
   font-family: var(--font-playfair), "Playfair Display", serif;
   font-size: 3vw;
   width: 80%;
@@ -581,13 +582,13 @@ h2 {
   margin: 0;
 }
 
-.gift-object-container .button,
+.t-magical .gift-object-container .button,.t-magical 
 .gift-container .button {
   margin-top: 2vw;
   font-size: max(3.5vw, 14px);
 }
 
-.gift-liverpool-container {
+.t-magical .gift-liverpool-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -597,13 +598,13 @@ h2 {
   margin-top: 2vw;
 }
 
-.gift-liverpool-container h2 {
+.t-magical .gift-liverpool-container h2 {
   font-size: 7vw;
   margin-bottom: 2vw;
   margin-top: 0;
 }
 
-.gift-liverpool-object-container {
+.t-magical .gift-liverpool-object-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -611,13 +612,13 @@ h2 {
   gap: 3vw;
 }
 
-.gift-liverpool-object-container img {
+.t-magical .gift-liverpool-object-container img {
   width: 17%;
   margin: 0;
   filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
 }
 
-.gift-liverpool-container p {
+.t-magical .gift-liverpool-container p {
   font-family: var(--font-playfair), "Playfair Display", serif;
   font-size: 3vw;
   width: 80%;
@@ -626,7 +627,7 @@ h2 {
   margin: 0;
 }
 
-.liverpool-container {
+.t-magical .liverpool-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -634,31 +635,31 @@ h2 {
   margin-top: 3vw;
 }
 
-.liverpool-container img {
+.t-magical .liverpool-container img {
   margin: 0;
   width: 25vw;
 }
 
-.liverpool-container a {
+.t-magical .liverpool-container a {
   text-decoration: none;
   font-weight: 800;
   color: #0a0418;
   z-index: 3;
 }
 
-.liverpool-container .button {
+.t-magical .liverpool-container .button {
   margin-top: 0;
   font-size: max(3.5vw, 14px);
 }
 
-.cut-line {
+.t-magical .cut-line {
   width: 80%;
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
   margin: 1vw auto;
 }
 
-.mensaje-buzon {
+.t-magical .mensaje-buzon {
   margin-top: 2vw;
   margin-bottom: 3vw;
   border-radius: 2vw;
@@ -672,7 +673,7 @@ h2 {
   color: #f0e6ff;
 }
 
-.mensaje-buzon::placeholder {
+.t-magical .mensaje-buzon::placeholder {
   color: rgba(240, 230, 255, 0.5);
 }
 
@@ -680,7 +681,7 @@ h2 {
    INFORMACION IMPORTANTE
    ====================================== */
 
-.informacion-importante {
+.t-magical .informacion-importante {
   display: flex;
   width: 80%;
   margin: auto;
@@ -690,13 +691,13 @@ h2 {
   text-align: center;
 }
 
-.informacion-importante h2 {
+.t-magical .informacion-importante h2 {
   margin-bottom: 0;
   line-height: 0.9;
   margin-bottom: 4%;
 }
 
-.informacion-importante p {
+.t-magical .informacion-importante p {
   font-size: 3vw;
   font-family: var(--font-playfair), "Playfair Display", serif;
   line-height: 1;
@@ -709,14 +710,14 @@ h2 {
    CONFIRMACION DE ASISTENCIA
    ====================================== */
 
-.confirmacion-asistencia {
+.t-magical .confirmacion-asistencia {
   text-align: center;
   width: 90%;
   margin: auto;
   margin-bottom: 2%;
 }
 
-.confirmacion-asistencia form {
+.t-magical .confirmacion-asistencia form {
   margin: auto;
   margin-top: 3vw;
   display: flex;
@@ -725,7 +726,7 @@ h2 {
   gap: 2vw;
 }
 
-.confirmacion-asistencia .familia-input {
+.t-magical .confirmacion-asistencia .familia-input {
   border-radius: 2vw;
   width: 70%;
   border: 0.4vw solid rgba(124, 58, 237, 0.6);
@@ -736,11 +737,11 @@ h2 {
   font-size: 3vw;
 }
 
-.confirmacion-asistencia .familia-input::placeholder {
+.t-magical .confirmacion-asistencia .familia-input::placeholder {
   color: rgba(240, 230, 255, 0.4);
 }
 
-.confirmacion-asistencia .button {
+.t-magical .confirmacion-asistencia .button {
   font-size: 3vw;
   border: none;
   margin-top: 2%;
@@ -751,7 +752,7 @@ h2 {
    FOOTER
    ====================================== */
 
-.footer {
+.t-magical .footer {
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -765,7 +766,7 @@ h2 {
   border-top: 1px solid rgba(212, 175, 55, 0.2);
 }
 
-.footer span span {
+.t-magical .footer span span {
   color: #d4af37;
 }
 
@@ -773,7 +774,7 @@ h2 {
    SOBRE (ENVELOPE)
    ====================================== */
 
-.sobre {
+.t-magical .sobre {
   position: fixed;
   top: 0;
   left: 0;
@@ -783,7 +784,7 @@ h2 {
   overflow: hidden;
 }
 
-.sobre .first {
+.t-magical .sobre .first {
   background: linear-gradient(180deg, #0a0418 0%, #1a0a3e 100%);
   width: 100%;
   height: 50%;
@@ -793,7 +794,7 @@ h2 {
   border-bottom: 1px solid rgba(124, 58, 237, 0.5);
 }
 
-.sobre .second {
+.t-magical .sobre .second {
   background: linear-gradient(0deg, #0a0418 0%, #1a0a3e 100%);
   width: 100%;
   height: 50%;
@@ -803,7 +804,7 @@ h2 {
   border-top: 1px solid rgba(124, 58, 237, 0.5);
 }
 
-.sello {
+.t-magical .sello {
   background: radial-gradient(circle, #2d1b69 0%, #1a0a3e 100%);
   border: 2px solid #d4af37;
   color: #d4af37;
@@ -827,44 +828,44 @@ h2 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  animation: booms 2s infinite;
+  animation: booms-t-magical 2s infinite;
   z-index: 2;
 }
 
-@keyframes booms {
+@keyframes booms-t-magical {
   0%   { transform: scale(1) translate(-50%, -50%); box-shadow: 0 0 20px rgba(124, 58, 237, 0.5), 0 0 40px rgba(212, 175, 55, 0.3); }
   50%  { transform: scale(1.1) translate(-50%, -50%); box-shadow: 0 0 35px rgba(124, 58, 237, 0.8), 0 0 60px rgba(212, 175, 55, 0.5); }
   100% { transform: scale(1) translate(-50%, -50%); box-shadow: 0 0 20px rgba(124, 58, 237, 0.5), 0 0 40px rgba(212, 175, 55, 0.3); }
 }
 
-.up_1 {
-  animation: up 3s forwards;
+.t-magical .up_1 {
+  animation: up-t-magical 3s forwards;
 }
 
-.down_1 {
-  animation: down 3s forwards;
+.t-magical .down_1 {
+  animation: down-t-magical 3s forwards;
 }
 
-.button_hiden {
-  animation: hiden 3s forwards;
+.t-magical .button_hiden {
+  animation: hiden-t-magical 3s forwards;
 }
 
-.sobre_hiden {
-  animation: hiden 3s forwards;
+.t-magical .sobre_hiden {
+  animation: hiden-t-magical 3s forwards;
 }
 
-@keyframes hiden {
+@keyframes hiden-t-magical {
   0%   { opacity: 1; }
   99%  { opacity: 0; }
   100% { display: none; pointer-events: none; }
 }
 
-@keyframes up {
+@keyframes up-t-magical {
   0%   { transform: translateY(0%); }
   100% { transform: translateY(-100%); }
 }
 
-@keyframes down {
+@keyframes down-t-magical {
   0%   { transform: translateY(0%); }
   100% { transform: translateY(100%); }
 }
@@ -873,7 +874,7 @@ h2 {
    MODAL LIGHTBOX
    ====================================== */
 
-.modal {
+.t-magical .modal {
   display: none;
   position: fixed;
   top: 0;
@@ -885,11 +886,11 @@ h2 {
   z-index: 9999;
 }
 
-.modal.open {
+.t-magical .modal.open {
   display: block;
 }
 
-.modal-img {
+.t-magical .modal-img {
   max-width: 80%;
   max-height: 80%;
   position: absolute;
@@ -900,7 +901,7 @@ h2 {
   border-radius: 8px;
 }
 
-.close-btn {
+.t-magical .close-btn {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -909,7 +910,7 @@ h2 {
   cursor: pointer;
 }
 
-.prev-btn,
+.t-magical .prev-btn,.t-magical 
 .next-btn {
   position: absolute;
   top: 50%;
@@ -920,42 +921,42 @@ h2 {
   padding: 1rem;
 }
 
-.prev-btn { left: 100px; }
-.next-btn { right: 100px; }
+.t-magical .prev-btn { left: 100px; }
+.t-magical .next-btn { right: 100px; }
 
 /* ======================================
    SCROLL ANIMATIONS
    ====================================== */
 
-.show-p-y {
+.t-magical .show-p-y {
   opacity: 0;
   transform: translateY(150px);
   transition: all 2s ease;
 }
 
-.active-p-y {
+.t-magical .active-p-y {
   transform: translateY(0px);
   opacity: 1;
 }
 
-.show-n-x {
+.t-magical .show-n-x {
   opacity: 0;
   transform: translateX(150px);
   transition: all 2s ease;
 }
 
-.active-n-x {
+.t-magical .active-n-x {
   transform: translateX(0px);
   opacity: 1;
 }
 
-.show-p-x {
+.t-magical .show-p-x {
   opacity: 0;
   transform: translateX(-150px);
   transition: all 2s ease;
 }
 
-.active-p-x {
+.t-magical .active-p-x {
   transform: translateX(0px);
   opacity: 1;
 }
@@ -964,7 +965,7 @@ h2 {
    DECORATIONS
    ====================================== */
 
-.decorations {
+.t-magical .decorations {
   position: absolute;
   width: 100%;
   height: 0;
@@ -972,38 +973,38 @@ h2 {
 }
 
 /* Stars */
-.decorations .item11 { position: absolute; width: 10vw; left: 4vw; top: 4vw; animation: twinkle 2.5s ease-in-out infinite; }
-.decorations .item12 { position: absolute; width: 8vw; right: 5vw; top: 97vw; animation: twinkle 3s ease-in-out infinite 0.5s; }
-.decorations .item13 { position: absolute; width: 10vw; left: 4vw; top: 144vw; animation: twinkle 2s ease-in-out infinite 1s; }
-.decorations .item14 { position: absolute; width: 8vw; right: 4vw; top: 525vw; animation: twinkle 2.8s ease-in-out infinite 0.3s; }
-.decorations .item15 { position: absolute; width: 8vw; left: 5vw; top: 900vw; animation: twinkle 3.2s ease-in-out infinite 0.7s; }
+.t-magical .decorations .item11 { position: absolute; width: 10vw; left: 4vw; top: 4vw; animation: twinkle-t-magical 2.5s ease-in-out infinite; }
+.t-magical .decorations .item12 { position: absolute; width: 8vw; right: 5vw; top: 97vw; animation: twinkle-t-magical 3s ease-in-out infinite 0.5s; }
+.t-magical .decorations .item13 { position: absolute; width: 10vw; left: 4vw; top: 144vw; animation: twinkle-t-magical 2s ease-in-out infinite 1s; }
+.t-magical .decorations .item14 { position: absolute; width: 8vw; right: 4vw; top: 525vw; animation: twinkle-t-magical 2.8s ease-in-out infinite 0.3s; }
+.t-magical .decorations .item15 { position: absolute; width: 8vw; left: 5vw; top: 900vw; animation: twinkle-t-magical 3.2s ease-in-out infinite 0.7s; }
 
 /* Moons */
-.decorations .item1 { position: absolute; width: 15vw; right: 4vw; top: 2vw; animation: float 4s ease-in-out infinite; }
-.decorations .item2 { position: absolute; width: 12vw; left: 3vw; top: 96vw; animation: float 5s ease-in-out infinite 1s; }
-.decorations .item3 { position: absolute; width: 12vw; right: 3vw; top: 143vw; animation: float 4.5s ease-in-out infinite 0.5s; }
-.decorations .item4 { position: absolute; width: 12vw; left: 3vw; top: 350vw; animation: float 5s ease-in-out infinite 1.5s; }
-.decorations .item5 { position: absolute; width: 11vw; right: 4vw; top: 1110vw; animation: float 4s ease-in-out infinite 0.8s; }
+.t-magical .decorations .item1 { position: absolute; width: 15vw; right: 4vw; top: 2vw; animation: float-t-magical 4s ease-in-out infinite; }
+.t-magical .decorations .item2 { position: absolute; width: 12vw; left: 3vw; top: 96vw; animation: float-t-magical 5s ease-in-out infinite 1s; }
+.t-magical .decorations .item3 { position: absolute; width: 12vw; right: 3vw; top: 143vw; animation: float-t-magical 4.5s ease-in-out infinite 0.5s; }
+.t-magical .decorations .item4 { position: absolute; width: 12vw; left: 3vw; top: 350vw; animation: float-t-magical 5s ease-in-out infinite 1.5s; }
+.t-magical .decorations .item5 { position: absolute; width: 11vw; right: 4vw; top: 1110vw; animation: float-t-magical 4s ease-in-out infinite 0.8s; }
 
 /* Sparkles */
-.decorations .item21 { position: absolute; width: 8vw; left: 46vw; top: 2vw; animation: sparkle 3s ease-in-out infinite; }
-.decorations .item22 { position: absolute; width: 9vw; left: 5vw; top: 40vw; animation: sparkle 2.5s ease-in-out infinite 1s; }
-.decorations .item23 { position: absolute; width: 9vw; right: 4vw; top: 65vw; animation: sparkle 3.5s ease-in-out infinite 0.5s; }
-.decorations .item24 { position: absolute; width: 8vw; right: 6vw; top: 240vw; animation: sparkle 3s ease-in-out infinite 1.5s; }
-.decorations .item25 { position: absolute; width: 9vw; left: 5vw; top: 578vw; animation: sparkle 2.8s ease-in-out infinite 0.3s; }
-.decorations .item26 { position: absolute; width: 9vw; right: 5vw; top: 760vw; animation: sparkle 3.2s ease-in-out infinite 0.9s; }
+.t-magical .decorations .item21 { position: absolute; width: 8vw; left: 46vw; top: 2vw; animation: sparkle-t-magical 3s ease-in-out infinite; }
+.t-magical .decorations .item22 { position: absolute; width: 9vw; left: 5vw; top: 40vw; animation: sparkle-t-magical 2.5s ease-in-out infinite 1s; }
+.t-magical .decorations .item23 { position: absolute; width: 9vw; right: 4vw; top: 65vw; animation: sparkle-t-magical 3.5s ease-in-out infinite 0.5s; }
+.t-magical .decorations .item24 { position: absolute; width: 8vw; right: 6vw; top: 240vw; animation: sparkle-t-magical 3s ease-in-out infinite 1.5s; }
+.t-magical .decorations .item25 { position: absolute; width: 9vw; left: 5vw; top: 578vw; animation: sparkle-t-magical 2.8s ease-in-out infinite 0.3s; }
+.t-magical .decorations .item26 { position: absolute; width: 9vw; right: 5vw; top: 760vw; animation: sparkle-t-magical 3.2s ease-in-out infinite 0.9s; }
 
-@keyframes float {
+@keyframes float-t-magical {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
   50% { transform: translateY(-8px) rotate(5deg); }
 }
 
-@keyframes twinkle {
+@keyframes twinkle-t-magical {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.4; transform: scale(0.85); }
 }
 
-@keyframes sparkle {
+@keyframes sparkle-t-magical {
   0%, 100% { opacity: 0.6; transform: scale(1) rotate(0deg); }
   50% { opacity: 1; transform: scale(1.2) rotate(180deg); }
 }
@@ -1012,7 +1013,7 @@ h2 {
    ESTRELLAS CSS (fondo)
    ====================================== */
 
-body::before {
+body:has(.t-magical)::before {
   content: '';
   position: fixed;
   top: 0; left: 0;
@@ -1032,10 +1033,10 @@ body::before {
     radial-gradient(1.5px 1.5px at 5% 50%, rgba(180,120,255,0.4) 0%, transparent 100%);
   pointer-events: none;
   z-index: 0;
-  animation: starfield 120s linear infinite;
+  animation: starfield-t-magical 120s linear infinite;
 }
 
-@keyframes starfield {
+@keyframes starfield-t-magical {
   0%   { background-position: 0 0; }
   100% { background-position: -500px 500px; }
 }
@@ -1045,54 +1046,54 @@ body::before {
    ====================================== */
 
 @media (min-width: 1100px) {
-  .background { width: 600px; margin-top: 30px; margin-bottom: 30px; }
-  h1 { font-size: 38px; }
-  h2 { font-size: 62px; }
-  h3 { font-size: 36px; margin-top: 30px; letter-spacing: 0.2em; }
-  h4 { font-size: 24px; }
-  h5 { font-size: 24px; margin-top: 8px; }
-  .button { font-size: 18px; padding: 4px 30px; margin-top: -27px; }
-  .decorations { display: none; }
-  .person-name { font-size: 58px; }
-  .photo .age { margin-top: -70px; }
-  .name { margin-top: 20px; }
-  .name img { height: 105px; }
-  .time { padding-bottom: 85px; }
-  .time img { height: 294px; }
-  #countdown { margin-top: -180px; }
-  .countdown-container .number { font-size: 28px; }
-  .countdown-container .unit { font-size: 18px; }
-  .countdown-container .segment { margin: 20px; }
-  .parents-container { margin-top: 30px; }
-  .parents-container h2 { font-size: 35px; }
-  .parents p { font-size: 24px; margin-top: -15px; }
-  .vector-long { margin-top: -30px; width: 250px; }
-  .lugar .nombre { font-size: 24px; }
-  .lugar .direccion { font-size: 18px; }
-  .lugar .hora { font-size: 24px; }
-  .itinerario { width: 70%; }
-  .itinerario .evento { column-gap: 50px; margin-top: 8px; border-radius: 15px; padding: 8px; }
-  .itinerario .evento .icono .circulo { width: 160px; height: 160px; }
-  .itinerario .evento .item .nombre { font-size: 32px; }
-  .itinerario .evento .item .hora { font-size: 28px; }
-  .dress-code { width: 80%; margin-top: 10px; }
-  .dress-code h2 { font-size: 40px; margin-bottom: -4px; }
-  .dress-code-container img { width: 80px; margin-bottom: -15px; margin-top: 10px; }
-  .dress-code p { font-size: 20px; }
-  .gift-container { width: 80%; margin-top: -10px; }
-  .gift-container h2 { font-size: 40px; margin-bottom: -4px; }
-  .gift-object-container img { width: 80px; margin-bottom: -15px; }
-  .gift-container p { font-size: 20px; width: 80%; }
-  .gift-liverpool-container { margin-top: 10px; }
-  .gift-liverpool-container h2 { font-size: 40px; margin-bottom: 8px; }
-  .gift-liverpool-container p { font-size: 22px; width: 80%; }
-  .liverpool-container img { margin-bottom: 40px; width: 190px; }
-  .mensaje-buzon { font-size: 18px; border-radius: 8px; padding: 8px; border: 2px solid rgba(124, 58, 237, 0.6); }
-  .informacion-importante p { font-size: 18px; }
-  .informacion-importante h2 { font-size: 42px; }
-  .confirmacion-asistencia .familia-input { font-size: 18px; border-radius: 8px; padding: 5px; border: 2px solid rgba(124, 58, 237, 0.6); }
-  .confirmacion-asistencia .button { font-size: 18px; }
-  .sello { font-size: 14px; }
-  .prev-btn { left: 100px; }
-  .next-btn { right: 100px; }
+  .t-magical .background { width: 600px; margin-top: 30px; margin-bottom: 30px; }
+  .t-magical h1 { font-size: 38px; }
+  .t-magical h2 { font-size: 62px; }
+  .t-magical h3 { font-size: 36px; margin-top: 30px; letter-spacing: 0.2em; }
+  .t-magical h4 { font-size: 24px; }
+  .t-magical h5 { font-size: 24px; margin-top: 8px; }
+  .t-magical .button { font-size: 18px; padding: 4px 30px; margin-top: -27px; }
+  .t-magical .decorations { display: none; }
+  .t-magical .person-name { font-size: 58px; }
+  .t-magical .photo .age { margin-top: -70px; }
+  .t-magical .name { margin-top: 20px; }
+  .t-magical .name img { height: 105px; }
+  .t-magical .time { padding-bottom: 85px; }
+  .t-magical .time img { height: 294px; }
+  .t-magical #countdown { margin-top: -180px; }
+  .t-magical .countdown-container .number { font-size: 28px; }
+  .t-magical .countdown-container .unit { font-size: 18px; }
+  .t-magical .countdown-container .segment { margin: 20px; }
+  .t-magical .parents-container { margin-top: 30px; }
+  .t-magical .parents-container h2 { font-size: 35px; }
+  .t-magical .parents p { font-size: 24px; margin-top: -15px; }
+  .t-magical .vector-long { margin-top: -30px; width: 250px; }
+  .t-magical .lugar .nombre { font-size: 24px; }
+  .t-magical .lugar .direccion { font-size: 18px; }
+  .t-magical .lugar .hora { font-size: 24px; }
+  .t-magical .itinerario { width: 70%; }
+  .t-magical .itinerario .evento { column-gap: 50px; margin-top: 8px; border-radius: 15px; padding: 8px; }
+  .t-magical .itinerario .evento .icono .circulo { width: 160px; height: 160px; }
+  .t-magical .itinerario .evento .item .nombre { font-size: 32px; }
+  .t-magical .itinerario .evento .item .hora { font-size: 28px; }
+  .t-magical .dress-code { width: 80%; margin-top: 10px; }
+  .t-magical .dress-code h2 { font-size: 40px; margin-bottom: -4px; }
+  .t-magical .dress-code-container img { width: 80px; margin-bottom: -15px; margin-top: 10px; }
+  .t-magical .dress-code p { font-size: 20px; }
+  .t-magical .gift-container { width: 80%; margin-top: -10px; }
+  .t-magical .gift-container h2 { font-size: 40px; margin-bottom: -4px; }
+  .t-magical .gift-object-container img { width: 80px; margin-bottom: -15px; }
+  .t-magical .gift-container p { font-size: 20px; width: 80%; }
+  .t-magical .gift-liverpool-container { margin-top: 10px; }
+  .t-magical .gift-liverpool-container h2 { font-size: 40px; margin-bottom: 8px; }
+  .t-magical .gift-liverpool-container p { font-size: 22px; width: 80%; }
+  .t-magical .liverpool-container img { margin-bottom: 40px; width: 190px; }
+  .t-magical .mensaje-buzon { font-size: 18px; border-radius: 8px; padding: 8px; border: 2px solid rgba(124, 58, 237, 0.6); }
+  .t-magical .informacion-importante p { font-size: 18px; }
+  .t-magical .informacion-importante h2 { font-size: 42px; }
+  .t-magical .confirmacion-asistencia .familia-input { font-size: 18px; border-radius: 8px; padding: 5px; border: 2px solid rgba(124, 58, 237, 0.6); }
+  .t-magical .confirmacion-asistencia .button { font-size: 18px; }
+  .t-magical .sello { font-size: 14px; }
+  .t-magical .prev-btn { left: 100px; }
+  .t-magical .next-btn { right: 100px; }
 }

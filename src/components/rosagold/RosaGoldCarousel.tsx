@@ -3,10 +3,10 @@
 import { useState } from "react";
 
 const FALLBACK = [
-  "/images/esmeralda/11.jpg",
-  "/images/esmeralda/21.jpg",
-  "/images/esmeralda/31.jpg",
-  "/images/esmeralda/41.jpg",
+  "/images/rosagold/base/11.jpg",
+  "/images/rosagold/base/21.jpg",
+  "/images/rosagold/base/31.jpg",
+  "/images/rosagold/base/41.jpg",
 ];
 
 interface Props { photos?: string[] }
