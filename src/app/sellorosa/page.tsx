@@ -5,7 +5,11 @@ import { useState, useRef } from "react";
 import EsmeraldaScrollInit from "@/components/esmeralda/EsmeraldaScrollInit";
 import SelloRosaEnvelope from "@/components/sellorosa/SelloRosaEnvelope";
 import SelloRosaContent from "@/components/sellorosa/SelloRosaContent";
-import { DEMO_PROJECT } from "@/lib/demo-project";
+import { demoProjectFor } from "@/lib/demo-project";
+import DemoFloatingControls from "@/components/DemoFloatingControls";
+import { NAV_SELLOROSA } from "@/lib/demo-nav";
+
+const DEMO_PROJECT = demoProjectFor("sellorosa");
 
 export default function SelloRosaPage() {
   const [open, setOpen] = useState(false);
@@ -20,8 +24,9 @@ export default function SelloRosaPage() {
     <div>
       <EsmeraldaScrollInit />
       <audio ref={audioRef} loop preload="auto">
-        <source src="/images/esmeralda/musica.mp3" type="audio/mpeg" />
+        <source src="/images/sellorosa/base/musica.mp3" type="audio/mpeg" />
       </audio>
+      <DemoFloatingControls candidates={NAV_SELLOROSA} colorVar="#cb997e" />
       {!open && <SelloRosaEnvelope onOpen={handleOpen} />}
       <SelloRosaContent project={DEMO_PROJECT} />
     </div>

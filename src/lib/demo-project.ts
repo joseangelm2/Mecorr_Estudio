@@ -74,3 +74,17 @@ export const DEMO_PROJECT: Project = {
   tiene_lista_invitados: false,
   pin_admin: null,
 }
+
+// Cada demo usa su propia copia de las imágenes de ejemplo (public/images/<demo>/base/) para
+// que cambiar o reemplazar un archivo de una demo no afecte a las demás.
+export function demoProjectFor(folder: string): Project {
+  const remap = <T,>(v: T): T => {
+    if (typeof v === 'string') return v.replace('/images/esmeralda/', `/images/${folder}/base/`) as T
+    if (Array.isArray(v)) return v.map(remap) as T
+    if (v && typeof v === 'object') {
+      return Object.fromEntries(Object.entries(v).map(([k, x]) => [k, remap(x)])) as T
+    }
+    return v
+  }
+  return remap(DEMO_PROJECT)
+}

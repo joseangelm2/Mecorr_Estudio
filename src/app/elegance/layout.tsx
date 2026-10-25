@@ -13,7 +13,7 @@ export const metadata: Metadata = { title: "Mis XV — Elegance", description: "
 export default function EleganceLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className={`${albert.variable} ${dancing.variable} ${tangerine.variable} ${bellefair.variable} ${dmSans.variable}`}>
-      {children}
+      <div className="t-elegance">{children}</div>
     </div>
   );
 }

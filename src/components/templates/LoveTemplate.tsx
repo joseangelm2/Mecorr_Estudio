@@ -57,7 +57,7 @@ export default function LoveTemplate({ project }: Props) {
   }
 
   return (
-    <div style={{ position: "relative" }}>
+    <div className="t-love" style={{ position: "relative" }}>
       <LoveScrollInit />
       <audio ref={audioRef} id="music" loop>
         <source src={project.music_url ?? "/images/love/musica.mp3"} type="audio/mpeg" />

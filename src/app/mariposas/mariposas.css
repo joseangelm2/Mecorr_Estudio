@@ -1,3 +1,4 @@
+/* scoped:t-mariposas */
 /* Custom font: Marchila (Titles) */
 @font-face {
   font-family: "Titles";
@@ -8,17 +9,17 @@
    GLOBAL LAYOUT
    ====================================== */
 
-html {
+html:has(.t-mariposas) {
   overflow: hidden;
   position: relative;
   overflow-x: hidden !important;
 }
 
-html.con-scroll {
+html.con-scroll:has(.t-mariposas) {
   overflow-y: scroll;
 }
 
-body {
+body:has(.t-mariposas) {
   margin: 0;
   position: relative;
   background-color: #222;
@@ -26,32 +27,32 @@ body {
   font-family: var(--font-raleway), "Raleway", sans-serif;
 }
 
-.bg-invitacion::after {
+.bg-invitacion:has(.t-mariposas)::after {
   position: fixed;
   z-index: -1;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
-  background-image: url(/images/background-mob.jpg);
+  background-image: url(/images/mariposas/background-mob.jpg);
   background-size: cover;
   background-position: center;
   content: "";
 }
 
 @media (min-width: 769px) {
-  #body {
+  #body:has(.t-mariposas) {
     width: 30%;
     position: relative;
     margin: 0 auto;
     background-color: #222;
   }
-  .bg-invitacion::after {
+  .bg-invitacion:has(.t-mariposas)::after {
     right: 35%;
     width: 30%;
     left: auto;
   }
-  .invitado {
+  .t-mariposas .invitado {
     width: 30% !important;
   }
 }
@@ -60,16 +61,16 @@ body {
    TYPOGRAPHY
    ====================================== */
 
-h1, h2, h3, h4, h5, h6 {
+.t-mariposas h1,.t-mariposas  h2,.t-mariposas  h3,.t-mariposas  h4,.t-mariposas  h5,.t-mariposas  h6 {
   font-family: "Titles", serif !important;
 }
 
-p, a, li {
+.t-mariposas p,.t-mariposas  a,.t-mariposas  li {
   font-family: var(--font-raleway), "Raleway", sans-serif;
   font-size: 18px;
 }
 
-.titulo {
+.t-mariposas .titulo {
   font-size: 30px;
   font-family: "Titles", serif !important;
 }
@@ -78,9 +79,9 @@ p, a, li {
    COLORS
    ====================================== */
 
-.color-principal { background: #b4882d; }
+.t-mariposas .color-principal { background: #b4882d; }
 
-.color-titulos {
+.t-mariposas .color-titulos {
   background: linear-gradient(to right, #b4882d 0%, #b4882d 100%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -88,35 +89,35 @@ p, a, li {
   padding: 5px 0 !important;
 }
 
-.color-textos { color: #292929; }
-.sombra { text-shadow: #000 0.05em 0.05em 0.05em; }
+.t-mariposas .color-textos { color: #292929; }
+.t-mariposas .sombra { text-shadow: #000 0.05em 0.05em 0.05em; }
 
 /* ======================================
    SPACING
    ====================================== */
 
-.mb-0  { margin-bottom: 0 !important; }
-.mb-10 { margin-bottom: 10px !important; }
-.mb-20 { margin-bottom: 20px !important; }
-.mb-30 { margin-bottom: 30px !important; }
-.mb-40 { margin-bottom: 40px !important; }
-.mb-50 { margin-bottom: 50px !important; }
-.mb-60 { margin-bottom: 60px !important; }
+.t-mariposas .mb-0  { margin-bottom: 0 !important; }
+.t-mariposas .mb-10 { margin-bottom: 10px !important; }
+.t-mariposas .mb-20 { margin-bottom: 20px !important; }
+.t-mariposas .mb-30 { margin-bottom: 30px !important; }
+.t-mariposas .mb-40 { margin-bottom: 40px !important; }
+.t-mariposas .mb-50 { margin-bottom: 50px !important; }
+.t-mariposas .mb-60 { margin-bottom: 60px !important; }
 
-.text-center { text-align: center; }
-.text-white  { color: #fff !important; }
+.t-mariposas .text-center { text-align: center; }
+.t-mariposas .text-white  { color: #fff !important; }
 
 /* ======================================
    SECTIONS
    ====================================== */
 
-.padding-section { padding: 50px 0; position: relative; }
-.padding-final   { padding: 450px 0 40px 0; }
+.t-mariposas .padding-section { padding: 50px 0; position: relative; }
+.t-mariposas .padding-final   { padding: 450px 0 40px 0; }
 
-.bg-img { background-position: center; background-size: cover; }
+.t-mariposas .bg-img { background-position: center; background-size: cover; }
 
-.bg-overlay-contador { position: relative; z-index: 1; }
-.bg-overlay-contador::after {
+.t-mariposas .bg-overlay-contador { position: relative; z-index: 1; }
+.t-mariposas .bg-overlay-contador::after {
   position: absolute; z-index: -1; top: 0; left: 0;
   width: 100%; height: 100%;
   background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 31%, rgba(0,0,0,0.65) 100%);
@@ -127,49 +128,49 @@ p, a, li {
    INTRO ENVELOPE
    ====================================== */
 
-.bg-overlay-intro { position: relative; z-index: 1; }
-.bg-overlay-intro::after {
+.t-mariposas .bg-overlay-intro { position: relative; z-index: 1; }
+.t-mariposas .bg-overlay-intro::after {
   position: absolute; z-index: -1; top: 0; left: 0;
   width: 100%; height: 100%;
   background-color: #fff; opacity: 0.6; content: "";
 }
 
-.bg-intro {
-  background-image: url(/images/background-mob.jpg);
+.t-mariposas .bg-intro {
+  background-image: url(/images/mariposas/background-mob.jpg);
   background-size: cover; background-position: center; background-color: #222;
 }
 
-#intro {
+.t-mariposas #intro {
   width: 100%; height: 100vh; z-index: 99999999;
   position: fixed; top: 0; left: 0;
   display: flex; justify-content: center; align-content: center; flex-direction: column;
   backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
 }
 
-.sobre-izquierdo { position: absolute; left: 0; top: 0; bottom: 0; margin: auto; height: 100%; }
-.sobre-derecho   { position: absolute; right: 0; top: 0; height: 100%; }
-.sello           { position: absolute; width: 120px; top: 45%; left: 40%; }
+.t-mariposas .sobre-izquierdo { position: absolute; left: 0; top: 0; bottom: 0; margin: auto; height: 100%; }
+.t-mariposas .sobre-derecho   { position: absolute; right: 0; top: 0; height: 100%; }
+.t-mariposas .sello           { position: absolute; width: 120px; top: 45%; left: 40%; }
 
-.desaparecer   { visibility: hidden; opacity: 0; transition: all 3s; }
-.efecto-derecha { right: -800px !important; transition: all 3s; position: absolute; }
-.efecto-izquierda { left: -800px !important; transition: all 3s; position: absolute; }
+.t-mariposas .desaparecer   { visibility: hidden; opacity: 0; transition: all 3s; }
+.t-mariposas .efecto-derecha { right: -800px !important; transition: all 3s; position: absolute; }
+.t-mariposas .efecto-izquierda { left: -800px !important; transition: all 3s; position: absolute; }
 
 /* ======================================
    STICKY BANNER
    ====================================== */
 
-.invitado { padding: 5px 0; width: 100%; position: fixed; top: 0; z-index: 10; }
-#cintillo { opacity: 0; transition-duration: 0.5s; }
-#cintillo.cintillo-scrolled { opacity: 1 !important; transition-duration: 0.5s; }
+.t-mariposas .invitado { padding: 5px 0; width: 100%; position: fixed; top: 0; z-index: 10; }
+.t-mariposas #cintillo { opacity: 0; transition-duration: 0.5s; }
+.t-mariposas #cintillo.cintillo-scrolled { opacity: 1 !important; transition-duration: 0.5s; }
 
 /* ======================================
    SCROLL ARROW
    ====================================== */
 
-.scroll       { display: block; width: 18px; }
-.scroll_arrow { display: block; height: 10px; animation: downarrow 2.5s infinite; }
+.t-mariposas .scroll       { display: block; width: 18px; }
+.t-mariposas .scroll_arrow { display: block; height: 10px; animation: downarrow-t-mariposas 2.5s infinite; }
 
-@keyframes downarrow {
+@keyframes downarrow-t-mariposas {
   0%   { transform: translate(0, 0); opacity: 0; }
   50%  { transform: translate(0, 10px); opacity: 1; }
   100% { transform: translate(0, 0); opacity: 0; }
@@ -179,10 +180,10 @@ p, a, li {
    COUNTDOWN
    ====================================== */
 
-ul.tiempo { margin: 0; padding: 0; text-align: center; }
-.tiempo li { display: inline-block; list-style-type: none; margin: 0; color: #fff; padding: 0 15px; font-size: 18px; }
-.tiempo li span { display: block; }
-.circulo-tiempo {
+.t-mariposas ul.tiempo { margin: 0; padding: 0; text-align: center; }
+.t-mariposas .tiempo li { display: inline-block; list-style-type: none; margin: 0; color: #fff; padding: 0 15px; font-size: 18px; }
+.t-mariposas .tiempo li span { display: block; }
+.t-mariposas .circulo-tiempo {
   list-style-type: none; margin: 0; color: #000; font-size: 18px;
   border-radius: 50%; background: #b4882d; border: solid 1px #fff;
   width: 50px; height: 50px;
@@ -194,88 +195,88 @@ ul.tiempo { margin: 0; padding: 0; text-align: center; }
    BUTTONS & LINKS
    ====================================== */
 
-.link-abrir { color: #fff; font-size: 14px; padding: 10px 40px; text-decoration: none; letter-spacing: 1px; border-radius: 30px; }
-.link-abrir:hover { color: #fff; }
+.t-mariposas .link-abrir { color: #fff; font-size: 14px; padding: 10px 40px; text-decoration: none; letter-spacing: 1px; border-radius: 30px; }
+.t-mariposas .link-abrir:hover { color: #fff; }
 
-.btn-form {
+.t-mariposas .btn-form {
   color: #fff; font-size: 14px;
   font-family: var(--font-raleway), "Raleway", sans-serif;
   padding: 10px 40px; border: 1px solid #b4882d;
   letter-spacing: 1px; border-radius: 30px;
   background: #b4882d; cursor: pointer;
 }
-.btn-form:hover { background: #9e7726; border-color: #9e7726; transition-duration: 0.2s; }
+.t-mariposas .btn-form:hover { background: #9e7726; border-color: #9e7726; transition-duration: 0.2s; }
 
 /* ======================================
    FORM
    ====================================== */
 
-.form-campo {
+.t-mariposas .form-campo {
   background: rgba(255, 255, 255, 0.3); width: 100%;
   border: 1px solid #b4882d; padding: 10px 10px;
   color: #000; border-radius: 15px;
   font-family: var(--font-raleway), "Raleway", sans-serif;
 }
-.form-campo::placeholder { color: #000; }
-.form-campo:focus { color: #000; outline: none; }
+.t-mariposas .form-campo::placeholder { color: #000; }
+.t-mariposas .form-campo:focus { color: #000; outline: none; }
 
 /* ======================================
    TIMELINE
    ====================================== */
 
-.timeline-container { display: flex; justify-content: center; }
-.timeline-container .vertical-scrollable-timeline { width: 100%; list-style-type: none; position: relative; padding: 0; }
-.timeline-container .vertical-scrollable-timeline .list-progress {
+.t-mariposas .timeline-container { display: flex; justify-content: center; }
+.t-mariposas .timeline-container .vertical-scrollable-timeline { width: 100%; list-style-type: none; position: relative; padding: 0; }
+.t-mariposas .timeline-container .vertical-scrollable-timeline .list-progress {
   width: 8px; height: 100%; background-color: #b4882d;
   position: absolute; left: 53px; top: 0; overflow: hidden;
 }
-.timeline-container .vertical-scrollable-timeline .list-progress .inner {
+.t-mariposas .timeline-container .vertical-scrollable-timeline .list-progress .inner {
   position: absolute; right: 0; bottom: 0; height: 100%;
   background-color: #c5c3cb; width: 100%;
 }
-.timeline-container .vertical-scrollable-timeline li { position: relative; padding: 0px 0px 80px 100px; }
-.timeline-container .vertical-scrollable-timeline li .icon-holder {
+.t-mariposas .timeline-container .vertical-scrollable-timeline li { position: relative; padding: 0px 0px 80px 100px; }
+.t-mariposas .timeline-container .vertical-scrollable-timeline li .icon-holder {
   position: absolute; left: 0; top: 0; width: 50px; height: 50px;
   display: flex; justify-content: center; align-items: center;
   background-color: #c5c3cb; border-radius: 50%; z-index: 1; transition: 0.4s all;
 }
-.timeline-container .vertical-scrollable-timeline li .icon-holder::before {
+.t-mariposas .timeline-container .vertical-scrollable-timeline li .icon-holder::before {
   content: ""; width: 100px; height: 100px; border: 4px solid #fff;
   position: absolute; background-color: #c5c3cb; border-radius: 50%; z-index: -1; transition: 0.4s all;
 }
-.timeline-container .vertical-scrollable-timeline li::before {
+.t-mariposas .timeline-container .vertical-scrollable-timeline li::before {
   content: ""; position: absolute; height: 100%; width: 8px;
   background-color: transparent; left: 48px; z-index: 0;
 }
-.timeline-container .vertical-scrollable-timeline li.active .icon-holder { background-color: #b4882d; }
-.timeline-container .vertical-scrollable-timeline li.active .icon-holder img { filter: invert(100%); }
-.timeline-container .vertical-scrollable-timeline li.active .icon-holder::before { background-color: #b4882d; }
+.t-mariposas .timeline-container .vertical-scrollable-timeline li.active .icon-holder { background-color: #b4882d; }
+.t-mariposas .timeline-container .vertical-scrollable-timeline li.active .icon-holder img { filter: invert(100%); }
+.t-mariposas .timeline-container .vertical-scrollable-timeline li.active .icon-holder::before { background-color: #b4882d; }
 
 /* ======================================
    CAROUSEL DOTS
    ====================================== */
 
-.owl-fotos .owl-dots { text-align: center; margin-top: 40px; }
-.owl-fotos .owl-dots .owl-dot { display: inline-block; }
-.owl-fotos .owl-dots .owl-dot span {
+.t-mariposas .owl-fotos .owl-dots { text-align: center; margin-top: 40px; }
+.t-mariposas .owl-fotos .owl-dots .owl-dot { display: inline-block; }
+.t-mariposas .owl-fotos .owl-dots .owl-dot span {
   width: 8px; height: 8px; margin: 5px; background: #999;
   display: block; border-radius: 50%; transition: opacity 200ms ease;
 }
-.owl-fotos .owl-dots .owl-dot.active span,
+.t-mariposas .owl-fotos .owl-dots .owl-dot.active span,.t-mariposas 
 .owl-fotos .owl-dots .owl-dot:hover span { background: #b4882d; }
 
 /* ======================================
    WOW ANIMATIONS
    ====================================== */
 
-@keyframes fadeInUp {
+@keyframes fadeInUp-t-mariposas {
   from { opacity: 0; transform: translate3d(0, 40px, 0); }
   to   { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
-.wow { visibility: hidden; }
-.wow.animated { visibility: visible; }
-.wow.animated.fadeInUp { visibility: visible; animation-name: fadeInUp; animation-fill-mode: both; }
+.t-mariposas .wow { visibility: hidden; }
+.t-mariposas .wow.animated { visibility: visible; }
+.t-mariposas .wow.animated.fadeInUp { visibility: visible; animation-name: fadeInUp-t-mariposas; animation-fill-mode: both; }
 
 @keyframes pulse {
   0%   { transform: scale(1); }
@@ -287,6 +288,6 @@ ul.tiempo { margin: 0; padding: 0; text-align: center; }
    SCROLLBAR
    ====================================== */
 
-::-webkit-scrollbar { width: 10px; background-color: #fff; }
-::-webkit-scrollbar-track { background-color: #000; }
-::-webkit-scrollbar-thumb { background-color: #b4882d; }
+.t-mariposas ::-webkit-scrollbar { width: 10px; background-color: #fff; }
+.t-mariposas ::-webkit-scrollbar-track { background-color: #000; }
+.t-mariposas ::-webkit-scrollbar-thumb { background-color: #b4882d; }

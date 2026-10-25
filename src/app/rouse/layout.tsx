@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function RouseLayout({ children }: { children: React.ReactNode }) {
   return (
     <div id="body" className={`bg-invitacion ${raleway.variable}`}>
-      {children}
+      <div className="t-rouse">{children}</div>
     </div>
   );
 }

@@ -204,7 +204,7 @@ export default function RosaGoldContent({ project }: Props) {
             </div>
             <table className="rg-tabla-itinerario"><tbody>
               {events.map((ev, i) => {
-                const iconSrc = ev.icon?.startsWith("http") || ev.icon?.startsWith("/") ? ev.icon : `/images/esmeralda/${ev.icon}`;
+                const iconSrc = ev.icon?.startsWith("http") || ev.icon?.startsWith("/") ? ev.icon : `/images/rosagold/base/${ev.icon}`;
                 return (
                   <tr key={i}>
                     <td className="rg-imagen-col anim-right">
@@ -235,7 +235,7 @@ export default function RosaGoldContent({ project }: Props) {
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "20px", width: "100%" }}>
           {project.gift_registry?.liverpoolLink && (
             <div className="rg-centrar anim-right">
-              <img src="/images/esmeralda/liverpool.png" alt="Liverpool" style={{ height: "80px" }} />
+              <img src="/images/rosagold/base/liverpool.png" alt="Liverpool" style={{ height: "80px" }} />
               <div className="rg-text-details"><strong>Mesa de Regalos Liverpool</strong></div>
               <div style={{ marginTop: "12px" }}>
                 <a href={project.gift_registry.liverpoolLink} target="_blank" rel="noopener noreferrer" className="rg-location-btn">LIVERPOOL</a>
@@ -244,7 +244,7 @@ export default function RosaGoldContent({ project }: Props) {
           )}
           {project.show_lluvia_sobres && (
             <div className="rg-centrar anim-left">
-              <img src="/images/esmeralda/sobre.png" alt="Sobre" style={{ height: "80px" }} />
+              <img src="/images/rosagold/base/sobre.png" alt="Sobre" style={{ height: "80px" }} />
               <div className="rg-text-details">
                 <strong>Lluvia de Sobres</strong>
                 {project.lluvia_sobres_text && <><br />{project.lluvia_sobres_text}</>}
@@ -296,7 +296,7 @@ export default function RosaGoldContent({ project }: Props) {
           <div className="rg-announcement anim-up">Hashtag en Instagram</div>
           <hr style={{ width: "230px", margin: "8px auto", border: "none", borderTop: "1px solid #ce9e5f" }} />
           <div className="esp-peq" />
-          <img src="/images/esmeralda/instagram.png" alt="Instagram" style={{ height: "60px", margin: "10px auto", display: "block" }} />
+          <img src="/images/rosagold/base/instagram.png" alt="Instagram" style={{ height: "60px", margin: "10px auto", display: "block" }} />
           <p className="rg-text anim-up">Comparte tus mejores momentos con el hashtag</p>
           <div className="rg-announcement-color anim-up" style={{ fontSize: "clamp(1.5rem, 4vw, 2rem)" }}>{project.hashtag}</div>
           <div style={{ textAlign: "center", marginTop: "12px" }}>
@@ -311,7 +311,7 @@ export default function RosaGoldContent({ project }: Props) {
         <div className="rg-announcement anim-up">Buzón de Deseos</div>
         <hr style={{ width: "230px", margin: "8px auto", border: "none", borderTop: "1px solid #ce9e5f" }} />
         <div className="esp-peq" />
-        <img src="/images/esmeralda/buzon.png" alt="Buzón" style={{ height: "70px", margin: "10px auto", display: "block" }} />
+        <img src="/images/rosagold/base/buzon.png" alt="Buzón" style={{ height: "70px", margin: "10px auto", display: "block" }} />
         <p className="rg-text anim-up">Déjame un lindo mensaje por mis XV años:</p>
         <div style={{ maxWidth: "400px", margin: "0 auto", paddingBottom: "20px" }}>
           <textarea ref={mensajeRef} className="rg-form-campo" rows={4} placeholder="Escribe tu mensaje aquí..." style={{ marginBottom: "10px" }} />
@@ -338,7 +338,7 @@ export default function RosaGoldContent({ project }: Props) {
           {project.dress_code && (
             <div className="anim-up anim-pause-2">
               <div className="rg-announcement">Vestimenta</div>
-              <img src="/images/esmeralda/vestimenta.png" alt="Vestimenta" className="rg-vestimenta-img" />
+              <img src="/images/rosagold/base/vestimenta.png" alt="Vestimenta" className="rg-vestimenta-img" />
               <div className="esp-peq" />
               <div className="rg-greeting">{project.dress_code.colors || "Formal"}</div>
               {project.dress_code.notes && <><br /><div className="rg-text">{project.dress_code.notes}</div></>}

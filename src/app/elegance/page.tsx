@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import type { Project } from '@/types/invitation'
-import { ELEGANCE_THEMES, DEFAULT_ELEGANCE_THEME, type EleganceTheme } from '@/lib/elegance-themes'
+import { ELEGANCE_THEMES, DEFAULT_ELEGANCE_THEME, type EleganceTheme, texturaFor } from '@/lib/elegance-themes'
 import EleganceEnvelope from '@/components/elegance/EleganceEnvelope'
 import EleganceScrollInit from '@/components/elegance/EleganceScrollInit'
 import EleganceDecorations from '@/components/elegance/EleganceDecorations'
@@ -16,6 +16,8 @@ import EleganceItinerary from '@/components/elegance/EleganceItinerary'
 import EleganceWishes from '@/components/elegance/EleganceWishes'
 import EleganceRSVP from '@/components/elegance/EleganceRSVP'
 import EleganceFooter from '@/components/elegance/EleganceFooter'
+import DemoFloatingControls from "@/components/DemoFloatingControls";
+import { NAV_ELEGANCE } from "@/lib/demo-nav";
 
 const BASE_PROJECT: Omit<Project, 'color_theme'> = {
   id: 'demo',
@@ -149,6 +151,8 @@ export default function ElegancePage() {
     const root = document.documentElement
     root.style.setProperty('--color-principal',    theme.colorPrincipal)
     root.style.setProperty('--bg-color',           theme.bgColor)
+    const textura = texturaFor(theme.colorPrincipal)
+    if (textura) root.style.setProperty('--textura-color', textura)
     root.style.setProperty('--img-filter',         theme.imgFilter)
     root.style.setProperty('--icon-filter',        theme.iconFilter)
     root.style.setProperty('--cuenta-color-fondo', theme.cuentaFondo)
@@ -161,7 +165,7 @@ export default function ElegancePage() {
     root.style.setProperty('--cuenta-color-borde', theme.cuentaTexto)
     return () => {
       const vars = [
-        '--color-principal', '--bg-color', '--img-filter', '--icon-filter', '--cuenta-color-fondo', '--nombre-color',
+        '--color-principal', '--bg-color', '--textura-color', '--img-filter', '--icon-filter', '--cuenta-color-fondo', '--nombre-color',
         '--subtitulos-color', '--textos-color', '--boton-color',
         '--boton-texto-color', '--cuenta-color-texto', '--cuenta-color-borde',
       ]
@@ -183,26 +187,27 @@ export default function ElegancePage() {
       <audio ref={audioRef} loop>
         <source src={project.music_url ?? '/images/elegance/musica.mp3'} type="audio/mpeg" />
       </audio>
+      <DemoFloatingControls candidates={NAV_ELEGANCE} colorVar="var(--color-principal, #b08968)" />
       {!envelopeOpen && <EleganceEnvelope onOpen={handleOpen} primaryColor={theme.colorPrincipal} />}
       <EleganceDecorations />
       <div className="contenido">
-        <EleganceHero project={project} />
+        <div id="portada"><EleganceHero project={project} /></div>
         <GalleryPhoto src={photos[0]} />
-        <EleganceParents project={project} />
+        <div id="familia"><EleganceParents project={project} /></div>
         <GalleryPhoto src={photos[1]} />
-        <EleganceEventDate eventDate={project.event_date} />
-        <EleganceLocations project={project} />
+        <div id="cuenta-regresiva"><EleganceEventDate eventDate={project.event_date} /></div>
+        <div id="ubicaciones"><EleganceLocations project={project} /></div>
         <GalleryPhoto src={photos[2]} />
-        <EleganceGifts project={project} />
+        <div id="regalos"><EleganceGifts project={project} /></div>
         <GalleryPhoto src={photos[3]} />
         <ElegancePhotoGrid gridRetrato={[]} gridHorizontal={[]} />
         {project.show_itinerary && project.itinerary.length > 0 && <GalleryPhoto src={photos[4]} />}
-        {project.show_itinerary && project.itinerary.length > 0 && <EleganceItinerary project={project} />}
+        {project.show_itinerary && project.itinerary.length > 0 && <div id="itinerario"><EleganceItinerary project={project} /></div>}
         <GalleryPhoto src={photos[5]} />
-        <EleganceWishes phone={project.rsvp_phone ?? ''} hashtag={hashtag} dressCodeNotes={project.dress_code?.notes || undefined} />
+        <div id="deseos"><EleganceWishes phone={project.rsvp_phone ?? ''} hashtag={hashtag} dressCodeNotes={project.dress_code?.notes || undefined} /></div>
         <EleganceRSVP project={project} />
         <GalleryPhoto src={photos[6]} />
-        <EleganceFooter />
+        <div id="despedida"><EleganceFooter /></div>
       </div>
       {!envelopeOpen && <ThemeSelector active={themeId} onChange={id => { window.scrollTo({ top: 0, behavior: 'smooth' }); setThemeId(id) }} />}
     </div>

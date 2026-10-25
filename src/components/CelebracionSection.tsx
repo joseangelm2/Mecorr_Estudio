@@ -1,4 +1,6 @@
 interface Props {
+  /** Carpeta base de las imágenes (cada demo usa la suya). Por defecto, la raíz /images. */
+  assetBase?: string;
   quinceaneraName?: string;
   parentNames?: string[];
   padrinos?: string[];
@@ -8,6 +10,7 @@ interface Props {
 }
 
 export default function CelebracionSection({
+  assetBase = "/images",
   quinceaneraName = "Aime Ferreira",
   parentNames = ["Felipe Ferreira", "Paola Mendoza"],
   padrinos = ["Sergio García", "Graciela Santos"],
@@ -43,7 +46,7 @@ export default function CelebracionSection({
               {invitationText || "Te invito a mis quince primaveras, porque formas parte esencial de mi vida y nada me haría más feliz que compartir contigo este día. Llegó el gran día soñado, donde comenzaré a crecer y comprender lo bello de la vida. Con amor, te invito a celebrar mis quince años"}
             </p>
             <div className="mb-10 text-center wow fadeInUp">
-              <img src="/images/flores-01.png" width="160" alt="" />
+              <img src={`${assetBase}/flores-01.png`} width="160" alt="" />
             </div>
             <h1 className="titulo mb-20 color-titulos text-center wow fadeInUp">
               {parentsTitle}
@@ -59,7 +62,7 @@ export default function CelebracionSection({
             {padrinos.length > 0 && (
               <>
                 <div className="mb-10 text-center wow fadeInUp">
-                  <img src="/images/flores-01.png" width="160" alt="" />
+                  <img src={`${assetBase}/flores-01.png`} width="160" alt="" />
                 </div>
                 <h1 className="titulo mb-20 color-titulos text-center wow fadeInUp">
                   {padrinosTitle}

@@ -1,10 +1,11 @@
+/* scoped:t-esmeralda */
 @import "tailwindcss";
 
 /* ======================================
    CSS CUSTOM PROPERTIES — Esmeralda
    ====================================== */
 
-:root {
+:root:has(.t-esmeralda) {
   --color-principal: #098074;
   --color-elementos: rgb(26, 161, 134);
   --color-sobre: var(--color-principal);
@@ -25,7 +26,7 @@
    ====================================== */
 
 /* h1 — event title: misma tipografía/color/tamaño que .person-name (nombre de la quinceañera) */
-h1 {
+.t-esmeralda h1 {
   font-family: var(--font-carattere), "Carattere", cursive;
   font-size: 10vw;
   color: var(--nombre-color) !important;
@@ -34,14 +35,14 @@ h1 {
 }
 
 /* h2 — section headings */
-h2 {
+.t-esmeralda h2 {
   font-family: var(--font-carattere), "Carattere", cursive;
   font-size: 7vw;
   color: var(--subtitulos-color);
 }
 
 /* h3 — date */
-h3 {
+.t-esmeralda h3 {
   font-family: var(--font-old-standard), "Old Standard TT", serif;
   font-size: 7vw;
   font-weight: 500;
@@ -50,7 +51,7 @@ h3 {
 }
 
 /* h4 — venue names, addresses */
-h4 {
+.t-esmeralda h4 {
   font-family: var(--font-bellefair), "Bellefair", serif;
   font-size: 3vw;
   font-weight: 500;
@@ -60,7 +61,7 @@ h4 {
 }
 
 /* h5 — times */
-h5 {
+.t-esmeralda h5 {
   font-family: var(--font-bellefair), "Bellefair", serif;
   font-size: 4vw;
   font-weight: 900;
@@ -72,7 +73,7 @@ h5 {
    BODY & LAYOUT
    ====================================== */
 
-body {
+body:has(.t-esmeralda) {
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -83,17 +84,17 @@ body {
   background-image: linear-gradient(var(--color-overlay), var(--color-overlay)),
     url(/images/esmeralda/verde_oro.jpg);
   background-blend-mode: color, normal;
-  animation: moveBackground 50s infinite;
+  animation: moveBackground-t-esmeralda 50s infinite;
   background-size: cover;
 }
 
-@keyframes moveBackground {
+@keyframes moveBackground-t-esmeralda {
   0% { background-position: -200px 0px; }
   50% { background-position: -800px 0px; }
   100% { background-position: -200px 0px; }
 }
 
-.background {
+.t-esmeralda .background {
   margin: auto;
   background: var(--color-overlay);
   -webkit-box-shadow: 0px 3px 23px 0px rgb(4, 43, 25);
@@ -113,19 +114,19 @@ body {
   margin-bottom: 19vw;
 }
 
-.texto {
+.t-esmeralda .texto {
   color: var(--texto-color);
 }
 
 /* Wrappers de sección (anclas del menú flotante) — deben replicar el
    centrado flex de .background; si no, sus hijos con ancho < 100%
    (.foto, .mensaje, .lugar, .itinerario, etc.) quedan pegados a la izquierda. */
-#portada,
-#familia,
-#ubicaciones,
-#itinerario,
-#regalos,
-#confirmar,
+.t-esmeralda #portada,.t-esmeralda 
+#familia,.t-esmeralda 
+#ubicaciones,.t-esmeralda 
+#itinerario,.t-esmeralda 
+#regalos,.t-esmeralda 
+#confirmar,.t-esmeralda 
 #despedida {
   width: 100%;
   display: flex;
@@ -133,11 +134,11 @@ body {
   align-items: center;
 }
 
-h2 {
+.t-esmeralda h2 {
   color: var(--subtitulos-color);
 }
 
-.person-name {
+.t-esmeralda .person-name {
   color: var(--nombre-color) !important;
   font-size: 10vw;
 }
@@ -146,7 +147,7 @@ h2 {
    BUTTON
    ====================================== */
 
-.button {
+.t-esmeralda .button {
   font-family: var(--font-old-standard), "Old Standard TT", serif;
   font-size: 2vw;
   font-weight: 900;
@@ -178,7 +179,7 @@ h2 {
   border: none;
 }
 
-.button:hover {
+.t-esmeralda .button:hover {
   transform: scale(1.2);
 }
 
@@ -186,14 +187,14 @@ h2 {
    PHOTO SECTION
    ====================================== */
 
-.foto {
+.t-esmeralda .foto {
   width: 80%;
   position: relative;
   margin-bottom: -4%;
   margin-top: -3%;
 }
 
-.foto .principal,
+.t-esmeralda .foto .principal,.t-esmeralda 
 .foto .aro-foto {
   position: absolute;
   border-radius: 50%;
@@ -204,11 +205,11 @@ h2 {
   top: 12%;
 }
 
-.foto .aro {
+.t-esmeralda .foto .aro {
   width: 100%;
 }
 
-.photo {
+.t-esmeralda .photo {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -216,7 +217,7 @@ h2 {
   align-items: center;
 }
 
-.photo .age {
+.t-esmeralda .photo .age {
   width: 20%;
   margin-top: -8vw;
 }
@@ -225,7 +226,7 @@ h2 {
    QUOTE
    ====================================== */
 
-.mensaje {
+.t-esmeralda .mensaje {
   width: 90%;
   font-size: 4vw;
   font-family: var(--font-old-standard), "Old Standard TT", serif;
@@ -237,20 +238,20 @@ h2 {
    NAME BANNER
    ====================================== */
 
-.name {
+.t-esmeralda .name {
   width: 100%;
   display: flex;
   flex-direction: column;
   margin-top: 5vw;
 }
 
-.name img {
+.t-esmeralda .name img {
   height: 14vw;
   width: 100%;
   object-fit: cover;
 }
 
-.name h2 {
+.t-esmeralda .name h2 {
   margin: auto;
   margin-top: -17%;
 }
@@ -259,7 +260,7 @@ h2 {
    COUNTDOWN
    ====================================== */
 
-.time {
+.t-esmeralda .time {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -267,12 +268,12 @@ h2 {
   padding-bottom: 11vw;
 }
 
-.time img {
+.t-esmeralda .time img {
   height: 39vw;
   margin: auto;
 }
 
-#countdown {
+.t-esmeralda #countdown {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -282,7 +283,7 @@ h2 {
   margin-top: -24vw;
 }
 
-.countdown-container {
+.t-esmeralda .countdown-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -291,15 +292,15 @@ h2 {
   width: 100%;
 }
 
-.countdown-container .number {
+.t-esmeralda .countdown-container .number {
   font-size: 4vw;
 }
 
-.countdown-container .unit {
+.t-esmeralda .countdown-container .unit {
   font-size: 2vw;
 }
 
-.countdown-container .segment {
+.t-esmeralda .countdown-container .segment {
   margin: 3vw;
   display: flex;
   text-align: center;
@@ -310,7 +311,7 @@ h2 {
    PARENTS SECTION
    ====================================== */
 
-.parents-container {
+.t-esmeralda .parents-container {
   width: 100%;
   margin: auto;
   display: flex;
@@ -320,12 +321,12 @@ h2 {
   margin-top: 4vw;
 }
 
-.parents-container h2 {
+.t-esmeralda .parents-container h2 {
   font-size: 7vw;
   margin-top: 0;
 }
 
-.parents p {
+.t-esmeralda .parents p {
   font-size: 4vw;
   width: 100%;
   text-align: center;
@@ -335,7 +336,7 @@ h2 {
   line-height: 1.3;
 }
 
-.vector-long {
+.t-esmeralda .vector-long {
   margin-top: -7vw;
   width: 50vw;
 }
@@ -344,7 +345,7 @@ h2 {
    LOCATION CARDS
    ====================================== */
 
-.lugar {
+.t-esmeralda .lugar {
   margin: auto;
   width: 95%;
   display: flex;
@@ -356,26 +357,26 @@ h2 {
   z-index: 4;
 }
 
-.lugar img.con-foto {
+.t-esmeralda .lugar img.con-foto {
   width: 100%;
   border-radius: 2vw;
   margin-bottom: 1vw;
 }
 
-.lugar .nombre {
+.t-esmeralda .lugar .nombre {
   font-size: 4vw;
   color: white;
   margin-top: 2vw;
 }
 
-.lugar .direccion {
+.t-esmeralda .lugar .direccion {
   font-size: 4vw;
   color: rgba(255, 255, 255, 0.85);
   margin: 1.5vw 0;
   padding: 0 5%;
 }
 
-.lugar .hora {
+.t-esmeralda .lugar .hora {
   font-size: 4vw;
   font-weight: 900;
   margin-top: 1vw;
@@ -383,10 +384,10 @@ h2 {
 }
 
 /* Botones consistentes en secciones de lugar, regalos, vestimenta, info */
-.lugar .button,
-.liverpool-container .button,
-.gift-object-container .button,
-.gift-container .button,
+.t-esmeralda .lugar .button,.t-esmeralda 
+.liverpool-container .button,.t-esmeralda 
+.gift-object-container .button,.t-esmeralda 
+.gift-container .button,.t-esmeralda 
 .confirmacion-asistencia .button {
   font-size: 3vw;
   font-family: var(--font-old-standard), "Old Standard TT", serif;
@@ -399,7 +400,7 @@ h2 {
    PHOTO GRID
    ====================================== */
 
-#grid {
+.t-esmeralda #grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -407,7 +408,7 @@ h2 {
   margin-top: 5%;
 }
 
-#grid .container-grid {
+.t-esmeralda #grid .container-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -415,15 +416,15 @@ h2 {
   width: 100%;
 }
 
-#grid .column {
+.t-esmeralda #grid .column {
   flex: 0 0 calc(33.33% - 2%);
 }
 
-#grid .column.full-width {
+.t-esmeralda #grid .column.full-width {
   flex-basis: 100%;
 }
 
-#grid img {
+.t-esmeralda #grid img {
   width: 100%;
   height: auto;
   display: block;
@@ -437,7 +438,7 @@ h2 {
    ITINERARIO
    ====================================== */
 
-.itinerario {
+.t-esmeralda .itinerario {
   width: 80%;
   margin: auto;
   display: flex;
@@ -447,7 +448,7 @@ h2 {
   margin-top: 5%;
 }
 
-.itinerario .evento {
+.t-esmeralda .itinerario .evento {
   display: grid;
   grid-template-columns: 45% 45%;
   column-gap: 10%;
@@ -458,14 +459,14 @@ h2 {
   backdrop-filter: blur(1vw);
 }
 
-.itinerario .evento .icono {
+.t-esmeralda .itinerario .evento .icono {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.itinerario .evento .icono .circulo {
+.t-esmeralda .itinerario .evento .icono .circulo {
   margin: auto;
   width: 16vw;
   height: 16vw;
@@ -476,26 +477,26 @@ h2 {
   align-items: center;
 }
 
-.itinerario .evento .icono .circulo img {
+.t-esmeralda .itinerario .evento .icono .circulo img {
   margin: auto;
   width: 60%;
   filter: var(--invertir-img-itinerario);
 }
 
-.itinerario .evento .item {
+.t-esmeralda .itinerario .evento .item {
   display: flex;
   flex-direction: column;
   text-align: center;
 }
 
-.itinerario .evento .item .nombre {
+.t-esmeralda .itinerario .evento .item .nombre {
   font-size: 5vw;
   color: var(--texto-color);
   font-family: var(--font-bellefair), "Bellefair", serif;
   margin: auto;
 }
 
-.itinerario .evento .item .hora {
+.t-esmeralda .itinerario .evento .item .hora {
   font-size: 4vw;
   color: var(--texto-color);
   font-weight: 900;
@@ -507,7 +508,7 @@ h2 {
    DRESS CODE
    ====================================== */
 
-.dress-code {
+.t-esmeralda .dress-code {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -517,26 +518,26 @@ h2 {
   margin-top: 2vw;
 }
 
-.dress-code h2 {
+.t-esmeralda .dress-code h2 {
   font-size: 7vw;
   margin-bottom: -1vw;
   margin-top: 0;
 }
 
-.dress-code-container {
+.t-esmeralda .dress-code-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.dress-code-container img {
+.t-esmeralda .dress-code-container img {
   width: 13vw;
   margin-bottom: -2vw;
   margin-top: 2vw;
 }
 
-.dress-code p {
+.t-esmeralda .dress-code p {
   font-family: var(--font-old-standard), "Old Standard TT", serif;
   font-size: 4vw;
   text-align: center;
@@ -547,7 +548,7 @@ h2 {
    GIFT / SOBRES / BUZON
    ====================================== */
 
-.gift-container {
+.t-esmeralda .gift-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -557,26 +558,26 @@ h2 {
   margin-top: 4vw;
 }
 
-.gift-container h2 {
+.t-esmeralda .gift-container h2 {
   font-size: 7vw;
   margin-bottom: 0;
   margin-top: 0;
 }
 
-.gift-object-container {
+.t-esmeralda .gift-object-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.gift-object-container img {
+.t-esmeralda .gift-object-container img {
   width: 14vw;
   margin-top: 2vw;
   margin-bottom: 0;
 }
 
-.gift-container p {
+.t-esmeralda .gift-container p {
   font-family: var(--font-old-standard), "Old Standard TT", serif;
   font-size: 4vw;
   width: 80%;
@@ -585,7 +586,7 @@ h2 {
   margin-top: 2vw;
 }
 
-.gift-liverpool-container {
+.t-esmeralda .gift-liverpool-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -595,25 +596,25 @@ h2 {
   margin-top: 4vw;
 }
 
-.gift-liverpool-container h2 {
+.t-esmeralda .gift-liverpool-container h2 {
   font-size: 7vw;
   margin-bottom: 0;
   margin-top: 0;
 }
 
-.gift-liverpool-object-container {
+.t-esmeralda .gift-liverpool-object-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.gift-liverpool-object-container img {
+.t-esmeralda .gift-liverpool-object-container img {
   width: 17%;
   margin-top: 2vw;
 }
 
-.gift-liverpool-container p {
+.t-esmeralda .gift-liverpool-container p {
   font-family: var(--font-old-standard), "Old Standard TT", serif;
   font-size: 4vw;
   width: 80%;
@@ -622,34 +623,34 @@ h2 {
   line-height: 1.4;
 }
 
-.liverpool-container {
+.t-esmeralda .liverpool-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.liverpool-container img {
+.t-esmeralda .liverpool-container img {
   margin: auto;
   margin-top: 2vw;
   margin-bottom: 2vw;
   width: 25vw;
 }
 
-.liverpool-container a {
+.t-esmeralda .liverpool-container a {
   text-decoration: none;
   font-weight: 800;
   color: black;
   z-index: 3;
 }
 
-.cut-line {
+.t-esmeralda .cut-line {
   width: 70%;
   height: 1px;
   background: rgba(255, 255, 255, 0.4);
   margin: 5vw auto 0;
 }
 
-.mensaje-buzon {
+.t-esmeralda .mensaje-buzon {
   margin-top: -5%;
   margin-bottom: 6%;
   border-radius: 2vw;
@@ -664,7 +665,7 @@ h2 {
   margin-top: 2vw;
 }
 
-.mensaje-buzon::placeholder {
+.t-esmeralda .mensaje-buzon::placeholder {
   color: rgba(255, 255, 255, 0.7);
 }
 
@@ -672,7 +673,7 @@ h2 {
    INFORMACION IMPORTANTE
    ====================================== */
 
-.informacion-importante {
+.t-esmeralda .informacion-importante {
   display: flex;
   width: 80%;
   margin: auto;
@@ -682,13 +683,13 @@ h2 {
   text-align: center;
 }
 
-.informacion-importante h2 {
+.t-esmeralda .informacion-importante h2 {
   margin-bottom: 0;
   line-height: 0.9;
   margin-bottom: 4%;
 }
 
-.informacion-importante p {
+.t-esmeralda .informacion-importante p {
   font-size: 4vw;
   font-family: var(--font-old-standard), "Old Standard TT", serif;
   line-height: 1.4;
@@ -700,14 +701,14 @@ h2 {
    CONFIRMACION DE ASISTENCIA
    ====================================== */
 
-.confirmacion-asistencia {
+.t-esmeralda .confirmacion-asistencia {
   text-align: center;
   width: 90%;
   margin: auto;
   margin-bottom: 2%;
 }
 
-.confirmacion-asistencia form {
+.t-esmeralda .confirmacion-asistencia form {
   margin: auto;
   margin-top: -4%;
   display: flex;
@@ -715,7 +716,7 @@ h2 {
   align-items: center;
 }
 
-.confirmacion-asistencia .familia-input {
+.t-esmeralda .confirmacion-asistencia .familia-input {
   border-radius: 2vw;
   width: 70%;
   border: 0.4vw solid var(--color-elementos);
@@ -726,7 +727,7 @@ h2 {
   font-size: 3vw;
 }
 
-.confirmacion-asistencia .button {
+.t-esmeralda .confirmacion-asistencia .button {
   font-size: 3vw;
   border: none;
   margin-top: 2%;
@@ -737,7 +738,7 @@ h2 {
    FOOTER
    ====================================== */
 
-.footer {
+.t-esmeralda .footer {
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -750,7 +751,7 @@ h2 {
   background: var(--color-elementos);
 }
 
-.footer span span {
+.t-esmeralda .footer span span {
   color: var(--texto-color);
 }
 
@@ -758,7 +759,7 @@ h2 {
    SOBRE (ENVELOPE)
    ====================================== */
 
-.sobre {
+.t-esmeralda .sobre {
   position: fixed;
   top: 0;
   left: 0;
@@ -768,7 +769,7 @@ h2 {
   overflow: hidden;
 }
 
-.sobre .first {
+.t-esmeralda .sobre .first {
   background-color: var(--color-sobre);
   width: 100%;
   height: 50%;
@@ -778,7 +779,7 @@ h2 {
   border-bottom: var(--line-sobre) solid 1px;
 }
 
-.sobre .second {
+.t-esmeralda .sobre .second {
   background-color: var(--color-sobre);
   width: 100%;
   height: 50%;
@@ -788,7 +789,7 @@ h2 {
   border-top: var(--line-sobre) solid 1px;
 }
 
-.sello {
+.t-esmeralda .sello {
   background: var(--color-sobre);
   border: none;
   color: #ffffff;
@@ -809,56 +810,56 @@ h2 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  animation: booms 2s infinite;
+  animation: booms-t-esmeralda 2s infinite;
   z-index: 2;
 }
 
-@keyframes booms {
+@keyframes booms-t-esmeralda {
   0% { transform: scale(1) translate(-50%, -50%); }
   50% { transform: scale(1.1) translate(-50%, -50%); }
   100% { transform: scale(1) translate(-50%, -50%); }
 }
 
-.up_1 {
+.t-esmeralda .up_1 {
   -webkit-animation-duration: 3s;
-  -webkit-animation-name: up;
+  -webkit-animation-name: up-t-esmeralda;
   -webkit-animation-fill-mode: forwards;
-  animation: up 3s forwards;
+  animation: up-t-esmeralda 3s forwards;
 }
 
-.down_1 {
+.t-esmeralda .down_1 {
   -webkit-animation-duration: 3s;
-  -webkit-animation-name: down;
+  -webkit-animation-name: down-t-esmeralda;
   -webkit-animation-fill-mode: forwards;
-  animation: down 3s forwards;
+  animation: down-t-esmeralda 3s forwards;
 }
 
-.button_hiden {
+.t-esmeralda .button_hiden {
   -webkit-animation-duration: 3s;
-  -webkit-animation-name: hiden;
+  -webkit-animation-name: hiden-t-esmeralda;
   -webkit-animation-fill-mode: forwards;
-  animation: hiden 3s forwards;
+  animation: hiden-t-esmeralda 3s forwards;
 }
 
-.sobre_hiden {
+.t-esmeralda .sobre_hiden {
   -webkit-animation-duration: 3s;
-  -webkit-animation-name: hiden;
+  -webkit-animation-name: hiden-t-esmeralda;
   -webkit-animation-fill-mode: forwards;
-  animation: hiden 3s forwards;
+  animation: hiden-t-esmeralda 3s forwards;
 }
 
-@keyframes hiden {
+@keyframes hiden-t-esmeralda {
   0% { opacity: 1; }
   99% { opacity: 0; }
   100% { display: none; pointer-events: none; }
 }
 
-@keyframes up {
+@keyframes up-t-esmeralda {
   0% { transform: translateY(0%); }
   100% { transform: translateY(-100%); }
 }
 
-@keyframes down {
+@keyframes down-t-esmeralda {
   0% { transform: translateY(0%); }
   100% { transform: translateY(100%); }
 }
@@ -867,7 +868,7 @@ h2 {
    MODAL
    ====================================== */
 
-.modal {
+.t-esmeralda .modal {
   display: none;
   position: fixed;
   top: 0;
@@ -879,11 +880,11 @@ h2 {
   z-index: 9999;
 }
 
-.modal.open {
+.t-esmeralda .modal.open {
   display: block;
 }
 
-.modal-img {
+.t-esmeralda .modal-img {
   max-width: 80%;
   max-height: 80%;
   position: absolute;
@@ -892,7 +893,7 @@ h2 {
   transform: translate(-50%, -50%);
 }
 
-.close-btn {
+.t-esmeralda .close-btn {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -901,7 +902,7 @@ h2 {
   cursor: pointer;
 }
 
-.prev-btn,
+.t-esmeralda .prev-btn,.t-esmeralda 
 .next-btn {
   position: absolute;
   top: 50%;
@@ -912,60 +913,60 @@ h2 {
   padding: 1rem;
 }
 
-.prev-btn { left: 100px; }
-.next-btn { right: 100px; }
+.t-esmeralda .prev-btn { left: 100px; }
+.t-esmeralda .next-btn { right: 100px; }
 
 /* ======================================
    DYNAMIC DISPLAY ANIMATIONS
    ====================================== */
 
-.show-p-y {
+.t-esmeralda .show-p-y {
   opacity: 0;
   transform: translateY(150px);
   transition: all 2s ease;
 }
 
-.active-p-y {
+.t-esmeralda .active-p-y {
   transform: translateY(0px);
   opacity: 1;
 }
 
-.show-n-x {
+.t-esmeralda .show-n-x {
   opacity: 0;
   transform: translateX(150px);
   transition: all 2s ease;
 }
 
-.active-n-x {
+.t-esmeralda .active-n-x {
   transform: translateX(0px);
   opacity: 1;
 }
 
-.show-p-x {
+.t-esmeralda .show-p-x {
   opacity: 0;
   transform: translateX(-150px);
   transition: all 2s ease;
 }
 
-.active-p-x {
+.t-esmeralda .active-p-x {
   transform: translateX(0px);
   opacity: 1;
 }
 
 /* Hero — animaciones sincronizadas con el sobre (3s) */
-.show-hero-up {
+.t-esmeralda .show-hero-up {
   opacity: 0;
   transform: translateY(150px);
   transition: opacity 3s ease, transform 3s ease;
 }
 
-.show-hero-left {
+.t-esmeralda .show-hero-left {
   opacity: 0;
   transform: translateX(-150px);
   transition: opacity 3s ease, transform 3s ease;
 }
 
-.active-hero {
+.t-esmeralda .active-hero {
   transform: translate(0px, 0px);
   opacity: 1;
 }
@@ -974,7 +975,7 @@ h2 {
    DECORATIONS
    ====================================== */
 
-.decorations {
+.t-esmeralda .decorations {
   position: absolute;
   width: 100%;
   height: 0;
@@ -982,32 +983,32 @@ h2 {
   z-index: 2;
 }
 
-.decorations .item1 { position: absolute; width: 17vw; right: 4vw; top: 2vw; animation: rotar 2.5s linear infinite; }
-.decorations .item2 { position: absolute; width: 14vw; left: -3vw; top: 96vw; animation: rotar 2.5s linear infinite; }
-.decorations .item3 { position: absolute; width: 14vw; right: 3vw; top: 143vw; animation: rotar 2.5s linear infinite; }
-.decorations .item4 { position: absolute; width: 14vw; left: 3vw; top: 350vw; animation: rotar 2.5s linear infinite; }
-.decorations .item5 { position: absolute; width: 13vw; right: 4vw; top: 1110vw; animation: rotar 2.5s linear infinite; }
+.t-esmeralda .decorations .item1 { position: absolute; width: 17vw; right: 4vw; top: 2vw; animation: rotar-t-esmeralda 2.5s linear infinite; }
+.t-esmeralda .decorations .item2 { position: absolute; width: 14vw; left: -3vw; top: 96vw; animation: rotar-t-esmeralda 2.5s linear infinite; }
+.t-esmeralda .decorations .item3 { position: absolute; width: 14vw; right: 3vw; top: 143vw; animation: rotar-t-esmeralda 2.5s linear infinite; }
+.t-esmeralda .decorations .item4 { position: absolute; width: 14vw; left: 3vw; top: 350vw; animation: rotar-t-esmeralda 2.5s linear infinite; }
+.t-esmeralda .decorations .item5 { position: absolute; width: 13vw; right: 4vw; top: 1110vw; animation: rotar-t-esmeralda 2.5s linear infinite; }
 
-.decorations .item11 { position: absolute; width: 14vw; left: 4vw; top: 4vw; animation: aumentar 2.5s linear infinite; }
-.decorations .item12 { position: absolute; width: 12vw; right: -3vw; top: 97vw; animation: aumentar 2.5s linear infinite; }
-.decorations .item13 { position: absolute; width: 14vw; left: 4vw; top: 144vw; animation: aumentar 2.5s linear infinite; }
-.decorations .item14 { position: absolute; width: 12vw; right: 4vw; top: 525vw; animation: aumentar 2.5s linear infinite; }
-.decorations .item15 { position: absolute; width: 12vw; left: 5vw; top: 900vw; animation: aumentar 2.5s linear infinite; }
+.t-esmeralda .decorations .item11 { position: absolute; width: 14vw; left: 4vw; top: 4vw; animation: aumentar-t-esmeralda 2.5s linear infinite; }
+.t-esmeralda .decorations .item12 { position: absolute; width: 12vw; right: -3vw; top: 97vw; animation: aumentar-t-esmeralda 2.5s linear infinite; }
+.t-esmeralda .decorations .item13 { position: absolute; width: 14vw; left: 4vw; top: 144vw; animation: aumentar-t-esmeralda 2.5s linear infinite; }
+.t-esmeralda .decorations .item14 { position: absolute; width: 12vw; right: 4vw; top: 525vw; animation: aumentar-t-esmeralda 2.5s linear infinite; }
+.t-esmeralda .decorations .item15 { position: absolute; width: 12vw; left: 5vw; top: 900vw; animation: aumentar-t-esmeralda 2.5s linear infinite; }
 
-.decorations .item21 { position: absolute; width: 10vw; left: 46vw; top: -6vw; }
-.decorations .item22 { position: absolute; width: 12vw; left: 5vw; top: 40vw; }
-.decorations .item23 { position: absolute; width: 12vw; right: 4vw; top: 65vw; }
-.decorations .item24 { position: absolute; width: 10vw; right: 6vw; top: 240vw; }
-.decorations .item25 { position: absolute; width: 11vw; left: 5vw; top: 578vw; }
-.decorations .item26 { position: absolute; width: 12vw; right: 5vw; top: 760vw; }
+.t-esmeralda .decorations .item21 { position: absolute; width: 10vw; left: 46vw; top: -6vw; }
+.t-esmeralda .decorations .item22 { position: absolute; width: 12vw; left: 5vw; top: 40vw; }
+.t-esmeralda .decorations .item23 { position: absolute; width: 12vw; right: 4vw; top: 65vw; }
+.t-esmeralda .decorations .item24 { position: absolute; width: 10vw; right: 6vw; top: 240vw; }
+.t-esmeralda .decorations .item25 { position: absolute; width: 11vw; left: 5vw; top: 578vw; }
+.t-esmeralda .decorations .item26 { position: absolute; width: 12vw; right: 5vw; top: 760vw; }
 
-@keyframes rotar {
+@keyframes rotar-t-esmeralda {
   0% { transform: rotate(2deg); }
   50% { transform: rotate(-2deg); }
   100% { transform: rotate(2deg); }
 }
 
-@keyframes aumentar {
+@keyframes aumentar-t-esmeralda {
   0% { transform: scale(1) rotate(3deg); }
   50% { transform: scale(0.9) rotate(-3deg); }
   100% { transform: scale(1) rotate(3deg); }
@@ -1018,54 +1019,54 @@ h2 {
    ====================================== */
 
 @media (min-width: 1100px) {
-  .background { width: 600px; margin-top: 30px; margin-bottom: 30px; }
-  h1 { font-size: 60px; }
-  h2 { font-size: 60px; }
-  h3 { font-size: 40px; margin-top: 30px; }
-  h4 { font-size: 26px; }
-  h5 { font-size: 26px; margin-top: 8px; }
-  .button { font-size: 20px; padding: 2px 30px; margin-top: -27px; }
-  .decorations { display: none; }
-  .person-name { font-size: 60px; }
-  .photo .age { margin-top: -70px; }
-  .name { margin-top: 20px; }
-  .name img { height: 105px; }
-  .time { padding-bottom: 85px; }
-  .time img { height: 294px; }
-  #countdown { margin-top: -180px; }
-  .countdown-container .number { font-size: 30px; }
-  .countdown-container .unit { font-size: 20px; }
-  .countdown-container .segment { margin: 20px; }
-  .parents-container { margin-top: 30px; }
-  .parents-container h2 { font-size: 35px; }
-  .parents p { font-size: 26px; margin-top: -15px; }
-  .vector-long { margin-top: -30px; width: 250px; }
-  .lugar .nombre { font-size: 26px; }
-  .lugar .direccion { font-size: 20px; }
-  .lugar .hora { font-size: 26px; }
-  .itinerario { width: 70%; }
-  .itinerario .evento { column-gap: 50px; margin-top: 8px; border-radius: 15px; padding: 8px; }
-  .itinerario .evento .icono .circulo { width: 160px; height: 160px; }
-  .itinerario .evento .item .nombre { font-size: 35px; }
-  .itinerario .evento .item .hora { font-size: 32px; }
-  .dress-code { width: 80%; margin-top: 10px; }
-  .dress-code h2 { font-size: 35px; margin-bottom: -4px; }
-  .dress-code-container img { width: 80px; margin-bottom: -15px; margin-top: 10px; }
-  .dress-code p { font-size: 22px; }
-  .gift-container { width: 80%; margin-top: -10px; }
-  .gift-container h2 { font-size: 35px; margin-bottom: -4px; }
-  .gift-object-container img { width: 80px; margin-bottom: -15px; }
-  .gift-container p { font-size: 22px; width: 80%; }
-  .gift-liverpool-container { margin-top: 10px; }
-  .gift-liverpool-container h2 { font-size: 35px; margin-bottom: 8px; }
-  .gift-liverpool-container p { font-size: 25px; width: 80%; }
-  .liverpool-container img { margin-bottom: 40px; width: 190px; }
-  .mensaje-buzon { font-size: 20px; border-radius: 8px; padding: 8px; border: 2px solid var(--button-background-color); }
-  .informacion-importante p { font-size: 20px; }
-  .informacion-importante h2 { font-size: 45px; }
-  .confirmacion-asistencia .familia-input { font-size: 20px; border-radius: 8px; padding: 5px; border: 2px solid var(--color-elementos); }
-  .confirmacion-asistencia .button { font-size: 20px; }
-  .sello { font-size: 16px; }
-  .prev-btn { left: 100px; }
-  .next-btn { right: 100px; }
+  .t-esmeralda .background { width: 600px; margin-top: 30px; margin-bottom: 30px; }
+  .t-esmeralda h1 { font-size: 60px; }
+  .t-esmeralda h2 { font-size: 60px; }
+  .t-esmeralda h3 { font-size: 40px; margin-top: 30px; }
+  .t-esmeralda h4 { font-size: 26px; }
+  .t-esmeralda h5 { font-size: 26px; margin-top: 8px; }
+  .t-esmeralda .button { font-size: 20px; padding: 2px 30px; margin-top: -27px; }
+  .t-esmeralda .decorations { display: none; }
+  .t-esmeralda .person-name { font-size: 60px; }
+  .t-esmeralda .photo .age { margin-top: -70px; }
+  .t-esmeralda .name { margin-top: 20px; }
+  .t-esmeralda .name img { height: 105px; }
+  .t-esmeralda .time { padding-bottom: 85px; }
+  .t-esmeralda .time img { height: 294px; }
+  .t-esmeralda #countdown { margin-top: -180px; }
+  .t-esmeralda .countdown-container .number { font-size: 30px; }
+  .t-esmeralda .countdown-container .unit { font-size: 20px; }
+  .t-esmeralda .countdown-container .segment { margin: 20px; }
+  .t-esmeralda .parents-container { margin-top: 30px; }
+  .t-esmeralda .parents-container h2 { font-size: 35px; }
+  .t-esmeralda .parents p { font-size: 26px; margin-top: -15px; }
+  .t-esmeralda .vector-long { margin-top: -30px; width: 250px; }
+  .t-esmeralda .lugar .nombre { font-size: 26px; }
+  .t-esmeralda .lugar .direccion { font-size: 20px; }
+  .t-esmeralda .lugar .hora { font-size: 26px; }
+  .t-esmeralda .itinerario { width: 70%; }
+  .t-esmeralda .itinerario .evento { column-gap: 50px; margin-top: 8px; border-radius: 15px; padding: 8px; }
+  .t-esmeralda .itinerario .evento .icono .circulo { width: 160px; height: 160px; }
+  .t-esmeralda .itinerario .evento .item .nombre { font-size: 35px; }
+  .t-esmeralda .itinerario .evento .item .hora { font-size: 32px; }
+  .t-esmeralda .dress-code { width: 80%; margin-top: 10px; }
+  .t-esmeralda .dress-code h2 { font-size: 35px; margin-bottom: -4px; }
+  .t-esmeralda .dress-code-container img { width: 80px; margin-bottom: -15px; margin-top: 10px; }
+  .t-esmeralda .dress-code p { font-size: 22px; }
+  .t-esmeralda .gift-container { width: 80%; margin-top: -10px; }
+  .t-esmeralda .gift-container h2 { font-size: 35px; margin-bottom: -4px; }
+  .t-esmeralda .gift-object-container img { width: 80px; margin-bottom: -15px; }
+  .t-esmeralda .gift-container p { font-size: 22px; width: 80%; }
+  .t-esmeralda .gift-liverpool-container { margin-top: 10px; }
+  .t-esmeralda .gift-liverpool-container h2 { font-size: 35px; margin-bottom: 8px; }
+  .t-esmeralda .gift-liverpool-container p { font-size: 25px; width: 80%; }
+  .t-esmeralda .liverpool-container img { margin-bottom: 40px; width: 190px; }
+  .t-esmeralda .mensaje-buzon { font-size: 20px; border-radius: 8px; padding: 8px; border: 2px solid var(--button-background-color); }
+  .t-esmeralda .informacion-importante p { font-size: 20px; }
+  .t-esmeralda .informacion-importante h2 { font-size: 45px; }
+  .t-esmeralda .confirmacion-asistencia .familia-input { font-size: 20px; border-radius: 8px; padding: 5px; border: 2px solid var(--color-elementos); }
+  .t-esmeralda .confirmacion-asistencia .button { font-size: 20px; }
+  .t-esmeralda .sello { font-size: 16px; }
+  .t-esmeralda .prev-btn { left: 100px; }
+  .t-esmeralda .next-btn { right: 100px; }
 }

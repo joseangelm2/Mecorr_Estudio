@@ -1,26 +1,27 @@
+/* scoped:t-pink */
 @import "tailwindcss";
 
 /* ==============================
    PINK — Gold Theme #c48602
    ============================== */
 
-:root {
+:root:has(.t-pink) {
   --color-principal: #c48602;
   --bg-color: #fffde7;
 }
 
-* {
+.t-pink * {
   box-sizing: border-box;
 }
 
-html, body {
+html:has(.t-pink), body:has(.t-pink) {
   margin: 0;
   padding: 0;
   background-color: var(--bg-color);
   overflow-x: hidden;
 }
 
-.contenido {
+.t-pink .contenido {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,23 +33,23 @@ html, body {
   z-index: 1;
 }
 
-.top,
+.t-pink .top,.t-pink 
 .bottom {
   position: fixed;
   pointer-events: none;
   z-index: 0;
 }
 
-.top { top: 0; right: 0; }
-.bottom { bottom: 0; left: 0; }
+.t-pink .top { top: 0; right: 0; }
+.t-pink .bottom { bottom: 0; left: 0; }
 
-.top-img,
+.t-pink .top-img,.t-pink 
 .bottom-img {
   width: 30vw;
   opacity: 0.6;
 }
 
-.nombre-principal {
+.t-pink .nombre-principal {
   font-family: var(--font-beau), "Beau Rivage", cursive;
   font-size: 13vw;
   color: #c48602;
@@ -56,7 +57,7 @@ html, body {
   line-height: 1.1;
 }
 
-.evento {
+.t-pink .evento {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 6vw;
   color: #333;
@@ -64,12 +65,12 @@ html, body {
   margin: 0;
 }
 
-.encabezado {
+.t-pink .encabezado {
   text-align: center;
   width: 100%;
 }
 
-.frase {
+.t-pink .frase {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 4vw;
   text-align: center;
@@ -79,25 +80,25 @@ html, body {
   line-height: 1.6;
 }
 
-.foto-con-degradado {
+.t-pink .foto-con-degradado {
   width: 90%;
   position: relative;
   margin: 3vw auto;
 }
 
-.foto-full {
+.t-pink .foto-full {
   width: 100%;
   border-radius: 2vw;
   display: block;
 }
 
-.familia {
+.t-pink .familia {
   text-align: center;
   margin: 4vw 0;
   width: 100%;
 }
 
-.familia h3 {
+.t-pink .familia h3 {
   font-family: var(--font-beau), "Beau Rivage", cursive;
   font-size: 9vw;
   color: #c48602;
@@ -105,14 +106,14 @@ html, body {
   font-style: italic;
 }
 
-.familia p.nombre {
+.t-pink .familia p.nombre {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 4vw;
   color: #444;
   margin: 1vw 0;
 }
 
-.fecha {
+.t-pink .fecha {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -120,8 +121,8 @@ html, body {
   margin: 5vw 0;
 }
 
-.fecha .dia,
-.fecha .mes,
+.t-pink .fecha .dia,.t-pink 
+.fecha .mes,.t-pink 
 .fecha .anio {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 7vw;
@@ -129,13 +130,13 @@ html, body {
   color: #c48602;
 }
 
-.fecha .barra {
+.t-pink .fecha .barra {
   width: 0.4vw;
   height: 8vw;
   background: #c48602;
 }
 
-.cuenta {
+.t-pink .cuenta {
   display: flex;
   gap: 5vw;
   justify-content: center;
@@ -143,26 +144,26 @@ html, body {
   width: 100%;
 }
 
-.segmento {
+.t-pink .segmento {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.numero {
+.t-pink .numero {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 8vw;
   font-weight: 700;
   color: #c48602;
 }
 
-.unidad {
+.t-pink .unidad {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 3vw;
   color: #666;
 }
 
-.ubicacion {
+.t-pink .ubicacion {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -176,7 +177,7 @@ html, body {
   color: inherit;
 }
 
-.ubicacion .lugar {
+.t-pink .ubicacion .lugar {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 4.5vw;
   font-weight: 600;
@@ -184,21 +185,21 @@ html, body {
   margin: 1vw 0;
 }
 
-.ubicacion .lugar-titulo {
+.t-pink .ubicacion .lugar-titulo {
   font-family: var(--font-beau), "Beau Rivage", cursive;
   font-size: 10vw;
   color: #c48602;
   margin: 0 0 1vw;
 }
 
-.ubicacion .direccion {
+.t-pink .ubicacion .direccion {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 3.5vw;
   color: #666;
   margin: 0.5vw 0;
 }
 
-.ubicacion .hora {
+.t-pink .ubicacion .hora {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 4vw;
   font-weight: 700;
@@ -206,7 +207,7 @@ html, body {
   margin: 1vw 0;
 }
 
-.boton {
+.t-pink .boton {
   background: #c48602;
   color: white;
   padding: 2vw 6vw;
@@ -221,9 +222,9 @@ html, body {
   transition: opacity 0.2s;
 }
 
-.boton:hover { opacity: 0.85; }
+.t-pink .boton:hover { opacity: 0.85; }
 
-.extra {
+.t-pink .extra {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -234,14 +235,14 @@ html, body {
   color: inherit;
 }
 
-.extra h3 {
+.t-pink .extra h3 {
   font-family: var(--font-beau), "Beau Rivage", cursive;
   font-size: 9vw;
   color: #c48602;
   margin: 0 0 2vw;
 }
 
-.extra .texto {
+.t-pink .extra .texto {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 3.5vw;
   color: #555;
@@ -249,34 +250,34 @@ html, body {
   line-height: 1.6;
 }
 
-#grid { width: 90%; margin: 3vw auto; }
+.t-pink #grid { width: 90%; margin: 3vw auto; }
 
-.container-grid {
+.t-pink .container-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 2vw;
   justify-content: space-between;
 }
 
-.dos-fotos {
+.t-pink .dos-fotos {
   display: flex;
   gap: 2vw;
   width: 100%;
 }
 
-.dos-fotos img { flex: 1; border-radius: 2vw; }
+.t-pink .dos-fotos img { flex: 1; border-radius: 2vw; }
 
-.column { flex: 0 0 calc(33.33% - 2vw); }
-.column.full-width { flex-basis: 100%; }
+.t-pink .column { flex: 0 0 calc(33.33% - 2vw); }
+.t-pink .column.full-width { flex-basis: 100%; }
 
-.object-grid {
+.t-pink .object-grid {
   width: 100%;
   border-radius: 2vw;
   display: block;
   margin-bottom: 2vw;
 }
 
-.itinerario {
+.t-pink .itinerario {
   width: 90%;
   margin: 5vw auto;
   display: flex;
@@ -285,14 +286,14 @@ html, body {
   text-align: center;
 }
 
-.itinerario h3 {
+.t-pink .itinerario h3 {
   font-family: var(--font-beau), "Beau Rivage", cursive;
   font-size: 9vw;
   color: #c48602;
   margin: 0 0 4vw;
 }
 
-.itinerario .evento {
+.t-pink .itinerario .evento {
   display: grid;
   grid-template-columns: 45% 45%;
   column-gap: 10%;
@@ -303,14 +304,14 @@ html, body {
   width: 100%;
 }
 
-.itinerario .evento .icono {
+.t-pink .itinerario .evento .icono {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.itinerario .evento .icono .circulo {
+.t-pink .itinerario .evento .icono .circulo {
   margin: auto;
   width: 16vw;
   height: 16vw;
@@ -321,20 +322,20 @@ html, body {
   align-items: center;
 }
 
-.itinerario .evento .icono .circulo img {
+.t-pink .itinerario .evento .icono .circulo img {
   margin: auto;
   width: 60%;
   filter: invert(100%);
 }
 
-.itinerario .evento .item {
+.t-pink .itinerario .evento .item {
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
 }
 
-.itinerario .evento .item .nombre {
+.t-pink .itinerario .evento .item .nombre {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 5vw;
   font-weight: 600;
@@ -342,7 +343,7 @@ html, body {
   margin: 0;
 }
 
-.itinerario .evento .item .hora {
+.t-pink .itinerario .evento .item .hora {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 4vw;
   font-weight: 700;
@@ -350,7 +351,7 @@ html, body {
   margin: 0;
 }
 
-.mensaje {
+.t-pink .mensaje {
   width: 70%;
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 3.5vw;
@@ -362,26 +363,26 @@ html, body {
   background: white;
 }
 
-.confirmacion-asistencia {
+.t-pink .confirmacion-asistencia {
   width: 90%;
   margin: 5vw auto;
   text-align: center;
 }
 
-.confirmacion-asistencia h3 {
+.t-pink .confirmacion-asistencia h3 {
   font-family: var(--font-beau), "Beau Rivage", cursive;
   font-size: 9vw;
   color: #c48602;
 }
 
-.confirmacion-asistencia form {
+.t-pink .confirmacion-asistencia form {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.5vw;
 }
 
-.familia-input {
+.t-pink .familia-input {
   border-radius: 2vw;
   width: 70%;
   border: 0.4vw solid #c48602;
@@ -391,13 +392,13 @@ html, body {
   background: white;
 }
 
-.texto {
+.t-pink .texto {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 3.5vw;
   color: #555;
 }
 
-.despedida {
+.t-pink .despedida {
   font-family: var(--font-beau), "Beau Rivage", cursive;
   font-size: 10vw;
   color: #c48602;
@@ -405,7 +406,7 @@ html, body {
   margin: 5vw 0;
 }
 
-.importante {
+.t-pink .importante {
   font-family: var(--font-albert), "Albert Sans", sans-serif;
   font-size: 3.5vw;
   color: #555;
@@ -414,7 +415,7 @@ html, body {
 }
 
 /* SOBRE */
-.sobre {
+.t-pink .sobre {
   position: fixed;
   top: 0;
   left: 0;
@@ -424,7 +425,7 @@ html, body {
   overflow: hidden;
 }
 
-.petalo {
+.t-pink .petalo {
   position: absolute;
   width: 50%;
   height: 100%;
@@ -432,20 +433,20 @@ html, body {
   border: 0.2vw solid rgba(255, 255, 255, 0.3);
 }
 
-.petalo.left {
+.t-pink .petalo.left {
   left: 0;
   transition: transform 1.5s ease;
 }
 
-.petalo.right {
+.t-pink .petalo.right {
   right: 0;
   transition: transform 1.5s ease;
 }
 
-.petalo.left.open { transform: translateX(-100%); }
-.petalo.right.open { transform: translateX(100%); }
+.t-pink .petalo.left.open { transform: translateX(-100%); }
+.t-pink .petalo.right.open { transform: translateX(100%); }
 
-.sello {
+.t-pink .sello {
   background: #c48602;
   border: none;
   color: white;
@@ -462,13 +463,13 @@ html, body {
   transform: translate(-50%, -50%);
   z-index: 2;
   transition: opacity 1.5s;
-  animation: booms 2s infinite;
+  animation: booms-t-pink 2s infinite;
   line-height: 1.3;
 }
 
-.sello.hidden { opacity: 0; pointer-events: none; }
+.t-pink .sello.hidden { opacity: 0; pointer-events: none; }
 
-.banda-sobre {
+.t-pink .banda-sobre {
   position: absolute;
   top: 50%;
   left: 0;
@@ -479,67 +480,67 @@ html, body {
   z-index: 1;
 }
 
-@keyframes booms {
+@keyframes booms-t-pink {
   0% { transform: scale(1) translate(-50%, -50%); }
   50% { transform: scale(1.05) translate(-50%, -50%); }
   100% { transform: scale(1) translate(-50%, -50%); }
 }
 
 /* SCROLL ANIMATIONS */
-.show-p-y {
+.t-pink .show-p-y {
   opacity: 0;
   transform: translateY(80px);
   transition: all 1.5s ease;
 }
 
-.active-p-y {
+.t-pink .active-p-y {
   transform: translateY(0px);
   opacity: 1;
 }
 
-.show-n-x {
+.t-pink .show-n-x {
   opacity: 0;
   transform: translateX(80px);
   transition: all 1.5s ease;
 }
 
-.active-n-x {
+.t-pink .active-n-x {
   transform: translateX(0px);
   opacity: 1;
 }
 
-.show-p-x {
+.t-pink .show-p-x {
   opacity: 0;
   transform: translateX(-80px);
   transition: all 1.5s ease;
 }
 
-.active-p-x {
+.t-pink .active-p-x {
   transform: translateX(0px);
   opacity: 1;
 }
 
-.show {
+.t-pink .show {
   opacity: 0;
   transition: all 1.5s ease;
 }
 
-.active { opacity: 1; }
+.t-pink .active { opacity: 1; }
 
 @media (min-width: 600px) {
-  .nombre-principal { font-size: 78px; }
-  .evento { font-size: 36px; }
-  .frase { font-size: 18px; }
-  .familia h3 { font-size: 54px; }
-  .familia p.nombre { font-size: 18px; }
-  .fecha .dia, .fecha .mes, .fecha .anio { font-size: 42px; }
-  .numero { font-size: 48px; }
-  .unidad { font-size: 16px; }
-  .ubicacion .lugar { font-size: 22px; }
-  .ubicacion .hora { font-size: 20px; }
-  .boton { font-size: 16px; padding: 8px 24px; }
-  .extra h3 { font-size: 54px; }
-  .extra .texto { font-size: 16px; }
-  .sello { font-size: 18px; width: 150px; height: 150px; }
-  .despedida { font-size: 60px; }
+  .t-pink .nombre-principal { font-size: 78px; }
+  .t-pink .evento { font-size: 36px; }
+  .t-pink .frase { font-size: 18px; }
+  .t-pink .familia h3 { font-size: 54px; }
+  .t-pink .familia p.nombre { font-size: 18px; }
+  .t-pink .fecha .dia,.t-pink  .fecha .mes,.t-pink  .fecha .anio { font-size: 42px; }
+  .t-pink .numero { font-size: 48px; }
+  .t-pink .unidad { font-size: 16px; }
+  .t-pink .ubicacion .lugar { font-size: 22px; }
+  .t-pink .ubicacion .hora { font-size: 20px; }
+  .t-pink .boton { font-size: 16px; padding: 8px 24px; }
+  .t-pink .extra h3 { font-size: 54px; }
+  .t-pink .extra .texto { font-size: 16px; }
+  .t-pink .sello { font-size: 18px; width: 150px; height: 150px; }
+  .t-pink .despedida { font-size: 60px; }
 }

@@ -12,7 +12,7 @@ export const metadata: Metadata = { title: "Mis XV — Esmeralda", description: 
 export default function EsmeraldaLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className={`${carattere.variable} ${bellefair.variable} ${cormorant.variable} ${oldStandard.variable}`}>
-      {children}
+      <div className="t-esmeralda">{children}</div>
     </div>
   );
 }

@@ -14,9 +14,9 @@ function CutLine() {
 
 const STORE_ICONS: Record<string, string> = {
   liverpool: "/images/esmeralda/liverpool.png",
-  amazon:    "/images/elegance/amazon.svg",
-  palacio:   "/images/elegance/palacio.svg",
-  sears:     "/images/elegance/sears.svg",
+  amazon:    "/images/esmeralda/amazon.svg",
+  palacio:   "/images/esmeralda/palacio.svg",
+  sears:     "/images/esmeralda/sears.svg",
   generic:   "/images/esmeralda/mesa_regalos.png",
 };
 

@@ -1,11 +1,14 @@
 interface Props {
+  /** Carpeta base de las imágenes (cada demo usa la suya). Por defecto, la raíz /images. */
+  assetBase?: string;
   quinceaneraName?: string;
   finalPhotoUrl?: string;
 }
 
 export default function FinalSection({
+  assetBase = "/images",
   quinceaneraName = "Aime Ferreira",
-  finalPhotoUrl = "/images/IMG_8206.JPG",
+  finalPhotoUrl = `${assetBase}/IMG_8206.JPG`,
 }: Props) {
   return (
     <section

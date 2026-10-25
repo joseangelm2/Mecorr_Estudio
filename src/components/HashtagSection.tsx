@@ -1,12 +1,14 @@
 import AlbumQRCode from '@/components/AlbumQRCode'
 
 interface Props {
+  /** Carpeta base de las imágenes (cada demo usa la suya). Por defecto, la raíz /images. */
+  assetBase?: string;
   hashtag?: string;
   mode?: 'instagram' | 'album';
   slug?: string;
 }
 
-export default function HashtagSection({ hashtag, mode = 'instagram', slug }: Props) {
+export default function HashtagSection({ assetBase = "/images", hashtag, mode = 'instagram', slug }: Props) {
   return (
     <section
       id="hashtag"
@@ -18,7 +20,7 @@ export default function HashtagSection({ hashtag, mode = 'instagram', slug }: Pr
         style={{ maxWidth: "100%", padding: "0 15px" }}
       >
         <div className="mb-10 text-center wow fadeInUp">
-          <img src="/images/hashtag.png" width="60" alt="Hashtag" />
+          <img src={`${assetBase}/hashtag.png`} width="60" alt="Hashtag" />
         </div>
         {mode === 'album' && slug ? (
           <>

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function SobreLayout({ children }: { children: React.ReactNode }) {
   return (
     <div id="body" className="bg-invitacion">
-      {children}
+      <div className="t-sobre">{children}</div>
     </div>
   );
 }

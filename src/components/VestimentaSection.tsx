@@ -7,11 +7,14 @@ interface DressCode {
 }
 
 interface Props {
+  /** Carpeta base de las imágenes (cada demo usa la suya). Por defecto, la raíz /images. */
+  assetBase?: string;
   dressCode?: DressCode;
   project?: Project;
 }
 
 export default function VestimentaSection({
+  assetBase = "/images",
   dressCode = {
     colors: "Formal",
     notes: "Los colores amarillo y dorado están destinados solo para la Quinceañera",
@@ -31,13 +34,13 @@ export default function VestimentaSection({
         <div className="row justify-content-center">
           <div className="col-md-10">
             <div className="mb-10 text-center wow fadeInUp">
-              <img src="/images/flores-01.png" width="160" alt="" />
+              <img src={`${assetBase}/flores-01.png`} width="160" alt="" />
             </div>
             <h1 className="titulo mb-10 color-titulos text-center wow fadeInUp">
               Código de Vestimenta
             </h1>
             <div className="mb-10 text-center wow fadeInUp">
-              <img src="/images/formal.png" width="120" alt="Formal" />
+              <img src={`${assetBase}/formal.png`} width="120" alt="Formal" />
             </div>
             <p className="mb-10 color-textos text-center wow fadeInUp">
               {dressCode.colors}

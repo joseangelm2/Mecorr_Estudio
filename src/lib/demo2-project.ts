@@ -2,7 +2,7 @@ import type { Project } from '@/types/invitation'
 import { DEMO_PROJECT } from '@/lib/demo-project'
 
 const IMG = '/images/emspecial'
-const EJEMPLO = '/images/esmeralda'
+const EJEMPLO = '/images/emspecial/base'
 
 // Demo2 de Esmeralda: réplica del diseño de una invitación Esmeralda Especial real,
 // con datos y fotos ficticios. Sin `titulo_fuente`, así que los títulos usan Carattere.
@@ -10,6 +10,7 @@ export const DEMO2_PROJECT: Project = {
   ...DEMO_PROJECT,
   id: 'demo2',
   slug: 'demo2',
+  music_url: `${EJEMPLO}/musica.mp3`,
   template: 'esmeralda-especial',
   status: 'published',
   quinceanera_name: 'Sophia Rivas',

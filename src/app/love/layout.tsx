@@ -34,7 +34,7 @@ export default function LoveLayout({ children }: { children: ReactNode }) {
     <div
       className={`${cormorant.variable} ${dancing.variable} ${oldStandard.variable} ${bellefair.variable}`}
     >
-      {children}
+      <div className="t-love">{children}</div>
     </div>
   );
 }

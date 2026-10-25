@@ -8,5 +8,5 @@ const beau = Beau_Rivage({ variable: "--font-beau", subsets: ["latin"], weight: 
 export const metadata: Metadata = { title: "Mis XV — Pink", description: "Te Invito a Mi Día Más Especial" };
 
 export default function PinkLayout({ children }: { children: React.ReactNode }) {
-  return <div className={`${albert.variable} ${beau.variable}`}>{children}</div>;
+  return <div className={`${albert.variable} ${beau.variable}`}><div className="t-pink">{children}</div></div>;
 }

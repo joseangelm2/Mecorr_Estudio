@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function EspecialLayout({ children }: { children: React.ReactNode }) {
   return (
     <div id="body" className={`bg-invitacion ${raleway.variable}`}>
-      {children}
+      <div className="t-especial">{children}</div>
     </div>
   );
 }

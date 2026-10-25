@@ -1,19 +1,20 @@
+/* scoped:t-love */
 @import "tailwindcss";
 
 /* ======================================
    LOVE INVITATION — Red Theme
    ====================================== */
 
-html {
+html:has(.t-love) {
   overflow: hidden;
   position: relative;
 }
 
-html.con-scroll {
+html.con-scroll:has(.t-love) {
   overflow-y: scroll;
 }
 
-@keyframes moveBackground2 {
+@keyframes moveBackground2-t-love {
   0%   { background-position: 0% 0%; }
   25%  { background-position: 100% 0%; }
   50%  { background-position: 100% 100%; }
@@ -21,17 +22,17 @@ html.con-scroll {
   100% { background-position: 0% 0%; }
 }
 
-body {
+body:has(.t-love) {
   margin: 0;
   background: radial-gradient(ellipse at 20% 30%, #e82020 0%, #c21807 35%, #8b0000 65%, #6b0000 100%);
   background-size: 300% 300%;
-  animation: moveBackground2 50s ease infinite;
+  animation: moveBackground2-t-love 50s ease infinite;
   color: aliceblue;
   font-family: Georgia, "Times New Roman", serif;
   overflow-x: hidden;
 }
 
-* {
+.t-love * {
   box-sizing: border-box;
 }
 
@@ -39,7 +40,7 @@ body {
    PARALLAX SECTIONS
    ====================================== */
 
-.parallax-container {
+.t-love .parallax-container {
   width: 100%;
   height: 80vh;
   background-attachment: fixed;
@@ -51,24 +52,24 @@ body {
   position: relative;
 }
 
-.parallax-1 {
+.t-love .parallax-1 {
   min-height: 100vh;
   clip-path: polygon(100% 100%, 51% 91%, 0% 100%, 0% 0%, 100% 0%);
 }
 
-.parallax-2 {
+.t-love .parallax-2 {
   clip-path: polygon(100% 0%, 100% 100%, 51% 90%, 0% 100%, 0% 0%, 51% 10%);
 }
 
-.parallax-3 {
+.t-love .parallax-3 {
   clip-path: polygon(100% 0%, 100% 100%, 51% 90%, 0% 100%, 0% 0%, 51% 10%);
 }
 
-.parallax-4 {
+.t-love .parallax-4 {
   clip-path: polygon(100% 0%, 100% 100%, 51% 90%, 0% 100%, 0% 0%, 51% 10%);
 }
 
-.parallax-5 {
+.t-love .parallax-5 {
   clip-path: polygon(100% 0%, 100% 100%, 51% 90%, 0% 100%, 0% 0%, 51% 10%);
 }
 
@@ -76,13 +77,13 @@ body {
    HERO
    ====================================== */
 
-.hero-container {
+.t-love .hero-container {
   text-align: center;
   padding: 10vw 5vw 6vw;
   width: 100%;
 }
 
-.nombre-titulo {
+.t-love .nombre-titulo {
   font-size: 14vw;
   color: white;
   font-family: var(--font-dancing), 'Dancing Script', cursive;
@@ -93,7 +94,7 @@ body {
   text-shadow: 0.4vw 0.4vw 0.5vw rgba(0,0,0,0.3), -0.3vw -0.3vw 0.5vw rgba(0,0,0,0.3);
 }
 
-.fecha-text h3 {
+.t-love .fecha-text h3 {
   font-size: 6vw;
   color: rgba(255, 255, 255, 0.85);
   letter-spacing: 0.4em;
@@ -106,11 +107,11 @@ body {
    COUNTDOWN
    ====================================== */
 
-#countdown .container {
+.t-love #countdown .container {
   padding: 2vw;
 }
 
-.countdown-container {
+.t-love .countdown-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -120,7 +121,7 @@ body {
   padding: 0 2vw;
 }
 
-.segment {
+.t-love .segment {
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -133,7 +134,7 @@ body {
   min-width: 18vw;
 }
 
-.number {
+.t-love .number {
   font-size: 8vw;
   font-weight: 700;
   color: white;
@@ -141,7 +142,7 @@ body {
   display: block;
 }
 
-.unit {
+.t-love .unit {
   font-size: 2.5vw;
   color: rgba(255, 255, 255, 0.7);
   letter-spacing: 0.2em;
@@ -153,7 +154,7 @@ body {
    CONTAIN (full-width transparent sections)
    ====================================== */
 
-.contain {
+.t-love .contain {
   width: 100%;
   height: fit-content;
   text-align: center;
@@ -167,7 +168,7 @@ body {
   padding: 6vw 5vw;
 }
 
-.subtitulo {
+.t-love .subtitulo {
   font-family: Georgia, serif;
   font-size: 9vw;
   color: white;
@@ -177,7 +178,7 @@ body {
   text-shadow: 0.4vw 0.4vw 0.5vw rgba(0,0,0,0.3), -0.3vw -0.3vw 0.5vw rgba(0,0,0,0.3);
 }
 
-.separador {
+.t-love .separador {
   width: 60%;
   margin: 2vw auto;
   display: block;
@@ -187,12 +188,12 @@ body {
    QUOTE / FRASE
    ====================================== */
 
-.frase-container {
+.t-love .frase-container {
   text-align: center;
   padding: 2vw 0;
 }
 
-.frase-container .texto {
+.t-love .frase-container .texto {
   color: aliceblue;
   font-size: 6vw;
   line-height: 1.6;
@@ -203,11 +204,11 @@ body {
    LOCATIONS
    ====================================== */
 
-.ubicaciones {
+.t-love .ubicaciones {
   margin-top: 4vw;
 }
 
-.lugar {
+.t-love .lugar {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -223,18 +224,18 @@ body {
   text-shadow: none;
 }
 
-.lugar:hover {
+.t-love .lugar:hover {
   background: rgba(0, 0, 0, 0.1);
 }
 
-.lugar .con-foto {
+.t-love .lugar .con-foto {
   width: 100% !important;
   border-radius: 2vw;
   margin-bottom: 2vw;
   object-fit: cover;
 }
 
-.lugar .nombre {
+.t-love .lugar .nombre {
   font-size: 5vw;
   font-weight: 700;
   color: white;
@@ -242,7 +243,7 @@ body {
   text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
-.lugar .direccion {
+.t-love .lugar .direccion {
   font-size: 4vw;
   color: rgba(240, 248, 255, 0.9);
   margin: 0.5vw 0;
@@ -250,7 +251,7 @@ body {
   text-shadow: 0 1px 3px rgba(0,0,0,0.5);
 }
 
-.lugar .hora {
+.t-love .lugar .hora {
   font-size: 5vw;
   font-weight: 700;
   color: white;
@@ -258,7 +259,7 @@ body {
   text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
-.button {
+.t-love .button {
   background: #d50f12;
   color: white;
   padding: 2.5vw 7vw;
@@ -274,7 +275,7 @@ body {
   font-family: Georgia, serif;
 }
 
-.button:hover {
+.t-love .button:hover {
   background: #8b0000;
   color: white;
 }
@@ -283,25 +284,25 @@ body {
    PARENTS / PADRINOS
    ====================================== */
 
-.familiares {
+.t-love .familiares {
   text-align: center;
 }
 
-.parents-container {
+.t-love .parents-container {
   margin: 4vw 0;
 }
 
-.parents {
+.t-love .parents {
   text-align: center;
 }
 
-.parents p {
+.t-love .parents p {
   font-size: 4.5vw;
   line-height: 2;
   color: aliceblue;
 }
 
-.vector-long {
+.t-love .vector-long {
   width: 60%;
   margin: 2vw auto;
   display: block;
@@ -311,34 +312,34 @@ body {
    PHOTO ALBUM GRID
    ====================================== */
 
-.album {
+.t-love .album {
   text-align: center;
 }
 
-.container-grid {
+.t-love .container-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2vw;
   margin-top: 4vw;
 }
 
-.column {
+.t-love .column {
   display: flex;
   flex-direction: column;
   gap: 2vw;
 }
 
-.column.full-width {
+.t-love .column.full-width {
   width: 100%;
 }
 
-.object-grid {
+.t-love .object-grid {
   width: 100%;
   border-radius: 2vw;
   object-fit: cover;
 }
 
-.dos-fotos {
+.t-love .dos-fotos {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2vw;
@@ -348,7 +349,7 @@ body {
    ITINERARIO
    ====================================== */
 
-.itinerario {
+.t-love .itinerario {
   width: 90%;
   max-width: 600px;
   margin: 0 auto;
@@ -356,11 +357,11 @@ body {
   text-align: center;
 }
 
-.itinerario .subtitulo {
+.t-love .itinerario .subtitulo {
   color: white;
 }
 
-.evento {
+.t-love .evento {
   display: flex;
   align-items: center;
   margin: 4vw 0;
@@ -369,19 +370,19 @@ body {
   border-radius: 3vw;
 }
 
-.evento.izquierda {
+.t-love .evento.izquierda {
   flex-direction: row;
 }
 
-.evento.derecha {
+.t-love .evento.derecha {
   flex-direction: row-reverse;
 }
 
-.icono {
+.t-love .icono {
   flex-shrink: 0;
 }
 
-.circulo {
+.t-love .circulo {
   width: 14vw;
   height: 14vw;
   border-radius: 50%;
@@ -393,32 +394,32 @@ body {
   margin: 0 3vw;
 }
 
-.circulo img {
+.t-love .circulo img {
   width: 8vw;
   filter: invert(100%);
 }
 
-.item {
+.t-love .item {
   flex: 1;
   padding: 0 2vw;
 }
 
-.evento.izquierda .item {
+.t-love .evento.izquierda .item {
   text-align: left;
 }
 
-.evento.derecha .item {
+.t-love .evento.derecha .item {
   text-align: right;
 }
 
-.item .nombre {
+.t-love .item .nombre {
   font-size: 5vw;
   color: white;
   font-weight: 600;
   margin: 0;
 }
 
-.item .hora {
+.t-love .item .hora {
   font-size: 4vw;
   color: rgba(255, 180, 180, 0.9);
   margin: 0.5vw 0 0;
@@ -428,55 +429,55 @@ body {
    EXTRA (Vestimenta, Sobres, etc.)
    ====================================== */
 
-.extra {
+.t-love .extra {
   width: 100%;
 }
 
-.dress-code {
+.t-love .dress-code {
   margin: 4vw 0;
   text-align: center;
 }
 
-.dress-code-container {
+.t-love .dress-code-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2vw;
 }
 
-.icon-extra {
+.t-love .icon-extra {
   width: 20vw;
   max-width: 80px;
 }
 
-.texto {
+.t-love .texto {
   font-size: 4vw;
   color: aliceblue;
   line-height: 1.6;
   text-align: center;
 }
 
-.gift-container,
+.t-love .gift-container,.t-love 
 .gift-liverpool-container {
   margin: 4vw 0;
   text-align: center;
 }
 
-.gift-object-container {
+.t-love .gift-object-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2vw;
 }
 
-.gift-liverpool-object-container {
+.t-love .gift-liverpool-object-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.5vw;
 }
 
-.liverpool-container {
+.t-love .liverpool-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -484,12 +485,12 @@ body {
   margin-top: 2vw;
 }
 
-.liverpool-container img {
+.t-love .liverpool-container img {
   width: 30vw;
   max-width: 120px;
 }
 
-.mensaje {
+.t-love .mensaje {
   width: 100%;
   padding: 2vw;
   border-radius: 2vw;
@@ -501,7 +502,7 @@ body {
   min-height: 80px;
 }
 
-.informacion-importante-container p {
+.t-love .informacion-importante-container p {
   font-size: 4vw;
   color: aliceblue;
   margin: 2vw 0;
@@ -511,12 +512,12 @@ body {
    RSVP FORM
    ====================================== */
 
-.confirmacion-asistencia {
+.t-love .confirmacion-asistencia {
   margin: 6vw 0 2vw;
   text-align: center;
 }
 
-.confirmacion-asistencia h2 {
+.t-love .confirmacion-asistencia h2 {
   font-size: 5vw;
   color: aliceblue;
   margin-bottom: 4vw;
@@ -524,7 +525,7 @@ body {
   text-shadow: 0.4vw 0.4vw 0.5vw rgba(0,0,0,0.3);
 }
 
-.familia-input {
+.t-love .familia-input {
   width: 100%;
   padding: 2.5vw;
   border-radius: 2vw;
@@ -536,14 +537,14 @@ body {
   background: white;
 }
 
-.confirmacion-asistencia label {
+.t-love .confirmacion-asistencia label {
   display: block;
   font-size: 4vw;
   color: aliceblue;
   margin: 1vw 0;
 }
 
-.radio-group {
+.t-love .radio-group {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -551,7 +552,7 @@ body {
   margin: 1.5vw 0;
 }
 
-.radio-group input[type="radio"] {
+.t-love .radio-group input[type="radio"] {
   width: 5vw;
   height: 5vw;
   accent-color: #d50f12;
@@ -561,7 +562,7 @@ body {
    ENVELOPE (sobre) — Red version
    ====================================== */
 
-.sobre {
+.t-love .sobre {
   position: fixed;
   top: 0;
   left: 0;
@@ -571,7 +572,7 @@ body {
   overflow: hidden;
 }
 
-.sobre .first {
+.t-love .sobre .first {
   background: linear-gradient(to top, #e82020 0%, #9b0000 60%, #3a0000 100%);
   width: 100%;
   height: 50%;
@@ -581,7 +582,7 @@ body {
   border-bottom: rgba(213, 15, 18, 0.4) solid 1px;
 }
 
-.sobre .second {
+.t-love .sobre .second {
   background: linear-gradient(to bottom, #e82020 0%, #9b0000 60%, #3a0000 100%);
   width: 100%;
   height: 50%;
@@ -591,7 +592,7 @@ body {
   border-top: rgba(213, 15, 18, 0.4) solid 1px;
 }
 
-.sobre-center {
+.t-love .sobre-center {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -604,7 +605,7 @@ body {
   gap: 3vw;
 }
 
-.sobre-center::before {
+.t-love .sobre-center::before {
   content: '';
   position: absolute;
   top: 50%;
@@ -630,7 +631,7 @@ body {
   pointer-events: none;
 }
 
-.sobre-nombre {
+.t-love .sobre-nombre {
   color: rgba(255, 255, 255, 0.92);
   font-size: 10vw;
   font-family: Georgia, serif;
@@ -639,8 +640,13 @@ body {
   letter-spacing: 0.05em;
 }
 
-.sello {
+/* `.sobre-center` sube la especificidad: otras plantillas (esmeralda, elegance, pink,
+   magical) definen `.sello` global y, al acumularse las hojas, pisaban el corazón. */
+.t-love .sobre-center .sello {
   position: relative;
+  /* El corazón del clip-path ocupa y 5–128 de 150: su centro queda 8px arriba del
+     centro de la caja, así que se baja 8px para alinearlo con el listón. */
+  top: 8px;
   z-index: 1;
   background:
     radial-gradient(ellipse 48% 38% at 34% 24%, rgba(255, 210, 210, 0.55) 0%, rgba(255, 120, 120, 0) 100%),
@@ -676,44 +682,44 @@ body {
   height: 150px;
   border-radius: 0;
   clip-path: path('M 75 128 C 75 128 8 90 8 45 C 8 15 30 5 50 5 C 62 5 72 12 75 26 C 78 12 88 5 100 5 C 120 5 142 15 142 45 C 142 90 75 128 75 128 Z');
-  animation: booms 2s infinite;
+  animation: booms-t-love 2s infinite;
 }
 
 
-@keyframes booms {
+@keyframes booms-t-love {
   0%   { transform: scale(1); }
   50%  { transform: scale(1.1); }
   100% { transform: scale(1); }
 }
 
-.up_1 {
-  animation: up 3s forwards;
+.t-love .up_1 {
+  animation: up-t-love 3s forwards;
 }
 
-.down_1 {
-  animation: down 3s forwards;
+.t-love .down_1 {
+  animation: down-t-love 3s forwards;
 }
 
-.button_hiden {
-  animation: hiden 3s forwards;
+.t-love .button_hiden {
+  animation: hiden-t-love 3s forwards;
 }
 
-.sobre_hiden {
-  animation: hiden 3s forwards;
+.t-love .sobre_hiden {
+  animation: hiden-t-love 3s forwards;
 }
 
-@keyframes hiden {
+@keyframes hiden-t-love {
   0%   { opacity: 1; }
   99%  { opacity: 0; }
   100% { display: none; pointer-events: none; }
 }
 
-@keyframes up {
+@keyframes up-t-love {
   0%   { transform: translateY(0%); }
   100% { transform: translateY(-100%); }
 }
 
-@keyframes down {
+@keyframes down-t-love {
   0%   { transform: translateY(0%); }
   100% { transform: translateY(100%); }
 }
@@ -722,7 +728,7 @@ body {
    FOOTER
    ====================================== */
 
-.footer {
+.t-love .footer {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -737,35 +743,35 @@ body {
    SCROLL ANIMATIONS
    ====================================== */
 
-.show-p-y {
+.t-love .show-p-y {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.show-p-y.active-p-y {
+.t-love .show-p-y.active-p-y {
   opacity: 1;
   transform: translateY(0);
 }
 
-.show-n-x {
+.t-love .show-n-x {
   opacity: 0;
   transform: translateX(-30px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.show-n-x.active-n-x {
+.t-love .show-n-x.active-n-x {
   opacity: 1;
   transform: translateX(0);
 }
 
-.show-p-x {
+.t-love .show-p-x {
   opacity: 0;
   transform: translateX(30px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.show-p-x.active-p-x {
+.t-love .show-p-x.active-p-x {
   opacity: 1;
   transform: translateX(0);
 }
@@ -775,11 +781,11 @@ body {
    ====================================== */
 
 @media (min-width: 600px) {
-  .nombre-titulo { font-size: 12vw; }
-  .fecha-text h3 { font-size: 4vw; }
-  .number { font-size: 6vw; }
-  .unit { font-size: 1.5vw; }
-  .subtitulo { font-size: 5vw; }
-  .texto { font-size: 2.5vw; }
-  .button { font-size: 2vw; padding: 1.5vw 5vw; }
+  .t-love .nombre-titulo { font-size: 12vw; }
+  .t-love .fecha-text h3 { font-size: 4vw; }
+  .t-love .number { font-size: 6vw; }
+  .t-love .unit { font-size: 1.5vw; }
+  .t-love .subtitulo { font-size: 5vw; }
+  .t-love .texto { font-size: 2.5vw; }
+  .t-love .button { font-size: 2vw; padding: 1.5vw 5vw; }
 }

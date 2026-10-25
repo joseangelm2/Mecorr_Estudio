@@ -3,6 +3,8 @@
 import { useState } from 'react'
 
 interface Props {
+  /** Carpeta base de las imágenes (cada demo usa la suya). Por defecto, la raíz /images. */
+  assetBase?: string;
   bankAccount?: string
   bankBeneficiary?: string
   bankAccountType?: 'clabe' | 'tarjeta'
@@ -10,6 +12,7 @@ interface Props {
 }
 
 export default function DatosBancariosSection({
+  assetBase = "/images",
   bankAccount = '',
   bankBeneficiary,
   bankAccountType,
@@ -37,7 +40,7 @@ export default function DatosBancariosSection({
         <div className="row justify-content-center">
           <div className="col-md-10">
             <div className="mb-10 text-center wow fadeInUp">
-              <img src="/images/flores-01.png" width="160" alt="" />
+              <img src={`${assetBase}/flores-01.png`} width="160" alt="" />
             </div>
             <h1 className="titulo mb-20 color-titulos text-center wow fadeInUp">
               Datos Bancarios

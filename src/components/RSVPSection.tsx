@@ -6,6 +6,8 @@ import { TokenRSVPForm } from '@/components/lista/TokenRSVPForm'
 import type { RsvpContact } from "@/lib/rsvp";
 
 interface Props {
+  /** Carpeta base de las imágenes (cada demo usa la suya). Por defecto, la raíz /images. */
+  assetBase?: string;
   rsvpPhone?: string;
   rsvpContacts?: RsvpContact[];
   rsvpEmail?: string;
@@ -24,6 +26,7 @@ function formatHighlightDate(dateStr: string): string {
 }
 
 export default function RSVPSection({
+  assetBase = "/images",
   rsvpPhone = "5214438569931",
   rsvpContacts,
   rsvpEmail,
@@ -86,7 +89,7 @@ export default function RSVPSection({
         style={{ maxWidth: "100%", padding: "0 15px" }}
       >
         <div className="mb-10 text-center wow fadeInUp">
-          <img src="/images/flores-01.png" width="160" alt="" />
+          <img src={`${assetBase}/flores-01.png`} width="160" alt="" />
         </div>
         <h1 className="titulo color-titulos text-center wow fadeInUp">
           Confirma tu Asistencia

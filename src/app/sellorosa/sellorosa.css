@@ -1,25 +1,26 @@
+/* scoped:t-sellorosa */
 @import "tailwindcss";
 
 /* ======================================
    SELLOROSA INVITATION — Pink/Rose Theme
    ====================================== */
 
-* {
+.t-sellorosa * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html {
+html:has(.t-sellorosa) {
   overflow: hidden;
   position: relative;
 }
 
-html.con-scroll {
+html.con-scroll:has(.t-sellorosa) {
   overflow-y: scroll;
 }
 
-body {
+body:has(.t-sellorosa) {
   margin: 0;
   background-color: #fff0f3;
   font-family: 'Raleway', sans-serif;
@@ -31,7 +32,7 @@ body {
    ENVELOPE / SOBRE
    ====================================== */
 
-.sr-envelope {
+.t-sellorosa .sr-envelope {
   position: fixed;
   top: 0;
   left: 0;
@@ -46,16 +47,16 @@ body {
   transition: opacity 0.8s ease;
 }
 
-.sr-envelope.opening {
+.t-sellorosa .sr-envelope.opening {
   opacity: 0;
   pointer-events: none;
 }
 
-.sr-envelope.hidden {
+.t-sellorosa .sr-envelope.hidden {
   display: none;
 }
 
-.sr-envelope-card {
+.t-sellorosa .sr-envelope-card {
   background: white;
   border-radius: 16px;
   padding: 40px 32px;
@@ -66,7 +67,7 @@ body {
   position: relative;
 }
 
-.sr-envelope-flap {
+.t-sellorosa .sr-envelope-flap {
   position: absolute;
   top: -1px;
   left: 0;
@@ -78,12 +79,12 @@ body {
   transform-origin: top center;
 }
 
-.sr-envelope-flap.open {
+.t-sellorosa .sr-envelope-flap.open {
   transform: rotateX(180deg);
   opacity: 0;
 }
 
-.sr-envelope-name {
+.t-sellorosa .sr-envelope-name {
   font-size: clamp(2.5rem, 12vw, 5rem);
   color: #cb997e;
   font-family: Georgia, serif;
@@ -92,7 +93,7 @@ body {
   text-shadow: 0 2px 8px rgba(203, 153, 126, 0.3);
 }
 
-.sr-envelope-tagline {
+.t-sellorosa .sr-envelope-tagline {
   font-size: 12px;
   letter-spacing: 4px;
   text-transform: uppercase;
@@ -100,7 +101,7 @@ body {
   margin-bottom: 24px;
 }
 
-.sr-sello-btn {
+.t-sellorosa .sr-sello-btn {
   background: linear-gradient(135deg, #cb997e, #f5babc);
   color: white;
   border: none;
@@ -115,7 +116,7 @@ body {
   animation: sr-pulse 3s infinite;
 }
 
-.sr-sello-btn:hover {
+.t-sellorosa .sr-sello-btn:hover {
   transform: scale(1.04);
 }
 
@@ -128,7 +129,7 @@ body {
    MAIN CONTENT
    ====================================== */
 
-.sr-main {
+.t-sellorosa .sr-main {
   width: 100%;
   min-height: 100vh;
 }
@@ -137,7 +138,7 @@ body {
    HERO
    ====================================== */
 
-.sr-hero {
+.t-sellorosa .sr-hero {
   position: relative;
   width: 100%;
   height: 100vh;
@@ -149,20 +150,20 @@ body {
   overflow: hidden;
 }
 
-.sr-hero::after {
+.t-sellorosa .sr-hero::after {
   content: "";
   position: absolute;
   inset: 0;
   background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.3) 100%);
 }
 
-.sr-hero-content {
+.t-sellorosa .sr-hero-content {
   position: relative;
   z-index: 2;
   padding: 20px;
 }
 
-.sr-hero-title {
+.t-sellorosa .sr-hero-title {
   font-size: clamp(4rem, 20vw, 10rem);
   color: white;
   font-family: Georgia, serif;
@@ -172,7 +173,7 @@ body {
   margin-bottom: 8px;
 }
 
-.sr-hero-xv {
+.t-sellorosa .sr-hero-xv {
   font-size: clamp(1rem, 4vw, 1.5rem);
   color: rgba(255, 255, 255, 0.9);
   letter-spacing: 8px;
@@ -181,7 +182,7 @@ body {
   margin-bottom: 24px;
 }
 
-.sr-hero-date {
+.t-sellorosa .sr-hero-date {
   font-size: clamp(1rem, 4vw, 1.5rem);
   color: rgba(255, 255, 255, 0.85);
   letter-spacing: 4px;
@@ -192,7 +193,7 @@ body {
    DIVIDER
    ====================================== */
 
-.sr-divider {
+.t-sellorosa .sr-divider {
   width: 100%;
   height: 6px;
   background: linear-gradient(to right, #f5babc, #cb997e, #f5babc);
@@ -202,14 +203,14 @@ body {
    SECTION BASE
    ====================================== */
 
-.sr-section {
+.t-sellorosa .sr-section {
   padding: 40px 24px;
   text-align: center;
   max-width: 600px;
   margin: 0 auto;
 }
 
-.sr-section-title {
+.t-sellorosa .sr-section-title {
   font-size: clamp(1.8rem, 6vw, 2.5rem);
   color: #cb997e;
   font-family: Georgia, serif;
@@ -217,7 +218,7 @@ body {
   margin-bottom: 8px;
 }
 
-.sr-section-line {
+.t-sellorosa .sr-section-line {
   width: 60%;
   height: 1px;
   background: linear-gradient(to right, transparent, #cb997e, transparent);
@@ -226,7 +227,7 @@ body {
   display: block;
 }
 
-.sr-text {
+.t-sellorosa .sr-text {
   font-size: 15px;
   color: #666;
   line-height: 1.8;
@@ -236,13 +237,13 @@ body {
    COUNTDOWN
    ====================================== */
 
-.sr-countdown-wrapper {
+.t-sellorosa .sr-countdown-wrapper {
   background: linear-gradient(135deg, #f5babc, #cb997e);
   padding: 40px 24px;
   text-align: center;
 }
 
-.sr-countdown-title {
+.t-sellorosa .sr-countdown-title {
   color: white;
   font-size: clamp(1.5rem, 5vw, 2rem);
   font-family: Georgia, serif;
@@ -251,18 +252,18 @@ body {
   margin-bottom: 24px;
 }
 
-.sr-countdown-grid {
+.t-sellorosa .sr-countdown-grid {
   display: flex;
   justify-content: center;
   gap: clamp(12px, 4vw, 32px);
   flex-wrap: wrap;
 }
 
-.sr-countdown-item {
+.t-sellorosa .sr-countdown-item {
   text-align: center;
 }
 
-.sr-countdown-num {
+.t-sellorosa .sr-countdown-num {
   font-size: clamp(2.5rem, 10vw, 4rem);
   font-weight: 700;
   color: white;
@@ -270,7 +271,7 @@ body {
   display: block;
 }
 
-.sr-countdown-label {
+.t-sellorosa .sr-countdown-label {
   font-size: 12px;
   color: rgba(255, 255, 255, 0.85);
   letter-spacing: 3px;
@@ -283,12 +284,12 @@ body {
    VENUE CARDS
    ====================================== */
 
-.sr-venues {
+.t-sellorosa .sr-venues {
   padding: 40px 16px;
   background: #fff0f3;
 }
 
-.sr-venue-card {
+.t-sellorosa .sr-venue-card {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -303,12 +304,12 @@ body {
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.sr-venue-card:hover {
+.t-sellorosa .sr-venue-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(203, 153, 126, 0.25);
 }
 
-.sr-venue-img {
+.t-sellorosa .sr-venue-img {
   width: 100%;
   max-width: 300px;
   border-radius: 12px;
@@ -316,28 +317,28 @@ body {
   margin-bottom: 16px;
 }
 
-.sr-venue-name {
+.t-sellorosa .sr-venue-name {
   font-size: 18px;
   color: #cb997e;
   font-weight: 600;
   margin-bottom: 4px;
 }
 
-.sr-venue-address {
+.t-sellorosa .sr-venue-address {
   font-size: 13px;
   color: #888;
   margin-bottom: 6px;
   text-align: center;
 }
 
-.sr-venue-time {
+.t-sellorosa .sr-venue-time {
   font-size: 20px;
   font-weight: 700;
   color: #a4717a;
   margin-bottom: 12px;
 }
 
-.sr-btn {
+.t-sellorosa .sr-btn {
   background: linear-gradient(to right, #f5babc, #cb997e);
   color: white;
   padding: 10px 28px;
@@ -353,7 +354,7 @@ body {
   transition: opacity 0.2s;
 }
 
-.sr-btn:hover {
+.t-sellorosa .sr-btn:hover {
   opacity: 0.9;
 }
 
@@ -361,13 +362,13 @@ body {
    PARENTS
    ====================================== */
 
-.sr-parents {
+.t-sellorosa .sr-parents {
   background: white;
   padding: 40px 24px;
   text-align: center;
 }
 
-.sr-parent-name {
+.t-sellorosa .sr-parent-name {
   font-size: 18px;
   color: #555;
   line-height: 2.2;
@@ -377,17 +378,17 @@ body {
    ITINERARIO
    ====================================== */
 
-.sr-itinerario {
+.t-sellorosa .sr-itinerario {
   background: linear-gradient(135deg, #cb997e, #a4717a);
   padding: 40px 24px;
   text-align: center;
 }
 
-.sr-itinerario .sr-section-title {
+.t-sellorosa .sr-itinerario .sr-section-title {
   color: white;
 }
 
-.sr-itinerario-item {
+.t-sellorosa .sr-itinerario-item {
   display: flex;
   align-items: center;
   background: rgba(255, 255, 255, 0.12);
@@ -398,34 +399,34 @@ body {
   gap: 16px;
 }
 
-.sr-itinerario-item.reverse {
+.t-sellorosa .sr-itinerario-item.reverse {
   flex-direction: row-reverse;
 }
 
-.sr-itinerario-icon {
+.t-sellorosa .sr-itinerario-icon {
   width: 48px;
   height: 48px;
   flex-shrink: 0;
   filter: invert(100%);
 }
 
-.sr-itinerario-info {
+.t-sellorosa .sr-itinerario-info {
   flex: 1;
   text-align: left;
 }
 
-.sr-itinerario-item.reverse .sr-itinerario-info {
+.t-sellorosa .sr-itinerario-item.reverse .sr-itinerario-info {
   text-align: right;
 }
 
-.sr-itinerario-name {
+.t-sellorosa .sr-itinerario-name {
   font-size: 17px;
   color: white;
   font-weight: 600;
   margin: 0;
 }
 
-.sr-itinerario-hour {
+.t-sellorosa .sr-itinerario-hour {
   font-size: 14px;
   color: rgba(255, 255, 255, 0.8);
   margin: 2px 0 0;
@@ -435,13 +436,13 @@ body {
    RSVP FORM
    ====================================== */
 
-.sr-rsvp {
+.t-sellorosa .sr-rsvp {
   padding: 40px 24px;
   background: #fff0f3;
   text-align: center;
 }
 
-.sr-rsvp-input {
+.t-sellorosa .sr-rsvp-input {
   width: 100%;
   max-width: 400px;
   padding: 12px 16px;
@@ -457,11 +458,11 @@ body {
   margin: 8px auto;
 }
 
-.sr-rsvp-input:focus {
+.t-sellorosa .sr-rsvp-input:focus {
   border-color: #cb997e;
 }
 
-.sr-radio-wrap {
+.t-sellorosa .sr-radio-wrap {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -469,13 +470,13 @@ body {
   margin: 8px 0;
 }
 
-.sr-radio-wrap input[type="radio"] {
+.t-sellorosa .sr-radio-wrap input[type="radio"] {
   accent-color: #cb997e;
   width: 18px;
   height: 18px;
 }
 
-.sr-radio-label {
+.t-sellorosa .sr-radio-label {
   font-size: 14px;
   color: #666;
 }
@@ -484,13 +485,13 @@ body {
    VESTIMENTA
    ====================================== */
 
-.sr-vestimenta {
+.t-sellorosa .sr-vestimenta {
   background: white;
   padding: 40px 24px;
   text-align: center;
 }
 
-.sr-vestimenta-img {
+.t-sellorosa .sr-vestimenta-img {
   max-width: 100px;
   margin: 12px auto;
   display: block;
@@ -500,13 +501,13 @@ body {
    HASHTAG
    ====================================== */
 
-.sr-hashtag {
+.t-sellorosa .sr-hashtag {
   background: linear-gradient(135deg, #f5babc, #cb997e);
   padding: 32px 24px;
   text-align: center;
 }
 
-.sr-hashtag-text {
+.t-sellorosa .sr-hashtag-text {
   font-size: clamp(1.5rem, 6vw, 2.5rem);
   color: white;
   font-family: Georgia, serif;
@@ -518,7 +519,7 @@ body {
    INFO IMPORTANTE
    ====================================== */
 
-.sr-info {
+.t-sellorosa .sr-info {
   background: #fff0f3;
   padding: 32px 24px;
   text-align: center;
@@ -526,7 +527,7 @@ body {
   margin: 0 auto;
 }
 
-.sr-info-item {
+.t-sellorosa .sr-info-item {
   font-size: 14px;
   color: #666;
   margin: 8px 0;
@@ -537,7 +538,7 @@ body {
    FOOTER
    ====================================== */
 
-.sr-footer {
+.t-sellorosa .sr-footer {
   background: #a4717a;
   padding: 20px;
   text-align: center;
@@ -551,35 +552,35 @@ body {
    SCROLL ANIMATIONS
    ====================================== */
 
-.show-p-y {
+.t-sellorosa .show-p-y {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.show-p-y.active-p-y {
+.t-sellorosa .show-p-y.active-p-y {
   opacity: 1;
   transform: translateY(0);
 }
 
-.show-n-x {
+.t-sellorosa .show-n-x {
   opacity: 0;
   transform: translateX(-30px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.show-n-x.active-n-x {
+.t-sellorosa .show-n-x.active-n-x {
   opacity: 1;
   transform: translateX(0);
 }
 
-.show-p-x {
+.t-sellorosa .show-p-x {
   opacity: 0;
   transform: translateX(30px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.show-p-x.active-p-x {
+.t-sellorosa .show-p-x.active-p-x {
   opacity: 1;
   transform: translateX(0);
 }

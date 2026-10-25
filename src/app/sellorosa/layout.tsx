@@ -8,5 +8,5 @@ const raleway = Raleway({ variable: "--font-raleway", subsets: ["latin"], weight
 export const metadata: Metadata = { title: "Mis XV — Ximena", description: "Te Invito a Mi Día Más Especial" };
 
 export default function SelloRosaLayout({ children }: { children: ReactNode }) {
-  return <div className={raleway.variable}>{children}</div>;
+  return <div className={raleway.variable}><div className="t-sellorosa">{children}</div></div>;
 }

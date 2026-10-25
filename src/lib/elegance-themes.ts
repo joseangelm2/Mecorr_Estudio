@@ -1,3 +1,5 @@
+import { shadeHex } from '@/lib/color'
+
 export interface EleganceTheme {
   id: string
   label: string
@@ -149,3 +151,12 @@ export const ELEGANCE_THEMES: EleganceTheme[] = [
 ]
 
 export const DEFAULT_ELEGANCE_THEME = ELEGANCE_THEMES.find(t => t.id === 'blanco-dorado')!
+
+// Tono con el que se pinta la textura "Cenicienta" sobre el fondo del tema. Por defecto el CSS la
+// aclara (80% color + 20% blanco), lo que en temas claros (p. ej. Blanco Dorado) deja la textura
+// blanco sobre casi-blanco, es decir invisible. Para esos temas se oscurece en su lugar.
+export function texturaFor(colorPrincipal: string): string | null {
+  const n = parseInt(colorPrincipal.replace('#', ''), 16)
+  const lum = (0.2126 * (n >> 16) + 0.7152 * ((n >> 8) & 0xff) + 0.0722 * (n & 0xff)) / 255
+  return lum > 0.6 ? shadeHex(colorPrincipal, -14) : null
+}

@@ -1,10 +1,11 @@
+/* scoped:t-elegance */
 @import "tailwindcss";
 
 /* =============================================
    CENICIENTA — Dark Blue/Gold matching original
    ============================================= */
 
-:root {
+:root:has(.t-elegance) {
   --color-principal: #1B488F;
   --nombre-color: #BA8100;
   --subtitulos-color: #F7BB52;
@@ -19,9 +20,9 @@
   --espacio-abajo: 27%;
 }
 
-* { box-sizing: border-box; }
+.t-elegance * { box-sizing: border-box; }
 
-html, body {
+html:has(.t-elegance), body:has(.t-elegance) {
   margin: 0;
   padding: 0;
   background-color: var(--bg-color, var(--color-principal));
@@ -29,7 +30,7 @@ html, body {
 }
 
 /* ---- Fondo con textura ---- */
-.contenido {
+.t-elegance .contenido {
   position: relative;
   z-index: 0; /* crea su propio contexto de apilamiento para que ::before (z-index:-1) quede justo detrás del contenido y no se escape detrás de otros elementos */
   margin: auto;
@@ -44,7 +45,7 @@ html, body {
   padding-bottom: var(--espacio-abajo);
 }
 
-.contenido::before {
+.t-elegance .contenido::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -57,7 +58,7 @@ html, body {
      visibles) sobre un tono aclarado de --color-principal (siempre el
      mismo matiz del tema elegido, nunca el azul original de la foto), así
      el patrón se ve como un realce sutil en vez de quedar plano o desviado. */
-  background-color: color-mix(in srgb, var(--color-principal) 80%, white 20%);
+  background-color: var(--textura-color, color-mix(in srgb, var(--color-principal) 80%, white 20%));
   -webkit-mask-image: url(/images/elegance/Cenicienta.png);
   mask-image: url(/images/elegance/Cenicienta.png);
   -webkit-mask-size: contain;
@@ -69,18 +70,18 @@ html, body {
 }
 
 /* ---- Decoraciones fijas ---- */
-.top, .bottom {
+.t-elegance .top,.t-elegance  .bottom {
   position: fixed;
   pointer-events: none;
   z-index: 2;
 }
 
-.top { top: 0; left: 0; }
-.bottom { bottom: 0; right: 0; }
-.top-img, .bottom-img { width: 100%; display: block; }
+.t-elegance .top { top: 0; left: 0; }
+.t-elegance .bottom { bottom: 0; right: 0; }
+.t-elegance .top-img,.t-elegance  .bottom-img { width: 100%; display: block; }
 
 /* ---- Encabezado ---- */
-.encabezado {
+.t-elegance .encabezado {
   z-index: 3;
   margin: auto;
   width: 100%;
@@ -90,7 +91,7 @@ html, body {
 }
 
 /* ---- Tipografía base ---- */
-.nombre-principal {
+.t-elegance .nombre-principal {
   font-family: var(--font-dancing, 'Dancing Script', cursive);
   font-size: 18vw;
   color: var(--nombre-color);
@@ -100,7 +101,7 @@ html, body {
   margin: 0;
 }
 
-.evento {
+.t-elegance .evento {
   font-family: var(--font-dancing, 'Dancing Script', cursive);
   font-size: 7vw;
   color: var(--nombre-color);
@@ -108,7 +109,7 @@ html, body {
   margin: 0;
 }
 
-.frase {
+.t-elegance .frase {
   z-index: 1;
   text-align: center;
   font-family: var(--font-bellefair, 'Bellefair', serif);
@@ -122,11 +123,11 @@ html, body {
 }
 
 /* ---- Fotos ---- */
-.foto-con-degradado { width: 100%; position: relative; margin: 3vw auto; }
-.foto-full { width: 100%; display: block; }
+.t-elegance .foto-con-degradado { width: 100%; position: relative; margin: 3vw auto; }
+.t-elegance .foto-full { width: 100%; display: block; }
 
 /* ---- Familia ---- */
-.familia {
+.t-elegance .familia {
   z-index: 1;
   width: 95%;
   display: flex;
@@ -137,7 +138,7 @@ html, body {
   margin-right: auto;
 }
 
-.familia h3 {
+.t-elegance .familia h3 {
   font-family: var(--font-tangerine, 'Tangerine', serif);
   font-size: 10vw;
   color: var(--subtitulos-color);
@@ -145,7 +146,7 @@ html, body {
   margin: 0 0 1vw;
 }
 
-.familia p.nombre {
+.t-elegance .familia p.nombre {
   font-family: var(--font-dm-sans, 'DM Sans', sans-serif);
   font-size: 4vw;
   color: var(--textos-color);
@@ -154,7 +155,7 @@ html, body {
 }
 
 /* ---- Fecha ---- */
-.fecha {
+.t-elegance .fecha {
   z-index: 1;
   font-family: var(--font-albert, 'Albert Sans', sans-serif);
   color: var(--textos-color);
@@ -167,15 +168,15 @@ html, body {
   margin-top: var(--separacion);
 }
 
-.fecha p {
+.t-elegance .fecha p {
   font-size: 5vw;
   font-weight: 600;
   margin: 0;
 }
 
-.fecha .mes { font-weight: 500; }
+.t-elegance .fecha .mes { font-weight: 500; }
 
-.fecha .barra {
+.t-elegance .fecha .barra {
   background: var(--textos-color);
   height: 6vw;
   width: 1px;
@@ -184,7 +185,7 @@ html, body {
 }
 
 /* ---- Reloj / Countdown ---- */
-.reloj-silueta {
+.t-elegance .reloj-silueta {
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -199,7 +200,7 @@ html, body {
   border: 0.5vw solid #F3CC7A;
 }
 
-.cuenta {
+.t-elegance .cuenta {
   z-index: 1;
   display: flex;
   gap: 5vw;
@@ -208,9 +209,9 @@ html, body {
   margin-top: 2vw;
 }
 
-.segmento { display: flex; flex-direction: column; align-items: center; }
+.t-elegance .segmento { display: flex; flex-direction: column; align-items: center; }
 
-.numero {
+.t-elegance .numero {
   font-family: var(--font-albert, 'Albert Sans', sans-serif);
   font-size: 8vw;
   font-weight: 700;
@@ -218,7 +219,7 @@ html, body {
   display: block;
 }
 
-.unidad {
+.t-elegance .unidad {
   font-family: var(--font-albert, 'Albert Sans', sans-serif);
   font-size: 3vw;
   color: var(--cuenta-color-texto);
@@ -226,7 +227,7 @@ html, body {
 }
 
 /* ---- Ubicaciones ---- */
-.ubicacion {
+.t-elegance .ubicacion {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -241,7 +242,7 @@ html, body {
   border: 0.3vw solid rgba(242, 214, 127, 0.4);
 }
 
-.ubicacion .lugar {
+.t-elegance .ubicacion .lugar {
   font-family: var(--font-dm-sans, 'DM Sans', sans-serif);
   font-size: 4vw;
   font-weight: 600;
@@ -249,7 +250,7 @@ html, body {
   margin: 1vw 0;
 }
 
-.ubicacion .lugar-titulo {
+.t-elegance .ubicacion .lugar-titulo {
   font-family: var(--font-tangerine, 'Tangerine', serif);
   font-size: 10vw;
   color: var(--subtitulos-color);
@@ -257,7 +258,7 @@ html, body {
   margin-bottom: 1%;
 }
 
-.ubicacion .direccion {
+.t-elegance .ubicacion .direccion {
   font-family: var(--font-dm-sans, 'DM Sans', sans-serif);
   font-size: 3.5vw;
   color: var(--textos-color);
@@ -266,7 +267,7 @@ html, body {
   display: block;
 }
 
-.ubicacion .hora {
+.t-elegance .ubicacion .hora {
   font-family: var(--font-dm-sans, 'DM Sans', sans-serif);
   font-size: 4vw;
   font-weight: 700;
@@ -276,7 +277,7 @@ html, body {
 }
 
 /* ---- Botón ---- */
-.boton {
+.t-elegance .boton {
   background: var(--boton-color);
   color: var(--boton-texto-color);
   padding: 2vw 6vw;
@@ -292,10 +293,10 @@ html, body {
   font-weight: 600;
 }
 
-.boton:hover { opacity: 0.85; }
+.t-elegance .boton:hover { opacity: 0.85; }
 
 /* ---- Secciones extra (regalos, buzón, etc.) ---- */
-.extra {
+.t-elegance .extra {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -310,14 +311,14 @@ html, body {
   border: 0.3vw solid rgba(242, 214, 127, 0.25);
 }
 
-.extra h3 {
+.t-elegance .extra h3 {
   font-family: var(--font-tangerine, 'Tangerine', serif);
   font-size: 10vw;
   color: var(--subtitulos-color);
   margin: 0 0 2vw;
 }
 
-.extra .texto {
+.t-elegance .extra .texto {
   font-family: var(--font-dm-sans, 'DM Sans', sans-serif);
   font-size: 3.5vw;
   color: var(--textos-color);
@@ -326,16 +327,16 @@ html, body {
 }
 
 /* ---- Grid de fotos ---- */
-#grid { width: 90%; margin: 3vw auto; }
-.container-grid { display: flex; flex-wrap: wrap; gap: 2vw; justify-content: space-between; }
-.dos-fotos { display: flex; gap: 2vw; width: 100%; }
-.dos-fotos img { flex: 1; border-radius: 2vw; }
-.column { flex: 0 0 calc(33.33% - 2vw); }
-.column.full-width { flex-basis: 100%; }
-.object-grid { width: 100%; border-radius: 2vw; display: block; margin-bottom: 2vw; }
+.t-elegance #grid { width: 90%; margin: 3vw auto; }
+.t-elegance .container-grid { display: flex; flex-wrap: wrap; gap: 2vw; justify-content: space-between; }
+.t-elegance .dos-fotos { display: flex; gap: 2vw; width: 100%; }
+.t-elegance .dos-fotos img { flex: 1; border-radius: 2vw; }
+.t-elegance .column { flex: 0 0 calc(33.33% - 2vw); }
+.t-elegance .column.full-width { flex-basis: 100%; }
+.t-elegance .object-grid { width: 100%; border-radius: 2vw; display: block; margin-bottom: 2vw; }
 
 /* ---- Itinerario ---- */
-.itinerario {
+.t-elegance .itinerario {
   width: 90%;
   margin: var(--separacion) auto;
   display: flex;
@@ -344,14 +345,14 @@ html, body {
   text-align: center;
 }
 
-.itinerario h3 {
+.t-elegance .itinerario h3 {
   font-family: var(--font-tangerine, 'Tangerine', serif);
   font-size: 10vw;
   color: var(--subtitulos-color);
   margin: 0 0 4vw;
 }
 
-.itinerario .evento {
+.t-elegance .itinerario .evento {
   display: grid;
   grid-template-columns: 45% 45%;
   column-gap: 10%;
@@ -362,14 +363,14 @@ html, body {
   width: 100%;
 }
 
-.itinerario .evento .icono {
+.t-elegance .itinerario .evento .icono {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.itinerario .evento .icono .circulo {
+.t-elegance .itinerario .evento .icono .circulo {
   margin: auto;
   width: 16vw;
   height: 16vw;
@@ -380,20 +381,20 @@ html, body {
   align-items: center;
 }
 
-.itinerario .evento .icono .circulo img {
+.t-elegance .itinerario .evento .icono .circulo img {
   margin: auto;
   width: 60%;
   filter: var(--icon-filter, invert(100%));
 }
 
-.itinerario .evento .item {
+.t-elegance .itinerario .evento .item {
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
 }
 
-.itinerario .evento .item .nombre {
+.t-elegance .itinerario .evento .item .nombre {
   font-family: var(--font-dm-sans, 'DM Sans', sans-serif);
   font-size: 5vw;
   font-weight: 600;
@@ -401,7 +402,7 @@ html, body {
   margin: 0;
 }
 
-.itinerario .evento .item .hora {
+.t-elegance .itinerario .evento .item .hora {
   font-family: var(--font-dm-sans, 'DM Sans', sans-serif);
   font-size: 4vw;
   font-weight: 700;
@@ -410,7 +411,7 @@ html, body {
 }
 
 /* ---- Mensaje / textarea ---- */
-.mensaje {
+.t-elegance .mensaje {
   width: 70%;
   font-family: var(--font-dm-sans, 'DM Sans', sans-serif);
   font-size: 3.5vw;
@@ -424,19 +425,19 @@ html, body {
 }
 
 /* ---- Confirmación RSVP ---- */
-.confirmacion-asistencia {
+.t-elegance .confirmacion-asistencia {
   width: 90%;
   margin: var(--separacion) auto;
   text-align: center;
 }
 
-.confirmacion-asistencia h3 {
+.t-elegance .confirmacion-asistencia h3 {
   font-family: var(--font-tangerine, 'Tangerine', serif);
   font-size: 10vw;
   color: var(--subtitulos-color);
 }
 
-.confirmacion-asistencia form {
+.t-elegance .confirmacion-asistencia form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -446,7 +447,7 @@ html, body {
   font-size: 3.5vw;
 }
 
-.familia-input {
+.t-elegance .familia-input {
   border-radius: 2vw;
   width: 60%;
   border: 0.4vw solid var(--boton-color);
@@ -457,14 +458,14 @@ html, body {
   font-size: 3vw;
 }
 
-.texto {
+.t-elegance .texto {
   font-family: var(--font-dm-sans, 'DM Sans', sans-serif);
   font-size: 3.5vw;
   color: var(--textos-color);
 }
 
 /* ---- Despedida ---- */
-.despedida {
+.t-elegance .despedida {
   font-family: var(--font-dancing, 'Dancing Script', cursive);
   font-size: 9vw;
   color: var(--subtitulos-color);
@@ -472,7 +473,7 @@ html, body {
   margin: var(--separacion) 0;
 }
 
-.importante {
+.t-elegance .importante {
   font-family: var(--font-dm-sans, 'DM Sans', sans-serif);
   font-size: 3.5vw;
   color: var(--textos-color);
@@ -481,7 +482,7 @@ html, body {
 }
 
 /* ---- Información bancaria ---- */
-.informacion {
+.t-elegance .informacion {
   font-family: var(--font-dm-sans, 'DM Sans', sans-serif);
   font-size: 3.5vw;
   color: var(--textos-color);
@@ -492,7 +493,7 @@ html, body {
 }
 
 /* ---- Sobre / Envelope ---- */
-.sobre {
+.t-elegance .sobre {
   position: fixed;
   top: 0;
   left: 0;
@@ -502,7 +503,7 @@ html, body {
   overflow: hidden;
 }
 
-.petalo {
+.t-elegance .petalo {
   position: absolute;
   width: 50%;
   height: 100%;
@@ -511,22 +512,22 @@ html, body {
   border: 0.3vw solid #F2D67F !important;
 }
 
-.petalo.left {
+.t-elegance .petalo.left {
   left: 0;
   transition: transform 1.5s ease;
   border-top-right-radius: 24vw 50%;
   border-bottom-right-radius: 24vw 50%;
 }
-.petalo.right {
+.t-elegance .petalo.right {
   right: 0;
   transition: transform 1.5s ease;
   border-top-left-radius: 24vw 50%;
   border-bottom-left-radius: 24vw 50%;
 }
-.petalo.left.open { transform: translateX(-100%); }
-.petalo.right.open { transform: translateX(100%); }
+.t-elegance .petalo.left.open { transform: translateX(-100%); }
+.t-elegance .petalo.right.open { transform: translateX(100%); }
 
-.sello {
+.t-elegance .sello {
   background: var(--color-principal);
   border: 0.6vw solid #F2D67F !important;
   color: #F2D67F;
@@ -543,14 +544,14 @@ html, body {
   transform: translate(-50%, -50%);
   z-index: 2;
   transition: opacity 1.5s;
-  animation: booms 2s infinite;
+  animation: booms-t-elegance 2s infinite;
   line-height: 1.0;
   letter-spacing: 0.2vw;
 }
 
-.sello.hidden { opacity: 0; pointer-events: none; }
+.t-elegance .sello.hidden { opacity: 0; pointer-events: none; }
 
-.banda-sobre {
+.t-elegance .banda-sobre {
   position: absolute;
   top: 50%;
   left: 0;
@@ -561,51 +562,51 @@ html, body {
   transition: opacity 1.5s;
 }
 
-.banda-sobre.opening {
+.t-elegance .banda-sobre.opening {
   opacity: 0;
 }
 
-@keyframes booms {
+@keyframes booms-t-elegance {
   0% { transform: scale(1) translate(-50%, -50%); }
   50% { transform: scale(1.05) translate(-50%, -50%); }
   100% { transform: scale(1) translate(-50%, -50%); }
 }
 
 /* ---- Animaciones de scroll ---- */
-.show-p-y { opacity: 0; transform: translateY(80px); transition: all 1.5s ease; }
-.active-p-y { transform: translateY(0px); opacity: 1; }
-.show-n-x { opacity: 0; transform: translateX(80px); transition: all 1.5s ease; }
-.active-n-x { transform: translateX(0px); opacity: 1; }
-.show-p-x { opacity: 0; transform: translateX(-80px); transition: all 1.5s ease; }
-.active-p-x { transform: translateX(0px); opacity: 1; }
-.show { opacity: 0; transition: all 1.5s ease; }
-.active { opacity: 1; }
+.t-elegance .show-p-y { opacity: 0; transform: translateY(80px); transition: all 1.5s ease; }
+.t-elegance .active-p-y { transform: translateY(0px); opacity: 1; }
+.t-elegance .show-n-x { opacity: 0; transform: translateX(80px); transition: all 1.5s ease; }
+.t-elegance .active-n-x { transform: translateX(0px); opacity: 1; }
+.t-elegance .show-p-x { opacity: 0; transform: translateX(-80px); transition: all 1.5s ease; }
+.t-elegance .active-p-x { transform: translateX(0px); opacity: 1; }
+.t-elegance .show { opacity: 0; transition: all 1.5s ease; }
+.t-elegance .active { opacity: 1; }
 
 @media (min-width: 600px) {
   /* Las decoraciones .top/.bottom son fixed y sin límite de ancho, así que
      por default ocupan casi todo el viewport en vez de solo enmarcar la
      tarjeta de .contenido (max-width: 600px, centrada). Se recentran aquí
      para que el marco siga alineado con el contenido en pantallas anchas. */
-  .top, .bottom {
+  .t-elegance .top,.t-elegance  .bottom {
     left: 50%;
     right: auto;
     width: 100%;
     max-width: 600px;
     transform: translateX(-50%);
   }
-  .nombre-principal { font-size: 108px; }
-  .evento { font-size: 42px; }
-  .frase { font-size: 20px; }
-  .familia h3 { font-size: 60px; }
-  .familia p.nombre { font-size: 18px; }
-  .fecha p { font-size: 30px; }
-  .numero { font-size: 48px; }
-  .unidad { font-size: 16px; }
-  .ubicacion .lugar { font-size: 20px; }
-  .ubicacion .lugar-titulo { font-size: 60px; }
-  .boton { font-size: 16px; padding: 8px 24px; }
-  .extra h3 { font-size: 60px; }
-  .extra .texto { font-size: 16px; }
-  .sello { font-size: 42px; width: 150px; height: 150px; }
-  .despedida { font-size: 54px; }
+  .t-elegance .nombre-principal { font-size: 108px; }
+  .t-elegance .evento { font-size: 42px; }
+  .t-elegance .frase { font-size: 20px; }
+  .t-elegance .familia h3 { font-size: 60px; }
+  .t-elegance .familia p.nombre { font-size: 18px; }
+  .t-elegance .fecha p { font-size: 30px; }
+  .t-elegance .numero { font-size: 48px; }
+  .t-elegance .unidad { font-size: 16px; }
+  .t-elegance .ubicacion .lugar { font-size: 20px; }
+  .t-elegance .ubicacion .lugar-titulo { font-size: 60px; }
+  .t-elegance .boton { font-size: 16px; padding: 8px 24px; }
+  .t-elegance .extra h3 { font-size: 60px; }
+  .t-elegance .extra .texto { font-size: 16px; }
+  .t-elegance .sello { font-size: 42px; width: 150px; height: 150px; }
+  .t-elegance .despedida { font-size: 54px; }
 }

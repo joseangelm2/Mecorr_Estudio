@@ -9,6 +9,8 @@ interface Props {
   onUploadComplete: (url: string) => void
   accept?: string
   label?: string
+  /** Medidas y orientación recomendadas, se muestra debajo del botón. */
+  sizeHint?: string
 }
 
 export default function MediaUploader({
@@ -17,6 +19,7 @@ export default function MediaUploader({
   onUploadComplete,
   accept = 'image/*',
   label = 'Subir archivo',
+  sizeHint,
 }: Props) {
   const [uploading, setUploading] = useState(false)
   const [progress, setProgress] = useState(0)
@@ -115,6 +118,7 @@ export default function MediaUploader({
           </div>
         )}
       </button>
+      {sizeHint && <p className="text-xs text-gray-500 mt-1.5">{sizeHint}</p>}
 
       <input
         ref={inputRef}

@@ -34,7 +34,7 @@ export default function RosaGoldTemplate({ project }: Props) {
   }
 
   return (
-    <div>
+    <div className="t-rosagold">
       <audio ref={audioRef} id="background-music" loop preload="auto">
         <source src={project.music_url ?? '/images/esmeralda/musica.mp3'} type="audio/mpeg" />
       </audio>

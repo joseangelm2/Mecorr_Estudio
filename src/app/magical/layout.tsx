@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function MagicalLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className={`${cinzel.variable} ${sacramento.variable} ${playfair.variable}`}>
-      {children}
+      <div className="t-magical">{children}</div>
     </div>
   );
 }

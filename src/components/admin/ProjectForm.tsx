@@ -736,7 +736,7 @@ export default function ProjectForm({ project }: Props) {
           </Field>
           <Field title="Foto de la iglesia">
             {project?.id ? (
-              <MediaUploader projectId={project.id} bucket="invitation-media" accept="image/*" onUploadComplete={url => set('ceremony_photo_url', url)} label="Subir foto de la iglesia" />
+              <MediaUploader sizeHint="Horizontal · 1200 × 800 px (3:2)" projectId={project.id} bucket="invitation-media" accept="image/*" onUploadComplete={url => set('ceremony_photo_url', url)} label="Subir foto de la iglesia" />
             ) : (
               <p className="text-sm text-amber-600 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">Guarda el proyecto primero para poder subir imágenes.</p>
             )}
@@ -770,7 +770,7 @@ export default function ProjectForm({ project }: Props) {
           </Field>
           <Field title="Foto del salón">
             {project?.id ? (
-              <MediaUploader projectId={project.id} bucket="invitation-media" accept="image/*" onUploadComplete={url => set('reception_photo_url', url)} label="Subir foto del salón" />
+              <MediaUploader sizeHint="Horizontal · 1200 × 800 px (3:2)" projectId={project.id} bucket="invitation-media" accept="image/*" onUploadComplete={url => set('reception_photo_url', url)} label="Subir foto del salón" />
             ) : (
               <p className="text-sm text-amber-600 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">Guarda el proyecto primero para poder subir imágenes.</p>
             )}
@@ -814,7 +814,7 @@ export default function ProjectForm({ project }: Props) {
                 <input type="text" value={item.icon} onChange={e => setItineraryItem(i, 'icon', e.target.value)} className={input} placeholder="⛪ Emoji o URL del ícono" />
               </div>
               {project?.id && (
-                <MediaUploader projectId={project.id} bucket="invitation-media" onUploadComplete={url => setItineraryItem(i, 'icon', url)} label="Subir ícono personalizado" />
+                <MediaUploader sizeHint="Cuadrada · 400 × 400 px, PNG con transparencia" projectId={project.id} bucket="invitation-media" onUploadComplete={url => setItineraryItem(i, 'icon', url)} label="Subir ícono personalizado" />
               )}
             </div>
           ))}
@@ -833,7 +833,7 @@ export default function ProjectForm({ project }: Props) {
         <div className="space-y-6">
           <SectionCard title="Foto de portada" description="Imagen principal que aparece al abrir la invitación">
             {project?.id ? (
-              <MediaUploader projectId={project.id} bucket="invitation-media" accept="image/*" onUploadComplete={url => set('hero_photo_url', url)} label="Subir foto de portada" />
+              <MediaUploader sizeHint={form.template === 'esmeralda' || form.template === 'esmeralda-especial' ? 'Cuadrada · 1000 × 1000 px (se recorta en círculo, deja el rostro al centro)' : 'Vertical · 1080 × 1350 px (4:5)'} projectId={project.id} bucket="invitation-media" accept="image/*" onUploadComplete={url => set('hero_photo_url', url)} label="Subir foto de portada" />
             ) : (
               <p className="text-sm text-amber-600 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">Guarda el proyecto primero para poder subir imágenes.</p>
             )}
@@ -849,7 +849,7 @@ export default function ProjectForm({ project }: Props) {
           {(form.template === 'sobre' || form.template === 'zafiro') && (
             <SectionCard title="Foto de cierre" description="Imagen del fondo en la última sección. Si no se define, se reutiliza la última foto del álbum o la foto de portada.">
               {project?.id ? (
-                <MediaUploader projectId={project.id} bucket="invitation-media" accept="image/*" onUploadComplete={url => set('sobre_final_photo_url', url)} label="Subir foto de cierre" />
+                <MediaUploader sizeHint="Vertical · 1080 × 1350 px (4:5). Evita poner el rostro abajo: ahí va el nombre" projectId={project.id} bucket="invitation-media" accept="image/*" onUploadComplete={url => set('sobre_final_photo_url', url)} label="Subir foto de cierre" />
               ) : (
                 <p className="text-sm text-amber-600 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">Guarda el proyecto primero para poder subir archivos.</p>
               )}
@@ -1029,7 +1029,7 @@ export default function ProjectForm({ project }: Props) {
                     <div key={key} className="rounded-xl border border-gray-100 bg-gray-50/50 p-4 space-y-3">
                       <p className="text-sm font-semibold text-gray-800">{label}</p>
                       {project?.id && (
-                        <MediaUploader
+                        <MediaUploader sizeHint="Vertical · 1080 × 1350 px (4:5)"
                           projectId={project.id}
                           bucket="invitation-media"
                           accept="image/*"
@@ -1071,7 +1071,7 @@ export default function ProjectForm({ project }: Props) {
                         <p className="text-xs text-gray-400 mt-0.5">Posición {i + 1} en la sección Momentos</p>
                       </div>
                       {project?.id && (
-                        <MediaUploader
+                        <MediaUploader sizeHint="Vertical · 1080 × 1350 px, u horizontal · 1600 × 1067 px (3:2)"
                           projectId={project.id}
                           bucket="invitation-media"
                           accept="image/*"
@@ -1125,7 +1125,7 @@ export default function ProjectForm({ project }: Props) {
                         <p className="text-xs text-gray-400 mt-0.5">Ciclo {i + 1} de 4 en la sección vertical</p>
                       </div>
                       {project?.id && (
-                        <MediaUploader
+                        <MediaUploader sizeHint="Vertical · 1080 × 1440 px (3:4)"
                           projectId={project.id}
                           bucket="invitation-media"
                           accept="image/*"
@@ -1162,7 +1162,7 @@ export default function ProjectForm({ project }: Props) {
                         <p className="text-xs text-gray-400 mt-0.5">Ciclo {i + 1} de 4 en la sección panorámica</p>
                       </div>
                       {project?.id && (
-                        <MediaUploader
+                        <MediaUploader sizeHint="Horizontal · 1600 × 900 px (16:9)"
                           projectId={project.id}
                           bucket="invitation-media"
                           accept="image/*"
@@ -1328,7 +1328,7 @@ export default function ProjectForm({ project }: Props) {
                 placeholder="https://..."
               />
               {project?.id ? (
-                <MediaUploader
+                <MediaUploader sizeHint="Vertical · 1080 × 1920 px (9:16), cubre toda la pantalla"
                   projectId={project.id}
                   bucket="invitation-media"
                   accept="image/*"
@@ -1381,7 +1381,7 @@ export default function ProjectForm({ project }: Props) {
                       placeholder="https://... (imagen de decoración)"
                     />
                     {project?.id ? (
-                      <MediaUploader
+                      <MediaUploader sizeHint="PNG con transparencia · 600 × 600 px"
                         projectId={project.id}
                         bucket="invitation-media"
                         accept="image/*"
@@ -1405,7 +1405,7 @@ export default function ProjectForm({ project }: Props) {
                   placeholder="https://..."
                 />
                 {project?.id ? (
-                  <MediaUploader
+                  <MediaUploader sizeHint="Cuadrada · 600 × 600 px, PNG con transparencia"
                     projectId={project.id}
                     bucket="invitation-media"
                     accept="image/*"
@@ -1426,7 +1426,7 @@ export default function ProjectForm({ project }: Props) {
                 placeholder="https://..."
               />
               {project?.id ? (
-                <MediaUploader
+                <MediaUploader sizeHint={form.template === 'esmeralda-especial' ? 'Vertical · 1080 × 1920 px (9:16), se parte en dos al abrirse' : 'PNG · 1000 px de alto'}
                   projectId={project.id}
                   bucket="invitation-media"
                   accept="image/*"
@@ -1447,7 +1447,7 @@ export default function ProjectForm({ project }: Props) {
                   placeholder="https://..."
                 />
                 {project?.id ? (
-                  <MediaUploader
+                  <MediaUploader sizeHint="PNG · 1000 px de alto"
                     projectId={project.id}
                     bucket="invitation-media"
                     accept="image/*"
@@ -1561,7 +1561,7 @@ export default function ProjectForm({ project }: Props) {
                     placeholder="https://..."
                   />
                   {project?.id ? (
-                    <MediaUploader
+                    <MediaUploader sizeHint="Cuadrada · 600 × 600 px, PNG con transparencia"
                       projectId={project.id}
                       bucket="invitation-media"
                       accept="image/*"
@@ -1593,7 +1593,7 @@ export default function ProjectForm({ project }: Props) {
                       placeholder="https://..."
                     />
                     {project?.id ? (
-                      <MediaUploader
+                      <MediaUploader sizeHint="Horizontal · 1000 × 340 px, PNG con transparencia"
                         projectId={project.id}
                         bucket="invitation-media"
                         accept="image/*"
@@ -1643,7 +1643,7 @@ export default function ProjectForm({ project }: Props) {
                     placeholder="https://..."
                   />
                   {project?.id ? (
-                    <MediaUploader
+                    <MediaUploader sizeHint="Cuadrada · 600 × 600 px, PNG con transparencia"
                       projectId={project.id}
                       bucket="invitation-media"
                       accept="image/*"
@@ -1767,7 +1767,7 @@ export default function ProjectForm({ project }: Props) {
                         placeholder="https://..."
                       />
                       {project?.id ? (
-                        <MediaUploader
+                        <MediaUploader sizeHint="Cuadrada · 600 × 600 px, PNG con transparencia"
                           projectId={project.id}
                           bucket="invitation-media"
                           accept="image/*"

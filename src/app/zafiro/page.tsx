@@ -2,7 +2,7 @@
 
 import "@/app/zafiro/zafiro.css";
 import { useState, useRef, useEffect } from "react";
-import { DEMO_PROJECT } from "@/lib/demo-project";
+import { demoProjectFor } from "@/lib/demo-project";
 import {
   ZafiroScrollInit,
   ZafiroEnvelope,
@@ -15,6 +15,10 @@ import {
   ZafiroGifts,
   ZafiroRSVP,
 } from "@/components/zafiro";
+import DemoFloatingControls from "@/components/DemoFloatingControls";
+import { NAV_PINK_ZAFIRO } from "@/lib/demo-nav";
+
+const DEMO_PROJECT = demoProjectFor("zafiro");
 
 const DEFAULT_PHOTOS = [
   "/images/zafiro/foto1.jpg",
@@ -48,6 +52,7 @@ export default function ZafiroPage() {
       <audio ref={audioRef} loop>
         <source src="/images/zafiro/musica.mp3" type="audio/mpeg" />
       </audio>
+      <DemoFloatingControls candidates={NAV_PINK_ZAFIRO} colorVar="var(--color-principal, #b08968)" />
       {!open && <ZafiroEnvelope onOpen={handleOpen} />}
       <div className="top">
         <img className="top-img" src="/images/zafiro/452.png" alt="" />
@@ -56,33 +61,33 @@ export default function ZafiroPage() {
         <img className="bottom-img" src="/images/zafiro/453.png" alt="" />
       </div>
       <div className="contenido">
-        <ZafiroHero project={project} />
+        <div id="portada"><ZafiroHero project={project} /></div>
         {photos[0] && (
           <div className="foto-con-degradado">
             <img className="foto-full show-p-y" src={photos[0]} alt="" />
           </div>
         )}
-        <ZafiroParents project={DEMO_PROJECT} />
+        <div id="familia"><ZafiroParents project={DEMO_PROJECT} /></div>
         {photos[1] && (
           <div className="foto-con-degradado">
             <img className="foto-full show-p-y" src={photos[1]} alt="" />
           </div>
         )}
-        <ZafiroDate project={DEMO_PROJECT} />
-        <ZafiroLocations project={DEMO_PROJECT} />
+        <div id="fecha"><ZafiroDate project={DEMO_PROJECT} /></div>
+        <div id="ubicaciones"><ZafiroLocations project={DEMO_PROJECT} /></div>
         {photos[2] && (
           <div className="foto-con-degradado">
             <img className="foto-full show-p-y" src={photos[2]} alt="" />
           </div>
         )}
-        <ZafiroGifts project={DEMO_PROJECT} />
+        <div id="regalos"><ZafiroGifts project={DEMO_PROJECT} /></div>
         {photos[3] && (
           <div className="foto-con-degradado">
             <img className="foto-full show-p-y" src={photos[3]} alt="" />
           </div>
         )}
-        <ZafiroPhotoGrid photos={photos.slice(4)} />
-        <ZafiroItinerary project={DEMO_PROJECT} />
+        <div id="fotos"><ZafiroPhotoGrid photos={photos.slice(4)} /></div>
+        <div id="itinerario"><ZafiroItinerary project={DEMO_PROJECT} /></div>
         <ZafiroRSVP project={DEMO_PROJECT} />
         <div className="extra">
           <img src="/images/zafiro/corona_bottom.png" style={{ width: "30%", marginBottom: "-5%" }} alt="" />

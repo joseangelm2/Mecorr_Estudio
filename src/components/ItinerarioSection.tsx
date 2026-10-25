@@ -11,27 +11,30 @@ interface TimelineItem {
 }
 
 interface Props {
+  /** Carpeta base de las imágenes (cada demo usa la suya). Por defecto, la raíz /images. */
+  assetBase?: string;
   itinerary?: TimelineItem[];
 }
 
-const DEFAULT_ITEMS: TimelineItem[] = [
-  { title: "Ceremonia Religiosa", time: "15:00", icon: "/images/iglesia.png" },
-  { title: "Recepción", time: "18:00", icon: "/images/recep.png" },
+const defaultItems = (base: string): TimelineItem[] => [
+  { title: "Ceremonia Religiosa", time: "15:00", icon: `${base}/iglesia.png` },
+  { title: "Recepción", time: "18:00", icon: `${base}/recep.png` },
 ];
 
-const DEFAULT_ICONS = [
-  "/images/iglesia.png",
-  "/images/recep.png",
-  "/images/calendario.png",
-  "/images/formal.png",
+const defaultIcons = (base: string) => [
+  `${base}/iglesia.png`,
+  `${base}/recep.png`,
+  `${base}/calendario.png`,
+  `${base}/formal.png`,
 ];
 
-function resolveIcon(item: TimelineItem, index: number): string {
+function resolveIcon(item: TimelineItem, index: number, base: string): string {
   const src = item.iconSrc ?? item.icon ?? "";
-  return src || DEFAULT_ICONS[index % DEFAULT_ICONS.length];
+  const icons = defaultIcons(base);
+  return src || icons[index % icons.length];
 }
 
-export default function ItinerarioSection({ itinerary = DEFAULT_ITEMS }: Props) {
+export default function ItinerarioSection({ assetBase = "/images", itinerary = defaultItems(assetBase) }: Props) {
   const items = itinerary;
   const timelineRef = useRef<HTMLUListElement>(null);
 
@@ -79,7 +82,7 @@ export default function ItinerarioSection({ itinerary = DEFAULT_ITEMS }: Props) 
         <div className="row justify-content-center">
           <div className="col-md-10">
             <div className="mb-10 text-center wow fadeInUp">
-              <img src="/images/flores-01.png" width="160" alt="" />
+              <img src={`${assetBase}/flores-01.png`} width="160" alt="" />
             </div>
             <h1 className="titulo mb-60 color-titulos text-center wow fadeInUp">
               Itinerario
@@ -103,7 +106,7 @@ export default function ItinerarioSection({ itinerary = DEFAULT_ITEMS }: Props) 
                     </p>
                     <div className="icon-holder">
                       <div className="text-center">
-                        <img src={resolveIcon(item, i)} width="60" alt={item.title} />
+                        <img src={resolveIcon(item, i, assetBase)} width="60" alt={item.title} />
                       </div>
                     </div>
                   </li>

@@ -1,10 +1,10 @@
-const STORE_ICONS: Record<string, string> = {
-  liverpool: "/images/elegance/liverpool.png",
-  amazon: "/images/elegance/amazon.svg",
-  palacio: "/images/elegance/palacio.svg",
-  sears: "/images/elegance/sears.svg",
-  generic: "/images/elegance/mesa_regalos.png",
-};
+const storeIcons = (base: string): Record<string, string> => ({
+  liverpool: `${base}/elegance/liverpool.png`,
+  amazon: `${base}/elegance/amazon.svg`,
+  palacio: `${base}/elegance/palacio.svg`,
+  sears: `${base}/elegance/sears.svg`,
+  generic: `${base}/elegance/mesa_regalos.png`,
+});
 
 const STORE_LABELS: Record<string, string> = {
   liverpool: "Liverpool",
@@ -15,15 +15,19 @@ const STORE_LABELS: Record<string, string> = {
 };
 
 interface Props {
+  /** Carpeta base de las imágenes (cada demo usa la suya). Por defecto, la raíz /images. */
+  assetBase?: string;
   liverpoolLink?: string;
   giftStore?: string;
 }
 
 export default function MesaRegalosSection({
+  assetBase = "/images",
   liverpoolLink = "https://mesaderegalos.liverpool.com.mx/milistaderegalos/51309081",
   giftStore = "liverpool",
 }: Props) {
-  const storeIcon = STORE_ICONS[giftStore] ?? STORE_ICONS.liverpool;
+  const icons = storeIcons(assetBase);
+  const storeIcon = icons[giftStore] ?? icons.liverpool;
   const storeLabel = STORE_LABELS[giftStore] ?? STORE_LABELS.liverpool;
 
   return (
@@ -36,7 +40,7 @@ export default function MesaRegalosSection({
         <div className="row justify-content-center">
           <div className="col-md-10">
             <div className="mb-10 text-center wow fadeInUp">
-              <img src="/images/flores-01.png" width="160" alt="" />
+              <img src={`${assetBase}/flores-01.png`} width="160" alt="" />
             </div>
             <h1 className="titulo mb-20 color-titulos text-center wow fadeInUp">
               Mesa de Regalos

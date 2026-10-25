@@ -4,12 +4,15 @@ import { useRef, type RefObject } from "react";
 import ColorSwitcher from "@/components/ColorSwitcher";
 
 interface Props {
+  /** Carpeta base de las imágenes (cada demo usa la suya). Por defecto, la raíz /images. */
+  assetBase?: string;
   musicUrl?: string;
   showSwitcher?: boolean;
   audioRef?: RefObject<HTMLAudioElement | null>;
 }
 
 export default function IntroEnvelope({
+  assetBase = "/images",
   musicUrl = "https://invitadigitalmanitas.com/musica/nocrezcasmas.mp3",
   showSwitcher = true,
   audioRef: externalAudioRef,
@@ -52,14 +55,14 @@ export default function IntroEnvelope({
           ref={sDerechoRef}
           id="s-derecho"
           className="sobre-derecho"
-          src="/images/sobre-derecho.png"
+          src={`${assetBase}/sobre-derecho.png`}
           alt=""
         />
         <img
           ref={sIzquierdoRef}
           id="s-izquierdo"
           className="sobre-izquierdo"
-          src="/images/sobre-izquierdo.png"
+          src={`${assetBase}/sobre-izquierdo.png`}
           alt=""
         />
         <button
@@ -78,7 +81,7 @@ export default function IntroEnvelope({
         >
           <img
             className="sello-img"
-            src="/images/sello.png"
+            src={`${assetBase}/sello.png`}
             alt="Abrir"
             style={{
               width: "120px",

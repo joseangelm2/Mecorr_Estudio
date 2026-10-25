@@ -8,11 +8,14 @@ const DEFAULT_CALENDAR_LINK =
   "https://calendar.google.com/calendar/r/eventedit?text=XV+Años+Aime+Ferreira&dates=20261122T150000/20261123T020000&details=Ceremonia+y+Recepción";
 
 interface Props {
+  /** Carpeta base de las imágenes (cada demo usa la suya). Por defecto, la raíz /images. */
+  assetBase?: string;
   eventDate?: string;
   quinceaneraName?: string;
 }
 
 export default function ContadorSection({
+  assetBase = "/images",
   eventDate = DEFAULT_EVENT_DATE,
   quinceaneraName = "Aime Ferreira",
 }: Props) {
@@ -114,7 +117,7 @@ export default function ContadorSection({
                 style={{ border: "1px solid #fff", cursor: "pointer", display: "inline-block" }}
               >
                 <img
-                  src="/images/calendario.png"
+                  src={`${assetBase}/calendario.png`}
                   alt="Calendario"
                   style={{ width: 16, height: 16, display: "inline", marginRight: 6 }}
                 />

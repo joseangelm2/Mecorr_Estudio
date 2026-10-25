@@ -7,6 +7,8 @@ interface ReceptionInfo {
 }
 
 interface Props {
+  /** Carpeta base de las imágenes (cada demo usa la suya). Por defecto, la raíz /images. */
+  assetBase?: string;
   reception?: ReceptionInfo;
 }
 
@@ -17,7 +19,7 @@ const DEFAULT_RECEPTION: ReceptionInfo = {
   mapsUrl: "https://maps.app.goo.gl/XJbvxRgHouJVdX966",
 };
 
-export default function RecepcionSection({ reception = DEFAULT_RECEPTION }: Props) {
+export default function RecepcionSection({ assetBase = "/images", reception = DEFAULT_RECEPTION }: Props) {
   const mapsHref = reception.mapLink ?? reception.mapsUrl ?? DEFAULT_RECEPTION.mapsUrl ?? "";
   return (
     <section
@@ -30,13 +32,13 @@ export default function RecepcionSection({ reception = DEFAULT_RECEPTION }: Prop
         style={{ maxWidth: "100%", padding: "0 15px" }}
       >
         <div className="mb-10 text-center wow fadeInUp">
-          <img src="/images/flores-01.png" width="160" alt="" />
+          <img src={`${assetBase}/flores-01.png`} width="160" alt="" />
         </div>
         <h1 className="titulo color-titulos mb-20 text-center wow fadeInUp">
           Recepción
         </h1>
         <div className="mb-20 text-center wow fadeInUp">
-          <img src="/images/recep.png" width="60" alt="Recepción" />
+          <img src={`${assetBase}/recep.png`} width="60" alt="Recepción" />
         </div>
         <div className="row">
           <div className="col-md-12 wow fadeInUp">

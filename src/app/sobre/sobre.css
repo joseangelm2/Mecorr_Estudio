@@ -1,3 +1,4 @@
+/* scoped:t-sobre */
 /* Custom font: Marchila (Titles) */
 @font-face {
   font-family: "Titles";
@@ -14,7 +15,7 @@
    COLOR VARIABLES — overridable via JS
    ====================================== */
 
-:root {
+:root:has(.t-sobre) {
   --inv-primary: #a8686a;
   --inv-primary-dark: #96585a;
   --inv-primary-light: #a8686a;
@@ -26,17 +27,17 @@
    GLOBAL LAYOUT
    ====================================== */
 
-html {
+html:has(.t-sobre) {
   overflow: hidden;
   position: relative;
   overflow-x: hidden !important;
 }
 
-html.con-scroll {
+html.con-scroll:has(.t-sobre) {
   overflow-y: scroll;
 }
 
-body {
+body:has(.t-sobre) {
   margin: 0;
   position: relative;
   background-color: #222;
@@ -44,14 +45,14 @@ body {
   font-family: "Handlee", cursive;
 }
 
-.bg-invitacion::after {
+.bg-invitacion:has(.t-sobre)::after {
   position: fixed;
   z-index: -1;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
-  background-image: url(/images/background-mob.jpg);
+  background-image: url(/images/sobre/background-mob.jpg);
   background-size: cover;
   background-position: center;
   content: "";
@@ -60,18 +61,18 @@ body {
 }
 
 @media (min-width: 769px) {
-  #body {
+  #body:has(.t-sobre) {
     width: 30%;
     position: relative;
     margin: 0 auto;
     background-color: #222;
   }
-  .bg-invitacion::after {
+  .bg-invitacion:has(.t-sobre)::after {
     right: 35%;
     width: 30%;
     left: auto;
   }
-  .invitado {
+  .t-sobre .invitado {
     width: 30% !important;
   }
 }
@@ -80,16 +81,16 @@ body {
    TYPOGRAPHY
    ====================================== */
 
-h1, h2, h3, h4, h5, h6 {
+.t-sobre h1,.t-sobre  h2,.t-sobre  h3,.t-sobre  h4,.t-sobre  h5,.t-sobre  h6 {
   font-family: "Titles", serif !important;
 }
 
-p, a, li {
+.t-sobre p,.t-sobre  a,.t-sobre  li {
   font-family: "Handlee", cursive;
   font-size: 18px;
 }
 
-.titulo {
+.t-sobre .titulo {
   font-size: 30px;
   font-family: "Titles", serif !important;
 }
@@ -98,9 +99,9 @@ p, a, li {
    COLORS — use CSS variables
    ====================================== */
 
-.color-principal { background: linear-gradient(to right, var(--inv-primary-dark), var(--inv-primary), var(--inv-primary-light)); }
+.t-sobre .color-principal { background: linear-gradient(to right, var(--inv-primary-dark), var(--inv-primary), var(--inv-primary-light)); }
 
-.color-titulos {
+.t-sobre .color-titulos {
   background: linear-gradient(
     to right,
     var(--inv-primary-dark) 0%,
@@ -113,37 +114,37 @@ p, a, li {
   padding: 5px 0 !important;
 }
 
-.color-textos { color: #292929; }
-.sombra { text-shadow: #000 0.05em 0.05em 0.05em; }
+.t-sobre .color-textos { color: #292929; }
+.t-sobre .sombra { text-shadow: #000 0.05em 0.05em 0.05em; }
 
 /* ======================================
    SPACING
    ====================================== */
 
-.mb-0  { margin-bottom: 0 !important; }
-.mb-10 { margin-bottom: 10px !important; }
-.mb-20 { margin-bottom: 20px !important; }
-.mb-30 { margin-bottom: 30px !important; }
-.mb-40 { margin-bottom: 40px !important; }
-.mb-50 { margin-bottom: 50px !important; }
-.mb-60 { margin-bottom: 60px !important; }
+.t-sobre .mb-0  { margin-bottom: 0 !important; }
+.t-sobre .mb-10 { margin-bottom: 10px !important; }
+.t-sobre .mb-20 { margin-bottom: 20px !important; }
+.t-sobre .mb-30 { margin-bottom: 30px !important; }
+.t-sobre .mb-40 { margin-bottom: 40px !important; }
+.t-sobre .mb-50 { margin-bottom: 50px !important; }
+.t-sobre .mb-60 { margin-bottom: 60px !important; }
 
-.text-center { text-align: center; }
-.text-center img { margin-left: auto; margin-right: auto; }
-.text-white  { color: #fff !important; }
+.t-sobre .text-center { text-align: center; }
+.t-sobre .text-center img { margin-left: auto; margin-right: auto; }
+.t-sobre .text-white  { color: #fff !important; }
 
 /* ======================================
    GRID (Bootstrap-compat minimal)
    ====================================== */
 
-.row {
+.t-sobre .row {
   display: flex;
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
 }
-.justify-content-center { justify-content: center; }
-.col-md-10,
+.t-sobre .justify-content-center { justify-content: center; }
+.t-sobre .col-md-10,.t-sobre 
 .col-md-12 {
   width: 100%;
   padding-right: 15px;
@@ -154,13 +155,13 @@ p, a, li {
    SECTIONS
    ====================================== */
 
-.padding-section { padding: 50px 0; position: relative; }
-.padding-final   { padding: 450px 0 40px 0; }
+.t-sobre .padding-section { padding: 50px 0; position: relative; }
+.t-sobre .padding-final   { padding: 450px 0 40px 0; }
 
-.bg-img { background-position: center; background-size: cover; }
+.t-sobre .bg-img { background-position: center; background-size: cover; }
 
-.bg-overlay-contador { position: relative; z-index: 1; }
-.bg-overlay-contador::after {
+.t-sobre .bg-overlay-contador { position: relative; z-index: 1; }
+.t-sobre .bg-overlay-contador::after {
   position: absolute; z-index: -1; top: 0; left: 0;
   width: 100%; height: 100%;
   background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 31%, rgba(0,0,0,0.65) 100%);
@@ -171,50 +172,50 @@ p, a, li {
    INTRO ENVELOPE
    ====================================== */
 
-.bg-overlay-intro { position: relative; z-index: 1; }
-.bg-overlay-intro::after {
+.t-sobre .bg-overlay-intro { position: relative; z-index: 1; }
+.t-sobre .bg-overlay-intro::after {
   position: absolute; z-index: -1; top: 0; left: 0;
   width: 100%; height: 100%;
   background-color: #fff; opacity: 0.6; content: "";
 }
 
-.bg-intro {
-  background-image: url(/images/background-mob.jpg);
+.t-sobre .bg-intro {
+  background-image: url(/images/sobre/background-mob.jpg);
   background-size: cover; background-position: center; background-color: #222;
 }
 
-#intro {
+.t-sobre #intro {
   width: 100%; height: 100vh; z-index: 99999999;
   position: fixed; top: 0; left: 0;
   display: flex; justify-content: center; align-content: center; flex-direction: column;
   backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
 }
 
-.sobre-izquierdo { position: absolute; left: 0; top: 0; bottom: 0; margin: auto; height: 100%; filter: var(--inv-filter-light, hue-rotate(0deg) brightness(1.4)); transition: filter 0.4s; }
-.sobre-derecho   { position: absolute; right: 0; top: 0; height: 100%; filter: var(--inv-filter-light, hue-rotate(0deg) brightness(1.4)); transition: filter 0.4s; }
-.sello           { position: absolute; width: 120px; top: 45%; left: 40%; }
-.sello-img       { filter: var(--inv-filter, hue-rotate(0deg)); transition: filter 0.4s; }
+.t-sobre .sobre-izquierdo { position: absolute; left: 0; top: 0; bottom: 0; margin: auto; height: 100%; filter: var(--inv-filter-light, hue-rotate(0deg) brightness(1.4)); transition: filter 0.4s; }
+.t-sobre .sobre-derecho   { position: absolute; right: 0; top: 0; height: 100%; filter: var(--inv-filter-light, hue-rotate(0deg) brightness(1.4)); transition: filter 0.4s; }
+.t-sobre .sello           { position: absolute; width: 120px; top: 45%; left: 40%; }
+.t-sobre .sello-img       { filter: var(--inv-filter, hue-rotate(0deg)); transition: filter 0.4s; }
 
-.desaparecer   { visibility: hidden; opacity: 0; transition: all 3s; }
-.efecto-derecha { right: -800px !important; transition: all 3s; position: absolute; }
-.efecto-izquierda { left: -800px !important; transition: all 3s; position: absolute; }
+.t-sobre .desaparecer   { visibility: hidden; opacity: 0; transition: all 3s; }
+.t-sobre .efecto-derecha { right: -800px !important; transition: all 3s; position: absolute; }
+.t-sobre .efecto-izquierda { left: -800px !important; transition: all 3s; position: absolute; }
 
 /* ======================================
    STICKY BANNER
    ====================================== */
 
-.invitado { padding: 5px 0; width: 100%; position: fixed; top: 0; z-index: 10; }
-#cintillo { opacity: 0; transition-duration: 0.5s; }
-#cintillo.cintillo-scrolled { opacity: 1 !important; transition-duration: 0.5s; }
+.t-sobre .invitado { padding: 5px 0; width: 100%; position: fixed; top: 0; z-index: 10; }
+.t-sobre #cintillo { opacity: 0; transition-duration: 0.5s; }
+.t-sobre #cintillo.cintillo-scrolled { opacity: 1 !important; transition-duration: 0.5s; }
 
 /* ======================================
    SCROLL ARROW
    ====================================== */
 
-.scroll       { display: block; width: 18px; }
-.scroll_arrow { display: block; height: 10px; animation: downarrow 2.5s infinite; }
+.t-sobre .scroll       { display: block; width: 18px; }
+.t-sobre .scroll_arrow { display: block; height: 10px; animation: downarrow-t-sobre 2.5s infinite; }
 
-@keyframes downarrow {
+@keyframes downarrow-t-sobre {
   0%   { transform: translate(0, 0); opacity: 0; }
   50%  { transform: translate(0, 10px); opacity: 1; }
   100% { transform: translate(0, 0); opacity: 0; }
@@ -224,10 +225,10 @@ p, a, li {
    COUNTDOWN
    ====================================== */
 
-ul.tiempo { margin: 0; padding: 0; text-align: center; display: flex; justify-content: center; }
-.tiempo li { display: inline-flex; flex-direction: column; align-items: center; list-style-type: none; margin: 0; color: #fff; padding: 0 15px; font-size: 18px; }
-.tiempo li span:not(.circulo-tiempo) { display: block; }
-.circulo-tiempo {
+.t-sobre ul.tiempo { margin: 0; padding: 0; text-align: center; display: flex; justify-content: center; }
+.t-sobre .tiempo li { display: inline-flex; flex-direction: column; align-items: center; list-style-type: none; margin: 0; color: #fff; padding: 0 15px; font-size: 18px; }
+.t-sobre .tiempo li span:not(.circulo-tiempo) { display: block; }
+.t-sobre .circulo-tiempo {
   list-style-type: none; margin: 0; color: #fff; font-size: 18px;
   border-radius: 50%; background: linear-gradient(135deg, var(--inv-primary-dark), var(--inv-primary), var(--inv-primary-light)); border: solid 1px #fff;
   width: 50px; height: 50px;
@@ -240,10 +241,10 @@ ul.tiempo { margin: 0; padding: 0; text-align: center; display: flex; justify-co
    BUTTONS & LINKS
    ====================================== */
 
-.link-abrir { color: #fff; font-size: 14px; padding: 10px 40px; text-decoration: none; letter-spacing: 1px; border-radius: 30px; }
-.link-abrir:hover { color: #fff; }
+.t-sobre .link-abrir { color: #fff; font-size: 14px; padding: 10px 40px; text-decoration: none; letter-spacing: 1px; border-radius: 30px; }
+.t-sobre .link-abrir:hover { color: #fff; }
 
-.btn-form {
+.t-sobre .btn-form {
   color: #fff; font-size: 14px;
   font-family: "Handlee", cursive;
   padding: 10px 40px; border: 1px solid var(--inv-primary);
@@ -251,80 +252,80 @@ ul.tiempo { margin: 0; padding: 0; text-align: center; display: flex; justify-co
   background: linear-gradient(to right, var(--inv-primary-dark), var(--inv-primary), var(--inv-primary-light)); cursor: pointer;
   transition: background 0.2s, border-color 0.2s;
 }
-.btn-form:hover { background: var(--inv-primary-dark); border-color: var(--inv-primary-dark); }
+.t-sobre .btn-form:hover { background: var(--inv-primary-dark); border-color: var(--inv-primary-dark); }
 
 /* ======================================
    FORM
    ====================================== */
 
-.form-campo {
+.t-sobre .form-campo {
   background: rgba(255, 255, 255, 0.3); width: 100%;
   border: 1px solid var(--inv-border); padding: 10px 10px;
   color: #000; border-radius: 15px;
   font-family: "Handlee", cursive;
   transition: border-color 0.4s;
 }
-.form-campo::placeholder { color: #000; }
-.form-campo:focus { color: #000; outline: none; }
+.t-sobre .form-campo::placeholder { color: #000; }
+.t-sobre .form-campo:focus { color: #000; outline: none; }
 
 /* ======================================
    TIMELINE
    ====================================== */
 
-.timeline-container { display: flex; justify-content: center; }
-.timeline-container .vertical-scrollable-timeline { width: 100%; list-style-type: none; position: relative; padding: 0; }
-.timeline-container .vertical-scrollable-timeline .list-progress {
+.t-sobre .timeline-container { display: flex; justify-content: center; }
+.t-sobre .timeline-container .vertical-scrollable-timeline { width: 100%; list-style-type: none; position: relative; padding: 0; }
+.t-sobre .timeline-container .vertical-scrollable-timeline .list-progress {
   width: 8px; height: 100%; background-color: var(--inv-primary);
   position: absolute; left: 53px; top: 0; overflow: hidden;
   transition: background 0.4s;
 }
-.timeline-container .vertical-scrollable-timeline .list-progress .inner {
+.t-sobre .timeline-container .vertical-scrollable-timeline .list-progress .inner {
   position: absolute; right: 0; bottom: 0; height: 100%;
   background-color: #c5c3cb; width: 100%;
 }
-.timeline-container .vertical-scrollable-timeline li { position: relative; padding: 0px 0px 80px 100px; }
-.timeline-container .vertical-scrollable-timeline li .icon-holder {
+.t-sobre .timeline-container .vertical-scrollable-timeline li { position: relative; padding: 0px 0px 80px 100px; }
+.t-sobre .timeline-container .vertical-scrollable-timeline li .icon-holder {
   position: absolute; left: 0; top: 0; width: 50px; height: 50px;
   display: flex; justify-content: center; align-items: center;
   background-color: #c5c3cb; border-radius: 50%; z-index: 1; transition: 0.4s all;
 }
-.timeline-container .vertical-scrollable-timeline li .icon-holder::before {
+.t-sobre .timeline-container .vertical-scrollable-timeline li .icon-holder::before {
   content: ""; width: 100px; height: 100px; border: 4px solid #fff;
   position: absolute; background-color: #c5c3cb; border-radius: 50%; z-index: -1; transition: 0.4s all;
 }
-.timeline-container .vertical-scrollable-timeline li::before {
+.t-sobre .timeline-container .vertical-scrollable-timeline li::before {
   content: ""; position: absolute; height: 100%; width: 8px;
   background-color: transparent; left: 48px; z-index: 0;
 }
-.timeline-container .vertical-scrollable-timeline li.active .icon-holder { background-color: var(--inv-primary); }
-.timeline-container .vertical-scrollable-timeline li.active .icon-holder img { filter: invert(100%); }
-.timeline-container .vertical-scrollable-timeline li.active .icon-holder::before { background-color: var(--inv-primary); }
+.t-sobre .timeline-container .vertical-scrollable-timeline li.active .icon-holder { background-color: var(--inv-primary); }
+.t-sobre .timeline-container .vertical-scrollable-timeline li.active .icon-holder img { filter: invert(100%); }
+.t-sobre .timeline-container .vertical-scrollable-timeline li.active .icon-holder::before { background-color: var(--inv-primary); }
 
 /* ======================================
    CAROUSEL DOTS
    ====================================== */
 
-.owl-fotos .owl-dots { text-align: center; margin-top: 40px; }
-.owl-fotos .owl-dots .owl-dot { display: inline-block; }
-.owl-fotos .owl-dots .owl-dot span {
+.t-sobre .owl-fotos .owl-dots { text-align: center; margin-top: 40px; }
+.t-sobre .owl-fotos .owl-dots .owl-dot { display: inline-block; }
+.t-sobre .owl-fotos .owl-dots .owl-dot span {
   width: 8px; height: 8px; margin: 5px; background: #999;
   display: block; border-radius: 50%; transition: background 200ms ease;
 }
-.owl-fotos .owl-dots .owl-dot.active span,
+.t-sobre .owl-fotos .owl-dots .owl-dot.active span,.t-sobre 
 .owl-fotos .owl-dots .owl-dot:hover span { background: var(--inv-primary); }
 
 /* ======================================
    WOW ANIMATIONS
    ====================================== */
 
-@keyframes fadeInUp {
+@keyframes fadeInUp-t-sobre {
   from { opacity: 0; transform: translate3d(0, 40px, 0); }
   to   { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
-.wow { visibility: hidden; }
-.wow.animated { visibility: visible; }
-.wow.animated.fadeInUp { visibility: visible; animation-name: fadeInUp; animation-fill-mode: both; }
+.t-sobre .wow { visibility: hidden; }
+.t-sobre .wow.animated { visibility: visible; }
+.t-sobre .wow.animated.fadeInUp { visibility: visible; animation-name: fadeInUp-t-sobre; animation-fill-mode: both; }
 
 @keyframes pulse {
   0%   { transform: scale(1); }
@@ -336,7 +337,7 @@ ul.tiempo { margin: 0; padding: 0; text-align: center; display: flex; justify-co
    COLOR SWITCHER PANEL
    ====================================== */
 
-.color-switcher {
+.t-sobre .color-switcher {
   position: fixed;
   bottom: 24px;
   right: 16px;
@@ -347,7 +348,7 @@ ul.tiempo { margin: 0; padding: 0; text-align: center; display: flex; justify-co
   gap: 8px;
 }
 
-.color-switcher-label {
+.t-sobre .color-switcher-label {
   font-family: "Handlee", cursive;
   font-size: 10px;
   font-weight: 700;
@@ -361,7 +362,7 @@ ul.tiempo { margin: 0; padding: 0; text-align: center; display: flex; justify-co
   backdrop-filter: blur(6px);
 }
 
-.color-switcher-swatches {
+.t-sobre .color-switcher-swatches {
   display: flex;
   gap: 8px;
   background: rgba(0,0,0,0.45);
@@ -371,7 +372,7 @@ ul.tiempo { margin: 0; padding: 0; text-align: center; display: flex; justify-co
   box-shadow: 0 4px 16px rgba(0,0,0,0.3);
 }
 
-.color-swatch {
+.t-sobre .color-swatch {
   width: 26px;
   height: 26px;
   border-radius: 50%;
@@ -381,16 +382,16 @@ ul.tiempo { margin: 0; padding: 0; text-align: center; display: flex; justify-co
   position: relative;
 }
 
-.color-swatch:hover {
+.t-sobre .color-swatch:hover {
   transform: scale(1.2);
 }
 
-.color-swatch.active {
+.t-sobre .color-swatch.active {
   border-color: #fff;
   transform: scale(1.15);
 }
 
-.color-swatch[title]::after {
+.t-sobre .color-swatch[title]::after {
   content: attr(title);
   position: absolute;
   bottom: calc(100% + 6px);
@@ -407,11 +408,11 @@ ul.tiempo { margin: 0; padding: 0; text-align: center; display: flex; justify-co
   transition: opacity 0.2s;
 }
 
-.color-swatch:hover[title]::after {
+.t-sobre .color-swatch:hover[title]::after {
   opacity: 1;
 }
 
-.color-switcher--inline {
+.t-sobre .color-switcher--inline {
   position: absolute;
   bottom: 32px;
   left: 50%;
@@ -424,14 +425,14 @@ ul.tiempo { margin: 0; padding: 0; text-align: center; display: flex; justify-co
    SCROLLBAR
    ====================================== */
 
-::-webkit-scrollbar { width: 10px; background-color: #fff; }
-::-webkit-scrollbar-track { background-color: #000; }
-::-webkit-scrollbar-thumb { background-color: var(--inv-border); transition: background 0.4s; }
+.t-sobre ::-webkit-scrollbar { width: 10px; background-color: #fff; }
+.t-sobre ::-webkit-scrollbar-track { background-color: #000; }
+.t-sobre ::-webkit-scrollbar-thumb { background-color: var(--inv-border); transition: background 0.4s; }
 
 /* ======================================
    INVITATION TEXT
    ====================================== */
 
-.invitation-text-content {
+.t-sobre .invitation-text-content {
   white-space: pre-line;
 }
