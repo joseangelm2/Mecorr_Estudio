@@ -14,7 +14,7 @@ export const DEMO_PROJECT: Project = {
   hashtag: '#XVAlison',
   instagram_mode: 'instagram',
   show_instagram_album: true,
-  music_url: '/images/esmeralda/musica.mp3',
+  music_url: '/images/esmeralda/base/musica.mp3',
   hero_photo_url: '/images/esmeralda/foto.jpg',
   parent_names: ['Elías Moises Galván Juárez', 'Esperanza Méndez Hernández'],
   padrinos: ['José Feliciano Hernández', 'María Carolina Escandón Cruz'],
@@ -86,5 +86,5 @@ export function demoProjectFor(folder: string): Project {
     }
     return v
   }
-  return remap(DEMO_PROJECT)
+  return { ...remap(DEMO_PROJECT), music_url: `/images/${folder}/base/musica.mp3` }
 }

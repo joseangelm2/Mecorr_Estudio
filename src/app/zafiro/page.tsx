@@ -50,7 +50,7 @@ export default function ZafiroPage() {
     <div style={{ position: "relative" }}>
       <ZafiroScrollInit />
       <audio ref={audioRef} loop>
-        <source src="/images/zafiro/musica.mp3" type="audio/mpeg" />
+        <source src="/images/zafiro/base/musica.mp3" type="audio/mpeg" />
       </audio>
       <DemoFloatingControls candidates={NAV_PINK_ZAFIRO} colorVar="var(--color-principal, #b08968)" />
       {!open && <ZafiroEnvelope onOpen={handleOpen} />}

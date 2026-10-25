@@ -127,7 +127,7 @@ export default function EsmeraldaEspecialTemplate({ project }: Props) {
     <div className="t-esmeralda-especial" style={{ position: 'relative', overflow: 'clip', ...(tituloFuente ? ({ '--esp-titulo-font': tituloFuente.css } as React.CSSProperties) : {}) }}>
       <EsmeraldaScrollInit />
       <audio ref={audioRef} id="music" loop>
-        <source src={project.music_url ?? '/images/esmeralda/musica.mp3'} type="audio/mpeg" />
+        <source src={project.music_url ?? '/images/love/musica.mp3'} type="audio/mpeg" />
       </audio>
       <EsmeraldaDecorations project={project} />
       {project.show_floating_controls !== false && (

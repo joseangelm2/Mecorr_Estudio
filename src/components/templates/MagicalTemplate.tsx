@@ -61,7 +61,7 @@ export default function MagicalTemplate({ project }: Props) {
     <div className="t-magical" style={{ position: 'relative' }}>
       <MagicalScrollInit />
       <audio ref={audioRef} id="music" loop>
-        <source src={project.music_url ?? '/images/magical/musica.mp3'} type="audio/mpeg" />
+        <source src={project.music_url ?? '/images/love/musica.mp3'} type="audio/mpeg" />
       </audio>
       <MagicalDecorations />
       {project.show_floating_controls !== false && (

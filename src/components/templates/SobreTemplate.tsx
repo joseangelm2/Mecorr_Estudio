@@ -93,7 +93,7 @@ export default function SobreTemplate({ project }: Props) {
   return (
     <div className="t-sobre">
       <WowInit />
-      <IntroEnvelope musicUrl={music_url ?? undefined} showSwitcher={false} audioRef={audioRef} />
+      <IntroEnvelope musicUrl={music_url ?? "/images/love/musica.mp3"} showSwitcher={false} audioRef={audioRef} />
       {project.show_floating_controls !== false && (
         <>
           <FloatingMusicToggle audioRef={audioRef} />

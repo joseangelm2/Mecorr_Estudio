@@ -60,7 +60,7 @@ export default function PinkTemplate({ project }: Props) {
     <div className="t-pink" style={{ position: "relative" }}>
       <PinkScrollInit />
       <audio ref={audioRef} loop>
-        <source src={project.music_url ?? "/images/pink/base/musica.mp3"} type="audio/mpeg" />
+        <source src={project.music_url ?? "/images/love/musica.mp3"} type="audio/mpeg" />
       </audio>
       {project.show_floating_controls !== false && (
         <>

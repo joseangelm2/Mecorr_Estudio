@@ -23,7 +23,7 @@ export default function EspecialPage() {
     <>
       <WowInit />
       <DemoFloatingControls candidates={NAV_SOBRE} />
-      <IntroEnvelope assetBase="/images/especial/base" />
+      <IntroEnvelope assetBase="/images/especial/base" musicUrl="/images/especial/base/MiPrincesa.mp3" />
       <StickyBanner guestName="Aime Ferreira" />
       <HeroSection assetBase="/images/especial/base" />
       <CelebracionSection assetBase="/images/especial/base" />
