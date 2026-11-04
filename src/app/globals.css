@@ -198,6 +198,14 @@ header .logo img {
     radial-gradient(at 12.9% 93.2%, #f5babc 0px, transparent 50%);
 }
 
+.accent-boda::before {
+  background: radial-gradient(at 3.3% 11.1%, #fbf9f4 0px, transparent 50%),
+    radial-gradient(at 80.6% 26.3%, #e8dfcf 0px, transparent 50%),
+    radial-gradient(at 71.3% 68.6%, #cbb994 0px, transparent 50%),
+    radial-gradient(at 89.8% 87.9%, #a89270 0px, transparent 50%),
+    radial-gradient(at 12.9% 93.2%, #f1ebdf 0px, transparent 50%);
+}
+
 .accent-portada::before {
   background: radial-gradient(at 3.3% 11.1%, #000000 0px, transparent 50%),
     radial-gradient(at 80.6% 26.3%, #38b6ff 0px, transparent 50%),

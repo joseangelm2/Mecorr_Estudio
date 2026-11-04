@@ -116,6 +116,16 @@ export interface ProjectFormData {
   elegance_show_album: boolean
   elegance_grid_retrato: string[]
   elegance_grid_horizontal: string[]
+  // Boda Silueta
+  boda_novia: string
+  boda_novio: string
+  boda_padres_novio: string[]
+  boda_padres_novio_title: string
+  boda_hospedajes: Array<{ nombre: string; fotoUrl: string; mapsUrl: string; sitioWeb: string; telefono: string; nota: string }>
+  boda_hospedaje_title: string
+  boda_hospedaje_text: string
+  boda_petalo_url: string
+  boda_petalo_cantidad: string
 }
 
 async function formDataToProject(data: ProjectFormData) {
@@ -124,11 +134,17 @@ async function formDataToProject(data: ProjectFormData) {
     pin_admin = await bcrypt.hash(data.pin_admin, 10)
   }
 
+  // En Boda Silueta el nombre que se muestra es "Novia & Novio"; se guarda en la columna de siempre.
+  const esBoda = data.template === 'bodasilueta'
+  const nombreMostrado = esBoda
+    ? [data.boda_novia, data.boda_novio].map(n => n.trim()).filter(Boolean).join(' & ')
+    : data.quinceanera_name
+
   return {
     slug: data.slug,
     template: data.template,
     status: data.status,
-    quinceanera_name: data.quinceanera_name,
+    quinceanera_name: nombreMostrado,
     guest_name: data.guest_name || null,
     event_date: data.event_date,
     rsvp_phone: data.rsvp_phone || null,
@@ -255,6 +271,19 @@ async function formDataToProject(data: ProjectFormData) {
       ...(data.elegance_photo_before_itinerary ? { photo_before_itinerary: data.elegance_photo_before_itinerary } : {}),
       ...(data.elegance_photo_after_itinerary  ? { photo_after_itinerary:  data.elegance_photo_after_itinerary  } : {}),
       ...(data.elegance_photo_after_rsvp       ? { photo_after_rsvp:       data.elegance_photo_after_rsvp       } : {}),
+      // Boda Silueta
+      ...(esBoda && data.boda_novia ? { nombre_novia: data.boda_novia } : {}),
+      ...(esBoda && data.boda_novio ? { nombre_novio: data.boda_novio } : {}),
+      ...(esBoda && data.boda_padres_novio.filter(Boolean).length > 0 ? { padres_novio: data.boda_padres_novio.filter(Boolean) } : {}),
+      ...(esBoda && data.boda_padres_novio_title ? { padres_novio_title: data.boda_padres_novio_title } : {}),
+      ...(esBoda && data.boda_hospedajes.filter(h => h.nombre.trim()).length > 0
+        ? { hospedajes: data.boda_hospedajes.filter(h => h.nombre.trim()) }
+        : {}),
+      ...(esBoda && data.boda_hospedaje_title ? { hospedaje_title: data.boda_hospedaje_title } : {}),
+      ...(esBoda && data.boda_hospedaje_text ? { hospedaje_text: data.boda_hospedaje_text } : {}),
+      ...(esBoda && data.boda_petalo_url ? { petalo_url: data.boda_petalo_url } : {}),
+      ...(esBoda && data.boda_petalo_cantidad !== '' && data.boda_petalo_cantidad !== '14'
+        ? { petalo_cantidad: Number(data.boda_petalo_cantidad) } : {}),
       ...(data.elegance_show_album ? { show_album: true } : {}),
       ...(data.elegance_grid_retrato.filter(Boolean).length > 0
         ? { grid_retrato: data.elegance_grid_retrato.filter(Boolean) }

@@ -1,0 +1,1137 @@
+/* scoped:t-bodasilueta */
+@import "tailwindcss";
+
+/* ======================================
+   SELLOROSA INVITATION — Pink/Rose Theme
+   ====================================== */
+
+.t-bodasilueta * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html:has(.t-bodasilueta) {
+  overflow: hidden;
+  position: relative;
+}
+
+html.con-scroll:has(.t-bodasilueta) {
+  overflow-y: scroll;
+}
+
+body:has(.t-bodasilueta) {
+  margin: 0;
+  background-color: var(--bs-bg, #fff0f3);
+  font-family: 'Raleway', sans-serif;
+  overflow-x: hidden;
+  color: #333;
+}
+
+/* ======================================
+   ENVELOPE / SOBRE
+   ====================================== */
+
+.t-bodasilueta .bs-envelope {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background: linear-gradient(135deg, var(--bs-bg, #fff0f3), var(--bs-soft, #f5babc), var(--bs-primary, #cb997e));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: opacity 0.8s ease;
+}
+
+.t-bodasilueta .bs-envelope.opening {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.t-bodasilueta .bs-envelope.hidden {
+  display: none;
+}
+
+.t-bodasilueta .bs-envelope-name {
+  font-size: clamp(2.4rem, 12vw, 4.2rem);
+  color: #fff;
+  font-family: var(--bs-titulo-font, Georgia, serif);
+  font-weight: 400;
+  line-height: 1.05;
+  margin-bottom: 6px;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
+}
+
+.t-bodasilueta .bs-envelope-tagline {
+  font-size: clamp(1.15rem, 5.5vw, 1.7rem); /* mayor que antes, pero menor que el nombre */
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.92);
+  margin-bottom: 22px;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Bloque inferior: nombre, fecha y botón casi al final de la pantalla. */
+.t-bodasilueta .bs-envelope-pie {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: max(7vh, 36px);
+  z-index: 1;
+  padding: 0 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.t-bodasilueta .bs-sello-btn {
+  background: var(--bs-boton-bg, linear-gradient(135deg, var(--bs-primary, #cb997e), var(--bs-soft, #f5babc)));
+  color: var(--bs-boton-color, white);
+  border: none;
+  padding: 14px 32px;
+  border-radius: 30px;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: inherit;
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: bs-pulse 3s infinite;
+}
+
+.t-bodasilueta .bs-sello-btn:hover {
+  transform: scale(1.04);
+}
+
+@keyframes bs-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(var(--bs-primary-rgb, 203, 153, 126), 0.4); }
+  50% { box-shadow: 0 0 20px 10px rgba(var(--bs-primary-rgb, 203, 153, 126), 0.1); }
+}
+
+/* ======================================
+   MAIN CONTENT
+   ====================================== */
+
+.t-bodasilueta .bs-main {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* ======================================
+   HERO
+   ====================================== */
+
+.t-bodasilueta .bs-hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(135deg, var(--bs-soft, #f5babc) 0%, var(--bs-primary, #cb997e) 50%, var(--bs-dark, #a4717a) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.t-bodasilueta .bs-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.3) 100%);
+}
+
+.t-bodasilueta .bs-hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+}
+
+.t-bodasilueta .bs-hero-title {
+  font-size: clamp(4rem, 20vw, 10rem);
+  color: white;
+  font-family: var(--bs-titulo-font, Georgia, serif);
+  font-weight: 400;
+  line-height: 1;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  margin-bottom: 8px;
+}
+
+.t-bodasilueta .bs-hero-xv {
+  font-size: clamp(1rem, 4vw, 1.5rem);
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.t-bodasilueta .bs-hero-date {
+  font-size: clamp(1rem, 4vw, 1.5rem);
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 4px;
+  font-weight: 400;
+}
+
+/* ======================================
+   DIVIDER
+   ====================================== */
+
+.t-bodasilueta .bs-divider {
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(to right, var(--bs-soft, #f5babc), var(--bs-primary, #cb997e), var(--bs-soft, #f5babc));
+}
+
+/* ======================================
+   SECTION BASE
+   ====================================== */
+
+.t-bodasilueta .bs-section {
+  padding: 40px 24px;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.t-bodasilueta .bs-section-title {
+  font-size: clamp(1.8rem, 6vw, 2.5rem);
+  color: var(--bs-titulos-color, var(--bs-primary, #cb997e));
+  font-family: var(--bs-titulo-font, Georgia, serif);
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.t-bodasilueta .bs-section-line {
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--bs-primary, #cb997e), transparent);
+  margin: 12px auto 24px;
+  border: none;
+  display: block;
+}
+
+.t-bodasilueta .bs-text {
+  font-size: 15px;
+  color: #666;
+  line-height: 1.8;
+}
+
+/* ======================================
+   COUNTDOWN
+   ====================================== */
+
+.t-bodasilueta .bs-countdown-wrapper {
+  background: linear-gradient(135deg, var(--bs-soft, #f5babc), var(--bs-primary, #cb997e));
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.t-bodasilueta .bs-countdown-title {
+  color: white;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-family: var(--bs-titulo-font, Georgia, serif);
+  font-weight: 400;
+  letter-spacing: 4px;
+  margin-bottom: 24px;
+}
+
+.t-bodasilueta .bs-countdown-grid {
+  display: flex;
+  justify-content: center;
+  gap: clamp(12px, 4vw, 32px);
+  flex-wrap: wrap;
+}
+
+.t-bodasilueta .bs-countdown-item {
+  text-align: center;
+}
+
+.t-bodasilueta .bs-countdown-num {
+  font-size: clamp(2.5rem, 10vw, 4rem);
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+  display: block;
+}
+
+.t-bodasilueta .bs-countdown-label {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  display: block;
+  margin-top: 4px;
+}
+
+/* ======================================
+   VENUE CARDS
+   ====================================== */
+
+.t-bodasilueta .bs-venues {
+  padding: 40px 16px;
+  background: var(--bs-bg, #fff0f3);
+}
+
+.t-bodasilueta .bs-venue-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  margin: 12px auto;
+  max-width: 480px;
+  box-shadow: 0 4px 16px rgba(var(--bs-primary-rgb, 203, 153, 126), 0.15);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.t-bodasilueta .bs-venue-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(var(--bs-primary-rgb, 203, 153, 126), 0.25);
+}
+
+.t-bodasilueta .bs-venue-img {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 12px;
+  object-fit: cover;
+  margin-bottom: 16px;
+}
+
+.t-bodasilueta .bs-venue-name {
+  font-size: 18px;
+  color: var(--bs-primary, #cb997e);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.t-bodasilueta .bs-venue-address {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.t-bodasilueta .bs-venue-time {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--bs-dark, #a4717a);
+  margin-bottom: 12px;
+}
+
+.t-bodasilueta .bs-btn {
+  background: var(--bs-boton-bg, linear-gradient(to right, var(--bs-soft, #f5babc), var(--bs-primary, #cb997e)));
+  color: var(--bs-boton-color, white);
+  padding: 10px 28px;
+  border-radius: 24px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: opacity 0.2s;
+}
+
+.t-bodasilueta .bs-btn:hover {
+  opacity: 0.9;
+}
+
+/* ======================================
+   PARENTS
+   ====================================== */
+
+.t-bodasilueta .bs-parents {
+  background: white;
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.t-bodasilueta .bs-parent-name {
+  font-size: 18px;
+  color: #555;
+  line-height: 2.2;
+}
+
+/* ======================================
+   ITINERARIO
+   ====================================== */
+
+.t-bodasilueta .bs-itinerario {
+  background: linear-gradient(135deg, var(--bs-primary, #cb997e), var(--bs-dark, #a4717a));
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.t-bodasilueta .bs-itinerario .bs-section-title {
+  color: white;
+}
+
+.t-bodasilueta .bs-itinerario-item {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 14px 20px;
+  margin: 10px auto;
+  max-width: 400px;
+  gap: 16px;
+}
+
+.t-bodasilueta .bs-itinerario-item.reverse {
+  flex-direction: row-reverse;
+}
+
+.t-bodasilueta .bs-itinerario-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  filter: invert(100%);
+}
+
+.t-bodasilueta .bs-itinerario-info {
+  flex: 1;
+  text-align: left;
+}
+
+.t-bodasilueta .bs-itinerario-item.reverse .bs-itinerario-info {
+  text-align: right;
+}
+
+.t-bodasilueta .bs-itinerario-name {
+  font-size: 17px;
+  color: white;
+  font-weight: 600;
+  margin: 0;
+}
+
+.t-bodasilueta .bs-itinerario-hour {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 2px 0 0;
+}
+
+/* ======================================
+   RSVP FORM
+   ====================================== */
+
+.t-bodasilueta .bs-rsvp {
+  padding: 40px 24px;
+  background: var(--bs-bg, #fff0f3);
+  text-align: center;
+}
+
+.t-bodasilueta .bs-rsvp-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 12px 16px;
+  border: 1px solid var(--bs-soft, #f5babc);
+  border-radius: 24px;
+  font-size: 14px;
+  background: white;
+  color: #333;
+  outline: none;
+  transition: border-color 0.2s;
+  font-family: inherit;
+  display: block;
+  margin: 8px auto;
+}
+
+.t-bodasilueta .bs-rsvp-input:focus {
+  border-color: var(--bs-primary, #cb997e);
+}
+
+.t-bodasilueta .bs-radio-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+}
+
+.t-bodasilueta .bs-radio-wrap input[type="radio"] {
+  accent-color: var(--bs-primary, #cb997e);
+  width: 18px;
+  height: 18px;
+}
+
+.t-bodasilueta .bs-radio-label {
+  font-size: 14px;
+  color: #666;
+}
+
+/* ======================================
+   VESTIMENTA
+   ====================================== */
+
+.t-bodasilueta .bs-vestimenta {
+  background: white;
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.t-bodasilueta .bs-vestimenta-img {
+  max-width: 100px;
+  margin: 12px auto;
+  display: block;
+}
+
+/* ======================================
+   HASHTAG
+   ====================================== */
+
+.t-bodasilueta .bs-hashtag {
+  background: linear-gradient(135deg, var(--bs-soft, #f5babc), var(--bs-primary, #cb997e));
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.t-bodasilueta .bs-hashtag-text {
+  font-size: clamp(1.5rem, 6vw, 2.5rem);
+  color: white;
+  font-family: var(--bs-titulo-font, Georgia, serif);
+  font-weight: 400;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* ======================================
+   INFO IMPORTANTE
+   ====================================== */
+
+.t-bodasilueta .bs-info {
+  background: var(--bs-bg, #fff0f3);
+  padding: 32px 24px;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.t-bodasilueta .bs-info-item {
+  font-size: 14px;
+  color: #666;
+  margin: 8px 0;
+  line-height: 1.6;
+}
+
+/* ======================================
+   FOOTER
+   ====================================== */
+
+.t-bodasilueta .bs-footer {
+  background: var(--bs-dark, #a4717a);
+  padding: 20px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* ======================================
+   SCROLL ANIMATIONS
+   ====================================== */
+
+.t-bodasilueta .show-p-y {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.t-bodasilueta .show-p-y.active-p-y {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.t-bodasilueta .show-n-x {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.t-bodasilueta .show-n-x.active-n-x {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.t-bodasilueta .show-p-x {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.t-bodasilueta .show-p-x.active-p-x {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+/* ======================================
+   PORTADA = SOBRE CON FOTO
+   ====================================== */
+
+.t-bodasilueta .bs-envelope--foto {
+  background-size: cover, cover;
+  background-position: center top, center;
+  background-repeat: no-repeat;
+}
+
+/* Velo rosa para que la frase y el sobre se lean sobre cualquier foto. */
+.t-bodasilueta .bs-envelope::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(var(--bs-deep-rgb, 87, 45, 56), 0.55) 0%, rgba(var(--bs-soft-rgb, 245, 186, 188), 0.1) 40%, rgba(var(--bs-deep-rgb, 87, 45, 56), 0.7) 100%);
+}
+
+.t-bodasilueta .bs-envelope-titulo {
+  /* la imagen o el texto del título se ajustan sin salto de línea */
+  position: absolute;
+  top: max(5vh, 28px);
+  left: 0;
+  right: 0;
+  z-index: 1;
+  padding: 0 16px;
+  text-align: center;
+  font-family: var(--bs-titulo-font, Georgia, serif);
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(2rem, 10.5vw, 4.4rem);
+  white-space: nowrap;
+  line-height: 1;
+  color: #fff;
+  letter-spacing: 1px;
+  text-shadow:
+    0 0 14px rgba(var(--bs-soft-rgb, 245, 186, 188), 0.95),
+    0 0 34px rgba(var(--bs-primary-rgb, 203, 153, 126), 0.85),
+    0 4px 18px rgba(0, 0, 0, 0.45);
+}
+
+/* ======================================
+   PRIMERA PANTALLA TRAS ABRIR EL SOBRE
+   (frase, cuenta regresiva, padres y padrinos, compactos para caber juntos)
+   ====================================== */
+
+.t-bodasilueta .bs-inicio {
+  background: var(--bs-bg, #fff0f3);
+}
+
+.t-bodasilueta .bs-inicio .bs-section {
+  padding: 14px 20px;
+}
+
+.t-bodasilueta .bs-inicio .bs-section-title {
+  font-size: clamp(1.45rem, 5.5vw, 2rem);
+  margin-bottom: 2px;
+}
+
+.t-bodasilueta .bs-inicio .bs-section-line {
+  margin: 6px auto 10px;
+}
+
+.t-bodasilueta .bs-inicio .bs-text {
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.t-bodasilueta .bs-inicio .bs-countdown-wrapper {
+  padding: 16px 16px 18px;
+}
+
+.t-bodasilueta .bs-inicio .bs-countdown-title {
+  font-size: clamp(1.1rem, 4vw, 1.5rem);
+  margin-bottom: 10px;
+}
+
+.t-bodasilueta .bs-inicio .bs-countdown-num {
+  font-size: clamp(2rem, 9vw, 3rem);
+}
+
+.t-bodasilueta .bs-inicio .bs-countdown-label {
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+.t-bodasilueta .bs-inicio .bs-parents {
+  padding: 8px 12px 14px;
+}
+
+.t-bodasilueta .bs-inicio .bs-parent-name {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* ======================================
+   GALERÍA "MOMENTOS"
+   ====================================== */
+
+.t-bodasilueta .bs-fotos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 16px 32px;
+}
+
+.t-bodasilueta .bs-foto {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(var(--bs-dark-rgb, 164, 113, 122), 0.25);
+  display: block;
+}
+
+/* La primera foto abre la galería a todo el ancho. */
+.t-bodasilueta .bs-foto:first-child {
+  grid-column: 1 / -1;
+  aspect-ratio: 4 / 3;
+}
+
+/* Si la última queda sola en su fila, también ocupa todo el ancho. */
+.t-bodasilueta .bs-foto:last-child:nth-child(even) {
+  grid-column: 1 / -1;
+  aspect-ratio: 4 / 3;
+}
+
+/* ======================================
+   FOTO DE CIERRE
+   ====================================== */
+
+.t-bodasilueta .bs-cierre {
+  position: relative;
+  width: 100%;
+  min-height: 70vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.t-bodasilueta .bs-cierre::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 40%, rgba(var(--bs-deep-rgb, 87, 45, 56), 0.75) 100%);
+}
+
+.t-bodasilueta .bs-cierre-texto {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 0 20px 36px;
+  color: white;
+  font-family: var(--bs-titulo-font, Georgia, serif);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+}
+
+.t-bodasilueta .bs-cierre-texto span {
+  font-size: 1rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.t-bodasilueta .bs-cierre-texto strong {
+  font-size: clamp(2.6rem, 14vw, 5rem);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+/* ======================================
+   PÉTALOS CAYENDO
+   ====================================== */
+
+.t-bodasilueta .bs-petalos {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 50;
+}
+
+.t-bodasilueta .bs-petalo {
+  position: absolute;
+  top: -40px;
+  /* Forma de pétalo: dos esquinas opuestas muy redondeadas. */
+  border-radius: 100% 0 100% 0;
+  background: radial-gradient(ellipse at 30% 25%, var(--bs-petalo-hi, #fff0f1) 0%, var(--bs-soft, #f5babc) 45%, var(--bs-petalo-lo, #d98a96) 100%);
+  box-shadow: inset -2px -2px 4px rgba(var(--bs-dark-rgb, 164, 113, 122), 0.25);
+  /* Sombra para que resalten sobre el papel claro. */
+  filter: drop-shadow(0 2px 3px rgba(var(--bs-dark-rgb, 120, 100, 70), 0.35));
+  animation-name: bs-petalo-caer;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+@keyframes bs-petalo-caer {
+  0%   { transform: translate3d(0, -5vh, 0) rotate(0deg); }
+  25%  { transform: translate3d(var(--bs-drift), 28vh, 0) rotate(calc(var(--bs-giro) * 0.25)); }
+  50%  { transform: translate3d(calc(var(--bs-drift) * -0.6), 58vh, 0) rotate(calc(var(--bs-giro) * 0.5)); }
+  75%  { transform: translate3d(calc(var(--bs-drift) * 0.8), 86vh, 0) rotate(calc(var(--bs-giro) * 0.75)); }
+  100% { transform: translate3d(calc(var(--bs-drift) * -0.3), 112vh, 0) rotate(var(--bs-giro)); }
+}
+
+/* No se ocultan con "reducir movimiento" (en Windows suele estar activo y los pétalos
+   desaparecían): solo caen más despacio. */
+@media (prefers-reduced-motion: reduce) {
+  .t-bodasilueta .bs-petalo { animation-duration: 22s !important; }
+}
+
+
+/* ======================================
+   PERSONALIZACIÓN (fondo propio, decorativos, hospedaje)
+   ====================================== */
+
+/* Fondo propio: imagen fija detrás de todo, con opacidad regulable. Las secciones de color
+   liso pasan a transparentes para que se vea; las de degradado se conservan. */
+body:has(.t-bodasilueta.bs-con-fondo)::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: var(--bs-bg-url);
+  background-size: cover;
+  background-position: center;
+  opacity: var(--bs-bg-opacity, 0.5);
+}
+
+.t-bodasilueta.bs-con-fondo .bs-inicio,
+.t-bodasilueta.bs-con-fondo .bs-venues,
+.t-bodasilueta.bs-con-fondo .bs-parents,
+.t-bodasilueta.bs-con-fondo .bs-info,
+.t-bodasilueta.bs-con-fondo .bs-vestimenta,
+.t-bodasilueta.bs-con-fondo .bs-fotos,
+.t-bodasilueta.bs-con-fondo .bs-hospedaje,
+.t-bodasilueta.bs-con-fondo .bs-rsvp {
+  background: transparent;
+}
+
+/* Decorativos: dos esquinas fijas y un separador entre secciones. */
+.t-bodasilueta .bs-deco-esquina {
+  position: fixed;
+  width: clamp(120px, 40vw, 260px);
+  height: auto;
+  pointer-events: none;
+  z-index: 45;
+}
+
+.t-bodasilueta .bs-deco-sup { top: 0; left: 0; }
+.t-bodasilueta .bs-deco-inf { bottom: 0; right: 0; }
+
+.t-bodasilueta .bs-deco-separador {
+  display: block;
+  width: min(94%, 440px);
+  height: auto;
+  margin: 8px auto;
+}
+
+/* Hospedaje: tarjetas con foto, enlaces y teléfono. */
+.t-bodasilueta .bs-hospedaje {
+  padding: 24px 16px 40px;
+  background: var(--bs-bg, #fff0f3);
+}
+
+.t-bodasilueta .bs-hospedaje-lista {
+  display: grid;
+  gap: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.t-bodasilueta .bs-hotel {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(var(--bs-primary-rgb, 203, 153, 126), 0.2);
+}
+
+.t-bodasilueta .bs-hotel-foto {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+}
+
+.t-bodasilueta .bs-hotel-cuerpo {
+  padding: 16px 16px 20px;
+}
+
+.t-bodasilueta .bs-hotel-nombre {
+  font-family: var(--bs-titulo-font, Georgia, serif);
+  font-size: 1.35rem;
+  color: var(--bs-titulos-color, var(--bs-primary, #cb997e));
+  margin-bottom: 4px;
+}
+
+.t-bodasilueta .bs-hotel-nota {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.t-bodasilueta .bs-hotel-tel {
+  display: block;
+  font-size: 15px;
+  color: #555;
+  text-decoration: none;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+.t-bodasilueta .bs-hotel-acciones {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.t-bodasilueta .bs-hotel-acciones .bs-btn {
+  padding: 8px 18px;
+  font-size: 12px;
+}
+
+/* Si se sube una imagen propia como "pétalo", se usa tal cual (sin forma ni degradado). */
+.t-bodasilueta .bs-petalo--img {
+  border-radius: 0;
+  background-color: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: none;
+}
+
+/* Título de la portada como imagen (en lugar de texto). */
+.t-bodasilueta .bs-envelope-titulo-img {
+  display: block;
+  margin: 0 auto;
+  height: clamp(60px, 18vw, 110px);
+  width: auto;
+  max-width: 92%;
+  object-fit: contain;
+}
+
+/* Nombres de los novios ("Ana & Luis"): pueden ser largos, por eso más chicos y con salto de línea. */
+.t-bodasilueta .bs-envelope-name {
+  font-size: clamp(2rem, 10vw, 3.6rem);
+  overflow-wrap: anywhere;
+}
+
+/* Mesas de regalos (una o varias) e íconos opcionales de cada sección. */
+.t-bodasilueta .bs-icono-seccion {
+  display: block;
+  height: 64px;
+  width: auto;
+  max-width: 80%;
+  object-fit: contain;
+  margin: 0 auto 14px;
+}
+
+.t-bodasilueta .bs-mesas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.t-bodasilueta .bs-mesa {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.t-bodasilueta .bs-mesa-icono {
+  height: 44px;
+  width: auto;
+  max-width: 70%;
+  object-fit: contain;
+}
+
+/* Cintillo con el nombre del invitado (StickyBanner): aparece al bajar. */
+.t-bodasilueta .color-principal { background: var(--bs-primary, #cb997e); }
+.t-bodasilueta .invitado { padding: 5px 0; width: 100%; position: fixed; top: 0; z-index: 10; }
+.t-bodasilueta #cintillo { opacity: 0; transition-duration: 0.5s; }
+.t-bodasilueta #cintillo.cintillo-scrolled { opacity: 1 !important; transition-duration: 0.5s; }
+
+/* En la portada las flores van sobre la foto: más chicas para no tapar el título. */
+.t-bodasilueta .bs-deco-portada {
+  position: absolute;
+  width: clamp(90px, 27vw, 170px);
+  z-index: 1;
+}
+
+/* Marco de flores: racimo en la esquina + guirnaldas que corren por los bordes. La guirnalda es un
+   mosaico que se repite, así que la longitud se ajusta sin deformar las flores. */
+.t-bodasilueta .bs-marco {
+  --C: clamp(110px, 31vw, 230px);   /* lado del racimo de la esquina */
+  --T: clamp(44px, 12vw, 84px);     /* grosor de la guirnalda */
+  position: fixed;
+  width: 0;
+  height: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.t-bodasilueta .bs-marco--sup { top: 0; left: 0; }
+/* Abajo-derecha: el mismo marco girado 180° alrededor de la esquina. */
+.t-bodasilueta .bs-marco--inf { right: 0; bottom: 0; transform: rotate(180deg); }
+
+.t-bodasilueta .bs-marco-racimo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--C);
+  height: var(--C);
+  max-width: none;
+}
+
+/* Horizontal: llega a ~45% del ancho. Vertical: ~40% del alto. */
+.t-bodasilueta .bs-marco-h {
+  position: absolute;
+  top: 0;
+  left: calc(var(--C) * 0.82);
+  width: max(0px, calc(min(45vw, 720px) - var(--C) * 0.82));
+  height: var(--T);
+  background: url(/images/bodasilueta/flores/guirnalda-h.svg) repeat-x left center / auto 100%;
+}
+
+.t-bodasilueta .bs-marco-v {
+  position: absolute;
+  left: 0;
+  top: calc(var(--C) * 0.82);
+  height: max(0px, calc(min(40vh, 640px) - var(--C) * 0.82));
+  width: var(--T);
+  background: url(/images/bodasilueta/flores/guirnalda-v.svg) repeat-y center top / 100% auto;
+}
+
+/* En la portada (sobre la foto) el marco va dentro del contenedor de la portada. */
+.t-bodasilueta .bs-marco--portada {
+  position: absolute;
+  z-index: 5;
+}
+
+/* El título baja lo justo para quedar debajo de la guirnalda superior. */
+.t-bodasilueta .bs-envelope-titulo {
+  top: max(9vh, 78px);
+}
+
+/* ---- Ajustes de espacio y capas ---- */
+
+/* Los bloques ya llevan su propio relleno dentro de .bs-section: no se suma otro por fuera
+   (antes quedaban ~140 px en blanco entre secciones cortas). */
+.t-bodasilueta .bs-info,
+.t-bodasilueta .bs-vestimenta,
+.t-bodasilueta .bs-rsvp {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.t-bodasilueta .bs-info .bs-section {
+  padding: 26px 24px;
+}
+
+/* Los racimos de flores van siempre al frente de todo el contenido (sin bloquear toques). */
+.t-bodasilueta .bs-marco {
+  z-index: 45;
+}
+
+.t-bodasilueta .bs-main > :not(.bs-marco):not(.bs-deco-esquina) {
+  position: relative;
+  z-index: 2;
+}
+
+/* Nombre de los novios en el cierre: más chico para que quepa en una línea. */
+.t-bodasilueta .bs-cierre-texto strong {
+  font-size: clamp(2rem, 9.5vw, 3.6rem);
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
+/* Ícono de iglesia de fábrica (dorado) en blanco, igual que el resto del itinerario. */
+.t-bodasilueta .bs-icono-blanco {
+  filter: brightness(0) invert(1);
+}
+
+/* Foto hero + anillos y palomas antes de la cuenta regresiva */
+.t-bodasilueta .bs-inicio-hero {
+  width: min(78%, 340px);
+  margin: 6px auto 20px;
+}
+.t-bodasilueta .bs-inicio-foto {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 999px 999px 10px 10px;
+  border: 5px solid #fff;
+  box-shadow: 0 8px 22px rgba(60, 50, 30, 0.25);
+}
+/* PNG con fondo transparente. */
+.t-bodasilueta .bs-inicio-anillos {
+  display: block;
+  position: relative;
+  width: 58%;
+  margin: -42px auto 0;
+  pointer-events: none;
+}
+
+/* Primera pantalla: título, frase, foto y palomas centrados; la cuenta regresiva queda debajo. */
+.t-bodasilueta .bs-inicio-primera {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 70px 0 30px;
+  box-sizing: border-box;
+}
+
+/* Título grande y en negritas; la frase se centra en el espacio entre el título y la foto
+   y crece o se acomoda según el texto. */
+.t-bodasilueta .bs-inicio .bs-inicio-titulo {
+  font-size: clamp(2.6rem, 12vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.05;
+  margin: 0;
+  padding: 0 20px 14px;
+  text-shadow: 0 2px 6px rgba(120, 100, 60, 0.18);
+}
+
+.t-bodasilueta .bs-inicio-frase {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 28px;
+  box-sizing: border-box;
+}
+
+.t-bodasilueta .bs-inicio .bs-inicio-frase .bs-text {
+  font-size: clamp(15px, 4.4vw, 18px);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.t-bodasilueta .bs-inicio-primera {
+  justify-content: flex-start;
+}

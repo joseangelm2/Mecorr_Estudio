@@ -8,6 +8,7 @@ import type { Project, TemplateId } from '@/types/invitation'
 import { THEMES } from '@/lib/themes'
 import { ELEGANCE_THEMES } from '@/lib/elegance-themes'
 import { ESMERALDA_THEMES } from '@/lib/esmeralda-themes'
+import { BODA_THEMES } from '@/lib/bodasilueta-themes'
 import { ESPECIAL_THEMES } from '@/lib/especial-themes'
 import { ZAFIRO_THEMES } from '@/lib/zafiro-themes'
 import { TITULO_FUENTES } from '@/lib/titulo-fuentes'
@@ -28,6 +29,7 @@ const TEMPLATES: { value: TemplateId; label: string; emoji: string }[] = [
   { value: 'magical', label: 'Magical', emoji: '🦋' },
   { value: 'especial', label: 'Especial', emoji: '⭐' },
   { value: 'esmeralda-especial', label: 'Esmeralda Especial', emoji: '💚⭐' },
+  { value: 'bodasilueta', label: 'Boda Silueta', emoji: '💍' },
 ]
 
 const TABS = [
@@ -129,6 +131,9 @@ function toFormData(project?: Project): ProjectFormData {
       elegance_show_album: false,
       elegance_grid_retrato: [],
       elegance_grid_horizontal: [],
+      boda_novia: '', boda_novio: '', boda_padres_novio: ['', ''], boda_padres_novio_title: '',
+      boda_hospedajes: [], boda_hospedaje_title: '', boda_hospedaje_text: '',
+      boda_petalo_url: '', boda_petalo_cantidad: '14',
     }
   }
   return {
@@ -226,6 +231,15 @@ function toFormData(project?: Project): ProjectFormData {
     elegance_show_album:      (project.extra_config?.show_album      as boolean) ?? false,
     elegance_grid_retrato:    (project.extra_config?.grid_retrato    as string[]) ?? [],
     elegance_grid_horizontal: (project.extra_config?.grid_horizontal as string[]) ?? [],
+    boda_novia: (project.extra_config?.nombre_novia as string) ?? '',
+    boda_novio: (project.extra_config?.nombre_novio as string) ?? '',
+    boda_padres_novio: ((project.extra_config?.padres_novio as string[] | undefined)?.length ? (project.extra_config?.padres_novio as string[]) : ['', '']),
+    boda_padres_novio_title: (project.extra_config?.padres_novio_title as string) ?? '',
+    boda_hospedajes: (project.extra_config?.hospedajes as ProjectFormData['boda_hospedajes']) ?? [],
+    boda_hospedaje_title: (project.extra_config?.hospedaje_title as string) ?? '',
+    boda_hospedaje_text: (project.extra_config?.hospedaje_text as string) ?? '',
+    boda_petalo_url: (project.extra_config?.petalo_url as string) ?? '',
+    boda_petalo_cantidad: project.extra_config?.petalo_cantidad === undefined ? '14' : String(project.extra_config?.petalo_cantidad),
     color_theme: project.color_theme ?? 'rosagold',
     invitation_text: project.invitation_text ?? '',
     show_video: project.show_video ?? false,
@@ -316,13 +330,26 @@ export default function ProjectForm({ project }: Props) {
     setForm(prev => ({ ...prev, [field]: value }))
   }
 
+  // Boda Silueta: dos campos (novia y novio); el nombre mostrado y el slug se componen con ambos.
+  function handleNovios(field: 'boda_novia' | 'boda_novio', value: string) {
+    const novia = field === 'boda_novia' ? value : form.boda_novia
+    const novio = field === 'boda_novio' ? value : form.boda_novio
+    const nombre = [novia, novio].map(n => n.trim()).filter(Boolean).join(' & ')
+    setForm(prev => ({
+      ...prev,
+      [field]: value,
+      quinceanera_name: nombre,
+      ...(project ? {} : { slug: generateSlug([novia, novio].filter(Boolean).join(' ')) }),
+    }))
+  }
+
   function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
     const name = e.target.value
     set('quinceanera_name', name)
     if (!project) set('slug', generateSlug(name))
   }
 
-  function setArrayItem(field: 'parent_names' | 'padrinos' | 'photos', index: number, value: string) {
+  function setArrayItem(field: 'parent_names' | 'padrinos' | 'photos' | 'boda_padres_novio', index: number, value: string) {
     setForm(prev => {
       const arr = [...(prev[field] as string[])]
       arr[index] = value
@@ -330,18 +357,18 @@ export default function ProjectForm({ project }: Props) {
     })
   }
 
-  function addArrayItem(field: 'parent_names' | 'padrinos' | 'photos') {
+  function addArrayItem(field: 'parent_names' | 'padrinos' | 'photos' | 'boda_padres_novio') {
     setForm(prev => ({ ...prev, [field]: [...(prev[field] as string[]), ''] }))
   }
 
-  function removeArrayItem(field: 'parent_names' | 'padrinos' | 'photos', index: number) {
+  function removeArrayItem(field: 'parent_names' | 'padrinos' | 'photos' | 'boda_padres_novio', index: number) {
     setForm(prev => {
       const arr = (prev[field] as string[]).filter((_, i) => i !== index)
       return { ...prev, [field]: arr.length ? arr : [''] }
     })
   }
 
-  function insertArrayItem(field: 'parent_names' | 'padrinos' | 'photos', index: number) {
+  function insertArrayItem(field: 'parent_names' | 'padrinos' | 'photos' | 'boda_padres_novio', index: number) {
     setForm(prev => {
       const arr = [...(prev[field] as string[])]
       arr.splice(index, 0, '')
@@ -382,7 +409,7 @@ export default function ProjectForm({ project }: Props) {
       {/* Tabs */}
       <div className="flex gap-1 mb-8 bg-gray-100 p-1.5 rounded-2xl overflow-x-auto">
         {TABS.map((tab, i) => {
-          if (i === 8 && form.template !== 'especial' && form.template !== 'esmeralda-especial') return null
+          if (i === 8 && form.template !== 'especial' && form.template !== 'esmeralda-especial' && form.template !== 'bodasilueta') return null
           return (
           <button
             key={tab.label}
@@ -403,9 +430,20 @@ export default function ProjectForm({ project }: Props) {
       {/* Tab 0: General */}
       {activeTab === 0 && (
         <div className="space-y-7">
-          <Field title="Nombre de la quinceañera *">
-            <input type="text" value={form.quinceanera_name} onChange={handleNameChange} required className={input} placeholder="Ej. Valeria García" />
-          </Field>
+          {form.template === 'bodasilueta' ? (
+            <div className="grid grid-cols-2 gap-5">
+              <Field title="Nombre de la novia *">
+                <input type="text" value={form.boda_novia} onChange={e => handleNovios('boda_novia', e.target.value)} required className={input} placeholder="Ej. Valeria" />
+              </Field>
+              <Field title="Nombre del novio *">
+                <input type="text" value={form.boda_novio} onChange={e => handleNovios('boda_novio', e.target.value)} required className={input} placeholder="Ej. Andrés" />
+              </Field>
+            </div>
+          ) : (
+            <Field title="Nombre de la quinceañera *">
+              <input type="text" value={form.quinceanera_name} onChange={handleNameChange} required className={input} placeholder="Ej. Valeria García" />
+            </Field>
+          )}
 
           <div className="grid grid-cols-2 gap-5">
             <Field title="URL (slug) *">
@@ -432,7 +470,10 @@ export default function ProjectForm({ project }: Props) {
                 <button
                   key={t.value}
                   type="button"
-                  onClick={() => set('template', t.value)}
+                  onClick={() => {
+                    set('template', t.value)
+                    if (t.value === 'bodasilueta' && form.color_theme !== 'custom' && !BODA_THEMES.some(th => th.id === form.color_theme)) set('color_theme', 'blanco')
+                  }}
                   className={`flex flex-col items-center gap-2 p-3.5 rounded-xl border-2 text-center transition-all ${
                     form.template === t.value
                       ? 'border-rose-400 bg-rose-50'
@@ -446,13 +487,14 @@ export default function ProjectForm({ project }: Props) {
             </div>
           </Field>
 
-          {(form.template === 'sobre' || form.template === 'elegance' || form.template === 'especial' || form.template === 'zafiro' || form.template === 'esmeralda' || form.template === 'esmeralda-especial') && (
+          {(form.template === 'sobre' || form.template === 'elegance' || form.template === 'especial' || form.template === 'zafiro' || form.template === 'esmeralda' || form.template === 'esmeralda-especial' || form.template === 'bodasilueta') && (
             <Field title="Paleta de color">
               <div className="flex flex-wrap gap-4">
                 {(
                   form.template === 'sobre' ? THEMES :
                   form.template === 'especial' ? ESPECIAL_THEMES :
                   form.template === 'zafiro' ? ZAFIRO_THEMES :
+                  form.template === 'bodasilueta' ? BODA_THEMES :
                   (form.template === 'esmeralda' || form.template === 'esmeralda-especial') ? ESMERALDA_THEMES :
                   ELEGANCE_THEMES
                 ).map(theme => (
@@ -474,7 +516,7 @@ export default function ProjectForm({ project }: Props) {
                     <span className={`text-xs font-medium ${form.color_theme === theme.id ? 'text-rose-500' : 'text-gray-400'}`}>{theme.label}</span>
                   </button>
                 ))}
-                {(form.template === 'especial' || form.template === 'zafiro' || form.template === 'esmeralda-especial') && (
+                {(form.template === 'especial' || form.template === 'zafiro' || form.template === 'esmeralda-especial' || form.template === 'bodasilueta') && (
                   <div className="flex flex-col items-center gap-2">
                     <label
                       className="w-10 h-10 rounded-full border-4 cursor-pointer transition-all relative overflow-hidden block"
@@ -495,7 +537,7 @@ export default function ProjectForm({ project }: Props) {
                     <span className={`text-xs font-medium ${form.color_theme === 'custom' ? 'text-rose-500' : 'text-gray-400'}`}>Personalizado</span>
                   </div>
                 )}
-                {form.template === 'esmeralda-especial' && (
+                {(form.template === 'esmeralda-especial' || form.template === 'bodasilueta') && (
                   <div className="flex flex-col items-center gap-2">
                     <label
                       className="w-10 h-10 rounded-full border-4 cursor-pointer transition-all relative overflow-hidden block"
@@ -520,7 +562,7 @@ export default function ProjectForm({ project }: Props) {
                     )}
                   </div>
                 )}
-                {form.template === 'esmeralda-especial' && (
+                {(form.template === 'esmeralda-especial' || form.template === 'bodasilueta') && (
                   <div className="flex flex-col items-center gap-2">
                     <label
                       className="w-10 h-10 rounded-full border-4 cursor-pointer transition-all relative overflow-hidden block"
@@ -676,16 +718,21 @@ export default function ProjectForm({ project }: Props) {
         <div className="space-y-6">
           <SectionCard title="Títulos de sección" description="Personaliza los encabezados (dejar vacío = valor por defecto)">
             <div className="space-y-4">
-              <Field title="Título sección Padres">
-                <input value={form.parents_title} onChange={e => set('parents_title', e.target.value)} className={input} placeholder="Mis Padres" />
+              <Field title={form.template === 'bodasilueta' ? 'Título padres de la novia' : 'Título sección Padres'}>
+                <input value={form.parents_title} onChange={e => set('parents_title', e.target.value)} className={input} placeholder={form.template === 'bodasilueta' ? 'Padres de la novia' : 'Mis Padres'} />
               </Field>
+              {form.template === 'bodasilueta' && (
+                <Field title="Título padres del novio">
+                  <input value={form.boda_padres_novio_title} onChange={e => set('boda_padres_novio_title', e.target.value)} className={input} placeholder="Padres del novio" />
+                </Field>
+              )}
               <Field title="Título sección Padrinos">
                 <input value={form.padrinos_title} onChange={e => set('padrinos_title', e.target.value)} className={input} placeholder="Mis Padrinos" />
               </Field>
             </div>
           </SectionCard>
 
-          <SectionCard title="Padres" description="Nombres que aparecerán en la invitación">
+          <SectionCard title={form.template === 'bodasilueta' ? 'Padres de la novia' : 'Padres'} description="Nombres que aparecerán en la invitación">
             <div className="space-y-3">
               {form.parent_names.map((name, i) => (
                 <div key={i} className="flex gap-3 items-center">
@@ -699,6 +746,23 @@ export default function ProjectForm({ project }: Props) {
               </button>
             </div>
           </SectionCard>
+
+          {form.template === 'bodasilueta' && (
+            <SectionCard title="Padres del novio" description="Nombres que aparecerán en la invitación">
+              <div className="space-y-3">
+                {form.boda_padres_novio.map((name, i) => (
+                  <div key={i} className="flex gap-3 items-center">
+                    <input type="text" value={name} onChange={e => setArrayItem('boda_padres_novio', i, e.target.value)} className={input} placeholder={i === 0 ? 'Nombre del padre' : 'Nombre de la madre'} />
+                    <button type="button" onClick={() => removeArrayItem('boda_padres_novio', i)} className="w-10 h-10 rounded-xl border border-red-200 text-red-400 hover:bg-red-50 flex items-center justify-center transition-colors">×</button>
+                  </div>
+                ))}
+                <button type="button" onClick={() => addArrayItem('boda_padres_novio')} className="text-sm text-rose-500 hover:text-rose-600 font-medium flex items-center gap-2 mt-1">
+                  <span className="w-5 h-5 rounded-full bg-rose-100 flex items-center justify-center text-xs">+</span>
+                  Agregar padre/madre
+                </button>
+              </div>
+            </SectionCard>
+          )}
 
           <SectionCard title="Padrinos" description="Lista de padrinos y madrinas">
             <div className="space-y-3">
@@ -782,6 +846,62 @@ export default function ProjectForm({ project }: Props) {
             )}
             <input type="url" value={form.reception_photo_url} onChange={e => set('reception_photo_url', e.target.value)} className={`${input} mt-3`} placeholder="O pega una URL directamente..." />
           </Field>
+
+          {form.template === 'bodasilueta' && (
+            <SectionCard title="Hospedaje recomendado" description="Hoteles o posadas cercanas para los invitados. Cada uno con foto, ubicación, sitio web y teléfono.">
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-5">
+                  <Field title="Título de la sección">
+                    <input type="text" value={form.boda_hospedaje_title} onChange={e => set('boda_hospedaje_title', e.target.value)} className={input} placeholder="Hospedaje" />
+                  </Field>
+                  <Field title="Texto de apoyo">
+                    <input type="text" value={form.boda_hospedaje_text} onChange={e => set('boda_hospedaje_text', e.target.value)} className={input} placeholder="Te sugerimos estos lugares cercanos…" />
+                  </Field>
+                </div>
+                {form.boda_hospedajes.map((h, i) => {
+                  const actualiza = (campo: keyof typeof h, valor: string) => {
+                    const lista = [...form.boda_hospedajes]
+                    lista[i] = { ...lista[i], [campo]: valor }
+                    set('boda_hospedajes', lista)
+                  }
+                  return (
+                    <div key={i} className="rounded-xl border border-gray-100 bg-gray-50/50 p-4 space-y-3">
+                      <div className="flex items-center justify-between">
+                        <p className="text-sm font-semibold text-gray-800">Lugar {i + 1}</p>
+                        <button type="button" onClick={() => set('boda_hospedajes', form.boda_hospedajes.filter((_, idx) => idx !== i))} className="text-sm text-red-400 hover:text-red-500">Quitar</button>
+                      </div>
+                      <input type="text" value={h.nombre} onChange={e => actualiza('nombre', e.target.value)} className={input} placeholder="Nombre del hotel *" />
+                      <input type="url" value={h.mapsUrl} onChange={e => actualiza('mapsUrl', e.target.value)} className={input} placeholder="Link de Google Maps" />
+                      <input type="url" value={h.sitioWeb} onChange={e => actualiza('sitioWeb', e.target.value)} className={input} placeholder="Sitio web (https://...)" />
+                      <input type="tel" value={h.telefono} onChange={e => actualiza('telefono', e.target.value)} className={input} placeholder="Teléfono" />
+                      <input type="text" value={h.nota} onChange={e => actualiza('nota', e.target.value)} className={input} placeholder="Nota opcional (ej. tarifa especial, código de la boda)" />
+                      <input type="url" value={h.fotoUrl} onChange={e => actualiza('fotoUrl', e.target.value)} className={input} placeholder="Foto (URL)" />
+                      {project?.id ? (
+                        <MediaUploader
+                          sizeHint="Horizontal · 1200 × 750 px (16:10)"
+                          projectId={project.id}
+                          bucket="invitation-media"
+                          accept="image/*"
+                          onUploadComplete={url => actualiza('fotoUrl', url)}
+                          label="Subir foto del hospedaje"
+                        />
+                      ) : (
+                        <p className="text-xs text-gray-400">Guarda el proyecto primero para subir fotos.</p>
+                      )}
+                    </div>
+                  )
+                })}
+                <button
+                  type="button"
+                  onClick={() => set('boda_hospedajes', [...form.boda_hospedajes, { nombre: '', fotoUrl: '', mapsUrl: '', sitioWeb: '', telefono: '', nota: '' }])}
+                  className="text-sm text-rose-500 hover:text-rose-600 font-medium flex items-center gap-2"
+                >
+                  <span className="w-5 h-5 rounded-full bg-rose-100 flex items-center justify-center text-xs">+</span>
+                  Agregar lugar de hospedaje
+                </button>
+              </div>
+            </SectionCard>
+          )}
         </div>
       )}
 
@@ -1316,10 +1436,13 @@ export default function ProjectForm({ project }: Props) {
       )}
 
       {/* Tab 8: Especial */}
-      {activeTab === 8 && (form.template === 'especial' || form.template === 'esmeralda-especial') && (
+      {activeTab === 8 && (form.template === 'especial' || form.template === 'esmeralda-especial' || form.template === 'bodasilueta') && (
         <div className="space-y-6">
           <SectionCard title="Fondo y decoraciones">
             <Field title="Imagen de fondo personalizada">
+              {form.template === 'bodasilueta' && (
+                <p className="text-xs text-gray-400 mb-2">Opcional — si no subes una, Boda Silueta usa un papel blanco rugoso a plena opacidad.</p>
+              )}
               <input
                 type="url"
                 value={form.especial_background_url}
@@ -1417,6 +1540,7 @@ export default function ProjectForm({ project }: Props) {
                 )}
               </Field>
             )}
+            {form.template !== 'bodasilueta' && (
             <Field title={form.template === 'esmeralda-especial' ? 'Sobre personalizado (imagen)' : 'Sobre derecho (imagen)'}>
               <input
                 type="url"
@@ -1437,6 +1561,7 @@ export default function ProjectForm({ project }: Props) {
                 <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para subir archivos.</p>
               )}
             </Field>
+            )}
             {form.template === 'especial' && (
               <Field title="Sobre izquierdo (imagen)">
                 <input
@@ -1534,8 +1659,10 @@ export default function ProjectForm({ project }: Props) {
             )}
           </SectionCard>
 
-          {form.template === 'esmeralda-especial' && (
-            <SectionCard title="Elementos decorativos">
+          {(form.template === 'esmeralda-especial' || form.template === 'bodasilueta') && (
+            <SectionCard title={form.template === 'bodasilueta' ? 'Portada, adornos y pétalos' : 'Elementos decorativos'}>
+              {form.template === 'esmeralda-especial' && (
+              <>
               <p className="text-xs text-gray-400 -mt-2 mb-2">Opcional — si no subes una imagen, se usa el elemento original de Esmeralda.</p>
               {([
                 { key: 'esmeralda_estrella_url' as const,    title: 'Estrella',  label: 'Subir estrella' },
@@ -1573,7 +1700,9 @@ export default function ProjectForm({ project }: Props) {
                   )}
                 </Field>
               ))}
-              <Field title='Título "Mis XV"'>
+              </>
+              )}
+              <Field title={form.template === 'bodasilueta' ? 'Título de la portada' : 'Título "Mis XV"'}>
                 <div className="flex items-center gap-3 mb-3">
                   <span className={`text-sm font-medium ${form.esmeralda_mis_xv_mode !== 'imagen' ? 'text-gray-800' : 'text-gray-400'}`}>Texto</span>
                   <Toggle
@@ -1603,11 +1732,13 @@ export default function ProjectForm({ project }: Props) {
                     ) : (
                       <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para subir archivos.</p>
                     )}
+                    {form.template === 'esmeralda-especial' && (
                     <p className="text-xs text-gray-400 mt-2">
                       Tamaño recomendado: <b>640 × 270 px</b> (proporción 2.4:1), PNG con fondo transparente.
                       Ocupa el mismo alto que el texto (59 px en celular, 90 px en escritorio); si tu imagen
                       es más ancha o más angosta se ajusta sin deformarse.
                     </p>
+                    )}
                   </>
                 ) : (
                   <input
@@ -1615,14 +1746,78 @@ export default function ProjectForm({ project }: Props) {
                     value={form.esmeralda_mis_xv_text}
                     onChange={e => set('esmeralda_mis_xv_text', e.target.value)}
                     className={input}
-                    placeholder="¡Mis XV!"
+                    placeholder={form.template === 'bodasilueta' ? '¡Nos Casamos!' : '¡Mis XV!'}
                   />
                 )}
               </Field>
+              {form.template === 'bodasilueta' && (
+                <>
+                  {([
+                    { key: 'esmeralda_decorativo1_url' as const, title: 'Adorno de esquina superior', label: 'Subir adorno superior', hint: 'Cuadrada · 600 × 600 px, PNG con transparencia (esquina superior izquierda)' },
+                    { key: 'esmeralda_decorativo2_url' as const, title: 'Adorno de esquina inferior', label: 'Subir adorno inferior', hint: 'Cuadrada · 600 × 600 px, PNG con transparencia (esquina inferior derecha)' },
+                    { key: 'esmeralda_decorativo3_url' as const, title: 'Separador entre secciones', label: 'Subir separador', hint: 'Horizontal · 800 × 160 px, PNG con transparencia' },
+                  ]).map(({ key, title, label, hint }) => (
+                    <Field key={key} title={title}>
+                      <input
+                        type="url"
+                        value={form[key]}
+                        onChange={e => set(key, e.target.value)}
+                        className={input}
+                        placeholder="https://..."
+                      />
+                      {project?.id ? (
+                        <MediaUploader
+                          sizeHint={hint}
+                          projectId={project.id}
+                          bucket="invitation-media"
+                          accept="image/*"
+                          onUploadComplete={url => set(key, url)}
+                          label={label}
+                        />
+                      ) : (
+                        <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para subir archivos.</p>
+                      )}
+                    </Field>
+                  ))}
+                  <Field title="Pétalos que caen">
+                    <div className="flex items-center gap-3">
+                      <input
+                        type="range"
+                        min={0}
+                        max={30}
+                        value={form.boda_petalo_cantidad}
+                        onChange={e => set('boda_petalo_cantidad', e.target.value)}
+                        className="flex-1"
+                      />
+                      <span className="text-sm text-gray-500 w-20 text-right">{Number(form.boda_petalo_cantidad) === 0 ? 'Sin efecto' : `${form.boda_petalo_cantidad} pétalos`}</span>
+                    </div>
+                    <p className="text-xs text-gray-400 mt-1 mb-3">Cantidad de pétalos en pantalla mientras se recorre la invitación (0 lo desactiva).</p>
+                    <input
+                      type="url"
+                      value={form.boda_petalo_url}
+                      onChange={e => set('boda_petalo_url', e.target.value)}
+                      className={input}
+                      placeholder="https://... (opcional: imagen propia en lugar del pétalo rosa)"
+                    />
+                    {project?.id ? (
+                      <MediaUploader
+                        sizeHint="Cuadrada · 200 × 200 px, PNG con transparencia (confeti, flores, corazones…)"
+                        projectId={project.id}
+                        bucket="invitation-media"
+                        accept="image/*"
+                        onUploadComplete={url => set('boda_petalo_url', url)}
+                        label="Subir imagen del pétalo"
+                      />
+                    ) : (
+                      <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para subir archivos.</p>
+                    )}
+                  </Field>
+                </>
+              )}
             </SectionCard>
           )}
 
-          {form.template === 'esmeralda-especial' && (
+          {(form.template === 'esmeralda-especial' || form.template === 'bodasilueta') && (
             <SectionCard title="Íconos de secciones">
               <p className="text-xs text-gray-400 -mt-2 mb-2">Opcional — el ícono que aparece arriba del título de cada sección. Si no subes nada, se usa el original de Esmeralda.</p>
               {([
@@ -1633,7 +1828,7 @@ export default function ProjectForm({ project }: Props) {
                 { key: 'esmeralda_icono_buzon_url' as const,          title: 'Buzón de Deseos',       label: 'Subir ícono' },
                 { key: 'esmeralda_icono_instagram_url' as const,      title: 'Hashtag en Instagram',  label: 'Subir ícono' },
                 { key: 'esmeralda_icono_tienda_url' as const,         title: 'Logo de la tienda (Mesa de Regalos)', label: 'Subir logo' },
-              ]).map(({ key, title, label }) => (
+              ]).filter(f => !(form.template === 'bodasilueta' && f.key === 'esmeralda_icono_buzon_url')).map(({ key, title, label }) => (
                 <Field key={key} title={title}>
                   <input
                     type="url"
@@ -1659,7 +1854,7 @@ export default function ProjectForm({ project }: Props) {
           )}
 
           <SectionCard title="Textos opcionales">
-            {form.template === 'esmeralda-especial' && (
+            {(form.template === 'esmeralda-especial' || form.template === 'bodasilueta') && (
               <Field title="Fuente de los títulos">
                 <select
                   value={form.esmeralda_titulo_fuente}
@@ -1695,9 +1890,9 @@ export default function ProjectForm({ project }: Props) {
             </Field>
           </SectionCard>
 
-          {(form.template === 'especial' || form.template === 'esmeralda-especial') && (
+          {(form.template === 'especial' || form.template === 'esmeralda-especial' || form.template === 'bodasilueta') && (
           <SectionCard title="Mesas de Regalos">
-            {form.template === 'esmeralda-especial' && (
+            {(form.template === 'esmeralda-especial' || form.template === 'bodasilueta') && (
               <p className="text-xs text-gray-400 -mt-2 mb-2">Se muestran junto con la mesa principal del tab General (si la hay): primero esa y después estas.</p>
             )}
             <div className="space-y-4">
@@ -1752,7 +1947,7 @@ export default function ProjectForm({ project }: Props) {
                     className={input}
                     placeholder="https://..."
                   />
-                  {form.template === 'esmeralda-especial' && (
+                  {(form.template === 'esmeralda-especial' || form.template === 'bodasilueta') && (
                     <div className="pt-2 border-t border-gray-100">
                       <label className="text-xs text-gray-500">Imagen personalizada de esta mesa (opcional — reemplaza el logo de la tienda)</label>
                       <input
