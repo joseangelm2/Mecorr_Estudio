@@ -122,6 +122,19 @@ const invitations: Invitation[] = [
     internalRoute: '/sellorosa',
   },
   {
+    title: 'Boda Silueta',
+    description: [
+      'Pensada para bodas: portada con la foto de los novios, papel blanco rugoso y un marco de camelias, rosas y azahares en 3D. Incluye familias de ambos lados, hospedaje recomendado con foto, mapa, sitio web y teléfono, y varias mesas de regalos. Totalmente personalizable.',
+    ],
+    image: '/promo/bodasilueta.png',
+    imageAlt: 'Invitación de boda Boda Silueta',
+    accent: 'accent-boda',
+    reversed: true,
+    demoHref: '/bodasilueta',
+    demoLabel: 'Ver demo',
+    internalRoute: '/bodasilueta',
+  },
+  {
     title: 'Magical',
     description: [
       'Un cosmos de fantasía con estrellas animadas, paleta de morado profundo y oro mágico. Efectos de brillo en cada sección, sobre de apertura mágico, galería con lightbox y cuenta regresiva estelar.',

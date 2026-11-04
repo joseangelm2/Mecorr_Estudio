@@ -1,0 +1,36 @@
+import type { Metadata } from 'next'
+import {
+  Raleway, Albert_Sans, Beau_Rivage, Mea_Culpa,
+  Carattere, Bellefair, Cormorant_Garamond, Old_Standard_TT,
+  Dancing_Script, Tangerine, DM_Sans, Playfair_Display, Libre_Bodoni,
+} from 'next/font/google'
+
+const raleway     = Raleway({ variable: '--font-raleway',      subsets: ['latin'], weight: ['400', '600', '700'] })
+const albert      = Albert_Sans({ variable: '--font-albert',   subsets: ['latin'], weight: ['200', '300', '400', '500'] })
+const beau        = Beau_Rivage({ variable: '--font-beau',      subsets: ['latin'], weight: '400' })
+const meaCulpa    = Mea_Culpa({ variable: '--font-meaculpa',   subsets: ['latin'], weight: '400' })
+const carattere   = Carattere({ variable: '--font-carattere',  subsets: ['latin'], weight: '400' })
+const bellefair   = Bellefair({ variable: '--font-bellefair',  subsets: ['latin'], weight: '400' })
+const cormorant   = Cormorant_Garamond({ variable: '--font-cormorant', subsets: ['latin'], weight: ['400', '500', '600', '700'] })
+const oldStandard = Old_Standard_TT({ variable: '--font-old-standard', subsets: ['latin'], weight: ['400', '700'] })
+const dancing     = Dancing_Script({ variable: '--font-dancing',   subsets: ['latin'], weight: ['400', '700'] })
+const tangerine   = Tangerine({ variable: '--font-tangerine',      subsets: ['latin'], weight: ['400', '700'] })
+const dmSans      = DM_Sans({ variable: '--font-dm-sans',          subsets: ['latin'] })
+const playfair    = Playfair_Display({ variable: '--font-playfair',      subsets: ['latin'] })
+const libreBodoni  = Libre_Bodoni({ variable: '--font-libre-bodoni', subsets: ['latin'] })
+
+export const metadata: Metadata = {
+  title: 'Boda Silueta — Nos Casamos',
+  description: 'Invitación de boda con hospedaje recomendado',
+}
+
+// Mismas fuentes que /i/[slug]: el selector de "Fuente de los títulos" las necesita como variables CSS.
+export default function BodaSiluetaLayout({ children }: { children: React.ReactNode }) {
+  const fonts = [
+    raleway.variable, albert.variable, beau.variable, meaCulpa.variable,
+    carattere.variable, bellefair.variable, cormorant.variable, oldStandard.variable,
+    dancing.variable, tangerine.variable, dmSans.variable, playfair.variable, libreBodoni.variable,
+  ].join(' ')
+
+  return <div className={fonts}>{children}</div>
+}
