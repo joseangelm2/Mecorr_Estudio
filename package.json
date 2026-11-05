@@ -33,7 +33,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "dev:tunnel": "concurrently -n next,ngrok -c blue,green \"next dev\" \"ngrok http --domain=rake-ducktail-compactor.ngrok-free.dev 3000\"",
+    "dev:tunnel": "concurrently -n next,ngrok -c blue,green \"next dev\" \"ngrok http --url=rake-ducktail-compactor.ngrok-free.dev 3000\"",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",

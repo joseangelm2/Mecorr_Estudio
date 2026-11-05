@@ -18,6 +18,7 @@ const templateMap: Record<TemplateId, TemplateComponent> = {
   especial: dynamic(() => import('./EspecialTemplate')),
   'esmeralda-especial': dynamic(() => import('./EsmeraldaEspecialTemplate')),
   bodasilueta: dynamic(() => import('./BodaSiluetaTemplate')),
+  bodasobre: dynamic(() => import('./BodaSobreTemplate')),
 }
 
 interface Props {

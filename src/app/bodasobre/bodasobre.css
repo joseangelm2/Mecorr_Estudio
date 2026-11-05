@@ -1,0 +1,1531 @@
+/* scoped:t-bodasobre */
+
+@import "tailwindcss";
+
+/* ======================================
+   SELLOROSA INVITATION — Pink/Rose Theme
+   ====================================== */
+
+.t-bodasobre * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html:has(.t-bodasobre) {
+  overflow: hidden;
+  position: relative;
+}
+
+html.con-scroll:has(.t-bodasobre) {
+  overflow-y: scroll;
+}
+
+body:has(.t-bodasobre) {
+  margin: 0;
+  background-color: var(--bs-bg, #fff0f3);
+  font-family: 'Raleway', sans-serif;
+  overflow-x: hidden;
+  color: #333;
+}
+
+/* ======================================
+   ENVELOPE / SOBRE
+   ====================================== */
+
+.t-bodasobre .bs-envelope {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background: linear-gradient(135deg, var(--bs-bg, #fff0f3), var(--bs-soft, #f5babc), var(--bs-primary, #cb997e));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: opacity 0.8s ease;
+}
+
+.t-bodasobre .bs-envelope.opening {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.t-bodasobre .bs-envelope.hidden {
+  display: none;
+}
+
+.t-bodasobre .bs-envelope-name {
+  font-size: clamp(2.4rem, 12vw, 4.2rem);
+  color: #fff;
+  font-family: var(--bs-titulo-font, Georgia, serif);
+  font-weight: 400;
+  line-height: 1.05;
+  margin-bottom: 6px;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
+}
+
+.t-bodasobre .bs-envelope-tagline {
+  font-size: clamp(1.15rem, 5.5vw, 1.7rem); /* mayor que antes, pero menor que el nombre */
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.92);
+  margin-bottom: 22px;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Bloque inferior: nombre, fecha y botón casi al final de la pantalla. */
+.t-bodasobre .bs-envelope-pie {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: max(7vh, 36px);
+  z-index: 1;
+  padding: 0 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.t-bodasobre .bs-sello-btn {
+  background: var(--bs-boton-bg, linear-gradient(135deg, var(--bs-primary, #cb997e), var(--bs-soft, #f5babc)));
+  color: var(--bs-boton-color, white);
+  border: none;
+  padding: 14px 32px;
+  border-radius: 30px;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: inherit;
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: bso-pulse-base 3s infinite;
+}
+
+.t-bodasobre .bs-sello-btn:hover {
+  transform: scale(1.04);
+}
+
+@keyframes bso-pulse-base {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(var(--bs-primary-rgb, 203, 153, 126), 0.4); }
+  50% { box-shadow: 0 0 20px 10px rgba(var(--bs-primary-rgb, 203, 153, 126), 0.1); }
+}
+
+/* ======================================
+   MAIN CONTENT
+   ====================================== */
+
+.t-bodasobre .bs-main {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* ======================================
+   HERO
+   ====================================== */
+
+.t-bodasobre .bs-hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(135deg, var(--bs-soft, #f5babc) 0%, var(--bs-primary, #cb997e) 50%, var(--bs-dark, #a4717a) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.t-bodasobre .bs-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.3) 100%);
+}
+
+.t-bodasobre .bs-hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+}
+
+.t-bodasobre .bs-hero-title {
+  font-size: clamp(4rem, 20vw, 10rem);
+  color: white;
+  font-family: var(--bs-titulo-font, Georgia, serif);
+  font-weight: 400;
+  line-height: 1;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  margin-bottom: 8px;
+}
+
+.t-bodasobre .bs-hero-xv {
+  font-size: clamp(1rem, 4vw, 1.5rem);
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.t-bodasobre .bs-hero-date {
+  font-size: clamp(1rem, 4vw, 1.5rem);
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 4px;
+  font-weight: 400;
+}
+
+/* ======================================
+   DIVIDER
+   ====================================== */
+
+.t-bodasobre .bs-divider {
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(to right, var(--bs-soft, #f5babc), var(--bs-primary, #cb997e), var(--bs-soft, #f5babc));
+}
+
+/* ======================================
+   SECTION BASE
+   ====================================== */
+
+.t-bodasobre .bs-section {
+  padding: 40px 24px;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.t-bodasobre .bs-section-title {
+  font-size: clamp(1.8rem, 6vw, 2.5rem);
+  color: var(--bs-titulos-color, var(--bs-primary, #cb997e));
+  font-family: var(--bs-titulo-font, Georgia, serif);
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.t-bodasobre .bs-section-line {
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--bs-primary, #cb997e), transparent);
+  margin: 12px auto 24px;
+  border: none;
+  display: block;
+}
+
+.t-bodasobre .bs-text {
+  font-size: 15px;
+  color: #666;
+  line-height: 1.8;
+}
+
+/* ======================================
+   COUNTDOWN
+   ====================================== */
+
+.t-bodasobre .bs-countdown-wrapper {
+  background: linear-gradient(135deg, var(--bs-soft, #f5babc), var(--bs-primary, #cb997e));
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.t-bodasobre .bs-countdown-title {
+  color: white;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-family: var(--bs-titulo-font, Georgia, serif);
+  font-weight: 400;
+  letter-spacing: 4px;
+  margin-bottom: 24px;
+}
+
+.t-bodasobre .bs-countdown-grid {
+  display: flex;
+  justify-content: center;
+  gap: clamp(12px, 4vw, 32px);
+  flex-wrap: wrap;
+}
+
+.t-bodasobre .bs-countdown-item {
+  text-align: center;
+}
+
+.t-bodasobre .bs-countdown-num {
+  font-size: clamp(2.5rem, 10vw, 4rem);
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+  display: block;
+}
+
+.t-bodasobre .bs-countdown-label {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  display: block;
+  margin-top: 4px;
+}
+
+/* ======================================
+   VENUE CARDS
+   ====================================== */
+
+.t-bodasobre .bs-venues {
+  padding: 40px 16px;
+  background: var(--bs-bg, #fff0f3);
+}
+
+.t-bodasobre .bs-venue-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  margin: 12px auto;
+  max-width: 480px;
+  box-shadow: 0 4px 16px rgba(var(--bs-primary-rgb, 203, 153, 126), 0.15);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.t-bodasobre .bs-venue-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(var(--bs-primary-rgb, 203, 153, 126), 0.25);
+}
+
+.t-bodasobre .bs-venue-img {
+  width: 100%;
+  max-width: 280px;
+  aspect-ratio: 1 / 1.08;
+  box-sizing: border-box;
+  border: 10px solid #fff;
+  border-bottom-width: 40px;
+  border-radius: 3px;
+  object-fit: cover;
+  margin: 6px 0 22px;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(60, 50, 30, 0.28), 0 0 0 1px rgba(60, 50, 30, 0.07);
+  transform: rotate(-2.5deg);
+}
+
+.t-bodasobre .bs-venue-card:nth-child(even) .bs-venue-img {
+  transform: rotate(2.5deg);
+}
+
+.t-bodasobre .bs-venue-name {
+  font-size: 18px;
+  color: var(--bs-primary, #cb997e);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.t-bodasobre .bs-venue-address {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.t-bodasobre .bs-venue-time {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--bs-dark, #a4717a);
+  margin-bottom: 12px;
+}
+
+.t-bodasobre .bs-btn {
+  background: var(--bs-boton-bg, linear-gradient(to right, var(--bs-soft, #f5babc), var(--bs-primary, #cb997e)));
+  color: var(--bs-boton-color, white);
+  padding: 10px 28px;
+  border-radius: 24px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: opacity 0.2s;
+}
+
+.t-bodasobre .bs-btn:hover {
+  opacity: 0.9;
+}
+
+/* ======================================
+   PARENTS
+   ====================================== */
+
+.t-bodasobre .bs-parents {
+  background: white;
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.t-bodasobre .bs-parent-name {
+  font-size: 18px;
+  color: #555;
+  line-height: 2.2;
+}
+
+/* ======================================
+   ITINERARIO
+   ====================================== */
+
+.t-bodasobre .bs-itinerario {
+  background: linear-gradient(135deg, var(--bs-primary, #cb997e), var(--bs-dark, #a4717a));
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.t-bodasobre .bs-itinerario .bs-section-title {
+  color: white;
+}
+
+.t-bodasobre .bs-itinerario-item {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 14px 20px;
+  margin: 10px auto;
+  max-width: 400px;
+  gap: 16px;
+}
+
+.t-bodasobre .bs-itinerario-item.reverse {
+  flex-direction: row-reverse;
+}
+
+.t-bodasobre .bs-itinerario-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  filter: invert(100%);
+}
+
+.t-bodasobre .bs-itinerario-info {
+  flex: 1;
+  text-align: left;
+}
+
+.t-bodasobre .bs-itinerario-item.reverse .bs-itinerario-info {
+  text-align: right;
+}
+
+.t-bodasobre .bs-itinerario-name {
+  font-size: 17px;
+  color: white;
+  font-weight: 600;
+  margin: 0;
+}
+
+.t-bodasobre .bs-itinerario-hour {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 2px 0 0;
+}
+
+/* ======================================
+   RSVP FORM
+   ====================================== */
+
+.t-bodasobre .bs-rsvp {
+  padding: 40px 24px;
+  background: var(--bs-bg, #fff0f3);
+  text-align: center;
+}
+
+.t-bodasobre .bs-rsvp-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 12px 16px;
+  border: 1px solid var(--bs-soft, #f5babc);
+  border-radius: 24px;
+  font-size: 14px;
+  background: white;
+  color: #333;
+  outline: none;
+  transition: border-color 0.2s;
+  font-family: inherit;
+  display: block;
+  margin: 8px auto;
+}
+
+.t-bodasobre .bs-rsvp-input:focus {
+  border-color: var(--bs-primary, #cb997e);
+}
+
+.t-bodasobre .bs-radio-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+}
+
+.t-bodasobre .bs-radio-wrap input[type="radio"] {
+  accent-color: var(--bs-primary, #cb997e);
+  width: 18px;
+  height: 18px;
+}
+
+.t-bodasobre .bs-radio-label {
+  font-size: 14px;
+  color: #666;
+}
+
+/* ======================================
+   VESTIMENTA
+   ====================================== */
+
+.t-bodasobre .bs-vestimenta {
+  background: white;
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.t-bodasobre .bs-vestimenta-img {
+  max-width: 100px;
+  margin: 12px auto;
+  display: block;
+}
+
+/* ======================================
+   HASHTAG
+   ====================================== */
+
+.t-bodasobre .bs-hashtag {
+  background: linear-gradient(135deg, var(--bs-soft, #f5babc), var(--bs-primary, #cb997e));
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.t-bodasobre .bs-hashtag-text {
+  font-size: clamp(1.5rem, 6vw, 2.5rem);
+  color: white;
+  font-family: var(--bs-titulo-font, Georgia, serif);
+  font-weight: 400;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* ======================================
+   INFO IMPORTANTE
+   ====================================== */
+
+.t-bodasobre .bs-info {
+  background: var(--bs-bg, #fff0f3);
+  padding: 32px 24px;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.t-bodasobre .bs-info-item {
+  font-size: 14px;
+  color: #666;
+  margin: 8px 0;
+  line-height: 1.6;
+}
+
+/* ======================================
+   FOOTER
+   ====================================== */
+
+.t-bodasobre .bs-footer {
+  background: var(--bs-dark, #a4717a);
+  padding: 20px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* ======================================
+   SCROLL ANIMATIONS
+   ====================================== */
+
+.t-bodasobre .show-p-y {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.t-bodasobre .show-p-y.active-p-y {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.t-bodasobre .show-n-x {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.t-bodasobre .show-n-x.active-n-x {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.t-bodasobre .show-p-x {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.t-bodasobre .show-p-x.active-p-x {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+/* ======================================
+   PORTADA = SOBRE CON FOTO
+   ====================================== */
+
+.t-bodasobre .bs-envelope--foto {
+  background-size: cover, cover;
+  background-position: center top, center;
+  background-repeat: no-repeat;
+}
+
+/* Velo rosa para que la frase y el sobre se lean sobre cualquier foto. */
+.t-bodasobre .bs-envelope::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(var(--bs-deep-rgb, 87, 45, 56), 0.55) 0%, rgba(var(--bs-soft-rgb, 245, 186, 188), 0.1) 40%, rgba(var(--bs-deep-rgb, 87, 45, 56), 0.7) 100%);
+}
+
+.t-bodasobre .bs-envelope-titulo {
+  /* la imagen o el texto del título se ajustan sin salto de línea */
+  position: absolute;
+  top: max(5vh, 28px);
+  left: 0;
+  right: 0;
+  z-index: 1;
+  padding: 0 16px;
+  text-align: center;
+  font-family: var(--bs-titulo-font, Georgia, serif);
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(2rem, 10.5vw, 4.4rem);
+  white-space: nowrap;
+  line-height: 1;
+  color: #fff;
+  letter-spacing: 1px;
+  text-shadow:
+    0 0 14px rgba(var(--bs-soft-rgb, 245, 186, 188), 0.95),
+    0 0 34px rgba(var(--bs-primary-rgb, 203, 153, 126), 0.85),
+    0 4px 18px rgba(0, 0, 0, 0.45);
+}
+
+/* ======================================
+   PRIMERA PANTALLA TRAS ABRIR EL SOBRE
+   (frase, cuenta regresiva, padres y padrinos, compactos para caber juntos)
+   ====================================== */
+
+.t-bodasobre .bs-inicio {
+  background: var(--bs-bg, #fff0f3);
+}
+
+.t-bodasobre .bs-inicio .bs-section {
+  padding: 14px 20px;
+}
+
+.t-bodasobre .bs-inicio .bs-section-title {
+  font-size: clamp(1.45rem, 5.5vw, 2rem);
+  margin-bottom: 2px;
+}
+
+.t-bodasobre .bs-inicio .bs-section-line {
+  margin: 6px auto 10px;
+}
+
+.t-bodasobre .bs-inicio .bs-text {
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.t-bodasobre .bs-inicio .bs-countdown-wrapper {
+  padding: 16px 16px 18px;
+}
+
+.t-bodasobre .bs-inicio .bs-countdown-title {
+  font-size: clamp(1.1rem, 4vw, 1.5rem);
+  margin-bottom: 10px;
+}
+
+.t-bodasobre .bs-inicio .bs-countdown-num {
+  font-size: clamp(2rem, 9vw, 3rem);
+}
+
+.t-bodasobre .bs-inicio .bs-countdown-label {
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+.t-bodasobre .bs-inicio .bs-parents {
+  padding: 8px 12px 14px;
+}
+
+.t-bodasobre .bs-inicio .bs-parent-name {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* ======================================
+   GALERÍA "MOMENTOS"
+   ====================================== */
+
+.t-bodasobre .bs-fotos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 16px 32px;
+}
+
+.t-bodasobre .bs-foto {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(var(--bs-dark-rgb, 164, 113, 122), 0.25);
+  display: block;
+}
+
+/* La primera foto abre la galería a todo el ancho. */
+.t-bodasobre .bs-foto:first-child {
+  grid-column: 1 / -1;
+  aspect-ratio: 4 / 3;
+}
+
+/* Si la última queda sola en su fila, también ocupa todo el ancho. */
+.t-bodasobre .bs-foto:last-child:nth-child(even) {
+  grid-column: 1 / -1;
+  aspect-ratio: 4 / 3;
+}
+
+/* ======================================
+   FOTO DE CIERRE
+   ====================================== */
+
+.t-bodasobre .bs-cierre {
+  position: relative;
+  width: 100%;
+  min-height: 70vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.t-bodasobre .bs-cierre::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 40%, rgba(var(--bs-deep-rgb, 87, 45, 56), 0.75) 100%);
+}
+
+.t-bodasobre .bs-cierre-texto {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 0 20px 36px;
+  color: white;
+  font-family: var(--bs-titulo-font, Georgia, serif);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+}
+
+.t-bodasobre .bs-cierre-texto span {
+  font-size: 1rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.t-bodasobre .bs-cierre-texto strong {
+  font-size: clamp(2.6rem, 14vw, 5rem);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+/* ======================================
+   DESTELLOS (brillos que titilan sobre la invitación)
+   ====================================== */
+
+.t-bodasobre .bs-petalos {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* Cada destello cae como un pétalo (el elemento) y titila (halo y estrella de cuatro puntas). */
+.t-bodasobre .bs-petalo {
+  position: absolute;
+  top: -50px;
+  animation-name: bso-petalo-caer;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+.t-bodasobre .bs-petalo::before,
+.t-bodasobre .bs-petalo::after {
+  content: "";
+  position: absolute;
+  opacity: 0;
+  animation-name: bso-destello;
+  animation-duration: var(--bs-titileo, 3s);
+  animation-delay: var(--bs-titileo-delay, 0s);
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+/* Halo suave. */
+.t-bodasobre .bs-petalo::after {
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(var(--bs-primary-rgb, 184, 155, 94), 0.5) 26%, rgba(var(--bs-primary-rgb, 184, 155, 94), 0) 66%);
+}
+
+/* Estrella de cuatro puntas. */
+.t-bodasobre .bs-petalo::before {
+  inset: 8%;
+  z-index: 1;
+  background: radial-gradient(circle, #fff 0%, #fff 22%, var(--bs-primary, #b89b5e) 100%);
+  clip-path: polygon(50% 0%, 59% 41%, 100% 50%, 59% 59%, 50% 100%, 41% 59%, 0% 50%, 41% 41%);
+}
+
+@keyframes bso-petalo-caer {
+  0%   { transform: translate3d(0, -5vh, 0); }
+  25%  { transform: translate3d(var(--bs-drift), 28vh, 0); }
+  50%  { transform: translate3d(calc(var(--bs-drift) * -0.6), 58vh, 0); }
+  75%  { transform: translate3d(calc(var(--bs-drift) * 0.8), 86vh, 0); }
+  100% { transform: translate3d(calc(var(--bs-drift) * -0.3), 112vh, 0); }
+}
+
+@keyframes bso-destello {
+  0%, 100% { opacity: 0; transform: scale(0.2) rotate(0deg); }
+  45%      { opacity: var(--bs-brillo, 1); transform: scale(1) rotate(45deg); }
+  55%      { opacity: var(--bs-brillo, 1); transform: scale(0.9) rotate(60deg); }
+}
+
+/* Con "reducir movimiento" no desaparecen: solo titilan más despacio. */
+@media (prefers-reduced-motion: reduce) {
+  .t-bodasobre .bs-petalo { animation-duration: 22s !important; }
+}
+
+
+/* ======================================
+   PERSONALIZACIÓN (fondo propio, decorativos, hospedaje)
+   ====================================== */
+
+/* Fondo propio: imagen fija detrás de todo, con opacidad regulable. Las secciones de color
+   liso pasan a transparentes para que se vea; las de degradado se conservan. */
+body:has(.t-bodasobre.bs-con-fondo)::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: var(--bs-bg-url);
+  background-size: cover;
+  background-position: center;
+  opacity: var(--bs-bg-opacity, 0.5);
+}
+
+.t-bodasobre.bs-con-fondo .bs-inicio,
+.t-bodasobre.bs-con-fondo .bs-venues,
+.t-bodasobre.bs-con-fondo .bs-parents,
+.t-bodasobre.bs-con-fondo .bs-info,
+.t-bodasobre.bs-con-fondo .bs-vestimenta,
+.t-bodasobre.bs-con-fondo .bs-fotos,
+.t-bodasobre.bs-con-fondo .bs-hospedaje,
+.t-bodasobre.bs-con-fondo .bs-rsvp {
+  background: transparent;
+}
+
+/* Decorativos: dos esquinas fijas y un separador entre secciones. */
+.t-bodasobre .bs-deco-esquina {
+  position: fixed;
+  width: clamp(120px, 40vw, 260px);
+  height: auto;
+  pointer-events: none;
+  z-index: 45;
+}
+
+.t-bodasobre .bs-deco-sup { top: 0; left: 0; }
+.t-bodasobre .bs-deco-inf { bottom: 0; right: 0; }
+
+.t-bodasobre .bs-deco-separador {
+  display: block;
+  width: min(94%, 440px);
+  height: auto;
+  margin: 8px auto;
+}
+
+/* Hospedaje: tarjetas con foto, enlaces y teléfono. */
+.t-bodasobre .bs-hospedaje {
+  padding: 24px 16px 40px;
+  background: var(--bs-bg, #fff0f3);
+}
+
+.t-bodasobre .bs-hospedaje-lista {
+  display: grid;
+  gap: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.t-bodasobre .bs-hotel {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(var(--bs-primary-rgb, 203, 153, 126), 0.2);
+}
+
+.t-bodasobre .bs-hotel-foto {
+  width: min(100% - 40px, 300px);
+  aspect-ratio: 1 / 0.88;
+  box-sizing: border-box;
+  border: 10px solid #fff;
+  border-bottom-width: 40px;
+  border-radius: 3px;
+  object-fit: cover;
+  display: block;
+  margin: 22px auto 4px;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(60, 50, 30, 0.28), 0 0 0 1px rgba(60, 50, 30, 0.07);
+  transform: rotate(-2.5deg);
+}
+
+.t-bodasobre .bs-hotel:nth-child(even) .bs-hotel-foto {
+  transform: rotate(2.5deg);
+}
+
+.t-bodasobre .bs-hotel-cuerpo {
+  padding: 16px 16px 20px;
+}
+
+.t-bodasobre .bs-hotel-nombre {
+  font-family: var(--bs-titulo-font, Georgia, serif);
+  font-size: 1.35rem;
+  color: var(--bs-titulos-color, var(--bs-primary, #cb997e));
+  margin-bottom: 4px;
+}
+
+.t-bodasobre .bs-hotel-nota {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.t-bodasobre .bs-hotel-tel {
+  display: block;
+  font-size: 15px;
+  color: #555;
+  text-decoration: none;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+.t-bodasobre .bs-hotel-acciones {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.t-bodasobre .bs-hotel-acciones .bs-btn {
+  padding: 8px 18px;
+  font-size: 12px;
+}
+
+/* Si se sube una imagen propia como "pétalo", se usa tal cual (sin forma ni degradado). */
+.t-bodasobre .bs-petalo--img::before { display: none; }
+
+.t-bodasobre .bs-petalo--img {
+  border-radius: 0;
+  background-color: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: none;
+}
+
+/* Título de la portada como imagen (en lugar de texto). */
+.t-bodasobre .bs-envelope-titulo-img {
+  display: block;
+  margin: 0 auto;
+  height: clamp(60px, 18vw, 110px);
+  width: auto;
+  max-width: 92%;
+  object-fit: contain;
+}
+
+/* Nombres de los novios ("Ana & Luis"): pueden ser largos, por eso más chicos y con salto de línea. */
+.t-bodasobre .bs-envelope-name {
+  font-size: clamp(2rem, 10vw, 3.6rem);
+  overflow-wrap: anywhere;
+}
+
+/* Mesas de regalos (una o varias) e íconos opcionales de cada sección. */
+.t-bodasobre .bs-icono-seccion {
+  display: block;
+  height: 64px;
+  width: auto;
+  max-width: 80%;
+  object-fit: contain;
+  margin: 0 auto 14px;
+}
+
+.t-bodasobre .bs-mesas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.t-bodasobre .bs-mesa {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.t-bodasobre .bs-mesa-icono {
+  height: 44px;
+  width: auto;
+  max-width: 70%;
+  object-fit: contain;
+}
+
+/* Cintillo con el nombre del invitado (StickyBanner): aparece al bajar. */
+.t-bodasobre .color-principal { background: var(--bs-primary, #cb997e); }
+.t-bodasobre .invitado { padding: 5px 0; width: 100%; position: fixed; top: 0; z-index: 10; }
+.t-bodasobre #cintillo { opacity: 0; transition-duration: 0.5s; }
+.t-bodasobre #cintillo.cintillo-scrolled { opacity: 1 !important; transition-duration: 0.5s; }
+
+/* En la portada las flores van sobre la foto: más chicas para no tapar el título. */
+.t-bodasobre .bs-deco-portada {
+  position: absolute;
+  width: clamp(90px, 27vw, 170px);
+  z-index: 1;
+}
+
+/* El título baja lo justo para quedar debajo de la guirnalda superior. */
+.t-bodasobre .bs-envelope-titulo {
+  top: max(9vh, 78px);
+}
+
+/* ---- Ajustes de espacio y capas ---- */
+
+/* Los bloques ya llevan su propio relleno dentro de .bs-section: no se suma otro por fuera
+   (antes quedaban ~140 px en blanco entre secciones cortas). */
+.t-bodasobre .bs-info,
+.t-bodasobre .bs-vestimenta,
+.t-bodasobre .bs-rsvp {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.t-bodasobre .bs-info .bs-section {
+  padding: 26px 24px;
+}
+
+/* Los racimos de flores van siempre al frente de todo el contenido (sin bloquear toques). */
+.t-bodasobre .bs-marco {
+  z-index: 45;
+}
+
+.t-bodasobre .bs-main > :not(.bs-marco):not(.bs-deco-esquina) {
+  position: relative;
+  z-index: 2;
+}
+
+/* Nombre de los novios en el cierre: más chico para que quepa en una línea. */
+.t-bodasobre .bs-cierre-texto strong {
+  font-size: clamp(2rem, 9.5vw, 3.6rem);
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
+/* Ícono de iglesia de fábrica (dorado) en blanco, igual que el resto del itinerario. */
+.t-bodasobre .bs-icono-blanco {
+  filter: brightness(0) invert(1);
+}
+
+/* Foto hero + anillos y palomas antes de la cuenta regresiva */
+.t-bodasobre .bs-inicio-hero {
+  width: min(86%, 350px);
+  margin: 6px auto 20px;
+}
+.t-bodasobre .bs-inicio-foto {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  aspect-ratio: 1 / 1.22;
+  object-fit: cover;
+  background: #fff;
+  /* Marco de instantánea (polaroid), más grande que las del carrusel para que realce. */
+  border: 13px solid #fff;
+  border-bottom-width: 56px;
+  border-radius: 3px;
+  box-shadow: 0 14px 34px rgba(60, 50, 30, 0.34), 0 0 0 1px rgba(60, 50, 30, 0.07);
+  transform: rotate(-2deg);
+}
+/* PNG con fondo transparente. */
+.t-bodasobre .bs-inicio-anillos {
+  display: block;
+  position: relative;
+  width: 80%;
+  max-width: 320px;
+  margin: -30px auto 0;
+  pointer-events: none;
+}
+
+/* Primera pantalla: título, frase, foto y palomas centrados; la cuenta regresiva queda debajo. */
+.t-bodasobre .bs-inicio-primera {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 70px 0 30px;
+  box-sizing: border-box;
+}
+
+/* Título grande y en negritas; la frase se centra en el espacio entre el título y la foto
+   y crece o se acomoda según el texto. */
+.t-bodasobre .bs-inicio .bs-inicio-titulo {
+  font-size: clamp(2.6rem, 12vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.05;
+  margin: 0;
+  padding: 0 20px 14px;
+  text-shadow: 0 2px 6px rgba(120, 100, 60, 0.18);
+}
+
+.t-bodasobre .bs-inicio-frase {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 28px;
+  box-sizing: border-box;
+}
+
+.t-bodasobre .bs-inicio .bs-inicio-frase .bs-text {
+  font-size: clamp(15px, 4.4vw, 18px);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.t-bodasobre .bs-inicio-primera {
+  justify-content: flex-start;
+}
+
+
+/* ======== Portada de sobre ======== */
+
+/* Sobre de boda: portada de sobre propia de esta invitación. */
+
+.t-bodasobre .bso-sobre {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mitades de mármol blanco con sombra en el borde central. */
+.t-bodasobre .bso-mitad {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50.5%;
+  background: var(--bs-bg, #fbf9f4) url(/images/bodasobre/marmol.jpg) center / cover;
+  transition: transform 2.4s cubic-bezier(0.65, 0, 0.35, 1);
+  will-change: transform;
+}
+
+.t-bodasobre .bso-mitad--izq {
+  left: 0;
+  box-shadow: 6px 0 22px rgba(60, 50, 30, 0.28);
+  border-right: 1px solid rgba(var(--bs-primary-rgb, 168, 146, 112), 0.45);
+}
+
+.t-bodasobre .bso-mitad--der {
+  right: 0;
+  box-shadow: -6px 0 22px rgba(60, 50, 30, 0.28);
+  border-left: 1px solid rgba(var(--bs-primary-rgb, 168, 146, 112), 0.45);
+}
+
+.t-bodasobre .bso-sobre.abriendo .bso-mitad { transition-delay: 0.55s; }
+.t-bodasobre .bso-sobre.abriendo .bso-mitad--izq { transform: translateX(-104%); }
+.t-bodasobre .bso-sobre.abriendo .bso-mitad--der { transform: translateX(104%); }
+
+.t-bodasobre .bso-contenido {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 24px;
+  box-sizing: border-box;
+  transition: opacity 0.7s ease;
+}
+
+.t-bodasobre .bso-sobre.abriendo .bso-contenido {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.t-bodasobre .bso-titulo {
+  margin: 0 0 10px;
+  font-family: var(--bs-titulo-font, Georgia, serif);
+  font-size: clamp(1.8rem, 8vw, 2.6rem);
+  font-weight: 700;
+  color: var(--bs-titulos-color, var(--bs-dark, #7d6b4c));
+}
+
+.t-bodasobre .bso-nombres {
+  margin: 0 0 6px;
+  font-family: var(--bs-titulo-font, Georgia, serif);
+  font-size: clamp(2.2rem, 11vw, 3.8rem);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--bs-titulos-color, var(--bs-primary, #a89270));
+}
+
+.t-bodasobre .bso-fecha {
+  margin: 0 0 34px;
+  letter-spacing: 5px;
+  font-size: clamp(1rem, 4.5vw, 1.4rem);
+  color: var(--bs-dark, #7d6b4c);
+}
+
+.t-bodasobre .bso-sello {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 130px;
+  animation: bso-pulse 3s ease-in-out infinite;
+  filter: var(--bs-sello-filtro, hue-rotate(48deg) saturate(1.1) brightness(1.08)) drop-shadow(0 6px 8px rgba(0, 0, 0, 0.3));
+}
+
+.t-bodasobre .bso-sello img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.t-bodasobre .bso-ayuda {
+  margin: 14px 0 0;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--bs-dark, #7d6b4c);
+  opacity: 0.8;
+}
+
+@keyframes bso-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+/* Familias: una sola fila con la foto cuadrada de cada pareja (marco delgado) y sus nombres abajo. */
+.t-bodasobre .bs-familias {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+  padding: 6px 10px 22px;
+  box-sizing: border-box;
+}
+
+.t-bodasobre .bs-familia {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 190px;
+  margin: 0;
+  text-align: center;
+}
+
+.t-bodasobre .bs-familia-foto {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 4px;
+  background: #fff;
+  border: 1px solid var(--bs-primary, #a89270);
+  box-shadow: 0 4px 12px rgba(60, 50, 30, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bs-primary, #a89270);
+  font-size: 2rem;
+}
+
+.t-bodasobre .bs-familia-foto img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.t-bodasobre .bs-familia-titulo {
+  margin: 10px 0 4px;
+  font-family: var(--bs-titulo-font, Georgia, serif);
+  font-size: clamp(0.95rem, 3.8vw, 1.2rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--bs-titulos-color, var(--bs-primary, #a89270));
+}
+
+.t-bodasobre .bs-familia-nombre {
+  margin: 0;
+  font-size: clamp(11px, 3.2vw, 13.5px);
+  line-height: 1.35;
+  color: #444;
+  overflow-wrap: anywhere;
+}
+
+/* Más aire entre la cuenta regresiva y las familias, y frase que las introduce. */
+.t-bodasobre .bs-familias-bloque {
+  padding-top: 44px;
+}
+
+.t-bodasobre .bs-familias-frase {
+  margin: 0 auto 22px;
+  max-width: 320px;
+  padding: 0 20px;
+  text-align: center;
+  font-family: var(--bs-titulo-font, Georgia, serif);
+  font-size: clamp(1.1rem, 4.6vw, 1.45rem);
+  line-height: 1.35;
+  color: var(--bs-titulos-color, var(--bs-dark, #7d6b4c));
+}
+
+/* Carrusel "Momentos": tres instantáneas encimadas, inclinadas hacia arriba a la izquierda. */
+.t-bodasobre .bs-galeria {
+  padding: 0 0 34px;
+}
+
+.t-bodasobre .bs-galeria-pila {
+  position: relative;
+  width: min(66%, 270px);
+  aspect-ratio: 1 / 1.22;
+  margin: 34px auto 0;
+  left: 14px; /* compensa lo que las de atrás se asoman hacia la izquierda */
+  cursor: pointer;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.t-bodasobre .bs-instantanea {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 10px 10px 40px;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0 8px 22px rgba(60, 50, 30, 0.28), 0 0 0 1px rgba(60, 50, 30, 0.06);
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.7s ease;
+  transform-origin: 70% 80%;
+  will-change: transform;
+}
+
+.t-bodasobre .bs-instantanea img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #eee;
+}
+
+.t-bodasobre .bs-instantanea--0 { transform: translate(0, 0) rotate(1.5deg); z-index: 4; }
+.t-bodasobre .bs-instantanea--1 { transform: translate(-16px, -14px) rotate(-5deg); z-index: 3; }
+.t-bodasobre .bs-instantanea--2 { transform: translate(-30px, -26px) rotate(-10deg); z-index: 2; }
+.t-bodasobre .bs-instantanea--fuera { transform: translate(-30px, -26px) rotate(-10deg); z-index: 1; opacity: 0; }
+
+.t-bodasobre .bs-galeria-puntos {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 26px;
+}
+
+.t-bodasobre .bs-galeria-puntos button {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(var(--bs-primary-rgb, 168, 146, 112), 0.35);
+  cursor: pointer;
+}
+
+.t-bodasobre .bs-galeria-puntos button.activo {
+  background: var(--bs-primary, #a89270);
+  transform: scale(1.25);
+}
+
+
+
+/* ---- Confirmación: fecha límite en su propio renglón y toggle Asistiré / No asistiré ---- */
+.t-bodasobre .bs-confirma {
+  margin-bottom: 24px;
+}
+
+.t-bodasobre .bs-confirma-frase {
+  margin-bottom: 6px;
+}
+
+.t-bodasobre .bs-confirma-fecha {
+  margin: 0;
+  font-family: var(--bs-titulo-font, Georgia, serif);
+  font-size: clamp(1.7rem, 7.4vw, 2.3rem);
+  line-height: 1.15;
+  color: var(--bs-titulos-color, var(--bs-primary, #b89b5e));
+}
+
+.t-bodasobre .bs-toggle {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 6px 0 12px;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgba(var(--bs-primary-rgb, 184, 155, 94), 0.14);
+  border: 1px solid rgba(var(--bs-primary-rgb, 184, 155, 94), 0.4);
+}
+
+.t-bodasobre .bs-toggle-fondo {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--bs-soft, #e9d8a6), var(--bs-primary, #b89b5e));
+  box-shadow: 0 2px 8px rgba(var(--bs-dark-rgb, 120, 100, 70), 0.3);
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.t-bodasobre .bs-toggle[data-valor="no"] .bs-toggle-fondo {
+  transform: translateX(100%);
+}
+
+.t-bodasobre .bs-toggle-op {
+  position: relative;
+  z-index: 1;
+  padding: 11px 8px;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  color: var(--bs-dark, #7d6b4c);
+  cursor: pointer;
+  transition: color 0.25s;
+}
+
+.t-bodasobre .bs-toggle-op[aria-checked="true"] {
+  color: #fff;
+  font-weight: 600;
+}
+
+
+
+
+/* ---- Sello que se quiebra: los trozos salen volando de la escena ---- */
+.t-bodasobre .bso-sello--roto {
+  visibility: hidden;
+  animation: none;
+}
+
+.t-bodasobre .bso-trozos {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+  /* Un temblor breve justo antes de que se rompa. */
+  animation: bso-tiembla 0.28s linear;
+}
+
+.t-bodasobre .bso-trozo,
+.t-bodasobre .bso-migaja {
+  position: absolute;
+  animation-name: bso-vuela;
+  animation-delay: 0.28s;
+  animation-timing-function: cubic-bezier(0.25, 0.55, 0.35, 1);
+  animation-fill-mode: both;
+  will-change: transform, opacity;
+}
+
+.t-bodasobre .bso-trozo {
+  inset: 0;
+}
+
+.t-bodasobre .bso-trozo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* Mismo tono que el sello entero (las migajas ya son doradas y no se tiñen). */
+  filter: var(--bs-sello-filtro, hue-rotate(48deg) saturate(1.1) brightness(1.08));
+}
+
+.t-bodasobre .bso-migaja {
+  left: 46%;
+  top: 46%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fff1b8, #c9a040 70%, #8a6419);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes bso-tiembla {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  15% { transform: translate(-3px, 1px) rotate(-3deg); }
+  35% { transform: translate(3px, -1px) rotate(3deg); }
+  55% { transform: translate(-3px, -2px) rotate(-2deg); }
+  75% { transform: translate(2px, 2px) rotate(2deg); }
+}
+
+@keyframes bso-vuela {
+  0%   { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 1; }
+  15%  { opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)) rotate(var(--giro)) scale(var(--esc)); opacity: 0; }
+}
+
+
+
+

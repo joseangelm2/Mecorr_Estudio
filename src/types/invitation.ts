@@ -44,6 +44,7 @@ export type TemplateId =
   | 'especial'
   | 'esmeralda-especial'
   | 'bodasilueta'
+  | 'bodasobre'
 
 export interface Project {
   id: string

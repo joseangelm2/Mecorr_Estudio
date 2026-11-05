@@ -34,13 +34,13 @@ export const DEMO_BODA: Project = {
     photoUrl: `${IMG}/salon.jpg`,
   },
   itinerary: [
-    ['Ceremonia', '5:00 PM', 'iglesia.png'],
-    ['Recepción', '7:00 PM', 'recepcion.png'],
-    ['Coctel', '7:30 PM', 'coctel.png'],
-    ['Cena', '8:30 PM', 'comida.png'],
-    ['Vals', '10:00 PM', 'vals.png'],
-    ['Baile', '10:30 PM', 'baile.png'],
-    ['Fin del Evento', '2:00 AM', 'fin.png'],
+    ['Ceremonia', '5:00 PM', 'iglesia.svg'],
+    ['Recepción', '7:00 PM', 'recepcion.svg'],
+    ['Coctel', '7:30 PM', 'coctel.svg'],
+    ['Cena', '8:30 PM', 'comida.svg'],
+    ['Vals', '10:00 PM', 'vals.svg'],
+    ['Baile', '10:30 PM', 'baile.svg'],
+    ['Fin del Evento', '2:00 AM', 'fin.svg'],
   ].map(([title, time, icon]) => ({ title, time, description: title, icon: `${IMG}/${icon}`, iconSrc: `${IMG}/${icon}` })),
   dress_code: { colors: 'Formal / Etiqueta', notes: 'El blanco queda reservado para la novia.' },
   photos: [1, 2, 3, 4, 5, 6].map(n => `${IMG}/galeria-${n}.jpg`),
@@ -64,5 +64,31 @@ export const DEMO_BODA: Project = {
       { nombre: 'Posada del Templo', fotoUrl: `${IMG}/hotel-2.jpg`, mapsUrl: 'https://maps.google.com', sitioWeb: 'https://example.com', telefono: '442 000 0002', nota: 'Tarifa especial para invitados.' },
       { nombre: 'Suites La Hacienda', fotoUrl: `${IMG}/hotel-3.jpg`, mapsUrl: 'https://maps.google.com', telefono: '442 000 0003' },
     ],
+  },
+}
+
+// Demo de Boda Sobre: mismas secciones y datos de ejemplo que Boda Silueta, con portada de sobre.
+const BASE_SOBRE: Project = JSON.parse(JSON.stringify(DEMO_BODA).replaceAll('/images/bodasilueta', '/images/bodasobre'))
+
+export const DEMO_BODASOBRE: Project = {
+  ...BASE_SOBRE,
+  id: 'demo-bodasobre',
+  slug: 'bodasobre',
+  template: 'bodasobre',
+  color_theme: 'champagne',
+  hero_photo_url: '/images/bodasobre/hero-novios.jpg',
+  extra_config: {
+    ...BASE_SOBRE.extra_config,
+    // Paleta de vestimenta en tonos champagne para que la demo sea toda del mismo color.
+    dress_palette: [
+      { name: 'Champagne', colors: ['#e9d8a6'] },
+      { name: 'Dorado', colors: ['#b89b5e'] },
+      { name: 'Marfil', colors: ['#fbf6e9'] },
+      { name: 'Beige', colors: ['#d9c7a7'] },
+      { name: 'Café claro', colors: ['#8a7440'] },
+    ],
+    familia_foto_novia: '/images/bodasobre/familia-novia.jpg',
+    familia_foto_novio: '/images/bodasobre/familia-novio.jpg',
+    familia_foto_padrinos: '/images/bodasobre/familia-padrinos.jpg',
   },
 }
