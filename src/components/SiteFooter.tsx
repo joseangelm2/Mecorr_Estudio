@@ -9,9 +9,9 @@ export default function SiteFooter() {
               <img src="/promo/icons/mail.svg" alt="Email" />
               contacto@mecorr.com.mx
             </a>
-            <a href="https://api.whatsapp.com/send?phone=525579410833" target="_blank" rel="noopener noreferrer">
+            <a href="https://api.whatsapp.com/send?phone=525548009724" target="_blank" rel="noopener noreferrer">
               <img src="/promo/icons/brand-whatsapp.svg" alt="WhatsApp" />
-              +52 55 7941 0833
+              +52 55 4800 9724
             </a>
             <a href="https://www.mecorr.com.mx" target="_blank" rel="noopener noreferrer">
               <img src="/promo/icons/world-www.svg" alt="Web" />
@@ -28,7 +28,7 @@ export default function SiteFooter() {
               <a href="https://www.facebook.com/mecorrmx" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                 <img src="/promo/icons/facebook.svg" alt="Facebook" />
               </a>
-              <a href="https://api.whatsapp.com/send?phone=525579410833&text=Hola%2C%20me%20interesa%20una%20invitaci%C3%B3n%20digital" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+              <a href="https://api.whatsapp.com/send?phone=525548009724&text=Hola%2C%20me%20interesa%20una%20invitaci%C3%B3n%20digital" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
                 <img src="/promo/icons/brand-whatsapp.svg" alt="WhatsApp" />
               </a>
             </div>

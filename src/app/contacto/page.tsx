@@ -9,10 +9,10 @@ const contactItems = [
     value: 'contacto@mecorr.com.mx',
   },
   {
-    href: 'https://api.whatsapp.com/send?phone=525579410833&text=Hola%2C%20me%20interesa%20una%20invitaci%C3%B3n%20digital',
+    href: 'https://api.whatsapp.com/send?phone=525548009724&text=Hola%2C%20me%20interesa%20una%20invitaci%C3%B3n%20digital',
     icon: '/promo/icons/brand-whatsapp.svg',
     label: 'WhatsApp',
-    value: '+52 55 7941 0833',
+    value: '+52 55 4800 9724',
     external: true,
   },
   {
@@ -36,7 +36,7 @@ const socialLinks = [
     label: 'Facebook',
   },
   {
-    href: 'https://api.whatsapp.com/send?phone=525579410833&text=Hola%2C%20me%20interesa%20una%20invitaci%C3%B3n%20digital',
+    href: 'https://api.whatsapp.com/send?phone=525548009724&text=Hola%2C%20me%20interesa%20una%20invitaci%C3%B3n%20digital',
     icon: '/promo/icons/brand-whatsapp.svg',
     label: 'WhatsApp',
   },
