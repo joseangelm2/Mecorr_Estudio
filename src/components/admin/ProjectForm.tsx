@@ -9,6 +9,8 @@ import { THEMES } from '@/lib/themes'
 import { ELEGANCE_THEMES } from '@/lib/elegance-themes'
 import { ESMERALDA_THEMES } from '@/lib/esmeralda-themes'
 import { BODA_THEMES } from '@/lib/bodasilueta-themes'
+import { BODASOBRE_THEMES } from '@/lib/bodasobre-themes'
+import { VESTIMENTA_IMAGEN_DEFAULT, VESTIMENTA_PALETA_DEFAULT } from '@/lib/bodasobre-vestimenta'
 import { ESPECIAL_THEMES } from '@/lib/especial-themes'
 import { ZAFIRO_THEMES } from '@/lib/zafiro-themes'
 import { TITULO_FUENTES } from '@/lib/titulo-fuentes'
@@ -30,6 +32,7 @@ const TEMPLATES: { value: TemplateId; label: string; emoji: string }[] = [
   { value: 'especial', label: 'Especial', emoji: '⭐' },
   { value: 'esmeralda-especial', label: 'Esmeralda Especial', emoji: '💚⭐' },
   { value: 'bodasilueta', label: 'Boda Silueta', emoji: '💍' },
+  { value: 'bodasobre', label: 'Boda Sobre', emoji: '💌' },
 ]
 
 const TABS = [
@@ -134,6 +137,7 @@ function toFormData(project?: Project): ProjectFormData {
       boda_novia: '', boda_novio: '', boda_padres_novio: ['', ''], boda_padres_novio_title: '',
       boda_hospedajes: [], boda_hospedaje_title: '', boda_hospedaje_text: '',
       boda_petalo_url: '', boda_petalo_cantidad: '14',
+      boda_familia_frase: '', boda_familia_foto_novia: '', boda_familia_foto_novio: '', boda_familia_foto_padrinos: '',
     }
   }
   return {
@@ -182,8 +186,10 @@ function toFormData(project?: Project): ProjectFormData {
     especial_decoration_style: (project.extra_config?.decoration_style as string) ?? 'flores',
     especial_banner_text: (project.extra_config?.banner_text as string) ?? '',
     especial_footer_text: (project.extra_config?.footer_text as string) ?? '',
-    show_dress_palette: (project.extra_config?.show_dress_palette as boolean) ?? false,
-    dress_palette: (project.extra_config?.dress_palette as DressPaletteEntry[]) ?? [],
+    show_dress_palette: (project.extra_config?.show_dress_palette as boolean) ?? (project.template === 'bodasobre'),
+    dress_palette: (project.extra_config?.dress_palette as DressPaletteEntry[] | undefined)?.length
+      ? (project.extra_config?.dress_palette as DressPaletteEntry[])
+      : project.template === 'bodasobre' ? VESTIMENTA_PALETA_DEFAULT : [],
     especial_gift_registries: (project.extra_config?.gift_registries as Array<{ giftStore: string; liverpoolLink: string; iconUrl?: string }>) ?? [],
     rsvp_phones: (project.extra_config?.rsvp_phones as Array<{ phone: string; label: string }>) ?? [],
     rsvp_email: (project.extra_config?.rsvp_email as string) ?? '',
@@ -191,7 +197,7 @@ function toFormData(project?: Project): ProjectFormData {
     especial_seal_filter: (project.extra_config?.seal_filter as string) ?? '',
     especial_seal_offset_x: String((project.extra_config?.seal_offset_x as number) ?? 0),
     especial_seal_offset_y: String((project.extra_config?.seal_offset_y as number) ?? 0),
-    dress_code_image_url: (project.extra_config?.dress_code_image_url as string) ?? '',
+    dress_code_image_url: (project.extra_config?.dress_code_image_url as string) ?? (project.template === 'bodasobre' ? VESTIMENTA_IMAGEN_DEFAULT : ''),
     especial_envelope_right_url: (project.extra_config?.envelope_right_url as string) ?? '',
     especial_envelope_left_url: (project.extra_config?.envelope_left_url as string) ?? '',
     esmeralda_estrella_url: (project.extra_config?.estrella_url as string) ?? '',
@@ -239,6 +245,10 @@ function toFormData(project?: Project): ProjectFormData {
     boda_hospedaje_title: (project.extra_config?.hospedaje_title as string) ?? '',
     boda_hospedaje_text: (project.extra_config?.hospedaje_text as string) ?? '',
     boda_petalo_url: (project.extra_config?.petalo_url as string) ?? '',
+    boda_familia_frase: (project.extra_config?.familia_frase as string) ?? '',
+    boda_familia_foto_novia: (project.extra_config?.familia_foto_novia as string) ?? '',
+    boda_familia_foto_novio: (project.extra_config?.familia_foto_novio as string) ?? '',
+    boda_familia_foto_padrinos: (project.extra_config?.familia_foto_padrinos as string) ?? '',
     boda_petalo_cantidad: project.extra_config?.petalo_cantidad === undefined ? '14' : String(project.extra_config?.petalo_cantidad),
     color_theme: project.color_theme ?? 'rosagold',
     invitation_text: project.invitation_text ?? '',
@@ -322,6 +332,9 @@ interface Props { project?: Project }
 export default function ProjectForm({ project }: Props) {
   const [activeTab, setActiveTab] = useState(0)
   const [form, setForm] = useState<ProjectFormData>(() => toFormData(project))
+  const esBoda = form.template === 'bodasilueta' || form.template === 'bodasobre'
+  // Cada boda tiene su propia paleta (bodasilueta-themes / bodasobre-themes).
+  const temasBoda = form.template === 'bodasobre' ? BODASOBRE_THEMES : BODA_THEMES
   const [loading, setLoading] = useState(false)
   const [saved, setSaved] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -347,6 +360,28 @@ export default function ProjectForm({ project }: Props) {
     const name = e.target.value
     set('quinceanera_name', name)
     if (!project) set('slug', generateSlug(name))
+  }
+
+
+  // Foto cuadrada de cada pareja (solo Boda Sobre): se muestra sobre sus nombres en la invitación.
+  function fotoFamilia(key: 'boda_familia_foto_novia' | 'boda_familia_foto_novio' | 'boda_familia_foto_padrinos') {
+    if (form.template !== 'bodasobre') return null
+    return (
+      <Field title="Foto de la pareja">
+        <input type="url" value={form[key]} onChange={e => set(key, e.target.value)} className={input} placeholder="https://..." />
+        {project?.id ? (
+          <MediaUploader sizeHint="Cuadrada · 600 × 600 px"
+            projectId={project.id}
+            bucket="invitation-media"
+            accept="image/*"
+            onUploadComplete={url => set(key, url)}
+            label="Subir foto"
+          />
+        ) : (
+          <p className="text-xs text-gray-400 mt-1">Guarda el proyecto primero para subir archivos.</p>
+        )}
+      </Field>
+    )
   }
 
   function setArrayItem(field: 'parent_names' | 'padrinos' | 'photos' | 'boda_padres_novio', index: number, value: string) {
@@ -409,7 +444,7 @@ export default function ProjectForm({ project }: Props) {
       {/* Tabs */}
       <div className="flex gap-1 mb-8 bg-gray-100 p-1.5 rounded-2xl overflow-x-auto">
         {TABS.map((tab, i) => {
-          if (i === 8 && form.template !== 'especial' && form.template !== 'esmeralda-especial' && form.template !== 'bodasilueta') return null
+          if (i === 8 && form.template !== 'especial' && form.template !== 'esmeralda-especial' && !esBoda) return null
           return (
           <button
             key={tab.label}
@@ -430,7 +465,7 @@ export default function ProjectForm({ project }: Props) {
       {/* Tab 0: General */}
       {activeTab === 0 && (
         <div className="space-y-7">
-          {form.template === 'bodasilueta' ? (
+          {esBoda ? (
             <div className="grid grid-cols-2 gap-5">
               <Field title="Nombre de la novia *">
                 <input type="text" value={form.boda_novia} onChange={e => handleNovios('boda_novia', e.target.value)} required className={input} placeholder="Ej. Valeria" />
@@ -472,7 +507,13 @@ export default function ProjectForm({ project }: Props) {
                   type="button"
                   onClick={() => {
                     set('template', t.value)
-                    if (t.value === 'bodasilueta' && form.color_theme !== 'custom' && !BODA_THEMES.some(th => th.id === form.color_theme)) set('color_theme', 'blanco')
+                    // Boda Sobre trae paleta e imagen de vestimenta por defecto.
+                    if (t.value === 'bodasobre') {
+                      if (!form.dress_palette.length) { set('dress_palette', VESTIMENTA_PALETA_DEFAULT); set('show_dress_palette', true) }
+                      if (!form.dress_code_image_url) set('dress_code_image_url', VESTIMENTA_IMAGEN_DEFAULT)
+                    }
+                    const temasDe = t.value === 'bodasobre' ? BODASOBRE_THEMES : t.value === 'bodasilueta' ? BODA_THEMES : null
+                    if (temasDe && form.color_theme !== 'custom' && !temasDe.some(th => th.id === form.color_theme)) set('color_theme', temasDe[0].id)
                   }}
                   className={`flex flex-col items-center gap-2 p-3.5 rounded-xl border-2 text-center transition-all ${
                     form.template === t.value
@@ -487,14 +528,14 @@ export default function ProjectForm({ project }: Props) {
             </div>
           </Field>
 
-          {(form.template === 'sobre' || form.template === 'elegance' || form.template === 'especial' || form.template === 'zafiro' || form.template === 'esmeralda' || form.template === 'esmeralda-especial' || form.template === 'bodasilueta') && (
+          {(form.template === 'sobre' || form.template === 'elegance' || form.template === 'especial' || form.template === 'zafiro' || form.template === 'esmeralda' || form.template === 'esmeralda-especial' || esBoda) && (
             <Field title="Paleta de color">
               <div className="flex flex-wrap gap-4">
                 {(
                   form.template === 'sobre' ? THEMES :
                   form.template === 'especial' ? ESPECIAL_THEMES :
                   form.template === 'zafiro' ? ZAFIRO_THEMES :
-                  form.template === 'bodasilueta' ? BODA_THEMES :
+                  esBoda ? temasBoda :
                   (form.template === 'esmeralda' || form.template === 'esmeralda-especial') ? ESMERALDA_THEMES :
                   ELEGANCE_THEMES
                 ).map(theme => (
@@ -516,7 +557,7 @@ export default function ProjectForm({ project }: Props) {
                     <span className={`text-xs font-medium ${form.color_theme === theme.id ? 'text-rose-500' : 'text-gray-400'}`}>{theme.label}</span>
                   </button>
                 ))}
-                {(form.template === 'especial' || form.template === 'zafiro' || form.template === 'esmeralda-especial' || form.template === 'bodasilueta') && (
+                {(form.template === 'especial' || form.template === 'zafiro' || form.template === 'esmeralda-especial' || esBoda) && (
                   <div className="flex flex-col items-center gap-2">
                     <label
                       className="w-10 h-10 rounded-full border-4 cursor-pointer transition-all relative overflow-hidden block"
@@ -537,7 +578,7 @@ export default function ProjectForm({ project }: Props) {
                     <span className={`text-xs font-medium ${form.color_theme === 'custom' ? 'text-rose-500' : 'text-gray-400'}`}>Personalizado</span>
                   </div>
                 )}
-                {(form.template === 'esmeralda-especial' || form.template === 'bodasilueta') && (
+                {(form.template === 'esmeralda-especial' || esBoda) && (
                   <div className="flex flex-col items-center gap-2">
                     <label
                       className="w-10 h-10 rounded-full border-4 cursor-pointer transition-all relative overflow-hidden block"
@@ -562,7 +603,7 @@ export default function ProjectForm({ project }: Props) {
                     )}
                   </div>
                 )}
-                {(form.template === 'esmeralda-especial' || form.template === 'bodasilueta') && (
+                {(form.template === 'esmeralda-especial' || esBoda) && (
                   <div className="flex flex-col items-center gap-2">
                     <label
                       className="w-10 h-10 rounded-full border-4 cursor-pointer transition-all relative overflow-hidden block"
@@ -718,12 +759,17 @@ export default function ProjectForm({ project }: Props) {
         <div className="space-y-6">
           <SectionCard title="Títulos de sección" description="Personaliza los encabezados (dejar vacío = valor por defecto)">
             <div className="space-y-4">
-              <Field title={form.template === 'bodasilueta' ? 'Título padres de la novia' : 'Título sección Padres'}>
-                <input value={form.parents_title} onChange={e => set('parents_title', e.target.value)} className={input} placeholder={form.template === 'bodasilueta' ? 'Padres de la novia' : 'Mis Padres'} />
+              <Field title={esBoda ? 'Título padres de la novia' : 'Título sección Padres'}>
+                <input value={form.parents_title} onChange={e => set('parents_title', e.target.value)} className={input} placeholder={esBoda ? 'Padres de la novia' : 'Mis Padres'} />
               </Field>
-              {form.template === 'bodasilueta' && (
+              {esBoda && (
                 <Field title="Título padres del novio">
                   <input value={form.boda_padres_novio_title} onChange={e => set('boda_padres_novio_title', e.target.value)} className={input} placeholder="Padres del novio" />
+                </Field>
+              )}
+              {form.template === 'bodasobre' && (
+                <Field title="Frase de las familias">
+                  <textarea value={form.boda_familia_frase} onChange={e => set('boda_familia_frase', e.target.value)} className={input} rows={2} placeholder="Las personas que nos guiaron a este momento de nuestras vidas" />
                 </Field>
               )}
               <Field title="Título sección Padrinos">
@@ -732,7 +778,7 @@ export default function ProjectForm({ project }: Props) {
             </div>
           </SectionCard>
 
-          <SectionCard title={form.template === 'bodasilueta' ? 'Padres de la novia' : 'Padres'} description="Nombres que aparecerán en la invitación">
+          <SectionCard title={esBoda ? 'Padres de la novia' : 'Padres'} description="Nombres que aparecerán en la invitación">
             <div className="space-y-3">
               {form.parent_names.map((name, i) => (
                 <div key={i} className="flex gap-3 items-center">
@@ -744,10 +790,11 @@ export default function ProjectForm({ project }: Props) {
                 <span className="w-5 h-5 rounded-full bg-rose-100 flex items-center justify-center text-xs">+</span>
                 Agregar padre/madre
               </button>
+              {fotoFamilia('boda_familia_foto_novia')}
             </div>
           </SectionCard>
 
-          {form.template === 'bodasilueta' && (
+          {esBoda && (
             <SectionCard title="Padres del novio" description="Nombres que aparecerán en la invitación">
               <div className="space-y-3">
                 {form.boda_padres_novio.map((name, i) => (
@@ -760,6 +807,7 @@ export default function ProjectForm({ project }: Props) {
                   <span className="w-5 h-5 rounded-full bg-rose-100 flex items-center justify-center text-xs">+</span>
                   Agregar padre/madre
                 </button>
+                {fotoFamilia('boda_familia_foto_novio')}
               </div>
             </SectionCard>
           )}
@@ -776,6 +824,7 @@ export default function ProjectForm({ project }: Props) {
                 <span className="w-5 h-5 rounded-full bg-rose-100 flex items-center justify-center text-xs">+</span>
                 Agregar padrino/madrina
               </button>
+              {fotoFamilia('boda_familia_foto_padrinos')}
             </div>
           </SectionCard>
         </div>
@@ -847,7 +896,7 @@ export default function ProjectForm({ project }: Props) {
             <input type="url" value={form.reception_photo_url} onChange={e => set('reception_photo_url', e.target.value)} className={`${input} mt-3`} placeholder="O pega una URL directamente..." />
           </Field>
 
-          {form.template === 'bodasilueta' && (
+          {esBoda && (
             <SectionCard title="Hospedaje recomendado" description="Hoteles o posadas cercanas para los invitados. Cada uno con foto, ubicación, sitio web y teléfono.">
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-5">
@@ -1436,11 +1485,11 @@ export default function ProjectForm({ project }: Props) {
       )}
 
       {/* Tab 8: Especial */}
-      {activeTab === 8 && (form.template === 'especial' || form.template === 'esmeralda-especial' || form.template === 'bodasilueta') && (
+      {activeTab === 8 && (form.template === 'especial' || form.template === 'esmeralda-especial' || esBoda) && (
         <div className="space-y-6">
           <SectionCard title="Fondo y decoraciones">
             <Field title="Imagen de fondo personalizada">
-              {form.template === 'bodasilueta' && (
+              {esBoda && (
                 <p className="text-xs text-gray-400 mb-2">Opcional — si no subes una, Boda Silueta usa un papel blanco rugoso a plena opacidad.</p>
               )}
               <input
@@ -1540,7 +1589,7 @@ export default function ProjectForm({ project }: Props) {
                 )}
               </Field>
             )}
-            {form.template !== 'bodasilueta' && (
+            {!esBoda && (
             <Field title={form.template === 'esmeralda-especial' ? 'Sobre personalizado (imagen)' : 'Sobre derecho (imagen)'}>
               <input
                 type="url"
@@ -1659,8 +1708,8 @@ export default function ProjectForm({ project }: Props) {
             )}
           </SectionCard>
 
-          {(form.template === 'esmeralda-especial' || form.template === 'bodasilueta') && (
-            <SectionCard title={form.template === 'bodasilueta' ? 'Portada, adornos y pétalos' : 'Elementos decorativos'}>
+          {(form.template === 'esmeralda-especial' || esBoda) && (
+            <SectionCard title={esBoda ? 'Portada, adornos y pétalos' : 'Elementos decorativos'}>
               {form.template === 'esmeralda-especial' && (
               <>
               <p className="text-xs text-gray-400 -mt-2 mb-2">Opcional — si no subes una imagen, se usa el elemento original de Esmeralda.</p>
@@ -1702,7 +1751,7 @@ export default function ProjectForm({ project }: Props) {
               ))}
               </>
               )}
-              <Field title={form.template === 'bodasilueta' ? 'Título de la portada' : 'Título "Mis XV"'}>
+              <Field title={esBoda ? 'Título de la portada' : 'Título "Mis XV"'}>
                 <div className="flex items-center gap-3 mb-3">
                   <span className={`text-sm font-medium ${form.esmeralda_mis_xv_mode !== 'imagen' ? 'text-gray-800' : 'text-gray-400'}`}>Texto</span>
                   <Toggle
@@ -1746,11 +1795,11 @@ export default function ProjectForm({ project }: Props) {
                     value={form.esmeralda_mis_xv_text}
                     onChange={e => set('esmeralda_mis_xv_text', e.target.value)}
                     className={input}
-                    placeholder={form.template === 'bodasilueta' ? '¡Nos Casamos!' : '¡Mis XV!'}
+                    placeholder={esBoda ? '¡Nos Casamos!' : '¡Mis XV!'}
                   />
                 )}
               </Field>
-              {form.template === 'bodasilueta' && (
+              {esBoda && (
                 <>
                   {([
                     { key: 'esmeralda_decorativo1_url' as const, title: 'Adorno de esquina superior', label: 'Subir adorno superior', hint: 'Cuadrada · 600 × 600 px, PNG con transparencia (esquina superior izquierda)' },
@@ -1817,7 +1866,7 @@ export default function ProjectForm({ project }: Props) {
             </SectionCard>
           )}
 
-          {(form.template === 'esmeralda-especial' || form.template === 'bodasilueta') && (
+          {(form.template === 'esmeralda-especial' || esBoda) && (
             <SectionCard title="Íconos de secciones">
               <p className="text-xs text-gray-400 -mt-2 mb-2">Opcional — el ícono que aparece arriba del título de cada sección. Si no subes nada, se usa el original de Esmeralda.</p>
               {([
@@ -1828,7 +1877,7 @@ export default function ProjectForm({ project }: Props) {
                 { key: 'esmeralda_icono_buzon_url' as const,          title: 'Buzón de Deseos',       label: 'Subir ícono' },
                 { key: 'esmeralda_icono_instagram_url' as const,      title: 'Hashtag en Instagram',  label: 'Subir ícono' },
                 { key: 'esmeralda_icono_tienda_url' as const,         title: 'Logo de la tienda (Mesa de Regalos)', label: 'Subir logo' },
-              ]).filter(f => !(form.template === 'bodasilueta' && f.key === 'esmeralda_icono_buzon_url')).map(({ key, title, label }) => (
+              ]).filter(f => !(esBoda && f.key === 'esmeralda_icono_buzon_url')).map(({ key, title, label }) => (
                 <Field key={key} title={title}>
                   <input
                     type="url"
@@ -1854,7 +1903,7 @@ export default function ProjectForm({ project }: Props) {
           )}
 
           <SectionCard title="Textos opcionales">
-            {(form.template === 'esmeralda-especial' || form.template === 'bodasilueta') && (
+            {(form.template === 'esmeralda-especial' || esBoda) && (
               <Field title="Fuente de los títulos">
                 <select
                   value={form.esmeralda_titulo_fuente}
@@ -1890,9 +1939,9 @@ export default function ProjectForm({ project }: Props) {
             </Field>
           </SectionCard>
 
-          {(form.template === 'especial' || form.template === 'esmeralda-especial' || form.template === 'bodasilueta') && (
+          {(form.template === 'especial' || form.template === 'esmeralda-especial' || esBoda) && (
           <SectionCard title="Mesas de Regalos">
-            {(form.template === 'esmeralda-especial' || form.template === 'bodasilueta') && (
+            {(form.template === 'esmeralda-especial' || esBoda) && (
               <p className="text-xs text-gray-400 -mt-2 mb-2">Se muestran junto con la mesa principal del tab General (si la hay): primero esa y después estas.</p>
             )}
             <div className="space-y-4">
@@ -1947,7 +1996,7 @@ export default function ProjectForm({ project }: Props) {
                     className={input}
                     placeholder="https://..."
                   />
-                  {(form.template === 'esmeralda-especial' || form.template === 'bodasilueta') && (
+                  {(form.template === 'esmeralda-especial' || esBoda) && (
                     <div className="pt-2 border-t border-gray-100">
                       <label className="text-xs text-gray-500">Imagen personalizada de esta mesa (opcional — reemplaza el logo de la tienda)</label>
                       <input

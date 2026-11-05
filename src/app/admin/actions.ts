@@ -125,6 +125,10 @@ export interface ProjectFormData {
   boda_hospedaje_title: string
   boda_hospedaje_text: string
   boda_petalo_url: string
+  boda_familia_frase: string
+  boda_familia_foto_novia: string
+  boda_familia_foto_novio: string
+  boda_familia_foto_padrinos: string
   boda_petalo_cantidad: string
 }
 
@@ -135,7 +139,7 @@ async function formDataToProject(data: ProjectFormData) {
   }
 
   // En Boda Silueta el nombre que se muestra es "Novia & Novio"; se guarda en la columna de siempre.
-  const esBoda = data.template === 'bodasilueta'
+  const esBoda = data.template === 'bodasilueta' || data.template === 'bodasobre'
   const nombreMostrado = esBoda
     ? [data.boda_novia, data.boda_novio].map(n => n.trim()).filter(Boolean).join(' & ')
     : data.quinceanera_name
@@ -282,6 +286,11 @@ async function formDataToProject(data: ProjectFormData) {
       ...(esBoda && data.boda_hospedaje_title ? { hospedaje_title: data.boda_hospedaje_title } : {}),
       ...(esBoda && data.boda_hospedaje_text ? { hospedaje_text: data.boda_hospedaje_text } : {}),
       ...(esBoda && data.boda_petalo_url ? { petalo_url: data.boda_petalo_url } : {}),
+      ...(data.template === 'bodasobre' ? { show_dress_palette: !!data.show_dress_palette, dress_code_image_url: data.dress_code_image_url } : {}),
+      ...(data.template === 'bodasobre' && data.boda_familia_frase ? { familia_frase: data.boda_familia_frase } : {}),
+      ...(data.template === 'bodasobre' && data.boda_familia_foto_novia ? { familia_foto_novia: data.boda_familia_foto_novia } : {}),
+      ...(data.template === 'bodasobre' && data.boda_familia_foto_novio ? { familia_foto_novio: data.boda_familia_foto_novio } : {}),
+      ...(data.template === 'bodasobre' && data.boda_familia_foto_padrinos ? { familia_foto_padrinos: data.boda_familia_foto_padrinos } : {}),
       ...(esBoda && data.boda_petalo_cantidad !== '' && data.boda_petalo_cantidad !== '14'
         ? { petalo_cantidad: Number(data.boda_petalo_cantidad) } : {}),
       ...(data.elegance_show_album ? { show_album: true } : {}),

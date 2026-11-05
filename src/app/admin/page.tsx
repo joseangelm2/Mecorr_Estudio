@@ -13,6 +13,7 @@ const TEMPLATE_COLORS: Record<string, string> = {
   elegance: 'bg-sky-100 text-sky-700',
   sellorosa: 'bg-fuchsia-100 text-fuchsia-700',
   bodasilueta: 'bg-pink-100 text-pink-700',
+  bodasobre: 'bg-amber-100 text-amber-700',
   rosagold: 'bg-orange-100 text-orange-700',
   magical: 'bg-purple-100 text-purple-700',
 }

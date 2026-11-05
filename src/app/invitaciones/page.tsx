@@ -136,6 +136,19 @@ const invitations: Invitation[] = [
     extraDemo: { href: '/bodasilueta/lista-invitados', label: 'Demo lista de invitados' },
   },
   {
+    title: 'Boda Sobre',
+    description: [
+      'Una boda que empieza con un sobre de papel y sello de cera dorado: al tocarlo se abre para revelar la invitación. Incluye familias de ambos lados, hospedaje recomendado, varias mesas de regalos y marco de flores en 3D. Totalmente personalizable.',
+    ],
+    image: '/promo/bodasobre.png',
+    imageAlt: 'Invitación de boda Boda Sobre',
+    accent: 'accent-boda',
+    reversed: false,
+    demoHref: '/bodasobre',
+    demoLabel: 'Ver demo',
+    internalRoute: '/bodasobre',
+  },
+  {
     title: 'Magical',
     description: [
       'Un cosmos de fantasía con estrellas animadas, paleta de morado profundo y oro mágico. Efectos de brillo en cada sección, sobre de apertura mágico, galería con lightbox y cuenta regresiva estelar.',
