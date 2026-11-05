@@ -133,6 +133,7 @@ const invitations: Invitation[] = [
     demoHref: '/bodasilueta',
     demoLabel: 'Ver demo',
     internalRoute: '/bodasilueta',
+    extraDemo: { href: '/bodasilueta/lista-invitados', label: 'Demo lista de invitados' },
   },
   {
     title: 'Magical',
@@ -195,7 +196,7 @@ export default function InvitacionesPage() {
         {/* WhatsApp flotante */}
         <a
           className="whatsapp-float"
-          href="https://api.whatsapp.com/send?phone=525579410833&text=Hola%2C%20me%20interesa%20una%20invitaci%C3%B3n%20digital"
+          href="https://api.whatsapp.com/send?phone=525548009724&text=Hola%2C%20me%20interesa%20una%20invitaci%C3%B3n%20digital"
           target="_blank"
           rel="noopener noreferrer"
         >
