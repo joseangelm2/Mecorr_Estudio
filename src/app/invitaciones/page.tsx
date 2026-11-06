@@ -9,7 +9,7 @@ interface Invitation {
   imageAlt: string
   accent: string
   reversed: boolean
-  demoHref: string
+  demoHref?: string
   demoLabel?: string
   internalRoute?: string
   extraDemo?: { href: string; label: string }
@@ -83,45 +83,6 @@ const invitations: Invitation[] = [
     internalRoute: '/zafiro',
   },
   {
-    title: 'Pink',
-    description: [
-      'La distinción de una invitación impresa, llevada al mundo digital. Fondos sutiles, tipografía cuidadosamente seleccionada y detalles refinados que reflejan el prestigio del evento.',
-    ],
-    image: '/promo/amatista.webp',
-    imageAlt: 'Invitación Pink',
-    accent: 'accent-pink',
-    reversed: true,
-    demoHref: '/pink',
-    demoLabel: 'Ver demo',
-    internalRoute: '/pink',
-  },
-  {
-    title: 'Rosa Gold',
-    description: [
-      'Rosa y dorado en perfecta armonía. Tipografía de alta gama que resalta el nombre de la quinceañera, galería de fotos, itinerario y confirmación de asistencia. Elegancia en cada scroll.',
-    ],
-    image: '/promo/rosapastel.png',
-    imageAlt: 'Invitación Rosa Gold',
-    accent: 'accent-pinkk',
-    reversed: false,
-    demoHref: '/rosagold',
-    demoLabel: 'Ver demo',
-    internalRoute: '/rosagold',
-  },
-  {
-    title: 'Sello Rosa',
-    description: [
-      'Una experiencia que comienza con el sello de la quinceañera en el sobre. Mariposas rosas en movimiento y personalización de nombre y pases para cada invitado. Solo disponible en celular.',
-    ],
-    image: '/promo/sellorosa.png',
-    imageAlt: 'Invitación Sello Rosa',
-    accent: 'accent-sellorosa',
-    reversed: false,
-    demoHref: '/sellorosa',
-    demoLabel: 'Ver demo',
-    internalRoute: '/sellorosa',
-  },
-  {
     title: 'Boda Silueta',
     description: [
       'Pensada para bodas: portada con la foto de los novios, papel blanco rugoso y un marco de camelias, rosas y azahares en 3D. Incluye familias de ambos lados, hospedaje recomendado con foto, mapa, sitio web y teléfono, y varias mesas de regalos. Totalmente personalizable.',
@@ -169,7 +130,7 @@ export default function InvitacionesPage() {
       <SiteHeader />
 
       {/* Page header */}
-      <div style={{ paddingTop: '65px' }}>
+      <div style={{ paddingTop: 'var(--sh-h)' }}>
         <div style={{ padding: '48px 24px 0', textAlign: 'center', background: '#fff' }}>
           <h1 style={{ fontSize: 'clamp(24px, 4vw, 40px)', fontWeight: 800, color: '#1a1a2e', marginBottom: 8 }}>
             Nuestras Invitaciones
@@ -189,9 +150,11 @@ export default function InvitacionesPage() {
                   <p key={j}>{p}</p>
                 ))}
                 <div className="buttons-row">
-                  <Link href={inv.internalRoute ?? inv.demoHref} className="btn-demo btn-primary">
-                    {inv.demoLabel ?? 'Ver demo'}
-                  </Link>
+                  {(inv.internalRoute ?? inv.demoHref) && (
+                    <Link href={(inv.internalRoute ?? inv.demoHref)!} className="btn-demo btn-primary">
+                      {inv.demoLabel ?? 'Ver demo'}
+                    </Link>
+                  )}
                   {inv.extraDemo && (
                     <Link href={inv.extraDemo.href} className="btn-demo btn-primary">
                       {inv.extraDemo.label}

@@ -26,11 +26,7 @@ export default function SiteHeader() {
         <div className="sh-inner">
           {/* Brand */}
           <Link href="/" className="sh-brand" onClick={() => setOpen(false)}>
-            <img src="/promo/logo_mecorr2.png" alt="MeCorr" />
-            <div className="sh-brand-text">
-              <span className="sh-brand-name">MeCorr Estudio</span>
-              <span className="sh-brand-tagline">Soluciones Digitales</span>
-            </div>
+            <img src="/promo/logo_mecorr.png" alt="MeCorr Soluciones Digitales" />
           </Link>
 
           {/* Desktop nav */}

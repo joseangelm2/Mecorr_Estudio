@@ -7,24 +7,34 @@ import SiteFooter from '@/components/SiteFooter'
 
 const slides = [
   {
-    src: '/promo/portadaxv.png',
-    title: 'Invitaciones Digitales para XV Años',
-    subtitle: 'Cada quinceañera merece una experiencia única. Diseños exclusivos que sorprenden a cada invitado.',
+    src: '/promo/sobreros.png',
+    name: 'Sobre Animado',
+    title: 'Un Sobre que se Abre para Sorprender',
+    subtitle: 'Tu invitación empieza con un sello de cera: al tocarlo, el sobre se abre y revela cada detalle de tu fiesta.',
   },
   {
     src: '/promo/esmeralda.webp',
+    name: 'Esmeralda',
     title: 'Elegancia en Cada Detalle',
-    subtitle: 'Tipografía de alta gama, animaciones fluidas y personalización completa para tu gran día.',
+    subtitle: 'Foto principal en círculo, cuenta regresiva, galería, itinerario y mesas de regalos en un solo enlace.',
   },
   {
     src: '/promo/zafiro.webp',
+    name: 'Zafiro',
     title: 'Tecnología que Enamora',
-    subtitle: 'Sobre de apertura, cuenta regresiva, galería de fotos y confirmación de asistencia en un solo enlace.',
+    subtitle: 'Efectos contemporáneos, paleta sofisticada y confirmación de asistencia directo a tu WhatsApp.',
   },
   {
-    src: '/promo/elegance.jpg',
-    title: 'Un Cuento Hecho Realidad',
-    subtitle: 'Paleta blanco marfil, detalles dorados y una atmósfera de cuento que conquista a cada invitado.',
+    src: '/promo/bodasilueta.png',
+    name: 'Boda Silueta',
+    title: 'Invitaciones para Bodas',
+    subtitle: 'Portada con la foto de los novios, familias de ambos lados, hospedajes recomendados y varias mesas de regalos.',
+  },
+  {
+    src: '/promo/bodasobre.png',
+    name: 'Boda Sobre',
+    title: 'Tu Boda Empieza con un Sello Dorado',
+    subtitle: 'Un sobre de papel con sello de cera que se quiebra al tocarlo, destellos y marco de flores.',
   },
 ]
 
@@ -32,7 +42,7 @@ const services = [
   {
     icon: '💌',
     title: 'Invitaciones Digitales',
-    desc: 'Diseños exclusivos para XV años con animaciones, galería de fotos, mapa, cuenta regresiva y confirmación de asistencia por WhatsApp.',
+    desc: 'Diseños exclusivos para XV años y Bodas con animaciones, galería de fotos, mapa, cuenta regresiva y confirmación de asistencia por WhatsApp.',
   },
   {
     icon: '🌐',
@@ -61,34 +71,38 @@ export default function LandingPage() {
       <SiteHeader />
 
       {/* Hero Carousel */}
-      <section className="hero-carousel">
-        {slides.map((slide, i) => (
-          <div key={i} className={`hero-slide ${i === current ? 'active' : ''}`}>
-            <img src={slide.src} alt={slide.title} />
-            <div className="hero-slide-overlay" />
+      <section className="hero-carousel" aria-roledescription="carrusel">
+        <div className="hero-inner">
+          <div className="hero-content">
+            <span className="hero-tag">{slides[current].name}</span>
+            <h1 key={current}>{slides[current].title}</h1>
+            <p key={`p${current}`}>{slides[current].subtitle}</p>
+            <div className="hero-actions">
+              <Link href="/invitaciones" className="btn-site-primary">
+                Ver Invitaciones
+              </Link>
+              <Link href="/contacto" className="btn-site-outline">
+                Contáctanos
+              </Link>
+            </div>
           </div>
-        ))}
 
-        <div className="hero-content">
-          <h1>{slides[current].title}</h1>
-          <p>{slides[current].subtitle}</p>
-          <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/invitaciones" className="btn-site-primary">
-              Ver Invitaciones
-            </Link>
-            <Link href="/contacto" className="btn-site-outline">
-              Contáctanos
-            </Link>
+          <div className="hero-stage">
+            {slides.map((slide, i) => (
+              <div key={slide.src} className={`hero-slide ${i === current ? 'active' : ''}`} aria-hidden={i !== current}>
+                <img src={slide.src} alt={`Invitación digital ${slide.name}`} />
+              </div>
+            ))}
           </div>
         </div>
 
         <div className="hero-dots">
-          {slides.map((_, i) => (
+          {slides.map((slide, i) => (
             <button
-              key={i}
+              key={slide.src}
               className={`hero-dot ${i === current ? 'active' : ''}`}
               onClick={() => setCurrent(i)}
-              aria-label={`Slide ${i + 1}`}
+              aria-label={`Ver ${slide.name}`}
             />
           ))}
         </div>
