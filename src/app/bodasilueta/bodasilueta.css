@@ -1065,11 +1065,6 @@ body:has(.t-bodasilueta.bs-con-fondo)::after {
   text-align: center;
 }
 
-/* Ícono de iglesia de fábrica (dorado) en blanco, igual que el resto del itinerario. */
-.t-bodasilueta .bs-icono-blanco {
-  filter: brightness(0) invert(1);
-}
-
 /* Foto hero + anillos y palomas antes de la cuenta regresiva */
 .t-bodasilueta .bs-inicio-hero {
   width: min(78%, 340px);

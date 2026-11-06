@@ -38,7 +38,7 @@ const TIENDAS: Record<string, { label: string; icon: string }> = {
 };
 
 function resolveIcon(icon: string | undefined): string {
-  if (!icon) return `${IMG}/iglesia.png`;
+  if (!icon) return `${IMG}/iglesia.svg`;
   if (icon.startsWith("http") || icon.startsWith("/")) return icon;
   return `${IMG}/${icon}`;
 }
@@ -126,7 +126,7 @@ export default function BodaSiluetaContent({ project }: Props) {
     if (r?.liverpoolLink) mesas.push({ giftStore: r.giftStore, link: r.liverpoolLink, iconUrl: r.iconUrl });
   }
 
-  const iconoVestimenta = (extra.icono_vestimenta_url as string) || `${IMG}/vestimenta.png`;
+  const iconoVestimenta = (extra.icono_vestimenta_url as string) || `${IMG}/vestimenta.svg`;
   const iconoMesa = (extra.icono_mesa_regalos_url as string) || "";
   const iconoSobre = (extra.icono_sobre_url as string) || "";
   const iconoBanco = (extra.icono_datos_bancarios_url as string) || "";
@@ -139,9 +139,6 @@ export default function BodaSiluetaContent({ project }: Props) {
     label: ev.title,
     hour: ev.time,
     icon: resolveIcon(ev.icon ?? ev.iconSrc),
-    // El ícono de iglesia de fábrica es dorado; los demás son blancos. Solo ese se tiñe de blanco
-    // (los íconos que suba cada invitación se respetan tal cual).
-    blanco: resolveIcon(ev.icon ?? ev.iconSrc) === `${IMG}/iglesia.png`,
     reverse: i % 2 !== 0,
   }));
 
@@ -283,7 +280,7 @@ export default function BodaSiluetaContent({ project }: Props) {
           <div style={{ padding: "0 16px 32px", maxWidth: "500px", margin: "0 auto" }}>
             {events.map((ev) => (
               <div key={ev.label} className={`bs-itinerario-item${ev.reverse ? " reverse" : ""}`}>
-                <img src={ev.icon} alt={ev.label} className={`bs-itinerario-icon${ev.blanco ? " bs-icono-blanco" : ""}`} />
+                <img src={ev.icon} alt={ev.label} className="bs-itinerario-icon" />
                 <div className="bs-itinerario-info">
                   <div className="bs-itinerario-name">{ev.label}</div>
                   <div className="bs-itinerario-hour">{ev.hour}</div>

@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "MeCorr Estudio | Soluciones Digitales",
-  description: "Invitaciones digitales para XV años, sitios web y soluciones digitales a medida.",
+  description: "Invitaciones digitales para XV años y bodas, sitios web y soluciones digitales a medida.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

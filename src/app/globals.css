@@ -443,6 +443,8 @@ footer.site-footer .social-row {
 .sh {
   position: fixed;
   top: 0; left: 0; right: 0;
+  padding: 0;
+  display: block;
   z-index: 1000;
   background: rgba(13, 13, 26, 0.92);
   backdrop-filter: blur(12px);
@@ -487,9 +489,21 @@ footer.site-footer .social-row {
 }
 
 .sh-brand-tagline {
-  font-size: 10px;
-  color: rgba(241,241,248,0.5);
-  letter-spacing: 0.04em;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #f1f1f8;
+}
+
+@media (min-width: 768px) {
+  .sh-brand-tagline {
+    font-size: 17px;
+  }
 }
 
 /* Desktop nav */

@@ -136,7 +136,7 @@ export default function InvitacionesPage() {
             Nuestras Invitaciones
           </h1>
           <p style={{ color: '#6b7280', fontSize: 'clamp(14px, 2vw, 17px)', marginBottom: 0, paddingBottom: 32 }}>
-            Diseños exclusivos para XV años — elige el que refleje tu personalidad
+            Diseños exclusivos para XV años y Bodas — elige el que refleje tu personalidad
           </p>
         </div>
 
