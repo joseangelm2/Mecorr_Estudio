@@ -25,6 +25,13 @@ export default async function AdminDashboard() {
     .select('id, slug, template, status, quinceanera_name, event_date, updated_at, show_instagram_album, instagram_mode, tiene_lista_invitados')
     .order('updated_at', { ascending: false })
 
+  const { data: linkRows } = await supabase
+    .from('project_client_links')
+    .select('project_id, submitted_at, open')
+  const submittedIds = new Set(
+    (linkRows ?? []).filter(l => l.submitted_at).map(l => l.project_id as string),
+  )
+
   if (error) {
     return (
       <div className="p-8">
@@ -47,13 +54,21 @@ export default async function AdminDashboard() {
           <h1 className="text-2xl font-bold text-gray-900">Invitaciones</h1>
           <p className="text-sm text-gray-500 mt-1">Gestiona todas las invitaciones digitales</p>
         </div>
-        <Link
-          href="/admin/projects/new"
-          className="flex items-center gap-2 px-4 py-2 bg-rose-500 hover:bg-rose-600 text-white rounded-xl text-sm font-medium transition-colors shadow-sm shadow-rose-200"
-        >
-          <span className="text-base leading-none">+</span>
-          Nueva invitación
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link
+            href="/admin/projects/nuevo-cliente"
+            className="flex items-center gap-2 px-4 py-2 bg-white border border-rose-200 hover:bg-rose-50 text-rose-600 rounded-xl text-sm font-medium transition-colors"
+          >
+            Nueva para cliente
+          </Link>
+          <Link
+            href="/admin/projects/new"
+            className="flex items-center gap-2 px-4 py-2 bg-rose-500 hover:bg-rose-600 text-white rounded-xl text-sm font-medium transition-colors shadow-sm shadow-rose-200"
+          >
+            <span className="text-base leading-none">+</span>
+            Nueva invitación
+          </Link>
+        </div>
       </div>
 
       {/* Stats */}
@@ -94,7 +109,7 @@ export default async function AdminDashboard() {
           </div>
           <div className="divide-y divide-gray-50">
             {list.map(project => (
-              <ProjectRow key={project.id} project={project} />
+              <ProjectRow key={project.id} project={project} clientSubmitted={submittedIds.has(project.id)} />
             ))}
           </div>
         </div>
@@ -103,7 +118,7 @@ export default async function AdminDashboard() {
   )
 }
 
-function ProjectRow({ project }: { project: Pick<Project, 'id' | 'slug' | 'template' | 'status' | 'quinceanera_name' | 'event_date' | 'updated_at' | 'show_instagram_album' | 'instagram_mode' | 'tiene_lista_invitados'> }) {
+function ProjectRow({ project, clientSubmitted }: { project: Pick<Project, 'id' | 'slug' | 'template' | 'status' | 'quinceanera_name' | 'event_date' | 'updated_at' | 'show_instagram_album' | 'instagram_mode' | 'tiene_lista_invitados'>; clientSubmitted: boolean }) {
   const eventDate = new Date(project.event_date).toLocaleDateString('es-MX', { day: 'numeric', month: 'short', year: 'numeric' })
   const updatedDate = new Date(project.updated_at).toLocaleDateString('es-MX', { day: 'numeric', month: 'short' })
 
@@ -126,7 +141,14 @@ function ProjectRow({ project }: { project: Pick<Project, 'id' | 'slug' | 'templ
         </div>
         <div className="min-w-0">
           <p className="text-sm font-medium text-gray-900 truncate">{project.quinceanera_name}</p>
-          <p className="text-xs text-gray-400 truncate">/i/{project.slug}</p>
+          <p className="text-xs text-gray-400 truncate">
+            /i/{project.slug}
+            {clientSubmitted && (
+              <span className="ml-2 rounded-full bg-amber-100 px-1.5 py-0.5 text-[10px] font-medium text-amber-700">
+                Cliente envió datos
+              </span>
+            )}
+          </p>
         </div>
       </div>
 

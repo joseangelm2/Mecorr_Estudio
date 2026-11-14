@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Albert_Sans, Dancing_Script, Tangerine, Bellefair, DM_Sans } from "next/font/google";
 import "./elegance.css";
 
-const albert = Albert_Sans({ variable: "--font-albert", subsets: ["latin"], weight: ["400", "500", "600"] });
+const albert = Albert_Sans({ variable: "--font-albert", subsets: ["latin"] });
 const dancing = Dancing_Script({ variable: "--font-dancing", subsets: ["latin"], weight: ["400", "700"] });
 const tangerine = Tangerine({ variable: "--font-tangerine", subsets: ["latin"], weight: ["400", "700"] });
 const bellefair = Bellefair({ variable: "--font-bellefair", subsets: ["latin"], weight: "400" });

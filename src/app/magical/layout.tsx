@@ -4,7 +4,7 @@ import "./magical.css";
 
 const cinzel = Cinzel({ variable: "--font-cinzel", subsets: ["latin"], weight: ["400", "600", "700", "900"] });
 const sacramento = Sacramento({ variable: "--font-sacramento", subsets: ["latin"], weight: "400" });
-const playfair = Playfair_Display({ variable: "--font-playfair", subsets: ["latin"], weight: ["400", "500", "600", "700"] });
+const playfair = Playfair_Display({ variable: "--font-playfair", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Mis XV — Magical",

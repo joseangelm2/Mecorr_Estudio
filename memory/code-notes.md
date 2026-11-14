@@ -92,3 +92,11 @@
 **Decisión de código:** `MediaUploader` sube a Supabase Storage. Bucket `invitation-media` para imágenes y video; bucket `invitation-audio` para audio. La ruta de almacenamiento es `${projectId}/${Date.now()}.${ext}`.
 **Trampa evitada:** Cada upload genera un archivo nuevo aunque sea el mismo contenido (el timestamp garantiza nombre único). Los URLs anteriores siguen siendo válidos y ocupando espacio. No hay limpieza automática de archivos huérfanos al cambiar la URL en el formulario.
 **Patrón reusable:** Props del componente: `bucket` (`'invitation-media'` | `'invitation-audio'`), `projectId`, `onUploadComplete: (url: string) => void`, `accept` (default: `'image/*'`). El callback retorna la URL pública completa lista para guardar en DB. Referencia: `src/components/admin/MediaUploader.tsx:35,39-52`.
+
+---
+
+### [2026-11-13] [coder] — Reset global `*{margin:0;padding:0}` anula las utilidades de Tailwind
+`src/app/globals.css` (desde el commit inicial) tenía un reset sin capa; en la cascada gana a `@layer utilities`, así que `p-*`, `m-*`, etc. no se aplican en ningún lado (el admin se ve compacto por eso). Para `/registro` se excluye el subárbol `.rg-root` con `:where(*:not(.rg-root, .rg-root *))` (especificidad 0, sin cambios en el resto). Además `globals.css` define `header {position:fixed; …}` para cualquier `<header>`: en `/registro` se usan `<div>`, no `<header>`/`<footer>`.
+
+### [2026-11-13] [coder] — `/registro`: guardado por sección y lectura/escritura de `extra_config`
+`saveSection(token, section, data)` valida con `SECTION_SCHEMAS[section]` (Zod, claves desconocidas se descartan) y `buildUpdate()` (`src/lib/registro/apply.ts`) arma solo las columnas/claves de esa sección; `extra_config` se fusiona con el existente y las claves vacías se eliminan (mismo criterio que `formDataToProject`). `initialData()` hace el camino inverso para reeditar. Itinerario: en bodas el ícono sale del tipo de evento (`/images/<plantilla>/<archivo>.svg`); en otras plantillas se conserva el ícono que el admin ya puso. Hora: el admin guarda texto libre ("5:00 PM"); el form usa `<input type="time">` y convierte con `to12h/to24h`. Fotos: solo URLs del storage propio o `/images/…`; enlaces: solo `http(s)`.
