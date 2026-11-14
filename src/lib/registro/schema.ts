@@ -139,14 +139,14 @@ export function isBoda(template: string): boolean {
   return template === 'bodasilueta' || template === 'bodasobre'
 }
 
-export const SECTION_META: Record<SectionId, { title: string; description: string }> = {
+export const SECTION_META: Record<SectionId, { title: string; description: string; optional?: boolean }> = {
   datos: { title: 'Datos principales', description: 'Nombres, fecha del evento y mensaje de invitación.' },
   contacto: { title: 'Confirmación de asistencia', description: 'A qué WhatsApp o correo te confirman los invitados.' },
   familia: { title: 'Familia y padrinos', description: 'Los nombres que aparecerán en tu invitación.' },
   lugares: { title: 'Lugares', description: 'Dónde será la ceremonia y la recepción.' },
-  itinerario: { title: 'Programa del evento', description: 'El orden de tu evento, hora por hora.' },
+  itinerario: { title: 'Programa del evento', description: 'El orden de tu evento, hora por hora.', optional: true },
   vestimenta: { title: 'Código de vestimenta', description: 'Cómo te gustaría que vayan vestidos tus invitados.' },
-  regalos: { title: 'Mesa de regalos', description: 'Tiendas, lluvia de sobres y datos bancarios (opcional).' },
+  regalos: { title: 'Mesa de regalos y transferencia', description: 'Mesa de regalos, lluvia de sobres y datos para transferencia bancaria.', optional: true },
   musica: { title: 'Música', description: 'Dinos qué canción te gustaría para tu invitación.' },
 }
 

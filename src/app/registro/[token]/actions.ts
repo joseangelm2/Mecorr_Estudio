@@ -41,7 +41,7 @@ export async function submitForReview(token: string): Promise<ActionResult> {
   const supabase = createServiceClient()
   const { error } = await supabase
     .from('project_client_links')
-    .update({ submitted_at: new Date().toISOString() })
+    .update({ submitted_at: new Date().toISOString(), open: false })
     .eq('project_id', found.project.id)
   return error ? { ok: false, error: 'No se pudo enviar. Inténtalo de nuevo.' } : { ok: true }
 }
