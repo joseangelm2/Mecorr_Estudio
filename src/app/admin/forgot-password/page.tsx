@@ -30,7 +30,7 @@ export default function ForgotPasswordPage() {
   return (
     <div className="admin-login-page">
       <div className="admin-login-logo">
-        <img src="/promo/logo_mecorr2.png" alt="MeCorr Estudio" />
+        <img src="/promo/icon_mecorr.png" alt="MeCorr Estudio" />
         <h1>MeCorr Estudio</h1>
         <p>Recuperar contraseña</p>
       </div>

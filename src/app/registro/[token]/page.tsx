@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
-import { findOpenLink } from '@/lib/registro/link'
+import { findOpenLink, findSubmittedLink } from '@/lib/registro/link'
 import { initialData } from '@/lib/registro/apply'
-import { RegistroForm } from '@/components/registro/RegistroForm'
+import { RegistroDone, RegistroForm } from '@/components/registro/RegistroForm'
 
 export const dynamic = 'force-dynamic'
 
@@ -19,6 +19,9 @@ export default async function RegistroPage({ params }: Props) {
   const found = await findOpenLink(token)
 
   if (!found) {
+    // Enlace cerrado porque el cliente ya envió: pantalla final con la descarga del PDF.
+    const sent = await findSubmittedLink(token)
+    if (sent) return <RegistroDone token={token} pdfReady={!!sent.pdf_path} />
     return (
       <main className="rg-root flex min-h-screen items-center justify-center bg-gray-50 px-6">
         <div className="max-w-sm text-center">
@@ -31,13 +34,12 @@ export default async function RegistroPage({ params }: Props) {
     )
   }
 
-  const { project, link } = found
+  const { project } = found
   return (
     <RegistroForm
       token={token}
       template={project.template}
       initial={initialData(project)}
-      alreadySubmitted={!!link.submitted_at}
     />
   )
 }

@@ -39,3 +39,4 @@
 - [2026-06-24] [coder] → code-notes.md — MediaUploader: dos buckets, sin deduplicación
 - [2026-06-25] [orquestador] → decisions.md — Módulo ListaInvitados: agregar a projects, ruta inteligente, JWT efímero
 - [2026-06-25] [coder] → decisions.md — ListaInvitados implementado completo (7 fases) en rama ListaInvitados; npm run check ✅
+- [2026-11-13] [coder] → code-notes.md — PDF de preguntas y respuestas del formulario del cliente (bucket privado client-forms, migración 0015)

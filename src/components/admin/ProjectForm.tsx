@@ -2085,7 +2085,7 @@ export default function ProjectForm({ project }: Props) {
       )}
 
       {/* Footer */}
-      <div className="mt-8 flex items-center gap-3 pt-6 border-t border-gray-100">
+      <div className="mt-8 flex flex-wrap items-center gap-3 pt-6 border-t border-gray-100">
         <button
           type="button"
           disabled={loading}

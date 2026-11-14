@@ -4,8 +4,12 @@ import { createServiceClient } from '@/lib/supabase/service'
 import { findOpenLink } from '@/lib/registro/link'
 import { buildUpdate } from '@/lib/registro/apply'
 import { isBoda, SECTION_SCHEMAS, type SectionId } from '@/lib/registro/schema'
+import { generateAndStoreClientPdf } from '@/lib/registro/pdf-store'
 
 export type ActionResult = { ok: true } | { ok: false; error: string }
+export type SubmitResult =
+  | { ok: true; pdfReady: boolean }
+  | { ok: false; error: string }
 
 const NO_DISPONIBLE = 'Este enlace ya no está disponible. Pide uno nuevo a MeCorr Estudio.'
 export async function saveSection(token: string, section: SectionId, raw: unknown): Promise<ActionResult> {
@@ -35,7 +39,7 @@ export async function saveSection(token: string, section: SectionId, raw: unknow
   return { ok: true }
 }
 
-export async function submitForReview(token: string): Promise<ActionResult> {
+export async function submitForReview(token: string): Promise<SubmitResult> {
   const found = await findOpenLink(token)
   if (!found) return { ok: false, error: NO_DISPONIBLE }
   const supabase = createServiceClient()
@@ -43,5 +47,14 @@ export async function submitForReview(token: string): Promise<ActionResult> {
     .from('project_client_links')
     .update({ submitted_at: new Date().toISOString(), open: false })
     .eq('project_id', found.project.id)
-  return error ? { ok: false, error: 'No se pudo enviar. Inténtalo de nuevo.' } : { ok: true }
+  if (error) return { ok: false, error: 'No se pudo enviar. Inténtalo de nuevo.' }
+
+  // La copia en PDF es un extra: si falla, el envío de los datos ya quedó hecho.
+  try {
+    await generateAndStoreClientPdf(found.project.id)
+    return { ok: true, pdfReady: true }
+  } catch (e) {
+    console.error('No se pudo generar el PDF del formulario', e)
+    return { ok: true, pdfReady: false }
+  }
 }
