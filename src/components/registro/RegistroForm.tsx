@@ -113,6 +113,8 @@ export function RegistroForm({ token, template, initial, alreadySubmitted }: Pro
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [done, setDone] = useState(alreadySubmitted)
+  // Al enviar, el servidor cierra el enlace: ya no se puede volver a editar desde esta pantalla.
+  const [justSent, setJustSent] = useState(false)
 
   const steps = SECTION_ORDER
   const reviewStep = steps.length
@@ -160,7 +162,10 @@ export function RegistroForm({ token, template, initial, alreadySubmitted }: Pro
     const res = await submitForReview(token)
     setSaving(false)
     if (!res.ok) setError(res.error)
-    else setDone(true)
+    else {
+      setDone(true)
+      setJustSent(true)
+    }
   }
 
   const progress = Math.round((Math.min(step, reviewStep) / reviewStep) * 100)
@@ -181,12 +186,13 @@ export function RegistroForm({ token, template, initial, alreadySubmitted }: Pro
             <div className="text-4xl">🎉</div>
             <h1 className="mt-2 text-xl font-bold text-gray-900">¡Listo! Recibimos tus datos</h1>
             <p className="mt-2 text-sm text-gray-600">
-              Revisaremos todo y te avisaremos cuando tu invitación esté lista. Si quieres cambiar algo, puedes volver a
-              entrar a este mismo enlace.
+              Revisaremos todo y te avisaremos cuando tu invitación esté lista.
             </p>
-            <button type="button" onClick={() => setStep(0)} className="mt-4 text-sm font-medium text-rose-600">
-              Revisar o editar mis datos
-            </button>
+            {!justSent && (
+              <button type="button" onClick={() => setStep(0)} className="mt-4 text-sm font-medium text-rose-600">
+                Revisar o editar mis datos
+              </button>
+            )}
           </div>
         ) : (
           <>
@@ -203,8 +209,20 @@ export function RegistroForm({ token, template, initial, alreadySubmitted }: Pro
             <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
               {current ? (
                 <>
-                  <h1 className="text-lg font-bold text-gray-900">{SECTION_META[current].title}</h1>
-                  <p className="mb-5 mt-0.5 text-sm text-gray-500">{SECTION_META[current].description}</p>
+                  <h1 className="text-lg font-bold text-gray-900">
+                    {SECTION_META[current].title}
+                    {SECTION_META[current].optional && (
+                      <span className="ml-2 rounded-full bg-gray-100 px-2 py-0.5 align-middle text-xs font-medium text-gray-600">Opcional</span>
+                    )}
+                  </h1>
+                  <p className="mt-0.5 text-sm text-gray-500">{SECTION_META[current].description}</p>
+                  {SECTION_META[current].optional ? (
+                    <p className="mb-5 mt-2 rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-800">
+                      Esta sección es opcional: puedes dejarla en blanco y continuar.
+                    </p>
+                  ) : (
+                    <div className="mb-5" />
+                  )}
                   <div className="space-y-4">{renderSection(current)}</div>
                 </>
               ) : (
@@ -217,7 +235,10 @@ export function RegistroForm({ token, template, initial, alreadySubmitted }: Pro
                     {steps.map((s, i) => (
                       <li key={s}>
                         <button type="button" onClick={() => setStep(i)} className="flex w-full items-center justify-between py-3 text-left text-sm">
-                          <span className="text-gray-800">{SECTION_META[s].title}</span>
+                          <span className="text-gray-800">
+                            {SECTION_META[s].title}
+                            {SECTION_META[s].optional && <span className="ml-1 text-xs text-gray-400">(opcional)</span>}
+                          </span>
                           <span className="text-rose-600">Editar</span>
                         </button>
                       </li>
@@ -335,9 +356,6 @@ export function RegistroForm({ token, template, initial, alreadySubmitted }: Pro
                 + Agregar otro número
               </button>
             )}
-            <Field label="Correo (opcional)">
-              <TextInput type="email" value={d.rsvp_email} onChange={v => set('contacto', { rsvp_email: v })} />
-            </Field>
             <Field label="Frase de confirmación" hint="Ej. Favor de confirmar asistencia antes del 1 de diciembre.">
               <TextInput value={d.confirmation_phrase} onChange={v => set('contacto', { confirmation_phrase: v })} />
             </Field>
