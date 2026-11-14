@@ -127,3 +127,25 @@
 **Por qué:** El admin debe reflejar exactamente la estructura visual de la invitación — el editor sabe qué foto sube y dónde quedará. Sin fallbacks, Elegance no muestra imágenes vacías confusas.
 **Alternativas descartadas:** Tab separado por template para fotos (rompe el constraint "misma sección del admin"). Fallback a placeholder genérico (sigue enmascarando fotos no cargadas). Campo `final_photo_url` como columna nueva en DB (violación del ADR de extra_config).
 **Referencia:** `src/components/templates/SobreTemplate.tsx:95-123`, `src/components/templates/EleganceTemplate.tsx:80-103`, `src/components/elegance/ElegancePhotoGrid.tsx`, `src/app/admin/actions.ts:68,156`, `src/components/admin/ProjectForm.tsx:580-645`
+
+---
+
+### [2026-11-13] [orquestador] — Formulario público para el cliente (`/registro/<token>`)
+**Contexto:** Solo el admin capturaba los datos de cada invitación (`ProjectForm.tsx`, 2127 líneas); el cliente mandaba datos y fotos por otros medios. Se pidió una página web compartible con el cliente que cree/llene el proyecto y capture los datos del admin. Rama `feature/registro-cliente`.
+**Decisiones:**
+1. **Acceso por link único por proyecto:** el admin crea un borrador (`/admin/projects/nuevo-cliente`: plantilla + nombre) y comparte `/registro/<token>`. Token de 32 bytes base64url (43 chars). Nadie sin link puede crear proyectos.
+2. **Token en tabla aparte `project_client_links`** (migración `0014`), con RLS solo `authenticated` y sin grant a `anon`. NO como columna de `projects`: esa tabla tiene `GRANT SELECT TO anon` y el token quedaría legible en proyectos publicados.
+3. **El formulario público escribe con service role** (`createServiceClient`) desde server actions; validación en servidor con Zod. Los esquemas (`src/lib/registro/schema.ts`) son también la lista blanca: `status`, `template`, `slug`, `color_theme` y todo el diseño NUNCA los puede tocar el cliente.
+4. **Resultado:** el proyecto sigue en `draft`; el cliente puede reeditar mientras el link esté abierto (`open=true`); el admin ve la insignia "Cliente envió datos" y cierra/regenera el link.
+5. **El cliente NO sube fotos ni audio** (decisión del usuario, 2026-11-13): se eliminaron el uploader, la subida por URL firmada, el bucket `client-uploads` y `uploads_count`. Las fotos las pone el admin; `photoUrl`/`fotoUrl` (lugares, hospedajes) viajan como campos ocultos para no borrar lo del admin al guardar. La música es un paso de texto: canción/artista + enlace opcional de YouTube o Spotify (validado por host), guardado como sugerencia en `extra_config.musica_sugerida` —NO en `music_url`, que es el archivo de audio que reproduce la invitación— y visible para el admin en `ClientLinkPanel`.
+6. **Sin columnas nuevas en `projects`:** todo va en columnas existentes o `extra_config`, fusionado con lo que ya puso el admin (ADR de extra_config).
+**Alternativas descartadas:** link general abierto (spam, cualquiera crea borradores); tabla de "solicitudes" con conversión manual (doble captura); refactorizar `ProjectForm` para compartir mapeo (riesgo alto en 2127 líneas; se escribió `src/lib/registro/apply.ts` aparte con las mismas claves).
+**Pendiente / fuera de v1:** posiciones de foto propias de cada plantilla (`photo_after_*` de Elegance, grids), paleta de vestimenta de `bodasobre` y todo el diseño siguen siendo del admin; sin rate-limit por IP (el token ya acota el abuso a un proyecto). **Antes de desplegar:** aplicar `supabase/migrations/0014_project_client_links.sql` en producción.
+**Referencia:** `src/app/registro/[token]/`, `src/lib/registro/`, `src/components/registro/`, `src/app/admin/client-link-actions.ts`, `src/components/admin/ClientLinkPanel.tsx`
+
+---
+
+### [2026-11-13] [orquestador] — Fuentes de Google: Albert Sans y Playfair Display sin `weight`
+**Contexto:** `npm run build` (y el deploy de Vercel) fallaba con `Can't resolve '@vercel/turbopack-next/internal/font/google/font'` / `next/font/google queries have exactly one entry`. No era un fallo de red: Google ahora sirve estas familias como fuentes variables y devuelve la MISMA URL de archivo para varios pesos; Turbopack no soporta ese caso.
+**Decisión:** declarar `Albert_Sans` (pink, zafiro, elegance, bodasilueta, bodasobre, `i/[slug]`) y `Playfair_Display` (magical) sin `weight` (= fuente variable completa). Los layouts que ya omitían `weight` en Playfair no fallaban.
+**Trampa activa:** si otra familia de Google empieza a fallar igual, quitar su `weight` o pasar a `next/font/local`.

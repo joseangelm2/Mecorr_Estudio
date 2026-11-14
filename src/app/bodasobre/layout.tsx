@@ -6,7 +6,7 @@ import {
 } from 'next/font/google'
 
 const raleway     = Raleway({ variable: '--font-raleway',      subsets: ['latin'], weight: ['400', '600', '700'] })
-const albert      = Albert_Sans({ variable: '--font-albert',   subsets: ['latin'], weight: ['200', '300', '400', '500'] })
+const albert      = Albert_Sans({ variable: '--font-albert',   subsets: ['latin'] })
 const beau        = Beau_Rivage({ variable: '--font-beau',      subsets: ['latin'], weight: '400' })
 const meaCulpa    = Mea_Culpa({ variable: '--font-meaculpa',   subsets: ['latin'], weight: '400' })
 const carattere   = Carattere({ variable: '--font-carattere',  subsets: ['latin'], weight: '400' })

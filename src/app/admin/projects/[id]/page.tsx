@@ -2,6 +2,8 @@ import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
 import ProjectForm from '@/components/admin/ProjectForm'
 import Link from 'next/link'
+import { ClientLinkPanel } from '@/components/admin/ClientLinkPanel'
+import type { ClientLinkRow } from '@/lib/registro/link'
 import type { Project } from '@/types/invitation'
 
 interface Props {
@@ -22,6 +24,12 @@ export default async function EditProjectPage({ params }: Props) {
 
   const project = data as Project
 
+  const { data: linkData } = await supabase
+    .from('project_client_links')
+    .select('*')
+    .eq('project_id', id)
+    .maybeSingle()
+
   return (
     <div className="p-8 max-w-3xl">
       <div className="flex items-center gap-2 mb-6 text-sm">
@@ -29,6 +37,7 @@ export default async function EditProjectPage({ params }: Props) {
         <span className="text-gray-300">/</span>
         <span className="text-gray-700 font-medium">{project.quinceanera_name}</span>
       </div>
+      <ClientLinkPanel projectId={project.id} clientName={project.quinceanera_name} initial={(linkData as ClientLinkRow | null) ?? null} music={(project.extra_config?.musica_sugerida as { cancion: string; enlace: string } | undefined) ?? null} />
       <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
         <div className="mb-6 pb-5 border-b border-gray-100 flex items-start justify-between">
           <div>

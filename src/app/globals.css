@@ -5,7 +5,12 @@
   src: url("/promo/Supreme-Variable.ttf") format("truetype");
 }
 
-*, *::before, *::after {
+/* Reset global. El formulario del cliente (/registro, clase .rg-root) usa utilidades de Tailwind,
+   que este reset sin capa anulaba (margin/padding); se excluye ese subárbol con :where() para no
+   cambiar la especificidad (0) ni el resultado en el resto del sitio. */
+:where(*:not(.rg-root, .rg-root *)),
+:where(*:not(.rg-root, .rg-root *))::before,
+:where(*:not(.rg-root, .rg-root *))::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;

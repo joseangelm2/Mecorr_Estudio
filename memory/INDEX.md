@@ -13,6 +13,10 @@
 
 ## Últimas entradas
 <!-- formato: - [YYYY-MM-DD] [agente] → archivo#anchor — título -->
+- [2026-11-13] [orquestador] → decisions.md — Formulario público para el cliente (/registro/<token>): token en tabla aparte, service role, bucket client-uploads
+- [2026-11-13] [orquestador] → decisions.md — Fuentes de Google: Albert Sans y Playfair Display sin weight (fix del build de Vercel)
+- [2026-11-13] [coder] → code-notes.md — Reset global anula utilidades de Tailwind; /registro y extra_config por sección
+- [2026-11-13] [revisor] → reviews.md#revisión-del-formulario-de-cliente-registro — Revisión del formulario de cliente /registro (sin críticos; 2 altos en uploads + 1 alto pre-existente)
 - [2026-06-27] [orquestador] → decisions.md — Control granular de fotos en templates Sobre y Elegance
 - [2026-06-27] [coder] → code-notes.md — Admin: sobre_final_photo_url + labels por posición en galería
 - [2026-06-27] [coder] → code-notes.md — Templates Sobre y Elegance: video reordenado, foto final independiente, sin fallbacks en Elegance
