@@ -6,16 +6,18 @@ interface Props {
 
 export default function EspecialFooter({ project }: Props) {
   const footerText = (project.extra_config?.footer_text as string) || '¡Te Esperamos!'
+  // Foto de cierre propia (como en Sobre): va de fondo. Sin ella, se conserva el diseño anterior.
+  const finalPhoto = (project.extra_config?.final_photo_url as string) || ''
 
   return (
     <section
       id="despedida"
       className="padding-final text-center bg-img bg-overlay-contador"
-      style={{ backgroundImage: 'var(--inv-bg-url, url(/images/background-mob.jpg))' }}
+      style={{ backgroundImage: finalPhoto ? `url(${finalPhoto})` : 'var(--inv-bg-url, url(/images/background-mob.jpg))' }}
     >
       <div className="row justify-content-center">
         <div className="col-md-10">
-          {project.hero_photo_url && (
+          {!finalPhoto && project.hero_photo_url && (
             <img
               src={project.hero_photo_url}
               alt={project.quinceanera_name}
