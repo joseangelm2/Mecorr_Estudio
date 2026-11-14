@@ -47,14 +47,14 @@ export default async function AdminDashboard() {
   const drafts = list.filter(p => p.status === 'draft').length
 
   return (
-    <div className="p-8 max-w-6xl">
+    <div className="p-4 md:p-8 max-w-6xl">
       {/* Header */}
-      <div className="flex items-start justify-between mb-8">
+      <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between mb-6 md:mb-8">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Invitaciones</h1>
           <p className="text-sm text-gray-500 mt-1">Gestiona todas las invitaciones digitales</p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <Link
             href="/admin/projects/nuevo-cliente"
             className="flex items-center gap-2 px-4 py-2 bg-white border border-rose-200 hover:bg-rose-50 text-rose-600 rounded-xl text-sm font-medium transition-colors"
@@ -72,13 +72,13 @@ export default async function AdminDashboard() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-3 gap-2 md:gap-4 mb-6 md:mb-8">
         {[
           { label: 'Total', value: list.length, color: 'text-gray-900', bg: 'bg-white' },
           { label: 'Publicadas', value: published, color: 'text-green-600', bg: 'bg-green-50' },
           { label: 'Borradores', value: drafts, color: 'text-gray-500', bg: 'bg-gray-50' },
         ].map(stat => (
-          <div key={stat.label} className={`${stat.bg} rounded-2xl border border-gray-100 p-5`}>
+          <div key={stat.label} className={`${stat.bg} rounded-2xl border border-gray-100 p-3 md:p-5`}>
             <p className="text-xs text-gray-500 font-medium uppercase tracking-wide">{stat.label}</p>
             <p className={`text-3xl font-bold mt-1 ${stat.color}`}>{stat.value}</p>
           </div>
@@ -97,7 +97,7 @@ export default async function AdminDashboard() {
         </div>
       ) : (
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-          <div className="grid grid-cols-[1fr_120px_100px_110px_110px_90px_90px_160px] text-xs font-semibold text-gray-400 uppercase tracking-wide px-6 py-3 border-b border-gray-100 bg-gray-50">
+          <div className="hidden md:grid grid-cols-[1fr_120px_100px_110px_110px_90px_90px_160px] text-xs font-semibold text-gray-400 uppercase tracking-wide px-6 py-3 border-b border-gray-100 bg-gray-50">
             <span>Nombre</span>
             <span>Template</span>
             <span>Estado</span>
@@ -133,7 +133,7 @@ function ProjectRow({ project, clientSubmitted }: { project: Pick<Project, 'id' 
   const isPastEvent = eventDatePlus30 < new Date(new Date().toDateString())
 
   return (
-    <div className="grid grid-cols-[1fr_120px_100px_110px_110px_90px_90px_160px] items-center px-6 py-3.5 hover:bg-gray-50/70 transition-colors">
+    <div className="flex flex-col gap-3 px-4 py-4 md:gap-0 md:grid md:grid-cols-[1fr_120px_100px_110px_110px_90px_90px_160px] md:items-center md:px-6 md:py-3.5 hover:bg-gray-50/70 transition-colors">
       {/* Name */}
       <div className="flex items-center gap-3 min-w-0">
         <div className="w-8 h-8 rounded-full bg-rose-100 flex items-center justify-center text-rose-600 text-xs font-bold shrink-0">
@@ -152,6 +152,8 @@ function ProjectRow({ project, clientSubmitted }: { project: Pick<Project, 'id' 
         </div>
       </div>
 
+      {/* Móvil: template, estado, fechas e indicadores se apilan en una línea que envuelve; en escritorio son columnas de la tabla (md:contents). */}
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-2 md:contents">
       {/* Template */}
       <span className={`inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium w-fit capitalize ${templateColor}`}>
         {project.template}
@@ -170,13 +172,18 @@ function ProjectRow({ project, clientSubmitted }: { project: Pick<Project, 'id' 
       </div>
 
       {/* Event date */}
-      <span className={`text-sm ${isPastEvent ? 'text-red-600 font-medium line-through' : 'text-gray-600'}`}>{eventDate}</span>
+      <span className={`text-sm ${isPastEvent ? 'text-red-600 font-medium line-through' : 'text-gray-600'}`}>
+        <span className="md:hidden text-gray-400 no-underline">Evento: </span>{eventDate}
+      </span>
 
       {/* Updated */}
-      <span className="text-sm text-gray-400">{updatedDate}</span>
+      <span className="text-sm text-gray-400">
+        <span className="md:hidden">Actualizado: </span>{updatedDate}
+      </span>
 
       {/* Álbum digital */}
-      <div className="flex justify-center">
+      <div className="flex items-center justify-center gap-1.5">
+        <span className="md:hidden text-xs text-gray-400">Álbum</span>
         <span
           title={hasAlbumDigital ? 'Álbum digital activo' : 'Sin álbum digital'}
           className={`inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold ${
@@ -188,7 +195,8 @@ function ProjectRow({ project, clientSubmitted }: { project: Pick<Project, 'id' 
       </div>
 
       {/* Lista de invitados */}
-      <div className="flex justify-center">
+      <div className="flex items-center justify-center gap-1.5">
+        <span className="md:hidden text-xs text-gray-400">Invitados</span>
         <span
           title={project.tiene_lista_invitados ? 'Lista de invitados activa' : 'Sin lista de invitados'}
           className={`inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold ${
@@ -199,8 +207,10 @@ function ProjectRow({ project, clientSubmitted }: { project: Pick<Project, 'id' 
         </span>
       </div>
 
+      </div>
+
       {/* Actions */}
-      <div className="flex items-center justify-end gap-1.5">
+      <div className="flex flex-wrap items-center gap-1.5 md:justify-end">
         <Link
           href={`/admin/projects/${project.id}`}
           className="text-xs px-2.5 py-1.5 border border-gray-200 rounded-lg hover:bg-gray-50 text-gray-600 font-medium transition-colors"

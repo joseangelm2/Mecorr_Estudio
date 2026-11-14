@@ -20,7 +20,7 @@ const TEMPLATES = [
 
 export default function NuevoClientePage() {
   return (
-    <div className="max-w-xl p-8">
+    <div className="max-w-xl p-4 md:p-8">
       <div className="mb-6 flex items-center gap-2 text-sm">
         <Link href="/admin" className="text-gray-400 hover:text-gray-600">Proyectos</Link>
         <span className="text-gray-300">/</span>
@@ -30,7 +30,7 @@ export default function NuevoClientePage() {
         <div>
           <h1 className="text-lg font-bold text-gray-900">Nueva invitación para cliente</h1>
           <p className="mt-1 text-sm text-gray-500">
-            Crea el borrador y un enlace para que el cliente llene sus datos y suba sus fotos.
+            Crea el borrador y un enlace para que el cliente llene sus datos.
           </p>
         </div>
         <label className="block space-y-1.5">

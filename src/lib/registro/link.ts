@@ -10,6 +10,8 @@ export interface ClientLinkRow {
   open: boolean
   submitted_at: string | null
   last_saved_at: string | null
+  pdf_path: string | null
+  pdf_generated_at: string | null
   created_at: string
 }
 
@@ -27,4 +29,12 @@ export async function findOpenLink(token: string): Promise<{ link: ClientLinkRow
   const { data: project } = await supabase.from('projects').select('*').eq('id', link.project_id).single()
   if (!project) return null
   return { link: link as ClientLinkRow, project: project as Project }
+}
+
+/** Link ya enviado (abierto o cerrado) y si tiene PDF. Solo para la pantalla final y la descarga del PDF. */
+export async function findSubmittedLink(token: string): Promise<ClientLinkRow | null> {
+  if (!TOKEN_RE.test(token)) return null
+  const supabase = createServiceClient()
+  const { data } = await supabase.from('project_client_links').select('*').eq('token', token).not('submitted_at', 'is', null).maybeSingle()
+  return (data as ClientLinkRow | null) ?? null
 }

@@ -49,7 +49,7 @@ export function ClientLinkPanel({ projectId, clientName, initial, music }: Props
   }
 
   const whatsapp = url
-    ? `https://wa.me/?text=${encodeURIComponent(`Hola, para tu invitación digital necesitamos tus datos y fotos. Llena este formulario cuando puedas: ${url}`)}`
+    ? `https://wa.me/?text=${encodeURIComponent(`Hola, para tu invitación digital necesitamos tus datos. Llena este formulario cuando puedas: ${url}`)}`
     : ''
 
   return (
@@ -58,7 +58,7 @@ export function ClientLinkPanel({ projectId, clientName, initial, music }: Props
         <div>
           <h2 className="text-sm font-bold text-gray-900">Formulario para el cliente</h2>
           <p className="mt-0.5 text-xs text-gray-500">
-            Comparte este enlace con {clientName}: llena sus datos y fotos, y se guardan aquí como borrador.
+            Comparte este enlace con {clientName}: llena sus datos y se guardan aquí como borrador.
           </p>
         </div>
         {link?.submitted_at && (
@@ -79,8 +79,8 @@ export function ClientLinkPanel({ projectId, clientName, initial, music }: Props
         </button>
       ) : (
         <div className="mt-4 space-y-3">
-          <div className="flex gap-2">
-            <input readOnly value={url} onFocus={e => e.currentTarget.select()} className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-xs text-gray-700" />
+          <div className="flex flex-wrap gap-2">
+            <input readOnly value={url} onFocus={e => e.currentTarget.select()} className="min-w-0 flex-1 basis-full sm:basis-0 rounded-xl border border-gray-200 bg-white px-3 py-2 text-xs text-gray-700" />
             <button type="button" onClick={copy} className="shrink-0 rounded-xl border border-gray-200 bg-white px-3 py-2 text-xs font-medium text-gray-700 hover:bg-gray-50">
               {copied ? '¡Copiado!' : 'Copiar'}
             </button>
@@ -94,6 +94,17 @@ export function ClientLinkPanel({ projectId, clientName, initial, music }: Props
             {fmt(link.last_saved_at) && <span>Último guardado: {fmt(link.last_saved_at)}</span>}
             {fmt(link.submitted_at) && <span>Enviado: {fmt(link.submitted_at)}</span>}
           </div>
+
+          {link.pdf_path && (
+            <a
+              href={`/admin/projects/${projectId}/respuestas-pdf`}
+              download
+              className="inline-flex items-center gap-1.5 rounded-xl border border-rose-200 bg-white px-3 py-2 text-xs font-medium text-rose-700 hover:bg-rose-50"
+            >
+              ⬇ Descargar respuestas del cliente (PDF)
+              {fmt(link.pdf_generated_at) && <span className="font-normal text-gray-400">· {fmt(link.pdf_generated_at)}</span>}
+            </a>
+          )}
 
           <div className="flex gap-4 text-xs">
             <button

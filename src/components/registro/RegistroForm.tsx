@@ -18,7 +18,6 @@ interface Props {
   token: string
   template: string
   initial: ClientData
-  alreadySubmitted: boolean
 }
 
 const KIND_LABEL: Record<ItineraryKind, string> = {
@@ -106,15 +105,46 @@ function StringList({
   )
 }
 
-export function RegistroForm({ token, template, initial, alreadySubmitted }: Props) {
+/** Pantalla final: sin opción de editar (el enlace ya está cerrado) y con la descarga de la copia en PDF. */
+export function RegistroDone({ token, pdfReady }: { token: string; pdfReady: boolean }) {
+  return (
+    <div className="rg-root min-h-screen bg-gray-50 pb-10">
+      <div className="bg-[#0d0d1a] px-5 py-4">
+        <div className="mx-auto flex max-w-xl items-center justify-between">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/promo/logo_mecorr.png" alt="MeCorr Estudio" className="h-10 w-auto" />
+          <span className="text-xs text-white/70">Datos de tu invitación</span>
+        </div>
+      </div>
+      <main className="mx-auto max-w-xl px-5 pt-6">
+        <div className="rounded-2xl border border-green-200 bg-white p-6 text-center shadow-sm">
+          <div className="text-4xl">🎉</div>
+          <h1 className="mt-2 text-xl font-bold text-gray-900">¡Listo! Recibimos tus datos</h1>
+          <p className="mt-2 text-sm text-gray-600">Revisaremos todo y te avisaremos cuando tu invitación esté lista.</p>
+          {pdfReady && (
+            <a
+              href={`/registro/${token}/pdf`}
+              download
+              className="mt-5 block w-full rounded-xl bg-rose-500 px-4 py-3 text-sm font-semibold text-white"
+            >
+              Descargar copia de mis respuestas (PDF)
+            </a>
+          )}
+        </div>
+      </main>
+    </div>
+  )
+}
+
+export function RegistroForm({ token, template, initial }: Props) {
   const boda = isBoda(template)
   const [data, setData] = useState<ClientData>(initial)
   const [step, setStep] = useState(0)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [done, setDone] = useState(alreadySubmitted)
-  // Al enviar, el servidor cierra el enlace: ya no se puede volver a editar desde esta pantalla.
-  const [justSent, setJustSent] = useState(false)
+  const [done, setDone] = useState(false)
+  // El servidor cierra el enlace al enviar; pdfReady indica si ya hay copia en PDF para descargar.
+  const [pdfReady, setPdfReady] = useState(false)
 
   const steps = SECTION_ORDER
   const reviewStep = steps.length
@@ -163,10 +193,12 @@ export function RegistroForm({ token, template, initial, alreadySubmitted }: Pro
     setSaving(false)
     if (!res.ok) setError(res.error)
     else {
+      setPdfReady(res.pdfReady)
       setDone(true)
-      setJustSent(true)
     }
   }
+
+  if (done) return <RegistroDone token={token} pdfReady={pdfReady} />
 
   const progress = Math.round((Math.min(step, reviewStep) / reviewStep) * 100)
 
@@ -181,20 +213,7 @@ export function RegistroForm({ token, template, initial, alreadySubmitted }: Pro
       </div>
 
       <main className="mx-auto max-w-xl px-5 pt-6">
-        {done && step === reviewStep ? (
-          <div className="rounded-2xl border border-green-200 bg-white p-6 text-center shadow-sm">
-            <div className="text-4xl">🎉</div>
-            <h1 className="mt-2 text-xl font-bold text-gray-900">¡Listo! Recibimos tus datos</h1>
-            <p className="mt-2 text-sm text-gray-600">
-              Revisaremos todo y te avisaremos cuando tu invitación esté lista.
-            </p>
-            {!justSent && (
-              <button type="button" onClick={() => setStep(0)} className="mt-4 text-sm font-medium text-rose-600">
-                Revisar o editar mis datos
-              </button>
-            )}
-          </div>
-        ) : (
+        {(
           <>
             <div className="mb-5">
               <div className="mb-1.5 flex justify-between text-xs text-gray-500">
@@ -252,7 +271,7 @@ export function RegistroForm({ token, template, initial, alreadySubmitted }: Pro
         )}
       </main>
 
-      {!(done && step === reviewStep) && (
+      {(
         <div className="fixed inset-x-0 bottom-0 border-t border-gray-200 bg-white/95 px-5 py-3 backdrop-blur">
           <div className="mx-auto flex max-w-xl gap-3">
             {step > 0 && (
