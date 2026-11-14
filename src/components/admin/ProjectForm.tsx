@@ -1015,7 +1015,7 @@ export default function ProjectForm({ project }: Props) {
             <input type="url" value={form.hero_photo_url} onChange={e => set('hero_photo_url', e.target.value)} className={input} placeholder="O pega una URL directamente..." />
           </SectionCard>
 
-          {(form.template === 'sobre' || form.template === 'zafiro') && (
+          {(form.template === 'sobre' || form.template === 'zafiro' || form.template === 'especial') && (
             <SectionCard title="Foto de cierre" description="Imagen del fondo en la última sección. Si no se define, se reutiliza la última foto del álbum o la foto de portada.">
               {project?.id ? (
                 <MediaUploader sizeHint="Vertical · 1080 × 1350 px (4:5). Evita poner el rostro abajo: ahí va el nombre" projectId={project.id} bucket="invitation-media" accept="image/*" onUploadComplete={url => set('sobre_final_photo_url', url)} label="Subir foto de cierre" />
