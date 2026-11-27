@@ -89,6 +89,10 @@ export default function EsmeraldaGifts({ project }: Props) {
             <div className="dress-code-container">
               <img src={iconoVestimenta} alt="Vestimenta" />
               <p className="texto">{project.dress_code.colors || "Vestimenta Formal"}</p>
+              {/* En Especial las notas van aquí; en Esmeralda siguen en "Información Importante". */}
+              {project.template === "esmeralda-especial" && project.dress_code.notes && (
+                <p className="texto">❖ {project.dress_code.notes}</p>
+              )}
               <DressCodePalette project={project} />
             </div>
           </section>
