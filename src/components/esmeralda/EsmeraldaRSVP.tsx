@@ -60,7 +60,7 @@ export default function EsmeraldaRSVP({ project }: Props) {
 
   return (
     <>
-      {project.dress_code?.notes && (
+      {project.template !== "esmeralda-especial" && project.dress_code?.notes && (
         <section className="informacion-importante no-print" style={{ marginTop: "1%", marginBottom: "2%" }}>
           <h2>Información Importante</h2>
           <p className="texto">❖ {project.dress_code.notes}</p>
@@ -70,7 +70,9 @@ export default function EsmeraldaRSVP({ project }: Props) {
       <section className="confirmacion-asistencia" style={{ marginTop: "1%", marginBottom: "3%" }}>
         <h2>{sectionTitle}</h2>
         {highlightDate && (
-          <p className="texto" style={{ marginTop: "-1%" }}>Antes del {highlightDate}</p>
+          <p className="texto" style={{ marginTop: "-1%" }}>
+            {project.template === "esmeralda-especial" ? "Favor de Confirmar antes del" : "Antes del"} {highlightDate}
+          </p>
         )}
         {!submitted ? (
           <form method="POST" onSubmit={handleSubmit}>
